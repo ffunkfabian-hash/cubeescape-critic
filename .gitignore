@@ -8,3 +8,4 @@ runs/
 node_modules/
 web/dist/
 web/renders/
+web/public/robot/

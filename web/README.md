@@ -42,3 +42,28 @@ npm run verify       # headless: renders/render_*.png, overlay_*.png, mask_*.png
   ganze Frontplatte; der Wert ist in lil-gui (Visier › Leuchtstärke) einstellbar.
 - AO über `GTAOPass` aus Three.js statt n8ao (keine zusätzliche Abhängigkeit).
 - Die Lüftungsgitter sind eine hellgraue Lochplatte mit dunklen Waben in dunklem Metallrahmen (wie im Video).
+
+## Roboter aus jedem Videoframe (`robot.html`)
+
+Zweite Vorlage `reference/robot/turnaround.mp4` (241 Frames, eine Drehung). Statt von Hand zu modellieren, wird die
+Form aus **allen** Frames rekonstruiert:
+
+1. `tools/robot/segment.py` – jeden Frame freistellen (heller Hintergrund, Konturen schließen die Fläche).
+2. `tools/robot/hull.py` – Kamera schätzen (Abstand, Neigung, Maßstab, Achse), dann den Drehwinkel **je Frame**
+   (das KI-Video dreht ungleichmäßig) und die Visual Hull schnitzen: ein Voxel bleibt, wenn er in ≥ 97 % der Frames
+   im Umriss liegt.
+3. `tools/robot/mesh.py` – Marching Cubes, Farben je Punkt aus allen Frames (Sichtbarkeit per Z-Puffer, Gewicht
+   nach Blickwinkel), GLB nach `public/robot/` (nicht im Repo).
+4. `npm run verify:robot` – rendert die Rekonstruktion aus der Kamera **jedes** Frames und misst die Umriss-IoU je
+   Frame (`renders/robot_iou.json`, `robot_iou_chart.png`, `robot_compare.png`).
+
+```sh
+pip install scipy scikit-image   # einmalig
+npm run robot                    # Schritte 1–3 (~3 min)
+npm run dev                      # http://127.0.0.1:5173/robot.html
+```
+
+Bedienung: Front/Left/Back/Right springen auf den passenden Videoframe, „Turntable (Video)“ spielt die Kamerafahrt des
+Videos nach, Regler „Videoframe“ bzw. Pfeiltasten wählen jeden der 241 Frames, O blendet genau diesen Frame ein.
+Grenzen der Visual Hull: Mulden, die in keinem Umriss sichtbar sind (Visier, Raum zwischen Beinen von vorn nicht
+offen), bleiben gefüllt; die Farben sind aus dem Video übernommen, nicht modelliert.
