@@ -13,10 +13,14 @@ export function brush(geo, { pos, rot, scale } = {}) {
   const g = geo.index ? geo.toNonIndexed() : geo.clone();
   if (g.getAttribute('uv')) g.deleteAttribute('uv');
   if (!g.getAttribute('normal')) g.computeVertexNormals();
+  // Bake the transform: evaluate() returns its result in the local frame of the first brush.
+  const o = new THREE.Object3D();
+  if (pos) o.position.set(...pos);
+  if (rot) o.rotation.set(...rot);
+  if (scale) o.scale.set(...(Array.isArray(scale) ? scale : [scale, scale, scale]));
+  o.updateMatrix();
+  g.applyMatrix4(o.matrix);
   const b = new Brush(g);
-  if (pos) b.position.set(...pos);
-  if (rot) b.rotation.set(...rot);
-  if (scale) b.scale.set(...(Array.isArray(scale) ? scale : [scale, scale, scale]));
   b.updateMatrixWorld();
   return b;
 }

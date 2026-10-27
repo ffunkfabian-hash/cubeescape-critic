@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sci-Fi Roboter – Three.js</title>
+    <style>
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #ffffff; font: 13px/1.3 system-ui, sans-serif; }
+      #app { position: fixed; inset: 0; }
+      #app canvas { display: block; width: 100%; height: 100%; }
+      #overlay {
+        position: fixed; top: 0; left: 50%; height: 100%; transform: translateX(-50%);
+        opacity: 0.45; pointer-events: none; display: none;
+      }
+      #overlay.diff { opacity: 1; mix-blend-mode: difference; }
+      #bar {
+        position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); display: flex; flex-wrap: wrap; gap: 6px;
+        justify-content: center; max-width: calc(100% - 32px); padding: 6px; border-radius: 10px; background: rgba(20, 20, 22, 0.55);
+      }
+      #bar button {
+        border: 0; border-radius: 6px; padding: 7px 12px; color: #eee; background: rgba(255, 255, 255, 0.1); cursor: pointer;
+      }
+      #bar button:hover { background: rgba(255, 255, 255, 0.2); }
+      #bar button.on { background: #2f8f88; }
+      #bar .sep { width: 1px; background: rgba(255, 255, 255, 0.2); }
+      body.noui #bar, body.noui .lil-gui { display: none; }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <img id="overlay" alt="" />
+    <div id="bar">
+      <button data-view="front">Front</button>
+      <button data-view="left">Left</button>
+      <button data-view="back">Back</button>
+      <button data-view="right">Right</button>
+      <button data-view="top">Top</button>
+      <button data-view="turntable">Turntable</button>
+      <span class="sep"></span>
+      <button id="btn-overlay" title="Taste O">Overlay</button>
+      <button id="btn-export">GLB-Export</button>
+    </div>
+    <script type="module" src="/src/robotParts.js"></script>
+  </body>
+</html>

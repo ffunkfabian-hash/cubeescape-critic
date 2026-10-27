@@ -8,7 +8,9 @@
     "build": "vite build",
     "verify": "node verify_renders.mjs",
     "robot": "python3 -I tools/robot/segment.py .. && python3 -I tools/robot/hull.py .. && python3 -I tools/robot/mesh.py ..",
-    "verify:robot": "node verify_robot.mjs"
+    "verify:robot": "node verify_robot.mjs",
+    "sheet": "python3 -I tools/robot/sheet.py ..",
+    "verify:parts": "node verify_robot_parts.mjs"
   },
   "dependencies": {
     "lil-gui": "0.21.0",

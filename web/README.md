@@ -67,3 +67,22 @@ Bedienung: Front/Left/Back/Right springen auf den passenden Videoframe, „Turnt
 Videos nach, Regler „Videoframe“ bzw. Pfeiltasten wählen jeden der 241 Frames, O blendet genau diesen Frame ein.
 Grenzen der Visual Hull: Mulden, die in keinem Umriss sichtbar sind (Visier, Raum zwischen Beinen von vorn nicht
 offen), bleiben gefüllt; die Farben sind aus dem Video übernommen, nicht modelliert.
+
+## Roboter aus Bauteilen nach dem Model Sheet (`robot_parts.html`)
+
+Vorlage `reference/robot/sheet/model_sheet.svg`: sechs orthografische Zeichnungen (Front, Rücken, beide Seiten, oben,
+unten) in einem Maßstab. Der Körper ist hier – wie der Helm – aus **eigenen Bauteilen** gebaut (Rumpf, Becken, Gürtel,
+Schal, Kopf, je Seite Oberarm, Ellbogen, Unterarm, Hand, Oberschenkel, Knie, Schienbein, Stiefel, Schulterpanzer):
+
+1. `tools/robot/sheet.py` rendert das SVG, schneidet je Bauteil den Umriss aus Front-, Seiten- (und Drauf-)sicht aus
+   (`src/robot/sheet.json`) und schreibt eine Zuordnungskarte, welches Sheet-Pixel zu welchem Teil gehört.
+2. `src/robot/parts.js`: Bauteil = Front-Umriss ∩ Seiten-Umriss ∩ abgerundeter Superellipsoid (CSG); die Zeichnung
+   wird aus den Ansichten, in denen das Teil sichtbar ist, orthografisch projiziert; Toon-Konturen per Inverted Hull.
+3. `npm run verify:parts`: orthografische Renders gegen die Zeichnungen, Umriss-IoU je Ansicht
+   (`renders/parts_iou.json`, `parts_compare.png`). Die Draufsicht zeigt die Arme nach vorn gestreckt (Zeichnung
+   inkonsistent zur Seitenansicht) und zählt nur zur Information.
+
+```sh
+npm run sheet          # einmalig bzw. nach Änderungen an PARTS
+npm run dev            # http://127.0.0.1:5173/robot_parts.html
+```
