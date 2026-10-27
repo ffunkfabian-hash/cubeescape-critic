@@ -1,0 +1,32 @@
+# Schnellprüfung als PR-Check. Öffentliches Repo: Standard-Linux-Runner kosten keine Minuten (globale Regel „GitHub Actions
+# sparsam“). Führt genau `.ce-repo.json` › check.quick aus (`python3 check`: JSON, Schema-Vertrag, Vorlagenbilder, Python-Syntax)
+# – wie `./check` lokal. Blender- und API-Stufen bleiben auf dem Mac.
+# Push nur auf den Standardbranch, andere Branches über ihren Pull Request, Doku löst nichts aus. Der Schritt ce-tools holt
+# ce-agent-tools am Commit aus `.ce-repo.json` › tools_version; `uses:` nennt denselben Commit.
+name: check
+
+on:
+  push:
+    branches: [main]
+    paths-ignore: ["**.md", "docs/**", ".claude/**", ".agents/**"]
+  pull_request:
+    paths-ignore: ["**.md", "docs/**", ".claude/**", ".agents/**"]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quick:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: "3.12"
+      - name: Werkzeuge aus ce-agent-tools (tools_version)
+        uses: ffunkfabian-hash/ce-agent-tools/.github/actions/ce-tools@f8a13fc9fb1c7d2b4038b7bf619d2fccd9f00d4a
+      - name: check.quick aus .ce-repo.json
+        run: ./ce check
