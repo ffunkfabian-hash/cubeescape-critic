@@ -1,7 +1,7 @@
 {
   "name": "cubeescape-critic",
-  "version": "0.0.1",
-  "version_name": "Scaffold",
+  "version": "0.0.2",
+  "version_name": "Browser Helmet",
   "check": {
     "quick": [
       [
