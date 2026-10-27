@@ -8,6 +8,7 @@ Antworten, Doku und Commit-Messages auf Deutsch; Code, Bezeichner und Kommentare
 - `reference/` – Vorlagen (nur lesen; neue Vorlagen als eigener Ordner).
 - `critic/` – Kritiker-Prompt und JSON-Schema der Antwort (Vertrag zwischen Kritiker und Arbeiter).
 - `generator/`, `tools/` – entstehen mit Version 0.1 (Blender-Generator, Ansichten, Kritiker-Aufruf, Messung).
+- `web/` – Three.js-Nachbau im Browser mit Playwright-Prüfung und Umriss-IoU (`web/README.md`); `web/renders/` nicht im Repo.
 - `runs/` – Laufergebnisse (nicht im Repo, `.gitignore`); Belege außerhalb unter `~/Library/Caches/Critic/<Version>/`.
 
 ## Regeln

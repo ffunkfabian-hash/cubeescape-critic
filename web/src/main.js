@@ -1,0 +1,276 @@
+// App shell: renderer, studio lighting, post-processing, camera views, reference overlay, lil-gui, GLB export.
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { GTAOPass } from 'three/examples/jsm/postprocessing/GTAOPass.js';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
+import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
+import GUI from 'lil-gui';
+import { createMaterials } from './materials.js';
+import { buildHelmet } from './helmet.js';
+import { D, resetParams } from './params.js';
+
+const query = new URLSearchParams(location.search);
+if (query.get('ui') === '0') document.body.classList.add('noui');
+
+const BG = 0x8c8c8c;
+// ?static=1: no animation loop, frames only via window.renderFrame() (headless checks with software GL).
+const STATIC = query.get('static') === '1';
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: STATIC });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFShadowMap;
+document.getElementById('app').appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(BG);
+
+// Studio environment: RoomEnvironment plus three large softboxes (key, fill, rim) baked into the PMREM.
+const envScene = new RoomEnvironment();
+for (const [pos, size, power] of [
+  [[-3, 3, 4], [4, 3], 5], // key: front left, high
+  [[4, 1, 3], [3, 3], 2], // fill: front right
+  [[0, 3, -4], [5, 2], 4], // rim: behind
+]) {
+  const box = new THREE.Mesh(new THREE.PlaneGeometry(...size), new THREE.MeshBasicMaterial({ color: new THREE.Color(power, power, power) }));
+  box.position.set(...pos);
+  box.lookAt(0, 0, 0);
+  envScene.add(box);
+}
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(envScene, 0.02).texture;
+scene.environmentIntensity = 0.3;
+
+const key = new THREE.DirectionalLight(0xffffff, 1.1);
+key.position.set(-2.5, 3.5, 3);
+key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048);
+key.shadow.camera.left = key.shadow.camera.bottom = -1.5;
+key.shadow.camera.right = key.shadow.camera.top = 1.5;
+key.shadow.bias = -0.0004;
+key.shadow.normalBias = 0.01;
+key.shadow.radius = 4;
+const fill = new THREE.DirectionalLight(0xdfe6ff, 0.35);
+fill.position.set(3, 1, 2);
+const rim = new THREE.DirectionalLight(0xffffff, 0.7);
+rim.position.set(0.5, 2.5, -3.5);
+scene.add(key, fill, rim, new THREE.HemisphereLight(0xffffff, 0x444444, 0.25));
+
+// Camera views matched to the extracted video frames (refs/ref_*.png: 0 s, 1.5 s, 3 s, 4.5 s).
+const camera = new THREE.PerspectiveCamera(30, 1, 0.05, 50);
+const target = new THREE.Vector3(0, -0.06, 0);
+const VIEWS = {
+  front: { az: 0, el: 3, dist: 2.6 },
+  left: { az: 64, el: 4, dist: 2.6 },
+  back: { az: 180, el: 7, dist: 2.6 },
+  right: { az: 298, el: 4, dist: 2.6 },
+};
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.target.copy(target);
+
+let model;
+let current = 'front';
+let turntable = false;
+const M = createMaterials();
+
+function setCameraView(name) {
+  if (name === 'turntable') {
+    setTurntable(!turntable);
+    return;
+  }
+  const v = VIEWS[name];
+  if (!v) throw new Error(`unknown view ${name}`);
+  setTurntable(false);
+  current = name;
+  const az = THREE.MathUtils.degToRad(v.az), el = THREE.MathUtils.degToRad(v.el);
+  camera.position.set(Math.sin(az) * Math.cos(el), Math.sin(el), Math.cos(az) * Math.cos(el)).multiplyScalar(v.dist).add(target);
+  controls.target.copy(target);
+  camera.lookAt(target);
+  controls.update();
+  updateOverlay();
+  markButtons();
+}
+
+function setTurntable(on) {
+  turntable = on;
+  if (!on && model) model.rotation.y = 0;
+  if (on) {
+    current = 'front';
+    const v = VIEWS.front, el = THREE.MathUtils.degToRad(v.el);
+    camera.position.set(0, Math.sin(el), Math.cos(el)).multiplyScalar(v.dist).add(target);
+    controls.target.copy(target);
+    controls.update();
+  }
+  updateOverlay();
+  markButtons();
+}
+
+// Reference overlay (onion skin): the ref frame of the active view over the canvas.
+const overlay = document.getElementById('overlay');
+let overlayOn = false;
+let overlayMode = 'normal';
+function updateOverlay() {
+  const show = overlayOn && !turntable;
+  overlay.style.display = show ? 'block' : 'none';
+  if (show) overlay.src = `/refs/ref_${current}.png`;
+  overlay.classList.toggle('diff', overlayMode === 'difference');
+  document.getElementById('btn-overlay').classList.toggle('on', overlayOn);
+}
+function toggleOverlay(on = !overlayOn, mode = overlayMode) {
+  overlayOn = on;
+  overlayMode = mode;
+  updateOverlay();
+}
+addEventListener('keydown', (e) => {
+  if (e.key === 'o' || e.key === 'O') toggleOverlay();
+});
+
+function markButtons() {
+  for (const b of document.querySelectorAll('#bar [data-view]')) {
+    b.classList.toggle('on', b.dataset.view === 'turntable' ? turntable : !turntable && b.dataset.view === current);
+  }
+}
+for (const b of document.querySelectorAll('#bar [data-view]')) b.addEventListener('click', () => setCameraView(b.dataset.view));
+document.getElementById('btn-overlay').addEventListener('click', () => toggleOverlay());
+
+// Post-processing: ambient occlusion, bloom only above the emissive threshold (visor), ACES in the output pass.
+const composer = new EffectComposer(renderer, new THREE.WebGLRenderTarget(1, 1, { type: THREE.HalfFloatType, samples: 4 }));
+composer.addPass(new RenderPass(scene, camera));
+const gtao = new GTAOPass(scene, camera, 1, 1);
+gtao.updateGtaoMaterial({ radius: 0.12, distanceExponent: 1.5, thickness: 0.6, scale: 1.0 });
+gtao.blendIntensity = 0.9;
+composer.addPass(gtao);
+const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.15, 0.0, 1.0);
+composer.addPass(bloom);
+composer.addPass(new OutputPass());
+
+// Silhouette mode for the IoU measurement: model white on black, no post-processing.
+const maskMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+let maskMode = false;
+function setMaskMode(on) {
+  maskMode = on;
+}
+
+function resize() {
+  const w = innerWidth, h = innerHeight;
+  renderer.setSize(w, h);
+  composer.setSize(w, h);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+addEventListener('resize', resize);
+resize();
+
+function disposeModel(obj) {
+  obj.traverse((o) => o.geometry?.dispose());
+}
+
+function rebuild() {
+  const rot = model ? model.rotation.y : 0;
+  if (model) {
+    scene.remove(model);
+    disposeModel(model);
+  }
+  const t0 = performance.now();
+  model = buildHelmet(M);
+  model.rotation.y = rot;
+  scene.add(model);
+  console.log(`model built in ${(performance.now() - t0).toFixed(0)} ms`);
+}
+
+async function exportGLB() {
+  const glb = await new GLTFExporter().parseAsync(model, { binary: true });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([glb], { type: 'model/gltf-binary' }));
+  a.download = 'scifi_helmet.glb';
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+document.getElementById('btn-export').addEventListener('click', exportGLB);
+
+// lil-gui: live geometry parameters; geometry rebuilds after a change is finished.
+function buildGui() {
+  const gui = new GUI({ title: 'Helm-Parameter' });
+  gui.close();
+  const re = () => rebuild();
+  const f1 = gui.addFolder('Proportionen');
+  f1.add(D.head.r, '0', 0.3, 0.45, 0.005).name('Kuppel Breite').onFinishChange(re);
+  f1.add(D.head.r, '1', 0.4, 0.6, 0.005).name('Kuppel Höhe').onFinishChange(re);
+  f1.add(D.head.r, '2', 0.38, 0.55, 0.005).name('Kuppel Tiefe').onFinishChange(re);
+  f1.add(D.head, 'pH', 0.4, 1, 0.01).name('Kantigkeit horiz.').onFinishChange(re);
+  f1.add(D.head, 'pV', 0.4, 1, 0.01).name('Kantigkeit vert.').onFinishChange(re);
+  f1.add(D, 'capEdgeY', 0.2, 0.42, 0.005).name('Kappenkante Y').onFinishChange(re);
+  f1.add(D.core, 'rx', 0.28, 0.4, 0.005).name('Kern Breite').onFinishChange(re);
+  f1.add(D.core, 'rz', 0.33, 0.48, 0.005).name('Kern Tiefe').onFinishChange(re);
+  f1.add(D.collar, 'tilt', -0.2, 0.3, 0.01).name('Kragen Neigung').onFinishChange(re);
+  const f2 = gui.addFolder('Visier');
+  f2.add(D.visor, 'angleDeg', 0, 25, 0.5).name('V-Winkel °').onFinishChange(re);
+  f2.add(D.visor, 'width', 0.08, 0.24, 0.005).name('Breite').onFinishChange(re);
+  f2.add(D.visor, 'height', 0.03, 0.12, 0.002).name('Höhe').onFinishChange(re);
+  f2.add(D.visor, 'x', 0.1, 0.25, 0.005).name('Abstand X').onFinishChange(re);
+  f2.add(D.visor, 'y', -0.05, 0.2, 0.005).name('Höhe Y').onFinishChange(re);
+  f2.add(M.visorGlow, 'emissiveIntensity', 0, 10, 0.1).name('Leuchtstärke');
+  const f3 = gui.addFolder('Schlauch');
+  f3.add(D.tube, 'radius', 0.006, 0.03, 0.001).name('Kern-Radius').onFinishChange(re);
+  f3.add(D.tube, 'ribRadius', 0.01, 0.035, 0.001).name('Rippen-Radius').onFinishChange(re);
+  D.tube.points.forEach((p, i) => {
+    const f = f3.addFolder(`Punkt ${i + 1}`).close();
+    ['x', 'y', 'z'].forEach((axis, k) => f.add(p, String(k), -0.7, 0.7, 0.005).name(axis).onFinishChange(re));
+  });
+  const f4 = gui.addFolder('Schal');
+  f4.add(D.scarf, 'foldDepth', 0, 0.8, 0.01).name('Faltentiefe').onFinishChange(re);
+  f4.add(D.scarf, 'noiseScale', 1, 10, 0.1).name('Faltenfrequenz').onFinishChange(re);
+  const f5 = gui.addFolder('Look');
+  f5.add(bloom, 'strength', 0, 2, 0.01).name('Bloom');
+  f5.add(gtao, 'blendIntensity', 0, 1, 0.01).name('AO');
+  f5.add(renderer, 'toneMappingExposure', 0.4, 2, 0.01).name('Belichtung');
+  gui.add({ overlay: () => toggleOverlay() }, 'overlay').name('Overlay (O)');
+  gui.add({ diff: () => toggleOverlay(true, overlayMode === 'difference' ? 'normal' : 'difference') }, 'diff').name('Overlay: Differenz');
+  gui.add({ json: () => console.log(JSON.stringify(D, null, 2)) }, 'json').name('Parameter → Konsole');
+  gui.add({ reset: () => { resetParams(); gui.destroy(); buildGui(); rebuild(); } }, 'reset').name('Zurücksetzen');
+  gui.add({ exportGLB }, 'exportGLB').name('scifi_helmet.glb');
+}
+
+rebuild();
+buildGui();
+setCameraView(VIEWS[query.get('view')] ? query.get('view') : 'front');
+if (query.get('turntable') === '1') setTurntable(true);
+if (query.get('overlay')) toggleOverlay(true, query.get('overlay') === 'diff' ? 'difference' : 'normal');
+
+function renderFrame() {
+  if (maskMode) {
+    scene.overrideMaterial = maskMaterial;
+    scene.background = new THREE.Color(0x000000);
+    renderer.toneMapping = THREE.NoToneMapping;
+    renderer.render(scene, camera);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    scene.background = new THREE.Color(BG);
+    scene.overrideMaterial = null;
+  } else {
+    composer.render();
+  }
+}
+
+const timer = new THREE.Timer();
+let frames = 0;
+if (STATIC) {
+  renderFrame();
+  window.__ready = true;
+} else {
+  renderer.setAnimationLoop(() => {
+    timer.update();
+    const dt = timer.getDelta();
+    if (turntable && model) model.rotation.y -= dt * ((Math.PI * 2) / 12);
+    controls.update();
+    renderFrame();
+    if (++frames === 3) window.__ready = true;
+  });
+}
+
+Object.assign(window, { THREE, scene, camera, controls, renderFrame, setCameraView, toggleOverlay, setMaskMode, exportGLB, rebuild, helmetParams: D });
