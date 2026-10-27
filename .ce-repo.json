@@ -1,0 +1,27 @@
+{
+  "name": "cubeescape-critic",
+  "version": "0.0.1",
+  "version_name": "Scaffold",
+  "check": {
+    "quick": [
+      [
+        "python3",
+        "check"
+      ]
+    ]
+  },
+  "docs": {
+    "agent_sections": [
+      "Was hier liegt",
+      "Regeln"
+    ]
+  },
+  "coordination": {
+    "repo": "ffunkfabian-hash/cubeescape-nexogen",
+    "registry": "https://github.com/ffunkfabian-hash/cubeescape-nexogen/blob/main/repos.json"
+  },
+  "tools_version": {
+    "version": "0.24.0",
+    "commit": "f8a13fc9fb1c7d2b4038b7bf619d2fccd9f00d4a"
+  }
+}

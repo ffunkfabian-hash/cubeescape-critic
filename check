@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+"""Quick check (.ce-repo.json › check.quick): JSON files, schema contract, reference frames, Python syntax."""
+import ast, json, os, sys
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
+err = []
+for base, dirs, files in os.walk(ROOT):
+    dirs[:] = [d for d in dirs if d not in ('.git', 'runs', '__pycache__')]
+    for f in files:
+        p = os.path.join(base, f)
+        rel = os.path.relpath(p, ROOT)
+        try:
+            if f.endswith('.json'):
+                json.load(open(p, encoding='utf-8'))
+            elif f.endswith('.py') or f == 'check':
+                ast.parse(open(p, encoding='utf-8').read(), rel)
+        except (ValueError, SyntaxError) as e:
+            err.append(f'{rel}: {e}')
+schema = json.load(open(os.path.join(ROOT, 'critic/schema.json'), encoding='utf-8'))
+need = {'schema_version', 'iteration_approved', 'confidence', 'critical_discrepancies', 'summary_reasoning'}
+if set(schema.get('required', [])) != need or schema.get('additionalProperties') is not False:
+    err.append('critic/schema.json: Pflichtfelder oder additionalProperties weichen vom Vertrag v1 ab')
+frames = os.path.join(ROOT, 'reference/helm/frames')
+pngs = sorted(f for f in os.listdir(frames) if f.endswith('.png'))
+if len(pngs) < 4:
+    err.append('reference/helm/frames: weniger als 4 Ansichten')
+for f in pngs:
+    if os.path.getsize(os.path.join(frames, f)) > 3_750_000:
+        err.append(f'reference/helm/frames/{f}: über 3,75 MB (Grenze von ce api --image)')
+print('\n'.join(err) if err else f'check: alles in Ordnung ({len(pngs)} Vorlagenbilder, Schema v1)')
+sys.exit(1 if err else 0)

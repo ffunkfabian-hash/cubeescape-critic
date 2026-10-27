@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ffunkfabian-hash/cubeescape-critic/critic/schema.json",
+  "title": "Critic feedback v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "iteration_approved",
+    "confidence",
+    "critical_discrepancies",
+    "summary_reasoning"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "iteration_approved": {
+      "type": "boolean"
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "critical_discrepancies": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "feature",
+          "view",
+          "issue",
+          "direction",
+          "magnitude"
+        ],
+        "properties": {
+          "feature": {
+            "type": "string",
+            "maxLength": 80
+          },
+          "view": {
+            "enum": [
+              "front",
+              "side",
+              "back",
+              "three_quarter",
+              "all"
+            ]
+          },
+          "issue": {
+            "type": "string",
+            "maxLength": 300
+          },
+          "direction": {
+            "enum": [
+              "bigger",
+              "smaller",
+              "wider",
+              "narrower",
+              "taller",
+              "shorter",
+              "forward",
+              "backward",
+              "up",
+              "down",
+              "rounder",
+              "sharper",
+              "add",
+              "remove",
+              "other"
+            ]
+          },
+          "magnitude": {
+            "enum": [
+              "small",
+              "medium",
+              "large"
+            ]
+          },
+          "estimate_percent": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          }
+        }
+      }
+    },
+    "summary_reasoning": {
+      "type": "string",
+      "maxLength": 400
+    }
+  }
+}
