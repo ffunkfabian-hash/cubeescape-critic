@@ -30,7 +30,9 @@ test('upper-body proposal stays a short independently editable bust and reuses t
     `${bounds.min.y}..${bounds.max.y}`);
   assert.ok(bounds.max.x < 1.18 && bounds.min.x > -1.18);
   assert.ok(bounds.max.x - bounds.min.x >= 2.25, 'the revised shoulders must keep the requested sturdy width');
-  assert.ok(bounds.max.z < 0.38 && bounds.min.z > -0.38);
+  assert.ok(bounds.max.z < 0.46 && bounds.min.z > -0.46);
+  const core = new THREE.Box3().setFromObject(body.getObjectByName('UpperTorsoCore'));
+  assert.ok(core.max.z - core.min.z > 0.69 && core.max.z - core.min.z < 0.75, 'sturdy torso depth');
 });
 
 test('all new solids have finite UVs, nondegenerate faces, outward volume and closed triangle edges', () => {
@@ -86,7 +88,7 @@ test('front and rear armor remain outside the support rather than disappearing i
   }
 });
 
-test('raised sturdy shoulders shorten the neck without moving its helmet anchor and retain a real front notch', () => {
+test('lower angular shoulders retain the short neck, helmet anchor, outer downturn and front notch', () => {
   const body = buildShoulderStudy(palette);
   const neck = new THREE.Box3().setFromObject(body.getObjectByName('NeckFlex'));
   assert.ok(Math.abs(neck.max.y - shoulderStudyParams.neck.top) < 1e-6);
@@ -98,7 +100,8 @@ test('raised sturdy shoulders shorten the neck without moving its helmet anchor 
     if (position.getX(i) < 0.5) inner.push(position.getY(i));
     if (position.getX(i) > 1.1) outer.push(position.getY(i));
   }
-  assert.ok(Math.max(...inner) - Math.max(...outer) > 0.23, 'outer shoulder cap must turn down substantially');
+  assert.ok(Math.max(...inner) - Math.max(...outer) > 0.12, 'outer shoulder cap must still turn down');
+  assert.ok(new THREE.Box3().setFromObject(shoulder).max.y < -0.58, 'avoid the previous raised shoulder hump');
   const plain = structuredClone(shoulderStudyParams);
   plain.collar.frontNotchDepth = 0;
   const unnotched = buildShoulderStudy(palette, plain);
@@ -110,9 +113,11 @@ test('raised sturdy shoulders shorten the neck without moving its helmet anchor 
   assert.ok(topAtCenter(unnotched) - topAtCenter(body) > 0.03, 'the front V must lower the physical rim');
 });
 
-test('the extra pauldron arch raises the upper silhouette while preserving width, neck and outside downturn', () => {
-  const body = buildShoulderStudy(palette);
-  const previous = structuredClone(shoulderStudyParams);
+test('the historical high arch remains reproducible while the current caps are lower and faceted', () => {
+  const historical = structuredClone(shoulderStudyParams);
+  Object.assign(historical.shoulder, { archHeight:0.23, curveSubdivisions:2, slope:0.31, outerDrop:0.14 });
+  const body = buildShoulderStudy(palette, historical), current = buildShoulderStudy(palette);
+  const previous = structuredClone(historical);
   previous.shoulder.archHeight = 0;
   previous.shoulder.thickness = 0.078;
   previous.shoulder.baseDrop = 0.07;
@@ -126,6 +131,10 @@ test('the extra pauldron arch raises the upper silhouette while preserving width
     assert.equal(raised.min.x, before.min.x);
     assert.equal(raised.max.x, before.max.x);
     assert.ok(raised.min.y < -1.01, `${name}: keep the downward outer cap`);
+    const lower = current.getObjectByName(name);
+    assert.ok(raised.max.y - new THREE.Box3().setFromObject(lower).max.y > 0.1, `${name}: lower crown`);
+    assert.ok(lower.geometry.attributes.position.count * 8 < body.getObjectByName(name).geometry.attributes.position.count,
+      `${name}: broad facets instead of a finely subdivided dome`);
   }
   for (const name of ['NeckFlex', 'NeckRibs', 'CollarFront', 'CollarRear', 'UpperTorsoCore']) {
     assert.deepEqual(body.getObjectByName(name).geometry.attributes.position.array,
