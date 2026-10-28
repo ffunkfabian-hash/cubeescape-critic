@@ -70,14 +70,12 @@ export function buildUpperHelmet(M) {
     glows.push(glow);
   }
 
-  // Mouth: trapezoid recess open at the bottom, two vertical vent slots.
+  // Mouth: tall trapezoid recess (narrow chamfered top, wide bottom) that splits the lower cheek plates; a horizontal
+  // slot at its top; slanted side rails are added as an insert below.
   const zm = surfZ(0, -0.2);
-  cuts.push(brush(prism([[-0.062, -0.03], [0.062, -0.03], [0.118, -0.5], [-0.118, -0.5]], 'xy', 1), { pos: [0, 0, zm - 0.035 + 0.5] }));
-  for (const s of [-1, 1]) {
-    cuts.push(brush(new THREE.BoxGeometry(0.022, 0.17, 0.2), { pos: [s * 0.032, -0.2, zm - 0.06 + 0.1] }));
-  }
-  // Horizontal slot at the top of the mouth plate.
-  cuts.push(brush(new THREE.BoxGeometry(0.08, 0.014, 0.2), { pos: [0, -0.065, zm - 0.06 + 0.1] }));
+  const mo = D.mouth;
+  cuts.push(brush(prism(mo.outline, 'xy', 1), { pos: [0, 0, zm - mo.depth + 0.5] }));
+  cuts.push(brush(new THREE.BoxGeometry(mo.slotWidth, 0.014, 0.2), { pos: [0, mo.slotY, zm - mo.depth - 0.025 + 0.1] }));
 
   // Panel lines: narrow grooves on the lower front plate and a transverse seam on the cap.
   const groove = (x, y, len, ang, w = 0.006) => {
@@ -100,19 +98,40 @@ export function buildUpperHelmet(M) {
   }
   cuts.push(brush(new THREE.BoxGeometry(0.006, 1, 0.6), { pos: [0, D.capEdgeY + 0.6, -0.3] }));
 
-  // Round temple recesses on both sides.
+  // Temple recesses: rounded triangles with sloped walls (three-sided frustum), a fastener in the floor added below.
+  const templeHits = [];
   for (const s of [-1, 1]) {
-    const h = hitSurface(probe, [s * 2, 0.24, 0.17], [-s, 0, 0]);
-    if (h) {
-      const c = new THREE.CylinderGeometry(0.024, 0.024, 0.03, 32).rotateZ(Math.PI / 2);
-      cuts.push(brush(c, { pos: h.point.toArray() }));
-    }
+    const h = hitSurface(probe, [s * 2, 0.26, 0.15], [-s, 0, 0]);
+    if (!h) continue;
+    templeHits.push(h);
+    const tri = new THREE.CylinderGeometry(0.042, 0.026, 0.05, 3).rotateY(s * 0.3).rotateZ(-s * Math.PI / 2);
+    cuts.push(brush(tri, { pos: h.point.toArray() }));
   }
 
   for (const c of cuts) shell = csg(shell, [SUBTRACTION, c]);
   boxProjectUV(shell.geometry, 2.5);
   const shellMesh = new THREE.Mesh(shell.geometry, M.darkArmor);
   shellMesh.name = 'Shell';
+  // Mouth rails: raised strips along both slanted sides of the recess, on the recess floor.
+  for (const s of [-1, 1]) {
+    const [xt, yt] = mo.outline[2], [xb, yb] = mo.outline[3];
+    const len = Math.hypot(xb - xt, yb - yt), ang = Math.atan2(yb - yt, xb - xt);
+    const rail = new THREE.Mesh(new THREE.BoxGeometry(len, mo.railWidth, 0.022), M.darkArmor);
+    rail.name = 'MouthRail';
+    rail.position.set(s * ((xt + xb) / 2 - mo.railWidth * 0.6), (yt + yb) / 2, zm - mo.depth + 0.01);
+    rail.rotation.z = s * ang;
+    g.add(rail);
+  }
+
+  // Dark recess behind the side edge of the face plate, separating it from the housing.
+  for (const s of [-1, 1]) {
+    const pts = D.maskGap.map(([z, y]) => hitSurface(probe, [s * 2, y, z], [-s, 0, 0])?.point).filter(Boolean);
+    if (pts.length < 2) continue;
+    const gap = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 40, 0.0065, 6), M.darkMetal);
+    gap.name = 'MaskGap';
+    g.add(gap);
+  }
+
   g.add(shellMesh, ...glows);
 
   // Brim: overhanging rim along the cap's lower edge at the back.
@@ -143,6 +162,11 @@ export function buildUpperHelmet(M) {
       rib.position.set(-0.017 + i * 0.008, -0.01, 0.026);
       hinge.add(rib);
     }
+    // Joint at the top of the mask holder.
+    const joint = new THREE.Mesh(new THREE.CylinderGeometry(0.013, 0.013, 0.05, 16), M.darkMetal);
+    joint.rotation.x = Math.PI / 2;
+    joint.position.set(0, 0.13, 0.012);
+    hinge.add(joint);
     orient(hinge, h.point, h.normal, 0.01, [0, 0, 1]);
     g.add(hinge);
   }
@@ -155,6 +179,9 @@ export function buildUpperHelmet(M) {
     }
     pts.push(hitSurface(probeAll, [s * 2, 0.3, 0.05], [-s, 0, 0]));
     pts.push(hitSurface(probeAll, [s * 2, 0.4, -0.05], [-s, -0.4, 0]));
+    // Fastener in the floor of the temple recess.
+    const th = templeHits.find((h) => Math.sign(h.point.x) === s);
+    if (th) pts.push(hitSurface(probeAll, [s * 2, th.point.y, th.point.z], [-s, 0, 0]));
     // Row of screws along the brim at the back.
     for (const a of [0.35, 0.75, 1.15]) pts.push(hitSurface(probeAll, [s * Math.sin(a) * 2, 0.36, -Math.cos(a) * 2], [-s * Math.sin(a), 0, Math.cos(a)]));
   }

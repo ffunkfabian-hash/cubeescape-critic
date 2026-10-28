@@ -11,3 +11,6 @@
 - Teile, die nicht Teil des Modells sind (Schal), aus der Messung ausschneiden (`CUT` in `web/tools/iou.py`), sonst bestraft jeder Durchlauf das Fehlen.
 - KI-Turntable-Videos drehen ungleichmäßig und driften: Drehwinkel je Frame schätzen statt konstanter Rate; mehr Frames derselben Kreisfahrt bringen kaum etwas, andere Blickhöhen schon (Branch `claude/robot-hull`).
 - Generierte Dateien (`web/public/robot/`) gehören in `.gitignore`, bevor ein anderer Branch sie erzeugt – sonst landen sie beim nächsten `git add -A` im Commit.
+- Drehteller-Videos: das Licht bleibt beim Betrachter – Licht-Rig und Umgebung mit der Kamera drehen (`lightRig`, `environmentRotation` in `web/src/main.js`), sonst sind Seiten und Rücken flach.
+- Neue Grundprofile können innere Teile freilegen (weißer Kern durch die Stirn) – innere Volumen auf ihren sichtbaren Bereich beschneiden.
+- Fremde Formbeschreibungen sind Startwerte: ein zu stark zurückweichendes Gesicht (15°) verschlechterte Seiten-IoU und Augen – Teile einzeln übernehmen und je Durchlauf messen ([HELM_VERLAUF.md](HELM_VERLAUF.md) #22–#25).

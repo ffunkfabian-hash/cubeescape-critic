@@ -37,6 +37,7 @@ npm run verify       # headless: renders/render_*.png, overlay_*.png, mask_*.png
 | `src/textures.js` | Canvas-Maps (Waben, Gebrauchsspuren, Schalen-Körnung) |
 | `verify_renders.mjs`, `tools/iou.py` | Playwright-Prüfung und Umriss-IoU je Ansicht (nur oberhalb der Schalkante der Vorlage) |
 | `tools/pairs.py` | Nahvergleich Vorlage/Render je Ansicht |
+| `tools/save_pass.py` | Belege eines Durchlaufs nach `runs/helm/<Nr>/` (IoU, Vergleichsbilder, Notiz) |
 
 ## Parameter (`src/helmetParams.json`)
 
@@ -56,7 +57,11 @@ Einheit: Helmhöhe ≈ 1, Ursprung in der Kopfmitte, Y oben, Gesicht +Z, linke H
 | `band` | Kopfbügel: Lage `z`, halbe Breite |
 | `earL`, `earR` | Ohrkappe links bzw. Funkmuschel rechts: Mitte, Außenkante, Größe |
 | `antenna.top`, `backBox` | Antennenspitze; Heck-Box Mitte und Größe |
-| `tube` | Spiralkabel: Wendel- und Drahtradius, Steigung, Kurvenpunkte |
+| `tube` | Spiralkabel: Wendel- und Drahtradius, Steigung, Kurvenpunkte (vom Box-Ausgang zur Funkmuschel) |
+| `mouth` | Mundaussparung: Umriss `outline` (`[x, y]`), Tiefe, Leistenbreite, Querschlitz (Breite, Höhe) |
+| `maskGap` | Verlauf der dunklen Rücksprung-Fuge hinter der Maskenkante (`[z, y]`) |
+| `cheekSlot` | Schlitze an den unteren Wangen: Lage, Breite, Höhe, Neigung |
+| `collar.dip` | Absenkung in der Oberkante des hinteren Rahmens (`[x, Δy]` relativ zur Oberkante) |
 
 ## Messverlauf (Umriss-IoU)
 
@@ -66,8 +71,9 @@ Einheit: Helmhöhe ≈ 1, Ursprung in der Kopfmitte, Y oben, Gesicht +Z, linke H
 | Runde 1, gemessen oberhalb der Schalkante | 0,926 | 0,921 | 0,896 | 0,884 | 0,907 |
 | Runde 2: Profil-Loft, Facetten, Spiralkabel, ohne Schal | 0,922 | 0,910 | 0,882 | 0,897 | 0,903 |
 | Runde 3: spitze Front, Fasen, Augenhöhlen, Details | 0,923 | 0,917 | 0,882 | 0,893 | 0,904 |
+| Runde 4: Formbeschreibung (Ausschnitte, Anbauten, Kamera-Licht) | 0,919 | 0,914 | 0,878 | 0,891 | 0,901 |
 
-Kurzfassung je Runde; **alle 21 Durchläufe** mit Änderung, Messwert und Entscheidung: `docs/HELM_VERLAUF.md`.
+Kurzfassung je Runde; **alle Durchläufe** mit Änderung, Messwert und Entscheidung: `docs/HELM_VERLAUF.md`.
 Die Silhouette ändert sich durch Facetten, Material und Details kaum; Fortschritt zeigt der Nahvergleich
 (`python3 tools/pairs.py . out.png`). Lehren: `docs/LESSONS.md`.
 

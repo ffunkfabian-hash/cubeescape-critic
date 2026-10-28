@@ -2,7 +2,7 @@
 // corner screws, and the ribbed black hose from the radio's lower front edge into the box.
 import * as THREE from 'three';
 import { D } from '../params.js';
-import { brush, csg, roundedRect, SUBTRACTION } from '../geo.js';
+import { brush, csg, prism, roundedRect, SUBTRACTION } from '../geo.js';
 import { screws } from './common.js';
 
 function tube(points, r) {
@@ -72,9 +72,10 @@ export function buildRightComms(M) {
     g.add(new THREE.Mesh(geo, M.darkMetal));
   }
 
-  // Rear tech box: mounting plate, box with recessed centre and logo, four corner screws, side tabs.
+  // Rear tech box: mounting plate, box with a recessed polygonal field and logo, four corner screws, cylindrical side
+  // connectors (the coiled cord leaves through the one on the cord side).
   const bb = D.backBox, zBack = -(D.core.rz - D.core.cz) + 0.035;
-  const plateGeo = new THREE.ExtrudeGeometry(roundedRect(bb.w + 0.06, bb.h + 0.06, 0.02), { depth: 0.09, bevelEnabled: false });
+  const plateGeo = new THREE.ExtrudeGeometry(roundedRect(bb.w + 0.03, bb.h + 0.03, 0.02), { depth: 0.09, bevelEnabled: false });
   plateGeo.rotateY(Math.PI); // faces -Z, extrusion towards -Z
   plateGeo.translate(0, bb.cy, zBack);
   const plate = new THREE.Mesh(plateGeo, M.oliveTech);
@@ -84,7 +85,9 @@ export function buildRightComms(M) {
   boxGeo.rotateY(Math.PI);
   boxGeo.translate(0, bb.cy, boxFront);
   const face0 = boxFront - 0.043;
-  const recess = brush(new THREE.BoxGeometry(bb.w * 0.62, bb.h * 0.56, 0.04), { pos: [0, bb.cy, face0 - 0.02 + 0.012] });
+  const rw = bb.w * 0.31, rh = bb.h * 0.28, ch = 0.022;
+  const field = [[-rw + ch, rh], [rw - ch, rh], [rw, rh - ch], [rw, -rh + ch], [rw - ch, -rh], [-rw + ch, -rh], [-rw, -rh + ch], [-rw, rh - ch]];
+  const recess = brush(prism(field.map(([x, y]) => [x, y + bb.cy]), 'xy', 0.04), { pos: [0, 0, face0 - 0.02 + 0.012] });
   const box = new THREE.Mesh(csg(brush(boxGeo), [SUBTRACTION, recess]).geometry, M.oliveTech);
   box.name = 'BackBox';
   const logo = new THREE.Group();
@@ -96,8 +99,9 @@ export function buildRightComms(M) {
     logo.add(bar);
   }
   const tabs = [-1, 1].map((s) => {
-    const t = new THREE.Mesh(new THREE.BoxGeometry(0.035, 0.07, 0.03), M.oliveTech);
-    t.position.set(s * (bb.w / 2 + 0.03), bb.cy - 0.02, boxFront - 0.012);
+    const t = new THREE.Mesh(new THREE.CylinderGeometry(0.017, 0.017, 0.045, 20).rotateZ(Math.PI / 2), M.darkMetal);
+    t.name = 'BackBox_Connector';
+    t.position.set(s * (bb.w / 2 + 0.022), bb.cy - 0.03, boxFront - 0.02);
     return t;
   });
   const corner = [];
@@ -109,7 +113,8 @@ export function buildRightComms(M) {
   backBox.add(plate, box, logo, ...tabs, screws(M, corner, 'Screws_BackBox'));
   g.add(backBox);
 
-  // Coiled cord: a helix wound around a Catmull-Rom path (Frenet frames), with three light sleeves.
+  // Coiled cord: a helix wound around a Catmull-Rom path (Frenet frames), with three light clamps. It leaves the back box
+  // sideways, loops out and down, runs along the lower side frame and rises to the radio module.
   const T = D.tube;
   const path = new THREE.CatmullRomCurve3(T.points.map((p) => new THREE.Vector3(...p)));
   const len = path.getLength();
@@ -129,7 +134,15 @@ export function buildRightComms(M) {
   coil.name = 'Hose_Coil';
   hose.add(coil);
   const Z = new THREE.Vector3(0, 0, 1);
-  for (const t of [0.04, 0.42, 0.62]) {
+  // Connectors where the cord enters the back box and the radio module.
+  for (const t of [0, 1]) {
+    const plug = new THREE.Mesh(new THREE.CylinderGeometry(0.016, 0.016, 0.035, 16).rotateX(Math.PI / 2), M.darkMetal);
+    plug.name = 'Hose_Plug';
+    plug.position.copy(path.getPointAt(t));
+    plug.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), path.getTangentAt(t));
+    hose.add(plug);
+  }
+  for (const t of [0.3, 0.55, 0.8]) {
     const r = T.coilRadius + T.wireRadius + 0.004;
     const sleeve = new THREE.Mesh(new THREE.CylinderGeometry(r, r, 0.05, 20).rotateX(Math.PI / 2), M.whiteArmor);
     sleeve.position.copy(path.getPointAt(t));

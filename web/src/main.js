@@ -59,7 +59,11 @@ const fill = new THREE.DirectionalLight(0xdfe6ff, 0.35);
 fill.position.set(3, 1, 2);
 const rim = new THREE.DirectionalLight(0xffffff, 0.7);
 rim.position.set(0.5, 2.5, -3.5);
-scene.add(key, fill, rim, new THREE.HemisphereLight(0xffffff, 0x444444, 0.25));
+// The video is a turntable: the helmet turns, the studio stays with the viewer. Key, fill, rim and the environment
+// therefore turn with the camera azimuth (lightRig, environmentRotation), so every view is lit like the video.
+const lightRig = new THREE.Group();
+lightRig.add(key, fill, rim, key.target);
+scene.add(lightRig, new THREE.HemisphereLight(0xffffff, 0x444444, 0.25));
 
 // Camera views matched to the extracted video frames (refs/ref_*.png: 0 s, 1.5 s, 3 s, 4.5 s).
 const camera = new THREE.PerspectiveCamera(30, 1, 0.05, 50);
@@ -89,6 +93,8 @@ function setCameraView(name) {
   setTurntable(false);
   current = name;
   const az = THREE.MathUtils.degToRad(v.az), el = THREE.MathUtils.degToRad(v.el);
+  lightRig.rotation.y = az;
+  scene.environmentRotation.set(0, az, 0);
   camera.position.set(Math.sin(az) * Math.cos(el), Math.sin(el), Math.cos(az) * Math.cos(el)).multiplyScalar(v.dist).add(target);
   controls.target.copy(target);
   camera.lookAt(target);
@@ -102,6 +108,8 @@ function setTurntable(on) {
   if (!on && model) model.rotation.y = 0;
   if (on) {
     current = 'front';
+    lightRig.rotation.y = 0;
+    scene.environmentRotation.set(0, 0, 0);
     const v = VIEWS.front, el = THREE.MathUtils.degToRad(v.el);
     camera.position.set(0, Math.sin(el), Math.cos(el)).multiplyScalar(v.dist).add(target);
     controls.target.copy(target);

@@ -14,6 +14,10 @@
 - Dritte Runde Helm: Front läuft mit Mittelgrat spitz zu (V aus zwei Ebenen), Fasen an allen Facettenkanten, tiefe
   Augenhöhlen mit schrägen Wänden (sattes Cyan, Auge zieht sich auf die Seitenfläche), Wangenmarkierungen,
   Schläfenplatten mit Rippen, Mundschlitz, Schraubenreihen an Krempe und Kiefersteg (IoU 0,904).
+- Vierte Runde Helm nach einer Formbeschreibung (GPT 6 Astra): Kinnblock hinter der Braue, Mundaussparung mit Leisten
+  und Querschlitz, Rücksprung-Fuge hinter der Maskenkante, Wangenschlitze, Rahmen-Absenkung hinten, dreieckige
+  Schläfenvertiefungen, Seitenmodul B kantig, Heck-Box nach Maß, Kabel vom Box-Ausgang, Licht dreht mit der Kamera;
+  Belege je Durchlauf unter `runs/helm/` (IoU 0,901).
 - CSG-Fix in `geo.js`: Transformationen werden in die Geometrie eingebacken (three-bvh-csg rechnet im lokalen System
   des ersten Körpers; Position und Neigung der Kuppel gingen verloren).
 - `check` überspringt `node_modules`, `dist`, `renders`.

@@ -4,8 +4,9 @@ import { D } from '../params.js';
 import { brush, csg, shape, hitSurface, orient, SUBTRACTION, INTERSECTION } from '../geo.js';
 import { headVolume } from './headVolume.js';
 
-// Shield outline in (z, y) relative to the cap centre.
-const CAP = [[0.085, 0.135], [-0.07, 0.135], [-0.11, 0.07], [-0.1, -0.06], [-0.03, -0.135], [0.06, -0.12], [0.1, 0.0]].map(([z, y]) => [z * 1.3, y * 1.3]);
+// Side module B: flat, angular, irregular quadrilateral in (z, y) relative to its centre; top and bottom edges slanted,
+// the front lower corner more rounded.
+const CAP = [[0.09, 0.125], [-0.12, 0.15], [-0.135, -0.11], [-0.02, -0.15], [0.055, -0.135], [0.09, -0.09]];
 
 function sidePlate(pts, depth, bevel, outerX, cz, cy) {
   const geo = new THREE.ExtrudeGeometry(shape(pts), {
@@ -30,7 +31,7 @@ export function buildLeftEar(M) {
   g.name = 'LeftEar_Cap';
   const e = D.earL;
 
-  const cap = new THREE.Mesh(sidePlate(CAP, 0.045, 0.01, e.outerX, e.cz, e.cy), M.whiteArmor);
+  const cap = new THREE.Mesh(sidePlate(CAP, 0.035, 0.012, e.outerX, e.cz, e.cy), M.whiteArmor);
   cap.name = 'EarCap';
   const insertPts = CAP.map(([z, y]) => [z * 0.74 - 0.008, y * 0.74]);
   const insert = new THREE.Mesh(sidePlate(insertPts, 0.01, 0.003, e.outerX + 0.008, e.cz, e.cy), M.whiteTextured);

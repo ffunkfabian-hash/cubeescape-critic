@@ -45,7 +45,25 @@ spitzer zu; bessere Übergänge zwischen den Formen.
 | 20 | Front aus zwei Ebenen mit Mittelgrat, Fasen an allen Facettenkanten | 0,923 | 0,918 | 0,882 | 0,893 | **0,904** | behalten |
 | 21 | Augenhöhle an der V-Front ausgerichtet und verlängert, Wangenmarkierungen, Schraubenreihen, Nieten | 0,923 | 0,917 | 0,882 | 0,893 | 0,904 | Stand Runde 3 (`966721d`) |
 
+## Runde 4 – Formbeschreibung von GPT 6 Astra (28.10.2026, Messung B)
+
+Vorlage: ausführliche Formbeschreibung in vier Stufen (Silhouette, Ausschnitte, Anbauten, Details) mit Richtmaßen.
+Übernommen bis auf die Gesamttiefe (Beschreibung 78–84, im Video gemessen ~95) und den Kiel (Beschreibung: kein
+Mittelgrat; die Front bleibt leicht V-förmig gewölbt). Ab hier liegen je Durchlauf `pairs.png`, `compare.png` und
+`iou.json` unter `runs/helm/<Nr>/` (nicht im Repo).
+
+| # | Änderung | front | left | back | right | Mittel | Ergebnis |
+|---|---|---|---|---|---|---|---|
+| 22 | Stufe 1: Seitenprofil nach Beschreibung (Braue vorn, Gesicht 15° zurück, Kinn springt vor), Front ohne Kiel, Kinnblock schmal | 0,925 | 0,893 | 0,881 | 0,854 | 0,888 | verworfen: weißer Kern sticht durch die Stirn |
+| 23 | Kern vorn beschnitten | 0,925 | 0,890 | 0,881 | 0,851 | 0,887 | Kernschnitt behalten |
+| 24 | Seitenfase ab x = 0,18, Augen in zwei Abschnitten um die Kante, Mund mit geneigtem Boden | 0,925 | 0,888 | 0,881 | 0,848 | 0,885 | verworfen: Augen zerfallen, Gesicht unten klotzig |
+| 25 | Zurück auf das Gesicht von #21; Kinnblock hinter die Braue (0,475), schmale Kinnfront mit Schrägflächen | 0,923 | 0,917 | 0,882 | 0,893 | 0,904 | behalten |
+| 26 | Stufe 2: Mundaussparung (schmal oben, breit unten) mit Seitenleisten und Querschlitz, Rücksprung-Fuge hinter der Maskenkante, Wangenschlitze, Kinn-Absenkung, Rahmen-Absenkung hinten mit Anschlussplatte, dreieckige Schläfenvertiefung mit Befestigungspunkt | 0,923 | 0,918 | 0,882 | 0,893 | 0,904 | behalten |
+| 27 | Licht und Umgebung drehen mit der Kamera (Drehteller wie im Video) | 0,923 | 0,918 | 0,882 | 0,893 | 0,904 | behalten |
+| 28 | Stufe 3: Seitenmodul B als kantiges Viereck, Heck-Box nach Maß mit Vieleck-Feld und zylindrischen Anschlüssen, Spiralkabel vom Box-Ausgang am Rahmen entlang zur Muschel, Stecker, Gelenk an den Maskenhalterungen | 0,919 | 0,910 | 0,878 | 0,892 | 0,900 | behalten, Heck-Box zu wuchtig |
+| 29 | Heck-Box schlanker | 0,919 | 0,914 | 0,878 | 0,891 | 0,901 | Stand Runde 4 |
+
 ## Offen
 
-Seitenfläche neben dem Auge zu flach mit harter Hell-Dunkel-Grenze; weißer Block zwischen Schläfenplatte und Ohrkappe
-klotzig; Hinterkopf schlichter als im Video.
+Seitenfläche neben dem Auge zu flach; weißer Block zwischen Schläfenplatte und Seitenmodul B klotzig; Stufe 4 der
+Beschreibung (Fugen, flache Vertiefungen im Seitenrahmen) nur teilweise; Weiß auf Weiß hinten kontrastarm.
