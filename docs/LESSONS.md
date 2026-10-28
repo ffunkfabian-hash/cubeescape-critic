@@ -1,5 +1,5 @@
 # Lehren (Critic)
-≤ 60 Zeilen, eine Zeile je Lehre, Link zur Langform.
+≤ 60 Zeilen, eine Zeile je Lehre, Link zur Langform. Verlauf aller Helm-Durchläufe: [HELM_VERLAUF.md](HELM_VERLAUF.md).
 
 - three-bvh-csg liefert das Ergebnis im lokalen System des **ersten** Körpers – Transformationen vorher in die Geometrie einbacken (`web/src/geo.js` › `brush`), sonst verschwinden Position/Neigung still.
 - Headless-Chromium hat nur Software-GL (SwiftShader): Animationsschleife + GTAO/Bloom lässt Screenshots in den Timeout laufen – Einzelbild-Modus `?static=1` mit `renderFrame()` (`web/verify_renders.mjs`).

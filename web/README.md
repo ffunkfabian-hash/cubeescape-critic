@@ -67,6 +67,7 @@ Einheit: Helmhöhe ≈ 1, Ursprung in der Kopfmitte, Y oben, Gesicht +Z, linke H
 | Runde 2: Profil-Loft, Facetten, Spiralkabel, ohne Schal | 0,922 | 0,910 | 0,882 | 0,897 | 0,903 |
 | Runde 3: spitze Front, Fasen, Augenhöhlen, Details | 0,923 | 0,917 | 0,882 | 0,893 | 0,904 |
 
+Kurzfassung je Runde; **alle 21 Durchläufe** mit Änderung, Messwert und Entscheidung: `docs/HELM_VERLAUF.md`.
 Die Silhouette ändert sich durch Facetten, Material und Details kaum; Fortschritt zeigt der Nahvergleich
 (`python3 tools/pairs.py . out.png`). Lehren: `docs/LESSONS.md`.
 
