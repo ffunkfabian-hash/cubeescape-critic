@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-10-28T15:08:28.555Z",
+  "startedAt": "2026-10-28T15:18:09.411Z",
   "status": "passed",
   "views": [
     "front",
@@ -112,33 +112,33 @@
     "textures/whiteArmor_roughnessMap.png": "e905554a48bc8c7f728613e80e22987b82686b8232bdf49f94e50b7bcc647182",
     "textures/whiteTextured_bumpMap.png": "c4ace6c801244697c9be598a42d9a5a36dae194fb3551c26df59a3b8c789bd61",
     "textures/materials.json": "3fb661e90d6a7e16aef143bbdf459418499b1dee4ae831cef9ac1fc93d5f5c82",
-    "scifi_helmet.glb": "d0dbba906776e33917ee3ade394cd1b0c837c309afe5a39e0ab7dd3097a8c507",
-    "render_front.png": "91b0fef0f203ffe8c9bc4745cd25874deb6ea03469b3e7562ae3c77a2c7308e6",
+    "scifi_helmet.glb": "132e66ea6caf7d63c2987248cebb1ace684d291e6d850fecf23e3a225beff1c9",
+    "render_front.png": "ab8f7505c348c7689419d2a0a0d6fc00abe7cfdd6997aa5379573265c5c8af50",
     "mask_front.png": "191f51c8deef52a8ca4ffc5cfb6e293dc1a5f3e7091853c42acf66f9f48434a0",
-    "overlay_front.png": "ec738fba01af7776557b10e0604aefa17c0790104cf2be0eda8b932092b0c04f",
-    "render_left.png": "d1ea74e32056611edb632e37d3048d44a568b98cf9e98750d2c2509134e10a17",
-    "mask_left.png": "ee4b0f769590e9857f1d85fed82e141629b3dc022f796d65b074625822ee975f",
-    "overlay_left.png": "a54b361e87902021f7b98be0c481eaeeae8c73a94715cc8df18a3fd940a6ebbc",
+    "overlay_front.png": "f25dc8eb946b70ea9d885556854a3ea1aaf84ef20365846f46c90ad48ff2cbeb",
+    "render_left.png": "66a49c2313066f8b601707df68e11066e8e81638de17cf0bce71a5f709456380",
+    "mask_left.png": "d677a3cc90632abfe5303acf7677628a2a49eaf07cc0cec739271f80238168b5",
+    "overlay_left.png": "4e89a50722f07f53717b57df22407c24ebcad1a0cc3170cf52723f2ccb1b5682",
     "render_back.png": "9183bac539c887d06890c5c70c87749c96a6035211e1ddba9027c388592b6e4b",
     "mask_back.png": "583cba1a08b6a50313c379ea67cc43330346132fca00121e2fc618dbd16ef842",
     "overlay_back.png": "65c81be681a31f7f370918ea2dd5ef64968bb04de9791f793e0aef9b36bd863c",
-    "render_right.png": "8bd210724774a0f49350c9d523ea268a168a9acafbffce9200bce3edab0abca9",
-    "mask_right.png": "324dd865b43676de9c1ad18a2897179aa3c8ec4204f56d0ffecd2ff4b7a84a81",
-    "overlay_right.png": "871a057b5879974ef69a3e09deb91b5eb477139d5486d98b9bed4f09369e7ac3",
+    "render_right.png": "ecf8efbc44f58c846e16073b7489046a097fdc6da3a5968ebe619a953151d373",
+    "mask_right.png": "f83ee3c7c147db7839019d6f9f33ec9d73776b9567b51ab6ae0b12edd7218811",
+    "overlay_right.png": "8d29f9d03b683ad24c3fbddc2f2d2476fb48a1a19b3d71b9373fd0dd0371cef2",
     "iou.json": "2661385909202db8f4a7d8c2397c8c6678fd29ef371ca66c7fe35f64b45f5c79",
-    "compare.png": "877f903b2d70a03f481b9b224c164aee454e92c057267e99f99cf29ce327071c"
+    "compare.png": "7738764b75e2518db81c6778e326ab3da805772db36940244c89690d0580b8ce"
   },
   "sources": {
     "files": {
       "src/geo.js": "ae2dfc529993cd9585028d9f2c3446960d8e6b18d7953258856adc07e87b9f6f",
       "src/helmet.js": "745c480ed0e39c2543e6f283eaf27f7dfc0536f687be122120aaff8cc39111bf",
-      "src/helmetParams.json": "8ec95a012de22236f30ff313c3dbb8ea92a5b617dc56a3a1ae3cb2d33f5a0240",
+      "src/helmetParams.json": "5fce9592bf90b3836fb5384e9f611b88ea168bbeba457e4f141120351e7ed1e1",
       "src/main.js": "12a9976636ce7537453294adc1be1933a64f73df2150dc3c0c390fc0a2cc76da",
       "src/materials.js": "38359a25e7c6695f4f9c979c78df1b5b36c63e59bf6acd23b7f62e71daf211c5",
       "src/params.js": "24b2e7cee16b44ca26b518beb689982e0fec092026a6f42d18bb08203e6db170",
       "src/parts/bodyStudy.js": "fe45c21c425de5367e1770735d6f9e7510d78d148e941d3ad8fc7de6c4bae4ce",
       "src/parts/common.js": "07c66f0f95ea400c4dcfdaadab2e2f3bbe96af2378af01b8b613699f5ba7a58b",
-      "src/parts/foreheadPlates.js": "1449e88148994aeafb900aa2930d7d554c200950aeea2182c09dd3626180fdd1",
+      "src/parts/foreheadPlates.js": "a68d6a47aa94c502bf14b39a3eabd1e9a89e18a35013a4d738abe04ea139834d",
       "src/parts/headVolume.js": "f1f501bfb3c0b694b78d66241396367016d5dc78d8ec564cdb24f63ef00bd987",
       "src/parts/leftEar.js": "42231d1db97f08377ef291e3e599ee59d093132425231ea138c8a9865c22ee72",
       "src/parts/lowerArmor.js": "1f170cd0c8b14f5df043fb060df1b6589ef56cc302b7ab0637b4c7c1e188ed2d",
@@ -167,7 +167,7 @@
       "tools/test_iou.py": "42522640872b806c7b7e8b732959b1836e9eebabec11ec8e84da984df392fb9f",
       "tools/test_save_pass.py": "32706b25972fb725dc9851907221e0ca8404fb7ecb6468bf051a49d6f0f455b0",
       "tools/textureProjection.test.mjs": "556dfb910000cd2e84d2d785c23fe0af0db2a0ed029cff590d96c60182034bac",
-      "tools/upperProfile.test.mjs": "75f1fdb06f911b7f2f575293c984dd7bd11e3f7fe03c1f12d427f56fa344d210",
+      "tools/upperProfile.test.mjs": "6a8469826d8475119bbbe3129eb25e317a9953860298e0e85b64dddb99042604",
       "tools/verification.mjs": "0b42c187226dda7c46805bc5c2f83b07050e09a905c1d39c396ac35e41e897c4",
       "tools/verification.test.mjs": "65ad99da80c2e987c10c325962f08f3743cab2678dc9b9472edcde33b923f1d3",
       "index.html": "b4649cc322f11741951fe689f9d0718c7b53f78617f280c02c423f6b7582566d",
@@ -178,7 +178,7 @@
       ".nvmrc": "7e8a2fa94951112b894a3dbe3d05efef5e9263741fa49125f0a70f40fedab4cc",
       "../reference/helm/turnaround.mp4": "fac039db10d9d3ee3c74373c38e323dd53489df69eee18971e736c9d971e70de"
     },
-    "digest": "122ed0d5dd6a50127edffcbac5464a8a13f37a0292cff061db9cde6e50da26d4"
+    "digest": "31bfb1930523aa46d10fdbdaac4b2dc6f276f07ad725f3a61045ef725650c5dc"
   },
   "runtime": {
     "node": "v24.19.0",
@@ -751,11 +751,11 @@
       "outline": [
         [
           0.055,
-          0.175
+          0.11
         ],
         [
           0.275,
-          0.175
+          0.11
         ],
         [
           0.17,
@@ -767,14 +767,17 @@
         ]
       ],
       "projection": 0.007,
-      "embed": 0.001
+      "embed": 0.001,
+      "joinBlendHeight": 0.05,
+      "joinOverlap": 0.003,
+      "joinLip": 0.003
     }
   },
   "renderSettings": {
     "denoiseSeed": 47
   },
   "glb": {
-    "bytes": 5992292,
+    "bytes": 6016836,
     "meshes": 91,
     "nodes": 106,
     "materials": 9,
@@ -791,5 +794,5 @@
     "right": 0.8996,
     "mean": 0.918
   },
-  "finishedAt": "2026-10-28T15:08:48.611Z"
+  "finishedAt": "2026-10-28T15:18:38.173Z"
 }

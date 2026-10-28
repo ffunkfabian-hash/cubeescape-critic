@@ -2,7 +2,7 @@
 
 ## Verbindlicher Stand
 
-Aktueller Lieferstand: **Prüflauf 76**. Nach Nutzerfeedback ist der Scheitel nun quer und längs gewölbt;
+Aktueller Lieferstand: **Prüflauf 78**. Nach Nutzerfeedback ist der Scheitel nun quer und längs gewölbt;
 der Kopfbügel folgt der Haube. Ihr Rand läuft weich zur Augenmaske aus. Das helle Hinterkopfgehäuse und der Nackenrahmen sind wieder rund; die Kieferplatten bleiben kantig.
 Zwei separate Stirnblenden ergänzen die Haube gemäß der [Nutzerzeichnung](../reference/helm-forehead-request-20261028/stirnblenden-markierung.jpg).
 Die abgeflachten, eckigen Haubenversuche 62/63 wurden vom Nutzer ausdrücklich verworfen.
@@ -20,7 +20,8 @@ Die Zuordnung ist im [Verlauf](HELM_VERLAUF.md) dokumentiert. „Vorher“ bezei
   Der Übergang zur Augenmaske soll möglichst ohne sichtbare Fugenlinie wirken. Eine minimale verdeckte Überlappung
   und Randabdeckung reduzieren die helle Linie; H01 und H02 bleiben getrennt. Material-/Lichtunterschiede können den Übergang noch zeigen.
 - **Stirnblenden H20/H21:** zwei flach aufliegende Trapeze oberhalb der Augen, oben schmaler, mit freiem Mittelstreifen.
-  Sie folgen der Haubenrundung und verwenden das Material der Maske. Separate Meshes; die Haube bleibt darunter erhalten.
+  Sie folgen der Haubenrundung und verwenden das Material der Maske. Ihre Unterkanten schließen mit flach auslaufender
+  Überlappung direkt an die Augenmaske an; kein freier Haubenstreifen dazwischen. Separate Meshes; die Haube bleibt darunter erhalten.
   Dies ist eine gezielte Nutzerergänzung zur Videovorlage.
 - **Gesicht H02–H06:** dunkle, kantige Panzerplatten mit schmalen Fugen, zurückgesetztem trapezförmigem Mitteleinsatz
   und klaren Wangenflächen. Die akzeptierten cyanfarbenen Augen bleiben in Form, Lage und Leuchtwirkung erhalten.
@@ -71,4 +72,4 @@ Einzelne Meshes sind noch keine Zusicherung fertiger Druckwandstärken, Montagep
 Standnummern beschriften. Messwerte ergänzen die Sichtprüfung; Silhouetten-IoU ist kein Prozentwert für die Gesamtähnlichkeit.
 Die optionale Körperstudie (`?body=1`) ist ein separater Proportionsentwurf und nicht als fertige Körperform freigegeben.
 
-[Reproduktionsanleitung](../web/README.md#aktueller-lieferstand-76) · [GLB und Prüfbelege](../assets/helmet/README.md)
+[Reproduktionsanleitung](../web/README.md#aktueller-lieferstand-78) · [GLB und Prüfbelege](../assets/helmet/README.md)

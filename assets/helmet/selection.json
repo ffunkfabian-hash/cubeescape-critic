@@ -1,19 +1,19 @@
 {
   "status": "passed",
-  "finalPass": 76,
-  "basedOnPass": 74,
+  "finalPass": 78,
+  "basedOnPass": 76,
   "meshCount": 91,
   "unchangedMeshGeometryAndTransforms": 89,
-  "changedGeometry": [],
-  "addedGeometry": [
+  "changedGeometry": [
     "104:ForeheadPlate_R",
     "105:ForeheadPlate_L"
   ],
   "allMaterialsAndTextureImagesUnchanged": true,
   "plateSupportProbes": 18,
   "centreStripProbes": 3,
-  "floatingPlateNegativeControl": "failed as expected; restored before verification",
-  "targetGLBSHA256": "d0dbba906776e33917ee3ade394cd1b0c837c309afe5a39e0ab7dd3097a8c507",
+  "plateMaskConnectionProbes": 12,
+  "disconnectedPlateNegativeControl": "failed as expected; restored before verification",
+  "targetGLBSHA256": "132e66ea6caf7d63c2987248cebb1ace684d291e6d850fecf23e3a225beff1c9",
   "geometryHashes": {
     "2:Crown": "1349693affb7808ea539f16a16d35efb230f210d53a6e8f04c6ae52e0e5b0903",
     "3:Cheek_R": "bc2db1c1c2ada2629cdd4399f6cf18ce54227604736f8836ddf350d56f66e755",
@@ -104,7 +104,7 @@
     "100:": "75a6ca1890ca00bf24dbeace405b825f22364a48657dde3b697a07b5edf74454",
     "101:": "c6a65578f13c433cd47fddbc22b824c75e113962d698a7210c63f33bd8813458",
     "102:": "c68cfc14db58fd257736a97790b979fd4b00ed523afad7383071d425096f34a6",
-    "104:ForeheadPlate_R": "162e76bd10a0b28c7466fa52c2f44e39cb74cd3b507afc4e4037e9c06203ed34",
-    "105:ForeheadPlate_L": "33a0df9e11c74c68cb23c9924dc3d398e8091b88a87b9aaf63040e9f46793ef7"
+    "104:ForeheadPlate_R": "23661679fafdf536bf4917be94c1598573d43ca4df486262662917ce711a781a",
+    "105:ForeheadPlate_L": "1c3eada077dfbd8abc533633eee5da9a42b9cd14fece62fd6cab982cddb60dfb"
   }
 }

@@ -34,7 +34,7 @@ Diese Bezeichnungen gelten unabhängig davon, von welcher Richtung man gerade au
 | H21 | Stirnblende B | Entsprechende separate Blende auf Seite B; Mittelstreifen bleibt frei. |
 
 Die IDs bezeichnen sichtbare Abschnitte, nicht zwingend einzelne Meshes. Seit Fidelity sind Haube, Augenmaske, beide Wangen, Kinn und beide Kieferstücke getrennte Meshes.
-Die Bildkarte zeigt Stand 76 mit H20/H21; aktuelle Vier-Ansichten-Belege stehen im [Prüfbericht](versions/0.3.md).
+Die Bildkarte zeigt Stand 78 mit H20/H21; aktuelle Vier-Ansichten-Belege stehen im [Prüfbericht](versions/0.3.md).
 Farben helfen beim Zuordnen; ein Änderungswunsch an H11 betrifft die Geometrie, solange keine Materialänderung genannt wird.
 
 ## Zuordnung für die Umsetzung
@@ -65,8 +65,9 @@ Die Karte verwendet die vier vorhandenen Renderansichten mit 1280×720 Pixeln. C
 vergeben; zusätzliche Bereiche erhalten neue Nummern. Die Karte dokumentiert einen Modellstand und ersetzt keinen
 Vergleich mit den Referenzbildern.
 
-Aktueller Lieferstand: **76**, mit quer und längs gewölbtem Scheitel, angepasstem Bügel und weichem Übergang
+Aktueller Lieferstand: **78**, mit quer und längs gewölbtem Scheitel, angepasstem Bügel und weichem Übergang
 zwischen H01 und H02. Die Fugenlinie ist durch einen verdeckten Überlappungsrand reduziert. Beide Teile bleiben getrennt; H09/H10 sind wieder rund; die separaten Vertiefungen H11 folgen der neuen Rundung.
 Die Haube besitzt dieselbe Graphitgrundfarbe wie die Maske, mit sichtbarer feiner Lackkörnung und gedämpftem Glanz.
-Die bestehenden 89 Meshes bleiben erhalten; H20/H21 ergänzen zwei eigenständige Meshes (insgesamt 91); [Exportverzeichnis](../assets/helmet/parts.json),
+H20/H21 schließen mit einem auslaufenden Überlappungsrand direkt an die Augenmaske an, bleiben aber eigenständige Meshes.
+Die übrigen 89 Meshes bleiben erhalten (insgesamt 91); [Exportverzeichnis](../assets/helmet/parts.json),
 [Stilbeschreibung](HELM_STIL.md), [Prüfbericht](versions/0.3.md).

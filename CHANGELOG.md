@@ -2,6 +2,12 @@
 
 ## 0.3.0 „Sidework“ – 2026-10-28 (offener Entwurf)
 
+- Stand 78: Trapezblenden bis zur Augenmaske verlängert, mit flach auslaufendem Überlappungsrand.
+- Nur H20/H21 geändert; übrige 89 Geometrien, alle Materialien und Texturen erhalten, Teile weiterhin separat.
+- 32 Tests und Build bestehen; zwölf zusätzliche Anschlussproben, Negativkontrolle und vier Ansichten geprüft.
+
+### Blendenstand 76
+
 - Stand 76: zwei separate trapezförmige Stirnblenden nach Nutzerzeichnung, auf der runden Haube aufliegend.
 - Alle bisherigen 89 Meshes, Materialien und Texturen erhalten; H20/H21 ergänzen zwei exportierbare Bauteile.
 - 32 Tests und Build bestehen; Auflage/Mittelstreifen, Negativkontrolle, vier Ansichten und erweiterte Teilekarte geprüft.

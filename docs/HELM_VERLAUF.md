@@ -375,3 +375,18 @@ Die Teilekarte enthält H01–H21 und passt weiterhin auf ein Blatt A3 quer.
 [Nutzerzeichnung](../reference/helm-forehead-request-20261028/stirnblenden-markierung.jpg) ·
 [Erster Versuch 75](belege/helm/75.jpg) · [Stand 76](belege/helm/76.jpg) ·
 [Vergleich 74/76](bilder/helm_stirnblenden_74_76.jpg). Noch nicht vom Nutzer abgenommen.
+
+
+## Runde 21 – Stirnblenden mit der Augenmaske verbinden 78 (28.10.2026)
+
+Der Nutzer möchte die Trapeze als Fortsetzung der metallischen Augenmaske. #77 verlängert sie bis zum Brauenrand,
+zeigt dort aber noch freiliegende Haubenstreifen und Schattierungsbänder. #78 überdeckt diesen Anschluss und
+transformiert die bestehenden glatten Normalen mit der Verformung. Die Blendenhöhe läuft zur Maske flacher aus.
+H20/H21 bleiben separate Meshes; nur diese beiden sind gegenüber 76 geändert. Die übrigen 89 Geometrien, UVs,
+Transformationen sowie alle Materialien und Texturbilder bleiben erhalten.
+
+32 Tests und Build bestehen. Zwölf zusätzliche Strahlen prüfen die sichtbare Verbindung mit der Maske;
+der vorherige getrennte Umriss lässt diese Prüfung gezielt fehlschlagen. Vier Ansichten und die Teilekarte
+sind aktualisiert. Mittlere Silhouetten-IoU bleibt 91,80 %.
+[Anschlussprobe 77](belege/helm/77.jpg) · [Stand 78](belege/helm/78.jpg) ·
+[Vergleich 76/78](bilder/helm_stirnanschluss_76_78.jpg) · [Front](bilder/helm_stirnanschluss_front.jpg).

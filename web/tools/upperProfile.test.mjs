@@ -56,6 +56,18 @@ test('rounded forehead does not lower the dark cap over the rear housing', async
   // The user now wants a visually closed joint, while preserving separate parts.
   const face = model.getObjectByName('Shell'), slope = D.crownTransition.slope;
   const centre = D.capEdgeY + slope * D.crownTransition.anchorZ;
+  for (const degrees of [-25, -15, 15, 25]) {
+   const angle = degrees * Math.PI / 180;
+   const direction = new THREE.Vector3(Math.sin(angle), -slope * Math.cos(angle), Math.cos(angle));
+   for (const t of [-0.001, 0.003, 0.01]) {
+    const ray = new THREE.Raycaster(new THREE.Vector3(0, centre + t, 0).addScaledVector(direction, 2), direction.clone().normalize().negate());
+    const hit = ray.intersectObjects([crown, face, plates], true)[0];
+    assert.ok(hit?.object.name.startsWith('ForeheadPlate_'), `Crown strip separates plate from mask at ${degrees}, ${t}`);
+    const mask = ray.intersectObject(face)[0];
+    if (mask) assert.ok(Math.abs(hit.distance - mask.distance) < 0.006, 'Plate lip stands too far off the mask');
+   }
+  }
+
   for (const degrees of [-75, -60, -45, -30, -15, 0, 15, 30, 45, 60, 75]) {
    const angle = degrees * Math.PI / 180;
    const direction = new THREE.Vector3(Math.sin(angle), -slope * Math.cos(angle), Math.cos(angle));
