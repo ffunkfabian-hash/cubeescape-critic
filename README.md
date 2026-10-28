@@ -1,6 +1,14 @@
 # Critic – parametrischer Helm im Browser
 
-Aktueller Lieferstand **79**: durchgehend gewölbter Scheitel mit angepasstem Kopfbügel und weichem Übergang zur
+**Aktueller Versuch 0.4 „Continuity“:** weichere Übergänge neben den Augen und zwei von der Stirn bis zum Hinterkopf
+verlängerte Streifen. Auf derselben Geometrie stehen Originalmaterial, glänzendes Metall und feines dunkles Graphit
+zum Vergleich; noch keine Materialauswahl durch den Nutzer. [Vergleich und Exporte](assets/helmet-continuity/README.md) ·
+[Prüfbericht](docs/versions/0.4.md). Der Generator zeigt standardmäßig die neue Form mit Originalmaterial.
+[Agentendokumentation: Aufbau, Entscheidungen und visueller Eindruck](docs/HELM_AGENTEN.md).
+
+![Vier Material- und Akzentkombinationen](docs/bilder/helm_continuity_varianten.jpg)
+
+Bisheriger Lieferstand **79**: durchgehend gewölbter Scheitel mit angepasstem Kopfbügel und weichem Übergang zur
 Augenmaske mit weitgehend verdeckter Fugenlinie. Die Haube trägt eine sichtbare feine Lackkörnung im Graphitton der Maske; der Glanz bleibt gedämpft. Hinterkopfgehäuse und Nackenrahmen sind wieder rund; Augen und kantige Kieferplatten bleiben erhalten. Zwei separate trapezförmige Stirnblenden schließen direkt an die Augenmaske an und setzen deren Flächen nach oben fort. Funkmuschel, Kabel, Halterung und Antenne sind jetzt von Seite A nach B gespiegelt. Das Video bleibt für den übrigen Helm maßgeblich.
 
 ![Aktueller Helm](docs/bilder/helm_aktuell.jpg)

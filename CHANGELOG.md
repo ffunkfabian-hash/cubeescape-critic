@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.0 „Continuity“ – 2026-10-28 (Material- und Formversuch)
+
+- Breitere gerundete Maskenübergänge neben unveränderten Augen; zwei separate Stirnstreifen bis zum Hinterkopf.
+- Vergleichbare Presets `original`, `metal`, `graphite` auf identischer Geometrie; technische Anbauten erhalten.
+- Separate Akzentwahl: helle Befestigungspunkte auf dunkler Rüstung, zusätzlich weiße Stirn-/Scheitelstreifen als Probe.
+- Getrennte reproduzierbare Exporte, Materialparameter und vier feste Ansichten je Preset; Nutzerwahl steht aus.
+
 ## 0.3.0 „Sidework“ – 2026-10-28 (offener Entwurf)
 
 - Dokumentation/Stil: seitliche Maskenstreifen als Geometrie-/Lichtwirkung erklärt; weicheren Übergang als offenen Vorschlag festgehalten, Lieferstand 79 unverändert.

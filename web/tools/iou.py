@@ -5,7 +5,7 @@ Reference mask: background modelled as a smooth quadratic luminance surface fitt
 side columns), object = pixels deviating from it, then everything not connected to the border background.
 Render mask: renders/mask_<view>.png (white silhouette on black from verify_renders.mjs).
 Writes renders/iou.json, renders/compare.png and renders/silhouette_<view>.png (reference in pale grey, amber = only
-reference, blue = only render). Usage: python3 tools/iou.py [web-dir]
+reference, blue = only render). Usage: python3 tools/iou.py [web-dir] [render-output-dir]
 """
 import json
 import os
@@ -113,7 +113,8 @@ def measure_iou(reference, rendered, cut):
 
 def main():
     root = sys.argv[1] if len(sys.argv) > 1 else os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    refs, renders = os.path.join(root, 'refs'), os.path.join(root, 'renders')
+    refs = os.path.join(root, 'refs')
+    renders = sys.argv[2] if len(sys.argv) > 2 else os.path.join(root, 'renders')
     validate_inputs(refs, renders)
     result, rows = {}, []
     for v in VIEWS:

@@ -3,7 +3,7 @@
 Diese Nummern bleiben über Modelländerungen hinweg gleich. Für einen Änderungswunsch genügen **Nummer, Seite und Richtung**:
 „H07 schmaler“, „H11 auf Seite B tiefer“ oder „H10 vorne flacher anschließen“.
 
-![Teilekarte des Helms](bilder/helm_teile.jpg)
+![Teilekarte des Helms](bilder/helm_continuity_teile.jpg)
 
 **Seite A** liegt in der Frontansicht links, im Three.js-Modell `−X`, Kamera-Schaltfläche `Right`.
 **Seite B** liegt in der Frontansicht rechts, im Modell `+X`, Schaltfläche `Left`. Seit Stand 79 tragen beide Seiten
@@ -31,11 +31,11 @@ Diese Bezeichnungen gelten unabhängig davon, von welcher Richtung man gerade au
 | H17 | Antennen A/B | Gespiegelte Stäbe mit Fuß und Endkappe; bei Feedback Seite angeben. |
 | H18 | Spiralkabel A/B | Gespiegelte Kabelschleifen mit Klammern und Anschlüssen zum gemeinsamen Heckmodul. |
 | H19 | Halsanschluss | Zurückgesetzter Ring unter dem Nackenrahmen. Der darunterliegende schwarze Hals dient als Träger. |
-| H20 | Stirnblende A | Trapezförmige separate Blende oberhalb des Auges auf Seite A. |
-| H21 | Stirnblende B | Entsprechende separate Blende auf Seite B; Mittelstreifen bleibt frei. |
+| H20 | Stirnblende A | Separater trapezförmiger Stirnstreifen auf Seite A; in Versuch 0.4 über den Scheitel bis zum Hinterkopf verlängert. |
+| H21 | Stirnblende B | Entsprechender separater Streifen auf Seite B; Mittelstreifen bleibt frei. |
 
 Die IDs bezeichnen sichtbare Abschnitte, nicht zwingend einzelne Meshes. Seit Fidelity sind Haube, Augenmaske, beide Wangen, Kinn und beide Kieferstücke getrennte Meshes.
-Die Bildkarte zeigt Stand 79 mit H20/H21; aktuelle Vier-Ansichten-Belege stehen im [Prüfbericht](versions/0.3.md).
+Die Bildkarte zeigt die gemeinsame Form 80–84 mit weißen H20/H21 aus Probe 83; aktuelle Vier-Ansichten-Belege stehen im [Prüfbericht](versions/0.4.md).
 Farben helfen beim Zuordnen; ein Änderungswunsch an H11 betrifft die Geometrie, solange keine Materialänderung genannt wird.
 
 ## Zuordnung für die Umsetzung

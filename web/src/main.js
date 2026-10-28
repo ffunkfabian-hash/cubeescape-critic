@@ -9,13 +9,16 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
 import GUI from 'lil-gui';
-import { createMaterials } from './materials.js';
+import { createMaterials, applyArmorFinish, applyArmorAccents } from './materials.js';
+import { resolveFinish, resolveAccents } from './finishPresets.js';
 import { denoiseTexture, DENOISE_SEED } from './textures.js';
 import { buildHelmet } from './helmet.js';
 import { buildBodyStudy } from './parts/bodyStudy.js';
 import { D, resetParams } from './params.js';
 
 const query = new URLSearchParams(location.search);
+const materialFinish = resolveFinish(query.get('finish') ?? 'original');
+const materialAccents = resolveAccents(query.get('accents') ?? 'original');
 if (query.get('ui') === '0') document.body.classList.add('noui');
 
 const BG = 0x8c8c8c;
@@ -84,7 +87,7 @@ controls.target.copy(target);
 let model;
 let current = 'front';
 let turntable = false;
-const M = createMaterials();
+const M = createMaterials(materialFinish.name, materialAccents.name);
 
 function setCameraView(name) {
   if (name === 'turntable') {
@@ -195,6 +198,8 @@ function rebuild() {
   const t0 = performance.now();
   model = buildHelmet(M);
   if (BODY_STUDY) model.add(buildBodyStudy(M));
+  applyArmorFinish(model, M);
+  applyArmorAccents(model, M, materialAccents.name);
   model.rotation.y = rot;
   scene.add(model);
   console.log(`model built in ${(performance.now() - t0).toFixed(0)} ms`);
@@ -285,4 +290,4 @@ if (STATIC) {
   });
 }
 
-Object.assign(window, { THREE, scene, camera, controls, renderFrame, setCameraView, toggleOverlay, setMaskMode, exportGLB, rebuild, helmetParams: D });
+Object.assign(window, { THREE, scene, camera, controls, renderFrame, setCameraView, toggleOverlay, setMaskMode, exportGLB, rebuild, helmetParams: D, materialFinish, materialAccents });

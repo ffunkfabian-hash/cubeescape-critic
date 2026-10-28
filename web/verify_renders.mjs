@@ -5,20 +5,39 @@
 // then runs tools/iou.py (silhouette IoU per view, if Python with Pillow and NumPy is available).
 // verification.json identifies this run's status, completed views and optional IoU.
 // Older files may remain after a failure or --no-iou; they are not evidence for the current run.
-// Usage: node verify_renders.mjs [--no-iou]
+// Usage: node verify_renders.mjs [--no-iou] [--finish=original|metal|graphite]
+//   [--accents=original|light-fasteners|white-strips] [--out=renders]
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { inspectGLB, subprocessExitCode } from './tools/verification.mjs';
 import { sha256, sourceManifest } from './tools/provenance.mjs';
+import { resolveFinish, resolveAccents } from './src/finishPresets.js';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
-const out = path.join(root, 'renders');
+const options = { finish: 'original', accents: 'original', out: 'renders', noIou: false };
+const seen = new Set();
+const args = process.argv.slice(2);
+for (let i = 0; i < args.length; i++) {
+  const match = /^(--finish|--accents|--out)(?:=(.*))?$/.exec(args[i]);
+  const key = args[i] === '--no-iou' ? 'noIou' : match?.[1].slice(2);
+  if (!key) throw new Error(`Unknown argument: ${args[i]}`);
+  if (seen.has(key)) throw new Error(`Duplicate argument: ${args[i]}`);
+  seen.add(key);
+  const value = key === 'noIou' ? true : match[2] ?? args[++i];
+  if (value === undefined || value === '' || typeof value === 'string' && value.startsWith('--')) {
+    throw new Error(`Missing value for --${key}`);
+  }
+  options[key] = value;
+}
+const finish = resolveFinish(options.finish);
+const accents = resolveAccents(options.accents);
+const out = path.resolve(root, options.out);
 mkdirSync(out, { recursive: true });
 const VIEWS = ['front', 'left', 'back', 'right'];
 const result = { startedAt: new Date().toISOString(), status: 'running', views: [],
-  iouSkipped: process.argv.includes('--no-iou'), cameras: {}, outputs: {} };
+  finish, accents, outputDirectory: out, iouSkipped: options.noIou, cameras: {}, outputs: {} };
 const record = () => writeFileSync(path.join(out, 'verification.json'), JSON.stringify(result, null, 2) + '\n');
 record();
 
@@ -53,9 +72,13 @@ try {
   page.on('response', (response) => {
     if (response.status() >= 400) errors.push(`HTTP ${response.status()}: ${response.url()}`);
   });
-  await page.goto(`${url}?ui=0&static=1`);
+  await page.goto(`${url}?ui=0&static=1&finish=${encodeURIComponent(finish.name)}&accents=${encodeURIComponent(accents.name)}`);
   await page.waitForFunction(() => window.__ready === true, null, { timeout: 180000 });
   result.parameters = await page.evaluate(() => window.helmetParams);
+  result.finish = await page.evaluate(() => window.materialFinish);
+  if (JSON.stringify(result.finish) !== JSON.stringify(finish)) throw new Error('Rendered finish does not match requested preset');
+  result.accents = await page.evaluate(() => window.materialAccents);
+  if (JSON.stringify(result.accents) !== JSON.stringify(accents)) throw new Error('Rendered accents do not match requested preset');
   result.renderSettings = await page.evaluate(() => window.renderSettings);
   const settle = () => page.evaluate(() => { const t = performance.now(); window.renderFrame(); return performance.now() - t; });
   for (const v of VIEWS) {
@@ -99,7 +122,10 @@ try {
       for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
         parts.push({ part: object.name, material: material.name });
         if (materials[material.name]) continue;
-        const entry = { bumpScale: material.bumpScale, maps: {} };
+        const entry = { color: material.color.getHexString(), roughness: material.roughness,
+          metalness: material.metalness, envMapIntensity: material.envMapIntensity,
+          specularIntensity: material.specularIntensity, normalScale: material.normalScale?.toArray(),
+          bumpScale: material.bumpScale, maps: {} };
         for (const kind of ['map','roughnessMap','bumpMap','normalMap','metalnessMap','emissiveMap']) {
           const texture = material[kind];
           if (!texture) continue;
@@ -122,7 +148,7 @@ try {
     writeFileSync(path.join(textureDir, name), bytes);
     result.outputs[`textures/${name}`] = sha256(bytes);
   }
-  const textureManifest = JSON.stringify({ materials: textureBundle.materials, parts: textureBundle.parts }, null, 2) + '\n';
+  const textureManifest = JSON.stringify({ finish: result.finish, accents: result.accents, materials: textureBundle.materials, parts: textureBundle.parts }, null, 2) + '\n';
   writeFileSync(path.join(textureDir, 'materials.json'), textureManifest);
   result.outputs['textures/materials.json'] = sha256(textureManifest);
   result.textures = { maps: Object.keys(textureBundle.files).length, manifest: 'textures/materials.json' };
@@ -133,8 +159,8 @@ try {
   }
   console.log(`GLB: ${result.glb.meshes} meshes, ${result.glb.materials} materials, ${result.glb.bytes} bytes`);
   if (errors.length) throw new Error('Browser-Fehler:\n' + errors.join('\n'));
-  if (!process.argv.includes('--no-iou')) {
-    const r = spawnSync('python3', ['-I', path.join(root, 'tools', 'iou.py'), root], { stdio: 'inherit' });
+  if (!options.noIou) {
+    const r = spawnSync('python3', ['-I', path.join(root, 'tools', 'iou.py'), root, out], { stdio: 'inherit' });
     const code = subprocessExitCode(r);
     if (code) {
       process.exitCode = code;

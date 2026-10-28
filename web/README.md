@@ -5,6 +5,13 @@ lokale 3D-Software. Kein Kritiker-API-Aufruf: der Abgleich läuft über Screensh
 
 ## Start
 
+Der aktuelle Generator enthält den Formversuch 0.4. `?finish=original` (Standard), `?finish=metal` und
+`?finish=graphite` wählen das Finish der dunklen Rüstung. Alle drei bauen dieselbe Geometrie. Stand 79 bleibt
+als früherer Export unter `assets/helmet/`; seine Quelle liegt bei Git-Commit `0a6bda5`.
+Unabhängig davon wählt `&accents=light-fasteners` helle obere Schrauben; `&accents=white-strips` ergänzt weiße
+Stirn-/Scheitelstreifen. Standard ist `accents=original`. Die [vier exportierten Proben](../assets/helmet-continuity/README.md)
+enthalten die genaue Auswahl samt Quell- und Ausgabehashes.
+
 ```sh
 cd web
 npm ci
@@ -90,7 +97,7 @@ Einheit: Helmhöhe ≈ 1, Ursprung in der Kopfmitte, Y oben, Gesicht +Z, linke H
 ## Über Änderungen sprechen
 
 Die [Teilekarte](../docs/HELM_TEILE.md) vergibt stabile Kennungen H01–H21. Bitte Kennung, Seite und gewünschte Änderung
-nennen, etwa „H11 auf Seite B tiefer“. Seite A trägt Funkmuschel, Antenne und Kabel; Seite B das kantige Modul.
+nennen, etwa „H11 auf Seite B tiefer“. Seit Stand 79 tragen beide Seiten gespiegelte Funkmuscheln, Antennen und Kabel.
 Die Seitennamen beziehen sich auf Bauteile und ändern sich beim Drehen nicht.
 
 Gezielte Prüfungen: `npm test` (Prüfablauf und Messung), `npm run build` und `npm run verify` (Browser, Bilder, GLB und IoU).

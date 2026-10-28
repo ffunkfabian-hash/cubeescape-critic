@@ -426,3 +426,27 @@ Quellen: [Maskenaufbau](../web/src/parts/upperHelmet.js), [Facettenparameter](..
 Vorgeschlagener Folgeschritt: breiterer, sanfter gerundeter Übergang neben den Augen, bei erhaltener Augenform und
 runder Haube. Vor Übernahme aus allen vier festen Ansichten prüfen. Diese Anpassung ist **noch nicht umgesetzt**;
 Lieferstand, Renderbilder und Messwerte bleiben bei 79. Der Befund und das Ziel sind in der [Stilbeschreibung](HELM_STIL.md) festgehalten.
+
+## Runde 23 – Durchgängige Form und Material-/Akzentproben 80–84 (28.10.2026)
+
+Der Nutzer beauftragt die breitere Rundung neben den Augen und die Verlängerung der beiden Stirntrapeze bis zum
+Hinterkopf. Zusätzlich sollen die dunkle Haubenstruktur und ein metallischer Look verglichen werden. Im laufenden
+Vergleich ergänzt der Nutzer helle Befestigungspunkte auf dunklem Grund sowie weiße Streifen für beide Materialien.
+
+| Stand | Variante | Zweck |
+|---|---|---|
+| [80](belege/helm/80.jpg) | Neue Form, Originalmaterial | Formvergleich mit 79 |
+| [81](belege/helm/81.jpg) | Metall, helle obere Schrauben | Metallische Materialrichtung |
+| [82](belege/helm/82.jpg) | Graphit, helle obere Schrauben | Geschlossene dunkle Materialrichtung |
+| [83](belege/helm/83.jpg) | Graphit, helle Schrauben, weiße Streifen | Helle Akzentprobe |
+| [84](belege/helm/84.jpg) | Metall, helle Schrauben, weiße Streifen | Vervollständigung des Material-/Akzentvergleichs |
+
+Die Stirnstreifen bleiben echte separate Bauteile. Ihre radiale Form folgt der Haube über den Scheitel nach hinten;
+der bestehende Bügel liegt darüber. Die seitlichen Maskenknicke erhalten tangentiale Rundungen mit Radius .055.
+Die erste Metalltextur war zu fleckig und wurde vor den nummerierten Materialproben geglättet.
+
+44 Tests, Build und unabhängige Prüfung bestehen. Alle Varianten haben dieselben 104 Meshes, Kameras und Silhouetten;
+mittlere IoU 90,89 %. Gegenüber 79 bleiben 97 Meshes bytegleich; die sehr kleinen numerischen Augenabweichungen sind
+im [Prüfbericht](versions/0.4.md) quantifiziert. Keine Materialwahl wird aus dem positiven Nutzerfeedback abgeleitet.
+[Vier Looks](bilder/helm_continuity_varianten.jpg) · [Alle Ansichten](bilder/helm_continuity_vier_ansichten.jpg) ·
+[Formvergleich](bilder/helm_continuity_form.jpg) · [Agentenübergabe mit visueller Einschätzung](HELM_AGENTEN.md).

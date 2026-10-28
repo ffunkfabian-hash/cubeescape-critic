@@ -71,6 +71,7 @@ export function buildUpperHelmet(M) {
   // gets the same planes pushed out by its offset.
   // Every pair in D.facetBevels gets a narrow chamfer plane along its shared edge (normal = mean of both normals),
   // so the edges catch light like machined bevels instead of meeting razor-sharp.
+  const roundedEdges = [];
   const facets = (off) => {
     const planes = D.facets.map(([p, n]) => {
       const u = new THREE.Vector3(...n).normalize();
@@ -78,6 +79,23 @@ export function buildUpperHelmet(M) {
     });
     const out = planes.map(({ u, c }) => [INTERSECTION, halfSpace(u.clone().multiplyScalar(c).toArray(), u.toArray())]);
     for (const [a, b] of D.facetBevels) {
+      if (D.templeRound.radius > 0 && ((a === 0 && b === 2) || (a === 1 && b === 3))) {
+        // A circular fillet tangent to both vertical planes. The centre is the
+        // intersection of the inward-offset planes; eye cutters stay unchanged.
+        const first = planes[a], last = planes[b], radius = D.templeRound.radius;
+        const det = first.u.x * last.u.z - last.u.x * first.u.z;
+        const ca = first.c - radius, cb = last.c - radius;
+        const centre = new THREE.Vector3((ca * last.u.z - cb * first.u.z) / det, 0,
+          (first.u.x * cb - last.u.x * ca) / det);
+        const start = Math.atan2(first.u.x, first.u.z), end = Math.atan2(last.u.x, last.u.z);
+        roundedEdges.push({ centre, start, end, radius });
+        for (let i = 1; i < D.templeRound.segments; i++) {
+          const angle = THREE.MathUtils.lerp(start, end, i / D.templeRound.segments);
+          const normal = new THREE.Vector3(Math.sin(angle), 0, Math.cos(angle));
+          out.push([INTERSECTION, halfSpace(centre.clone().addScaledVector(normal, radius).toArray(), normal.toArray())]);
+        }
+        continue;
+      }
       const sum = planes[a].u.clone().add(planes[b].u);
       const len = sum.length();
       const cb = (planes[a].c + planes[b].c) / len - D.bevelWidth;
@@ -88,6 +106,17 @@ export function buildUpperHelmet(M) {
   };
   let shell = csg(H2, [INTERSECTION, front], [INTERSECTION, side],
     [INTERSECTION, belowBrow], ...facets(0.011));
+  // Smooth only the new fillet's exterior, before cutting sockets and seams.
+  // Keeping cut-wall normals separate preserves the crisp accepted eye rims.
+  const roundPos = shell.geometry.attributes.position, roundNormal = shell.geometry.attributes.normal;
+  for (let i = 0; i < roundPos.count; i++) for (const edge of roundedEdges) {
+    if (Math.abs(roundNormal.getY(i)) > 1e-5) continue;
+    const nx = roundPos.getX(i) - edge.centre.x, nz = roundPos.getZ(i) - edge.centre.z;
+    const angle = Math.atan2(nx, nz), distance = Math.hypot(nx, nz);
+    const lo = Math.min(edge.start, edge.end), hi = Math.max(edge.start, edge.end);
+    if (angle >= lo - 1e-5 && angle <= hi + 1e-5 && Math.abs(distance - edge.radius) < 0.0001)
+      roundNormal.setXYZ(i, nx / distance, 0, nz / distance);
+  }
   const probe = new THREE.Mesh(shell.geometry, M.darkArmor);
   const crown = csg(H, [INTERSECTION, capRegion]);
   // Keep the crown and face as distinct meshes for later individual editing/export.

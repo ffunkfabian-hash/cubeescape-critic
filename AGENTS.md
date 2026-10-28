@@ -10,6 +10,7 @@ Antworten, Doku und Commit-Messages auf Deutsch; Code, Bezeichner und Kommentare
 - `generator/`, `tools/` – entstehen mit Version 0.1 (Blender-Generator, Ansichten, Kritiker-Aufruf, Messung).
 - `web/` – Three.js-Nachbau im Browser mit Playwright-Prüfung und Umriss-IoU (`web/README.md`); `web/renders/` nicht im Repo.
 - `docs/HELM_STIL.md` – bestätigte Form-/Materialvorgaben; runde Haube, Augen erhalten, maßgeblich ist das Video.
+- `docs/HELM_AGENTEN.md` – technischer Aufbau, Material-/Akzentvarianten, Prüfumfang, visueller Eindruck und offene Nutzerwahl; vor Helm-Fortsetzungen gezielt lesen.
 - `assets/helmet/` – bewusst versionierter Lieferexport mit GLB, Texturen, Teileliste und Prüfmanifest; keine beliebigen Caches.
 - `docs/HELM_TEILE.md` – stabile Teilekennungen H01–H19 für Nutzerfeedback; nummerierte Teilekarte über
   `web/tools/parts_sheet.py`. Kennungen bei weiteren Änderungen beibehalten.

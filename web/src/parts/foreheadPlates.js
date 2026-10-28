@@ -17,6 +17,28 @@ export function buildForeheadPlates(crown, M) {
       const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i);
       const u = THREE.MathUtils.clamp((y + slope * z - centre) / p.joinBlendHeight, 0, 1);
       const blend = u * u * (3 - 2 * u), derivative = 6 * u * (1 - u) / p.joinBlendHeight;
+      if (p.wrapToRear) {
+        // Expand around the dome, rather than translating towards +Z: both
+        // strips must keep their thickness over the apex and rear hemisphere.
+        const f = THREE.MathUtils.clamp(z / 0.1, 0, 1), front = f * f * (3 - 2 * f);
+        const frontDerivative = 6 * f * (1 - f) / 0.1;
+        const weight = 1 - front * (1 - blend);
+        const gradient = new THREE.Vector3(0, front * derivative,
+          front * derivative * slope - frontDerivative * (1 - blend));
+        const offset = outside ? THREE.MathUtils.lerp(p.joinLip, p.projection, weight) : -p.embed;
+        const scale = 1 + offset / p.offsetRadius;
+        const radial = new THREE.Vector3(x, y - p.offsetCentreY, z);
+        const delta = outside ? (p.projection - p.joinLip) / p.offsetRadius : 0;
+        pos.setXYZ(i, radial.x * scale, p.offsetCentreY + radial.y * scale - p.joinOverlap * (1 - weight), radial.z * scale);
+        const response = radial.clone().multiplyScalar(delta).add(new THREE.Vector3(0, p.joinOverlap, 0));
+        const jacobian = new THREE.Matrix3().set(
+          scale, response.x * gradient.y, response.x * gradient.z,
+          0, scale + response.y * gradient.y, response.y * gradient.z,
+          0, response.z * gradient.y, scale + response.z * gradient.z);
+        const normal = new THREE.Vector3().fromBufferAttribute(normals, i).applyMatrix3(jacobian.invert().transpose()).normalize();
+        normals.setXYZ(i, normal.x, normal.y, normal.z);
+        continue;
+      }
       const offset = outside ? THREE.MathUtils.lerp(p.joinLip, p.projection, blend) : -p.embed;
       pos.setXYZ(i, x, y - p.joinOverlap * (1 - blend), z + offset);
       // Transport the existing smooth normals through the deformation; rebuilding
@@ -29,9 +51,8 @@ export function buildForeheadPlates(crown, M) {
     }
     return brush(geo);
   };
-  const layer = csg(fitted(true),
-    [SUBTRACTION, fitted(false)],
-    [INTERSECTION, halfSpace([0, 0, 0], [0, 0, -1])]);
+  let layer = csg(fitted(true), [SUBTRACTION, fitted(false)]);
+  if (!p.wrapToRear) layer = csg(layer, [INTERSECTION, halfSpace([0, 0, 0], [0, 0, -1])]);
   for (const side of [-1, 1]) {
     const outline = p.outline.map(([x, y]) => [side * x, y]);
     const part = csg(layer, [INTERSECTION, brush(prism(outline, 'xy'))]);

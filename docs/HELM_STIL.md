@@ -2,6 +2,14 @@
 
 ## Verbindlicher Stand
 
+**Versuch 0.4 „Continuity“, noch zur Auswahl:** Die seitlichen Übergänge der Augenmaske werden gerundet;
+H20/H21 laufen als zwei getrennte Streifen von der Stirn über die Haube bis zur hinteren Haubenkante.
+Die Trapezform bleibt im Stirnbereich erkennbar, der Mittelstreifen frei. Der bestehende Kopfbügel liegt darüber.
+Metall und Graphit sind gleichberechtigte Materialproben, keine bestätigte Ablösung des bisherigen Looks.
+Zusätzlich gewünscht: helle Befestigungspunkte auf dunkler Rüstung und eine Probe mit weißen H20/H21.
+[Versuchsstände und Reproduktion](../assets/helmet-continuity/README.md).
+[Technischer Aufbau und Einschätzung für KI-Agenten](HELM_AGENTEN.md).
+
 Aktueller Lieferstand: **Prüflauf 79**. Nach Nutzerfeedback ist der Scheitel nun quer und längs gewölbt;
 der Kopfbügel folgt der Haube. Ihr Rand läuft weich zur Augenmaske aus. Das helle Hinterkopfgehäuse und der Nackenrahmen sind wieder rund; die Kieferplatten bleiben kantig.
 Zwei separate Stirnblenden ergänzen die Haube gemäß der [Nutzerzeichnung](../reference/helm-forehead-request-20261028/stirnblenden-markierung.jpg).
@@ -25,10 +33,10 @@ Die Zuordnung ist im [Verlauf](HELM_VERLAUF.md) dokumentiert. „Vorher“ bezei
   Dies ist eine gezielte Nutzerergänzung zur Videovorlage.
 - **Gesicht H02–H06:** dunkle, kantige Panzerplatten mit schmalen Fugen, zurückgesetztem trapezförmigem Mitteleinsatz
   und klaren Wangenflächen. Die akzeptierten cyanfarbenen Augen bleiben in Form, Lage und Leuchtwirkung erhalten.
-  Die Augenmaske H02 soll optisch durchgängig bis zu den Seiten laufen. Die dunklen Streifen neben den Augen in
+  Die Augenmaske H03 soll optisch durchgängig bis zu den Seiten laufen. Die dunklen Streifen neben den Augen in
   Stand 79 entstehen am abrupten Richtungswechsel der Fläche, verstärkt durch die Beleuchtung; dort ist keine Teilefuge.
-  **Vorgeschlagener nächster Schritt, noch nicht umgesetzt:** den seitlichen Übergang breiter und sanfter runden,
-  ohne Augenöffnungen, Haubenrundung oder die übrige kantige Formensprache zu verändern.
+  **In 0.4 als Versuch umgesetzt:** breitere tangentiale Rundung an beiden Seiten; Augenöffnungen und übrige kantige
+  Formensprache bleiben erhalten. Haubenrand und verlängerte Streifen passen sich der neuen Anschlussfläche an.
 - **Heller Rahmen H07–H11:** kräftige, asymmetrisch gegliederte technische Konstruktion. Die gewählte Kieferkontur aus
   Stand 46 bleibt erhalten. Seiten-/Hinterkopfgehäuse und Nackenrahmen sind glatt elliptisch gerundet. Die schmale obere Fase und
   gerade abgeschrägten Vertiefungen bleiben; ihre separaten Böden folgen der runden Wand. Keine erneut verschmälerten Kieferplatten wie in den verworfenen Versuchen 51–58.
@@ -52,6 +60,21 @@ Die Augenfläche und ihre seitlichen Fortsetzungen gehören zum selben Mesh `She
 (Rauheit 0,75, Metallanteil 0,15). Ein heller Seitenreflex und dunkle Frontstreifen sind deshalb kein Materialwechsel.
 Die Flächenausrichtung sowie das mit der Ansicht gedrehte Licht und die Umgebung bestimmen die Reflexion mit.
 Eine spätere Korrektur soll zuerst den geometrischen Übergang prüfen; keinen hellen Streifen in die Farbtextur malen.
+
+### Materialproben 0.4
+
+Beide Proben verwenden dieselbe Graphitgrundfarbe `#313438` auf Haube, Maske, Wangen, Mundschienen und H20/H21.
+**Metall** nutzt eine gleichmäßige Farbe, die feine Rauheitskarte der bisherigen Maske, Metallanteil 0,55, Rauheit 0,50
+und stark gedämpftes Normalenrelief (0,06). **Graphit** übernimmt Farb-, Normalen- und Rauheitskarten der Haube
+(Seed 73), Metallanteil 0,15 und Rauheit 0,90. Innerhalb jeder Probe teilen sich die dunklen Rüstungsteile dieselben
+Texturkarten. Der Glanz soll kontrolliert bleiben, kein Chromlook.
+Augen, heller Rahmen, Funkmodule, Kabel und Kopfbügel behalten ihre bisherigen Materialien. Die Originalmaterialien
+sind als dritte Vergleichsoption erhalten. Entscheidung erst anhand identisch beleuchteter Ansichten.
+
+Die Akzentwahl ist unabhängig vom Finish: `light-fasteners` färbt ausschließlich die oberen Schraubenköpfe
+(`Screws_Upper`) hell; Befestigungen auf weißem Rahmen und Funkmodulen bleiben dunkel. `white-strips` ergänzt
+die beiden durchlaufenden Streifen H20/H21 im gebrochenen Weiß des Rahmens einschließlich dessen Texturen.
+Die Ausgangsfarbe ist `#D6D7D5`, kein leuchtendes Reinweiß. `original` erhält die bisherige Akzentverteilung.
 
 | Bereich | Basisfarbe | Wirkung |
 |---|---|---|
