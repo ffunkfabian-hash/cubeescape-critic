@@ -1,7 +1,7 @@
 {
   "name": "cubeescape-critic",
-  "version": "0.6.0",
-  "version_name": "Cuirass",
+  "version": "0.7.0",
+  "version_name": "Bastion",
   "check": {
     "quick": [
       [

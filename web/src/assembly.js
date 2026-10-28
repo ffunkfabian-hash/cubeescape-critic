@@ -91,6 +91,7 @@ const BODY_LABELS = {
   B12:'Brustplatte A', B13:'Brustplatte B', B14:'Brusteinsatz A', B15:'Brusteinsatz B', B16:'Rückenplatte A', B17:'Rückenplatte B', B18:'Rückeneinsatz',
   B19:'Brustbefestigung A', B20:'Brustbefestigung B', B21:'Rückenbefestigung A', B22:'Rückenbefestigung B',
   B23:'Schulterlamelle A', B24:'Schulterlamelle B', B25:'Schultergelenk A', B26:'Schultergelenk B',
+  B27:'Brustmitte', B28:'Flankenpanzer A', B29:'Flankenpanzer B', B30:'Schulterdach A', B31:'Schulterdach B',
 };
 
 export function assemblyInventory(model) {
