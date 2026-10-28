@@ -14,6 +14,13 @@ Die Bilder wurden bei eingefrorenen Quellen erzeugt; jeder Quellenhash wird gege
 | `headset-off` | Helm ohne Kopfhörer/Bügel/Kabel/Antennen | sonst wie Kontrolle | 62 |
 | `exploded` | Beschriftete Explosionsübersicht, alle Helmteile | Metall, weiße Blenden, Headsets an | 104 |
 | `shoulders` | Kurzer Hals, breite höhere Schultern, Brust/Rücken | Graphit, ohne Blenden/Headsets | 78 |
+| `shoulders-blocky` | **Aktuell 0.5.1:** tieferer Rumpf, niedrigere kantige Schultern | wie `shoulders` | 78 |
+
+Patchquelle `d8e0b2ed0174e66e1d049eff2dd4147893558b98`: `shoulders-blocky` verwendet denselben Körperbefehl unten
+mit dem neuen Quellstand und anderem Ausgabeordner. [Vergleich](shoulders-blocky/comparison.json): 56 Helm-Meshes
+und beide Halsmeshes unverändert, alle 22 Körper-IDs erhalten. [Maße](shoulders-blocky/metrics.json),
+[Tests](shoulders-blocky/tests.txt) und [Vorher/Nachher](../../docs/bilder/helm_bulkhead_vergleich.jpg).
+Die alten Lieferordner bleiben historische, unveränderte Exporte ihrer oben genannten Quellstände.
 
 Pro Ordner: `scifi_helmet.glb`, `assembly.json` mit allen Meshpfaden und Verbindungsnotizen,
 `textures/` mit tatsächlichen Quellkarten und Materialbelegung, `verification.json` mit Quellen/Parametern/Kameras/Hashes,

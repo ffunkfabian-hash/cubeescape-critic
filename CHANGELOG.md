@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.1 – 2026-10-28 (Patch)
+
+- Rumpfkern 36 % tiefer, Brust/Rücken und Kragen angepasst; niedrigere, deutlich facettierte Schultern bei gleicher Breite und Dicke.
+- 22 separate Körperteile, kurzer Hals und Helm erhalten; 54 Tests, Build und vier Ansichten geprüft, Vergleich und Export gesichert.
+
 ## 0.5.0 „Assembly“ – 2026-10-28 (Aufbaustudie)
 
 - Beschriftete Explosionsansicht mit vollständiger Meshzuordnung und offenen Montageverbindungen; GLB erhält Teilemetadaten.

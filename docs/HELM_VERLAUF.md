@@ -514,3 +514,11 @@ Die erhöhte Schulterform war beim Quellenfund bereits umgesetzt. Die endgültig
 
 [Vier Körperansichten](bilder/helm_assembly_schultern.jpg) · [Explosionsbild](bilder/helm_assembly_explosion.jpg) ·
 [Headsetvergleich](bilder/helm_assembly_headset.jpg) · [GLB/Texturen/Prüfbelege](../assets/helmet-assembly/README.md).
+
+### Patch 0.5.1 – mehr Tiefe, niedrigere kantige Schultern
+
+Nutzer: oberer Rumpf zu dünn, Schultern zu hochgezogen, kantiger gewünscht. Quelle `d8e0b2e`:
+Kerntiefe +35,8 %, Schulteroberkante rund 0,135 niedriger, große Facetten bei erhaltener Schalendicke.
+Kragen, Brust und Rücken folgen der größeren Tiefe; Hals und Helm bleiben gleich. 22 separate Körperteile erhalten.
+54 Tests, Build und vier Ansichten geprüft. [Vergleich](bilder/helm_bulkhead_vergleich.jpg) ·
+[Vier Ansichten](bilder/helm_bulkhead_vier_ansichten.jpg) · [Lieferexport](../assets/helmet-assembly/shoulders-blocky/scifi_helmet.glb).

@@ -2,7 +2,7 @@
 
 ## Status und Bedeutung dieses Dokuments
 
-Stand: 28.10.2026, Version **0.5 „Assembly“** auf der Form-/Materialbasis 0.4. Dies ist die Beschreibung des erzeugten Modells und der Versuche,
+Stand: 28.10.2026, Version **0.5.1 „Assembly“** auf der Form-/Materialbasis 0.4. Dies ist die Beschreibung des erzeugten Modells und der Versuche,
 kein eigenständiger Auftrag zur weiteren Änderung. Aktuelle Nutzeranweisungen haben Vorrang.
 
 - **Letzter früherer Lieferexport:** 79 unter `assets/helmet/`, reproduzierbar aus Commit `0a6bda5`.
@@ -11,14 +11,14 @@ kein eigenständiger Auftrag zur weiteren Änderung. Aktuelle Nutzeranweisungen 
 - **Zusätzliche Formproben:** 87/88 ohne Blenden bleiben verfügbar. Die Muster 89–91 wurden anschließend ausdrücklich
   komplett verworfen; Musterfunktion und aktive Musterexporte sind entfernt.
 - **Nutzerwahl:** noch offen. Positive Rückmeldungen bedeuten keine eindeutige Auswahl zwischen den Kombinationen.
-- **Repo:** Branch `codex/critic-0.5-assembly`, aufgebaut auf dem offenen 0.4-Entwurf. Kein Merge auf `main`.
+- **Repo:** Patchbranch `codex/critic-patch-bulkhead` auf `codex/critic-0.5-assembly`. Kein Merge auf `main`.
 - **Neu:** beschriftete Explosionsansicht, ausblendbare komplette Headsets und getrennte Oberkörperstudie B01–B22.
-  Nutzerkorrekturen: kürzerer Hals, breiterer Körper, höhere und dickere Schulterkappen.
+  Nutzerkorrekturen: kurzer Hals, breiterer und tieferer Körper; zuletzt niedrigere, kantige Schulterkappen.
   [Aufbau, Parametrisierung, Titan-Referenz und noch offene Verbindungen](HELM_AUFBAU.md).
 - **Quelle der Wahrheit:** Generator und Parameter; Exporte und Bilder sind daraus abgeleitete Prüfbelege.
 
-**Eindruck 0.5:** Die erhöhten Schulterkappen ergeben eine kräftigere, gewölbte Silhouette; der verkürzte Hals bindet
-den Kopf kompakter an den Rumpf. Seitlich sind Vorder- und Hinterkappe als getrennte Schalen erkennbar.
+**Aktuell 0.5.1:** Nach Nutzerkorrektur ist der Rumpf tiefer, die Schulterdächer niedriger und kantiger; die hohen Bögen
+aus 0.5.0 sind als Vorher-Stand erhalten. Seitlich sind Vorder- und Hinterkappe als getrennte Schalen erkennbar.
 Die dunkle Unterstruktur wirkt noch wie eine grobe Gelenkabdeckung, weil Arme und echte Aufnahmen fehlen.
 Die Explosionsansicht hilft vor allem beim Erkennen dieser konstruktiven Lücken. Das ist die Einschätzung des Agenten,
 keine bestätigte neue Material- oder Körperfreigabe des Nutzers.

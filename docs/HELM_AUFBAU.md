@@ -86,8 +86,8 @@ UVs/Normalen. Sie entstehen aus Parametern in `shoulderStudyParams.json`, ohne Z
 
 Koordinaten: +Y oben, +Z vorne, A = −X. Maße sind **Modelleinheiten**, keine Millimeter.
 Geschlossene Platten entstehen aus Umrissringen mit Vorderseite, Rückseite, Seitenwand und schmaler Fase.
-Die Schulterkappen werden vor der Wölbung zweimal unterteilt, sodass Vorderseite, Fase und Seitenwand
-gemeinsame Kanten behalten. Projektion entlang der dominanten Flächennormale erzeugt deterministische UVs.
+Die Schulterkappen wurden in 0.5.0 vor der Wölbung zweimal unterteilt. 0.5.1 nutzt den unverfeinerten geschlossenen
+Plattenaufbau für große Facetten. Projektion entlang der dominanten Flächennormale erzeugt deterministische UVs.
 Es werden die vorhandenen gebrochen weißen Schalen, dunklen Zwischenlagen und Befestigungsmaterialien genutzt.
 
 ## Rückmeldungen und Formentscheidung
@@ -99,12 +99,19 @@ Es werden die vorhandenen gebrochen weißen Schalen, dunklen Zwischenlagen und B
    dunkle Unterlage 0,215. Gemessene Oberkante steigt um etwa 0,15 auf Y ≈ −0,462.
    Außenkappen reichen weiter nach unten; Breite, Hals und Brustposition bleiben wie in Schritt 2.
 
-Die statische Oberflächenprüfung der vier weißen Kappen gegen den aktuellen Helm ohne Headset ergibt
+4. **Patch 0.5.1:** Nutzer: Rumpf in der Tiefe zu schmal, Schultern zu hochgezogen, kantiger gewünscht.
+   Kerntiefe 0,53 → 0,72 (+35,8 %); Brust-/Rückenlage +0,308/−0,302 → +0,415/−0,409.
+   Äußerer Kragenradius in Z 0,365 → 0,425; Halsaufnahme bleibt gleich. Schulterumrisse in Z rund 22 % tiefer.
+   Bogen 0,23 → 0,04, Neigung 0,31 → 0,16, äußerer Abfall 0,14 → 0,085, Unterteilungen 2 → 0.
+   Schulteroberkante nun Y ≈ −0,597 (rund 0,135 niedriger), Breite 2,3198 und Schalendicken unverändert.
+   Alle 22 IDs erhalten; B01/B02 und die 56 enthaltenen Helm-Meshes geometrisch unverändert.
+
+Die statische Oberflächenprüfung der vier weißen Kappen gegen den Helm ohne Headset **im Stand 0.5.0** ergab
 mindestens 0,3018 Abstand; die nächstgelegenen Helmteile sind Kiefer und Halsring.
 Das ist eine Prüfung der Ruhepose, keine Freigabe für Kopfbewegung oder Armheben.
 
-**Visueller Eindruck nach Vier-Ansichten-Prüfung:** Die neuen Kappen lesen sich als gewölbte, schwere Schutzschalen
-und nicht mehr als flache seitliche Ausleger. Der kurze gerippte Hals verbindet Helm und Brust kompakter.
+**Visueller Eindruck 0.5.1 nach Vier-Ansichten-Prüfung:** Der tiefere Rumpf wirkt seitlich tragfähiger; die niedrigeren
+Kappen lesen sich als kantige Schutzplatten mit breiten Dachflächen. Der kurze gerippte Hals bleibt erhalten.
 Die dunkle Unterlage macht die Schalendicke deutlich; seitlich bleibt die Teilung in Vorder- und Hinterkappe lesbar.
 Der Rücken ist bewusst dunkler als die Brust und erhält nur einen kleinen hellen Mitteleinsatz.
 Ohne Oberarme wirken die äußeren Unterlagen noch abstrakt: echte Schultergelenke und Armanschlüsse wären der nächste

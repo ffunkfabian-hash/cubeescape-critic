@@ -2,9 +2,9 @@
 
 ## Verbindlicher Stand
 
-**Ergänzung 0.5 „Assembly“:** Der neue Oberkörper setzt den Helmstil mit gebrochen weißen Schutzschalen,
-dunkler Unterstruktur und wenigen Befestigungen fort. Kurzer gerippter Hals, breite Brust und nach oben gewölbte,
-dickere Schulterkappen sollen stämmiger wirken. Front- und Rückenkappen bleiben getrennt. Die runde Haube und
+**Ergänzung 0.5.1 „Assembly“:** Der neue Oberkörper setzt den Helmstil mit gebrochen weißen Schutzschalen,
+dunkler Unterstruktur und wenigen Befestigungen fort. Kurzer gerippter Hals, tieferer Rumpf und niedrige, kantige
+Schulterdächer mit kräftiger Unterlage ersetzen die zu hoch gewölbten Kappen. Front- und Rückenkappen bleiben getrennt. Die runde Haube und
 akzeptierten Augen werden dafür nicht verändert. Headsets können für die Formbetrachtung vollständig ausgeblendet werden.
 Die Titan-Recherche unterstützt große geschichtete Gehäuse und dunkle Bewegungszonen; sie liefert keine verbindlichen
 Körpermaße. [Formentscheidungen und Herkunft](HELM_AUFBAU.md). Der Oberkörper bleibt eine ungeriggte Studie.

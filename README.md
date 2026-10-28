@@ -1,7 +1,7 @@
 # Critic – parametrischer Helm im Browser
 
-**Aktueller Versuch 0.5 „Assembly“:** beschriftete Explosionsansicht, ausblendbare Kopfhörer mit Bügel und eine
-separate Hals-/Schulterstudie mit kürzerem Hals und höheren, kräftigeren Schulterkappen.
+**Aktueller Versuch 0.5.1 „Assembly“:** beschriftete Explosionsansicht, ausblendbare Kopfhörer mit Bügel und eine
+separate Hals-/Schulterstudie mit kurzem Hals, tieferem Rumpf und niedrigeren, kantigen Schulterkappen.
 [Aufbau und Reproduktion](docs/HELM_AUFBAU.md) · [Exporte](assets/helmet-assembly/README.md) · [Prüfbericht](docs/versions/0.5.md).
 Die bestehenden Helmformen und Materialproben bleiben erhalten. Das Video bleibt die Helmreferenz;
 die Titan-Recherche aus `cubeescape-reference` ergänzt die Stilbetrachtung des Oberkörpers.
