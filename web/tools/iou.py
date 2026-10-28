@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Silhouette IoU per view and a comparison sheet.
+"""Silhouette IoU per view (above the scarf line) and a comparison sheet.
 
 Reference mask: background modelled as a smooth quadratic luminance surface fitted on the frame border (top rows and
 side columns), object = pixels deviating from it, then everything not connected to the border background.
@@ -16,6 +16,8 @@ import numpy as np
 from PIL import Image
 
 VIEWS = ['front', 'left', 'back', 'right']
+# The model has no scarf: compare only the rows above the scarf's upper edge in each reference frame (720 px high).
+CUT = {'front': 470, 'left': 450, 'back': 440, 'right': 450}
 
 
 def luminance(img):
@@ -94,6 +96,8 @@ def main():
         a, b = reference_mask(ref_p), render_mask(mask_p)
         if a.shape != b.shape:
             b = np.asarray(Image.fromarray(b).resize(a.shape[::-1]))
+        a[CUT[v]:] = False
+        b[CUT[v]:] = False
         inter, union = (a & b).sum(), (a | b).sum()
         result[v] = round(float(inter / union), 4) if union else 0.0
         sil = silhouette_view(ref_p, a, b)

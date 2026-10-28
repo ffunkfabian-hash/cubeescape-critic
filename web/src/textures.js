@@ -62,6 +62,36 @@ export function shellMaps(seed = 11) {
   return [bump, rough];
 }
 
+// Worn paint for the white armour: soft dirt clouds, fine grain and short scratches: [colour, roughness].
+export function grimeMaps(seed = 21) {
+  const r = rng(seed);
+  const S = 512;
+  const cloud = valueNoise(S, 8, r), mid = valueNoise(S, 32, r), fine = valueNoise(S, 160, r);
+  const [c, ctx] = canvas(S);
+  const img = ctx.createImageData(S, S);
+  for (let i = 0; i < S * S; i++) {
+    const v = 0.93 + 0.05 * (cloud[i] - 0.5) * 2 + 0.025 * (mid[i] - 0.5) * 2 + 0.02 * (fine[i] - 0.5) * 2;
+    const g = Math.round(255 * Math.min(1, v));
+    img.data[i * 4] = g;
+    img.data[i * 4 + 1] = g;
+    img.data[i * 4 + 2] = Math.round(g * 0.985);
+    img.data[i * 4 + 3] = 255;
+  }
+  ctx.putImageData(img, 0, 0);
+  ctx.lineCap = 'round';
+  for (let k = 0; k < 140; k++) {
+    const x = r() * S, y = r() * S, a = r() * Math.PI, l = 4 + r() * 22;
+    ctx.strokeStyle = r() < 0.6 ? 'rgba(90,90,88,0.35)' : 'rgba(255,255,255,0.5)';
+    ctx.lineWidth = 0.6 + r() * 0.8;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x + Math.cos(a) * l, y + Math.sin(a) * l);
+    ctx.stroke();
+  }
+  const rough = tex(grayImage(S, (i) => 0.75 + 0.25 * cloud[i]), [1, 1]);
+  return [tex(c, [1, 1], true), rough];
+}
+
 // Honeycomb perforation tile: [colour map (dark holes), bump map]. UVs in model units; `cell` = hole spacing.
 export function honeycombMaps(cell = 0.013) {
   const W = 64, H = Math.round(W * Math.sqrt(3));
@@ -86,23 +116,6 @@ export function honeycombMaps(cell = 0.013) {
   draw(x2, '#ffffff', '#000000');
   const rep = [1 / cell, 1 / (cell * Math.sqrt(3))];
   return [tex(c1, rep, true), tex(c2, rep)];
-}
-
-// Woven fabric: fine twill plus soft noise: [bump, roughness].
-export function fabricMaps(seed = 5) {
-  const r = rng(seed);
-  const n = valueNoise(256, 16, r);
-  const S = 256;
-  const bump = tex(
-    grayImage(S, (i) => {
-      const x = i % S, y = (i / S) | 0;
-      const twill = 0.5 + 0.25 * Math.sin(((x + y) / S) * Math.PI * 2 * 48) + 0.15 * Math.sin((x / S) * Math.PI * 2 * 96);
-      return 0.6 * twill + 0.3 * n[i] + 0.1 * r();
-    }),
-    [36, 5],
-  );
-  const rough = tex(grayImage(S, (i) => 0.85 + 0.15 * n[i]), [12, 2]);
-  return [bump, rough];
 }
 
 // Planar UVs by dominant normal axis (CSG results carry no UVs).

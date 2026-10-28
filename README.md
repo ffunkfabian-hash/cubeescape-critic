@@ -14,6 +14,11 @@ Name `cubeescape-critic`, öffentlich, Kritiker „Nur API wie Gemini“.
 4. **Messung zur Auswertung** (nicht als Abbruchkriterium des Kritikers): Umriss-Übereinstimmung je Ansicht (IoU der Masken),
    Kosten je Runde, Zeit.
 
+## Browser-Variante (Three.js)
+
+`web/` baut denselben Helm prozedural in Three.js nach – ohne lokale 3D-Software, mit Playwright-Screenshots, Onion-Overlay
+und Umriss-IoU je Ansicht statt Kritiker-API. Start, Bedienung, Aufbau und Parameter: `web/README.md`.
+
 ## Vorlage
 
 `reference/helm/turnaround.mp4` – KI-Video des Nutzers (6 s, 1280×720, 360°-Drehung eines Sci-Fi-Helms) und

@@ -25,6 +25,14 @@ export function brush(geo, { pos, rot, scale } = {}) {
   return b;
 }
 
+// Half-space { p : dot(p - point, normal) <= 0 } as a large box brush (for planar facet cuts with INTERSECTION).
+export function halfSpace(point, normal, size = 6) {
+  const n = new THREE.Vector3(...normal).normalize();
+  const q = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 0, 1), n);
+  const c = new THREE.Vector3(...point).addScaledVector(n, -size / 2);
+  return brush(new THREE.BoxGeometry(size, size, size), { pos: c.toArray(), rot: new THREE.Euler().setFromQuaternion(q).toArray().slice(0, 3) });
+}
+
 // Apply a chain of operations: csg(a, [SUBTRACTION, b], [ADDITION, c], ...).
 export function csg(a, ...steps) {
   let r = a;
