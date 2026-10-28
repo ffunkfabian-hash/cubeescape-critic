@@ -1,17 +1,18 @@
-# Lieferstand 78 – Stirnblenden an die Maske angeschlossen
+# Lieferstand 79 – symmetrische Funkmuscheln und Kabel
 
-H20/H21 reichen bis an die Augenmaske und setzen deren Flächen nach oben fort. Ihr Überlappungsrand läuft flach aus.
-89/91 Geometrien, UVs und Transformationen sind gegenüber Stand 76 unverändert; nur beide Blenden sind angepasst.
-Alle Materialien und Texturbilder bleiben erhalten. Beide Blenden bleiben separat exportierbar.
-18 Auflage-, drei Mittelstreifen- und zwölf Anschlussproben prüfen den Sitz. [Stilbeschreibung](../../docs/HELM_STIL.md).
+Die komplette seitliche Einheit von A ist an X=0 nach B gespiegelt: Funkmuschel, Knöpfe, Kabel, Halterung und Antenne.
+18 separate Meshes ersetzen dort das frühere Ohrmodul mit fünf Meshes. Das mittige Heckmodul bleibt einmal erhalten.
+86 bisherige Geometrien einschließlich UVs und Transformationen sind unverändert; insgesamt 104 Meshes.
+Materialien und Texturbilder bleiben erhalten. Ein Geometrietest prüft alle Spiegelpunkte, positive Exportskalierung,
+Flächenorientierung und das einmalige Heckmodul. [Stilbeschreibung](../../docs/HELM_STIL.md).
 
-- [scifi_helmet.glb](scifi_helmet.glb): 91 Meshes, neun verwendete Materialien; getrennte Baugruppen.
+- [scifi_helmet.glb](scifi_helmet.glb): 104 Meshes, neun verwendete Materialien; getrennte Baugruppen.
 - [parts.json](parts.json): Verzeichnis der tatsächlichen Exportobjekte, Hierarchie, Transformationen und Materialien.
 - [textures/](textures/): acht prozedurale PNGs und Materialzuordnung; Haubennormalenkarte im GLB enthalten, sonstige Bump-Karten bei Bedarf separat zuordnen.
 - `render_front/left/back/right.png`: vier feste Ansichten; zugehörige Masken und Overlays sind Prüfbelege.
 - [verification.json](verification.json): Quell-/Referenzhashes, Laufzeitumgebung, Kameras, Parameter und 24 Ausgabehashes.
 - [code-review.txt](code-review.txt) und [tests.txt](tests.txt): unabhängige Codeprüfung einschließlich der Nachprüfung von Stand 68 und aktuelle Testbelege.
-- [selection.json](selection.json): Vergleich der 91 Exportobjekte mit Stand 76 einschließlich Material-/Texturprüfung und Hashes des aktuellen Exports.
+- [selection.json](selection.json): Vergleich der 104 Exportobjekte mit Stand 78 einschließlich Material-/Texturprüfung und Hashes des aktuellen Exports.
 
 Erzeugen über [web/README.md](../../web/README.md). Nach `npm run verify` vom Repo-Hauptverzeichnis vergleichen:
 

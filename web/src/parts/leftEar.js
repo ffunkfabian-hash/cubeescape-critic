@@ -36,7 +36,7 @@ function bandShell(dIn, dOut, zc, half, yMin) {
   return csg(outer, [SUBTRACTION, inner], [INTERSECTION, slab]).geometry;
 }
 
-export function buildLeftEar(M) {
+export function buildLeftEar(M, { headBandOnly = false } = {}) {
   const g = new THREE.Group();
   g.name = 'LeftEar_Cap';
   const e = D.earL;
@@ -49,7 +49,7 @@ export function buildLeftEar(M) {
   const fold = new THREE.Mesh(new THREE.BoxGeometry(0.002, 0.002, 0.22), M.whiteTextured);
   fold.position.set(e.outerX + 0.009, e.cy, e.cz);
   fold.rotation.x = -0.75;
-  g.add(cap, insert, fold);
+  if (!headBandOnly) g.add(cap, insert, fold);
 
   // Head band ear to ear over the dome: dark strap with a light centre stripe and clip blocks.
   const b = D.band;
@@ -67,6 +67,8 @@ export function buildLeftEar(M) {
     orient(clip, hit.point, hit.normal, 0.008, [0, 0, 1]);
     g.add(clip);
   }
+
+  if (headBandOnly) return g;
 
   // Dark bracket: runs forward from the band and hooks down in front of the cap.
   const hook = new THREE.CatmullRomCurve3(

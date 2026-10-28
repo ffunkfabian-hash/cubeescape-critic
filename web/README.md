@@ -63,6 +63,7 @@ Einheit: Helmhöhe ≈ 1, Ursprung in der Kopfmitte, Y oben, Gesicht +Z, linke H
 | Schlüssel | Bedeutung |
 | --- | --- |
 | `shapeFit` | kohärente Verkürzung unter Augenhöhe (`lowerFaceScale`, `lowerFaceAnchor`), einschließlich Befestigungen |
+| `comms.symmetric` | Spiegelt den kompletten Kopfhörer von A nach B und ersetzt dort das alte Ohrmodul; `false` reproduziert den asymmetrischen Aufbau |
 | `foreheadPlates` | Trapezumriss, Auflagehöhe, Unterseite und auslaufender Maskenanschluss der separaten Stirnblenden H20/H21 |
 | `crownTransition` | Neigung und Z-Anker des Übergangs zwischen Haube und Gesichtsmaske |
 | `crownRounding` | Stärke und Höhenbereich der Rundung des Haubenquerschnitts |
@@ -155,13 +156,15 @@ Der Referenzlauf erzeugt Textur- und Geometrieansichten sowie `comparison.json` 
 Die globale Aufstellung ist zur Sichtprüfung angenähert; aus diesen Bildern wird **kein Meshy-IoU** berechnet.
 Die Bildausschnitte des Kontaktbogens sind Darstellungszuschnitte, keine Änderung der Helm-Messung.
 
-## Aktueller Lieferstand 78
+## Aktueller Lieferstand 79
 
 Nach Nutzerfeedback ist die Haube auch um den Kopfbügel quer und längs gewölbt (`crownDome`).
 `crownTransition.blendHeight` führt den Haubenrand weich zur Augenmaske. `rimOverlap` und `rimCover` (je 0,001
 Modelleinheiten) schließen den sichtbaren Abstand und decken die helle Schnittkante ab. `clearance` ist dadurch ersetzt.
-89/91 Meshgeometrien einschließlich UVs und Transformationen sind gegenüber Stand 76 unverändert; nur H20/H21
-sind bis an die Augenmaske verlängert. `foreheadPlates.outline`, `projection` und `embed` steuern ihre Form.
+Der symmetrische Kopfhöreraufbau übernimmt 18 Anbauteile von A nach B, einschließlich Kabel, Halterung und Antenne.
+`comms.symmetric = true` ersetzt das bisherige helle Ohrmodul samt eigenem Halter; das Scheitelband und das einzige
+mittige Heckmodul bleiben erhalten. Die Reflexion wird in Geometrie und Normalen eingebrannt, Dreiecksorientierung
+korrigiert und positive Exportskalierung geprüft. H20/H21 sind weiterhin bis an die Augenmaske verlängert. `foreheadPlates.outline`, `projection` und `embed` steuern ihre Form.
 `joinBlendHeight`, `joinOverlap` und `joinLip` führen den Rand flach in die Maske. Die glatten Normalen werden mit
 der Verformung transformiert, damit keine Schattierungsstreifen entstehen. Material und Texturen bleiben erhalten.
 18 Auflageproben, drei Mittelstreifenproben und zwölf Anschlussproben sichern den Sitz; der alte getrennte Umriss
@@ -175,7 +178,7 @@ Die Haubenversuche 62/63 sind verworfen. Aktuelle Quellen und alle 24 Ausgaben s
 Die obere Fase und geraden Eckabschrägungen der Taschen bleiben erhalten. Zwölf Strahlproben prüfen die elliptische
 Rundung; die vorherige 16-Flächen-Variante fällt dabei gezielt durch. Die Taschenböden folgen derselben Rundung
 wie ihre Träger und bleiben separate Teile. Der Halsring und die kantigen Kieferplatten sind unverändert.
-Modellteile werden in `parts/` erzeugt; 91 Meshes sind im GLB enthalten. Die optionale Körperstudie bleibt ein Entwurf.
+Modellteile werden in `parts/` erzeugt; 104 Meshes sind im GLB enthalten. Die optionale Körperstudie bleibt ein Entwurf.
 
 [Stilbeschreibung und feste Vorgaben](../docs/HELM_STIL.md) · [Lieferdateien](../assets/helmet/README.md).
 

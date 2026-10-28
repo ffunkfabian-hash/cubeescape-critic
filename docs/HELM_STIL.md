@@ -2,7 +2,7 @@
 
 ## Verbindlicher Stand
 
-Aktueller Lieferstand: **Prüflauf 78**. Nach Nutzerfeedback ist der Scheitel nun quer und längs gewölbt;
+Aktueller Lieferstand: **Prüflauf 79**. Nach Nutzerfeedback ist der Scheitel nun quer und längs gewölbt;
 der Kopfbügel folgt der Haube. Ihr Rand läuft weich zur Augenmaske aus. Das helle Hinterkopfgehäuse und der Nackenrahmen sind wieder rund; die Kieferplatten bleiben kantig.
 Zwei separate Stirnblenden ergänzen die Haube gemäß der [Nutzerzeichnung](../reference/helm-forehead-request-20261028/stirnblenden-markierung.jpg).
 Die abgeflachten, eckigen Haubenversuche 62/63 wurden vom Nutzer ausdrücklich verworfen.
@@ -28,8 +28,10 @@ Die Zuordnung ist im [Verlauf](HELM_VERLAUF.md) dokumentiert. „Vorher“ bezei
 - **Heller Rahmen H07–H11:** kräftige, asymmetrisch gegliederte technische Konstruktion. Die gewählte Kieferkontur aus
   Stand 46 bleibt erhalten. Seiten-/Hinterkopfgehäuse und Nackenrahmen sind glatt elliptisch gerundet. Die schmale obere Fase und
   gerade abgeschrägten Vertiefungen bleiben; ihre separaten Böden folgen der runden Wand. Keine erneut verschmälerten Kieferplatten wie in den verworfenen Versuchen 51–58.
-- **Anbauten H12–H18:** olivfarbenes Funkgehäuse auf Seite A, helles Ohrmodul auf Seite B, schwarzes Spiralkabel,
-  sichtbare Halter, Antenne und rückwärtiges Technikmodul. Die Asymmetrie gehört zum Design.
+- **Anbauten H12–H18:** auf ausdrücklichen Nutzerwunsch symmetrische Funkmuscheln auf A und B, einschließlich
+  Bedienknöpfen, schwarzen Spiralkabeln, Haltern und Antennen. Die komplette Einheit von A wird an X=0 nach B gespiegelt.
+  Das frühere helle Ohrmodul samt seinem Halter entfällt im aktuellen Aufbau. Das mittige Heckmodul bleibt einmal
+  vorhanden; beide Kabel nutzen dessen seitliche Anschlüsse. Diese Symmetrie ersetzt die frühere asymmetrische Vorgabe.
 - **Halsanschluss H19:** rund und zurückgesetzt. Der schwarze Hals ist ein Präsentationsträger; der Schal aus dem Video
   ist kein Bestandteil des exportierten Helms.
 
@@ -64,7 +66,7 @@ Quelle ist der Three.js-Generator, keine von Hand geänderte Exportdatei. Formpa
 Im Generator zeigt +Y nach oben, +Z nach vorn. Seite A liegt bei −X (Kamera `right`), Seite B bei +X (`left`).
 Die anders bezeichneten Achsen in der ursprünglichen Formbeschreibung werden nicht mit diesen Arbeitskoordinaten vermischt.
 
-Der GLB enthält **91 Meshes** mit getrennten Baugruppen; Schraubensätze können gemeinsam in einem Mesh liegen.
+Der GLB enthält **104 Meshes** mit getrennten Baugruppen; Schraubensätze können gemeinsam in einem Mesh liegen.
 [parts.json](../assets/helmet/parts.json) listet die tatsächlichen Exportobjekte und Materialien.
 Einzelne Meshes sind noch keine Zusicherung fertiger Druckwandstärken, Montagepassungen oder tragbarer Schutzwirkung.
 
@@ -72,4 +74,4 @@ Einzelne Meshes sind noch keine Zusicherung fertiger Druckwandstärken, Montagep
 Standnummern beschriften. Messwerte ergänzen die Sichtprüfung; Silhouetten-IoU ist kein Prozentwert für die Gesamtähnlichkeit.
 Die optionale Körperstudie (`?body=1`) ist ein separater Proportionsentwurf und nicht als fertige Körperform freigegeben.
 
-[Reproduktionsanleitung](../web/README.md#aktueller-lieferstand-78) · [GLB und Prüfbelege](../assets/helmet/README.md)
+[Reproduktionsanleitung](../web/README.md#aktueller-lieferstand-79) · [GLB und Prüfbelege](../assets/helmet/README.md)

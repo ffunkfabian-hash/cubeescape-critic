@@ -363,18 +363,6 @@
       "material": "darkMetal"
     },
     {
-      "part": "EarCap",
-      "material": "whiteArmor"
-    },
-    {
-      "part": "EarCap_Insert",
-      "material": "whiteTextured"
-    },
-    {
-      "part": "",
-      "material": "whiteTextured"
-    },
-    {
       "part": "HeadBand",
       "material": "darkArmor"
     },
@@ -389,14 +377,6 @@
     {
       "part": "BandClip_L",
       "material": "darkArmor"
-    },
-    {
-      "part": "Bracket",
-      "material": "darkArmor"
-    },
-    {
-      "part": "Wire",
-      "material": "darkMetal"
     },
     {
       "part": "RadioModule",
@@ -533,6 +513,78 @@
     {
       "part": "ForeheadPlate_L",
       "material": "darkArmor"
+    },
+    {
+      "part": "RadioModule_B",
+      "material": "oliveTech"
+    },
+    {
+      "part": "RadioDetail_B_1",
+      "material": "blackRubber"
+    },
+    {
+      "part": "Radio_Button_1_B",
+      "material": "blackRubber"
+    },
+    {
+      "part": "Radio_Button_2_B",
+      "material": "blackRubber"
+    },
+    {
+      "part": "Radio_Button_3_B",
+      "material": "blackRubber"
+    },
+    {
+      "part": "RadioDetail_B_2",
+      "material": "darkMetal"
+    },
+    {
+      "part": "RadioDetail_B_3",
+      "material": "darkMetal"
+    },
+    {
+      "part": "RadioDetail_B_4",
+      "material": "darkMetal"
+    },
+    {
+      "part": "RadioDetail_B_5",
+      "material": "darkMetal"
+    },
+    {
+      "part": "Yoke_B",
+      "material": "darkArmor"
+    },
+    {
+      "part": "RadioDetail_B_6",
+      "material": "darkMetal"
+    },
+    {
+      "part": "RadioDetail_B_7",
+      "material": "darkMetal"
+    },
+    {
+      "part": "Hose_Coil_B",
+      "material": "blackRubber"
+    },
+    {
+      "part": "Hose_Plug_B",
+      "material": "darkMetal"
+    },
+    {
+      "part": "Hose_Plug_B",
+      "material": "darkMetal"
+    },
+    {
+      "part": "RadioDetail_B_8",
+      "material": "whiteArmor"
+    },
+    {
+      "part": "RadioDetail_B_9",
+      "material": "whiteArmor"
+    },
+    {
+      "part": "RadioDetail_B_10",
+      "material": "whiteArmor"
     }
   ]
 }

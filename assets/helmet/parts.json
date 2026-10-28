@@ -1,6 +1,6 @@
 {
-  "pass": 78,
-  "meshCount": 91,
+  "pass": 79,
+  "meshCount": 104,
   "parts": [
     {
       "node": 2,
@@ -883,78 +883,29 @@
     },
     {
       "node": 54,
-      "name": "EarCap",
-      "path": "SciFiHelmet/LeftEar_Cap/EarCap",
-      "mesh": 48,
-      "materials": [
-        "whiteArmor"
-      ],
-      "transform": {}
-    },
-    {
-      "node": 55,
-      "name": "EarCap_Insert",
-      "path": "SciFiHelmet/LeftEar_Cap/EarCap_Insert",
-      "mesh": 49,
-      "materials": [
-        "whiteTextured"
-      ],
-      "transform": {}
-    },
-    {
-      "node": 56,
-      "name": "",
-      "path": "SciFiHelmet/LeftEar_Cap/56",
-      "mesh": 50,
-      "materials": [
-        "whiteTextured"
-      ],
-      "transform": {
-        "matrix": [
-          1,
-          0,
-          0,
-          0,
-          0,
-          0.7316888688738209,
-          -0.6816387600233342,
-          0,
-          0,
-          0.6816387600233342,
-          0.7316888688738209,
-          0,
-          0.404,
-          0.1,
-          -0.2,
-          1
-        ]
-      }
-    },
-    {
-      "node": 57,
       "name": "HeadBand",
       "path": "SciFiHelmet/LeftEar_Cap/HeadBand",
-      "mesh": 51,
+      "mesh": 48,
       "materials": [
         "darkArmor"
       ],
       "transform": {}
     },
     {
-      "node": 58,
+      "node": 55,
       "name": "HeadBand_Stripe",
       "path": "SciFiHelmet/LeftEar_Cap/HeadBand_Stripe",
-      "mesh": 52,
+      "mesh": 49,
       "materials": [
         "bandStripe"
       ],
       "transform": {}
     },
     {
-      "node": 59,
+      "node": 56,
       "name": "BandClip_R",
       "path": "SciFiHelmet/LeftEar_Cap/BandClip_R",
-      "mesh": 53,
+      "mesh": 50,
       "materials": [
         "darkArmor"
       ],
@@ -980,10 +931,10 @@
       }
     },
     {
-      "node": 60,
+      "node": 57,
       "name": "BandClip_L",
       "path": "SciFiHelmet/LeftEar_Cap/BandClip_L",
-      "mesh": 54,
+      "mesh": 51,
       "materials": [
         "darkArmor"
       ],
@@ -1009,40 +960,20 @@
       }
     },
     {
-      "node": 61,
-      "name": "Bracket",
-      "path": "SciFiHelmet/LeftEar_Cap/Bracket",
-      "mesh": 55,
-      "materials": [
-        "darkArmor"
-      ],
-      "transform": {}
-    },
-    {
-      "node": 62,
-      "name": "Wire",
-      "path": "SciFiHelmet/LeftEar_Cap/Wire",
-      "mesh": 56,
-      "materials": [
-        "darkMetal"
-      ],
-      "transform": {}
-    },
-    {
-      "node": 64,
+      "node": 59,
       "name": "RadioModule",
       "path": "SciFiHelmet/RightComms_And_Tube/RadioModule",
-      "mesh": 57,
+      "mesh": 52,
       "materials": [
         "oliveTech"
       ],
       "transform": {}
     },
     {
-      "node": 65,
+      "node": 60,
       "name": "",
-      "path": "SciFiHelmet/RightComms_And_Tube/65",
-      "mesh": 58,
+      "path": "SciFiHelmet/RightComms_And_Tube/60",
+      "mesh": 53,
       "materials": [
         "blackRubber"
       ],
@@ -1068,10 +999,10 @@
       }
     },
     {
-      "node": 67,
+      "node": 62,
       "name": "Radio_Button_1",
       "path": "SciFiHelmet/RightComms_And_Tube/Buttons/Radio_Button_1",
-      "mesh": 59,
+      "mesh": 54,
       "materials": [
         "blackRubber"
       ],
@@ -1097,10 +1028,10 @@
       }
     },
     {
-      "node": 68,
+      "node": 63,
       "name": "Radio_Button_2",
       "path": "SciFiHelmet/RightComms_And_Tube/Buttons/Radio_Button_2",
-      "mesh": 60,
+      "mesh": 55,
       "materials": [
         "blackRubber"
       ],
@@ -1126,10 +1057,10 @@
       }
     },
     {
-      "node": 69,
+      "node": 64,
       "name": "Radio_Button_3",
       "path": "SciFiHelmet/RightComms_And_Tube/Buttons/Radio_Button_3",
-      "mesh": 61,
+      "mesh": 56,
       "materials": [
         "blackRubber"
       ],
@@ -1155,10 +1086,10 @@
       }
     },
     {
-      "node": 70,
+      "node": 65,
       "name": "",
-      "path": "SciFiHelmet/RightComms_And_Tube/Buttons/70",
-      "mesh": 62,
+      "path": "SciFiHelmet/RightComms_And_Tube/Buttons/65",
+      "mesh": 57,
       "materials": [
         "darkMetal"
       ],
@@ -1184,10 +1115,10 @@
       }
     },
     {
-      "node": 72,
+      "node": 67,
       "name": "",
-      "path": "SciFiHelmet/RightComms_And_Tube/Antenna/72",
-      "mesh": 63,
+      "path": "SciFiHelmet/RightComms_And_Tube/Antenna/67",
+      "mesh": 58,
       "materials": [
         "darkMetal"
       ],
@@ -1213,10 +1144,10 @@
       }
     },
     {
-      "node": 73,
+      "node": 68,
       "name": "",
-      "path": "SciFiHelmet/RightComms_And_Tube/Antenna/73",
-      "mesh": 64,
+      "path": "SciFiHelmet/RightComms_And_Tube/Antenna/68",
+      "mesh": 59,
       "materials": [
         "darkMetal"
       ],
@@ -1242,10 +1173,10 @@
       }
     },
     {
-      "node": 74,
+      "node": 69,
       "name": "",
-      "path": "SciFiHelmet/RightComms_And_Tube/Antenna/74",
-      "mesh": 65,
+      "path": "SciFiHelmet/RightComms_And_Tube/Antenna/69",
+      "mesh": 60,
       "materials": [
         "darkMetal"
       ],
@@ -1271,10 +1202,10 @@
       }
     },
     {
-      "node": 75,
+      "node": 70,
       "name": "Yoke",
       "path": "SciFiHelmet/RightComms_And_Tube/Yoke",
-      "mesh": 66,
+      "mesh": 61,
       "materials": [
         "darkArmor"
       ],
@@ -1300,50 +1231,50 @@
       }
     },
     {
-      "node": 76,
+      "node": 71,
       "name": "",
-      "path": "SciFiHelmet/RightComms_And_Tube/76",
-      "mesh": 67,
+      "path": "SciFiHelmet/RightComms_And_Tube/71",
+      "mesh": 62,
       "materials": [
         "darkMetal"
+      ],
+      "transform": {}
+    },
+    {
+      "node": 72,
+      "name": "",
+      "path": "SciFiHelmet/RightComms_And_Tube/72",
+      "mesh": 63,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {}
+    },
+    {
+      "node": 74,
+      "name": "BackBox_Mount",
+      "path": "SciFiHelmet/RightComms_And_Tube/BackBox_Group/BackBox_Mount",
+      "mesh": 64,
+      "materials": [
+        "oliveTech"
+      ],
+      "transform": {}
+    },
+    {
+      "node": 75,
+      "name": "BackBox",
+      "path": "SciFiHelmet/RightComms_And_Tube/BackBox_Group/BackBox",
+      "mesh": 65,
+      "materials": [
+        "oliveTech"
       ],
       "transform": {}
     },
     {
       "node": 77,
       "name": "",
-      "path": "SciFiHelmet/RightComms_And_Tube/77",
-      "mesh": 68,
-      "materials": [
-        "darkMetal"
-      ],
-      "transform": {}
-    },
-    {
-      "node": 79,
-      "name": "BackBox_Mount",
-      "path": "SciFiHelmet/RightComms_And_Tube/BackBox_Group/BackBox_Mount",
-      "mesh": 69,
-      "materials": [
-        "oliveTech"
-      ],
-      "transform": {}
-    },
-    {
-      "node": 80,
-      "name": "BackBox",
-      "path": "SciFiHelmet/RightComms_And_Tube/BackBox_Group/BackBox",
-      "mesh": 70,
-      "materials": [
-        "oliveTech"
-      ],
-      "transform": {}
-    },
-    {
-      "node": 82,
-      "name": "",
-      "path": "SciFiHelmet/RightComms_And_Tube/BackBox_Group/Logo/82",
-      "mesh": 71,
+      "path": "SciFiHelmet/RightComms_And_Tube/BackBox_Group/Logo/77",
+      "mesh": 66,
       "materials": [
         "oliveTech"
       ],
@@ -1369,10 +1300,10 @@
       }
     },
     {
-      "node": 83,
+      "node": 78,
       "name": "",
-      "path": "SciFiHelmet/RightComms_And_Tube/BackBox_Group/Logo/83",
-      "mesh": 72,
+      "path": "SciFiHelmet/RightComms_And_Tube/BackBox_Group/Logo/78",
+      "mesh": 67,
       "materials": [
         "oliveTech"
       ],
@@ -1398,10 +1329,10 @@
       }
     },
     {
-      "node": 84,
+      "node": 79,
       "name": "",
-      "path": "SciFiHelmet/RightComms_And_Tube/BackBox_Group/Logo/84",
-      "mesh": 73,
+      "path": "SciFiHelmet/RightComms_And_Tube/BackBox_Group/Logo/79",
+      "mesh": 68,
       "materials": [
         "oliveTech"
       ],
@@ -1427,10 +1358,10 @@
       }
     },
     {
-      "node": 85,
+      "node": 80,
       "name": "BackBox_Connector",
       "path": "SciFiHelmet/RightComms_And_Tube/BackBox_Group/BackBox_Connector",
-      "mesh": 74,
+      "mesh": 69,
       "materials": [
         "darkMetal"
       ],
@@ -1456,10 +1387,10 @@
       }
     },
     {
-      "node": 86,
+      "node": 81,
       "name": "BackBox_Connector",
       "path": "SciFiHelmet/RightComms_And_Tube/BackBox_Group/BackBox_Connector",
-      "mesh": 75,
+      "mesh": 70,
       "materials": [
         "darkMetal"
       ],
@@ -1485,30 +1416,30 @@
       }
     },
     {
-      "node": 87,
+      "node": 82,
       "name": "Screws_BackBox",
       "path": "SciFiHelmet/RightComms_And_Tube/BackBox_Group/Screws_BackBox",
-      "mesh": 76,
+      "mesh": 71,
       "materials": [
         "darkMetal"
       ],
       "transform": {}
     },
     {
-      "node": 89,
+      "node": 84,
       "name": "Hose_Coil",
       "path": "SciFiHelmet/RightComms_And_Tube/Hose/Hose_Coil",
-      "mesh": 77,
+      "mesh": 72,
       "materials": [
         "blackRubber"
       ],
       "transform": {}
     },
     {
-      "node": 90,
+      "node": 85,
       "name": "Hose_Plug",
       "path": "SciFiHelmet/RightComms_And_Tube/Hose/Hose_Plug",
-      "mesh": 78,
+      "mesh": 73,
       "materials": [
         "darkMetal"
       ],
@@ -1534,10 +1465,10 @@
       }
     },
     {
-      "node": 91,
+      "node": 86,
       "name": "Hose_Plug",
       "path": "SciFiHelmet/RightComms_And_Tube/Hose/Hose_Plug",
-      "mesh": 79,
+      "mesh": 74,
       "materials": [
         "darkMetal"
       ],
@@ -1563,10 +1494,10 @@
       }
     },
     {
-      "node": 92,
+      "node": 87,
       "name": "",
-      "path": "SciFiHelmet/RightComms_And_Tube/Hose/92",
-      "mesh": 80,
+      "path": "SciFiHelmet/RightComms_And_Tube/Hose/87",
+      "mesh": 75,
       "materials": [
         "whiteArmor"
       ],
@@ -1592,10 +1523,10 @@
       }
     },
     {
-      "node": 93,
+      "node": 88,
       "name": "",
-      "path": "SciFiHelmet/RightComms_And_Tube/Hose/93",
-      "mesh": 81,
+      "path": "SciFiHelmet/RightComms_And_Tube/Hose/88",
+      "mesh": 76,
       "materials": [
         "whiteArmor"
       ],
@@ -1621,10 +1552,10 @@
       }
     },
     {
-      "node": 94,
+      "node": 89,
       "name": "",
-      "path": "SciFiHelmet/RightComms_And_Tube/Hose/94",
-      "mesh": 82,
+      "path": "SciFiHelmet/RightComms_And_Tube/Hose/89",
+      "mesh": 77,
       "materials": [
         "whiteArmor"
       ],
@@ -1650,10 +1581,10 @@
       }
     },
     {
-      "node": 96,
+      "node": 91,
       "name": "NeckCore",
       "path": "SciFiHelmet/Neck/NeckCore",
-      "mesh": 83,
+      "mesh": 78,
       "materials": [
         "blackRubber"
       ],
@@ -1679,10 +1610,10 @@
       }
     },
     {
-      "node": 98,
+      "node": 93,
       "name": "",
-      "path": "SciFiHelmet/Neck/NeckPlates/98",
-      "mesh": 84,
+      "path": "SciFiHelmet/Neck/NeckPlates/93",
+      "mesh": 79,
       "materials": [
         "blackRubber"
       ],
@@ -1708,10 +1639,10 @@
       }
     },
     {
-      "node": 99,
+      "node": 94,
       "name": "",
-      "path": "SciFiHelmet/Neck/NeckPlates/99",
-      "mesh": 85,
+      "path": "SciFiHelmet/Neck/NeckPlates/94",
+      "mesh": 80,
       "materials": [
         "blackRubber"
       ],
@@ -1737,10 +1668,10 @@
       }
     },
     {
-      "node": 100,
+      "node": 95,
       "name": "",
-      "path": "SciFiHelmet/Neck/NeckPlates/100",
-      "mesh": 86,
+      "path": "SciFiHelmet/Neck/NeckPlates/95",
+      "mesh": 81,
       "materials": [
         "blackRubber"
       ],
@@ -1766,10 +1697,10 @@
       }
     },
     {
-      "node": 101,
+      "node": 96,
       "name": "",
-      "path": "SciFiHelmet/Neck/NeckPlates/101",
-      "mesh": 87,
+      "path": "SciFiHelmet/Neck/NeckPlates/96",
+      "mesh": 82,
       "materials": [
         "blackRubber"
       ],
@@ -1795,10 +1726,10 @@
       }
     },
     {
-      "node": 102,
+      "node": 97,
       "name": "",
-      "path": "SciFiHelmet/Neck/NeckPlates/102",
-      "mesh": 88,
+      "path": "SciFiHelmet/Neck/NeckPlates/97",
+      "mesh": 83,
       "materials": [
         "darkMetal"
       ],
@@ -1824,22 +1755,202 @@
       }
     },
     {
-      "node": 104,
+      "node": 99,
       "name": "ForeheadPlate_R",
       "path": "SciFiHelmet/ForeheadPlates/ForeheadPlate_R",
-      "mesh": 89,
+      "mesh": 84,
       "materials": [
         "darkArmor"
       ],
       "transform": {}
     },
     {
-      "node": 105,
+      "node": 100,
       "name": "ForeheadPlate_L",
       "path": "SciFiHelmet/ForeheadPlates/ForeheadPlate_L",
-      "mesh": 90,
+      "mesh": 85,
       "materials": [
         "darkArmor"
+      ],
+      "transform": {}
+    },
+    {
+      "node": 102,
+      "name": "RadioModule_B",
+      "path": "SciFiHelmet/MirroredComms_B/RadioModule_B",
+      "mesh": 86,
+      "materials": [
+        "oliveTech"
+      ],
+      "transform": {}
+    },
+    {
+      "node": 103,
+      "name": "RadioDetail_B_1",
+      "path": "SciFiHelmet/MirroredComms_B/RadioDetail_B_1",
+      "mesh": 87,
+      "materials": [
+        "blackRubber"
+      ],
+      "transform": {}
+    },
+    {
+      "node": 105,
+      "name": "Radio_Button_1_B",
+      "path": "SciFiHelmet/MirroredComms_B/Buttons_B/Radio_Button_1_B",
+      "mesh": 88,
+      "materials": [
+        "blackRubber"
+      ],
+      "transform": {}
+    },
+    {
+      "node": 106,
+      "name": "Radio_Button_2_B",
+      "path": "SciFiHelmet/MirroredComms_B/Buttons_B/Radio_Button_2_B",
+      "mesh": 89,
+      "materials": [
+        "blackRubber"
+      ],
+      "transform": {}
+    },
+    {
+      "node": 107,
+      "name": "Radio_Button_3_B",
+      "path": "SciFiHelmet/MirroredComms_B/Buttons_B/Radio_Button_3_B",
+      "mesh": 90,
+      "materials": [
+        "blackRubber"
+      ],
+      "transform": {}
+    },
+    {
+      "node": 108,
+      "name": "RadioDetail_B_2",
+      "path": "SciFiHelmet/MirroredComms_B/Buttons_B/RadioDetail_B_2",
+      "mesh": 91,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {}
+    },
+    {
+      "node": 110,
+      "name": "RadioDetail_B_3",
+      "path": "SciFiHelmet/MirroredComms_B/Antenna_B/RadioDetail_B_3",
+      "mesh": 92,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {}
+    },
+    {
+      "node": 111,
+      "name": "RadioDetail_B_4",
+      "path": "SciFiHelmet/MirroredComms_B/Antenna_B/RadioDetail_B_4",
+      "mesh": 93,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {}
+    },
+    {
+      "node": 112,
+      "name": "RadioDetail_B_5",
+      "path": "SciFiHelmet/MirroredComms_B/Antenna_B/RadioDetail_B_5",
+      "mesh": 94,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {}
+    },
+    {
+      "node": 113,
+      "name": "Yoke_B",
+      "path": "SciFiHelmet/MirroredComms_B/Yoke_B",
+      "mesh": 95,
+      "materials": [
+        "darkArmor"
+      ],
+      "transform": {}
+    },
+    {
+      "node": 114,
+      "name": "RadioDetail_B_6",
+      "path": "SciFiHelmet/MirroredComms_B/RadioDetail_B_6",
+      "mesh": 96,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {}
+    },
+    {
+      "node": 115,
+      "name": "RadioDetail_B_7",
+      "path": "SciFiHelmet/MirroredComms_B/RadioDetail_B_7",
+      "mesh": 97,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {}
+    },
+    {
+      "node": 117,
+      "name": "Hose_Coil_B",
+      "path": "SciFiHelmet/MirroredComms_B/Hose_B/Hose_Coil_B",
+      "mesh": 98,
+      "materials": [
+        "blackRubber"
+      ],
+      "transform": {}
+    },
+    {
+      "node": 118,
+      "name": "Hose_Plug_B",
+      "path": "SciFiHelmet/MirroredComms_B/Hose_B/Hose_Plug_B",
+      "mesh": 99,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {}
+    },
+    {
+      "node": 119,
+      "name": "Hose_Plug_B",
+      "path": "SciFiHelmet/MirroredComms_B/Hose_B/Hose_Plug_B",
+      "mesh": 100,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {}
+    },
+    {
+      "node": 120,
+      "name": "RadioDetail_B_8",
+      "path": "SciFiHelmet/MirroredComms_B/Hose_B/RadioDetail_B_8",
+      "mesh": 101,
+      "materials": [
+        "whiteArmor"
+      ],
+      "transform": {}
+    },
+    {
+      "node": 121,
+      "name": "RadioDetail_B_9",
+      "path": "SciFiHelmet/MirroredComms_B/Hose_B/RadioDetail_B_9",
+      "mesh": 102,
+      "materials": [
+        "whiteArmor"
+      ],
+      "transform": {}
+    },
+    {
+      "node": 122,
+      "name": "RadioDetail_B_10",
+      "path": "SciFiHelmet/MirroredComms_B/Hose_B/RadioDetail_B_10",
+      "mesh": 103,
+      "materials": [
+        "whiteArmor"
       ],
       "transform": {}
     }

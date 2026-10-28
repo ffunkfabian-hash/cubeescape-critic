@@ -23,19 +23,19 @@ PARTS = [
     ("H10", "Nacken-/Seitenrahmen", "Unterer Rahmen mit vorderem Anschluss."),
     ("H11", "Seitliche Vertiefungen", "Längsfeld, kleine Tasche und schmaler Schlitz."),
     ("H12", "Funkmuschel A", "Großes ovales Modul auf Seite A."),
-    ("H13", "Seitenmodul B", "Flaches kantiges Modul auf Seite B."),
+    ("H13", "Funkmuschel B", "Gespiegeltes Funkmodul auf Seite B."),
     ("H14", "Maskenhalterungen", "Kleine dunkle Halter vor den Ohrmodulen."),
     ("H15", "Bügel und Scheitelband", "Halter und Band über dem Hinterkopf."),
     ("H16", "Hinterkopfmodul", "Rückwärtiger Kasten mit Montageplatte."),
-    ("H17", "Antenne", "Langer Stab auf Seite A, mit Fuß und Spitze."),
-    ("H18", "Spiralkabel", "Gerippte Verbindung um Seite A."),
+    ("H17", "Antennen A/B", "Gespiegelte Stäbe mit Fuß und Spitze."),
+    ("H18", "Spiralkabel A/B", "Gespiegelte Kabel zum mittigen Heckmodul."),
     ("H19", "Halsanschluss", "Zurückgesetzter Ring unter dem Rahmen."),
     ("H20", "Stirnblende A", "Separate trapezförmige Blende oberhalb von Auge A."),
     ("H21", "Stirnblende B", "Separate trapezförmige Blende oberhalb von Auge B."),
 ]
 
 # Every point is in the original 1280×720 render coordinate system.
-# A = front-left, -X, radio; B = front-right, +X, angular ear module.
+# A = front-left, -X, radio; B = front-right, +X, mirrored headset.
 VIEWS = [
     ("front", "01 / Front", "Seite A links · Seite B rechts", [
         ("H01", (640, 155), (240, 55)),
@@ -48,7 +48,7 @@ VIEWS = [
         ("H06", (640, 439), (240, 455)),
         ("H07", (640, 549), (240, 625)),
     ]),
-    ("left", "02 / Seite B", "Kantiges Ohrmodul · +X", [
+    ("left", "02 / Seite B", "Gespiegelte Funkmuschel, Antenne, Kabel · +X", [
         ("H08", (570, 516), (245, 620)),
         ("H09", (752, 205), (1050, 130)),
         ("H10", (745, 437), (1050, 535)),
@@ -182,7 +182,7 @@ footer { margin-top: 16px; padding-top: 12px; border-top: 1px solid #cdd7dd; col
 „H07 schmaler.“ &nbsp; „H11 auf Seite B tiefer.“ &nbsp; „H10 vorne flacher anschließen.“<br>
 Immer Abschnitt, Seite und Richtung nennen. Beispiel: „H05 auf Seite A unten weiter nach innen.“</div>
 <footer><strong>Seite A:</strong> in der Frontansicht links, mit Funkmuschel und Antenne (−X).<br>
-<strong>Seite B:</strong> in der Frontansicht rechts, mit kantigem Ohrmodul (+X).<br>
+<strong>Seite B:</strong> in der Frontansicht rechts, mit gespiegelter Funkmuschel (+X).<br>
 Die Nummern benennen sichtbare Bereiche; mehrere Bereiche können im Generator dasselbe Bauteil bilden.
 Standbilder dokumentieren den aktuellen Modellstand, keine Abnahme der Vorlagentreue.</footer>
 </div><aside class="legend"><h2>Teile und Abschnitte</h2><ol>__LEGEND__</ol></aside></div>

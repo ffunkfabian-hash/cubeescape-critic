@@ -2,6 +2,12 @@
 
 ## 0.3.0 „Sidework“ – 2026-10-28 (offener Entwurf)
 
+- Stand 79: Kopfhörer, Kabel, Halterung und Antenne von A nach B gespiegelt; gemeinsames Heckmodul erhalten.
+- 18 neue Spiegelteile ersetzen das alte Ohrmodul samt Halter; 86 bisherige Meshes und alle Materialien unverändert.
+- 33 Tests und Build bestehen; Spiegelpunkte, Flächenorientierung, positive Skalierung und vier Ansichten geprüft.
+
+### Stirnanschluss 78
+
 - Stand 78: Trapezblenden bis zur Augenmaske verlängert, mit flach auslaufendem Überlappungsrand.
 - Nur H20/H21 geändert; übrige 89 Geometrien, alle Materialien und Texturen erhalten, Teile weiterhin separat.
 - 32 Tests und Build bestehen; zwölf zusätzliche Anschlussproben, Negativkontrolle und vier Ansichten geprüft.

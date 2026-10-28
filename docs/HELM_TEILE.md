@@ -5,8 +5,9 @@ Diese Nummern bleiben über Modelländerungen hinweg gleich. Für einen Änderun
 
 ![Teilekarte des Helms](bilder/helm_teile.jpg)
 
-**Seite A** liegt in der Frontansicht links: Funkmuschel, Antenne und Kabel; im Three.js-Modell `−X`, Kamera-Schaltfläche
-`Right`. **Seite B** liegt in der Frontansicht rechts: das kantige Ohrmodul; im Modell `+X`, Schaltfläche `Left`.
+**Seite A** liegt in der Frontansicht links, im Three.js-Modell `−X`, Kamera-Schaltfläche `Right`.
+**Seite B** liegt in der Frontansicht rechts, im Modell `+X`, Schaltfläche `Left`. Seit Stand 79 tragen beide Seiten
+die gespiegelte Funkmuschel mit Kabel, Halterung und Antenne; die frühere Unterscheidung am hellen Ohrmodul entfällt.
 Diese Bezeichnungen gelten unabhängig davon, von welcher Richtung man gerade auf den Helm schaut.
 
 | ID | Teil / Abschnitt | Gemeint ist |
@@ -23,18 +24,18 @@ Diese Bezeichnungen gelten unabhängig davon, von welcher Richtung man gerade au
 | H10 | Nacken-/Seitenrahmen | Unterer umlaufender Rahmen mit vorderem Anschluss unter dem Ohr und hinterer mittiger Absenkung. |
 | H11 | Seitliche Vertiefungen | Längliches Feld, zusätzliche kleine Tasche und schmaler Schlitz im Seitenrahmen. Bitte A oder B angeben. |
 | H12 | Funkmuschel A | Großes ovales Gehäuse auf Seite A mit seinen Bedienelementen. |
-| H13 | Seitenmodul B | Flaches, kantiges Ohrmodul auf Seite B mit eingesetztem Außenfeld. |
+| H13 | Funkmuschel B | Spiegelung von H12 mit Bedienelementen; ersetzt das frühere helle Ohrmodul. |
 | H14 | Maskenhalterungen | Kleine dunkle kantige Halter unmittelbar vor den Ohrmodulen. |
 | H15 | Bügel und Scheitelband | Haltebügel an den Ohren sowie Band und Klemmen über dem hinteren Scheitel. |
 | H16 | Hinterkopfmodul | Rückwärtiger Kasten einschließlich Montageplatte, eingefasstem Feld und Anschlüssen. |
-| H17 | Antenne | Langer Stab auf Seite A mit Fuß und Endkappe. |
-| H18 | Spiralkabel | Gerippte Kabelschleife auf Seite A mit Klammern und Anschlüssen. |
+| H17 | Antennen A/B | Gespiegelte Stäbe mit Fuß und Endkappe; bei Feedback Seite angeben. |
+| H18 | Spiralkabel A/B | Gespiegelte Kabelschleifen mit Klammern und Anschlüssen zum gemeinsamen Heckmodul. |
 | H19 | Halsanschluss | Zurückgesetzter Ring unter dem Nackenrahmen. Der darunterliegende schwarze Hals dient als Träger. |
-| H20 | Stirnblende A | Trapezförmige separate Blende oberhalb des Auges auf Funkseite A. |
+| H20 | Stirnblende A | Trapezförmige separate Blende oberhalb des Auges auf Seite A. |
 | H21 | Stirnblende B | Entsprechende separate Blende auf Seite B; Mittelstreifen bleibt frei. |
 
 Die IDs bezeichnen sichtbare Abschnitte, nicht zwingend einzelne Meshes. Seit Fidelity sind Haube, Augenmaske, beide Wangen, Kinn und beide Kieferstücke getrennte Meshes.
-Die Bildkarte zeigt Stand 78 mit H20/H21; aktuelle Vier-Ansichten-Belege stehen im [Prüfbericht](versions/0.3.md).
+Die Bildkarte zeigt Stand 79 mit H20/H21; aktuelle Vier-Ansichten-Belege stehen im [Prüfbericht](versions/0.3.md).
 Farben helfen beim Zuordnen; ein Änderungswunsch an H11 betrifft die Geometrie, solange keine Materialänderung genannt wird.
 
 ## Zuordnung für die Umsetzung
@@ -44,7 +45,8 @@ Farben helfen beim Zuordnen; ein Änderungswunsch an H11 betrifft die Geometrie,
 | H01–H06, H14 | `upperHelmet.js` | `Crown`, `Shell` (Augenmaske), `Cheek_L/R`, `Brim`, `Visor_L/R`, `Mouth_Insert`, `MouthRail_L/R`, `MaskGap`, `Hinge_L/R` |
 | H07–H11, H19 | `lowerArmor.js` | `Chin`, `Jaw_L/R`, `Jaw_Insert_L/R`, `Core`, `Collar`, `NeckRing`, seitliche Felder |
 | H20, H21 | `foreheadPlates.js` | `ForeheadPlate_R` (A), `ForeheadPlate_L` (B) |
-| H13, H15 | `leftEar.js` | `EarCap`, `EarCap_Insert`, `HeadBand`, `Bracket`, Klemmen |
+| H15 | `leftEar.js` | `HeadBand`, Mittelstreifen und Klemmen; altes Ohrmodul im symmetrischen Modus ausgeblendet |
+| H13, H15, H17, H18 (B) | `mirrorComms.js` | `MirroredComms_B`, `RadioModule_B`, `Yoke_B`, `Antenna_B`, `Hose_B` |
 | H12, H16–H18 | `rightComms.js` | `RadioModule`, `BackBox_Group`, `Antenna`, `Hose` |
 
 ## Blatt aktualisieren und drucken
@@ -65,9 +67,10 @@ Die Karte verwendet die vier vorhandenen Renderansichten mit 1280×720 Pixeln. C
 vergeben; zusätzliche Bereiche erhalten neue Nummern. Die Karte dokumentiert einen Modellstand und ersetzt keinen
 Vergleich mit den Referenzbildern.
 
-Aktueller Lieferstand: **78**, mit quer und längs gewölbtem Scheitel, angepasstem Bügel und weichem Übergang
+Aktueller Lieferstand: **79**, mit quer und längs gewölbtem Scheitel, angepasstem Bügel und weichem Übergang
 zwischen H01 und H02. Die Fugenlinie ist durch einen verdeckten Überlappungsrand reduziert. Beide Teile bleiben getrennt; H09/H10 sind wieder rund; die separaten Vertiefungen H11 folgen der neuen Rundung.
 Die Haube besitzt dieselbe Graphitgrundfarbe wie die Maske, mit sichtbarer feiner Lackkörnung und gedämpftem Glanz.
 H20/H21 schließen mit einem auslaufenden Überlappungsrand direkt an die Augenmaske an, bleiben aber eigenständige Meshes.
-Die übrigen 89 Meshes bleiben erhalten (insgesamt 91); [Exportverzeichnis](../assets/helmet/parts.json),
+Der Kopfhöreraufbau auf B spiegelt 18 Meshes von A; das alte Ohrmodul samt Halter entfällt.
+86 bisherige Meshes bleiben erhalten, insgesamt 104; [Exportverzeichnis](../assets/helmet/parts.json),
 [Stilbeschreibung](HELM_STIL.md), [Prüfbericht](versions/0.3.md).

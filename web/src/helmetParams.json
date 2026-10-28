@@ -556,5 +556,6 @@
     "joinBlendHeight": 0.05,
     "joinOverlap": 0.003,
     "joinLip": 0.003
-  }
+  },
+  "comms": { "symmetric": true }
 }

@@ -390,3 +390,21 @@ der vorherige getrennte Umriss lässt diese Prüfung gezielt fehlschlagen. Vier 
 sind aktualisiert. Mittlere Silhouetten-IoU bleibt 91,80 %.
 [Anschlussprobe 77](belege/helm/77.jpg) · [Stand 78](belege/helm/78.jpg) ·
 [Vergleich 76/78](bilder/helm_stirnanschluss_76_78.jpg) · [Front](bilder/helm_stirnanschluss_front.jpg).
+
+
+## Runde 22 – Kopfhörer und Kabel symmetrisch spiegeln 79 (28.10.2026)
+
+Auf Nutzerwunsch ist die komplette Funkmuschel der Front-links-Seite A nach B gespiegelt: Gehäuse, Polster,
+Bedienknöpfe, Antenne, Halter und Spiralkabel. Das mittige Heckmodul bleibt einmal vorhanden; beide Kabel nutzen
+dessen vorhandene seitliche Anschlüsse. Das alte helle Ohrmodul auf B samt Halter ist im symmetrischen Modus
+ausgeblendet. `comms.symmetric=false` erhält den reproduzierbaren früheren asymmetrischen Aufbau.
+
+18 neue Spiegelmeshes ersetzen fünf alte Meshes; 86 bisherige Geometrien/UVs/Transformationen sowie alle Materialien
+und Texturbilder sind unverändert. Insgesamt 104 Meshes. Spiegelung und Dreiecksorientierung werden in der Geometrie
+gesichert, der Export verwendet positive Skalierungen. 33 Tests und Build bestehen. Der zusätzliche Test prüft alle
+18 Paare punktweise, die Flächenorientierung und das einmalige Heckmodul. Invertierte Flächen werden als Negativkontrolle erkannt.
+
+Vier Ansichten geprüft. Mittlere Silhouetten-IoU 90,78 %; der Rückgang gegenüber 78 ist durch die ausdrücklich gewünschte
+Symmetrie erklärbar, während die Videovorlage asymmetrisch bleibt. Kein Anspruch höherer Vorlagentreue durch diese Designänderung.
+[Stand 79](belege/helm/79.jpg) · [Vergleich 78/79](bilder/helm_symmetrie_78_79.jpg) ·
+[Front](bilder/helm_symmetrie_front.jpg) · [Seite B](bilder/helm_symmetrie_seite_b.jpg) · [Heck](bilder/helm_symmetrie_heck.jpg).
