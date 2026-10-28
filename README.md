@@ -1,8 +1,8 @@
 # Critic – parametrischer Helm im Browser
 
-**Aktueller Versuch 0.6 „Cuirass“:** umschließende Schulterpanzer mit unteren Lamellen, breite Brust mit
-Mittelgrat und engerer Halskragen. 26 separate Körperteile; Helm und kurzer Hals erhalten.
-[Aufbau und Stil](docs/HELM_CUIRASS.md) · [Exporte](assets/helmet-cuirass/README.md) · [Prüfbericht](docs/versions/0.6.md).
+**Aktueller Versuch 0.7 „Bastion“:** tiefe kantige Schultergehäuse mit unterer Panzerlage, geschlossene Brustmitte
+und separate Flanken. 31 Körperteile; Helm, kurzer Hals und kräftiger Rumpfkern erhalten.
+[Aufbau und Stil](docs/HELM_BASTION.md) · [Exporte](assets/helmet-bastion/README.md) · [Prüfbericht](docs/versions/0.7.md).
 
 **Form- und Materialbasis 0.4 „Continuity“:** weichere Übergänge neben den Augen und zwei von der Stirn bis zum Hinterkopf
 verlängerte Streifen. Auf derselben Geometrie stehen Originalmaterial, glänzendes Metall und feines dunkles Graphit

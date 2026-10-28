@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.0 „Bastion“ – 2026-10-28 (Oberkörperstudie)
+
+- Tiefe kantige Schultergehäuse mit eigenen Dächern und unterer Panzerlage; zentrale Brust und separate Flanken.
+- 31 Körperteile; Helm, kurzer Hals, Kragen, Rumpfkern und vorhandene Materialien erhalten.
+- Neue Nutzerreferenzen und Stil dokumentiert; 59 Tests, reproduzierbare Ansichten, GLBs und Explosionsübersicht.
+
 ## 0.6.0 „Cuirass“ – 2026-10-28 (Oberkörperstudie)
 
 - Umschließende Schulterpanzer mit separaten unteren Lamellen und dunklen Gelenkkörpern; 26 stabile Körperteile.

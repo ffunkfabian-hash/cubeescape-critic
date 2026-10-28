@@ -1,0 +1,46 @@
+{
+  "sourceRevision": "c445de50b758710962b32097a61202cea534ad97",
+  "baseline": "../helmet-cuirass/assembled",
+  "unchangedHelmetMeshes": 56,
+  "unchangedBodyMeshes": [
+    "NeckFlex",
+    "NeckRibs",
+    "CollarFront",
+    "CollarRear",
+    "UpperTorsoCore",
+    "ScapulaArmor_R",
+    "RearFastener_R",
+    "ShoulderJoint_R",
+    "ScapulaArmor_L",
+    "RearFastener_L",
+    "ShoulderJoint_L",
+    "BackSpineInsert"
+  ],
+  "sameAssembledCameras": true,
+  "sameHelmetParameters": true,
+  "unchangedTextureMaps": [
+    "textures/crownArmor_map.png",
+    "textures/crownArmor_roughnessMap.png",
+    "textures/crownArmor_normalMap.png",
+    "textures/darkArmor_map.png",
+    "textures/darkArmor_roughnessMap.png",
+    "textures/darkArmor_normalMap.png",
+    "textures/accessoryArmor_roughnessMap.png",
+    "textures/accessoryArmor_bumpMap.png",
+    "textures/whiteArmor_map.png",
+    "textures/whiteArmor_roughnessMap.png",
+    "textures/whiteTextured_bumpMap.png"
+  ],
+  "bodyParts": 31,
+  "meshCount": 87,
+  "labelGroups": 53,
+  "testOnlyReviewCorrectionChangedImages": false,
+  "sourceDigest": "b273baeb704beb62ed22fd2d077d821b9069bf693bebb2b853913c41d25b9cc2",
+  "assembledGlbSha256": "99545587caf3e27fa36d0044abc022a7912e4b11f1bba11d8b90be63e1a5544c",
+  "explodedRoundtrip": {
+    "meshes": 87,
+    "positionsIdentical": true,
+    "maximumTransformError": 5.551115123125783e-16,
+    "metadataPreserved": true
+  }
+}

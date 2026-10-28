@@ -536,3 +536,18 @@ Oberkante plus gezielte Strahlprobe beheben ihn. Keine neue Helm-IoU, keine fina
 [Aufbau, Stil und Grenzen](HELM_CUIRASS.md) · [Prüfbericht](versions/0.6.md).
 
 ![Vorher / Cuirass](bilder/helm_cuirass_vergleich.jpg)
+
+
+## Bastion 0.7 – technische Gehäuse und geschlossene Brust (28.10.2026)
+
+Vier neue Nutzerbilder führen nach „Dann leg mal los“ zu kantigen, tiefen Schultergehäusen mit separater
+unterer Lage. B27 ergänzt die durchgehende Brustmitte; B28/B29 die Flanken, B30/B31 gefaltete Schulterdächer.
+31 Körperteile; Helm, kurzer Hals und tiefer Rumpfkern erhalten. Die erste Brustfläche wird nach Sichtprüfung
+planar, der gemessene Flankenabstand vergrößert. Frühere Cuirass-Formtests bleiben über eine Parameterfixture erhalten.
+[Aufbau/Stil](HELM_BASTION.md) · [Prüfbericht](versions/0.7.md).
+
+![Cuirass / Bastion](bilder/helm_bastion_vergleich.jpg)
+
+Nachgereicht während 0.7: Schultern etwas zu kantig, Brust seitlich zu flach. Zwei Facettenbilder führen zu
+einer reliefartig vorgewölbten Brust mit definierten inneren Scheiteln sowie stärker gefasten Schulterkanten.
+Die plane Zwischenprobe bleibt nur im lokalen Belegcache; sie ist nicht der Lieferstand.
