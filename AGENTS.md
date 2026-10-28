@@ -10,6 +10,8 @@ Antworten, Doku und Commit-Messages auf Deutsch; Code, Bezeichner und Kommentare
 - `generator/`, `tools/` – entstehen mit Version 0.1 (Blender-Generator, Ansichten, Kritiker-Aufruf, Messung).
 - `web/` – Three.js-Nachbau im Browser mit Playwright-Prüfung und Umriss-IoU (`web/README.md`); `web/renders/` nicht im Repo.
 - `runs/` – Laufergebnisse (nicht im Repo, `.gitignore`); Belege außerhalb unter `~/Library/Caches/Critic/<Version>/`.
+- `docs/belege/`, `docs/bilder/` – auf Wunsch des Nutzers ein Vergleichsbild je Helm-Durchlauf und Bilder der
+  Rundenenden als JPEG im Repo (`web/tools/save_pass.py` schreibt sie mit); Verlauf in `docs/HELM_VERLAUF.md`.
 
 ## Regeln
 

@@ -37,7 +37,7 @@ npm run verify       # headless: renders/render_*.png, overlay_*.png, mask_*.png
 | `src/textures.js` | Canvas-Maps (Waben, Gebrauchsspuren, Schalen-Körnung) |
 | `verify_renders.mjs`, `tools/iou.py` | Playwright-Prüfung und Umriss-IoU je Ansicht (nur oberhalb der Schalkante der Vorlage) |
 | `tools/pairs.py` | Nahvergleich Vorlage/Render je Ansicht |
-| `tools/save_pass.py` | Belege eines Durchlaufs nach `runs/helm/<Nr>/` (IoU, Vergleichsbilder, Notiz) |
+| `tools/save_pass.py` | Belege eines Durchlaufs: `runs/helm/<Nr>/` (IoU, Vergleichsbilder, Notiz) und `docs/belege/helm/<Nr>.jpg` |
 
 ## Parameter (`src/helmetParams.json`)
 
