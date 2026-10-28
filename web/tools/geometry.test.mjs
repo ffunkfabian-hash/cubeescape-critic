@@ -85,6 +85,23 @@ test('collar surface attributes remain finite after boolean pocket cuts', () => 
   }
 });
 
+test('rear core and collar follow a round elliptical outline', () => {
+  for (const [name, dims, localY, tilt] of [
+    ['Core', D.core, 0.12, 0], ['Collar', D.collar, -0.17, D.collar.tilt],
+  ]) {
+    const mesh = model.getObjectByName(name);
+    for (const x of [-0.28, -0.22, -0.1, 0.1, 0.22, 0.28]) {
+      const origin = new THREE.Vector3(x, localY, -2).applyAxisAngle(new THREE.Vector3(1, 0, 0), tilt);
+      const direction = new THREE.Vector3(0, 0, 1).applyAxisAngle(new THREE.Vector3(1, 0, 0), tilt);
+      const hit = new THREE.Raycaster(origin, direction).intersectObject(mesh)[0];
+      assert.ok(hit, `Missing rear wall on ${name}`);
+      const local = hit.point.clone().applyAxisAngle(new THREE.Vector3(1, 0, 0), -tilt);
+      const expectedZ = dims.cz - dims.rz * Math.sqrt(1 - (x / dims.rx) ** 2);
+      assert.ok(Math.abs(local.z - expectedZ) < 0.0008, `Faceted rear wall remains on ${name}`);
+    }
+  }
+});
+
 test('panel interiors expose recessed floors, with no residual original wall facets', () => {
   const p = D.collarPanel;
   for (const side of [-1, 1]) {

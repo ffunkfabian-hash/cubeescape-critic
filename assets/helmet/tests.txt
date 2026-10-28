@@ -2,54 +2,54 @@
 > critic-helm-web@0.3.0 test
 > node --test --test-concurrency=1 tools/*.test.mjs && python3 -I tools/test_iou.py && python3 -I tools/test_save_pass.py
 
-✔ body study keeps separately editable, uniquely named geometry (5.002542ms)
-(node:20131) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+✔ body study keeps separately editable, uniquely named geometry (9.030417ms)
+(node:22027) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
 Replace `const THREE = require("three")` with `import * as THREE from "three"`.
 (Use `node --trace-deprecation ...` to show where the warning was created)
 BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
-✔ separate jaw inserts follow their supporting plates (303.540542ms)
-✔ collar surface attributes remain finite after boolean pocket cuts (0.368667ms)
-✔ panel interiors expose recessed floors, with no residual original wall facets (1.559ms)
-✔ slot is deeper than the panel, socket is recessed, and surrounding wall is retained (0.501416ms)
-✔ manifest detects source and authoritative reference changes, excluding generated output (5.438166ms)
-✔ verification overwrites old passed status on missing-source (27.068875ms)
-✔ verification overwrites old passed status on server-initialization (78.224583ms)
-✔ reference comparison overwrites old passed status on missing-file (27.165292ms)
-✔ reference comparison overwrites old passed status on wrong-hash (25.301375ms)
-✔ lower-face fit preserves crown and shortens connected lower geometry (1.23ms)
-✔ instanced fasteners follow the same fit as their supporting plates (0.665ms)
-✔ identity fit leaves geometry unchanged and invalid fitting values fail (0.432ms)
-(node:20155) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+✔ separate jaw inserts follow their supporting plates (1382.782542ms)
+✔ collar surface attributes remain finite after boolean pocket cuts (2.134666ms)
+✔ rear core and collar follow a round elliptical outline (3.34525ms)
+✔ panel interiors expose recessed floors, with no residual original wall facets (8.485208ms)
+✔ slot is deeper than the panel, socket is recessed, and surrounding wall is retained (2.962875ms)
+✔ manifest detects source and authoritative reference changes, excluding generated output (5.445667ms)
+✔ verification overwrites old passed status on missing-source (48.781666ms)
+✔ verification overwrites old passed status on server-initialization (152.419916ms)
+✔ reference comparison overwrites old passed status on missing-file (44.242542ms)
+✔ reference comparison overwrites old passed status on wrong-hash (47.665958ms)
+✔ lower-face fit preserves crown and shortens connected lower geometry (2.427542ms)
+✔ instanced fasteners follow the same fit as their supporting plates (1.083958ms)
+✔ identity fit leaves geometry unchanged and invalid fitting values fail (0.66575ms)
+(node:22072) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
 Replace `const THREE = require("three")` with `import * as THREE from "three"`.
 (Use `node --trace-deprecation ...` to show where the warning was created)
-✔ ambient-occlusion denoising is reproducible without altering global random state (3.234291ms)
-✔ UV projection stays consistent within triangles despite varying vertex normals (0.345292ms)
-(node:20156) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+✔ ambient-occlusion denoising is reproducible without altering global random state (6.161666ms)
+✔ UV projection stays consistent within triangles despite varying vertex normals (0.624542ms)
+(node:22074) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
 Replace `const THREE = require("three")` with `import * as THREE from "three"`.
 (Use `node --trace-deprecation ...` to show where the warning was created)
 BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
-✔ rounded forehead does not lower the dark cap over the rear housing (471.774834ms)
-✔ process launch failures and signals cannot pass as exit zero (0.275625ms)
-✔ GLB smoke inspection reads the model and its materials (0.145667ms)
-✔ GLB inspection rejects truncated and mislabeled downloads (0.172ms)
-ℹ tests 19
+✔ rounded forehead does not lower the dark cap over the rear housing (1269.125083ms)
+✔ process launch failures and signals cannot pass as exit zero (0.772ms)
+✔ GLB smoke inspection reads the model and its materials (0.309125ms)
+✔ GLB inspection rejects truncated and mislabeled downloads (0.364958ms)
+ℹ tests 20
 ℹ suites 0
-ℹ pass 19
+ℹ pass 20
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 1341.20675
+ℹ duration_ms 3796.88625
 ....
 ----------------------------------------------------------------------
-Ran 4 tests in 0.023s
+Ran 4 tests in 0.048s
 
 OK
 ........
 ----------------------------------------------------------------------
-Ran 8 tests in 0.068s
+Ran 8 tests in 0.153s
 
 OK
 
-Gezielter Anschluss-Test: elf Winkel mit je drei Strahlen (33 Proben) für einen geschlossenen Anschluss.
-Negativkontrolle: alte offene Fuge vorübergehend wiederhergestellt; Test schlug gezielt fehl; Quelle vor Renderprüfung vollständig wiederhergestellt.
+Stand 74: zwölf Rundungsproben an Hinterkopf und Nackenrahmen; Negativkontrolle mit 16 Segmenten schlägt erwartungsgemäß fehl.

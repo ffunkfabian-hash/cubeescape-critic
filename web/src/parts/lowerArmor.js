@@ -13,15 +13,9 @@ function ellipticCylinder(rx, rz, y0, y1, cz, seg = 96) {
   return g;
 }
 
-function planarFaces(geometry) {
-  const result = geometry.toNonIndexed();
-  result.computeVertexNormals();
-  return result;
-}
-
-// Broad planar facets on the outer housing; keep the neck interface round.
+// Smooth elliptic housing; jaw plates and pocket outlines retain their angular edges.
 function armorCylinder(rx, rz, y0, y1, cz) {
-  return planarFaces(ellipticCylinder(rx, rz, y0, y1, cz, D.lowerArmorEdges.radialSegments));
+  return ellipticCylinder(rx, rz, y0, y1, cz, D.lowerArmorEdges.radialSegments);
 }
 
 // Cut pockets with a nominal radial inset into the curved collar itself. The floor follows
@@ -105,8 +99,8 @@ export function buildLowerArmor(M) {
   // upper edge at the back centre; built level, then tilted so it drops towards the front.
   const k = D.collar;
   const edge = D.lowerArmorEdges;
-  const ringTop = planarFaces(new THREE.CylinderGeometry(edge.topScale, 1, edge.chamferHeight, edge.radialSegments)
-    .scale(k.rx, 1, k.rz).translate(0, k.y1 - edge.chamferHeight / 2, k.cz));
+  const ringTop = new THREE.CylinderGeometry(edge.topScale, 1, edge.chamferHeight, edge.radialSegments)
+    .scale(k.rx, 1, k.rz).translate(0, k.y1 - edge.chamferHeight / 2, k.cz);
   let ring = csg(
     brush(armorCylinder(k.rx, k.rz, k.y0, k.y1 - edge.chamferHeight + 0.001, k.cz)),
     [ADDITION, brush(ringTop)],

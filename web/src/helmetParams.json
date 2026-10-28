@@ -536,7 +536,7 @@
     "endY": 0.38
   },
   "lowerArmorEdges": {
-    "radialSegments": 16,
+    "radialSegments": 96,
     "chamferHeight": 0.035,
     "topScale": 0.975,
     "cornerScale": 0.55

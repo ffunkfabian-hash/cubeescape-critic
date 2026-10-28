@@ -154,19 +154,22 @@ Der Referenzlauf erzeugt Textur- und Geometrieansichten sowie `comparison.json` 
 Die globale Aufstellung ist zur Sichtprüfung angenähert; aus diesen Bildern wird **kein Meshy-IoU** berechnet.
 Die Bildausschnitte des Kontaktbogens sind Darstellungszuschnitte, keine Änderung der Helm-Messung.
 
-## Aktueller Lieferstand 73
+## Aktueller Lieferstand 74
 
 Nach Nutzerfeedback ist die Haube auch um den Kopfbügel quer und längs gewölbt (`crownDome`).
 `crownTransition.blendHeight` führt den Haubenrand weich zur Augenmaske. `rimOverlap` und `rimCover` (je 0,001
 Modelleinheiten) schließen den sichtbaren Abstand und decken die helle Schnittkante ab. `clearance` ist dadurch ersetzt.
-87/89 Meshgeometrien einschließlich UVs und Transformationen sind gegenüber Stand 71 unverändert; angepasst sind nur
-Haube und ihre Schrauben. Der Anschluss wird mit 33 Strahlen geprüft; die alte offene Fuge lässt den Test gezielt fehlschlagen.
+77/89 Meshgeometrien einschließlich UVs und Transformationen sind gegenüber Stand 73 unverändert; angepasst sind
+das helle Heckgehäuse, Nackenrahmen und ihre abhängigen Einsätze/Befestigungen. Haube, Augen, Kiefer und verdeckter
+Maskenanschluss bleiben erhalten. Der Anschluss wird weiterhin mit 33 Strahlen geprüft.
 `crownArmor` behält die Graphitgrundfarbe der Maske und den gedämpften Glanz. `crownMaps(seed=73)` erzeugt sichtbare feine
 Lackkörnung als Farb-, Normalen- und Rauheitskarte. Die übrigen Materialien bleiben erhalten; die Haubennormalenkarte wird im glTF-Kernkanal exportiert.
 Die Haubenversuche 62/63 sind verworfen. Aktuelle Quellen und alle 24 Ausgaben sind über SHA256 dokumentiert.
 
-`lowerArmorEdges` parametrisiert 16 ebene Mantelflächen, die schmalere obere Fase und gerade Eckabschrägungen der Taschen.
-Der Halsring bleibt rund. Die Taschenböden folgen derselben facettierten Form wie ihre Träger und bleiben separate Teile.
+`lowerArmorEdges.radialSegments = 96` erzeugt die wieder runde, glatt schattierte Gehäuse- und Nackenwand.
+Die obere Fase und geraden Eckabschrägungen der Taschen bleiben erhalten. Zwölf Strahlproben prüfen die elliptische
+Rundung; die vorherige 16-Flächen-Variante fällt dabei gezielt durch. Die Taschenböden folgen derselben Rundung
+wie ihre Träger und bleiben separate Teile. Der Halsring und die kantigen Kieferplatten sind unverändert.
 Modellteile werden in `parts/` erzeugt; 89 Meshes sind im GLB enthalten. Die optionale Körperstudie bleibt ein Entwurf.
 
 [Stilbeschreibung und feste Vorgaben](../docs/HELM_STIL.md) · [Lieferdateien](../assets/helmet/README.md).

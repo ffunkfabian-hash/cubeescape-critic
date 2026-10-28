@@ -2,8 +2,8 @@
 
 ## Verbindlicher Stand
 
-Aktueller Lieferstand: **Prüflauf 73**. Nach Nutzerfeedback ist der Scheitel nun quer und längs gewölbt;
-der Kopfbügel folgt der Haube. Ihr Rand läuft weich zur Augenmaske aus. Der helle Rahmen bleibt moderat kantiger.
+Aktueller Lieferstand: **Prüflauf 74**. Nach Nutzerfeedback ist der Scheitel nun quer und längs gewölbt;
+der Kopfbügel folgt der Haube. Ihr Rand läuft weich zur Augenmaske aus. Das helle Hinterkopfgehäuse und der Nackenrahmen sind wieder rund; die Kieferplatten bleiben kantig.
 Die abgeflachten, eckigen Haubenversuche 62/63 wurden vom Nutzer ausdrücklich verworfen.
 
 ![Aktueller Helm mit runder Haube](bilder/helm_aktuell.jpg)
@@ -21,8 +21,8 @@ Die Zuordnung ist im [Verlauf](HELM_VERLAUF.md) dokumentiert. „Vorher“ bezei
 - **Gesicht H02–H06:** dunkle, kantige Panzerplatten mit schmalen Fugen, zurückgesetztem trapezförmigem Mitteleinsatz
   und klaren Wangenflächen. Die akzeptierten cyanfarbenen Augen bleiben in Form, Lage und Leuchtwirkung erhalten.
 - **Heller Rahmen H07–H11:** kräftige, asymmetrisch gegliederte technische Konstruktion. Die gewählte Kieferkontur aus
-  Stand 46 bleibt erhalten. Seiten-/Nackenrahmen besitzen 16 moderate Mantelfacetten, eine schmale obere Fase und
-  gerade abgeschrägte Vertiefungen. Keine erneut verschmälerten Kieferplatten wie in den verworfenen Versuchen 51–58.
+  Stand 46 bleibt erhalten. Seiten-/Hinterkopfgehäuse und Nackenrahmen sind glatt elliptisch gerundet. Die schmale obere Fase und
+  gerade abgeschrägten Vertiefungen bleiben; ihre separaten Böden folgen der runden Wand. Keine erneut verschmälerten Kieferplatten wie in den verworfenen Versuchen 51–58.
 - **Anbauten H12–H18:** olivfarbenes Funkgehäuse auf Seite A, helles Ohrmodul auf Seite B, schwarzes Spiralkabel,
   sichtbare Halter, Antenne und rückwärtiges Technikmodul. Die Asymmetrie gehört zum Design.
 - **Halsanschluss H19:** rund und zurückgesetzt. Der schwarze Hals ist ein Präsentationsträger; der Schal aus dem Video
@@ -67,4 +67,4 @@ Einzelne Meshes sind noch keine Zusicherung fertiger Druckwandstärken, Montagep
 Standnummern beschriften. Messwerte ergänzen die Sichtprüfung; Silhouetten-IoU ist kein Prozentwert für die Gesamtähnlichkeit.
 Die optionale Körperstudie (`?body=1`) ist ein separater Proportionsentwurf und nicht als fertige Körperform freigegeben.
 
-[Reproduktionsanleitung](../web/README.md#aktueller-lieferstand-73) · [GLB und Prüfbelege](../assets/helmet/README.md)
+[Reproduktionsanleitung](../web/README.md#aktueller-lieferstand-74) · [GLB und Prüfbelege](../assets/helmet/README.md)

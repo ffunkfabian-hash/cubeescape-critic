@@ -2,6 +2,12 @@
 
 ## 0.3.0 „Sidework“ – 2026-10-28 (offener Entwurf)
 
+- Stand 74: helles Hinterkopfgehäuse und Nackenrahmen wieder glatt gerundet, einschließlich separater Taschenböden.
+- Haube, verdeckter Maskenanschluss, Augen und Kiefer erhalten; 77/89 Geometrien sowie alle Materialien unverändert.
+- 32 Tests und Build bestehen; zwölf Rundungsproben, Negativkontrolle und vier Videoansichten geprüft.
+
+### Fugenstand 73
+
 - Stand 73: helle Fugenlinie zwischen Haube und Augenmaske durch verdeckten Überlappungsrand deutlich reduziert.
 - Teile bleiben getrennt; 87/89 Geometrien sowie alle Materialien und Texturen unverändert gegenüber 71.
 - 31 Tests und Build bestehen; 33 Anschlussproben und Negativkontrolle prüfen den geschlossenen Rand.

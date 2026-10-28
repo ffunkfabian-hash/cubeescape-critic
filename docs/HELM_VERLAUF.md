@@ -345,3 +345,17 @@ Der frühere Test auf eine offene Teilefuge ist entsprechend dem geänderten Nut
 geschlossenen Anschluss ersetzt. Eine Negativkontrolle mit der alten offenen Fuge schlägt gezielt fehl.
 31 Tests, Build und Projektprüfung bestehen. [Zwischenstand 72](belege/helm/72.jpg) · [Stand 73](belege/helm/73.jpg) ·
 [Vergleich 71/73](bilder/helm_fuge_71_73.jpg) · [Nahvergleich](bilder/helm_fuge_71_73_detail.jpg).
+
+
+## Runde 19 – Hinterkopf wieder runder 74 (28.10.2026)
+
+Auf Wunsch nach einem runderen Hinterkopf ist das helle Gehäuse H09 und der Nackenrahmen H10 wieder glatt
+elliptisch. 96 Segmente ersetzen die 16 breiten Mantelfacetten; obere Fase und kantige Taschenumrisse bleiben.
+Separate Taschenböden und Befestigungen folgen der neuen Oberfläche. Haube, verdeckte Stirnfuge, Augen,
+Kieferplatten, Funkmodul und Kabel sind geometrisch unverändert. 77/89 Meshes inklusive UVs/Transformationen sowie
+alle Materialien und Texturbilder sind unverändert gegenüber 73.
+
+32 Tests, Build, Projektprüfung und vier feste Ansichten bestehen. Zwölf Strahlproben prüfen die Rundung;
+die alte 16-Flächen-Geometrie schlägt als Negativkontrolle fehl. Mittlere Silhouetten-IoU: 91,76 %.
+[Stand 74](belege/helm/74.jpg) · [Vier-Ansichten-Vergleich 73/74](bilder/helm_hinterkopf_73_74.jpg) ·
+[Heckvergleich](bilder/helm_hinterkopf_73_74_detail.jpg). Noch nicht vom Nutzer abgenommen.
