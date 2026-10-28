@@ -16,9 +16,9 @@ export function buildRightComms(M) {
   const e = D.earR;
 
   // Radio module: rounded box on the right ear, thickness towards +X (into the helmet).
-  const depth = 0.06, bevel = 0.015;
-  const radioGeo = new THREE.ExtrudeGeometry(roundedRect(e.w, e.h, 0.075), {
-    depth, bevelEnabled: true, bevelThickness: bevel, bevelSize: bevel, bevelSegments: 4, curveSegments: 10,
+  const depth = 0.05, bevel = 0.025;
+  const radioGeo = new THREE.ExtrudeGeometry(roundedRect(e.w - 2 * bevel, e.h - 2 * bevel, 0.07), {
+    depth, bevelEnabled: true, bevelThickness: bevel, bevelSize: bevel, bevelSegments: 6, curveSegments: 12,
   });
   radioGeo.rotateY(-Math.PI / 2); // (u, v, w) -> (-w, v, u)
   radioGeo.rotateY(Math.PI); // flip so the extrusion grows towards +X: (u, v, w) -> (w, v, -u)
@@ -109,30 +109,31 @@ export function buildRightComms(M) {
   backBox.add(plate, box, logo, ...tabs, screws(M, corner, 'Screws_BackBox'));
   g.add(backBox);
 
-  // Ribbed hose: core tube plus tightly spaced torus rings along a Catmull-Rom curve, two light sleeves.
+  // Coiled cord: a helix wound around a Catmull-Rom path (Frenet frames), with three light sleeves.
   const T = D.tube;
-  const [curve, coreGeo] = tube(T.points, T.radius);
+  const path = new THREE.CatmullRomCurve3(T.points.map((p) => new THREE.Vector3(...p)));
+  const len = path.getLength();
+  const turns = Math.round(len / T.pitch);
+  const steps = turns * 16;
+  const frames = path.computeFrenetFrames(steps, false);
+  const helix = [];
+  for (let i = 0; i <= steps; i++) {
+    const a = (i / 16) * Math.PI * 2;
+    helix.push(path.getPointAt(i / steps)
+      .addScaledVector(frames.normals[i], Math.cos(a) * T.coilRadius)
+      .addScaledVector(frames.binormals[i], Math.sin(a) * T.coilRadius));
+  }
   const hose = new THREE.Group();
   hose.name = 'Hose';
-  hose.add(new THREE.Mesh(coreGeo, M.blackRubber));
-  const ringGeo = new THREE.TorusGeometry(T.ribRadius, T.ribRadius * 0.42, 8, 18);
-  const count = Math.floor(curve.getLength() / (T.ribRadius * 0.75));
-  const rings = new THREE.InstancedMesh(ringGeo, M.blackRubber, count);
-  rings.name = 'Hose_Rings';
-  const o = new THREE.Object3D();
+  const coil = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(helix), steps * 2, T.wireRadius, 8), M.blackRubber);
+  coil.name = 'Hose_Coil';
+  hose.add(coil);
   const Z = new THREE.Vector3(0, 0, 1);
-  for (let i = 0; i < count; i++) {
-    const t = (i + 0.5) / count;
-    o.position.copy(curve.getPointAt(t));
-    o.quaternion.setFromUnitVectors(Z, curve.getTangentAt(t));
-    o.updateMatrix();
-    rings.setMatrixAt(i, o.matrix);
-  }
-  hose.add(rings);
   for (const t of [0.04, 0.42, 0.62]) {
-    const sleeve = new THREE.Mesh(new THREE.CylinderGeometry(T.ribRadius * 1.35, T.ribRadius * 1.35, 0.045, 20).rotateX(Math.PI / 2), M.whiteArmor);
-    sleeve.position.copy(curve.getPointAt(t));
-    sleeve.quaternion.setFromUnitVectors(Z, curve.getTangentAt(t));
+    const r = T.coilRadius + T.wireRadius + 0.004;
+    const sleeve = new THREE.Mesh(new THREE.CylinderGeometry(r, r, 0.05, 20).rotateX(Math.PI / 2), M.whiteArmor);
+    sleeve.position.copy(path.getPointAt(t));
+    sleeve.quaternion.setFromUnitVectors(Z, path.getTangentAt(t));
     hose.add(sleeve);
   }
   g.add(hose);

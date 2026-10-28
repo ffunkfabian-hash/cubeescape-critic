@@ -1,10 +1,11 @@
 // LeftEar_Cap (+X): contoured white ear cap with a textured insert, the head band over the top and the dark bracket.
 import * as THREE from 'three';
 import { D } from '../params.js';
-import { brush, csg, shape, superEllipsoid, hitSurface, orient, SUBTRACTION, INTERSECTION } from '../geo.js';
+import { brush, csg, shape, hitSurface, orient, SUBTRACTION, INTERSECTION } from '../geo.js';
+import { headVolume } from './headVolume.js';
 
 // Shield outline in (z, y) relative to the cap centre.
-const CAP = [[0.085, 0.135], [-0.07, 0.135], [-0.11, 0.07], [-0.1, -0.06], [-0.03, -0.135], [0.06, -0.12], [0.1, 0.0]];
+const CAP = [[0.085, 0.135], [-0.07, 0.135], [-0.11, 0.07], [-0.1, -0.06], [-0.03, -0.135], [0.06, -0.12], [0.1, 0.0]].map(([z, y]) => [z * 1.3, y * 1.3]);
 
 function sidePlate(pts, depth, bevel, outerX, cz, cy) {
   const geo = new THREE.ExtrudeGeometry(shape(pts), {
@@ -17,9 +18,9 @@ function sidePlate(pts, depth, bevel, outerX, cz, cy) {
 
 // Strip of a shell offset from the head surface, limited to a slab around z = zc.
 function bandShell(dIn, dOut, zc, half, yMin) {
-  const { r, c, pH, pV, tilt } = D.head;
-  const outer = brush(superEllipsoid(r[0] + dOut, r[1] + dOut, r[2] + dOut, pH, pV), { pos: c, rot: [tilt, 0, 0] });
-  const inner = brush(superEllipsoid(r[0] + dIn, r[1] + dIn, r[2] + dIn, pH, pV), { pos: c, rot: [tilt, 0, 0] });
+  // Offsets as uniform scale of the head volume (radius ~0.45).
+  const outer = headVolume(1 + dOut / 0.45);
+  const inner = headVolume(1 + dIn / 0.45);
   const slab = brush(new THREE.BoxGeometry(2, 1, half * 2), { pos: [0, yMin + 0.5, zc] });
   return csg(outer, [SUBTRACTION, inner], [INTERSECTION, slab]).geometry;
 }
@@ -29,12 +30,12 @@ export function buildLeftEar(M) {
   g.name = 'LeftEar_Cap';
   const e = D.earL;
 
-  const cap = new THREE.Mesh(sidePlate(CAP, 0.08, 0.012, e.outerX, e.cz, e.cy), M.whiteArmor);
+  const cap = new THREE.Mesh(sidePlate(CAP, 0.045, 0.01, e.outerX, e.cz, e.cy), M.whiteArmor);
   cap.name = 'EarCap';
   const insertPts = CAP.map(([z, y]) => [z * 0.74 - 0.008, y * 0.74]);
   const insert = new THREE.Mesh(sidePlate(insertPts, 0.01, 0.003, e.outerX + 0.008, e.cz, e.cy), M.whiteTextured);
   insert.name = 'EarCap_Insert';
-  const fold = new THREE.Mesh(new THREE.BoxGeometry(0.003, 0.003, 0.17), M.darkMetal);
+  const fold = new THREE.Mesh(new THREE.BoxGeometry(0.003, 0.003, 0.22), M.darkMetal);
   fold.position.set(e.outerX + 0.009, e.cy, e.cz);
   fold.rotation.x = -0.75;
   g.add(cap, insert, fold);

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Silhouette IoU per view and a comparison sheet.
+"""Silhouette IoU per view (above the scarf line) and a comparison sheet.
 
 Reference mask: background modelled as a smooth quadratic luminance surface fitted on the frame border (top rows and
 side columns), object = pixels deviating from it, then everything not connected to the border background.
 Render mask: renders/mask_<view>.png (white silhouette on black from verify_renders.mjs).
-Writes renders/iou.json, renders/compare.png and renders/silhouette_<view>.png (green = both, red = only reference,
-blue = only render). Usage: python3 tools/iou.py [web-dir]
+Writes renders/iou.json, renders/compare.png and renders/silhouette_<view>.png (reference in pale grey, amber = only
+reference, blue = only render). Usage: python3 tools/iou.py [web-dir]
 """
 import json
 import os
@@ -16,6 +16,8 @@ import numpy as np
 from PIL import Image
 
 VIEWS = ['front', 'left', 'back', 'right']
+# The model has no scarf: compare only the rows above the scarf's upper edge in each reference frame (720 px high).
+CUT = {'front': 470, 'left': 450, 'back': 440, 'right': 450}
 
 
 def luminance(img):
@@ -69,6 +71,20 @@ def render_mask(path):
     return lum > 128
 
 
+AMBER = np.array((232, 150, 40), np.float32)  # only in the reference
+SKY = np.array((50, 140, 235), np.float32)  # only in the render
+
+
+def silhouette_view(ref_path, a, b):
+    """Reference as a pale grey image; deviations as amber (reference only) and blue (render only) fringes."""
+    lum, _ = luminance(Image.open(ref_path))
+    pale = (150 + lum * 0.4)[..., None].repeat(3, 2)
+    out = pale.copy()
+    out[a & ~b] = AMBER
+    out[~a & b] = SKY
+    return out.clip(0, 255).astype(np.uint8)
+
+
 def main():
     root = sys.argv[1] if len(sys.argv) > 1 else os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     refs, renders = os.path.join(root, 'refs'), os.path.join(root, 'renders')
@@ -80,12 +96,11 @@ def main():
         a, b = reference_mask(ref_p), render_mask(mask_p)
         if a.shape != b.shape:
             b = np.asarray(Image.fromarray(b).resize(a.shape[::-1]))
+        a[CUT[v]:] = False
+        b[CUT[v]:] = False
         inter, union = (a & b).sum(), (a | b).sum()
         result[v] = round(float(inter / union), 4) if union else 0.0
-        sil = np.zeros(a.shape + (3,), np.uint8)
-        sil[a & b] = (60, 170, 90)
-        sil[a & ~b] = (220, 60, 60)
-        sil[~a & b] = (60, 110, 230)
+        sil = silhouette_view(ref_p, a, b)
         Image.fromarray(sil).save(os.path.join(renders, f'silhouette_{v}.png'))
         tiles = [Image.open(ref_p).convert('RGB'), Image.open(os.path.join(renders, f'render_{v}.png')).convert('RGB'),
                  Image.fromarray(sil)]
