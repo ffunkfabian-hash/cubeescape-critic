@@ -13,12 +13,24 @@ export function brush(geo, { pos, rot, scale } = {}) {
   const g = geo.index ? geo.toNonIndexed() : geo.clone();
   if (g.getAttribute('uv')) g.deleteAttribute('uv');
   if (!g.getAttribute('normal')) g.computeVertexNormals();
+  // Bake the transform: evaluate() returns its result in the local frame of the first brush.
+  const o = new THREE.Object3D();
+  if (pos) o.position.set(...pos);
+  if (rot) o.rotation.set(...rot);
+  if (scale) o.scale.set(...(Array.isArray(scale) ? scale : [scale, scale, scale]));
+  o.updateMatrix();
+  g.applyMatrix4(o.matrix);
   const b = new Brush(g);
-  if (pos) b.position.set(...pos);
-  if (rot) b.rotation.set(...rot);
-  if (scale) b.scale.set(...(Array.isArray(scale) ? scale : [scale, scale, scale]));
   b.updateMatrixWorld();
   return b;
+}
+
+// Half-space { p : dot(p - point, normal) <= 0 } as a large box brush (for planar facet cuts with INTERSECTION).
+export function halfSpace(point, normal, size = 6) {
+  const n = new THREE.Vector3(...normal).normalize();
+  const q = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 0, 1), n);
+  const c = new THREE.Vector3(...point).addScaledVector(n, -size / 2);
+  return brush(new THREE.BoxGeometry(size, size, size), { pos: c.toArray(), rot: new THREE.Euler().setFromQuaternion(q).toArray().slice(0, 3) });
 }
 
 // Apply a chain of operations: csg(a, [SUBTRACTION, b], [ADDITION, c], ...).

@@ -59,7 +59,11 @@ const fill = new THREE.DirectionalLight(0xdfe6ff, 0.35);
 fill.position.set(3, 1, 2);
 const rim = new THREE.DirectionalLight(0xffffff, 0.7);
 rim.position.set(0.5, 2.5, -3.5);
-scene.add(key, fill, rim, new THREE.HemisphereLight(0xffffff, 0x444444, 0.25));
+// The video is a turntable: the helmet turns, the studio stays with the viewer. Key, fill, rim and the environment
+// therefore turn with the camera azimuth (lightRig, environmentRotation), so every view is lit like the video.
+const lightRig = new THREE.Group();
+lightRig.add(key, fill, rim, key.target);
+scene.add(lightRig, new THREE.HemisphereLight(0xffffff, 0x444444, 0.25));
 
 // Camera views matched to the extracted video frames (refs/ref_*.png: 0 s, 1.5 s, 3 s, 4.5 s).
 const camera = new THREE.PerspectiveCamera(30, 1, 0.05, 50);
@@ -89,6 +93,8 @@ function setCameraView(name) {
   setTurntable(false);
   current = name;
   const az = THREE.MathUtils.degToRad(v.az), el = THREE.MathUtils.degToRad(v.el);
+  lightRig.rotation.y = az;
+  scene.environmentRotation.set(0, az, 0);
   camera.position.set(Math.sin(az) * Math.cos(el), Math.sin(el), Math.cos(az) * Math.cos(el)).multiplyScalar(v.dist).add(target);
   controls.target.copy(target);
   camera.lookAt(target);
@@ -102,6 +108,8 @@ function setTurntable(on) {
   if (!on && model) model.rotation.y = 0;
   if (on) {
     current = 'front';
+    lightRig.rotation.y = 0;
+    scene.environmentRotation.set(0, 0, 0);
     const v = VIEWS.front, el = THREE.MathUtils.degToRad(v.el);
     camera.position.set(0, Math.sin(el), Math.cos(el)).multiplyScalar(v.dist).add(target);
     controls.target.copy(target);
@@ -146,7 +154,7 @@ const gtao = new GTAOPass(scene, camera, 1, 1);
 gtao.updateGtaoMaterial({ radius: 0.12, distanceExponent: 1.5, thickness: 0.6, scale: 1.0 });
 gtao.blendIntensity = 0.9;
 composer.addPass(gtao);
-const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.15, 0.0, 1.0);
+const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.08, 0.0, 0.9);
 composer.addPass(bloom);
 composer.addPass(new OutputPass());
 
@@ -200,11 +208,7 @@ function buildGui() {
   gui.close();
   const re = () => rebuild();
   const f1 = gui.addFolder('Proportionen');
-  f1.add(D.head.r, '0', 0.3, 0.45, 0.005).name('Kuppel Breite').onFinishChange(re);
-  f1.add(D.head.r, '1', 0.4, 0.6, 0.005).name('Kuppel Höhe').onFinishChange(re);
-  f1.add(D.head.r, '2', 0.38, 0.55, 0.005).name('Kuppel Tiefe').onFinishChange(re);
-  f1.add(D.head, 'pH', 0.4, 1, 0.01).name('Kantigkeit horiz.').onFinishChange(re);
-  f1.add(D.head, 'pV', 0.4, 1, 0.01).name('Kantigkeit vert.').onFinishChange(re);
+  f1.add(D.head, 'tilt', -0.3, 0.3, 0.01).name('Kuppel Neigung').onFinishChange(re);
   f1.add(D, 'capEdgeY', 0.2, 0.42, 0.005).name('Kappenkante Y').onFinishChange(re);
   f1.add(D.core, 'rx', 0.28, 0.4, 0.005).name('Kern Breite').onFinishChange(re);
   f1.add(D.core, 'rz', 0.33, 0.48, 0.005).name('Kern Tiefe').onFinishChange(re);
@@ -215,17 +219,17 @@ function buildGui() {
   f2.add(D.visor, 'height', 0.03, 0.12, 0.002).name('Höhe').onFinishChange(re);
   f2.add(D.visor, 'x', 0.1, 0.25, 0.005).name('Abstand X').onFinishChange(re);
   f2.add(D.visor, 'y', -0.05, 0.2, 0.005).name('Höhe Y').onFinishChange(re);
+  f2.add(D.visor, 'socketDepth', 0.0, 0.08, 0.002).name('Tiefe Augenhöhle').onFinishChange(re);
+  f2.add(D.visor, 'slitDepth', 0.005, 0.06, 0.002).name('Tiefe Schlitz').onFinishChange(re);
   f2.add(M.visorGlow, 'emissiveIntensity', 0, 10, 0.1).name('Leuchtstärke');
-  const f3 = gui.addFolder('Schlauch');
-  f3.add(D.tube, 'radius', 0.006, 0.03, 0.001).name('Kern-Radius').onFinishChange(re);
-  f3.add(D.tube, 'ribRadius', 0.01, 0.035, 0.001).name('Rippen-Radius').onFinishChange(re);
+  const f3 = gui.addFolder('Spiralkabel');
+  f3.add(D.tube, 'coilRadius', 0.006, 0.03, 0.001).name('Wendel-Radius').onFinishChange(re);
+  f3.add(D.tube, 'wireRadius', 0.003, 0.012, 0.0005).name('Draht-Radius').onFinishChange(re);
+  f3.add(D.tube, 'pitch', 0.008, 0.03, 0.001).name('Steigung').onFinishChange(re);
   D.tube.points.forEach((p, i) => {
     const f = f3.addFolder(`Punkt ${i + 1}`).close();
     ['x', 'y', 'z'].forEach((axis, k) => f.add(p, String(k), -0.7, 0.7, 0.005).name(axis).onFinishChange(re));
   });
-  const f4 = gui.addFolder('Schal');
-  f4.add(D.scarf, 'foldDepth', 0, 0.8, 0.01).name('Faltentiefe').onFinishChange(re);
-  f4.add(D.scarf, 'noiseScale', 1, 10, 0.1).name('Faltenfrequenz').onFinishChange(re);
   const f5 = gui.addFolder('Look');
   f5.add(bloom, 'strength', 0, 2, 0.01).name('Bloom');
   f5.add(gtao, 'blendIntensity', 0, 1, 0.01).name('AO');

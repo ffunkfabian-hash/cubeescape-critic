@@ -2,7 +2,7 @@
 // corner screws, and the ribbed black hose from the radio's lower front edge into the box.
 import * as THREE from 'three';
 import { D } from '../params.js';
-import { brush, csg, roundedRect, SUBTRACTION } from '../geo.js';
+import { brush, csg, prism, roundedRect, SUBTRACTION } from '../geo.js';
 import { screws } from './common.js';
 
 function tube(points, r) {
@@ -16,9 +16,9 @@ export function buildRightComms(M) {
   const e = D.earR;
 
   // Radio module: rounded box on the right ear, thickness towards +X (into the helmet).
-  const depth = 0.06, bevel = 0.015;
-  const radioGeo = new THREE.ExtrudeGeometry(roundedRect(e.w, e.h, 0.075), {
-    depth, bevelEnabled: true, bevelThickness: bevel, bevelSize: bevel, bevelSegments: 4, curveSegments: 10,
+  const depth = 0.05, bevel = 0.025;
+  const radioGeo = new THREE.ExtrudeGeometry(roundedRect(e.w - 2 * bevel, e.h - 2 * bevel, 0.07), {
+    depth, bevelEnabled: true, bevelThickness: bevel, bevelSize: bevel, bevelSegments: 6, curveSegments: 12,
   });
   radioGeo.rotateY(-Math.PI / 2); // (u, v, w) -> (-w, v, u)
   radioGeo.rotateY(Math.PI); // flip so the extrusion grows towards +X: (u, v, w) -> (w, v, -u)
@@ -72,9 +72,10 @@ export function buildRightComms(M) {
     g.add(new THREE.Mesh(geo, M.darkMetal));
   }
 
-  // Rear tech box: mounting plate, box with recessed centre and logo, four corner screws, side tabs.
+  // Rear tech box: mounting plate, box with a recessed polygonal field and logo, four corner screws, cylindrical side
+  // connectors (the coiled cord leaves through the one on the cord side).
   const bb = D.backBox, zBack = -(D.core.rz - D.core.cz) + 0.035;
-  const plateGeo = new THREE.ExtrudeGeometry(roundedRect(bb.w + 0.06, bb.h + 0.06, 0.02), { depth: 0.09, bevelEnabled: false });
+  const plateGeo = new THREE.ExtrudeGeometry(roundedRect(bb.w + 0.03, bb.h + 0.03, 0.02), { depth: 0.09, bevelEnabled: false });
   plateGeo.rotateY(Math.PI); // faces -Z, extrusion towards -Z
   plateGeo.translate(0, bb.cy, zBack);
   const plate = new THREE.Mesh(plateGeo, M.oliveTech);
@@ -84,7 +85,9 @@ export function buildRightComms(M) {
   boxGeo.rotateY(Math.PI);
   boxGeo.translate(0, bb.cy, boxFront);
   const face0 = boxFront - 0.043;
-  const recess = brush(new THREE.BoxGeometry(bb.w * 0.62, bb.h * 0.56, 0.04), { pos: [0, bb.cy, face0 - 0.02 + 0.012] });
+  const rw = bb.w * 0.31, rh = bb.h * 0.28, ch = 0.022;
+  const field = [[-rw + ch, rh], [rw - ch, rh], [rw, rh - ch], [rw, -rh + ch], [rw - ch, -rh], [-rw + ch, -rh], [-rw, -rh + ch], [-rw, rh - ch]];
+  const recess = brush(prism(field.map(([x, y]) => [x, y + bb.cy]), 'xy', 0.04), { pos: [0, 0, face0 - 0.02 + 0.012] });
   const box = new THREE.Mesh(csg(brush(boxGeo), [SUBTRACTION, recess]).geometry, M.oliveTech);
   box.name = 'BackBox';
   const logo = new THREE.Group();
@@ -96,8 +99,9 @@ export function buildRightComms(M) {
     logo.add(bar);
   }
   const tabs = [-1, 1].map((s) => {
-    const t = new THREE.Mesh(new THREE.BoxGeometry(0.035, 0.07, 0.03), M.oliveTech);
-    t.position.set(s * (bb.w / 2 + 0.03), bb.cy - 0.02, boxFront - 0.012);
+    const t = new THREE.Mesh(new THREE.CylinderGeometry(0.017, 0.017, 0.045, 20).rotateZ(Math.PI / 2), M.darkMetal);
+    t.name = 'BackBox_Connector';
+    t.position.set(s * (bb.w / 2 + 0.022), bb.cy - 0.03, boxFront - 0.02);
     return t;
   });
   const corner = [];
@@ -109,30 +113,40 @@ export function buildRightComms(M) {
   backBox.add(plate, box, logo, ...tabs, screws(M, corner, 'Screws_BackBox'));
   g.add(backBox);
 
-  // Ribbed hose: core tube plus tightly spaced torus rings along a Catmull-Rom curve, two light sleeves.
+  // Coiled cord: a helix wound around a Catmull-Rom path (Frenet frames), with three light clamps. It leaves the back box
+  // sideways, loops out and down, runs along the lower side frame and rises to the radio module.
   const T = D.tube;
-  const [curve, coreGeo] = tube(T.points, T.radius);
+  const path = new THREE.CatmullRomCurve3(T.points.map((p) => new THREE.Vector3(...p)));
+  const len = path.getLength();
+  const turns = Math.round(len / T.pitch);
+  const steps = turns * 16;
+  const frames = path.computeFrenetFrames(steps, false);
+  const helix = [];
+  for (let i = 0; i <= steps; i++) {
+    const a = (i / 16) * Math.PI * 2;
+    helix.push(path.getPointAt(i / steps)
+      .addScaledVector(frames.normals[i], Math.cos(a) * T.coilRadius)
+      .addScaledVector(frames.binormals[i], Math.sin(a) * T.coilRadius));
+  }
   const hose = new THREE.Group();
   hose.name = 'Hose';
-  hose.add(new THREE.Mesh(coreGeo, M.blackRubber));
-  const ringGeo = new THREE.TorusGeometry(T.ribRadius, T.ribRadius * 0.42, 8, 18);
-  const count = Math.floor(curve.getLength() / (T.ribRadius * 0.75));
-  const rings = new THREE.InstancedMesh(ringGeo, M.blackRubber, count);
-  rings.name = 'Hose_Rings';
-  const o = new THREE.Object3D();
+  const coil = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(helix), steps * 2, T.wireRadius, 8), M.blackRubber);
+  coil.name = 'Hose_Coil';
+  hose.add(coil);
   const Z = new THREE.Vector3(0, 0, 1);
-  for (let i = 0; i < count; i++) {
-    const t = (i + 0.5) / count;
-    o.position.copy(curve.getPointAt(t));
-    o.quaternion.setFromUnitVectors(Z, curve.getTangentAt(t));
-    o.updateMatrix();
-    rings.setMatrixAt(i, o.matrix);
+  // Connectors where the cord enters the back box and the radio module.
+  for (const t of [0, 1]) {
+    const plug = new THREE.Mesh(new THREE.CylinderGeometry(0.016, 0.016, 0.035, 16).rotateX(Math.PI / 2), M.darkMetal);
+    plug.name = 'Hose_Plug';
+    plug.position.copy(path.getPointAt(t));
+    plug.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), path.getTangentAt(t));
+    hose.add(plug);
   }
-  hose.add(rings);
-  for (const t of [0.04, 0.42, 0.62]) {
-    const sleeve = new THREE.Mesh(new THREE.CylinderGeometry(T.ribRadius * 1.35, T.ribRadius * 1.35, 0.045, 20).rotateX(Math.PI / 2), M.whiteArmor);
-    sleeve.position.copy(curve.getPointAt(t));
-    sleeve.quaternion.setFromUnitVectors(Z, curve.getTangentAt(t));
+  for (const t of [0.3, 0.55, 0.8]) {
+    const r = T.coilRadius + T.wireRadius + 0.004;
+    const sleeve = new THREE.Mesh(new THREE.CylinderGeometry(r, r, 0.05, 20).rotateX(Math.PI / 2), M.whiteArmor);
+    sleeve.position.copy(path.getPointAt(t));
+    sleeve.quaternion.setFromUnitVectors(Z, path.getTangentAt(t));
     hose.add(sleeve);
   }
   g.add(hose);

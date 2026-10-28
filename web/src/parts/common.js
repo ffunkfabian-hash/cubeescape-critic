@@ -18,7 +18,7 @@ export function screws(M, placements, name = 'Screws') {
   return mesh;
 }
 
-// Rounded vent grille in the local XY plane facing +Z: dark metal frame and a honeycomb-perforated plate
+// Rounded vent grille in the local XY plane facing +Z: light textured frame and a honeycomb-perforated plate
 // (canvas colour + bump map, UVs in model units from ExtrudeGeometry).
 export function grille(M, w, h, name = 'VentGrille') {
   const g = new THREE.Group();
@@ -26,7 +26,7 @@ export function grille(M, w, h, name = 'VentGrille') {
   const r = Math.min(w, h) / 2;
   const frame = new THREE.Mesh(
     new THREE.ExtrudeGeometry(roundedRect(w, h, r), { depth: 0.008, bevelEnabled: true, bevelThickness: 0.003, bevelSize: 0.003, bevelSegments: 2 }),
-    M.darkMetal,
+    M.whiteTextured,
   );
   frame.position.z = -0.006;
   const plate = new THREE.Mesh(
@@ -35,5 +35,20 @@ export function grille(M, w, h, name = 'VentGrille') {
   );
   plate.position.z = 0.003;
   g.add(frame, plate);
+  return g;
+}
+
+// Raised light-grey panel with leathery texture and a dark slot near one end (collar sides in the video).
+export function texturedPanel(M, w, h, name = 'TexturedPanel') {
+  const g = new THREE.Group();
+  g.name = name;
+  const plate = new THREE.Mesh(
+    new THREE.ExtrudeGeometry(roundedRect(w, h, 0.018), { depth: 0.008, bevelEnabled: true, bevelThickness: 0.004, bevelSize: 0.004, bevelSegments: 2 }),
+    M.whiteTextured,
+  );
+  plate.position.z = -0.006;
+  const slot = new THREE.Mesh(new THREE.BoxGeometry(0.012, h * 0.4, 0.006), M.darkMetal);
+  slot.position.set(-w * 0.32, 0, 0.006);
+  g.add(plate, slot);
   return g;
 }
