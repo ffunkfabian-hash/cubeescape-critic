@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.0.4 „Sheet Robot“ – 2026-10-28
+
+- Model Sheet des Roboters `reference/robot/sheet/model_sheet.svg` (sechs orthografische Ansichten).
+- `web/tools/robot/sheet.py`: Umrisse je Bauteil aus Front-, Seiten- und Draufsicht, Zuordnungskarte Sheet-Pixel →
+  Bauteil; `render_svg.mjs` rendert das SVG.
+- `web/robot_parts.html`: 23 Bauteile (Front ∩ Seite ∩ Superellipsoid), Zeichnung orthografisch aus den Ansichten
+  projiziert, in denen das Teil sichtbar ist, Toon-Konturen, Sheet-Overlay, GLB-Export.
+- `npm run verify:parts`: Umriss-IoU gegen das Sheet – Front 0,986, Rücken 0,969, rechts 0,963, links 0,921.
+- Bilder: `docs/bilder/roboter_teile_vergleich.jpg`, `roboter_teile_schraeg.jpg`.
+- Rückmeldung des Nutzers: Ergebnis entspricht nicht der Erwartung (Arme kastenförmig, Platten nur aufgemalt).
+
 ## 0.0.3 „Frame Robot“ – 2026-10-28
 
 - Zweite Vorlage `reference/robot/` (KI-Video eines Ganzkörper-Roboters, 241 Frames).
