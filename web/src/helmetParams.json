@@ -524,7 +524,10 @@
   },
   "crownTransition": {
     "slope": 0.42,
-    "anchorZ": 0.06
+    "anchorZ": 0.06,
+    "blendHeight": 0.07,
+    "clearance": 0.0005,
+    "sideBlendWidth": 0.05
   },
   "crownRounding": {
     "strength": 0.35,
@@ -536,5 +539,13 @@
     "chamferHeight": 0.035,
     "topScale": 0.975,
     "cornerScale": 0.55
+  },
+  "crownDome": {
+    "startY": 0.33,
+    "endY": 0.43,
+    "baseY": 0.17,
+    "radiusX": 0.38,
+    "radiusFront": 0.51,
+    "radiusBack": 0.48
   }
 }

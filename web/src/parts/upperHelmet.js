@@ -1,5 +1,6 @@
 // UpperHelmet_Dark: dark cap and faceted front plate, V-angled visor slits, recessed mouth with two vents.
 import * as THREE from 'three';
+import { mergeVertices } from 'three/addons/utils/BufferGeometryUtils.js';
 import { D } from '../params.js';
 import { brush, csg, prism, shape, halfSpace, hitSurface, orient, ADDITION, SUBTRACTION, INTERSECTION } from '../geo.js';
 import { boxProjectUV } from '../textures.js';
@@ -8,12 +9,53 @@ import { headVolume } from './headVolume.js';
 
 const DEG = Math.PI / 180;
 
+function blendCrownRim(geometry, volume, face) {
+  const slope = D.crownTransition.slope;
+  const centre = D.capEdgeY + slope * D.crownTransition.anchorZ;
+  const height = D.crownTransition.blendHeight;
+  const position = geometry.attributes.position;
+  const ray = new THREE.Raycaster(), cache = new Map();
+  for (let i = 0; i < position.count; i++) {
+    const x = position.getX(i), y = position.getY(i), z = position.getZ(i);
+    const t = y + slope * z - centre, radius = Math.hypot(x, z);
+    if (z <= D.maskBackZ || t < -1e-5 || t >= height || radius < 1e-6) continue;
+    const angle = Math.atan2(x, z), key = angle.toFixed(6);
+    if (!cache.has(key)) {
+      const direction = new THREE.Vector3(Math.sin(angle), -slope * Math.cos(angle), Math.cos(angle));
+      const origin = new THREE.Vector3(0, centre - 1e-5, 0).addScaledVector(direction, 2);
+      ray.set(origin, direction.clone().normalize().negate());
+      const inner = ray.intersectObject(volume)[0], outer = ray.intersectObject(face)[0];
+      cache.set(key, inner && outer ? {
+        base: Math.hypot(inner.point.x, inner.point.z),
+        delta: Math.hypot(outer.point.x, outer.point.z) - Math.hypot(inner.point.x, inner.point.z),
+        fade: THREE.MathUtils.smoothstep(inner.point.z, D.maskBackZ, D.maskBackZ + D.crownTransition.sideBlendWidth),
+      } : null);
+    }
+    const fit = cache.get(key);
+    if (!fit) continue;
+    const blend = fit.fade * (1 - THREE.MathUtils.smoothstep(t, 0, height));
+    const scale = 1 + fit.delta / fit.base * blend;
+    // Move along the sloping brow plane: the separate parts meet on the same rim.
+    position.setXYZ(i, x * scale, y - slope * z * (scale - 1) + D.crownTransition.clearance * blend, z * scale);
+  }
+  // Weld the outer surface, but keep the underside separate for normal generation.
+  // Otherwise the broad closing faces pull the narrow rim's normals downwards.
+  const normal = geometry.attributes.normal;
+  for (let i = 0; i < normal.count; i++) {
+    if (normal.getY(i) >= 0) normal.setXYZ(i, 0, 0, 0);
+  }
+  geometry.deleteAttribute('uv');
+  const result = mergeVertices(geometry, 1e-5);
+  result.computeVertexNormals();
+  return result;
+}
+
 export function buildUpperHelmet(M) {
   const g = new THREE.Group();
   g.name = 'UpperHelmet_Dark';
 
   // Outer volume from the drawn profiles. Dark = head ∩ (cap above the brim ∪ front-plate silhouette stack).
-  const H = headVolume(1);
+  const H = headVolume(1, true);
   const zb = D.maskBackZ;
   const front = brush(prism([[-0.6, 0.8], [-0.6, 0.16], [-0.38, 0.01], [-0.205, -0.35], [0.205, -0.35], [0.38, 0.01], [0.6, 0.16], [0.6, 0.8]], 'xy'));
   const side = brush(prism([[zb - 0.02, 0.8], [0.8, 0.8], [0.8, 0.05], [0.49, -0.335], [0.16, -0.335], [0.1, -0.29], [0.0, -0.2], [zb + 0.02, 0.05]], 'zy'));
@@ -46,13 +88,13 @@ export function buildUpperHelmet(M) {
   };
   let shell = csg(H2, [INTERSECTION, front], [INTERSECTION, side],
     [INTERSECTION, belowBrow], ...facets(0.011));
+  const probe = new THREE.Mesh(shell.geometry, M.darkArmor);
   const crown = csg(H, [INTERSECTION, capRegion]);
   // Keep the crown and face as distinct meshes for later individual editing/export.
-  const crownMesh = new THREE.Mesh(boxProjectUV(crown.geometry, 2.5), M.darkArmor);
+  const crownMesh = new THREE.Mesh(boxProjectUV(blendCrownRim(crown.geometry, H, probe), 2.5), M.darkArmor);
   crownMesh.name = 'Crown';
   g.add(crownMesh);
 
-  const probe = new THREE.Mesh(shell.geometry, M.darkArmor);
   const surfZ = (x, y) => hitSurface(probe, [x, y, 2], [0, 0, -1])?.point.z ?? 0.45;
 
   // Visor: a socket with sloped walls (square frustum, wide at the surface), then the slit; the light sits deep at the

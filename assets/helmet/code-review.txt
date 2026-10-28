@@ -29,3 +29,49 @@ ce_judge: 5 Dateien, 407 Diff-Zeilen, Richter sol (gpt-6.1-sol high), Grund: exp
 | 8 | web/tools/save_pass.py:17; web/verify_renders.mjs:143 | ok | Gezielte Nachprüfung bleibt beim Belegsicherungsbefund. Der vorgelegte Diff entspricht dem Arbeitsstand auf `5af89bd`; der Commit allein enthält diese Korrekturen noch nicht. | Freigabe auf den vorgelegten Arbeitsdiff beziehen. |
 
 Freigabe
+
+
+=== Fortsetzung: gewölbter Scheitel und Stirnübergang, Stand 68 ===
+ce_judge: 6 Dateien, 161 Diff-Zeilen, Richter sol (gpt-6.1-sol high), Grund: expliziter --model=sol; automatisch wäre luna (Routineänderung (149 Diff-Zeilen, kein erkannter Kern-/Vertragspfad)), Basis HEAD
+| Nr | Datei:Zeile | Schwere (blocker/hoch/niedrig/ok) | Befund | Vorschlag |
+|---|---|---|---|---|
+| 1 | web/src/helmetParams.json:525 | ok | Interne Geometrieparameter ergänzt; keine Änderung der genannten Austauschverträge erkennbar. | — |
+| 2 | web/src/parts/upperHelmet.js:95 | ok | Bestehende Teilenamen bleiben erhalten; keine ID-/Enum-Änderungen im Diff. | — |
+| 3 | web/src/parts/upperHelmet.js:17 | ok | Three.js-Erzeugungscode; keine Unity-Objekte oder Änderungen an Update/Tick. | — |
+| 4 | web/tools/upperProfile.test.mjs:25 | hoch | Keine Tests entfernt oder abgeschwächt. Die Ergänzung prüft Dachkrümmung, aber keinen Stirnanschluss: Ein Entfernen von `blendCrownRim` wird damit nicht gezielt erkannt. `test_map.json` liegt außerhalb des erlaubten Prüfumfangs. | Anschluss und Fugenabstand zwischen Haube und Maske an mehreren Stellen prüfen; Test muss bei entferntem Übergang fehlschlagen. |
+| 5 | web/src/parts/upperHelmet.js:31 | niedrig | Die Ausblendbreite `0.05` bestimmt die sichtbare Übergangsform, steht aber als unbegründete Zahl im Code. | Als benannten Parameter unter `crownTransition` hinterlegen. |
+| 6 | docs/versions/0.3.md:5 | ok | Formänderung, Messwerte, Belegpfade und ausstehende Nutzerabnahme sind dokumentiert. | — |
+| 7 | docs/versions/0.3.md:52 | ok | Keine verbotenen Git- oder Aufräumoperationen im Diff erkennbar. Tatsächlich ausgeführte Operationen sind daraus nicht prüfbar. | — |
+| 8 | web/src/parts/leftEar.js:33 | ok | Haube, angepasster Kopfbügel, Parameter und Prüfung gehören zum selben Formziel; kein fachfremder Änderungsumfang erkennbar. | — |
+
+Nachbessern: 4, 5
+
+=== Nachprüfung, Changelog zunächst nicht im Prüfumfang ===
+ce_judge: 3 Dateien, 94 Diff-Zeilen, Richter sol (gpt-6.1-sol high), Grund: expliziter --model=sol; automatisch wäre luna (Routineänderung (88 Diff-Zeilen, kein erkannter Kern-/Vertragspfad)), Basis HEAD
+| Nr | Datei:Zeile | Schwere (blocker/hoch/niedrig/ok) | Befund | Vorschlag |
+|---|---|---|---|---|
+| 1 | web/src/helmetParams.json:525 | ok | Interne Geometrieparameter ergänzt; keine Änderung der genannten Austauschverträge erkennbar. | Keine Migration erforderlich. |
+| 2 | web/src/parts/upperHelmet.js:95 | ok | Bestehende Teilekennungen bleiben erhalten; keine ID- oder Enum-Änderungen. | — |
+| 3 | web/src/parts/upperHelmet.js:12 | ok | Kein Unity-Code; neue Allokationen erfolgen beim Modellaufbau. | — |
+| 4 | web/tools/upperProfile.test.mjs:22 | ok | Krümmungs- und Fugentests ergänzt; bestehende Tests und Referenzwerte unverändert. Vorhandene Zuordnung in `test_map.json` im erlaubten Prüfumfang nicht überprüfbar. | — |
+| 5 | web/src/parts/upperHelmet.js:13 | ok | Formsteuernde Übergangsparameter stammen aus den Daten; keine neue bereichsspezifische Sonderlogik. | — |
+| 6 | web/src/parts/upperHelmet.js:94 | niedrig | Sichtbare Formänderung ohne Changelog-Eintrag im vorgelegten Diff; die Patch-Regel verlangt drei Zeilen. | Changelog um Änderung und Prüfbelege ergänzen. |
+| 7 | Diff:gesamt | ok | Keine Force-Push-, Stash-, Lösch-, Push- oder Merge-Aktionen enthalten. | — |
+| 8 | Diff:gesamt | ok | Zusammengehörige Änderungen an Helmform, Parametern und Tests; keine fachfremden Dateien. | — |
+
+Nachbessern: 6
+
+=== Vollständige Nachprüfung mit Changelog ===
+ce_judge: 5 Dateien, 156 Diff-Zeilen, Richter sol (gpt-6.1-sol high), Grund: expliziter --model=sol; automatisch wäre luna (Routineänderung (146 Diff-Zeilen, kein erkannter Kern-/Vertragspfad)), Basis HEAD
+| Nr | Datei:Zeile | Schwere (blocker/hoch/niedrig/ok) | Befund | Vorschlag |
+|---|---|---|---|---|
+| 1 | web/src/helmetParams.json:525 | ok | Geometrieparameter ergänzt; keine Änderung der genannten Austauschverträge. Migration, Fixture und Abnehmer-Mindestversion nicht erforderlich. | — |
+| 2 | web/src/parts/upperHelmet.js:95 | ok | Keine Änderung bestehender IDs, Teilenamen, Seeds oder Enums im Diff. | — |
+| 3 | web/src/parts/upperHelmet.js:17 | ok | Three.js-Code ohne Unity-Objekte oder Update-/Tick-Schleifen; keine der genannten Unity-Fallen. | — |
+| 4 | web/tools/upperProfile.test.mjs:22 | ok | Bestehender Test um Krümmungs- und Fugenprüfungen erweitert; keine Assertions entfernt oder abgeschwächt. `test_map.json` und Hashdateien liegen außerhalb des erlaubten Prüfumfangs; Hashprüfung im Versionsbericht dokumentiert. | — |
+| 5 | web/src/parts/upperHelmet.js:13 | ok | Formparameter stammen aus JSON; zusätzliche Zahlen dienen numerischen Toleranzen und Strahlabfragen. Keine gebietsspezifische Sonderlogik. | — |
+| 6 | CHANGELOG.md:5; docs/versions/0.3.md:5 | ok | Verhalten, Messwerte, Belegpfade und ausstehende Nutzerabnahme dokumentiert. Weitere verlinkte Dokumente nicht geprüft. Keine Werkbank-Fenster betroffen. | — |
+| 7 | docs/versions/0.3.md:52 | ok | Keine verbotenen Git-/Worktree-Aktionen im Diff; Commit-/Upload-Autorisierung dokumentiert, kein Merge behauptet. | — |
+| 8 | web/src/parts/upperHelmet.js:12; web/tools/upperProfile.test.mjs:22 | ok | Zusammenhängende Änderung der Haubenform mit Parametern, Regressionstest und Dokumentation; keine sachfremden Änderungen im vorgelegten Diff. | — |
+
+Freigabe

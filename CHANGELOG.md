@@ -1,6 +1,12 @@
 # Changelog
 
-## 0.3.0 „Sidework“ – 2026-10-28
+## 0.3.0 „Sidework“ – 2026-10-28 (offener Entwurf)
+
+- Scheitel und Kopfbügel quer und längs gewölbt; Haubenrand weich zur Augenmaske geführt.
+- Haube und Maske getrennt; 83/89 Meshes, einschließlich Augen, Maske und Kiefer, geometrisch unverändert.
+- 31 Tests, Build und vier Ansichten geprüft; Export, Texturen und Dokumentation auf Stand 68 aktualisiert.
+
+### Ausgangsstand 64
 
 - Finale Auswahl 64: runde Haube und akzeptierte Augen, moderat kantiger heller Rahmen; eckige Hauben 62/63 verworfen.
 - Generator, GLB mit 89 Meshes, fünf Textur-PNGs, Teileverzeichnis, Stilbeschreibung und Bildverlauf im Repo gebündelt.

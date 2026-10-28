@@ -290,9 +290,27 @@ die markierte Fläche wirkte merkwürdig. Beide Versuche sind verworfen.
 |---|---|---:|---:|---:|---:|---:|
 | [62](belege/helm/62.jpg) | Erste abgeflachte Haube, verworfen | 0,9193 | 0,9441 | 0,9104 | 0,8916 | 0,9163 |
 | [63](belege/helm/63.jpg) | Breitere Schrägflächen, vom Nutzer verworfen | 0,9160 | 0,9458 | 0,9120 | 0,8926 | 0,9166 |
-| [64](belege/helm/64.jpg) | Runde Haube, Rahmen aus 61; Lieferstand | 0,9199 | 0,9418 | 0,9053 | 0,8887 | 0,9139 |
+| [64](belege/helm/64.jpg) | Runde Haube, Rahmen aus 61; damaliger Lieferstand | 0,9199 | 0,9418 | 0,9053 | 0,8887 | 0,9139 |
 
 Alle 21 gesicherten Ausgaben von #64 sind bytegleich mit #61; einschließlich der nach der Codeprüfung ergänzten Hashes für IoU und Vergleichsbild. Der etwas höhere Silhouettenwert der kantigen Versuche ist kein Grund,
 die ausdrückliche Formauswahl zu übergehen. [Aktuelles Bild](bilder/helm_aktuell.jpg),
 [Nutzerfeedback zur verworfenen Haube](bilder/helm_haube_verworfen.jpg), [Stilbeschreibung](HELM_STIL.md).
 Der Nutzer hat anschließend das Hochladen des Gesamtstands einschließlich Dokumentation autorisiert.
+
+## Runde 15 – Gewölbter Scheitel und Stirnübergang 68 (28.10.2026)
+
+Der Nutzer empfand auch #64 am Kopfbügel als zu flach. #65 rundete den Querschnitt, beeinflusste aber die Maske
+und wurde verworfen. #66 trennt Hauben- und Gesichtsvolumen und rundet den Scheitel quer und längs.
+Anschließend wünschte der Nutzer einen weichen Übergang zur Augenmaske: #67 entfernte den Absatz, zeigte aber eine
+unruhige Fuge. #68 trennt die Normalen von Außenfläche und Unterseite und lässt eine feine Teilefuge.
+
+- [65](belege/helm/65.jpg): Verworfen: Maskenartefakt.
+- [66](belege/helm/66.jpg): Gewölbter Scheitel; noch harter Stirnabsatz.
+- [67](belege/helm/67.jpg): Zwischenstand: unruhige Fuge.
+- [68](belege/helm/68.jpg): Aktueller Stand: Wölbung und weicher Stirnübergang.
+
+Stand 68: Front 0.9096, Seite B 0.9463, Rücken 0.9123, Seite A 0.8968, Mittel 0.9163.
+83/89 Meshes sind inklusive Transformationen unverändert gegenüber #64. Haube, ihre Schrauben, Kopfbügel, Mittelstreifen
+und zwei Clips folgen der neuen Oberfläche. Augen, Augenmaske, Kiefer, Funkmuschel und Kabel bleiben erhalten.
+31 Tests und Build bestehen; keine Freigabe durch den Nutzer vorweggenommen.
+[Gesamtvergleich 64/68](bilder/helm_uebergang_64_68.jpg) · [Stirnübergang 66/68](bilder/helm_uebergang_66_68.jpg).

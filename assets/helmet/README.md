@@ -1,6 +1,7 @@
-# Lieferstand 64 – runde Haube
+# Lieferstand 68 – gewölbter Scheitel und weicher Stirnübergang
 
-Stand 64 entspricht bytegenau Stand 61: runde Haube aus Stand 46, moderat kantiger heller Rahmen.
+Stand 68 rundet die Haube in beiden Richtungen und führt ihren Rand weich zur Augenmaske.
+83/89 Meshes einschließlich Augen und Maske sind geometrisch unverändert gegenüber Stand 64.
 Die eckigen Hauben 62/63 sind verworfen. [Stilbeschreibung](../../docs/HELM_STIL.md).
 
 - [scifi_helmet.glb](scifi_helmet.glb): 89 Meshes, acht verwendete Materialien; getrennte Baugruppen.
@@ -8,8 +9,8 @@ Die eckigen Hauben 62/63 sind verworfen. [Stilbeschreibung](../../docs/HELM_STIL
 - [textures/](textures/): fünf prozedurale PNGs und Materialzuordnung; Bump-Karten beim Import separat zuordnen.
 - `render_front/left/back/right.png`: vier feste Ansichten; zugehörige Masken und Overlays sind Prüfbelege.
 - [verification.json](verification.json): Quell-/Referenzhashes, Laufzeitumgebung, Kameras, Parameter und 21 Ausgabehashes.
-- [code-review.txt](code-review.txt) und [tests.txt](tests.txt): unabhängige Codeprüfung und Testbelege.
-- [selection.json](selection.json): Nachweis der Rückkehr zur runden Haube und der Gleichheit mit Stand 61.
+- [code-review.txt](code-review.txt) und [tests.txt](tests.txt): unabhängige Codeprüfung einschließlich der Nachprüfung von Stand 68 und aktuelle Testbelege.
+- [selection.json](selection.json): Vergleich der 89 Exportobjekte mit Stand 64 und Hashes des aktuellen Exports.
 
 Erzeugen über [web/README.md](../../web/README.md). Nach `npm run verify` vom Repo-Hauptverzeichnis vergleichen:
 

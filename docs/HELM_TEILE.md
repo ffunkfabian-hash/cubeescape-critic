@@ -62,7 +62,7 @@ Die Karte verwendet die vier vorhandenen Renderansichten mit 1280×720 Pixeln. C
 vergeben; zusätzliche Bereiche erhalten neue Nummern. Die Karte dokumentiert einen Modellstand und ersetzt keinen
 Vergleich mit den Referenzbildern.
 
-Aktueller Lieferstand: **64**, bytegleich mit Stand 61. Die Haube ist wieder rund wie im bestätigten Stand 46;
-die kantigen Haubenversuche 62/63 sind verworfen. H09–H11 bleiben moderat facettiert.
+Aktueller Lieferstand: **68**, mit quer und längs gewölbtem Scheitel, angepasstem Bügel und weichem Übergang
+zwischen H01 und H02. Beide Teile bleiben getrennt; H09–H11 bleiben moderat facettiert.
 Teilekennungen und 89 Meshes bleiben erhalten; [Exportverzeichnis](../assets/helmet/parts.json),
 [Stilbeschreibung](HELM_STIL.md), [Prüfbericht](versions/0.3.md).

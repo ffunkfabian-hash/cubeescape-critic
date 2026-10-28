@@ -154,11 +154,12 @@ Der Referenzlauf erzeugt Textur- und Geometrieansichten sowie `comparison.json` 
 Die globale Aufstellung ist zur Sichtprüfung angenähert; aus diesen Bildern wird **kein Meshy-IoU** berechnet.
 Die Bildausschnitte des Kontaktbogens sind Darstellungszuschnitte, keine Änderung der Helm-Messung.
 
-## Aktueller Lieferstand 64
+## Aktueller Lieferstand 68
 
-Der Nutzer hat die **runde Haube** gewählt. Stand 64 entspricht vollständig Stand 61: runde Haube, Gesicht, Augen,
-Kieferform und Funkanlage aus dem bestätigten Stand 46 sowie ein moderat kantiger heller Seiten-/Nackenrahmen.
-Die Haubenversuche 62/63 sind verworfen. Alle 21 Ausgaben aus dem abschließenden Lauf stimmen bytegenau mit Stand 61 überein.
+Nach Nutzerfeedback ist die Haube auch um den Kopfbügel quer und längs gewölbt (`crownDome`).
+`crownTransition.blendHeight` führt den Haubenrand weich zur Augenmaske; `clearance` hält eine feine Teilefuge.
+83 von 89 Meshes sind gegenüber Stand 64 einschließlich ihrer Transformationen unverändert; Augen und Maske gehören dazu.
+Die Haubenversuche 62/63 sind verworfen. Aktuelle Quellen und alle 21 Ausgaben sind über SHA256 dokumentiert.
 
 `lowerArmorEdges` parametrisiert 16 ebene Mantelflächen, die schmalere obere Fase und gerade Eckabschrägungen der Taschen.
 Der Halsring bleibt rund. Die Taschenböden folgen derselben facettierten Form wie ihre Träger und bleiben separate Teile.

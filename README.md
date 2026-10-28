@@ -1,7 +1,7 @@
 # Critic – parametrischer Helm im Browser
 
-Aktueller Lieferstand **64**: runde Schädelhaube und akzeptierte Augen aus Stand 46, moderat kantiger heller Rahmen
-wie Stand 61. Die eckigen Haubenvarianten 62/63 wurden verworfen. Das Video bleibt maßgeblich.
+Aktueller Lieferstand **68**: durchgehend gewölbter Scheitel mit angepasstem Kopfbügel und weichem Übergang zur
+Augenmaske. Augen, Kiefer und moderat kantiger heller Rahmen sind erhalten. Das Video bleibt maßgeblich.
 
 ![Aktueller Helm](docs/bilder/helm_aktuell.jpg)
 

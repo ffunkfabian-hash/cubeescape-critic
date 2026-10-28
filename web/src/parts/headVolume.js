@@ -26,7 +26,7 @@ function topOutline(half, n = 64) {
   return curve.getSpacedPoints(n).slice(0, -1).map((p) => [p.x, p.y]);
 }
 
-export function loftGeometry(rows = 72) {
+export function loftGeometry(rows = 72, roundedCrown = false) {
   const P = D.profile;
   const w = profileFn(P.front), zf = profileFn(P.sideFront), zb = profileFn(P.sideBack);
   const ring = topOutline(P.topHalf);
@@ -38,9 +38,21 @@ export function loftGeometry(rows = 72) {
   for (let j = 0; j <= rows; j++) {
     const t = j / rows;
     const y = yBot + (yTop - yBot) * Math.sin((t * Math.PI) / 2);
-    const hw = Math.max(w(y), 1e-4), f = zf(y), b = zb(y);
+    let hw = Math.max(w(y), 1e-4), f = zf(y), b = zb(y);
     const rounding = D.crownRounding;
-    const round = rounding.strength * THREE.MathUtils.smoothstep(y, rounding.startY, rounding.endY);
+    let round = rounding.strength * THREE.MathUtils.smoothstep(y, rounding.startY, rounding.endY);
+    if (roundedCrown) {
+      // A curved ellipsoidal roof removes both the flat shoulders and the long
+      // plateau beside the band. Preserve the original rim and face volume.
+      const dome = D.crownDome;
+      const mix = THREE.MathUtils.smoothstep(y, dome.startY, dome.endY);
+      const height = THREE.MathUtils.clamp((y - dome.baseY) / (yTop - dome.baseY), 0, 1);
+      const radius = Math.sqrt(1 - height * height);
+      hw = THREE.MathUtils.lerp(hw, Math.max(dome.radiusX * radius, 1e-4), mix);
+      f = THREE.MathUtils.lerp(f, dome.radiusFront * radius, mix);
+      b = THREE.MathUtils.lerp(b, -dome.radiusBack * radius, mix);
+      round = THREE.MathUtils.lerp(round, 1, mix);
+    }
     for (const [u, v] of ring) {
       const length = Math.hypot(u, v);
       const ru = THREE.MathUtils.lerp(u, u / length, round);
@@ -84,6 +96,6 @@ export function loftGeometry(rows = 72) {
   return geo;
 }
 
-export function headVolume(inflate = 1) {
-  return brush(loftGeometry(), { scale: inflate, rot: [D.head.tilt, 0, 0] });
+export function headVolume(inflate = 1, roundedCrown = false) {
+  return brush(loftGeometry(72, roundedCrown), { scale: inflate, rot: [D.head.tilt, 0, 0] });
 }

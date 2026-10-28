@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-10-28T13:21:55.945Z",
+  "startedAt": "2026-10-28T14:03:05.234Z",
   "status": "passed",
   "views": [
     "front",
@@ -109,38 +109,38 @@
     "textures/whiteArmor_roughnessMap.png": "e905554a48bc8c7f728613e80e22987b82686b8232bdf49f94e50b7bcc647182",
     "textures/whiteTextured_bumpMap.png": "c4ace6c801244697c9be598a42d9a5a36dae194fb3551c26df59a3b8c789bd61",
     "textures/materials.json": "7f0d1515306d88b3de19fe28101168dfeec3ad412238d38ce733e02562f952ef",
-    "scifi_helmet.glb": "b6284f6f42b9e54d8efb5dc92ea6293d867a9100b2d319489bf250abd2273aca",
-    "render_front.png": "89270cb835bebf32a459153de87660d19329ca0a22c4da4856c8dc83b45cfbe2",
-    "mask_front.png": "183a3c2056d308b4be7b50b9ed3ffa1713f35dc2d66085646cd7f24a40bdba8d",
-    "overlay_front.png": "f4a87d59dbea68ccf04b6a9af1c4453506295df7a9802157134f158017e29d97",
-    "render_left.png": "82b72b499c9361ac75b82ce81a502dd93474206e9ac16c34fba6642761aeb440",
-    "mask_left.png": "f00cdf76a3b3863c1af155d9730c177f13142222f88ebd5c38401223a4ed1556",
-    "overlay_left.png": "1fdbc132ac8d1fa00849bd3ee5e4f85c9cfa41a687a4481b4b9ca060fd4cc1c1",
-    "render_back.png": "bfe3c963dec84402e76b87a43877f61ffe5ab7145177417699406314773a0219",
-    "mask_back.png": "e64e4adf0226f998f1176402c2a01a2f440873164bd7f65016d61803b3b4176c",
-    "overlay_back.png": "4baeab43a4fc22185a81cbb57ba576316a1fbf695e48ee07fdbf5f41409bcb08",
-    "render_right.png": "1598535f3ee29b0f5cc05e38f07d00f3453093312e467ed1736a4ed30ac2fcdc",
-    "mask_right.png": "cdbc065977e56596f2d1372907dbb42e2ee11cc1f63e72ab179e923800a58f83",
-    "overlay_right.png": "d084cc507a2e5bb9fe72a207ad7b695ef42c735f59282d810e1d4831be14e6db",
-    "iou.json": "5f8c15edb18b42a84bc36576adcfef31afdc2ed6de33ce663299868c5adf32dc",
-    "compare.png": "28a4f4d10d8947206d676b6c271e720a17e82aa5fde8a56c21308bd2feb59a6f"
+    "scifi_helmet.glb": "657409cd0cdd84f10527386d76456dc0a16339372503b2d4ca04988532bb741c",
+    "render_front.png": "d79f78b9ed955e7afaa557b36a66aa996365ce852a6c4bf8feb27ac88fbadf80",
+    "mask_front.png": "b8b8771b089e2b944a49e78b5e7466957b611194aafffd8ea781106701a0d28e",
+    "overlay_front.png": "221bc9e044541b3c738aa0d51eae4c45562afa9b0db0f070e616f4d7a3da3362",
+    "render_left.png": "32d016712df60a42e85f936f9b331fc6bbaafae913e707342441f5c8d1496c75",
+    "mask_left.png": "a04e74e8f75ae87f4b1c3ccabc51d5cc06016911ba7e6a6453e2f19713b8ec58",
+    "overlay_left.png": "6de1903515b890fa333203528cc4efb42680e6cdd7552ff2da17ebdd13b46b63",
+    "render_back.png": "aca59b26e5b99bd8e2ec822d80d4d0b08c7957711ab2693d043eef9573db8a82",
+    "mask_back.png": "474de3bd4ecaf5806c4c7ace38fb3dfea2cd83af7ffa6713ae1cf05513016a4e",
+    "overlay_back.png": "8e1c354a44ae4d9fe0a543111ee2173dc68d8f5b2ace5a11e332e96381966b96",
+    "render_right.png": "4d6e4cf0cdd8495220fca10491557096bed01df8b6d1819e10b305e630b8f18e",
+    "mask_right.png": "0022bf6f7bd154c5373558d3398422d777429ee924fc43b4c8a6561d0aee397f",
+    "overlay_right.png": "8e3c4e2db610bf3851c924a24485ca9c29b55ee1488b9419f29d7299d26338a3",
+    "iou.json": "590538c4cd96649df70a2616f0cd668cba321ca2466109932cb51c478fe38b32",
+    "compare.png": "ca7fb56f6ae2a74f9b1f80067310f736d14c1d30f1c34b9c4dd34df180bfb42e"
   },
   "sources": {
     "files": {
       "src/geo.js": "ae2dfc529993cd9585028d9f2c3446960d8e6b18d7953258856adc07e87b9f6f",
       "src/helmet.js": "10c578579b83457e5b60b37d5411121a7b20b8b6169ffa4ccc55d76bec44f461",
-      "src/helmetParams.json": "d3cb8397b1662b1f6e45a1d5e5200c34eafe15deda7ffb235195dbf4888a3cbe",
+      "src/helmetParams.json": "9b38756b9f76f05acfdcd9f46e3670af29c9406039e9827257ff01ad59a0b34d",
       "src/main.js": "12a9976636ce7537453294adc1be1933a64f73df2150dc3c0c390fc0a2cc76da",
       "src/materials.js": "3cff574fba8a5480efb7723edcd471dcdb5892691f74e2cd98cdc1513a19b144",
       "src/params.js": "24b2e7cee16b44ca26b518beb689982e0fec092026a6f42d18bb08203e6db170",
       "src/parts/bodyStudy.js": "fe45c21c425de5367e1770735d6f9e7510d78d148e941d3ad8fc7de6c4bae4ce",
       "src/parts/common.js": "07c66f0f95ea400c4dcfdaadab2e2f3bbe96af2378af01b8b613699f5ba7a58b",
-      "src/parts/headVolume.js": "050900b46e22240818575617a1d2339708159b39108a0199c3a57459beb7d63a",
-      "src/parts/leftEar.js": "9cd4803cd16b3fa4c50fc789ae36635ec99315f92d1e4cc54696a4a05eaeb500",
+      "src/parts/headVolume.js": "f1f501bfb3c0b694b78d66241396367016d5dc78d8ec564cdb24f63ef00bd987",
+      "src/parts/leftEar.js": "42231d1db97f08377ef291e3e599ee59d093132425231ea138c8a9865c22ee72",
       "src/parts/lowerArmor.js": "61c2781faef89a275c066f0e1ccc7ccda42785872ee39e8dfb9cca97633181a4",
       "src/parts/neck.js": "df7208322bef09cdd445fe14e724869851604377d8bcdf4ae6a9c57ed96d5110",
       "src/parts/rightComms.js": "0f1c7a8eebee5830ecb06f4cc8d421588cb720d2b44e6e672af84fc19af8e86a",
-      "src/parts/upperHelmet.js": "4dfd935d56ae7017ccb2b35d0c088b9c173898d7aab6944022dcba6296eb0ec8",
+      "src/parts/upperHelmet.js": "4dbcf0621463529968ba734b9a8d44df5689b6dd72f29b1533ebb8fb04520de8",
       "src/shapeFit.js": "57c4a7b94b0edbcbed61a38e2f1939af7e721101ce9b04d73c0de96159640ed8",
       "src/textures.js": "4316102ba362735b59b3aa2a2e27a684aeb45314aedd1f34907b51dde4c14414",
       "refs/meshy-reference.json": "47f6e9df33dada643dafadbbb90994b69c66ce522789f4eae25b7ec7f78fa673",
@@ -163,7 +163,7 @@
       "tools/test_iou.py": "42522640872b806c7b7e8b732959b1836e9eebabec11ec8e84da984df392fb9f",
       "tools/test_save_pass.py": "32706b25972fb725dc9851907221e0ca8404fb7ecb6468bf051a49d6f0f455b0",
       "tools/textureProjection.test.mjs": "556dfb910000cd2e84d2d785c23fe0af0db2a0ed029cff590d96c60182034bac",
-      "tools/upperProfile.test.mjs": "62716043d020ddca120d5451e6a3e4ed49ec37adbf41374e936571940e5ce781",
+      "tools/upperProfile.test.mjs": "abe5b1c6276b1eb7e75ba8a1701cffd650d857404a71ffbfbe78f6227c590556",
       "tools/verification.mjs": "0b42c187226dda7c46805bc5c2f83b07050e09a905c1d39c396ac35e41e897c4",
       "tools/verification.test.mjs": "65ad99da80c2e987c10c325962f08f3743cab2678dc9b9472edcde33b923f1d3",
       "index.html": "b4649cc322f11741951fe689f9d0718c7b53f78617f280c02c423f6b7582566d",
@@ -174,7 +174,7 @@
       ".nvmrc": "7e8a2fa94951112b894a3dbe3d05efef5e9263741fa49125f0a70f40fedab4cc",
       "../reference/helm/turnaround.mp4": "fac039db10d9d3ee3c74373c38e323dd53489df69eee18971e736c9d971e70de"
     },
-    "digest": "fe22122a72a8777600b398172f0c2c887c60750fd7ccdec0bc0059cc942ea07d"
+    "digest": "c8cd9c455375ba288ba41240886bf700178b04c78604e47ad27a8d97f58a4e46"
   },
   "runtime": {
     "node": "v24.19.0",
@@ -718,7 +718,10 @@
     },
     "crownTransition": {
       "slope": 0.42,
-      "anchorZ": 0.06
+      "anchorZ": 0.06,
+      "blendHeight": 0.07,
+      "clearance": 0.0005,
+      "sideBlendWidth": 0.05
     },
     "crownRounding": {
       "strength": 0.35,
@@ -730,13 +733,21 @@
       "chamferHeight": 0.035,
       "topScale": 0.975,
       "cornerScale": 0.55
+    },
+    "crownDome": {
+      "startY": 0.33,
+      "endY": 0.43,
+      "baseY": 0.17,
+      "radiusX": 0.38,
+      "radiusFront": 0.51,
+      "radiusBack": 0.48
     }
   },
   "renderSettings": {
     "denoiseSeed": 47
   },
   "glb": {
-    "bytes": 4808784,
+    "bytes": 4754980,
     "meshes": 89,
     "nodes": 103,
     "materials": 8,
@@ -747,11 +758,11 @@
     "manifest": "textures/materials.json"
   },
   "iou": {
-    "front": 0.9199,
-    "left": 0.9418,
-    "back": 0.9053,
-    "right": 0.8887,
-    "mean": 0.9139
+    "front": 0.9096,
+    "left": 0.9463,
+    "back": 0.9123,
+    "right": 0.8968,
+    "mean": 0.9163
   },
-  "finishedAt": "2026-10-28T13:22:06.730Z"
+  "finishedAt": "2026-10-28T14:03:18.355Z"
 }

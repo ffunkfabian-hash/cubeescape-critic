@@ -19,6 +19,33 @@ test('rounded forehead does not lower the dark cap over the rear housing', async
    assert.ok(part?.isMesh, `Missing separate part ${name}`);
    assert.ok(part.geometry.attributes.position.array.every(Number.isFinite), name);
   }
+  // Both transverse and longitudinal roof sections must curve continuously:
+  // slopes get steeper away from the apex, with no flat shoulder at the band.
+  const crown = model.getObjectByName('Crown');
+  for (const section of [t => [t, -0.12], t => [0, t], t => [0, -t]]) {
+   const heights = Array.from({length: 11}, (_, i) => {
+    const [x, z] = section(i * 0.03);
+    const hit = new THREE.Raycaster(new THREE.Vector3(x, 2, z), new THREE.Vector3(0, -1, 0)).intersectObject(crown)[0];
+    assert.ok(hit, 'Missing crown roof');
+    return hit.point.y;
+   });
+   for (let i = 1; i < heights.length - 1; i++)
+    assert.ok(heights[i - 1] - 2 * heights[i] + heights[i + 1] < 0, 'Crown roof has a flat or inverted shoulder');
+  }
+  // A thin assembly seam must replace the former raised ledge above the eyes.
+  const face = model.getObjectByName('Shell'), slope = D.crownTransition.slope;
+  const centre = D.capEdgeY + slope * D.crownTransition.anchorZ;
+  for (const degrees of [-60, -45, -30, -15, 0, 15, 30, 45, 60]) {
+   const angle = degrees * Math.PI / 180;
+   const direction = new THREE.Vector3(Math.sin(angle), -slope * Math.cos(angle), Math.cos(angle));
+   const cast = t => new THREE.Raycaster(new THREE.Vector3(0, centre + t, 0).addScaledVector(direction, 2), direction.clone().normalize().negate());
+   const below = cast(-0.001).intersectObject(face)[0], above = cast(0.0015).intersectObject(crown)[0];
+   assert.ok(below && above, `Missing brow surface at ${degrees} degrees`);
+   const radius = point => Math.hypot(point.x, point.z);
+   assert.ok(Math.abs(radius(above.point) - radius(below.point)) < 0.002, 'Raised ledge remains at crown/mask joint');
+   assert.ok(!cast(0.00025).intersectObjects([crown, face]).some(hit => radius(hit.point) > radius(below.point) - 0.005),
+    'Crown and mask overlap in the narrow assembly seam');
+  }
   // Preserve the user-approved H04 geometry and keep the openings unobstructed.
   for (const s of [-1, 1]) {
    const eye = model.getObjectByName(s > 0 ? 'Visor_L' : 'Visor_R');

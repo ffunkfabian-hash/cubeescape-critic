@@ -30,8 +30,8 @@ function sidePlate(pts, depth, bevel, outerX, cz, cy) {
 // Strip of a shell offset from the head surface, limited to a slab around z = zc.
 function bandShell(dIn, dOut, zc, half, yMin) {
   // Offsets as uniform scale of the head volume (radius ~0.45).
-  const outer = headVolume(1 + dOut / 0.45);
-  const inner = headVolume(1 + dIn / 0.45);
+  const outer = headVolume(1 + dOut / 0.45, true);
+  const inner = headVolume(1 + dIn / 0.45, true);
   const slab = brush(new THREE.BoxGeometry(2, 1, half * 2), { pos: [0, yMin + 0.5, zc] });
   return csg(outer, [SUBTRACTION, inner], [INTERSECTION, slab]).geometry;
 }
