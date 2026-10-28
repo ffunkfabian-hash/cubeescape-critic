@@ -6,7 +6,7 @@
 // verification.json identifies this run's status, completed views and optional IoU.
 // Older files may remain after a failure or --no-iou; they are not evidence for the current run.
 // Usage: node verify_renders.mjs [--no-iou] [--finish=original|metal|graphite]
-//   [--accents=original|light-fasteners|white-strips] [--out=renders]
+//   [--accents=original|light-fasteners|white-strips|contrast-strips] [--out=renders]
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';

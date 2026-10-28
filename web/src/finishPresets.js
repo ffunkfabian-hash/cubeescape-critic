@@ -18,15 +18,22 @@ export function resolveFinish(value = 'original') {
   return FINISH_PRESETS[value];
 }
 
+const GRAPHITE_STRIP = Object.freeze({ color: 0x41474d, roughness: 0.58, metalness: 0.2,
+  normalScale: 0.15, envMapIntensity: 0.45, map: null, normalMap: 'crownNormal', roughnessMap: 'darkArmor' });
+const METAL_STRIP = Object.freeze({ color: 0x41474d, roughness: 0.7, metalness: 0.55,
+  normalScale: 0.1, envMapIntensity: 0.6, map: null, normalMap: 'crownNormal', roughnessMap: 'darkArmor' });
+
 export const ACCENT_PRESETS = Object.freeze({
   original: Object.freeze({ name: 'original', lightFasteners: false, whiteStrips: false }),
   'light-fasteners': Object.freeze({ name: 'light-fasteners', lightFasteners: true, whiteStrips: false }),
   'white-strips': Object.freeze({ name: 'white-strips', lightFasteners: true, whiteStrips: true }),
+  'contrast-strips': Object.freeze({ name: 'contrast-strips', lightFasteners: true, contrastStrips: true,
+    stripProfiles: Object.freeze({ original: GRAPHITE_STRIP, graphite: GRAPHITE_STRIP, metal: METAL_STRIP }) }),
 });
 
 export function resolveAccents(value = 'original') {
   if (!Object.hasOwn(ACCENT_PRESETS, value)) {
-    throw new Error(`Unknown accents ${JSON.stringify(value)}; expected original, light-fasteners or white-strips`);
+    throw new Error(`Unknown accents ${JSON.stringify(value)}; expected original, light-fasteners, white-strips or contrast-strips`);
   }
   return ACCENT_PRESETS[value];
 }

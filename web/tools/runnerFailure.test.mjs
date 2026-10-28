@@ -61,7 +61,7 @@ test('verification rejects invalid arguments before starting the renderer or wri
   try {
     for (const args of [['--finish=chrome'], ['--finish='], ['--finish'], ['--out='],
       ['--out', '--no-iou'], ['--unknown'], ['--finish=metal', '--finish=graphite'],
-      ['--accents=white'], ['--accents='], ['--accents'], ['--accents=white-strips', '--accents=original']]) {
+      ['--accents=white'], ['--accents=contrast'], ['--accents='], ['--accents'], ['--accents=white-strips', '--accents=original']]) {
       const run = spawnSync(process.execPath, [path.join(f.root, 'verify_renders.mjs'), ...args], { timeout: 10000 });
       assert.equal(run.status, 1, run.stderr?.toString());
       assert.match(run.stderr.toString(), /Unknown finish|Unknown accents|Missing value|Unknown argument|Duplicate argument/);

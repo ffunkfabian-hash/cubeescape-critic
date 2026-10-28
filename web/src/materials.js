@@ -61,6 +61,15 @@ export function createMaterials(finish = 'original', accents = 'original') {
       name: 'lightFastener', color: 0xd6d7d5, roughness: 0.6, metalness: 0.05,
     });
   }
+  if (accentPreset.contrastStrips) {
+    const profile = accentPreset.stripProfiles[preset.name];
+    materials.contrastStrip = materials.darkArmor.clone();
+    materials.contrastStrip.color.setHex(profile.color);
+    Object.assign(materials.contrastStrip, { name: 'contrastStrip', map: null,
+      roughness: profile.roughness, metalness: profile.metalness, envMapIntensity: profile.envMapIntensity,
+      normalMap: crownNormal, bumpMap: null });
+    materials.contrastStrip.normalScale.setScalar(profile.normalScale);
+  }
   return materials;
 }
 
@@ -81,9 +90,11 @@ export function applyArmorFinish(model, materials) {
 export function applyArmorAccents(model, materials, accents = 'original') {
   const preset = resolveAccents(accents);
   if (preset.lightFasteners && !materials.lightFastener) throw new Error('Missing light fastener material');
+  if (preset.contrastStrips && !materials.contrastStrip) throw new Error('Missing contrast strip material');
   model.traverse(object => {
     if (!object.isMesh) return;
     if (preset.lightFasteners && object.name === 'Screws_Upper') object.material = materials.lightFastener;
     if (preset.whiteStrips && ['ForeheadPlate_L', 'ForeheadPlate_R'].includes(object.name)) object.material = materials.whiteArmor;
+    if (preset.contrastStrips && ['ForeheadPlate_L', 'ForeheadPlate_R'].includes(object.name)) object.material = materials.contrastStrip;
   });
 }

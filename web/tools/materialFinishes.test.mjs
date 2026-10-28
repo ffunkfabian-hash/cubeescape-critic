@@ -28,8 +28,8 @@ test('finish selection defaults to original and rejects unrecognized names', () 
 
 test('accent selection is independent and rejects unrecognized names', () => {
   assert.equal(resolveAccents(), ACCENT_PRESETS.original);
-  for (const name of ['original', 'light-fasteners', 'white-strips']) assert.equal(resolveAccents(name).name, name);
-  for (const name of ['', 'white', 'metal', '__proto__', 'toString', null]) {
+  for (const name of ['original', 'light-fasteners', 'white-strips', 'contrast-strips']) assert.equal(resolveAccents(name).name, name);
+  for (const name of ['', 'white', 'contrast', 'metal', '__proto__', 'toString', null]) {
     assert.throws(() => resolveAccents(name), /Unknown accents/);
   }
 });
@@ -63,7 +63,8 @@ test('accent choices change only upper screws and optionally both forehead strip
         assert.deepEqual([...object.geometry.attributes.position.array], state.position);
         assert.deepEqual(object.instanceMatrix && [...object.instanceMatrix.array], state.instances);
         const expected = accents !== 'original' && object.name === 'Screws_Upper' ? materials.lightFastener
-          : accents === 'white-strips' && object.name.startsWith('ForeheadPlate_') ? materials.whiteArmor : state.material;
+          : accents === 'white-strips' && object.name.startsWith('ForeheadPlate_') ? materials.whiteArmor
+            : accents === 'contrast-strips' && object.name.startsWith('ForeheadPlate_') ? materials.contrastStrip : state.material;
         assert.equal(object.material, expected, `${finish}/${accents}/${object.name}`);
       }
       if (accents === 'original') assert.equal(materials.lightFastener, undefined);
@@ -73,6 +74,21 @@ test('accent choices change only upper screws and optionally both forehead strip
         assert.equal(materials.lightFastener.metalness, 0.05);
         assert.equal(materials.lightFastener.map, null, 'Tiny fasteners must not receive grime');
       }
+      if (accents === 'contrast-strips') {
+        const strip = materials.contrastStrip, profile = resolveAccents(accents).stripProfiles[finish];
+        assert.equal(strip.color.getHex(), 0x41474d);
+        assert.equal(strip.roughness, finish === 'metal' ? 0.7 : 0.58);
+        assert.equal(strip.metalness, finish === 'metal' ? 0.55 : 0.2);
+        assert.equal(strip.envMapIntensity, finish === 'metal' ? 0.6 : 0.45);
+        assert.deepEqual(strip.normalScale.toArray(), [profile.normalScale, profile.normalScale]);
+        assert.equal(profile.normalScale, finish === 'metal' ? 0.1 : 0.15);
+        assert.equal(strip.map, null);
+        assert.equal(strip.bumpMap, null);
+        assert.equal(strip.normalMap, materials.crownArmor.normalMap);
+        assert.equal(strip.roughnessMap, materials.darkArmor.roughnessMap);
+        if (finish === 'graphite') assert.ok(strip.roughness < materials.darkArmor.roughness);
+        if (finish === 'metal') assert.ok(strip.roughness > materials.darkArmor.roughness);
+      } else assert.equal(materials.contrastStrip, undefined);
     }
   } finally {
     geometry.dispose();
