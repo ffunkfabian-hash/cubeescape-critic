@@ -2,6 +2,12 @@
 
 ## 0.3.0 „Sidework“ – 2026-10-28 (offener Entwurf)
 
+- Stand 69: Haube übernimmt Maskenfarbe und -texturkarten mit gedämpftem Glanz.
+- Alle 89 Meshgeometrien/UVs und bisherigen Materialien unverändert; vier Silhouettenmasken bytegleich mit 68.
+- 31 Tests, Build und vier Ansichten geprüft; Export und Dokumentation aktualisiert.
+
+### Formstand 68
+
 - Scheitel und Kopfbügel quer und längs gewölbt; Haubenrand weich zur Augenmaske geführt.
 - Haube und Maske getrennt; 83/89 Meshes, einschließlich Augen, Maske und Kiefer, geometrisch unverändert.
 - 31 Tests, Build und vier Ansichten geprüft; Export, Texturen und Dokumentation auf Stand 68 aktualisiert.

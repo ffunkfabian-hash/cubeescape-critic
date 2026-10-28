@@ -91,7 +91,7 @@ export function buildUpperHelmet(M) {
   const probe = new THREE.Mesh(shell.geometry, M.darkArmor);
   const crown = csg(H, [INTERSECTION, capRegion]);
   // Keep the crown and face as distinct meshes for later individual editing/export.
-  const crownMesh = new THREE.Mesh(boxProjectUV(blendCrownRim(crown.geometry, H, probe), 2.5), M.darkArmor);
+  const crownMesh = new THREE.Mesh(boxProjectUV(blendCrownRim(crown.geometry, H, probe), 2.5), M.crownArmor);
   crownMesh.name = 'Crown';
   g.add(crownMesh);
 

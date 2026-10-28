@@ -1,5 +1,5 @@
 {
-  "pass": 68,
+  "pass": 69,
   "meshCount": 89,
   "parts": [
     {
@@ -8,7 +8,7 @@
       "path": "SciFiHelmet/UpperHelmet_Dark/Crown",
       "mesh": 0,
       "materials": [
-        "darkArmor"
+        "crownArmor"
       ],
       "transform": {}
     },

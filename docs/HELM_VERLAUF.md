@@ -314,3 +314,12 @@ Stand 68: Front 0.9096, Seite B 0.9463, Rücken 0.9123, Seite A 0.8968, Mittel 0
 und zwei Clips folgen der neuen Oberfläche. Augen, Augenmaske, Kiefer, Funkmuschel und Kabel bleiben erhalten.
 31 Tests und Build bestehen; keine Freigabe durch den Nutzer vorweggenommen.
 [Gesamtvergleich 64/68](bilder/helm_uebergang_64_68.jpg) · [Stirnübergang 66/68](bilder/helm_uebergang_66_68.jpg).
+
+## Runde 16 – Haubenmaterial an die Maske angeglichen 69 (28.10.2026)
+
+Auf Nutzerwunsch bleiben Graphitfarbe und Körnung von Haube und Maske identisch. Schon #68 verwendete dieselben
+Karten; breite Reflexe ließen die Rundung heller/glatter erscheinen. #69 leitet das Haubenmaterial von der Maske ab und
+dämpft seine Glanzantwort. Grundfarbe, Bump-/Rauheitsbilder und Texturmaßstab sind identisch; Maskenmaterial bleibt unverändert.
+Alle 89 Meshgeometrien, UVs und Transformationen sowie die vier Silhouettenmasken sind bytegleich mit #68.
+31 Tests, Build und Projektprüfung bestehen. Neun Materialien; sieben PNGs mit fünf unterschiedlichen Texturbildern.
+[Stand 69 gegen Video](belege/helm/69.jpg) · [Video / Stand 68 / Stand 69](bilder/helm_material_68_69.jpg).

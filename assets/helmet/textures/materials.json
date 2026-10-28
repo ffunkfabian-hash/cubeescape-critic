@@ -1,5 +1,42 @@
 {
   "materials": {
+    "crownArmor": {
+      "bumpScale": 0.03,
+      "maps": {
+        "roughnessMap": {
+          "file": "crownArmor_roughnessMap.png",
+          "repeat": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "rotation": 0,
+          "wrapS": 1000,
+          "wrapT": 1000,
+          "flipY": true,
+          "colorSpace": ""
+        },
+        "bumpMap": {
+          "file": "crownArmor_bumpMap.png",
+          "repeat": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "rotation": 0,
+          "wrapS": 1000,
+          "wrapT": 1000,
+          "flipY": true,
+          "colorSpace": ""
+        }
+      }
+    },
     "darkArmor": {
       "bumpScale": 0.03,
       "maps": {
@@ -119,7 +156,7 @@
   "parts": [
     {
       "part": "Crown",
-      "material": "darkArmor"
+      "material": "crownArmor"
     },
     {
       "part": "Cheek_R",

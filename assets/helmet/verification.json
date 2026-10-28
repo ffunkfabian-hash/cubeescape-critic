@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-10-28T14:03:05.234Z",
+  "startedAt": "2026-10-28T14:10:51.466Z",
   "status": "passed",
   "views": [
     "front",
@@ -103,27 +103,29 @@
     }
   },
   "outputs": {
+    "textures/crownArmor_roughnessMap.png": "6ee24b8c34e86709354f4685927c7347d188eb617b4141a158e1c6a7d8849b08",
+    "textures/crownArmor_bumpMap.png": "a837da04e90b49b70f28625459ccfab34e03c06908fbfbb20c857aeb85adc27b",
     "textures/darkArmor_roughnessMap.png": "6ee24b8c34e86709354f4685927c7347d188eb617b4141a158e1c6a7d8849b08",
     "textures/darkArmor_bumpMap.png": "a837da04e90b49b70f28625459ccfab34e03c06908fbfbb20c857aeb85adc27b",
     "textures/whiteArmor_map.png": "e3d8f7e39ec3b338fec42aa58b39cbdd08ae33fbc20442b41f202d24527edf57",
     "textures/whiteArmor_roughnessMap.png": "e905554a48bc8c7f728613e80e22987b82686b8232bdf49f94e50b7bcc647182",
     "textures/whiteTextured_bumpMap.png": "c4ace6c801244697c9be598a42d9a5a36dae194fb3551c26df59a3b8c789bd61",
-    "textures/materials.json": "7f0d1515306d88b3de19fe28101168dfeec3ad412238d38ce733e02562f952ef",
-    "scifi_helmet.glb": "657409cd0cdd84f10527386d76456dc0a16339372503b2d4ca04988532bb741c",
-    "render_front.png": "d79f78b9ed955e7afaa557b36a66aa996365ce852a6c4bf8feb27ac88fbadf80",
+    "textures/materials.json": "bff94e86f0ebffb357827634ab2bc223c4e88f817e1f9469a3bf2bdecc2ce738",
+    "scifi_helmet.glb": "e89ff7b3575fb56387bd4479050993c11f47a72d2d93f241cc8061e03e14e213",
+    "render_front.png": "fdba22867c09a9301ff690bd3ea17ec9a8d9c5cde568dad53d09aeac74c24296",
     "mask_front.png": "b8b8771b089e2b944a49e78b5e7466957b611194aafffd8ea781106701a0d28e",
-    "overlay_front.png": "221bc9e044541b3c738aa0d51eae4c45562afa9b0db0f070e616f4d7a3da3362",
-    "render_left.png": "32d016712df60a42e85f936f9b331fc6bbaafae913e707342441f5c8d1496c75",
+    "overlay_front.png": "931d69dfb73dcfc1e598189ae7758d23fbbd744769f2a6de813df1f5e758e19a",
+    "render_left.png": "48d1639a9a0d236a210f6c3c4b2ed4add2bf419cd9c3c9d3f33d37be772e5481",
     "mask_left.png": "a04e74e8f75ae87f4b1c3ccabc51d5cc06016911ba7e6a6453e2f19713b8ec58",
-    "overlay_left.png": "6de1903515b890fa333203528cc4efb42680e6cdd7552ff2da17ebdd13b46b63",
-    "render_back.png": "aca59b26e5b99bd8e2ec822d80d4d0b08c7957711ab2693d043eef9573db8a82",
+    "overlay_left.png": "71a08b1e55c27063d43bcf0a729f1de543ce89e66254a62aff3bf123f09a0c4c",
+    "render_back.png": "306dd0f7623b745c225cbb72aa6f28895770ba3ad8bb09f99c90f70ffb307ae3",
     "mask_back.png": "474de3bd4ecaf5806c4c7ace38fb3dfea2cd83af7ffa6713ae1cf05513016a4e",
-    "overlay_back.png": "8e1c354a44ae4d9fe0a543111ee2173dc68d8f5b2ace5a11e332e96381966b96",
-    "render_right.png": "4d6e4cf0cdd8495220fca10491557096bed01df8b6d1819e10b305e630b8f18e",
+    "overlay_back.png": "56ea3f8ee9491c81655c8c95a644ecb32a2da19ad6a500b49c89fb3e5fd82e85",
+    "render_right.png": "61ac74eb0a13e84ec227ef7beb1f220ccaa6d968b6b9d25ef0d99e85b339da1f",
     "mask_right.png": "0022bf6f7bd154c5373558d3398422d777429ee924fc43b4c8a6561d0aee397f",
-    "overlay_right.png": "8e3c4e2db610bf3851c924a24485ca9c29b55ee1488b9419f29d7299d26338a3",
+    "overlay_right.png": "247d1c86f823093b337b67fc08fd7908bcae00183297a5324150232091ea7d67",
     "iou.json": "590538c4cd96649df70a2616f0cd668cba321ca2466109932cb51c478fe38b32",
-    "compare.png": "ca7fb56f6ae2a74f9b1f80067310f736d14c1d30f1c34b9c4dd34df180bfb42e"
+    "compare.png": "3a102cd6ab52dd8e28934948e2a6aa58851f016ae92fb5abc6f892f838f2a7a8"
   },
   "sources": {
     "files": {
@@ -131,7 +133,7 @@
       "src/helmet.js": "10c578579b83457e5b60b37d5411121a7b20b8b6169ffa4ccc55d76bec44f461",
       "src/helmetParams.json": "9b38756b9f76f05acfdcd9f46e3670af29c9406039e9827257ff01ad59a0b34d",
       "src/main.js": "12a9976636ce7537453294adc1be1933a64f73df2150dc3c0c390fc0a2cc76da",
-      "src/materials.js": "3cff574fba8a5480efb7723edcd471dcdb5892691f74e2cd98cdc1513a19b144",
+      "src/materials.js": "367eb448d883ced1be5fdaca4ab361729779f7786eb30a27b77b6727e339598f",
       "src/params.js": "24b2e7cee16b44ca26b518beb689982e0fec092026a6f42d18bb08203e6db170",
       "src/parts/bodyStudy.js": "fe45c21c425de5367e1770735d6f9e7510d78d148e941d3ad8fc7de6c4bae4ce",
       "src/parts/common.js": "07c66f0f95ea400c4dcfdaadab2e2f3bbe96af2378af01b8b613699f5ba7a58b",
@@ -140,7 +142,7 @@
       "src/parts/lowerArmor.js": "61c2781faef89a275c066f0e1ccc7ccda42785872ee39e8dfb9cca97633181a4",
       "src/parts/neck.js": "df7208322bef09cdd445fe14e724869851604377d8bcdf4ae6a9c57ed96d5110",
       "src/parts/rightComms.js": "0f1c7a8eebee5830ecb06f4cc8d421588cb720d2b44e6e672af84fc19af8e86a",
-      "src/parts/upperHelmet.js": "4dbcf0621463529968ba734b9a8d44df5689b6dd72f29b1533ebb8fb04520de8",
+      "src/parts/upperHelmet.js": "5ee5f2b9aebe462fb12d41ba61cafb0f172b2a3049013014301157fe6f41471c",
       "src/shapeFit.js": "57c4a7b94b0edbcbed61a38e2f1939af7e721101ce9b04d73c0de96159640ed8",
       "src/textures.js": "4316102ba362735b59b3aa2a2e27a684aeb45314aedd1f34907b51dde4c14414",
       "refs/meshy-reference.json": "47f6e9df33dada643dafadbbb90994b69c66ce522789f4eae25b7ec7f78fa673",
@@ -174,7 +176,7 @@
       ".nvmrc": "7e8a2fa94951112b894a3dbe3d05efef5e9263741fa49125f0a70f40fedab4cc",
       "../reference/helm/turnaround.mp4": "fac039db10d9d3ee3c74373c38e323dd53489df69eee18971e736c9d971e70de"
     },
-    "digest": "c8cd9c455375ba288ba41240886bf700178b04c78604e47ad27a8d97f58a4e46"
+    "digest": "267628f52ce74ba64d61ebfa55a16026fdfcc2c399f459a29937703a9dcf914d"
   },
   "runtime": {
     "node": "v24.19.0",
@@ -747,14 +749,14 @@
     "denoiseSeed": 47
   },
   "glb": {
-    "bytes": 4754980,
+    "bytes": 4822584,
     "meshes": 89,
     "nodes": 103,
-    "materials": 8,
-    "images": 5
+    "materials": 9,
+    "images": 6
   },
   "textures": {
-    "maps": 5,
+    "maps": 7,
     "manifest": "textures/materials.json"
   },
   "iou": {
@@ -764,5 +766,5 @@
     "right": 0.8968,
     "mean": 0.9163
   },
-  "finishedAt": "2026-10-28T14:03:18.355Z"
+  "finishedAt": "2026-10-28T14:11:02.730Z"
 }

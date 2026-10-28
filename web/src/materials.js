@@ -9,7 +9,7 @@ export function createMaterials() {
   const [honeyColor, honeyBump] = honeycombMaps();
   const [grime, grimeRough] = grimeMaps();
 
-  return {
+  const materials = {
     darkArmor: new THREE.MeshPhysicalMaterial({
       name: 'darkArmor', color: 0x313438, roughness: 0.75, metalness: 0.15,
       roughnessMap: shellRough, bumpMap: shellBump, bumpScale: 0.03, envMapIntensity: 0.6,
@@ -30,4 +30,11 @@ export function createMaterials() {
     bandStripe: new THREE.MeshStandardMaterial({ name: 'bandStripe', color: 0x8d8e8b, roughness: 0.6, metalness: 0.2 }),
     bust: new THREE.MeshStandardMaterial({ name: 'bust', color: 0x1e1e1e, roughness: 0.8 }),
   };
+  // Same graphite colour and texture maps as the mask, with the broad dome
+  // reflection subdued so the curved surface reads as the same matte coating.
+  materials.crownArmor = materials.darkArmor.clone();
+  Object.assign(materials.crownArmor, {
+    name: 'crownArmor', roughness: 0.9, envMapIntensity: 0.35, specularIntensity: 0.45,
+  });
+  return materials;
 }
