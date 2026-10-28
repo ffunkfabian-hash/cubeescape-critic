@@ -6,7 +6,8 @@
 // verification.json identifies this run's status, completed views and optional IoU.
 // Older files may remain after a failure or --no-iou; they are not evidence for the current run.
 // Usage: node verify_renders.mjs [--no-iou] [--finish=original|metal|graphite]
-//   [--accents=original|light-fasteners|white-strips|contrast-strips] [--out=renders]
+//   [--accents=original|light-fasteners|white-strips|contrast-strips] [--strips=on|off] [--out=renders]
+//   [--crown-pattern=none|chevron|hex|tech] (patterns require --strips=off)
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -14,13 +15,14 @@ import path from 'node:path';
 import { inspectGLB, subprocessExitCode } from './tools/verification.mjs';
 import { sha256, sourceManifest } from './tools/provenance.mjs';
 import { resolveFinish, resolveAccents } from './src/finishPresets.js';
+import { resolveCrownPattern } from './src/crownPatternPresets.js';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
-const options = { finish: 'original', accents: 'original', out: 'renders', noIou: false };
+const options = { finish: 'original', accents: 'original', strips: 'on', 'crown-pattern': 'none', out: 'renders', noIou: false };
 const seen = new Set();
 const args = process.argv.slice(2);
 for (let i = 0; i < args.length; i++) {
-  const match = /^(--finish|--accents|--out)(?:=(.*))?$/.exec(args[i]);
+  const match = /^(--finish|--accents|--strips|--crown-pattern|--out)(?:=(.*))?$/.exec(args[i]);
   const key = args[i] === '--no-iou' ? 'noIou' : match?.[1].slice(2);
   if (!key) throw new Error(`Unknown argument: ${args[i]}`);
   if (seen.has(key)) throw new Error(`Duplicate argument: ${args[i]}`);
@@ -33,11 +35,15 @@ for (let i = 0; i < args.length; i++) {
 }
 const finish = resolveFinish(options.finish);
 const accents = resolveAccents(options.accents);
+const strips = options.strips;
+if (!['on', 'off'].includes(strips)) throw new Error(`Unknown strips ${JSON.stringify(strips)}; expected on or off`);
+const crownPattern = resolveCrownPattern(options['crown-pattern']);
+if (crownPattern.requiresStripsOff && strips !== 'off') throw new Error('Crown patterns require --strips=off');
 const out = path.resolve(root, options.out);
 mkdirSync(out, { recursive: true });
 const VIEWS = ['front', 'left', 'back', 'right'];
 const result = { startedAt: new Date().toISOString(), status: 'running', views: [],
-  finish, accents, outputDirectory: out, iouSkipped: options.noIou, cameras: {}, outputs: {} };
+  finish, accents, strips, crownPattern, outputDirectory: out, iouSkipped: options.noIou, cameras: {}, outputs: {} };
 const record = () => writeFileSync(path.join(out, 'verification.json'), JSON.stringify(result, null, 2) + '\n');
 record();
 
@@ -72,13 +78,23 @@ try {
   page.on('response', (response) => {
     if (response.status() >= 400) errors.push(`HTTP ${response.status()}: ${response.url()}`);
   });
-  await page.goto(`${url}?ui=0&static=1&finish=${encodeURIComponent(finish.name)}&accents=${encodeURIComponent(accents.name)}`);
+  await page.goto(`${url}?ui=0&static=1&finish=${encodeURIComponent(finish.name)}&accents=${encodeURIComponent(accents.name)}&strips=${strips}&crownPattern=${crownPattern.name}`);
   await page.waitForFunction(() => window.__ready === true, null, { timeout: 180000 });
   result.parameters = await page.evaluate(() => window.helmetParams);
   result.finish = await page.evaluate(() => window.materialFinish);
   if (JSON.stringify(result.finish) !== JSON.stringify(finish)) throw new Error('Rendered finish does not match requested preset');
   result.accents = await page.evaluate(() => window.materialAccents);
   if (JSON.stringify(result.accents) !== JSON.stringify(accents)) throw new Error('Rendered accents do not match requested preset');
+  result.strips = await page.evaluate(() => window.helmetParams.foreheadPlates.enabled !== false ? 'on' : 'off');
+  if (result.strips !== strips) throw new Error('Rendered strips do not match requested state');
+  result.crownPattern = await page.evaluate(() => window.crownPattern);
+  if (JSON.stringify(result.crownPattern) !== JSON.stringify(crownPattern)) throw new Error('Rendered crown pattern does not match requested preset');
+  const markingCount = await page.evaluate(() => {
+    let count = 0;
+    window.scene.getObjectByName('SciFiHelmet').traverse(object => { if (object.name === 'CrownMarking') count++; });
+    return count;
+  });
+  if (markingCount !== (crownPattern.name === 'none' ? 0 : 1)) throw new Error('Unexpected crown marking mesh count');
   result.renderSettings = await page.evaluate(() => window.renderSettings);
   const settle = () => page.evaluate(() => { const t = performance.now(); window.renderFrame(); return performance.now() - t; });
   for (const v of VIEWS) {
@@ -123,6 +139,7 @@ try {
         parts.push({ part: object.name, material: material.name });
         if (materials[material.name]) continue;
         const entry = { color: material.color.getHexString(), roughness: material.roughness,
+          alphaTest: material.alphaTest, transparent: material.transparent,
           metalness: material.metalness, envMapIntensity: material.envMapIntensity,
           specularIntensity: material.specularIntensity, normalScale: material.normalScale?.toArray(),
           bumpScale: material.bumpScale, maps: {} };
@@ -148,7 +165,8 @@ try {
     writeFileSync(path.join(textureDir, name), bytes);
     result.outputs[`textures/${name}`] = sha256(bytes);
   }
-  const textureManifest = JSON.stringify({ finish: result.finish, accents: result.accents, materials: textureBundle.materials, parts: textureBundle.parts }, null, 2) + '\n';
+  const textureManifest = JSON.stringify({ finish: result.finish, accents: result.accents, strips: result.strips,
+    crownPattern: result.crownPattern, materials: textureBundle.materials, parts: textureBundle.parts }, null, 2) + '\n';
   writeFileSync(path.join(textureDir, 'materials.json'), textureManifest);
   result.outputs['textures/materials.json'] = sha256(textureManifest);
   result.textures = { maps: Object.keys(textureBundle.files).length, manifest: 'textures/materials.json' };

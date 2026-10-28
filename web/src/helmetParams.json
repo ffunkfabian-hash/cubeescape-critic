@@ -551,6 +551,7 @@
     "radiusBack": 0.48
   },
   "foreheadPlates": {
+    "enabled": true,
     "outline": [[0.055, 0.11], [0.275, 0.11], [0.17, 0.415], [0.17, 0.8], [0.065, 0.8], [0.065, 0.42]],
     "wrapToRear": true,
     "offsetCentreY": 0.1,

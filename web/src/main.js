@@ -11,6 +11,8 @@ import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
 import GUI from 'lil-gui';
 import { createMaterials, applyArmorFinish, applyArmorAccents } from './materials.js';
 import { resolveFinish, resolveAccents } from './finishPresets.js';
+import { resolveCrownPattern } from './crownPatternPresets.js';
+import { createCrownMarking } from './crownPatterns.js';
 import { denoiseTexture, DENOISE_SEED } from './textures.js';
 import { buildHelmet } from './helmet.js';
 import { buildBodyStudy } from './parts/bodyStudy.js';
@@ -19,6 +21,11 @@ import { D, resetParams } from './params.js';
 const query = new URLSearchParams(location.search);
 const materialFinish = resolveFinish(query.get('finish') ?? 'original');
 const materialAccents = resolveAccents(query.get('accents') ?? 'original');
+const crownPattern = resolveCrownPattern(query.get('crownPattern') ?? 'none');
+const strips = query.get('strips') ?? 'on';
+if (!['on', 'off'].includes(strips)) throw new Error(`Unknown strips ${JSON.stringify(strips)}; expected on or off`);
+if (crownPattern.requiresStripsOff && strips !== 'off') throw new Error('Crown patterns require ?strips=off');
+D.foreheadPlates.enabled = strips === 'on';
 if (query.get('ui') === '0') document.body.classList.add('noui');
 
 const BG = 0x8c8c8c;
@@ -186,10 +193,15 @@ addEventListener('resize', resize);
 resize();
 
 function disposeModel(obj) {
-  obj.traverse((o) => o.geometry?.dispose());
+  obj.traverse((o) => {
+    o.geometry?.dispose();
+    if (o.name === 'CrownMarking') { o.material.map?.dispose(); o.material.dispose(); }
+  });
 }
 
 function rebuild() {
+  // URL-level variant selection survives geometry resets and GUI rebuilds.
+  D.foreheadPlates.enabled = strips === 'on';
   const rot = model ? model.rotation.y : 0;
   if (model) {
     scene.remove(model);
@@ -200,6 +212,9 @@ function rebuild() {
   if (BODY_STUDY) model.add(buildBodyStudy(M));
   applyArmorFinish(model, M);
   applyArmorAccents(model, M, materialAccents.name);
+  const crown = model.getObjectByName('Crown');
+  const marking = createCrownMarking(crown, crownPattern.name);
+  if (marking) crown.parent.add(marking);
   model.rotation.y = rot;
   scene.add(model);
   console.log(`model built in ${(performance.now() - t0).toFixed(0)} ms`);
@@ -250,7 +265,7 @@ function buildGui() {
   gui.add({ overlay: () => toggleOverlay() }, 'overlay').name('Overlay (O)');
   gui.add({ diff: () => toggleOverlay(true, overlayMode === 'difference' ? 'normal' : 'difference') }, 'diff').name('Overlay: Differenz');
   gui.add({ json: () => console.log(JSON.stringify(D, null, 2)) }, 'json').name('Parameter → Konsole');
-  gui.add({ reset: () => { resetParams(); gui.destroy(); buildGui(); rebuild(); } }, 'reset').name('Zurücksetzen');
+  gui.add({ reset: () => { resetParams(); D.foreheadPlates.enabled = strips === 'on'; gui.destroy(); buildGui(); rebuild(); } }, 'reset').name('Zurücksetzen');
   gui.add({ exportGLB }, 'exportGLB').name('scifi_helmet.glb');
 }
 
@@ -262,10 +277,15 @@ if (query.get('overlay')) toggleOverlay(true, query.get('overlay') === 'diff' ? 
 
 function renderFrame() {
   if (maskMode) {
+    // The transparent marking is appearance only; the measurement uses the
+    // original helmet surface rather than an opaque override of its decal.
+    const marking = model.getObjectByName('CrownMarking'), visible = marking?.visible;
+    if (marking) marking.visible = false;
     scene.overrideMaterial = maskMaterial;
     scene.background = new THREE.Color(0x000000);
     renderer.toneMapping = THREE.NoToneMapping;
     renderer.render(scene, camera);
+    if (marking) marking.visible = visible;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     scene.background = new THREE.Color(BG);
     scene.overrideMaterial = null;
@@ -290,4 +310,4 @@ if (STATIC) {
   });
 }
 
-Object.assign(window, { THREE, scene, camera, controls, renderFrame, setCameraView, toggleOverlay, setMaskMode, exportGLB, rebuild, helmetParams: D, materialFinish, materialAccents });
+Object.assign(window, { THREE, scene, camera, controls, renderFrame, setCameraView, toggleOverlay, setMaskMode, exportGLB, rebuild, helmetParams: D, materialFinish, materialAccents, crownPattern });

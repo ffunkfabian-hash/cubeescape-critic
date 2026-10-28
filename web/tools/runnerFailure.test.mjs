@@ -12,7 +12,7 @@ function fixture() {
     const file = path.join(root, name); mkdirSync(path.dirname(file), { recursive: true });
     writeFileSync(file, typeof value === 'string' ? value : JSON.stringify(value));
   };
-  for (const file of ['verify_renders.mjs', 'src/finishPresets.js', 'tools/provenance.mjs', 'tools/verification.mjs', 'tools/compare_reference.mjs']) {
+  for (const file of ['verify_renders.mjs', 'src/finishPresets.js', 'src/crownPatternPresets.js', 'tools/provenance.mjs', 'tools/verification.mjs', 'tools/compare_reference.mjs']) {
     put(file, ''); copyFileSync(new URL('../' + file, import.meta.url), path.join(root, file));
   }
   return { directory, root, put };
@@ -35,6 +35,8 @@ for (const failure of ['missing-source', 'server-initialization']) {
       assert.equal(run.status, 1, run.stderr?.toString());
       const result = JSON.parse(readFileSync(path.join(f.root, 'renders/verification.json')));
       assert.equal(result.status, 'failed'); assert.equal(result.old, undefined);
+      assert.equal(result.strips, 'on');
+      assert.equal(result.crownPattern.name, 'none');
       if (failure === 'server-initialization') assert.match(result.error, /fixture server failure/);
     } finally { rmSync(f.directory, { recursive: true, force: true }); }
   });
@@ -61,12 +63,33 @@ test('verification rejects invalid arguments before starting the renderer or wri
   try {
     for (const args of [['--finish=chrome'], ['--finish='], ['--finish'], ['--out='],
       ['--out', '--no-iou'], ['--unknown'], ['--finish=metal', '--finish=graphite'],
-      ['--accents=white'], ['--accents=contrast'], ['--accents='], ['--accents'], ['--accents=white-strips', '--accents=original']]) {
+      ['--accents=white'], ['--accents=contrast'], ['--accents='], ['--accents'], ['--accents=white-strips', '--accents=original'],
+      ['--strips=hidden'], ['--strips='], ['--strips'], ['--strips=on', '--strips=off'],
+      ['--crown-pattern=unknown'], ['--crown-pattern='], ['--crown-pattern'],
+      ['--crown-pattern=chevron'], ['--crown-pattern=tech', '--strips=on'],
+      ['--crown-pattern=hex', '--crown-pattern=none']]) {
       const run = spawnSync(process.execPath, [path.join(f.root, 'verify_renders.mjs'), ...args], { timeout: 10000 });
       assert.equal(run.status, 1, run.stderr?.toString());
-      assert.match(run.stderr.toString(), /Unknown finish|Unknown accents|Missing value|Unknown argument|Duplicate argument/);
+      assert.match(run.stderr.toString(), /Unknown finish|Unknown accents|Unknown strips|Unknown crown pattern|Crown patterns require|Missing value|Unknown argument|Duplicate argument/);
     }
     assert.equal(existsSync(path.join(f.root, 'renders')), false);
+  } finally { rmSync(f.directory, { recursive: true, force: true }); }
+});
+
+test('verification records every crown pattern and requires the explicit strip-free state', () => {
+  const f = fixture();
+  try {
+    for (const name of ['chevron', 'hex', 'tech']) {
+      const run = spawnSync(process.execPath, [path.join(f.root, 'verify_renders.mjs'), `--crown-pattern=${name}`,
+        '--strips=off', `--out=patterns/${name}`, '--no-iou'], { timeout: 10000 });
+      assert.equal(run.status, 1, run.stderr?.toString());
+      const result = JSON.parse(readFileSync(path.join(f.root, `patterns/${name}/verification.json`)));
+      assert.equal(result.crownPattern.name, name);
+      assert.equal(result.crownPattern.textureSize, 1024);
+      assert.equal(result.crownPattern.surfaceOffset, 0.001);
+      assert.equal(result.strips, 'off');
+      assert.equal(result.finish.name, 'original');
+    }
   } finally { rmSync(f.directory, { recursive: true, force: true }); }
 });
 
@@ -74,7 +97,7 @@ test('verification records selected preset and failure in its separate output di
   const f = fixture();
   try {
     f.put('renders/verification.json', { status: 'passed', original: true });
-    const run = spawnSync(process.execPath, [path.join(f.root, 'verify_renders.mjs'), '--finish=metal', '--accents=light-fasteners', '--out=variants/metal', '--no-iou'], { timeout: 10000 });
+    const run = spawnSync(process.execPath, [path.join(f.root, 'verify_renders.mjs'), '--finish=metal', '--accents=light-fasteners', '--strips=off', '--out=variants/metal', '--no-iou'], { timeout: 10000 });
     assert.equal(run.status, 1, run.stderr?.toString());
     const result = JSON.parse(readFileSync(path.join(f.root, 'variants/metal/verification.json')));
     assert.equal(result.status, 'failed');
@@ -82,6 +105,7 @@ test('verification records selected preset and failure in its separate output di
     assert.equal(result.finish.metalness, 0.55);
     assert.deepEqual(result.finish.textureSeeds, { normal: 73, roughness: 11 });
     assert.deepEqual(result.accents, { name: 'light-fasteners', lightFasteners: true, whiteStrips: false });
+    assert.equal(result.strips, 'off');
     assert.equal(result.iouSkipped, true);
     assert.equal(result.outputDirectory, realpathSync(path.join(f.root, 'variants/metal')));
     assert.equal(JSON.parse(readFileSync(path.join(f.root, 'renders/verification.json'))).original, true);

@@ -15,7 +15,7 @@ export function buildHelmet(M) {
   model.name = 'SciFiHelmet';
   const comms = buildRightComms(M);
   model.add(buildUpperHelmet(M), buildLowerArmor(M), buildLeftEar(M, { headBandOnly: D.comms.symmetric }), comms, buildNeck(M));
-  model.add(buildForeheadPlates(model.getObjectByName('Crown'), M));
+  if (D.foreheadPlates.enabled !== false) model.add(buildForeheadPlates(model.getObjectByName('Crown'), M));
   if (D.comms.symmetric) model.add(mirrorComms(comms));
   fitHelmet(model, D.shapeFit);
   model.traverse((o) => {
