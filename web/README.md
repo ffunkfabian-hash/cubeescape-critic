@@ -38,6 +38,38 @@ npm run verify       # headless: renders/render_*.png, overlay_*.png, mask_*.png
 | `verify_renders.mjs`, `tools/iou.py` | Playwright-Prüfung und Umriss-IoU je Ansicht (nur oberhalb der Schalkante der Vorlage) |
 | `tools/pairs.py` | Nahvergleich Vorlage/Render je Ansicht |
 
+## Parameter (`src/helmetParams.json`)
+
+Einheit: Helmhöhe ≈ 1, Ursprung in der Kopfmitte, Y oben, Gesicht +Z, linke Helmseite +X.
+
+| Schlüssel | Bedeutung |
+| --- | --- |
+| `head.tilt` | Neigung der ganzen Grundform um X (Bogenmaß) |
+| `profile.front` | halbe Breite je Höhe, `[x, y]` von oben nach unten |
+| `profile.sideFront`, `profile.sideBack` | vordere bzw. hintere Kante je Höhe, `[z, y]` von oben nach unten |
+| `profile.topHalf` | normierte Draufsicht (rechte Hälfte, `[u, v]`, v = 1 vorn), wird je Höhe skaliert |
+| `facets` | Ebenen der Frontplatte `[Punkt, Normale]`: zwei Front-Ebenen (Mittelgrat), Seitenfasen, Stirn, Untergesicht |
+| `facetBevels`, `bevelWidth` | Facettenpaare mit Fase an der gemeinsamen Kante, Fasenbreite |
+| `capEdgeY`, `maskBackZ` | Unterkante der dunklen Kappe hinten, hintere Kante der Frontplatte an der Seite |
+| `visor` | Sehschlitze: Lage `x`/`y`, `width`/`height`, V-Winkel `angleDeg`, Ausrichtung `yawDeg`, Tiefe `socketDepth`/`slitDepth` |
+| `core`, `collar`, `neckRing` | weißer Kern, Kragen (mit Neigung), Halsring: Radien, Höhen, Mittelpunkt |
+| `band` | Kopfbügel: Lage `z`, halbe Breite |
+| `earL`, `earR` | Ohrkappe links bzw. Funkmuschel rechts: Mitte, Außenkante, Größe |
+| `antenna.top`, `backBox` | Antennenspitze; Heck-Box Mitte und Größe |
+| `tube` | Spiralkabel: Wendel- und Drahtradius, Steigung, Kurvenpunkte |
+
+## Messverlauf (Umriss-IoU)
+
+| Stand | front | left | back | right | Mittel |
+| --- | --- | --- | --- | --- | --- |
+| Runde 1, mit Schal (alte Messung) | 0,939 | 0,887 | 0,918 | 0,887 | 0,908 |
+| Runde 1, gemessen oberhalb der Schalkante | 0,926 | 0,921 | 0,896 | 0,884 | 0,907 |
+| Runde 2: Profil-Loft, Facetten, Spiralkabel, ohne Schal | 0,922 | 0,910 | 0,882 | 0,897 | 0,903 |
+| Runde 3: spitze Front, Fasen, Augenhöhlen, Details | 0,923 | 0,917 | 0,882 | 0,893 | 0,904 |
+
+Die Silhouette ändert sich durch Facetten, Material und Details kaum; Fortschritt zeigt der Nahvergleich
+(`python3 tools/pairs.py . out.png`). Lehren: `docs/LESSONS.md`.
+
 ## Abweichungen von den Vorgaben
 
 - `visorGlow.emissiveIntensity` steht auf 0,75 statt 5,0 und Bloom auf 0: im Video leuchten die Schlitze blass ohne
