@@ -1,0 +1,13 @@
+ce_judge: 5 Dateien, 56 Diff-Zeilen, Richter luna (gpt-6-luna medium), Grund: expliziter --model=luna; automatisch wäre luna (Routineänderung (46 Diff-Zeilen, kein erkannter Kern-/Vertragspfad)), Basis 9e1b495
+| Nr | Datei:Zeile | Schwere (blocker/hoch/niedrig/ok) | Befund | Vorschlag |
+|---:|---|---|---|---|
+| 1 | — | ok | SaveData, LevelFormat, unity_contract und Vertragsversion sind im Diff nicht geändert. | Keine Migration erforderlich. |
+| 2 | — | ok | Keine Persistent-, Szenen-, Item-, Baustein- oder Seed-IDs und keine Enums geändert. | — |
+| 3 | — | ok | Keine UnityEngine.Object-, Zeit-, statischen Zustands- oder Update/Tick-Änderungen. | — |
+| 4 | `web/tools/materialFinishes.test.mjs:31,66–92`; `web/tools/runnerFailure.test.mjs:64` | ok | Tests wurden erweitert, nicht abgeschwächt. Neue Preset- und Argumentfälle sind gezielt abgedeckt. Kein Golden-/Hash-Update im Diff. | — |
+| 5 | `web/src/materials.js:66–74,93–96` | ok | Keine `area == …`-Sonderlogik; die neuen Materialwerte stammen aus den Presetprofilen. | — |
+| 6 | `web/verify_renders.mjs:9` | ok | Nur Usage-Zeile angepasst; die übrige Verhaltensdokumentation wird nicht berührt. | — |
+| 7 | — | ok | Kein Force-Push, Stash, fremdes Löschen, Push oder Merge im Diff. | — |
+| 8 | `web/src/finishPresets.js:21–32`; `web/src/materials.js:66–74,93–96` | ok | Eine eng begrenzte Materialprobe samt Tests und Usage-Anpassung; entspricht den genannten offenen Punkten und Zuständigkeit. | — |
+
+Freigabe

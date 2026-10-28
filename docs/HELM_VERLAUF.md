@@ -448,5 +448,37 @@ Die erste Metalltextur war zu fleckig und wurde vor den nummerierten Materialpro
 44 Tests, Build und unabhängige Prüfung bestehen. Alle Varianten haben dieselben 104 Meshes, Kameras und Silhouetten;
 mittlere IoU 90,89 %. Gegenüber 79 bleiben 97 Meshes bytegleich; die sehr kleinen numerischen Augenabweichungen sind
 im [Prüfbericht](versions/0.4.md) quantifiziert. Keine Materialwahl wird aus dem positiven Nutzerfeedback abgeleitet.
-[Vier Looks](bilder/helm_continuity_varianten.jpg) · [Alle Ansichten](bilder/helm_continuity_vier_ansichten.jpg) ·
+[Materialauswahl, später um 85/86 ergänzt](bilder/helm_continuity_varianten.jpg) · [Alle Ansichten](bilder/helm_continuity_vier_ansichten.jpg) ·
 [Formvergleich](bilder/helm_continuity_form.jpg) · [Agentenübergabe mit visueller Einschätzung](HELM_AGENTEN.md).
+
+### Ergänzung 85/86 – dunkle Streifen besser lesbar
+
+Die schwarzen Stirnblenden gefallen dem Nutzer auf Metall, verschwinden ihm aber auf Graphit zu stark. Auf Wunsch
+wird das Kontrastverfahren bei beiden Finishes ausprobiert: [85](belege/helm/85.jpg) setzt glattere, hellere
+Anthrazitstreifen auf raues Graphit; [86](belege/helm/86.jpg) setzt mattere Anthrazitstreifen auf glänzendes Metall.
+Die Ausgangsvarianten bleiben erhalten. Nur Materialien ändern sich; 104 Meshes, Transformationen und Silhouetten
+stimmen mit 80–84 überein. Zehn gezielte Tests und die unabhängige Nachprüfung bestehen.
+[Metallvergleich](bilder/helm_continuity_metall_auswahl.jpg) · [Graphitvergleich](bilder/helm_continuity_graphit_auswahl.jpg).
+
+
+### Ergänzung 87–91 – ohne Blenden und alternative Haubenmuster
+
+Der Nutzer möchte die Kopfoberseite ohne Stirnblenden sehen und statt der Bänder andere Muster „just for fun“
+ausprobieren. `strips=off` lässt ausschließlich H20/H21 weg; die bereits darunter vorhandene Haube bleibt unverändert.
+Die Materialproben [87 Metall](belege/helm/87.jpg) und [88 Graphit](belege/helm/88.jpg) zeigen diese ruhigere Form mit
+hellen oberen Schrauben. Die 102 verbleibenden Grundmeshes sind identisch zu 80–86.
+
+[89 Winkel](belege/helm/89.jpg), [90 Hexagon](belege/helm/90.jpg) und [91 Technik](belege/helm/91.jpg) verwenden Graphit
+ohne Blenden und ergänzen ausschließlich `CrownMarking`: einen separaten Träger für deterministische weiße PNG-Bemalung.
+Die drei Trägergeometrien sind identisch; nur ihre Motive unterscheiden sich. GLB-Alpha-Masken und PNGs sind exportiert.
+Die Markierungen belegen den vorderen/oberen Scheitel, nicht das Heck. Die Technikmarkierungen sind bewusst asymmetrisch.
+
+Nach Sichtprüfung wirkt die blendenlose Form ruhiger, das Winkelmotiv klar und leicht, das Hexagonraster feiner und
+auf Distanz unruhiger; die Technikmarkierungen erinnern an auflackierte Kennzeichnungen. Dies sind Einschätzungen des
+Agenten, keine Nutzerentscheidung. Alle bisherigen Blenden- und Materialproben bleiben verfügbar.
+
+50 Tests und Build bestehen. Unabhängige Nachprüfung: Freigabe; der ergänzend verlangte Browsercheck bestätigt
+Reset-/Rebuild-Verhalten und Wiederherstellung der Mustersichtbarkeit nach dem Maskenrender. Vier Ansichten pro Probe
+geprüft. Die fünf Silhouettensätze sind bytegleich, mittlere IoU 90,73 %; dies bewertet keine Mustergestaltung.
+[Mustervergleich](bilder/helm_continuity_muster_vier_ansichten.jpg) ·
+[Ohne Blenden](bilder/helm_continuity_ohne_blenden.jpg) · [Aufbau und Reproduktion](HELM_AGENTEN.md).

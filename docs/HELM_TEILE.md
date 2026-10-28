@@ -35,8 +35,12 @@ Diese Bezeichnungen gelten unabhängig davon, von welcher Richtung man gerade au
 | H21 | Stirnblende B | Entsprechender separater Streifen auf Seite B; Mittelstreifen bleibt frei. |
 
 Die IDs bezeichnen sichtbare Abschnitte, nicht zwingend einzelne Meshes. Seit Fidelity sind Haube, Augenmaske, beide Wangen, Kinn und beide Kieferstücke getrennte Meshes.
-Die Bildkarte zeigt die gemeinsame Form 80–84 mit weißen H20/H21 aus Probe 83; aktuelle Vier-Ansichten-Belege stehen im [Prüfbericht](versions/0.4.md).
+Die Bildkarte zeigt Probe 83; dieselbe Bauteilgeometrie gilt für 80–86. Aktuelle Vier-Ansichten-Belege stehen im [Prüfbericht](versions/0.4.md).
 Farben helfen beim Zuordnen; ein Änderungswunsch an H11 betrifft die Geometrie, solange keine Materialänderung genannt wird.
+
+In den optionalen Proben 87–91 sind H20/H21 ausgeschaltet, ihre Kennungen bleiben reserviert. Die übrigen 102 Meshes
+bleiben unverändert. 89–91 ergänzen `CrownMarking` als separaten Texturträger auf H01: Bemalung, kein massives Bauteil
+und keine neue Teilekennung. Die tatsächlichen Objekte stehen in `parts.json` des jeweiligen [Variantenordners](../assets/helmet-continuity/README.md).
 
 ## Zuordnung für die Umsetzung
 
@@ -67,7 +71,7 @@ Die Karte verwendet die vier vorhandenen Renderansichten mit 1280×720 Pixeln. C
 vergeben; zusätzliche Bereiche erhalten neue Nummern. Die Karte dokumentiert einen Modellstand und ersetzt keinen
 Vergleich mit den Referenzbildern.
 
-Aktueller Lieferstand: **79**, mit quer und längs gewölbtem Scheitel, angepasstem Bügel und weichem Übergang
+Bisheriger Lieferstand vor 0.4: **79**, mit quer und längs gewölbtem Scheitel, angepasstem Bügel und weichem Übergang
 zwischen H01 und H02. Die Fugenlinie ist durch einen verdeckten Überlappungsrand reduziert. Beide Teile bleiben getrennt; H09/H10 sind wieder rund; die separaten Vertiefungen H11 folgen der neuen Rundung.
 Die Haube besitzt dieselbe Graphitgrundfarbe wie die Maske, mit sichtbarer feiner Lackkörnung und gedämpftem Glanz.
 H20/H21 schließen mit einem auslaufenden Überlappungsrand direkt an die Augenmaske an, bleiben aber eigenständige Meshes.

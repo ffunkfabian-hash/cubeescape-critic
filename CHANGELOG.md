@@ -6,6 +6,9 @@
 - Vergleichbare Presets `original`, `metal`, `graphite` auf identischer Geometrie; technische Anbauten erhalten.
 - Separate Akzentwahl: helle Befestigungspunkte auf dunkler Rüstung, zusätzlich weiße Stirn-/Scheitelstreifen als Probe.
 - Getrennte reproduzierbare Exporte, Materialparameter und vier feste Ansichten je Preset; Nutzerwahl steht aus.
+- Anthrazitfarbene Kontraststreifen für Metall und Graphit; optionale Haube ohne H20/H21, einschließlich stabiler Auswahl beim Zurücksetzen.
+- Drei deterministische PNG-Bemalungen als separate GLB-Texturträger: Winkel, Hexagon und Technik; keine Änderung der Haubengeometrie.
+- Zwölf gesicherte Varianten 80–91, 50 Tests, Browserprüfung und unabhängige Prüfungen; Aufbau, Stil und visuelle Einschätzung dokumentiert.
 
 ## 0.3.0 „Sidework“ – 2026-10-28 (offener Entwurf)
 

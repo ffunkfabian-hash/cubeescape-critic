@@ -7,10 +7,12 @@ H20/H21 laufen als zwei getrennte Streifen von der Stirn über die Haube bis zur
 Die Trapezform bleibt im Stirnbereich erkennbar, der Mittelstreifen frei. Der bestehende Kopfbügel liegt darüber.
 Metall und Graphit sind gleichberechtigte Materialproben, keine bestätigte Ablösung des bisherigen Looks.
 Zusätzlich gewünscht: helle Befestigungspunkte auf dunkler Rüstung und eine Probe mit weißen H20/H21.
+Die Stände 85/86 ergänzen anthrazitfarbene Kontrastblenden, 87/88 zeigen beide Finishes ohne Blenden und
+89–91 erproben weiße Winkel-, Hexagon- und Technikmarkierungen auf der Graphithaube.
 [Versuchsstände und Reproduktion](../assets/helmet-continuity/README.md).
 [Technischer Aufbau und Einschätzung für KI-Agenten](HELM_AGENTEN.md).
 
-Aktueller Lieferstand: **Prüflauf 79**. Nach Nutzerfeedback ist der Scheitel nun quer und längs gewölbt;
+Bisheriger Lieferstand vor diesen Versuchen: **Prüflauf 79**. Nach Nutzerfeedback ist der Scheitel nun quer und längs gewölbt;
 der Kopfbügel folgt der Haube. Ihr Rand läuft weich zur Augenmaske aus. Das helle Hinterkopfgehäuse und der Nackenrahmen sind wieder rund; die Kieferplatten bleiben kantig.
 Zwei separate Stirnblenden ergänzen die Haube gemäß der [Nutzerzeichnung](../reference/helm-forehead-request-20261028/stirnblenden-markierung.jpg).
 Die abgeflachten, eckigen Haubenversuche 62/63 wurden vom Nutzer ausdrücklich verworfen.
@@ -76,6 +78,22 @@ Die Akzentwahl ist unabhängig vom Finish: `light-fasteners` färbt ausschließl
 die beiden durchlaufenden Streifen H20/H21 im gebrochenen Weiß des Rahmens einschließlich dessen Texturen.
 Die Ausgangsfarbe ist `#D6D7D5`, kein leuchtendes Reinweiß. `original` erhält die bisherige Akzentverteilung.
 
+Auf Nutzerfeedback ergänzt `contrast-strips` eine Zwischenstufe: anthrazitfarbene H20/H21 (`#41474D`) mit
+gleichmäßiger Farbe und anderem Glanz als die Haube. Auf Graphit sind sie glatter (Rauheit .58, Metallanteil .20),
+auf Metall matter (Rauheit .70, Metallanteil .55). Die hellen oberen Schrauben bleiben dabei erhalten. Ziel ist die
+Lesbarkeit schwarzer Bauteile auf dunklem Grund ohne den starken Kontrast weißer Streifen. Auch dies ist eine Probe.
+
+### Weitere optionale Stilproben
+
+Auf Nutzerwunsch gibt es eine Haube ohne H20/H21 (`strips=off`), um die ruhige Grundform beurteilen zu können.
+Zusätzlich werden Winkelmarkierungen, ein Hexagonraster und asymmetrische Technikmarkierungen als aufgebrachte
+Bemalung ausprobiert. Diese „just for fun“-Proben ergänzen die Auswahl; sie ersetzen keine bestätigte Stilvorgabe.
+Die runde Haube bleibt darunter vollständig erhalten. Muster sind getrennte exportierbare Texturüberlagerungen,
+keine aufgemalten Ersatzteile für fehlende Geometrie. Aufbau und Grenzen stehen in [HELM_AGENTEN.md](HELM_AGENTEN.md).
+Die Muster konzentrieren sich auf Stirn und oberen Scheitel; das Heck bleibt frei. Winkel und Hexagone sind symmetrisch,
+die Technikmarkierungen bewusst asymmetrisch. [Vier Ansichten](bilder/helm_continuity_muster_vier_ansichten.jpg) und
+[beide Finishes ohne Blenden](bilder/helm_continuity_ohne_blenden.jpg) zeigen dieselben Kameras und dieselbe Beleuchtung.
+
 | Bereich | Basisfarbe | Wirkung |
 |---|---|---|
 | Dunkle Panzerung | `#313438` | Graphit, überwiegend matt, leicht metallisch |
@@ -97,7 +115,8 @@ Quelle ist der Three.js-Generator, keine von Hand geänderte Exportdatei. Formpa
 Im Generator zeigt +Y nach oben, +Z nach vorn. Seite A liegt bei −X (Kamera `right`), Seite B bei +X (`left`).
 Die anders bezeichneten Achsen in der ursprünglichen Formbeschreibung werden nicht mit diesen Arbeitskoordinaten vermischt.
 
-Der GLB enthält **104 Meshes** mit getrennten Baugruppen; Schraubensätze können gemeinsam in einem Mesh liegen.
+Die Streifenvarianten enthalten **104 Meshes**, die blendenlosen **102**, die Musterproben **103** mit einem zusätzlichen
+Bemalungsträger. Die 102 Grundmeshes sind identisch. Baugruppen bleiben getrennt; Schraubensätze können gemeinsam in einem Mesh liegen.
 [parts.json](../assets/helmet/parts.json) listet die tatsächlichen Exportobjekte und Materialien.
 Einzelne Meshes sind noch keine Zusicherung fertiger Druckwandstärken, Montagepassungen oder tragbarer Schutzwirkung.
 

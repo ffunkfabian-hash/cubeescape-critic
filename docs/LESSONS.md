@@ -22,3 +22,5 @@
 - Beim Verschieben eines Anbauteils beide Enden seiner Halterung an realen Flächen neu bestimmen und geometrisch prüfen; ein mitbewegtes Gehäuse allein trennt sonst die Verbindung ([Sidework](versions/0.3.md)).
 
 - „Vorher“ ist keine Versionskennung: Nutzerbilder zuerst gegen gespeicherte Vergleichsbilder identifizieren und bei Wiederherstellungen alle Ansichten/GLB gegen die gewählte Quelle prüfen ([Fehlzuordnung 50 statt 46](HELM_VERLAUF.md#runde-12--tatsächliche-mittlere-variante-wiederhergestellt-28102026)).
+- Radial verformte CSG-Schalen brauchen mit der inversen transponierten Ableitung transportierte Normalen; bloße Neuberechnung kann sichtbare Bänder an Schnittpunkten erzeugen ([Continuity-Aufbau](HELM_AGENTEN.md#geometrische-änderung-04)).
+- Transparente Bemalungsträger beim Silhouettenrender ausblenden und danach den vorherigen Sichtbarkeitszustand wiederherstellen; sonst misst der Test die Trägerfläche statt der Grundform ([Haubenmuster](HELM_AGENTEN.md#optionale-haube-ohne-blenden-und-spielerische-muster)).

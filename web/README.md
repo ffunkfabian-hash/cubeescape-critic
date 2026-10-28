@@ -9,8 +9,12 @@ Der aktuelle Generator enthält den Formversuch 0.4. `?finish=original` (Standar
 `?finish=graphite` wählen das Finish der dunklen Rüstung. Alle drei bauen dieselbe Geometrie. Stand 79 bleibt
 als früherer Export unter `assets/helmet/`; seine Quelle liegt bei Git-Commit `0a6bda5`.
 Unabhängig davon wählt `&accents=light-fasteners` helle obere Schrauben; `&accents=white-strips` ergänzt weiße
-Stirn-/Scheitelstreifen. Standard ist `accents=original`. Die [vier exportierten Proben](../assets/helmet-continuity/README.md)
+Stirn-/Scheitelstreifen; `&accents=contrast-strips` wählt anthrazitfarbene Streifen mit zum Finish passendem Glanzkontrast.
+Standard ist `accents=original`. Die [exportierten Proben](../assets/helmet-continuity/README.md)
 enthalten die genaue Auswahl samt Quell- und Ausgabehashes.
+`&strips=off` erzeugt die Haube ohne die beiden Stirn-/Scheitelblenden; Standard ist `on`.
+`&crownPattern=chevron|hex|tech` ergänzt optionale Bemalungen und verlangt `strips=off`; ohne Muster gilt `none`.
+Die entsprechenden Runner-Optionen heißen `--strips=off` und `--crown-pattern=chevron`.
 
 ```sh
 cd web
