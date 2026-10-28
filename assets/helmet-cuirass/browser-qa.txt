@@ -1,0 +1,83 @@
+{
+  "frames": {
+    "assembly": {
+      "maxX": 0.36886770567372607,
+      "maxY": 0.7243964783468179
+    },
+    "front": {
+      "maxX": 0.37583851396908324,
+      "maxY": 0.7239545479788992
+    },
+    "left": {
+      "maxX": 0.3892582166509239,
+      "maxY": 0.7241743612796807
+    },
+    "back": {
+      "maxX": 0.3657390639024766,
+      "maxY": 0.7270938431354905
+    },
+    "right": {
+      "maxX": 0.352037788233526,
+      "maxY": 0.7242033472815106
+    }
+  },
+  "sequence": [
+    {
+      "count": 62,
+      "parts": 62,
+      "band": false,
+      "neck": true,
+      "body": "none"
+    },
+    {
+      "count": 102,
+      "parts": 102,
+      "band": true,
+      "neck": true,
+      "body": "none"
+    },
+    {
+      "count": 122,
+      "parts": 122,
+      "band": true,
+      "neck": false,
+      "body": "shoulders"
+    },
+    {
+      "count": 82,
+      "parts": 82,
+      "band": false,
+      "neck": false,
+      "body": "shoulders"
+    },
+    {
+      "count": 82,
+      "parts": 82,
+      "band": false,
+      "neck": false,
+      "body": "shoulders"
+    },
+    {
+      "count": 82,
+      "parts": 82,
+      "band": false,
+      "neck": false,
+      "body": "shoulders"
+    },
+    {
+      "count": 62,
+      "parts": 62,
+      "band": false,
+      "neck": true,
+      "body": "none"
+    }
+  ],
+  "overlaps": false,
+  "clipped": false,
+  "hidden": true,
+  "shown": true,
+  "leadersReused": true,
+  "labels": 48,
+  "retainedStrips": false
+}
+Browser mode switches, reset, label bounds and mask exclusion: PASS

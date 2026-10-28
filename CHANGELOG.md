@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.0 „Cuirass“ – 2026-10-28 (Oberkörperstudie)
+
+- Umschließende Schulterpanzer mit separaten unteren Lamellen und dunklen Gelenkkörpern; 26 stabile Körperteile.
+- Breite Brusthälften mit physischem Mittelgrat, engerer Kragen mit Weitung zur Brust; Helm, kurzer Hals und tiefer Rumpfkern erhalten.
+- Nutzerinspiration, Parameter und Stil dokumentiert; 56 Tests, Ansichten und Export-/Explosionsprüfung.
+
 ## 0.5.1 – 2026-10-28 (Patch)
 
 - Rumpfkern 36 % tiefer, Brust/Rücken und Kragen angepasst; niedrigere, deutlich facettierte Schultern bei gleicher Breite und Dicke.

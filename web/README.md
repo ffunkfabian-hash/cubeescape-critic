@@ -35,7 +35,8 @@ vorhandene Bilder allein können noch aus einem früheren Lauf stammen. `--no-io
 
 ## Körperstudie
 
-**Neu in 0.5:** `?body=shoulders&headset=off` zeigt den verkürzten Hals, kräftige höhere Schulterkappen, Brust und Rücken.
+**Aktuell 0.6:** `?body=shoulders&headset=off` zeigt kurzen Hals, umschließende Schulterpanzer mit unteren Lamellen,
+breite Brust mit Mittelgrat und Rücken. 26 separate Körperteile; [Cuirass-Aufbau und Reproduktion](../docs/HELM_CUIRASS.md).
 22 separate Körpermeshes, parametrisch reproduzierbar. `?headset=off` blendet beide kompletten Kopfhörer samt Bügel,
 Kabeln und Antennen aus; das zentrale Heckmodul bleibt. `?exploded=1&view=assembly` öffnet die beschriftete
 Explosionsübersicht. Alle Optionen auch rechts oben unter **Aufbau und Varianten**; die Teileliste nennt offene Anschlüsse.

@@ -2,7 +2,7 @@
 
 ## Status und Bedeutung dieses Dokuments
 
-Stand: 28.10.2026, Version **0.5.1 „Assembly“** auf der Form-/Materialbasis 0.4. Dies ist die Beschreibung des erzeugten Modells und der Versuche,
+Stand: 28.10.2026, Version **0.6 „Cuirass“** auf der Form-/Materialbasis 0.4. Dies ist die Beschreibung des erzeugten Modells und der Versuche,
 kein eigenständiger Auftrag zur weiteren Änderung. Aktuelle Nutzeranweisungen haben Vorrang.
 
 - **Letzter früherer Lieferexport:** 79 unter `assets/helmet/`, reproduzierbar aus Commit `0a6bda5`.
@@ -11,17 +11,17 @@ kein eigenständiger Auftrag zur weiteren Änderung. Aktuelle Nutzeranweisungen 
 - **Zusätzliche Formproben:** 87/88 ohne Blenden bleiben verfügbar. Die Muster 89–91 wurden anschließend ausdrücklich
   komplett verworfen; Musterfunktion und aktive Musterexporte sind entfernt.
 - **Nutzerwahl:** noch offen. Positive Rückmeldungen bedeuten keine eindeutige Auswahl zwischen den Kombinationen.
-- **Repo:** Patchbranch `codex/critic-patch-bulkhead` auf `codex/critic-0.5-assembly`. Kein Merge auf `main`.
-- **Neu:** beschriftete Explosionsansicht, ausblendbare komplette Headsets und getrennte Oberkörperstudie B01–B22.
-  Nutzerkorrekturen: kurzer Hals, breiterer und tieferer Körper; zuletzt niedrigere, kantige Schulterkappen.
-  [Aufbau, Parametrisierung, Titan-Referenz und noch offene Verbindungen](HELM_AUFBAU.md).
+- **Repo:** Versionsbranch `codex/critic-0.6-cuirass` auf `codex/critic-patch-bulkhead`. Kein Merge auf `main`.
+- **Neu:** umschließende Schulterpanzer, separate untere Lamellen und Gelenkkörper, breite Brust mit Mittelgrat,
+  zur Brust geweiteter Kragen. Körperteile B01–B26; kurzer Hals und tiefer Rumpfkern erhalten.
+  [Cuirass: Geometrie, Stil, Referenz, offene Verbindungen](HELM_CUIRASS.md).
 - **Quelle der Wahrheit:** Generator und Parameter; Exporte und Bilder sind daraus abgeleitete Prüfbelege.
 
-**Aktuell 0.5.1:** Nach Nutzerkorrektur ist der Rumpf tiefer, die Schulterdächer niedriger und kantiger; die hohen Bögen
-aus 0.5.0 sind als Vorher-Stand erhalten. Seitlich sind Vorder- und Hinterkappe als getrennte Schalen erkennbar.
-Die dunkle Unterstruktur wirkt noch wie eine grobe Gelenkabdeckung, weil Arme und echte Aufnahmen fehlen.
-Die Explosionsansicht hilft vor allem beim Erkennen dieser konstruktiven Lücken. Das ist die Einschätzung des Agenten,
-keine bestätigte neue Material- oder Körperfreigabe des Nutzers.
+**Aktuell 0.6:** Die Schulterpanzer folgen dem Armansatz nach unten und liegen näher am Rumpf. Die breite
+helle Brust hat einen sichtbaren Mittelgrat; Kragen und dunkle Gelenkzonen gliedern den Übergang zum Helm.
+Gelenke und Plattenaufnahmen sind weiterhin Formstudien. Der erste Render zeigte einen durch die Schale
+ragenden Gelenkkörper; seine Oberkante ist korrigiert und gezielt geprüft. Ausführliche subjektive Bewertung
+und Grenzen: [Cuirass](HELM_CUIRASS.md#visueller-eindruck-des-agenten). Das ist keine bestätigte Nutzerwahl.
 
 Einstiege: [Stil](HELM_STIL.md), [Teilekennungen](HELM_TEILE.md), [Chronologie](HELM_VERLAUF.md),
 [Varianten und Exporte](../assets/helmet-continuity/README.md), [Prüfbericht](versions/0.4.md).
@@ -185,8 +185,8 @@ das ist keine Wiederaufnahme der verworfenen Haubenmuster.
 
 ## Abnahme, Reproduktion und nächste Schritte
 
-0.5: **54 Tests**, davon 41 Node-, fünf IoU- und acht Belegsicherungsprüfungen. Aktuelle Nachweise stehen im
-[Assembly-Bericht](versions/0.5.md). Die neuen Körperteile werden auf geschlossene Oberflächen, positive Volumina,
+0.6: **56 Tests**, davon 43 Node-, fünf IoU- und acht Belegsicherungsprüfungen. Aktuelle Nachweise stehen im
+[Cuirass-Bericht](versions/0.6.md). Die neuen Körperteile werden auf geschlossene Oberflächen, positive Volumina,
 deterministische Erzeugung, sichtbare Platten und die korrigierten Proportionen geprüft.
 
 Historische Basis 0.4: 45 Tests, davon 32 Node-, fünf IoU- und acht Belegsicherungsprüfungen. Build, Projekt-/Dokumentationsprüfung und unabhängige

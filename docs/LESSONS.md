@@ -1,6 +1,7 @@
 # Lehren (Critic)
 ≤ 60 Zeilen, eine Zeile je Lehre, Link zur Langform. Verlauf aller Helm-Durchläufe: [HELM_VERLAUF.md](HELM_VERLAUF.md).
 
+- Geschlossene Einzelmeshes können sich sichtbar durchdringen: Gelenke nach vier Ansichten prüfen und auffällige Stellen mit Sichtstrahlen absichern. [Cuirass](HELM_CUIRASS.md#geometrie-und-datenfluss).
 - Explosionsbilder nach stabilen Teile-IDs gruppieren, alle enthaltenen Meshpfade zusätzlich ausgeben; Weltmatrix und Herkunft im GLB erhalten. [Assembly](HELM_AUFBAU.md#datenfluss-und-teilelogik).
 - Schultermasse getrennt über Breite, obere Wölbung und Schalendicke steuern; Halsverkürzung durch Anheben des Oberkörpers bei festem Helm. Referenzstil ist kein vermessenes Körpermaß. [Formentscheidung](HELM_AUFBAU.md#rückmeldungen-und-formentscheidung).
 
