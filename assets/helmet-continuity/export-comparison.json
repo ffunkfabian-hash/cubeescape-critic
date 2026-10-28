@@ -120,42 +120,15 @@
       "strips": false,
       "crownPattern": "none",
       "outputsVerified": 27
-    },
-    "chevron": {
-      "sha256": "e28301d43f3f22961b680732bdf98e41dcd75073e886fe0edb174a8a191d6318",
-      "sourceRevision": "f90d7c4",
-      "meshCount": 103,
-      "coreGeometryIdentical": true,
-      "sameCameras": true,
-      "sameBaseParameters": true,
-      "silhouetteGroup": "plain",
-      "strips": false,
-      "crownPattern": "chevron",
-      "outputsVerified": 28
-    },
-    "hex": {
-      "sha256": "84dc4806c0d9627f73a6d6f18459c5b1717e24742483c53830cb85c65edc38f4",
-      "sourceRevision": "f90d7c4",
-      "meshCount": 103,
-      "coreGeometryIdentical": true,
-      "sameCameras": true,
-      "sameBaseParameters": true,
-      "silhouetteGroup": "plain",
-      "strips": false,
-      "crownPattern": "hex",
-      "outputsVerified": 28
-    },
-    "tech": {
-      "sha256": "52beddfec8f1399d163922b6130da24625630dfec113e14bded65636d87ae896",
-      "sourceRevision": "f90d7c4",
-      "meshCount": 103,
-      "coreGeometryIdentical": true,
-      "sameCameras": true,
-      "sameBaseParameters": true,
-      "silhouetteGroup": "plain",
-      "strips": false,
-      "crownPattern": "tech",
-      "outputsVerified": 28
     }
+  },
+  "withdrawnPatterns": {
+    "passes": [
+      89,
+      90,
+      91
+    ],
+    "reason": "User requested complete withdrawal",
+    "historicalRevision": "caf7a79dc46269b9f02801587b909d5c947f73d8"
   }
 }

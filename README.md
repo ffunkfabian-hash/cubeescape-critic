@@ -8,11 +8,10 @@ zum Vergleich; noch keine Materialauswahl durch den Nutzer. [Vergleich und Expor
 
 ![Sechs Material- und Akzentkombinationen](docs/bilder/helm_continuity_varianten.jpg)
 
-Zusätzliche Proben: [Metall und Graphit ohne Stirnblenden](docs/bilder/helm_continuity_ohne_blenden.jpg) sowie drei
-aufgebrachte Muster auf der blendenlosen Graphithaube. Alle zwölf Stände 80–91 sind mit Quellstand, Parametern,
-Einzelteilen und Texturen im [Variantenverzeichnis](assets/helmet-continuity/README.md) gesichert.
-
-![Ohne Muster, Winkel, Hexagon und Technikmarkierungen](docs/bilder/helm_continuity_muster.jpg)
+Zusätzliche Proben: [Metall und Graphit ohne Stirnblenden](docs/bilder/helm_continuity_ohne_blenden.jpg).
+Die neun Stände 80–88 sind mit Quellstand, Parametern, Einzelteilen und Texturen im
+[Variantenverzeichnis](assets/helmet-continuity/README.md) gesichert. Die alternativen Haubenmuster 89–91 wurden
+auf Nutzerwunsch vollständig verworfen; sie bleiben ausschließlich als Historie dokumentiert.
 
 Bisheriger Lieferstand **79**: durchgehend gewölbter Scheitel mit angepasstem Kopfbügel und weichem Übergang zur
 Augenmaske mit weitgehend verdeckter Fugenlinie. Die Haube trägt eine sichtbare feine Lackkörnung im Graphitton der Maske; der Glanz bleibt gedämpft. Hinterkopfgehäuse und Nackenrahmen sind wieder rund; Augen und kantige Kieferplatten bleiben erhalten. Zwei separate trapezförmige Stirnblenden schließen direkt an die Augenmaske an und setzen deren Flächen nach oben fort. Funkmuschel, Kabel, Halterung und Antenne sind jetzt von Seite A nach B gespiegelt. Das Video bleibt für den übrigen Helm maßgeblich.

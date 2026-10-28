@@ -8,7 +8,7 @@ Die Trapezform bleibt im Stirnbereich erkennbar, der Mittelstreifen frei. Der be
 Metall und Graphit sind gleichberechtigte Materialproben, keine bestätigte Ablösung des bisherigen Looks.
 Zusätzlich gewünscht: helle Befestigungspunkte auf dunkler Rüstung und eine Probe mit weißen H20/H21.
 Die Stände 85/86 ergänzen anthrazitfarbene Kontrastblenden, 87/88 zeigen beide Finishes ohne Blenden und
-89–91 erproben weiße Winkel-, Hexagon- und Technikmarkierungen auf der Graphithaube.
+89–91 mit weißen Haubenmustern wurden anschließend auf Nutzerwunsch vollständig verworfen.
 [Versuchsstände und Reproduktion](../assets/helmet-continuity/README.md).
 [Technischer Aufbau und Einschätzung für KI-Agenten](HELM_AGENTEN.md).
 
@@ -86,13 +86,9 @@ Lesbarkeit schwarzer Bauteile auf dunklem Grund ohne den starken Kontrast weiße
 ### Weitere optionale Stilproben
 
 Auf Nutzerwunsch gibt es eine Haube ohne H20/H21 (`strips=off`), um die ruhige Grundform beurteilen zu können.
-Zusätzlich werden Winkelmarkierungen, ein Hexagonraster und asymmetrische Technikmarkierungen als aufgebrachte
-Bemalung ausprobiert. Diese „just for fun“-Proben ergänzen die Auswahl; sie ersetzen keine bestätigte Stilvorgabe.
-Die runde Haube bleibt darunter vollständig erhalten. Muster sind getrennte exportierbare Texturüberlagerungen,
-keine aufgemalten Ersatzteile für fehlende Geometrie. Aufbau und Grenzen stehen in [HELM_AGENTEN.md](HELM_AGENTEN.md).
-Die Muster konzentrieren sich auf Stirn und oberen Scheitel; das Heck bleibt frei. Winkel und Hexagone sind symmetrisch,
-die Technikmarkierungen bewusst asymmetrisch. [Vier Ansichten](bilder/helm_continuity_muster_vier_ansichten.jpg) und
-[beide Finishes ohne Blenden](bilder/helm_continuity_ohne_blenden.jpg) zeigen dieselben Kameras und dieselbe Beleuchtung.
+Die später ausprobierten Winkel-, Hexagon- und Technikmuster wurden vollständig verworfen und aus dem Generator
+entfernt. Keine aufgebrachten Haubenmuster als Stilvorgabe übernehmen. Der Versuch bleibt nur historisch im
+[Verlauf](HELM_VERLAUF.md) beschrieben. [Beide Finishes ohne Blenden](bilder/helm_continuity_ohne_blenden.jpg).
 
 | Bereich | Basisfarbe | Wirkung |
 |---|---|---|
@@ -115,8 +111,7 @@ Quelle ist der Three.js-Generator, keine von Hand geänderte Exportdatei. Formpa
 Im Generator zeigt +Y nach oben, +Z nach vorn. Seite A liegt bei −X (Kamera `right`), Seite B bei +X (`left`).
 Die anders bezeichneten Achsen in der ursprünglichen Formbeschreibung werden nicht mit diesen Arbeitskoordinaten vermischt.
 
-Die Streifenvarianten enthalten **104 Meshes**, die blendenlosen **102**, die Musterproben **103** mit einem zusätzlichen
-Bemalungsträger. Die 102 Grundmeshes sind identisch. Baugruppen bleiben getrennt; Schraubensätze können gemeinsam in einem Mesh liegen.
+Die Streifenvarianten enthalten **104 Meshes**, die blendenlosen **102**. Die 102 Grundmeshes sind identisch. Baugruppen bleiben getrennt; Schraubensätze können gemeinsam in einem Mesh liegen.
 [parts.json](../assets/helmet/parts.json) listet die tatsächlichen Exportobjekte und Materialien.
 Einzelne Meshes sind noch keine Zusicherung fertiger Druckwandstärken, Montagepassungen oder tragbarer Schutzwirkung.
 

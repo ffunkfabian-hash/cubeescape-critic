@@ -11,8 +11,6 @@ import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
 import GUI from 'lil-gui';
 import { createMaterials, applyArmorFinish, applyArmorAccents } from './materials.js';
 import { resolveFinish, resolveAccents } from './finishPresets.js';
-import { resolveCrownPattern } from './crownPatternPresets.js';
-import { createCrownMarking } from './crownPatterns.js';
 import { denoiseTexture, DENOISE_SEED } from './textures.js';
 import { buildHelmet } from './helmet.js';
 import { buildBodyStudy } from './parts/bodyStudy.js';
@@ -21,10 +19,8 @@ import { D, resetParams } from './params.js';
 const query = new URLSearchParams(location.search);
 const materialFinish = resolveFinish(query.get('finish') ?? 'original');
 const materialAccents = resolveAccents(query.get('accents') ?? 'original');
-const crownPattern = resolveCrownPattern(query.get('crownPattern') ?? 'none');
 const strips = query.get('strips') ?? 'on';
 if (!['on', 'off'].includes(strips)) throw new Error(`Unknown strips ${JSON.stringify(strips)}; expected on or off`);
-if (crownPattern.requiresStripsOff && strips !== 'off') throw new Error('Crown patterns require ?strips=off');
 D.foreheadPlates.enabled = strips === 'on';
 if (query.get('ui') === '0') document.body.classList.add('noui');
 
@@ -193,10 +189,7 @@ addEventListener('resize', resize);
 resize();
 
 function disposeModel(obj) {
-  obj.traverse((o) => {
-    o.geometry?.dispose();
-    if (o.name === 'CrownMarking') { o.material.map?.dispose(); o.material.dispose(); }
-  });
+  obj.traverse((o) => o.geometry?.dispose());
 }
 
 function rebuild() {
@@ -212,9 +205,6 @@ function rebuild() {
   if (BODY_STUDY) model.add(buildBodyStudy(M));
   applyArmorFinish(model, M);
   applyArmorAccents(model, M, materialAccents.name);
-  const crown = model.getObjectByName('Crown');
-  const marking = createCrownMarking(crown, crownPattern.name);
-  if (marking) crown.parent.add(marking);
   model.rotation.y = rot;
   scene.add(model);
   console.log(`model built in ${(performance.now() - t0).toFixed(0)} ms`);
@@ -277,15 +267,10 @@ if (query.get('overlay')) toggleOverlay(true, query.get('overlay') === 'diff' ? 
 
 function renderFrame() {
   if (maskMode) {
-    // The transparent marking is appearance only; the measurement uses the
-    // original helmet surface rather than an opaque override of its decal.
-    const marking = model.getObjectByName('CrownMarking'), visible = marking?.visible;
-    if (marking) marking.visible = false;
     scene.overrideMaterial = maskMaterial;
     scene.background = new THREE.Color(0x000000);
     renderer.toneMapping = THREE.NoToneMapping;
     renderer.render(scene, camera);
-    if (marking) marking.visible = visible;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     scene.background = new THREE.Color(BG);
     scene.overrideMaterial = null;
@@ -310,4 +295,4 @@ if (STATIC) {
   });
 }
 
-Object.assign(window, { THREE, scene, camera, controls, renderFrame, setCameraView, toggleOverlay, setMaskMode, exportGLB, rebuild, helmetParams: D, materialFinish, materialAccents, crownPattern });
+Object.assign(window, { THREE, scene, camera, controls, renderFrame, setCameraView, toggleOverlay, setMaskMode, exportGLB, rebuild, helmetParams: D, materialFinish, materialAccents });

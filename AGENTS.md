@@ -12,7 +12,7 @@ Antworten, Doku und Commit-Messages auf Deutsch; Code, Bezeichner und Kommentare
 - `docs/HELM_STIL.md` – bestätigte Form-/Materialvorgaben; runde Haube, Augen erhalten, maßgeblich ist das Video.
 - `docs/HELM_AGENTEN.md` – technischer Aufbau, Material-/Akzentvarianten, Prüfumfang, visueller Eindruck und offene Nutzerwahl; vor Helm-Fortsetzungen gezielt lesen.
 - `assets/helmet/` – bewusst versionierter Lieferexport mit GLB, Texturen, Teileliste und Prüfmanifest; keine beliebigen Caches.
-- `assets/helmet-continuity/` – einzeln gesicherte Form-, Material- und Musterproben 80–91; Index nennt Auswahl, Quellen und Reproduktionsbefehle.
+- `assets/helmet-continuity/` – einzeln gesicherte Form- und Materialproben 80–88; Muster 89–91 sind verworfen und nur historisch dokumentiert; Index nennt Auswahl, Quellen und Reproduktionsbefehle.
 - `docs/HELM_TEILE.md` – stabile Teilekennungen H01–H21 für Nutzerfeedback; nummerierte Teilekarte über
   `web/tools/parts_sheet.py`. Kennungen bei weiteren Änderungen beibehalten.
 - `runs/` – Laufergebnisse (nicht im Repo, `.gitignore`); Belege außerhalb unter `~/Library/Caches/Critic/<Version>/`.

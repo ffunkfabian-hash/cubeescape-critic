@@ -482,3 +482,13 @@ Reset-/Rebuild-Verhalten und Wiederherstellung der Mustersichtbarkeit nach dem M
 geprüft. Die fünf Silhouettensätze sind bytegleich, mittlere IoU 90,73 %; dies bewertet keine Mustergestaltung.
 [Mustervergleich](bilder/helm_continuity_muster_vier_ansichten.jpg) ·
 [Ohne Blenden](bilder/helm_continuity_ohne_blenden.jpg) · [Aufbau und Reproduktion](HELM_AGENTEN.md).
+
+
+### Nutzerentscheidung nach 91 – Muster vollständig verworfen
+
+Der Nutzer verwirft alle drei Muster ausdrücklich komplett. Winkel, Hexagon und Technik sind daher aus Generator,
+Viewer, Runner und aktiven Exporten entfernt; fünf ausschließlich zugehörige, vorher bestandene Tests entfallen.
+45 verbleibende Tests und Build bestehen. Die Musterbilder oben sind ausschließlich historische Belege verworfener Versuche.
+Ihr vollständiger Aufbau und ihre Exporte bleiben im [Git-Stand vor Rücknahme](https://github.com/ffunkfabian-hash/cubeescape-critic/blob/caf7a79dc46269b9f02801587b909d5c947f73d8/assets/helmet-continuity/README.md).
+Die Varianten 80–88 einschließlich Metall/Graphit ohne Blenden bleiben unverändert verfügbar. Keine neue Geometrie-
+oder Materialauswahl wird daraus abgeleitet; Video, Augen und Einzelteilaufbau behalten ihre bisherigen Vorgaben.

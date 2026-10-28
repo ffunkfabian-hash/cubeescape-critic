@@ -38,9 +38,8 @@ Die IDs bezeichnen sichtbare Abschnitte, nicht zwingend einzelne Meshes. Seit Fi
 Die Bildkarte zeigt Probe 83; dieselbe Bauteilgeometrie gilt für 80–86. Aktuelle Vier-Ansichten-Belege stehen im [Prüfbericht](versions/0.4.md).
 Farben helfen beim Zuordnen; ein Änderungswunsch an H11 betrifft die Geometrie, solange keine Materialänderung genannt wird.
 
-In den optionalen Proben 87–91 sind H20/H21 ausgeschaltet, ihre Kennungen bleiben reserviert. Die übrigen 102 Meshes
-bleiben unverändert. 89–91 ergänzen `CrownMarking` als separaten Texturträger auf H01: Bemalung, kein massives Bauteil
-und keine neue Teilekennung. Die tatsächlichen Objekte stehen in `parts.json` des jeweiligen [Variantenordners](../assets/helmet-continuity/README.md).
+In den optionalen Proben 87/88 sind H20/H21 ausgeschaltet, ihre Kennungen bleiben reserviert. Die übrigen 102 Meshes
+bleiben unverändert. Die kurz erprobten Bemalungsträger aus 89–91 sind vollständig entfernt; sie erhalten keine Teilekennung. Die tatsächlichen Objekte stehen in `parts.json` des jeweiligen [Variantenordners](../assets/helmet-continuity/README.md).
 
 ## Zuordnung für die Umsetzung
 

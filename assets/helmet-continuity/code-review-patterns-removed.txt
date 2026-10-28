@@ -1,0 +1,13 @@
+ce_judge: 6 Dateien, 385 Diff-Zeilen, Richter sol (gpt-6.1-sol high), Grund: expliziter --model=sol; automatisch wäre sol (373 Diff-Zeilen (Schwelle 300)), Basis caf7a79
+| Nr | Datei:Zeile | Schwere (blocker/hoch/niedrig/ok) | Befund | Vorschlag |
+|---|---|---|---|---|
+| 1 | web/verify_renders.mjs:38 | ok | Keine Änderung der genannten versionierten Verträge. Muster-Metadaten entfallen entsprechend der beauftragten Rücknahme. | — |
+| 2 | web/src/crownPatternPresets.js:1 (gelöscht) | ok | Nur verworfene Musterkennungen entfernt; keine persistenten IDs oder Enum-Reihenfolgen geändert. | — |
+| 3 | web/src/main.js:189 | ok | Kein Unity-Code betroffen; keine der genannten Unity-Fallen eingeführt. | — |
+| 4 | web/tools/crownPatterns.test.mjs:1 (gelöscht); web/tools/runnerFailure.test.mjs:64 | ok | Ausschließlich Tests des entfernten Features gelöscht; Ablehnung der entfernten CLI-Option wird geprüft. Keine Golden-/Hash-Referenzen geändert. | — |
+| 5 | web/src/main.js:205 | ok | Keine Sonderlogik oder unbelegten Magic Numbers hinzugefügt. | — |
+| 6 | web/verify_renders.mjs:9 | ok | CLI-Hilfe angepasst. Weitere Dokumentation wird laut Auftrag parallel zurückgenommen; nicht Bestandteil dieser Prüfung. | — |
+| 7 | Gesamter Diff | ok | Keine der genannten unerlaubten Git- oder Aufräumaktionen ersichtlich. | — |
+| 8 | Gesamter Diff | ok | Ein zusammenhängendes Ziel: vollständige Rücknahme der verworfenen Muster einschließlich zugehöriger Tests und Prüfpfade. | — |
+
+Freigabe

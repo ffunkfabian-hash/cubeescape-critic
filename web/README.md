@@ -13,8 +13,8 @@ Stirn-/Scheitelstreifen; `&accents=contrast-strips` wählt anthrazitfarbene Stre
 Standard ist `accents=original`. Die [exportierten Proben](../assets/helmet-continuity/README.md)
 enthalten die genaue Auswahl samt Quell- und Ausgabehashes.
 `&strips=off` erzeugt die Haube ohne die beiden Stirn-/Scheitelblenden; Standard ist `on`.
-`&crownPattern=chevron|hex|tech` ergänzt optionale Bemalungen und verlangt `strips=off`; ohne Muster gilt `none`.
-Die entsprechenden Runner-Optionen heißen `--strips=off` und `--crown-pattern=chevron`.
+Die entsprechende Runner-Option heißt `--strips=off`. Die kurz erprobten Haubenmuster wurden auf Nutzerwunsch
+vollständig entfernt; `--crown-pattern` wird nicht mehr unterstützt.
 
 ```sh
 cd web
