@@ -87,6 +87,8 @@ export function buildLowerArmor(M) {
     sideScrews.push(hitSurface(jawMesh, [s * 2, -0.04, 0.12], [-s, 0, 0]));
     sideScrews.push(hitSurface(jawMesh, [s * 2, -0.2, 0.22], [-s, 0, 0]));
     sideScrews.push(hitSurface(collar, [s * 2, -0.02, -0.3], [-s, 0, 0]));
+    // Rivets along the jaw bar.
+    for (const z of [0.2, 0.3, 0.4]) sideScrews.push(hitSurface(jawMesh, [s * 2, -0.37 - (z - 0.2) * 0.12, z], [-s, 0, 0]));
   }
   g.add(screws(M, sideScrews, 'Screws_Side'));
 

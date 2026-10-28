@@ -146,7 +146,7 @@ const gtao = new GTAOPass(scene, camera, 1, 1);
 gtao.updateGtaoMaterial({ radius: 0.12, distanceExponent: 1.5, thickness: 0.6, scale: 1.0 });
 gtao.blendIntensity = 0.9;
 composer.addPass(gtao);
-const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.0, 0.0, 0.85);
+const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.08, 0.0, 0.9);
 composer.addPass(bloom);
 composer.addPass(new OutputPass());
 
@@ -211,6 +211,8 @@ function buildGui() {
   f2.add(D.visor, 'height', 0.03, 0.12, 0.002).name('Höhe').onFinishChange(re);
   f2.add(D.visor, 'x', 0.1, 0.25, 0.005).name('Abstand X').onFinishChange(re);
   f2.add(D.visor, 'y', -0.05, 0.2, 0.005).name('Höhe Y').onFinishChange(re);
+  f2.add(D.visor, 'socketDepth', 0.0, 0.08, 0.002).name('Tiefe Augenhöhle').onFinishChange(re);
+  f2.add(D.visor, 'slitDepth', 0.005, 0.06, 0.002).name('Tiefe Schlitz').onFinishChange(re);
   f2.add(M.visorGlow, 'emissiveIntensity', 0, 10, 0.1).name('Leuchtstärke');
   const f3 = gui.addFolder('Spiralkabel');
   f3.add(D.tube, 'coilRadius', 0.006, 0.03, 0.001).name('Wendel-Radius').onFinishChange(re);

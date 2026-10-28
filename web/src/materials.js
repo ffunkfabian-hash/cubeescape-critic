@@ -23,7 +23,7 @@ export function createMaterials() {
     }),
     oliveTech: new THREE.MeshStandardMaterial({ name: 'oliveTech', color: 0x4a493e, roughness: 0.6, metalness: 0.15 }),
     visorGlow: new THREE.MeshStandardMaterial({
-      name: 'visorGlow', color: 0x99fff6, emissive: 0x99fff6, emissiveIntensity: 0.75, roughness: 0.2,
+      name: 'visorGlow', color: 0x5fe3d6, emissive: 0x5fe3d6, emissiveIntensity: 1.0, roughness: 0.2,
     }),
     blackRubber: new THREE.MeshStandardMaterial({ name: 'blackRubber', color: 0x141414, roughness: 0.75 }),
     darkMetal: new THREE.MeshStandardMaterial({ name: 'darkMetal', color: 0x1a1a1a, roughness: 0.3, metalness: 0.8 }),

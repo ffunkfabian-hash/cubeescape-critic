@@ -1,7 +1,7 @@
 // UpperHelmet_Dark: dark cap and faceted front plate, V-angled visor slits, recessed mouth with two vents.
 import * as THREE from 'three';
 import { D } from '../params.js';
-import { brush, csg, prism, halfSpace, hitSurface, orient, ADDITION, SUBTRACTION, INTERSECTION } from '../geo.js';
+import { brush, csg, prism, shape, halfSpace, hitSurface, orient, ADDITION, SUBTRACTION, INTERSECTION } from '../geo.js';
 import { boxProjectUV } from '../textures.js';
 import { screws } from './common.js';
 import { headVolume } from './headVolume.js';
@@ -27,28 +27,46 @@ export function buildUpperHelmet(M) {
   const pTop = brush(prism([[-0.6, 0.18], [-0.24, 0.505], [0, 0.52], [0.24, 0.505], [0.6, 0.18], [0.6, 0.05], [-0.6, 0.05]], 'xz'));
   // Planar facets of the face (flat front, side chamfers, sloped brow, lower face leaning back); the raised plate
   // gets the same planes pushed out by its offset.
-  const facets = (off) => D.facets.map(([p, n]) => {
-    const m = Math.hypot(...n);
-    return [INTERSECTION, halfSpace(p.map((v, i) => v + (n[i] / m) * off), n)];
-  });
+  // Every pair in D.facetBevels gets a narrow chamfer plane along its shared edge (normal = mean of both normals),
+  // so the edges catch light like machined bevels instead of meeting razor-sharp.
+  const facets = (off) => {
+    const planes = D.facets.map(([p, n]) => {
+      const u = new THREE.Vector3(...n).normalize();
+      return { u, c: u.dot(new THREE.Vector3(...p)) + off };
+    });
+    const out = planes.map(({ u, c }) => [INTERSECTION, halfSpace(u.clone().multiplyScalar(c).toArray(), u.toArray())]);
+    for (const [a, b] of D.facetBevels) {
+      const sum = planes[a].u.clone().add(planes[b].u);
+      const len = sum.length();
+      const cb = (planes[a].c + planes[b].c) / len - D.bevelWidth;
+      const u = sum.divideScalar(len);
+      out.push([INTERSECTION, halfSpace(u.clone().multiplyScalar(cb).toArray(), u.toArray())]);
+    }
+    return out;
+  };
   const facePlate = csg(H2, [INTERSECTION, pFront], [INTERSECTION, pSide], [INTERSECTION, pTop], ...facets(0.011));
   let shell = csg(H, [INTERSECTION, region], ...facets(0), [ADDITION, facePlate]);
 
   const probe = new THREE.Mesh(shell.geometry, M.darkArmor);
   const surfZ = (x, y) => hitSurface(probe, [x, y, 2], [0, 0, -1])?.point.z ?? 0.45;
 
-  // Visor: shallow frame recess, then the slit; inner ends lower (V shape).
+  // Visor: a socket with sloped walls (square frustum, wide at the surface), then the slit; the light sits deep at the
+  // bottom so the brow and the socket walls frame it. Inner ends lower (V shape).
   const v = D.visor;
   const cuts = [];
   const glows = [];
+  const socketDepth = v.socketDepth, slitDepth = v.slitDepth;
   for (const s of [-1, 1]) {
-    const x = s * v.x, z = surfZ(x, v.y), rz = s * v.angleDeg * DEG;
-    cuts.push(brush(new THREE.BoxGeometry(v.width + 0.03, v.height + 0.028, 0.2), { pos: [x, v.y, z + 0.1 - 0.012], rot: [0, s * 0.12, rz] }));
-    cuts.push(brush(new THREE.BoxGeometry(v.width, v.height, 0.3), { pos: [x, v.y, z - 0.035 + 0.15], rot: [0, s * 0.12, rz] }));
-    const glow = new THREE.Mesh(new THREE.BoxGeometry(v.width - 0.004, v.height - 0.004, 0.03), M.visorGlow);
+    // Yaw follows the V-shaped front, so the socket keeps its depth along the slit and wraps onto the side chamfer.
+    const x = s * v.x, z = surfZ(x, v.y), rz = s * v.angleDeg * DEG, rot = [0, s * v.yawDeg * DEG, rz];
+    const socket = new THREE.CylinderGeometry(1, 0.8, socketDepth + 0.03, 4, 1).rotateY(Math.PI / 4).rotateX(Math.PI / 2);
+    socket.scale((v.width + 0.04) / Math.SQRT2, (v.height + 0.034) / Math.SQRT2, 1);
+    cuts.push(brush(socket, { pos: [x, v.y, z - socketDepth / 2 + 0.015], rot }));
+    cuts.push(brush(new THREE.BoxGeometry(v.width, v.height, 0.3), { pos: [x, v.y, z - socketDepth - slitDepth + 0.15], rot }));
+    const glow = new THREE.Mesh(new THREE.BoxGeometry(v.width - 0.004, v.height - 0.004, 0.02), M.visorGlow);
     glow.name = s < 0 ? 'Visor_R' : 'Visor_L';
-    glow.position.set(x, v.y, z - 0.03);
-    glow.rotation.set(0, s * 0.12, rz);
+    glow.position.set(x, v.y, z - socketDepth - slitDepth + 0.006 - 0.01);
+    glow.rotation.set(...rot);
     glows.push(glow);
   }
 
@@ -58,6 +76,8 @@ export function buildUpperHelmet(M) {
   for (const s of [-1, 1]) {
     cuts.push(brush(new THREE.BoxGeometry(0.022, 0.17, 0.2), { pos: [s * 0.032, -0.2, zm - 0.06 + 0.1] }));
   }
+  // Horizontal slot at the top of the mouth plate.
+  cuts.push(brush(new THREE.BoxGeometry(0.08, 0.014, 0.2), { pos: [0, -0.065, zm - 0.06 + 0.1] }));
 
   // Panel lines: narrow grooves on the lower front plate and a transverse seam on the cap.
   const groove = (x, y, len, ang, w = 0.006) => {
@@ -68,6 +88,10 @@ export function buildUpperHelmet(M) {
     groove(s * 0.19, -0.115, 0.2, s * 0.32);
     groove(s * 0.17, -0.25, 0.16, s * -0.55);
     groove(s * 0.28, 0.215, 0.12, s * -0.18);
+    // Seam under the eye socket towards the mouth plate.
+    groove(s * 0.2, -0.015, 0.22, s * 0.1, 0.007);
+    // Small chevron marks on the lower cheek plates.
+    for (let k = 0; k < 3; k++) groove(s * (0.215 + k * 0.016), -0.205, 0.035, s * 1.0, 0.004);
   }
   cuts.push(brush(new THREE.BoxGeometry(2, 1, 0.006), { pos: [0, D.capEdgeY + 0.55, -0.25] }));
   for (const s of [-1, 1]) {
@@ -104,15 +128,19 @@ export function buildUpperHelmet(M) {
   // Hinge panels on the plate sides between visor and ear, with ribs.
   const probeAll = [shellMesh];
   for (const s of [-1, 1]) {
-    const h = hitSurface(probeAll, [s * 2, 0.09, 0.08], [-s, 0, 0]);
+    const h = hitSurface(probeAll, [s * 2, 0.08, 0.05], [-s, 0, 0]);
     if (!h) continue;
     const hinge = new THREE.Group();
     hinge.name = s > 0 ? 'Hinge_L' : 'Hinge_R';
-    const body = new THREE.Mesh(new THREE.BoxGeometry(0.09, 0.24, 0.045), M.darkArmor);
+    // Temple plate: chamfered hexagon (local x = along +Z of the helmet, y = up), ribbed grip in the middle.
+    const hex = shape([[-0.035, 0.12], [0.02, 0.12], [0.04, 0.07], [0.04, -0.05], [0.015, -0.1], [-0.035, -0.1], [-0.045, 0.0]]);
+    const plateGeo = new THREE.ExtrudeGeometry(hex, { depth: 0.03, bevelEnabled: true, bevelThickness: 0.006, bevelSize: 0.006, bevelSegments: 2 });
+    plateGeo.translate(0, 0, -0.012);
+    const body = new THREE.Mesh(plateGeo, M.darkArmor);
     hinge.add(body);
-    for (let i = 0; i < 4; i++) {
-      const rib = new THREE.Mesh(new THREE.BoxGeometry(0.012, 0.05, 0.012), M.darkMetal);
-      rib.position.set(-0.015 + i * 0.01, -0.02, 0.026);
+    for (let i = 0; i < 5; i++) {
+      const rib = new THREE.Mesh(new THREE.BoxGeometry(0.006, 0.06, 0.01), M.darkMetal);
+      rib.position.set(-0.017 + i * 0.008, -0.01, 0.026);
       hinge.add(rib);
     }
     orient(hinge, h.point, h.normal, 0.01, [0, 0, 1]);
@@ -127,6 +155,8 @@ export function buildUpperHelmet(M) {
     }
     pts.push(hitSurface(probeAll, [s * 2, 0.3, 0.05], [-s, 0, 0]));
     pts.push(hitSurface(probeAll, [s * 2, 0.4, -0.05], [-s, -0.4, 0]));
+    // Row of screws along the brim at the back.
+    for (const a of [0.35, 0.75, 1.15]) pts.push(hitSurface(probeAll, [s * Math.sin(a) * 2, 0.36, -Math.cos(a) * 2], [-s * Math.sin(a), 0, Math.cos(a)]));
   }
   g.add(screws(M, pts, 'Screws_Upper'));
   return g;
