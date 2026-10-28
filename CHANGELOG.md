@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.0.3 „Frame Robot“ – 2026-10-28
+
+- Zweite Vorlage `reference/robot/` (KI-Video eines Ganzkörper-Roboters, 241 Frames).
+- `web/tools/robot/`: jeden Frame freistellen, Kamera und Drehwinkel **je Frame** schätzen (das Video dreht
+  ungleichmäßig), Visual Hull schnitzen, Netz mit Farben aus allen Frames, GLB (erzeugt, nicht im Repo).
+- `web/robot.html`: Kamera exakt auf jeden der 241 Videoframes, Overlay des Frames, Video-Turntable, GLB-Export.
+- `npm run verify:robot`: Umriss-IoU gegen jeden einzelnen Frame, Mittel 0,923 (min 0,863).
+- Bilder: `docs/bilder/roboter_video_vergleich.jpg`, `roboter_video_iou.png`.
+
 ## 0.0.2 „Browser Helmet“ – 2026-10-27
 
 - `web/`: Three.js-Nachbau des Helms ohne lokale 3D-Software – fünf benannte Bauteilgruppen (three-bvh-csg, Schal mit
