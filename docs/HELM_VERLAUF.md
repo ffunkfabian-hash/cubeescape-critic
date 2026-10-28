@@ -408,3 +408,21 @@ Vier Ansichten geprüft. Mittlere Silhouetten-IoU 90,78 %; der Rückgang gegenü
 Symmetrie erklärbar, während die Videovorlage asymmetrisch bleibt. Kein Anspruch höherer Vorlagentreue durch diese Designänderung.
 [Stand 79](belege/helm/79.jpg) · [Vergleich 78/79](bilder/helm_symmetrie_78_79.jpg) ·
 [Front](bilder/helm_symmetrie_front.jpg) · [Seite B](bilder/helm_symmetrie_seite_b.jpg) · [Heck](bilder/helm_symmetrie_heck.jpg).
+
+## Befund nach Stand 79 – seitlicher Übergang der Augenmaske (28.10.2026)
+
+Die Nutzerbilder markieren dunkle Streifen links und rechts neben den Augen: Die Maske wirkt dort unterbrochen,
+während dieselbe Fläche seitlich einen breiten metallischen Reflex zeigt. Die Geometrieprüfung des Liefer-GLB
+bestätigt für diese Bereiche ein gemeinsames Mesh `Shell` mit einem Material `darkArmor`.
+Ein waagerechter Strahlquerschnitt bei Y = −0,025 über −80° bis +80° trifft in allen 1601 Proben die Maskenfläche.
+Das ist ein gezielter Befund an der fraglichen Zone, keine allgemeine Prüfung auf Wasserdichtigkeit.
+
+Der Übergang zwischen Augenfläche und Seitenfase ändert die Flächennormale deutlich (etwa 12° zu 44° gegen die
+Frontachse, mit schmaler Zwischenfase). Zusammen mit Licht und Reflexion erzeugt dies die scheinbare Unterbrechung.
+Die Erklärung „nur Licht“ greift deshalb zu kurz; die kantige Geometrie verursacht den starken Helligkeitswechsel.
+Quellen: [Maskenaufbau](../web/src/parts/upperHelmet.js), [Facettenparameter](../web/src/helmetParams.json),
+[Material](../web/src/materials.js) und [ansichtsabhängige Beleuchtung](../web/src/main.js).
+
+Vorgeschlagener Folgeschritt: breiterer, sanfter gerundeter Übergang neben den Augen, bei erhaltener Augenform und
+runder Haube. Vor Übernahme aus allen vier festen Ansichten prüfen. Diese Anpassung ist **noch nicht umgesetzt**;
+Lieferstand, Renderbilder und Messwerte bleiben bei 79. Der Befund und das Ziel sind in der [Stilbeschreibung](HELM_STIL.md) festgehalten.

@@ -2,6 +2,7 @@
 
 ## 0.3.0 „Sidework“ – 2026-10-28 (offener Entwurf)
 
+- Dokumentation/Stil: seitliche Maskenstreifen als Geometrie-/Lichtwirkung erklärt; weicheren Übergang als offenen Vorschlag festgehalten, Lieferstand 79 unverändert.
 - Stand 79: Kopfhörer, Kabel, Halterung und Antenne von A nach B gespiegelt; gemeinsames Heckmodul erhalten.
 - 18 neue Spiegelteile ersetzen das alte Ohrmodul samt Halter; 86 bisherige Meshes und alle Materialien unverändert.
 - 33 Tests und Build bestehen; Spiegelpunkte, Flächenorientierung, positive Skalierung und vier Ansichten geprüft.

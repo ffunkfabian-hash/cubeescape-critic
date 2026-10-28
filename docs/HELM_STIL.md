@@ -25,6 +25,10 @@ Die Zuordnung ist im [Verlauf](HELM_VERLAUF.md) dokumentiert. „Vorher“ bezei
   Dies ist eine gezielte Nutzerergänzung zur Videovorlage.
 - **Gesicht H02–H06:** dunkle, kantige Panzerplatten mit schmalen Fugen, zurückgesetztem trapezförmigem Mitteleinsatz
   und klaren Wangenflächen. Die akzeptierten cyanfarbenen Augen bleiben in Form, Lage und Leuchtwirkung erhalten.
+  Die Augenmaske H02 soll optisch durchgängig bis zu den Seiten laufen. Die dunklen Streifen neben den Augen in
+  Stand 79 entstehen am abrupten Richtungswechsel der Fläche, verstärkt durch die Beleuchtung; dort ist keine Teilefuge.
+  **Vorgeschlagener nächster Schritt, noch nicht umgesetzt:** den seitlichen Übergang breiter und sanfter runden,
+  ohne Augenöffnungen, Haubenrundung oder die übrige kantige Formensprache zu verändern.
 - **Heller Rahmen H07–H11:** kräftige, asymmetrisch gegliederte technische Konstruktion. Die gewählte Kieferkontur aus
   Stand 46 bleibt erhalten. Seiten-/Hinterkopfgehäuse und Nackenrahmen sind glatt elliptisch gerundet. Die schmale obere Fase und
   gerade abgeschrägten Vertiefungen bleiben; ihre separaten Böden folgen der runden Wand. Keine erneut verschmälerten Kieferplatten wie in den verworfenen Versuchen 51–58.
@@ -44,6 +48,10 @@ Rauheit 0,90, Glanzintensität 0,45 und Umgebungsreflexion 0,35 dämpfen weiterh
 Die grobe, lederartige erste Texturprobe 70 ist verworfen; Stand 71 verwendet ein deutlich flacheres Relief.
 
 Die Werte stammen aus [materials.js](../web/src/materials.js); das Rendering ergänzt Licht, Tonemapping und Texturen.
+Die Augenfläche und ihre seitlichen Fortsetzungen gehören zum selben Mesh `Shell` mit demselben Material `darkArmor`
+(Rauheit 0,75, Metallanteil 0,15). Ein heller Seitenreflex und dunkle Frontstreifen sind deshalb kein Materialwechsel.
+Die Flächenausrichtung sowie das mit der Ansicht gedrehte Licht und die Umgebung bestimmen die Reflexion mit.
+Eine spätere Korrektur soll zuerst den geometrischen Übergang prüfen; keinen hellen Streifen in die Farbtextur malen.
 
 | Bereich | Basisfarbe | Wirkung |
 |---|---|---|
