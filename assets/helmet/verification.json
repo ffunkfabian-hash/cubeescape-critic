@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-10-28T14:55:07.882Z",
+  "startedAt": "2026-10-28T15:08:28.555Z",
   "status": "passed",
   "views": [
     "front",
@@ -111,33 +111,34 @@
     "textures/whiteArmor_map.png": "e3d8f7e39ec3b338fec42aa58b39cbdd08ae33fbc20442b41f202d24527edf57",
     "textures/whiteArmor_roughnessMap.png": "e905554a48bc8c7f728613e80e22987b82686b8232bdf49f94e50b7bcc647182",
     "textures/whiteTextured_bumpMap.png": "c4ace6c801244697c9be598a42d9a5a36dae194fb3551c26df59a3b8c789bd61",
-    "textures/materials.json": "d94d7e1fd156bb4faa3fd9f9ba5db561748c4a19ebf77f80df71a04b3fe30fd4",
-    "scifi_helmet.glb": "3666633abed23207dc349c5ff932155138fc61c7b0734d6f992623f14034ab43",
-    "render_front.png": "30f766af58ef5b9c857ebb9ea20ccd42162032d796fd35ef2a90584648f8a097",
+    "textures/materials.json": "3fb661e90d6a7e16aef143bbdf459418499b1dee4ae831cef9ac1fc93d5f5c82",
+    "scifi_helmet.glb": "d0dbba906776e33917ee3ade394cd1b0c837c309afe5a39e0ab7dd3097a8c507",
+    "render_front.png": "91b0fef0f203ffe8c9bc4745cd25874deb6ea03469b3e7562ae3c77a2c7308e6",
     "mask_front.png": "191f51c8deef52a8ca4ffc5cfb6e293dc1a5f3e7091853c42acf66f9f48434a0",
-    "overlay_front.png": "602acf9cc89b76cf561b8e367ba4223e952568af7106b1b8fb45a4d6e5850501",
-    "render_left.png": "54ba518bebdcd272f639559fa25eb324ca50c4d8416197f43ff80fdc3feb25c1",
-    "mask_left.png": "e6ec6405c8a498f834f9531a0f5a6a6e1ad3695238313c43cdd65bcf6faff4d8",
-    "overlay_left.png": "d9f5ebdc33b40f0df0f4aff3feeb93fca5ab94841acc89209f40f27e92bc6790",
+    "overlay_front.png": "ec738fba01af7776557b10e0604aefa17c0790104cf2be0eda8b932092b0c04f",
+    "render_left.png": "d1ea74e32056611edb632e37d3048d44a568b98cf9e98750d2c2509134e10a17",
+    "mask_left.png": "ee4b0f769590e9857f1d85fed82e141629b3dc022f796d65b074625822ee975f",
+    "overlay_left.png": "a54b361e87902021f7b98be0c481eaeeae8c73a94715cc8df18a3fd940a6ebbc",
     "render_back.png": "9183bac539c887d06890c5c70c87749c96a6035211e1ddba9027c388592b6e4b",
     "mask_back.png": "583cba1a08b6a50313c379ea67cc43330346132fca00121e2fc618dbd16ef842",
     "overlay_back.png": "65c81be681a31f7f370918ea2dd5ef64968bb04de9791f793e0aef9b36bd863c",
-    "render_right.png": "fb8086db0e94baaaad36341632ebe3d70899d3c92912ccceda44924e56d06d87",
-    "mask_right.png": "84393d818413deaffb8124f546d4ed31f0f28350126cddab40f0cef4704ae0c7",
-    "overlay_right.png": "c6a6c84a742acdebd0cbba588d8b4ce09bb0211fa7686fd28f003315679cfc53",
-    "iou.json": "9adcbb4c1bc78b8a37ab677debbdbac072e0b2b26f9f4bf5bd6d755c18c7d8c9",
-    "compare.png": "1022dacfd5349a6faf3b3ec9e578fc9bafc5a7067e3477d0ecd0df602ff58dfd"
+    "render_right.png": "8bd210724774a0f49350c9d523ea268a168a9acafbffce9200bce3edab0abca9",
+    "mask_right.png": "324dd865b43676de9c1ad18a2897179aa3c8ec4204f56d0ffecd2ff4b7a84a81",
+    "overlay_right.png": "871a057b5879974ef69a3e09deb91b5eb477139d5486d98b9bed4f09369e7ac3",
+    "iou.json": "2661385909202db8f4a7d8c2397c8c6678fd29ef371ca66c7fe35f64b45f5c79",
+    "compare.png": "877f903b2d70a03f481b9b224c164aee454e92c057267e99f99cf29ce327071c"
   },
   "sources": {
     "files": {
       "src/geo.js": "ae2dfc529993cd9585028d9f2c3446960d8e6b18d7953258856adc07e87b9f6f",
-      "src/helmet.js": "10c578579b83457e5b60b37d5411121a7b20b8b6169ffa4ccc55d76bec44f461",
-      "src/helmetParams.json": "5e3f7fb9717edf9968e2a7ff4210c9e263e3bada9ba5812f6b44386a0875785e",
+      "src/helmet.js": "745c480ed0e39c2543e6f283eaf27f7dfc0536f687be122120aaff8cc39111bf",
+      "src/helmetParams.json": "8ec95a012de22236f30ff313c3dbb8ea92a5b617dc56a3a1ae3cb2d33f5a0240",
       "src/main.js": "12a9976636ce7537453294adc1be1933a64f73df2150dc3c0c390fc0a2cc76da",
       "src/materials.js": "38359a25e7c6695f4f9c979c78df1b5b36c63e59bf6acd23b7f62e71daf211c5",
       "src/params.js": "24b2e7cee16b44ca26b518beb689982e0fec092026a6f42d18bb08203e6db170",
       "src/parts/bodyStudy.js": "fe45c21c425de5367e1770735d6f9e7510d78d148e941d3ad8fc7de6c4bae4ce",
       "src/parts/common.js": "07c66f0f95ea400c4dcfdaadab2e2f3bbe96af2378af01b8b613699f5ba7a58b",
+      "src/parts/foreheadPlates.js": "1449e88148994aeafb900aa2930d7d554c200950aeea2182c09dd3626180fdd1",
       "src/parts/headVolume.js": "f1f501bfb3c0b694b78d66241396367016d5dc78d8ec564cdb24f63ef00bd987",
       "src/parts/leftEar.js": "42231d1db97f08377ef291e3e599ee59d093132425231ea138c8a9865c22ee72",
       "src/parts/lowerArmor.js": "1f170cd0c8b14f5df043fb060df1b6589ef56cc302b7ab0637b4c7c1e188ed2d",
@@ -156,7 +157,7 @@
       "tools/geometry.test.mjs": "bdb20ae92c09ed7ac540cc1798ea2a33377f346f9c95a5551e4ac5e3d041db79",
       "tools/iou.py": "09a55bc04b25b41655e6c77143e6f7b3d3436d81b517cb3cb6751dcc3215a210",
       "tools/pairs.py": "218a718ce6704691b9d11b0dd5ed673e7fbfad07fd3fa3f3dc7d7172d0b90e6f",
-      "tools/parts_sheet.py": "48c4e1df8b9793048c33886c788697b9b17a96ddc9d0057296a7e7fdeb8cd71d",
+      "tools/parts_sheet.py": "ae46dedced0c4db724376c4bdab64d2adae6456d188e3e5c763fd4d9b88227aa",
       "tools/probe.mjs": "a4ce50c7410bec0fed6b475b97a30d64c29d56257fa50b524eb996dcc92372ac",
       "tools/provenance.mjs": "048f2d6ba44c74e7eaa96e424a49679c7650478073e5b9a6a7c10620c231afe5",
       "tools/provenance.test.mjs": "6bd36bf468f5f11be39589c8efaaf743573da915d8f4cb43e9de138f23396b19",
@@ -166,7 +167,7 @@
       "tools/test_iou.py": "42522640872b806c7b7e8b732959b1836e9eebabec11ec8e84da984df392fb9f",
       "tools/test_save_pass.py": "32706b25972fb725dc9851907221e0ca8404fb7ecb6468bf051a49d6f0f455b0",
       "tools/textureProjection.test.mjs": "556dfb910000cd2e84d2d785c23fe0af0db2a0ed029cff590d96c60182034bac",
-      "tools/upperProfile.test.mjs": "a4b0270ebabe9ec95778799b995727ce766048b0f3a78dc14344668ab6867455",
+      "tools/upperProfile.test.mjs": "75f1fdb06f911b7f2f575293c984dd7bd11e3f7fe03c1f12d427f56fa344d210",
       "tools/verification.mjs": "0b42c187226dda7c46805bc5c2f83b07050e09a905c1d39c396ac35e41e897c4",
       "tools/verification.test.mjs": "65ad99da80c2e987c10c325962f08f3743cab2678dc9b9472edcde33b923f1d3",
       "index.html": "b4649cc322f11741951fe689f9d0718c7b53f78617f280c02c423f6b7582566d",
@@ -177,7 +178,7 @@
       ".nvmrc": "7e8a2fa94951112b894a3dbe3d05efef5e9263741fa49125f0a70f40fedab4cc",
       "../reference/helm/turnaround.mp4": "fac039db10d9d3ee3c74373c38e323dd53489df69eee18971e736c9d971e70de"
     },
-    "digest": "122833c3c2db76dcd1398ca4aedfa58ce52003038e7944af52a847579d29f1d2"
+    "digest": "122ed0d5dd6a50127edffcbac5464a8a13f37a0292cff061db9cde6e50da26d4"
   },
   "runtime": {
     "node": "v24.19.0",
@@ -745,15 +746,37 @@
       "radiusX": 0.38,
       "radiusFront": 0.51,
       "radiusBack": 0.48
+    },
+    "foreheadPlates": {
+      "outline": [
+        [
+          0.055,
+          0.175
+        ],
+        [
+          0.275,
+          0.175
+        ],
+        [
+          0.17,
+          0.415
+        ],
+        [
+          0.065,
+          0.42
+        ]
+      ],
+      "projection": 0.007,
+      "embed": 0.001
     }
   },
   "renderSettings": {
     "denoiseSeed": 47
   },
   "glb": {
-    "bytes": 5785736,
-    "meshes": 89,
-    "nodes": 103,
+    "bytes": 5992292,
+    "meshes": 91,
+    "nodes": 106,
     "materials": 9,
     "images": 8
   },
@@ -763,10 +786,10 @@
   },
   "iou": {
     "front": 0.9111,
-    "left": 0.9474,
+    "left": 0.9477,
     "back": 0.9136,
-    "right": 0.8984,
-    "mean": 0.9176
+    "right": 0.8996,
+    "mean": 0.918
   },
-  "finishedAt": "2026-10-28T14:55:26.956Z"
+  "finishedAt": "2026-10-28T15:08:48.611Z"
 }

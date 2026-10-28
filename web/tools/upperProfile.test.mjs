@@ -10,6 +10,7 @@ test('rounded forehead does not lower the dark cap over the rear housing', async
  try {
   const {buildUpperHelmet}=await server.ssrLoadModule('/src/parts/upperHelmet.js');
   const {D}=await server.ssrLoadModule('/src/params.js');
+  const {buildForeheadPlates}=await server.ssrLoadModule('/src/parts/foreheadPlates.js');
   const palette=new Proxy({},{get:(_,name)=>{if(!materials.has(name))materials.set(name,new THREE.MeshStandardMaterial());return materials.get(name)}});
   const warn=console.warn;let emitted=false;let model;
   try{console.warn=(...args)=>{if(String(args[0]).includes('maxLeafSize')){if(emitted)return;emitted=true;}warn(...args)};model=buildUpperHelmet(palette);}finally{console.warn=warn;}
@@ -22,6 +23,26 @@ test('rounded forehead does not lower the dark cap over the rear housing', async
   // Both transverse and longitudinal roof sections must curve continuously:
   // slopes get steeper away from the apex, with no flat shoulder at the band.
   const crown = model.getObjectByName('Crown');
+  const plates = buildForeheadPlates(crown, palette);
+  model.add(plates); model.updateMatrixWorld(true);
+  assert.equal(plates.children.length, 2);
+  for (const side of [-1, 1]) {
+   const part = plates.getObjectByName(side > 0 ? 'ForeheadPlate_L' : 'ForeheadPlate_R');
+   assert.ok(part?.isMesh, 'Each forehead plate must remain independently exportable');
+   for (const attr of Object.values(part.geometry.attributes)) assert.ok(attr.array.every(Number.isFinite));
+   assert.equal(part.material, palette.darkArmor);
+   for (const y of [0.22, 0.29, 0.36]) for (const x of [0.08, 0.11, 0.14]) {
+    const ray = new THREE.Raycaster(new THREE.Vector3(side * x, y, 2), new THREE.Vector3(0, 0, -1));
+    const support = ray.intersectObject(crown)[0], surface = ray.intersectObject(part)[0];
+    assert.ok(support && surface, 'Missing plate surface or supporting crown');
+    const offset = surface.point.z - support.point.z;
+    assert.ok(offset > 0.002 && offset < 0.012, `Floating or buried forehead plate: ${offset}`);
+   }
+  }
+  for (const y of [0.2, 0.3, 0.4])
+   assert.equal(new THREE.Raycaster(new THREE.Vector3(0, y, 2), new THREE.Vector3(0, 0, -1))
+    .intersectObject(plates, true).length, 0, 'Keep the centre strip open');
+
   for (const section of [t => [t, -0.12], t => [0, t], t => [0, -t]]) {
    const heights = Array.from({length: 11}, (_, i) => {
     const [x, z] = section(i * 0.03);

@@ -2,37 +2,44 @@
 > critic-helm-web@0.3.0 test
 > node --test --test-concurrency=1 tools/*.test.mjs && python3 -I tools/test_iou.py && python3 -I tools/test_save_pass.py
 
-✔ body study keeps separately editable, uniquely named geometry (9.030417ms)
-(node:22027) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+✔ body study keeps separately editable, uniquely named geometry (5.120375ms)
+(node:23948) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
 Replace `const THREE = require("three")` with `import * as THREE from "three"`.
 (Use `node --trace-deprecation ...` to show where the warning was created)
 BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
-✔ separate jaw inserts follow their supporting plates (1382.782542ms)
-✔ collar surface attributes remain finite after boolean pocket cuts (2.134666ms)
-✔ rear core and collar follow a round elliptical outline (3.34525ms)
-✔ panel interiors expose recessed floors, with no residual original wall facets (8.485208ms)
-✔ slot is deeper than the panel, socket is recessed, and surrounding wall is retained (2.962875ms)
-✔ manifest detects source and authoritative reference changes, excluding generated output (5.445667ms)
-✔ verification overwrites old passed status on missing-source (48.781666ms)
-✔ verification overwrites old passed status on server-initialization (152.419916ms)
-✔ reference comparison overwrites old passed status on missing-file (44.242542ms)
-✔ reference comparison overwrites old passed status on wrong-hash (47.665958ms)
-✔ lower-face fit preserves crown and shortens connected lower geometry (2.427542ms)
-✔ instanced fasteners follow the same fit as their supporting plates (1.083958ms)
-✔ identity fit leaves geometry unchanged and invalid fitting values fail (0.66575ms)
-(node:22072) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+✔ separate jaw inserts follow their supporting plates (924.878458ms)
+✔ collar surface attributes remain finite after boolean pocket cuts (0.853875ms)
+✔ rear core and collar follow a round elliptical outline (1.363042ms)
+✔ panel interiors expose recessed floors, with no residual original wall facets (3.391625ms)
+✔ slot is deeper than the panel, socket is recessed, and surrounding wall is retained (1.020333ms)
+✔ manifest detects source and authoritative reference changes, excluding generated output (4.055917ms)
+✔ verification overwrites old passed status on missing-source (30.659917ms)
+✔ verification overwrites old passed status on server-initialization (85.639792ms)
+✔ reference comparison overwrites old passed status on missing-file (28.297917ms)
+✔ reference comparison overwrites old passed status on wrong-hash (39.040125ms)
+✔ lower-face fit preserves crown and shortens connected lower geometry (1.422167ms)
+✔ instanced fasteners follow the same fit as their supporting plates (0.70075ms)
+✔ identity fit leaves geometry unchanged and invalid fitting values fail (0.148208ms)
+(node:23984) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
 Replace `const THREE = require("three")` with `import * as THREE from "three"`.
 (Use `node --trace-deprecation ...` to show where the warning was created)
-✔ ambient-occlusion denoising is reproducible without altering global random state (6.161666ms)
-✔ UV projection stays consistent within triangles despite varying vertex normals (0.624542ms)
-(node:22074) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+✔ ambient-occlusion denoising is reproducible without altering global random state (9.022792ms)
+✔ UV projection stays consistent within triangles despite varying vertex normals (0.379625ms)
+(node:23985) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
 Replace `const THREE = require("three")` with `import * as THREE from "three"`.
 (Use `node --trace-deprecation ...` to show where the warning was created)
 BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
-✔ rounded forehead does not lower the dark cap over the rear housing (1269.125083ms)
-✔ process launch failures and signals cannot pass as exit zero (0.772ms)
-✔ GLB smoke inspection reads the model and its materials (0.309125ms)
-✔ GLB inspection rejects truncated and mislabeled downloads (0.364958ms)
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+✔ rounded forehead does not lower the dark cap over the rear housing (697.549542ms)
+✔ process launch failures and signals cannot pass as exit zero (0.360667ms)
+✔ GLB smoke inspection reads the model and its materials (0.169833ms)
+✔ GLB inspection rejects truncated and mislabeled downloads (0.2005ms)
 ℹ tests 20
 ℹ suites 0
 ℹ pass 20
@@ -40,16 +47,16 @@ BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 3796.88625
+ℹ duration_ms 2400.396709
 ....
 ----------------------------------------------------------------------
-Ran 4 tests in 0.048s
+Ran 4 tests in 0.028s
 
 OK
 ........
 ----------------------------------------------------------------------
-Ran 8 tests in 0.153s
+Ran 8 tests in 0.075s
 
 OK
 
-Stand 74: zwölf Rundungsproben an Hinterkopf und Nackenrahmen; Negativkontrolle mit 16 Segmenten schlägt erwartungsgemäß fehl.
+Stand 76: 18 Auflageproben, drei freie Mittelstreifenproben. Negativkontrolle mit schwebender Blende schlägt erwartungsgemäß fehl. Teilekarte mit 21 IDs ohne Überlauf geprüft.

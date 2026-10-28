@@ -1,17 +1,17 @@
-# Lieferstand 74 – runder Hinterkopf
+# Lieferstand 76 – separate Stirnblenden
 
-Stand 74 rundet das helle Hinterkopfgehäuse und den Nackenrahmen wieder ab.
-77/89 Geometrien sind gegenüber Stand 73 unverändert; angepasst sind die Schalen und ihre abhängigen
-Einsätze/Befestigungen. Alle Materialien und Texturbilder bleiben erhalten. Haube, verdeckter Maskenanschluss,
-Augen und Kieferplatten sind unverändert; alle Teile bleiben getrennt. [Stilbeschreibung](../../docs/HELM_STIL.md).
+Zwei trapezförmige Blenden H20/H21 folgen der Haubenrundung und der Nutzerzeichnung.
+Alle bisherigen 89 Geometrien, UVs und Transformationen sind gegenüber Stand 74 unverändert; zwei Meshes kommen hinzu.
+Alle Materialien und Texturbilder bleiben erhalten. Die Blenden verwenden das Maskenmaterial und werden durch
+18 Auflageproben und drei Mittelstreifenproben geprüft. [Stilbeschreibung](../../docs/HELM_STIL.md).
 
-- [scifi_helmet.glb](scifi_helmet.glb): 89 Meshes, neun verwendete Materialien; getrennte Baugruppen.
+- [scifi_helmet.glb](scifi_helmet.glb): 91 Meshes, neun verwendete Materialien; getrennte Baugruppen.
 - [parts.json](parts.json): Verzeichnis der tatsächlichen Exportobjekte, Hierarchie, Transformationen und Materialien.
 - [textures/](textures/): acht prozedurale PNGs und Materialzuordnung; Haubennormalenkarte im GLB enthalten, sonstige Bump-Karten bei Bedarf separat zuordnen.
 - `render_front/left/back/right.png`: vier feste Ansichten; zugehörige Masken und Overlays sind Prüfbelege.
 - [verification.json](verification.json): Quell-/Referenzhashes, Laufzeitumgebung, Kameras, Parameter und 24 Ausgabehashes.
 - [code-review.txt](code-review.txt) und [tests.txt](tests.txt): unabhängige Codeprüfung einschließlich der Nachprüfung von Stand 68 und aktuelle Testbelege.
-- [selection.json](selection.json): Vergleich der 89 Exportobjekte mit Stand 73 einschließlich Material-/Texturprüfung und Hashes des aktuellen Exports.
+- [selection.json](selection.json): Vergleich der 91 Exportobjekte mit Stand 74 einschließlich Material-/Texturprüfung und Hashes des aktuellen Exports.
 
 Erzeugen über [web/README.md](../../web/README.md). Nach `npm run verify` vom Repo-Hauptverzeichnis vergleichen:
 

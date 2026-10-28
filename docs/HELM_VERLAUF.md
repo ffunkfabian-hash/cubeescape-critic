@@ -359,3 +359,19 @@ alle Materialien und Texturbilder sind unverändert gegenüber 73.
 die alte 16-Flächen-Geometrie schlägt als Negativkontrolle fehl. Mittlere Silhouetten-IoU: 91,76 %.
 [Stand 74](belege/helm/74.jpg) · [Vier-Ansichten-Vergleich 73/74](bilder/helm_hinterkopf_73_74.jpg) ·
 [Heckvergleich](bilder/helm_hinterkopf_73_74_detail.jpg). Noch nicht vom Nutzer abgenommen.
+
+
+## Runde 20 – zwei Stirnblenden nach Nutzerzeichnung 76 (28.10.2026)
+
+Die Nutzerzeichnung ergänzt zwei oben schmalere Trapezblenden oberhalb der Augen. #75 sitzt noch zu hoch;
+#76 führt die Blenden näher an die Maske. H20/H21 folgen der tatsächlichen Rundung, liegen flach auf und lassen
+den Mittelstreifen frei. Das Material stammt unverändert von der Augenmaske. Die Blenden sind zwei zusätzliche
+Meshobjekte; alle bisherigen 89 Geometrien/UVs/Transformationen und alle Materialien/Texturbilder sind unverändert.
+Die Ergänzung ist eine Nutzerentscheidung zur Videovorlage, keine Behauptung höherer Vorlagentreue.
+
+32 Tests und Build bestehen. 18 Auflageproben und drei Mittelstreifenproben sichern den Sitz; eine absichtlich
+schwebende Blende fällt gezielt durch. Alle vier Ansichten sind geprüft; mittlere Silhouetten-IoU 91,80 %.
+Die Teilekarte enthält H01–H21 und passt weiterhin auf ein Blatt A3 quer.
+[Nutzerzeichnung](../reference/helm-forehead-request-20261028/stirnblenden-markierung.jpg) ·
+[Erster Versuch 75](belege/helm/75.jpg) · [Stand 76](belege/helm/76.jpg) ·
+[Vergleich 74/76](bilder/helm_stirnblenden_74_76.jpg). Noch nicht vom Nutzer abgenommen.

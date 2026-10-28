@@ -30,9 +30,11 @@ Diese Bezeichnungen gelten unabhängig davon, von welcher Richtung man gerade au
 | H17 | Antenne | Langer Stab auf Seite A mit Fuß und Endkappe. |
 | H18 | Spiralkabel | Gerippte Kabelschleife auf Seite A mit Klammern und Anschlüssen. |
 | H19 | Halsanschluss | Zurückgesetzter Ring unter dem Nackenrahmen. Der darunterliegende schwarze Hals dient als Träger. |
+| H20 | Stirnblende A | Trapezförmige separate Blende oberhalb des Auges auf Funkseite A. |
+| H21 | Stirnblende B | Entsprechende separate Blende auf Seite B; Mittelstreifen bleibt frei. |
 
 Die IDs bezeichnen sichtbare Abschnitte, nicht zwingend einzelne Meshes. Seit Fidelity sind Haube, Augenmaske, beide Wangen, Kinn und beide Kieferstücke getrennte Meshes.
-Die bestehende Bildkarte zeigt Stand #42; aktuelle Vier-Ansichten-Belege stehen im [Fidelity-Bericht](versions/0.2.md).
+Die Bildkarte zeigt Stand 76 mit H20/H21; aktuelle Vier-Ansichten-Belege stehen im [Prüfbericht](versions/0.3.md).
 Farben helfen beim Zuordnen; ein Änderungswunsch an H11 betrifft die Geometrie, solange keine Materialänderung genannt wird.
 
 ## Zuordnung für die Umsetzung
@@ -41,6 +43,7 @@ Farben helfen beim Zuordnen; ein Änderungswunsch an H11 betrifft die Geometrie,
 | --- | --- | --- |
 | H01–H06, H14 | `upperHelmet.js` | `Crown`, `Shell` (Augenmaske), `Cheek_L/R`, `Brim`, `Visor_L/R`, `Mouth_Insert`, `MouthRail_L/R`, `MaskGap`, `Hinge_L/R` |
 | H07–H11, H19 | `lowerArmor.js` | `Chin`, `Jaw_L/R`, `Jaw_Insert_L/R`, `Core`, `Collar`, `NeckRing`, seitliche Felder |
+| H20, H21 | `foreheadPlates.js` | `ForeheadPlate_R` (A), `ForeheadPlate_L` (B) |
 | H13, H15 | `leftEar.js` | `EarCap`, `EarCap_Insert`, `HeadBand`, `Bracket`, Klemmen |
 | H12, H16–H18 | `rightComms.js` | `RadioModule`, `BackBox_Group`, `Antenna`, `Hose` |
 
@@ -62,8 +65,8 @@ Die Karte verwendet die vier vorhandenen Renderansichten mit 1280×720 Pixeln. C
 vergeben; zusätzliche Bereiche erhalten neue Nummern. Die Karte dokumentiert einen Modellstand und ersetzt keinen
 Vergleich mit den Referenzbildern.
 
-Aktueller Lieferstand: **74**, mit quer und längs gewölbtem Scheitel, angepasstem Bügel und weichem Übergang
+Aktueller Lieferstand: **76**, mit quer und längs gewölbtem Scheitel, angepasstem Bügel und weichem Übergang
 zwischen H01 und H02. Die Fugenlinie ist durch einen verdeckten Überlappungsrand reduziert. Beide Teile bleiben getrennt; H09/H10 sind wieder rund; die separaten Vertiefungen H11 folgen der neuen Rundung.
 Die Haube besitzt dieselbe Graphitgrundfarbe wie die Maske, mit sichtbarer feiner Lackkörnung und gedämpftem Glanz.
-Teilekennungen und 89 Meshes bleiben erhalten; [Exportverzeichnis](../assets/helmet/parts.json),
+Die bestehenden 89 Meshes bleiben erhalten; H20/H21 ergänzen zwei eigenständige Meshes (insgesamt 91); [Exportverzeichnis](../assets/helmet/parts.json),
 [Stilbeschreibung](HELM_STIL.md), [Prüfbericht](versions/0.3.md).

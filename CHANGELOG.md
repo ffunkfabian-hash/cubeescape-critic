@@ -2,6 +2,12 @@
 
 ## 0.3.0 „Sidework“ – 2026-10-28 (offener Entwurf)
 
+- Stand 76: zwei separate trapezförmige Stirnblenden nach Nutzerzeichnung, auf der runden Haube aufliegend.
+- Alle bisherigen 89 Meshes, Materialien und Texturen erhalten; H20/H21 ergänzen zwei exportierbare Bauteile.
+- 32 Tests und Build bestehen; Auflage/Mittelstreifen, Negativkontrolle, vier Ansichten und erweiterte Teilekarte geprüft.
+
+### Hinterkopfstand 74
+
 - Stand 74: helles Hinterkopfgehäuse und Nackenrahmen wieder glatt gerundet, einschließlich separater Taschenböden.
 - Haube, verdeckter Maskenanschluss, Augen und Kiefer erhalten; 77/89 Geometrien sowie alle Materialien unverändert.
 - 32 Tests und Build bestehen; zwölf Rundungsproben, Negativkontrolle und vier Videoansichten geprüft.

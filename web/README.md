@@ -63,6 +63,7 @@ Einheit: Helmhöhe ≈ 1, Ursprung in der Kopfmitte, Y oben, Gesicht +Z, linke H
 | Schlüssel | Bedeutung |
 | --- | --- |
 | `shapeFit` | kohärente Verkürzung unter Augenhöhe (`lowerFaceScale`, `lowerFaceAnchor`), einschließlich Befestigungen |
+| `foreheadPlates` | Trapezumriss, geringe Auflagehöhe und eingebettete Unterseite der separaten Stirnblenden H20/H21 |
 | `crownTransition` | Neigung und Z-Anker des Übergangs zwischen Haube und Gesichtsmaske |
 | `crownRounding` | Stärke und Höhenbereich der Rundung des Haubenquerschnitts |
 | `head.tilt` | Neigung der ganzen Grundform um X (Bogenmaß) |
@@ -87,7 +88,7 @@ Einheit: Helmhöhe ≈ 1, Ursprung in der Kopfmitte, Y oben, Gesicht +Z, linke H
 
 ## Über Änderungen sprechen
 
-Die [Teilekarte](../docs/HELM_TEILE.md) vergibt stabile Kennungen H01–H19. Bitte Kennung, Seite und gewünschte Änderung
+Die [Teilekarte](../docs/HELM_TEILE.md) vergibt stabile Kennungen H01–H21. Bitte Kennung, Seite und gewünschte Änderung
 nennen, etwa „H11 auf Seite B tiefer“. Seite A trägt Funkmuschel, Antenne und Kabel; Seite B das kantige Modul.
 Die Seitennamen beziehen sich auf Bauteile und ändern sich beim Drehen nicht.
 
@@ -154,14 +155,16 @@ Der Referenzlauf erzeugt Textur- und Geometrieansichten sowie `comparison.json` 
 Die globale Aufstellung ist zur Sichtprüfung angenähert; aus diesen Bildern wird **kein Meshy-IoU** berechnet.
 Die Bildausschnitte des Kontaktbogens sind Darstellungszuschnitte, keine Änderung der Helm-Messung.
 
-## Aktueller Lieferstand 74
+## Aktueller Lieferstand 76
 
 Nach Nutzerfeedback ist die Haube auch um den Kopfbügel quer und längs gewölbt (`crownDome`).
 `crownTransition.blendHeight` führt den Haubenrand weich zur Augenmaske. `rimOverlap` und `rimCover` (je 0,001
 Modelleinheiten) schließen den sichtbaren Abstand und decken die helle Schnittkante ab. `clearance` ist dadurch ersetzt.
-77/89 Meshgeometrien einschließlich UVs und Transformationen sind gegenüber Stand 73 unverändert; angepasst sind
-das helle Heckgehäuse, Nackenrahmen und ihre abhängigen Einsätze/Befestigungen. Haube, Augen, Kiefer und verdeckter
-Maskenanschluss bleiben erhalten. Der Anschluss wird weiterhin mit 33 Strahlen geprüft.
+Alle bisherigen 89 Meshgeometrien einschließlich UVs und Transformationen sind gegenüber Stand 74 unverändert.
+`foreheadPlates.outline`, `projection` und `embed` steuern die zwei neuen Trapezblenden H20/H21. Ihre Oberfläche wird
+aus der tatsächlichen Haube abgeleitet und verwendet das Maskenmaterial. 18 Strahlproben prüfen die Auflage,
+drei den freien Mittelstreifen; eine absichtlich schwebende Blende lässt den Test fehlschlagen.
+Der verdeckte Maskenanschluss wird weiterhin mit 33 Strahlen geprüft.
 `crownArmor` behält die Graphitgrundfarbe der Maske und den gedämpften Glanz. `crownMaps(seed=73)` erzeugt sichtbare feine
 Lackkörnung als Farb-, Normalen- und Rauheitskarte. Die übrigen Materialien bleiben erhalten; die Haubennormalenkarte wird im glTF-Kernkanal exportiert.
 Die Haubenversuche 62/63 sind verworfen. Aktuelle Quellen und alle 24 Ausgaben sind über SHA256 dokumentiert.
@@ -170,7 +173,7 @@ Die Haubenversuche 62/63 sind verworfen. Aktuelle Quellen und alle 24 Ausgaben s
 Die obere Fase und geraden Eckabschrägungen der Taschen bleiben erhalten. Zwölf Strahlproben prüfen die elliptische
 Rundung; die vorherige 16-Flächen-Variante fällt dabei gezielt durch. Die Taschenböden folgen derselben Rundung
 wie ihre Träger und bleiben separate Teile. Der Halsring und die kantigen Kieferplatten sind unverändert.
-Modellteile werden in `parts/` erzeugt; 89 Meshes sind im GLB enthalten. Die optionale Körperstudie bleibt ein Entwurf.
+Modellteile werden in `parts/` erzeugt; 91 Meshes sind im GLB enthalten. Die optionale Körperstudie bleibt ein Entwurf.
 
 [Stilbeschreibung und feste Vorgaben](../docs/HELM_STIL.md) · [Lieferdateien](../assets/helmet/README.md).
 

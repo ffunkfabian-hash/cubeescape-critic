@@ -30,13 +30,17 @@ PARTS = [
     ("H17", "Antenne", "Langer Stab auf Seite A, mit Fuß und Spitze."),
     ("H18", "Spiralkabel", "Gerippte Verbindung um Seite A."),
     ("H19", "Halsanschluss", "Zurückgesetzter Ring unter dem Rahmen."),
+    ("H20", "Stirnblende A", "Separate trapezförmige Blende oberhalb von Auge A."),
+    ("H21", "Stirnblende B", "Separate trapezförmige Blende oberhalb von Auge B."),
 ]
 
 # Every point is in the original 1280×720 render coordinate system.
 # A = front-left, -X, radio; B = front-right, +X, angular ear module.
 VIEWS = [
     ("front", "01 / Front", "Seite A links · Seite B rechts", [
-        ("H01", (620, 135), (240, 95)),
+        ("H01", (640, 155), (240, 55)),
+        ("H20", (550, 165), (240, 150)),
+        ("H21", (730, 165), (1020, 55)),
         ("H02", (675, 237), (1020, 155)),
         ("H03", (650, 330), (1020, 350)),
         ("H04", (520, 281), (240, 275)),
@@ -162,7 +166,7 @@ svg rect { fill: #fff; stroke: #093e59; stroke-width: 2; }
 svg text { fill: #093e59; text-anchor: middle; font: bold 26px Arial,sans-serif; }
 .legend h2 { margin: 0 0 12px; font-size: 19px; }
 ol { list-style: none; margin: 0; padding: 0; }
-li { display: grid; grid-template-columns: 42px 1fr; gap: 8px; padding: 6px 0; border-bottom: 1px solid #e4e9ec; break-inside: avoid; }
+li { display: grid; grid-template-columns: 42px 1fr; gap: 8px; padding: 5px 0; border-bottom: 1px solid #e4e9ec; break-inside: avoid; }
 li > b { font-size: 13px; color: #0d4864; align-self: start; padding: 3px 0; }
 li strong { display: block; font-size: 13px; line-height: 1.2; }
 li span { display: block; font-size: 11px; line-height: 1.3; color: #556873; margin-top: 2px; }
@@ -172,7 +176,7 @@ footer { margin-top: 16px; padding-top: 12px; border-top: 1px solid #cdd7dd; col
 @media print { html, body { width: 420mm; height: 297mm; } .sheet { width: 420mm; height: 297mm; } }
 </style></head><body><main class="sheet"><header><div><h1>Helm · Teilekarte</h1>
 <p>Stabile Abschnittsnummern für konkrete Änderungswünsche</p></div>
-<div class="stamp">__LABEL__<br>19 Abschnitte · vier Ansichten · A3 quer</div></header>
+<div class="stamp">__LABEL__<br>__COUNT__ Abschnitte · vier Ansichten · A3 quer</div></header>
 <div class="layout"><div><div class="views">__PANELS__</div>
 <div class="usage"><strong>So sprechen wir über Änderungen</strong>
 „H07 schmaler.“ &nbsp; „H11 auf Seite B tiefer.“ &nbsp; „H10 vorne flacher anschließen.“<br>
@@ -184,7 +188,7 @@ Standbilder dokumentieren den aktuellen Modellstand, keine Abnahme der Vorlagent
 </div><aside class="legend"><h2>Teile und Abschnitte</h2><ol>__LEGEND__</ol></aside></div>
 </main></body></html>
 """
-    document = document.replace("__LABEL__", html.escape(label)).replace("__PANELS__", "".join(panels)).replace("__LEGEND__", legend)
+    document = document.replace("__COUNT__", str(len(PARTS))).replace("__LABEL__", html.escape(label)).replace("__PANELS__", "".join(panels)).replace("__LEGEND__", legend)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(document, encoding="utf-8")
 

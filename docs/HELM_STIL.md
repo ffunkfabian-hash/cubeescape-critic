@@ -2,8 +2,9 @@
 
 ## Verbindlicher Stand
 
-Aktueller Lieferstand: **Prüflauf 74**. Nach Nutzerfeedback ist der Scheitel nun quer und längs gewölbt;
+Aktueller Lieferstand: **Prüflauf 76**. Nach Nutzerfeedback ist der Scheitel nun quer und längs gewölbt;
 der Kopfbügel folgt der Haube. Ihr Rand läuft weich zur Augenmaske aus. Das helle Hinterkopfgehäuse und der Nackenrahmen sind wieder rund; die Kieferplatten bleiben kantig.
+Zwei separate Stirnblenden ergänzen die Haube gemäß der [Nutzerzeichnung](../reference/helm-forehead-request-20261028/stirnblenden-markierung.jpg).
 Die abgeflachten, eckigen Haubenversuche 62/63 wurden vom Nutzer ausdrücklich verworfen.
 
 ![Aktueller Helm mit runder Haube](bilder/helm_aktuell.jpg)
@@ -18,6 +19,9 @@ Die Zuordnung ist im [Verlauf](HELM_VERLAUF.md) dokumentiert. „Vorher“ bezei
   keine abgeschnittenen hellen Flecken und keine ausgeprägten geraden Schulterflächen. Der Bügel folgt der Rundung.
   Der Übergang zur Augenmaske soll möglichst ohne sichtbare Fugenlinie wirken. Eine minimale verdeckte Überlappung
   und Randabdeckung reduzieren die helle Linie; H01 und H02 bleiben getrennt. Material-/Lichtunterschiede können den Übergang noch zeigen.
+- **Stirnblenden H20/H21:** zwei flach aufliegende Trapeze oberhalb der Augen, oben schmaler, mit freiem Mittelstreifen.
+  Sie folgen der Haubenrundung und verwenden das Material der Maske. Separate Meshes; die Haube bleibt darunter erhalten.
+  Dies ist eine gezielte Nutzerergänzung zur Videovorlage.
 - **Gesicht H02–H06:** dunkle, kantige Panzerplatten mit schmalen Fugen, zurückgesetztem trapezförmigem Mitteleinsatz
   und klaren Wangenflächen. Die akzeptierten cyanfarbenen Augen bleiben in Form, Lage und Leuchtwirkung erhalten.
 - **Heller Rahmen H07–H11:** kräftige, asymmetrisch gegliederte technische Konstruktion. Die gewählte Kieferkontur aus
@@ -55,11 +59,11 @@ zusätzlich als Höhen-/Bump-Texturen zuordnen, da glTF diesen Kanal nicht direk
 ## Aufbau und Reproduktion
 
 Quelle ist der Three.js-Generator, keine von Hand geänderte Exportdatei. Formparameter liegen in
-[helmetParams.json](../web/src/helmetParams.json); einige Kieferkonturen stehen noch direkt in `parts/lowerArmor.js`. Feste Teilekennungen H01–H19 stehen in [HELM_TEILE.md](HELM_TEILE.md).
+[helmetParams.json](../web/src/helmetParams.json); einige Kieferkonturen stehen noch direkt in `parts/lowerArmor.js`. Feste Teilekennungen H01–H21 stehen in [HELM_TEILE.md](HELM_TEILE.md).
 Im Generator zeigt +Y nach oben, +Z nach vorn. Seite A liegt bei −X (Kamera `right`), Seite B bei +X (`left`).
 Die anders bezeichneten Achsen in der ursprünglichen Formbeschreibung werden nicht mit diesen Arbeitskoordinaten vermischt.
 
-Der GLB enthält **89 Meshes** mit getrennten Baugruppen; Schraubensätze können gemeinsam in einem Mesh liegen.
+Der GLB enthält **91 Meshes** mit getrennten Baugruppen; Schraubensätze können gemeinsam in einem Mesh liegen.
 [parts.json](../assets/helmet/parts.json) listet die tatsächlichen Exportobjekte und Materialien.
 Einzelne Meshes sind noch keine Zusicherung fertiger Druckwandstärken, Montagepassungen oder tragbarer Schutzwirkung.
 
@@ -67,4 +71,4 @@ Einzelne Meshes sind noch keine Zusicherung fertiger Druckwandstärken, Montagep
 Standnummern beschriften. Messwerte ergänzen die Sichtprüfung; Silhouetten-IoU ist kein Prozentwert für die Gesamtähnlichkeit.
 Die optionale Körperstudie (`?body=1`) ist ein separater Proportionsentwurf und nicht als fertige Körperform freigegeben.
 
-[Reproduktionsanleitung](../web/README.md#aktueller-lieferstand-74) · [GLB und Prüfbelege](../assets/helmet/README.md)
+[Reproduktionsanleitung](../web/README.md#aktueller-lieferstand-76) · [GLB und Prüfbelege](../assets/helmet/README.md)

@@ -1,14 +1,14 @@
 # Critic – parametrischer Helm im Browser
 
-Aktueller Lieferstand **74**: durchgehend gewölbter Scheitel mit angepasstem Kopfbügel und weichem Übergang zur
-Augenmaske mit weitgehend verdeckter Fugenlinie. Die Haube trägt eine sichtbare feine Lackkörnung im Graphitton der Maske; der Glanz bleibt gedämpft. Hinterkopfgehäuse und Nackenrahmen sind wieder rund; Augen und kantige Kieferplatten bleiben erhalten. Das Video bleibt maßgeblich.
+Aktueller Lieferstand **76**: durchgehend gewölbter Scheitel mit angepasstem Kopfbügel und weichem Übergang zur
+Augenmaske mit weitgehend verdeckter Fugenlinie. Die Haube trägt eine sichtbare feine Lackkörnung im Graphitton der Maske; der Glanz bleibt gedämpft. Hinterkopfgehäuse und Nackenrahmen sind wieder rund; Augen und kantige Kieferplatten bleiben erhalten. Zwei separate trapezförmige Stirnblenden ergänzen die Haube nach der Nutzerzeichnung. Das Video bleibt für den übrigen Helm maßgeblich.
 
 ![Aktueller Helm](docs/bilder/helm_aktuell.jpg)
 
 - [Stil- und Formbeschreibung](docs/HELM_STIL.md)
 - [GLB, Texturen, Einzelteilverzeichnis und Prüfbelege](assets/helmet/README.md)
 - [Start, Bedienung und Reproduktion](web/README.md)
-- [Teilekarte H01–H19](docs/HELM_TEILE.md) · [Verlauf mit Vergleichsbildern](docs/HELM_VERLAUF.md)
+- [Teilekarte H01–H21](docs/HELM_TEILE.md) · [Verlauf mit Vergleichsbildern](docs/HELM_VERLAUF.md)
 - [Versionsbericht und Prüfstand](docs/versions/0.3.md)
 
 Der Helm entsteht vollständig aus Code in `web/` (Three.js). Maße stehen in `web/src/helmetParams.json`;

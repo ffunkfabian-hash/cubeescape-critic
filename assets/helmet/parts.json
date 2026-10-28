@@ -1,6 +1,6 @@
 {
-  "pass": 74,
-  "meshCount": 89,
+  "pass": 76,
+  "meshCount": 91,
   "parts": [
     {
       "node": 2,
@@ -1822,6 +1822,26 @@
           1
         ]
       }
+    },
+    {
+      "node": 104,
+      "name": "ForeheadPlate_R",
+      "path": "SciFiHelmet/ForeheadPlates/ForeheadPlate_R",
+      "mesh": 89,
+      "materials": [
+        "darkArmor"
+      ],
+      "transform": {}
+    },
+    {
+      "node": 105,
+      "name": "ForeheadPlate_L",
+      "path": "SciFiHelmet/ForeheadPlates/ForeheadPlate_L",
+      "mesh": 90,
+      "materials": [
+        "darkArmor"
+      ],
+      "transform": {}
     }
   ]
 }

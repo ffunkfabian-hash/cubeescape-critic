@@ -548,5 +548,10 @@
     "radiusX": 0.38,
     "radiusFront": 0.51,
     "radiusBack": 0.48
+  },
+  "foreheadPlates": {
+    "outline": [[0.055, 0.175], [0.275, 0.175], [0.17, 0.415], [0.065, 0.42]],
+    "projection": 0.007,
+    "embed": 0.001
   }
 }

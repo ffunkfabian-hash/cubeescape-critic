@@ -525,6 +525,14 @@
     {
       "part": "",
       "material": "darkMetal"
+    },
+    {
+      "part": "ForeheadPlate_R",
+      "material": "darkArmor"
+    },
+    {
+      "part": "ForeheadPlate_L",
+      "material": "darkArmor"
     }
   ]
 }
