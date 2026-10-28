@@ -1,6 +1,25 @@
 // Procedural canvas maps (bump / roughness / colour) and a box-projection UV helper for CSG results.
 import * as THREE from 'three';
 import { rng } from './geo.js';
+import { SimplexNoise } from 'three/examples/jsm/math/SimplexNoise.js';
+
+export const DENOISE_SEED = 47;
+
+// GTAOPass otherwise creates a fresh random denoising pattern on every page load.
+export function denoiseTexture(seed = DENOISE_SEED, size = 64) {
+  const simplex = new SimplexNoise({ random: rng(seed) });
+  const data = new Uint8Array(size * size * 4);
+  for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+    for (let channel = 0; channel < 4; channel++) {
+      data[(y * size + x) * 4 + channel] = (simplex.noise(y + (channel % 2) * size,
+        x + Math.floor(channel / 2) * size) * 0.5 + 0.5) * 255;
+    }
+  }
+  const texture = new THREE.DataTexture(data, size, size, THREE.RGBAFormat, THREE.UnsignedByteType);
+  texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+  texture.needsUpdate = true;
+  return texture;
+}
 
 function canvas(w, h = w) {
   const c = document.createElement('canvas');
@@ -118,15 +137,27 @@ export function honeycombMaps(cell = 0.013) {
   return [tex(c1, rep, true), tex(c2, rep)];
 }
 
-// Planar UVs by dominant normal axis (CSG results carry no UVs).
+// Pick one projection per triangle. Choosing per vertex lets interpolated normals
+// switch axes inside a triangle, stretching scratches into large triangular patches.
 export function boxProjectUV(geo, scale = 1) {
-  const p = geo.attributes.position, n = geo.attributes.normal;
+  if (geo.index) {
+    const expanded = geo.toNonIndexed();
+    geo.copy(expanded);
+    expanded.dispose();
+  }
+  const p = geo.attributes.position;
   const uv = new Float32Array(p.count * 2);
-  for (let i = 0; i < p.count; i++) {
-    const ax = Math.abs(n.getX(i)), ay = Math.abs(n.getY(i)), az = Math.abs(n.getZ(i));
-    const [u, v] = ax >= ay && ax >= az ? [p.getZ(i), p.getY(i)] : ay >= az ? [p.getX(i), p.getZ(i)] : [p.getX(i), p.getY(i)];
-    uv[i * 2] = u * scale;
-    uv[i * 2 + 1] = v * scale;
+  const a = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3();
+  for (let i = 0; i < p.count; i += 3) {
+    a.fromBufferAttribute(p, i); b.fromBufferAttribute(p, i + 1); c.fromBufferAttribute(p, i + 2);
+    const n = b.sub(a).cross(c.sub(a));
+    const ax = Math.abs(n.x), ay = Math.abs(n.y), az = Math.abs(n.z);
+    for (let j = i; j < i + 3; j++) {
+      const [u, v] = ax >= ay && ax >= az ? [p.getZ(j), p.getY(j)]
+        : ay >= az ? [p.getX(j), p.getZ(j)] : [p.getX(j), p.getY(j)];
+      uv[j * 2] = u * scale;
+      uv[j * 2 + 1] = v * scale;
+    }
   }
   geo.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
   return geo;

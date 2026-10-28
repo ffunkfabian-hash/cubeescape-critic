@@ -14,17 +14,17 @@ export function buildUpperHelmet(M) {
 
   // Outer volume from the drawn profiles. Dark = head ∩ (cap above the brim ∪ front-plate silhouette stack).
   const H = headVolume(1);
-  const capBox = brush(new THREE.BoxGeometry(2, 1, 2), { pos: [0, D.capEdgeY + 0.5, D.maskBackZ + 0.02 - 1] });
   const zb = D.maskBackZ;
-  const front = brush(prism([[-0.5, 0.8], [-0.5, 0.2], [-0.345, 0.1], [-0.345, -0.02], [-0.2, -0.335], [0.2, -0.335], [0.345, -0.02], [0.345, 0.1], [0.5, 0.2], [0.5, 0.8]], 'xy'));
+  const front = brush(prism([[-0.6, 0.8], [-0.6, 0.16], [-0.38, 0.01], [-0.205, -0.35], [0.205, -0.35], [0.38, 0.01], [0.6, 0.16], [0.6, 0.8]], 'xy'));
   const side = brush(prism([[zb - 0.02, 0.8], [0.8, 0.8], [0.8, 0.05], [0.49, -0.335], [0.16, -0.335], [0.1, -0.29], [0.0, -0.2], [zb + 0.02, 0.05]], 'zy'));
-  const top = brush(prism([[-0.5, -0.3], [-0.5, 0.26], [-0.22, 0.49], [0, 0.505], [0.22, 0.49], [0.5, 0.26], [0.5, -0.3]], 'xz'));
-  const region = csg(front, [INTERSECTION, side], [INTERSECTION, top], [ADDITION, capBox]);
-  // Raised face plate: slightly inflated head volume cut to the plate outline, so its edges read as panel steps.
+  // A continuous sloping brow partitions the crown from the face. The former
+  // intersection of three raised plate outlines left rectangular steps on the temples.
   const H2 = headVolume(1.022);
-  const pFront = brush(prism([[-0.31, 0.27], [0.31, 0.27], [0.355, 0.12], [0.355, -0.02], [0.205, -0.34], [-0.205, -0.34], [-0.355, -0.02], [-0.355, 0.12]], 'xy'));
-  const pSide = brush(prism([[0.2, 0.27], [0.8, 0.27], [0.8, 0.0], [0.505, -0.34], [0.2, -0.34]], 'zy'));
-  const pTop = brush(prism([[-0.6, 0.18], [-0.24, 0.505], [0, 0.52], [0.24, 0.505], [0.6, 0.18], [0.6, 0.05], [-0.6, 0.05]], 'xz'));
+  const browSlope = D.crownTransition.slope;
+  const browPoint = [0, D.capEdgeY, D.crownTransition.anchorZ];
+  const belowBrow = halfSpace(browPoint, [0, 1, browSlope]);
+  const capRegion = csg(halfSpace(browPoint, [0, -1, -browSlope]),
+    [ADDITION, halfSpace([0, D.capEdgeY, 0], [0, -1, 0])]);
   // Planar facets of the face (flat front, side chamfers, sloped brow, lower face leaning back); the raised plate
   // gets the same planes pushed out by its offset.
   // Every pair in D.facetBevels gets a narrow chamfer plane along its shared edge (normal = mean of both normals),
@@ -44,8 +44,13 @@ export function buildUpperHelmet(M) {
     }
     return out;
   };
-  const facePlate = csg(H2, [INTERSECTION, pFront], [INTERSECTION, pSide], [INTERSECTION, pTop], ...facets(0.011));
-  let shell = csg(H, [INTERSECTION, region], ...facets(0), [ADDITION, facePlate]);
+  let shell = csg(H2, [INTERSECTION, front], [INTERSECTION, side],
+    [INTERSECTION, belowBrow], ...facets(0.011));
+  const crown = csg(H, [INTERSECTION, capRegion]);
+  // Keep the crown and face as distinct meshes for later individual editing/export.
+  const crownMesh = new THREE.Mesh(boxProjectUV(crown.geometry, 2.5), M.darkArmor);
+  crownMesh.name = 'Crown';
+  g.add(crownMesh);
 
   const probe = new THREE.Mesh(shell.geometry, M.darkArmor);
   const surfZ = (x, y) => hitSurface(probe, [x, y, 2], [0, 0, -1])?.point.z ?? 0.45;
@@ -59,13 +64,16 @@ export function buildUpperHelmet(M) {
   for (const s of [-1, 1]) {
     // Yaw follows the V-shaped front, so the socket keeps its depth along the slit and wraps onto the side chamfer.
     const x = s * v.x, z = surfZ(x, v.y), rz = s * v.angleDeg * DEG, rot = [0, s * v.yawDeg * DEG, rz];
+    // Place cuts and pane along the rotated socket's local depth axis.
+    const axis = new THREE.Vector3(0, 0, 1).applyEuler(new THREE.Euler(...rot));
+    const atDepth = (depth) => new THREE.Vector3(x, v.y, z).addScaledVector(axis, depth).toArray();
     const socket = new THREE.CylinderGeometry(1, 0.8, socketDepth + 0.03, 4, 1).rotateY(Math.PI / 4).rotateX(Math.PI / 2);
-    socket.scale((v.width + 0.04) / Math.SQRT2, (v.height + 0.034) / Math.SQRT2, 1);
-    cuts.push(brush(socket, { pos: [x, v.y, z - socketDepth / 2 + 0.015], rot }));
-    cuts.push(brush(new THREE.BoxGeometry(v.width, v.height, 0.3), { pos: [x, v.y, z - socketDepth - slitDepth + 0.15], rot }));
-    const glow = new THREE.Mesh(new THREE.BoxGeometry(v.width - 0.004, v.height - 0.004, 0.02), M.visorGlow);
+    socket.scale((v.width + v.socketMarginWidth) / Math.SQRT2, (v.height + v.socketMarginHeight) / Math.SQRT2, 1);
+    cuts.push(brush(socket, { pos: atDepth(-socketDepth / 2 + 0.015), rot }));
+    cuts.push(brush(new THREE.BoxGeometry(v.width, v.height, 0.3), { pos: atDepth(-socketDepth - slitDepth + 0.15), rot }));
+    const glow = new THREE.Mesh(new THREE.BoxGeometry(v.width - 0.002, v.height - 0.002, 0.004), M.visorGlow);
     glow.name = s < 0 ? 'Visor_R' : 'Visor_L';
-    glow.position.set(x, v.y, z - socketDepth - slitDepth + 0.006 - 0.01);
+    glow.position.fromArray(atDepth(-socketDepth - 0.002));
     glow.rotation.set(...rot);
     glows.push(glow);
   }
@@ -74,29 +82,17 @@ export function buildUpperHelmet(M) {
   // slot at its top; slanted side rails are added as an insert below.
   const zm = surfZ(0, -0.2);
   const mo = D.mouth;
-  cuts.push(brush(prism(mo.outline, 'xy', 1), { pos: [0, 0, zm - mo.depth + 0.5] }));
+  const floorTop = Math.min(surfZ(0, -0.07), surfZ(0.06, -0.07)) - 0.05;
+  const floorBottom = Math.min(surfZ(0, -0.335), surfZ(0.13, -0.335)) - 0.05;
+  const mouthFloor = (y) => THREE.MathUtils.lerp(floorTop, floorBottom, (y + 0.07) / (-0.335 + 0.07));
+  const mouthCut = new THREE.ExtrudeGeometry(shape(mo.outline), { depth: 1, bevelEnabled: false });
+  const cutPositions = mouthCut.attributes.position;
+  for (let i = 0; i < cutPositions.count; i++) {
+    cutPositions.setZ(i, cutPositions.getZ(i) + mouthFloor(cutPositions.getY(i)));
+  }
+  mouthCut.computeVertexNormals();
+  cuts.push(brush(mouthCut));
   cuts.push(brush(new THREE.BoxGeometry(mo.slotWidth, 0.014, 0.2), { pos: [0, mo.slotY, zm - mo.depth - 0.025 + 0.1] }));
-
-  // Panel lines: narrow grooves on the lower front plate and a transverse seam on the cap.
-  const groove = (x, y, len, ang, w = 0.006) => {
-    const z = surfZ(x, y);
-    cuts.push(brush(new THREE.BoxGeometry(len, w, 0.2), { pos: [x, y, z + 0.1 - 0.012], rot: [0, 0, ang] }));
-  };
-  for (const s of [-1, 1]) {
-    groove(s * 0.19, -0.115, 0.2, s * 0.32);
-    groove(s * 0.17, -0.25, 0.16, s * -0.55);
-    groove(s * 0.28, 0.215, 0.12, s * -0.18);
-    // Seam under the eye socket towards the mouth plate.
-    groove(s * 0.2, -0.015, 0.22, s * 0.1, 0.007);
-    // Small chevron marks on the lower cheek plates.
-    for (let k = 0; k < 3; k++) groove(s * (0.215 + k * 0.016), -0.205, 0.035, s * 1.0, 0.004);
-  }
-  cuts.push(brush(new THREE.BoxGeometry(2, 1, 0.006), { pos: [0, D.capEdgeY + 0.55, -0.25] }));
-  for (const s of [-1, 1]) {
-    // Side seam: from the brow corner back and up over the temple, as a thin slot in a vertical plane.
-    cuts.push(brush(new THREE.BoxGeometry(0.12, 0.006, 0.42), { pos: [s * 0.38, 0.36, 0.1], rot: [0.32, 0, 0] }));
-  }
-  cuts.push(brush(new THREE.BoxGeometry(0.006, 1, 0.6), { pos: [0, D.capEdgeY + 0.6, -0.3] }));
 
   // Temple recesses: rounded triangles with sloped walls (three-sided frustum), a fastener in the floor added below.
   const templeHits = [];
@@ -109,17 +105,48 @@ export function buildUpperHelmet(M) {
   }
 
   for (const c of cuts) shell = csg(shell, [SUBTRACTION, c]);
-  boxProjectUV(shell.geometry, 2.5);
-  const shellMesh = new THREE.Mesh(shell.geometry, M.darkArmor);
+  // Separate cheek plates along a shallow V seam, with a real clearance gap.
+  const seam = -0.115, gap = 0.003;
+  const upper = csg(shell,
+    [INTERSECTION, halfSpace([0, seam + gap, 0], [0.23, -1, -0.05])],
+    [INTERSECTION, halfSpace([0, seam + gap, 0], [-0.23, -1, -0.05])]);
+  const shellMesh = new THREE.Mesh(boxProjectUV(upper.geometry, 2.5), M.darkArmor);
   shellMesh.name = 'Shell';
+  const cheekMeshes = [-1, 1].map((s) => {
+    const part = csg(shell,
+      [INTERSECTION, halfSpace([0, seam - gap, 0], [-s * 0.23, 1, 0.05])],
+      [INTERSECTION, halfSpace([0, 0, 0], [-s, 0, 0])]);
+    const mesh = new THREE.Mesh(boxProjectUV(part.geometry, 2.5), M.darkArmor);
+    mesh.name = s > 0 ? 'Cheek_L' : 'Cheek_R';
+    return mesh;
+  });
+  g.add(...cheekMeshes);
+  // A fitted dark insert occupies the mouth recess without protruding below the cheeks.
+  let insertGeo = new THREE.ExtrudeGeometry(shape([[-0.036,-0.071],[0.036,-0.071],
+    [0.05,-0.087],[0.113,-0.327],[-0.113,-0.327],[-0.05,-0.087]]),
+    { depth: 0.006, bevelEnabled: true, bevelSize: 0.003, bevelThickness: 0.003, bevelSegments: 2 });
+  insertGeo = csg(brush(insertGeo), [SUBTRACTION,
+    brush(new THREE.BoxGeometry(0.06, 0.01, 0.1), { pos: [0, -0.105, 0] })]).geometry;
+  const insertPositions = insertGeo.attributes.position;
+  for (let i = 0; i < insertPositions.count; i++) {
+    const x = insertPositions.getX(i), y = insertPositions.getY(i);
+    insertPositions.setZ(i, insertPositions.getZ(i) + mouthFloor(y) + 0.002);
+  }
+  insertGeo.computeVertexNormals();
+  const insertMesh = new THREE.Mesh(insertGeo, M.blackRubber);
+  insertMesh.name = 'Mouth_Insert';
+  g.add(insertMesh);
   // Mouth rails: raised strips along both slanted sides of the recess, on the recess floor.
   for (const s of [-1, 1]) {
-    const [xt, yt] = mo.outline[2], [xb, yb] = mo.outline[3];
-    const len = Math.hypot(xb - xt, yb - yt), ang = Math.atan2(yb - yt, xb - xt);
-    const rail = new THREE.Mesh(new THREE.BoxGeometry(len, mo.railWidth, 0.022), M.darkArmor);
-    rail.name = 'MouthRail';
-    rail.position.set(s * ((xt + xb) / 2 - mo.railWidth * 0.6), (yt + yb) / 2, zm - mo.depth + 0.01);
-    rail.rotation.z = s * ang;
+    const [xt, yt] = mo.outline[2], [xb] = mo.outline[3], yb = -0.33;
+    // Follow the actual front profile at both ends, including its depth slope.
+    const start = new THREE.Vector3(s * (xt - mo.railWidth * 0.6), yt, surfZ(s * xt, yt) - mo.depth + 0.01);
+    const end = new THREE.Vector3(s * (xb - mo.railWidth * 0.6), yb, surfZ(s * xb, yb) - mo.depth + 0.01);
+    const direction = end.clone().sub(start);
+    const rail = new THREE.Mesh(new THREE.BoxGeometry(direction.length(), mo.railWidth, 0.022), M.darkArmor);
+    rail.name = s > 0 ? 'MouthRail_L' : 'MouthRail_R';
+    rail.position.copy(start).add(end).multiplyScalar(0.5);
+    rail.quaternion.setFromUnitVectors(new THREE.Vector3(1, 0, 0), direction.normalize());
     g.add(rail);
   }
 
@@ -145,7 +172,7 @@ export function buildUpperHelmet(M) {
   g.add(brim);
 
   // Hinge panels on the plate sides between visor and ear, with ribs.
-  const probeAll = [shellMesh];
+  const probeAll = [shellMesh, crownMesh, ...cheekMeshes];
   for (const s of [-1, 1]) {
     const h = hitSurface(probeAll, [s * 2, 0.08, 0.05], [-s, 0, 0]);
     if (!h) continue;
@@ -168,6 +195,7 @@ export function buildUpperHelmet(M) {
     joint.position.set(0, 0.13, 0.012);
     hinge.add(joint);
     orient(hinge, h.point, h.normal, 0.01, [0, 0, 1]);
+    hinge.rotateZ(0.32);
     g.add(hinge);
   }
 

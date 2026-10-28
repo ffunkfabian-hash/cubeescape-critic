@@ -7,10 +7,27 @@ lokale 3D-Software. Kein Kritiker-API-Aufruf: der Abgleich läuft über Screensh
 
 ```sh
 cd web
-npm install
+npm ci
+python3 -m pip install -r requirements.txt # vorzugsweise in einer virtuellen Umgebung
+npx playwright install chromium          # falls kein Chromium vorhanden ist
 npm run dev          # http://127.0.0.1:5173 – Live-Reload, Kamera per Maus drehbar
 npm run verify       # headless: renders/render_*.png, overlay_*.png, mask_*.png, compare.png, iou.json
 ```
+
+In der Cloud: `. /workspace/critic-env/venv/bin/activate` und
+`export PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium`; damit wird der vorhandene Browser verwendet.
+Node 24 und Python 3.12 sind hier geprüft. Playwright ist als Entwicklungsabhängigkeit gepinnt.
+`npm run verify` startet und beendet seinen eigenen Vite-Server, benötigt also keinen zuvor gestarteten Dev-Server.
+Zusätzlich wird der tatsächliche Browser-GLB-Export unter `renders/scifi_helmet.glb` geprüft und zusammen mit dem
+Laufstatus in `renders/verification.json` protokolliert. Nur `status: passed` bezeichnet einen abgeschlossenen Lauf;
+vorhandene Bilder allein können noch aus einem früheren Lauf stammen. `--no-iou` lässt die Messung ausdrücklich aus.
+
+## Körperstudie
+
+Mit `http://127.0.0.1:5173/?body=1` erscheint eine erste Proportionsstudie unter dem Helm. Sie ist ein Entwurf ohne
+Körperreferenz, noch keine vollständige Figur. Brust, Rücken, Bauch, Becken, Halsanschluss, Schultern und Gelenke sind
+getrennte, benannte Meshes im GLB-Export `scifi_body_study.glb`. Arme und Beine fehlen noch. Ohne `?body=1` bleiben
+Helmansicht, Kameras, Export und Silhouettenprüfung unverändert.
 
 ## Bedienung
 
@@ -45,6 +62,9 @@ Einheit: Helmhöhe ≈ 1, Ursprung in der Kopfmitte, Y oben, Gesicht +Z, linke H
 
 | Schlüssel | Bedeutung |
 | --- | --- |
+| `shapeFit` | kohärente Verkürzung unter Augenhöhe (`lowerFaceScale`, `lowerFaceAnchor`), einschließlich Befestigungen |
+| `crownTransition` | Neigung und Z-Anker des Übergangs zwischen Haube und Gesichtsmaske |
+| `crownRounding` | Stärke und Höhenbereich der Rundung des Haubenquerschnitts |
 | `head.tilt` | Neigung der ganzen Grundform um X (Bogenmaß) |
 | `profile.front` | halbe Breite je Höhe, `[x, y]` von oben nach unten |
 | `profile.sideFront`, `profile.sideBack` | vordere bzw. hintere Kante je Höhe, `[z, y]` von oben nach unten |
@@ -62,6 +82,16 @@ Einheit: Helmhöhe ≈ 1, Ursprung in der Kopfmitte, Y oben, Gesicht +Z, linke H
 | `maskGap` | Verlauf der dunklen Rücksprung-Fuge hinter der Maskenkante (`[z, y]`) |
 | `cheekSlot` | Schlitze an den unteren Wangen: Lage, Breite, Höhe, Neigung |
 | `collar.dip` | Absenkung in der Oberkante des hinteren Rahmens (`[x, Δy]` relativ zur Oberkante) |
+| `collarFront.topZ`, `bottomZ` | schräger vorderer Abschluss des Nackenrahmens unter der Maskenhalterung |
+| `collarPanel` | Größe, Lage und Tiefe der tatsächlich ausgeschnittenen Seitenfelder, des kleinen Felds und der Schlitze |
+
+## Über Änderungen sprechen
+
+Die [Teilekarte](../docs/HELM_TEILE.md) vergibt stabile Kennungen H01–H19. Bitte Kennung, Seite und gewünschte Änderung
+nennen, etwa „H11 auf Seite B tiefer“. Seite A trägt Funkmuschel, Antenne und Kabel; Seite B das kantige Modul.
+Die Seitennamen beziehen sich auf Bauteile und ändern sich beim Drehen nicht.
+
+Gezielte Prüfungen: `npm test` (Prüfablauf und Messung), `npm run build` und `npm run verify` (Browser, Bilder, GLB und IoU).
 
 ## Messverlauf (Umriss-IoU)
 
@@ -79,8 +109,94 @@ Die Silhouette ändert sich durch Facetten, Material und Details kaum; Fortschri
 
 ## Abweichungen von den Vorgaben
 
-- `visorGlow.emissiveIntensity` steht auf 0,75 statt 5,0 und Bloom auf 0: im Video leuchten die Schlitze blass ohne
+- `visorGlow.emissiveIntensity` steht auf 1,0 statt 5,0 und Bloom auf 0,08: im Video leuchten die Schlitze blass ohne
   Lichthof; beides ist in lil-gui einstellbar.
 - Kein Schal (Wunsch des Nutzers); der Umrissvergleich zählt deshalb nur oberhalb der Schalkante.
 - AO über `GTAOPass` aus Three.js statt n8ao (keine zusätzliche Abhängigkeit).
 - Die Lüftungsgitter sind eine hellgraue Lochplatte mit dunklen Waben in dunklem Metallrahmen (wie im Video).
+
+## Reproduzierbarer Stand 0.2 „Fidelity“
+
+Das Video `reference/helm/turnaround.mp4` bleibt maßgeblich. Die Meshy-GLB ist ausschließlich eine zusätzliche
+3D-Referenz; sie ersetzt weder die Referenzbilder noch die Kamerakalibrierung. Ihre doppelte Funkseite ist keine Vorgabe.
+
+Auf einer frischen Kopie mit Node **24.19.0** (`web/.nvmrc`) und Python **3.12**:
+
+```sh
+python3 -m venv ../critic-helm-venv
+. ../critic-helm-venv/bin/activate
+python3 -m pip install -r web/requirements.txt
+npm --prefix web ci
+cd web
+npx playwright install chromium
+npm test
+npm run build
+# Im Projekt mit ce: ../ce lock gpu -- node verify_renders.mjs
+npm run verify
+```
+
+`renders/verification.json` enthält SHA-256 der Quellen, des maßgeblichen Videos und aller vier Referenzbilder,
+Parameter, Kameraposen, tatsächlich verwendete Laufzeit-/Paketversionen sowie Hashes des GLB und der Renderdateien.
+Ändert sich eine erfasste Quelldatei während der Prüfung, schlägt der Lauf fehl. Materialien verwenden feste Seeds
+(3/11/21); die GTAO-Entrauschung verwendet Seed 47. GLB und PNGs sind auf der dokumentierten Mac-/Chromium-/SwiftShader-
+Umgebung wiederholbar zu prüfen. Bytegleichheit auf anderen Browser-, Betriebssystem- oder Treiberversionen wird nicht behauptet.
+
+Die Referenzprüfung benötigt die unveränderte Meshy-Datei (Hash steht in `refs/meshy-reference.json`):
+
+```sh
+npm run verify:reference -- /absoluter/pfad/zur/Meshy-Datei.glb
+python3 tools/pairs.py . renders/meshy-vergleich.jpg --reference renders/reference
+# Vergleich mit gespeicherten Vorher-Bildern:
+python3 tools/pairs.py . renders/vorher-nachher.jpg --baseline /pfad/zum/vorher/renders
+```
+
+Der Referenzlauf erzeugt Textur- und Geometrieansichten sowie `comparison.json` mit Herkunft und Ausgabehashes.
+Die globale Aufstellung ist zur Sichtprüfung angenähert; aus diesen Bildern wird **kein Meshy-IoU** berechnet.
+Die Bildausschnitte des Kontaktbogens sind Darstellungszuschnitte, keine Änderung der Helm-Messung.
+
+## Aktueller Lieferstand 64
+
+Der Nutzer hat die **runde Haube** gewählt. Stand 64 entspricht vollständig Stand 61: runde Haube, Gesicht, Augen,
+Kieferform und Funkanlage aus dem bestätigten Stand 46 sowie ein moderat kantiger heller Seiten-/Nackenrahmen.
+Die Haubenversuche 62/63 sind verworfen. Alle 21 Ausgaben aus dem abschließenden Lauf stimmen bytegenau mit Stand 61 überein.
+
+`lowerArmorEdges` parametrisiert 16 ebene Mantelflächen, die schmalere obere Fase und gerade Eckabschrägungen der Taschen.
+Der Halsring bleibt rund. Die Taschenböden folgen derselben facettierten Form wie ihre Träger und bleiben separate Teile.
+Modellteile werden in `parts/` erzeugt; 89 Meshes sind im GLB enthalten. Die optionale Körperstudie bleibt ein Entwurf.
+
+[Stilbeschreibung und feste Vorgaben](../docs/HELM_STIL.md) · [Lieferdateien](../assets/helmet/README.md).
+
+### Neu erzeugen
+
+```sh
+python3 -m venv ../helm-venv
+. ../helm-venv/bin/activate
+python3 -m pip install -r web/requirements.txt
+npm --prefix web ci
+cd web
+npx playwright install chromium
+npm test
+npm run build
+npm run verify
+```
+
+Geprüft mit Node 24.19.0, Python 3.12.10 und Chromium/ANGLE SwiftShader auf macOS arm64; Paketversionen sind gepinnt.
+Auf dem gemeinsam genutzten Mac vom Repo-Hauptverzeichnis rendern mit
+`./ce lock gpu -- node "$PWD/web/verify_renders.mjs"`.
+Der absolute Pfad ist nötig, weil ce den Befehl vom Repo-Hauptverzeichnis startet. Ohne diesen Ressourcenkoordinator
+funktionieren Generator und npm-Befehle ebenfalls.
+
+`renders/verification.json` dokumentiert Quellen, Video-/Referenzhashes, Parameter, Kameras, Laufzeit und Ausgabehashes.
+`npm run verify` sichert fünf Textur-PNGs und `textures/materials.json` mit Materialzuordnung, UV-Wiederholung und Bump-Stärke.
+GLB enthält unterstützte Farb-/Rauheitskarten; Reliefkarten beim Import zusätzlich als Höhen-/Bump-Texturen zuordnen,
+da glTF Three.js-`bumpMap` nicht direkt übernimmt. Die Texturen entstehen mit festen Seeds ohne externe Bildquelle.
+
+[Lieferdateien gegen einen neuen Lauf prüfen](../assets/helmet/README.md). Bytegleichheit wird für die dokumentierte
+Umgebung geprüft; für beliebige Fremdprogramme/Treiber wird sie nicht zugesichert.
+
+Die historischen Formversuche bleiben im [Verlauf](../docs/HELM_VERLAUF.md) und als Vergleichsbilder im Repo erhalten.
+Vollständige lokale Quellsicherungen und Reproduktionspakete der verworfenen Varianten bleiben separat archiviert;
+der Repo-Generator und `assets/helmet/` repräsentieren ausschließlich den aktuellen Lieferstand.
+
+`tools/save_pass.py` sichert nur vollständige erfolgreiche Läufe mit IoU. Quell- und Ausgabehashes, `iou.json` und
+`compare.png` müssen zum Prüfmanifest passen; nach Fehlern oder `--no-iou` wird kein neuer Beleg angelegt.

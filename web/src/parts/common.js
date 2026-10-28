@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import { orient, roundedRect } from '../geo.js';
 
-const screwGeo = new THREE.CylinderGeometry(0.0085, 0.0095, 0.006, 6).rotateX(Math.PI / 2);
+const screwGeo = new THREE.CylinderGeometry(0.0055, 0.0065, 0.004, 8).rotateX(Math.PI / 2);
 
 // placements: [{ point, normal }] (e.g. from hitSurface)
 export function screws(M, placements, name = 'Screws') {

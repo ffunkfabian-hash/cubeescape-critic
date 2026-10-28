@@ -1,15 +1,79 @@
 // LowerArmor_White: white core, rear collar, neck ring and the faceted U-shaped jaw with chin screws and vent grilles.
 import * as THREE from 'three';
 import { D } from '../params.js';
-import { brush, csg, prism, shape, hitSurface, orient, ADDITION, SUBTRACTION, INTERSECTION } from '../geo.js';
-import { screws, grille, texturedPanel } from './common.js';
+import { brush, csg, prism, shape, halfSpace, hitSurface, orient, ADDITION, SUBTRACTION, INTERSECTION } from '../geo.js';
+import { screws } from './common.js';
 import { boxProjectUV } from '../textures.js';
+import { headVolume } from './headVolume.js';
 
 function ellipticCylinder(rx, rz, y0, y1, cz, seg = 96) {
   const g = new THREE.CylinderGeometry(1, 1, y1 - y0, seg);
   g.scale(rx, 1, rz);
   g.translate(0, (y0 + y1) / 2, cz);
   return g;
+}
+
+function planarFaces(geometry) {
+  const result = geometry.toNonIndexed();
+  result.computeVertexNormals();
+  return result;
+}
+
+// Broad planar facets on the outer housing; keep the neck interface round.
+function armorCylinder(rx, rz, y0, y1, cz) {
+  return planarFaces(ellipticCylinder(rx, rz, y0, y1, cz, D.lowerArmorEdges.radialSegments));
+}
+
+// Cut pockets with a nominal radial inset into the curved collar itself. The floor follows
+// the elliptic wall; a flat plate would bridge the side curvature and float.
+function collarRecesses(original, M) {
+  const k = D.collar, p = D.collarPanel;
+  let solid = original;
+  const beds = [];
+  const radialVolume = (inset) => brush(
+    armorCylinder(k.rx - inset, k.rz - inset, k.y0 - 0.1, k.y1 + 0.1, k.cz).rotateX(k.tilt),
+  );
+  // Extend the cutter beyond the original wall. Reusing that exact wall as
+  // the cutter's outer face leaves coplanar opposite triangles in BVH-CSG.
+  const surfaceLayer = (depth) => csg(radialVolume(-0.05), [SUBTRACTION, radialVolume(depth)]);
+  const floorLayer = (depth) => csg(radialVolume(depth - 0.001), [SUBTRACTION, radialVolume(depth)], [INTERSECTION, original]);
+  const probe = new THREE.Mesh(original.geometry, M.whiteArmor);
+  for (const side of [-1, 1]) {
+    const suffix = side > 0 ? 'L' : 'R';
+    for (const field of [
+      { name: 'Panel', y: p.y, z: p.z, w: p.width, h: p.height, r: p.radius, depth: p.depth },
+      { name: 'Socket', y: p.y + 0.01, z: p.socketZ, w: p.socketWidth, h: p.socketHeight, r: 0.009, depth: p.depth },
+    ]) {
+      const hit = hitSurface(probe, [side * 2, field.y, field.z], [-side, 0, 0]);
+      if (!hit) continue;
+      const tool = (w, h, r, u = 0) => {
+        const cut = Math.min(r * D.lowerArmorEdges.cornerScale, w / 3, h / 3);
+        const outline = [[-w/2+cut,-h/2],[w/2-cut,-h/2],[w/2,-h/2+cut],[w/2,h/2-cut],
+          [w/2-cut,h/2],[-w/2+cut,h/2],[-w/2,h/2-cut],[-w/2,-h/2+cut]];
+        const geo = new THREE.ExtrudeGeometry(shape(outline.map(([x,y]) => [x+u,y])), { depth: 0.32, bevelEnabled: false });
+        geo.translate(0, 0, -0.16);
+        const holder = orient(new THREE.Mesh(geo), hit.point, hit.normal, 0, [0, 0.06, 1]);
+        holder.updateMatrix();
+        return brush(geo.applyMatrix4(holder.matrix));
+      };
+      const cutter = tool(field.w, field.h, field.r);
+      solid = csg(solid, [SUBTRACTION, csg(surfaceLayer(field.depth), [INTERSECTION, cutter])]);
+      let floor = csg(floorLayer(field.depth), [INTERSECTION, cutter]);
+      if (field.name === 'Panel') {
+        const slot = tool(p.slotWidth, p.slotHeight, 0.003, -field.w * 0.32);
+        const slotDepth = field.depth + p.slotDepth;
+        solid = csg(solid, [SUBTRACTION, csg(surfaceLayer(slotDepth), [INTERSECTION, slot])]);
+        floor = csg(floor, [SUBTRACTION, slot]);
+        const slotBed = new THREE.Mesh(csg(floorLayer(slotDepth), [INTERSECTION, slot]).geometry, M.darkMetal);
+        slotBed.name = `CollarSlotFloor_${suffix}`;
+        beds.push(slotBed);
+      }
+      const bed = new THREE.Mesh(boxProjectUV(floor.geometry, 2), M.whiteTextured);
+      bed.name = `Collar${field.name}Floor_${suffix}`;
+      beds.push(bed);
+    }
+  }
+  return { solid, beds };
 }
 
 export function buildLowerArmor(M) {
@@ -19,40 +83,49 @@ export function buildLowerArmor(M) {
   // Core: rear and side wall between cap and collar, with vertical panel seams at the back.
   const c = D.core;
   // Only the rear and sides are visible; the front is cut back so it never pierces the receding forehead.
-  let core = csg(brush(ellipticCylinder(c.rx, c.rz, c.y0, c.y1, c.cz)), [INTERSECTION, brush(new THREE.BoxGeometry(2, 2, 1), { pos: [0, 0, 0.15 - 0.5] })]);
+  let core = csg(brush(armorCylinder(c.rx, c.rz, c.y0, c.y1, c.cz)), [INTERSECTION, brush(new THREE.BoxGeometry(2, 2, 1), { pos: [0, 0, 0.15 - 0.5] })]);
   for (const x of [-0.17, 0.17]) {
     core = csg(core, [SUBTRACTION, brush(new THREE.BoxGeometry(0.006, 0.6, 0.2), { pos: [x, 0.1, -0.5] })]);
   }
   core = csg(core, [SUBTRACTION, brush(new THREE.BoxGeometry(0.2, 0.6, 0.006), { pos: [-0.42, 0.1, -0.2] })]);
   core = csg(core, [SUBTRACTION, brush(new THREE.BoxGeometry(0.2, 0.6, 0.006), { pos: [0.42, 0.1, -0.3] })]);
+  core = csg(core, [INTERSECTION, headVolume(0.985)]);
   const coreMesh = new THREE.Mesh(boxProjectUV(core.geometry, 2), M.whiteArmor);
   coreMesh.name = 'Core';
   g.add(coreMesh);
 
   // Rear inset panel around the tech box: a patch of a slightly larger core shell, textured light grey.
-  const shellOut = brush(ellipticCylinder(c.rx + 0.007, c.rz + 0.007, c.y0, c.y1, c.cz));
+  const shellOut = brush(armorCylinder(c.rx + 0.007, c.rz + 0.007, c.y0, c.y1, c.cz));
   const patch = brush(new THREE.BoxGeometry(0.4, 0.3, 0.4), { pos: [0, 0.17, -0.45] });
-  const rearPanel = new THREE.Mesh(csg(shellOut, [INTERSECTION, patch]).geometry, M.whiteTextured);
+  const rearPanel = new THREE.Mesh(csg(shellOut, [INTERSECTION, patch], [INTERSECTION, headVolume(0.985)]).geometry, M.whiteTextured);
   rearPanel.name = 'RearPanel';
   g.add(rearPanel);
 
   // Collar (lower rear frame): solid elliptic ring with a chamfered top, open at the front, with a stepped dip in its
   // upper edge at the back centre; built level, then tilted so it drops towards the front.
   const k = D.collar;
-  const ringTop = new THREE.CylinderGeometry(0.95, 1, 0.05, 120).scale(k.rx, 1, k.rz).translate(0, k.y1 - 0.025, k.cz);
+  const edge = D.lowerArmorEdges;
+  const ringTop = planarFaces(new THREE.CylinderGeometry(edge.topScale, 1, edge.chamferHeight, edge.radialSegments)
+    .scale(k.rx, 1, k.rz).translate(0, k.y1 - edge.chamferHeight / 2, k.cz));
   let ring = csg(
-    brush(ellipticCylinder(k.rx, k.rz, k.y0, k.y1 - 0.05 + 0.001, k.cz, 120)),
+    brush(armorCylinder(k.rx, k.rz, k.y0, k.y1 - edge.chamferHeight + 0.001, k.cz)),
     [ADDITION, brush(ringTop)],
-    [SUBTRACTION, brush(ellipticCylinder(k.rx * 0.86, k.rz * 0.86, k.y0 - 0.1, k.y1 + 0.1, k.cz, 120))],
-    [SUBTRACTION, brush(new THREE.BoxGeometry(2, 1, 1), { pos: [0, -0.1, 0.18 + 0.5] })],
+    [SUBTRACTION, brush(armorCylinder(k.rx * 0.86, k.rz * 0.86, k.y0 - 0.1, k.y1 + 0.1, k.cz))],
+    // Taper the collar's front termination into the rising jaw instead of
+    // ending the full-height ring in a vertical white block beneath the hinge.
+    [SUBTRACTION, brush(prism([
+      [D.collarFront.topZ, k.y1], [D.collarFront.topZ, k.y1 + 0.2],
+      [1, k.y1 + 0.2], [1, k.y0 - 0.2],
+      [D.collarFront.bottomZ, k.y0 - 0.2], [D.collarFront.bottomZ, k.y0],
+    ], 'zy'))],
   );
   const dip = k.dip.map(([x, dy]) => [x, k.y1 + dy]);
   ring = csg(ring, [SUBTRACTION, brush(prism(dip, 'xy', 1), { pos: [0, 0, -0.25 - 0.5] })]);
-  const collarGeo = ring.geometry;
-  collarGeo.rotateX(k.tilt);
-  const collar = new THREE.Mesh(boxProjectUV(collarGeo, 2), M.whiteArmor);
+  ring.geometry.rotateX(k.tilt);
+  const { solid: recessedCollar, beds: collarFloors } = collarRecesses(brush(ring.geometry), M);
+  const collar = new THREE.Mesh(boxProjectUV(recessedCollar.geometry, 2), M.whiteArmor);
   collar.name = 'Collar';
-  g.add(collar);
+  g.add(collar, ...collarFloors);
 
   // Stepped trapezoid connector plate in the bottom of the collar dip.
   {
@@ -94,7 +167,19 @@ export function buildLowerArmor(M) {
   jaw = csg(jaw, [SUBTRACTION, brush(prism([[-0.075, -0.32], [0.075, -0.32], [0.05, -0.365], [-0.05, -0.365]], 'xy', 1), { pos: [0, 0, 0.3 + 0.5] })]);
   const jawMesh = new THREE.Mesh(boxProjectUV(jaw.geometry, 2), M.whiteArmor);
   jawMesh.name = 'Jaw';
-  g.add(jawMesh);
+  // Keep the chin and both jaw pieces independently addressable in the export.
+  const chinPart = csg(jaw,
+    [INTERSECTION, halfSpace([0.172, 0, 0], [1, 0, 0])],
+    [INTERSECTION, halfSpace([-0.172, 0, 0], [-1, 0, 0])]);
+  const chinMesh = new THREE.Mesh(boxProjectUV(chinPart.geometry, 2), M.whiteArmor);
+  chinMesh.name = 'Chin';
+  g.add(chinMesh);
+  for (const s of [-1, 1]) {
+    const part = csg(jaw, [INTERSECTION, halfSpace([s * 0.178, 0, 0], [-s, 0, 0])]);
+    const mesh = new THREE.Mesh(boxProjectUV(part.geometry, 2), M.whiteArmor);
+    mesh.name = s > 0 ? 'Jaw_L' : 'Jaw_R';
+    g.add(mesh);
+  }
 
   // Exactly four dark screw heads on the chin.
   const chin = [[-0.1, -0.455], [0.1, -0.455], [-0.12, -0.375], [0.12, -0.375]].map(([x, y]) => hitSurface(jawMesh, [x, y, 2], [0, 0, -1]));
@@ -111,19 +196,26 @@ export function buildLowerArmor(M) {
   }
   g.add(screws(M, sideScrews, 'Screws_Side'));
 
-  // Honeycomb vent grilles along the lower jaw edge, large textured panels on the collar sides.
-  const targets = [jawMesh, collar];
+  // Derive each insert from a thin shell of the actual jaw, so its complete
+  // triangulation follows the supporting bevels, not just its outline vertices.
   for (const s of [-1, 1]) {
-    for (const [y, z, w, h, tan, name] of [
-      [-0.3, 0.28, 0.22, 0.065, [0, -0.2, 1], 'Jaw'],
-      [-0.115, -0.16, 0.32, 0.11, [0, 0.06, 1], 'Collar'],
-    ]) {
-      const hit = hitSurface(targets, [s * 2, y, z], [-s, 0, 0]);
-      if (!hit) continue;
-      const gr = name === 'Collar' ? texturedPanel(M, w, h, `Panel_${name}_${s > 0 ? 'L' : 'R'}`) : grille(M, w, h, `Grille_${name}_${s > 0 ? 'L' : 'R'}`);
-      orient(gr, hit.point, hit.normal, 0.004, tan);
-      g.add(gr);
-    }
+    const suffix = s > 0 ? 'L' : 'R';
+    const outline = [[-0.085,-0.035],[0.065,-0.035],[0.085,-0.018],
+      [0.085,0.035],[-0.065,0.035],[-0.085,0.018]];
+    const cutter = brush(prism(outline.map(([z, y]) => [z + 0.28, y - 0.375]), 'zy', 2));
+    const outside = brush(jaw.geometry.clone().scale(1.012, 1, 1));
+    const inside = brush(jaw.geometry.clone().scale(0.998, 1, 1));
+    const geometry = csg(outside, [SUBTRACTION, inside], [INTERSECTION, cutter],
+      [INTERSECTION, halfSpace([s * 0.1, 0, 0], [-s, 0, 0])]).geometry;
+    boxProjectUV(geometry, 2);
+    const plate = new THREE.Mesh(geometry, M.whiteTextured);
+    plate.name = `Jaw_Insert_${suffix}`;
+    g.add(plate);
+    const hit = hitSurface(jawMesh, [s * 2, -0.375, 0.23], [-s, 0, 0]);
+    const slot = new THREE.Mesh(new THREE.BoxGeometry(0.012, 0.025, 0.002), M.darkMetal);
+    slot.name = `Jaw_InsertSlot_${suffix}`;
+    orient(slot, hit.point, hit.normal, 0.005, [0, 0, 1]);
+    g.add(slot);
   }
   return g;
 }

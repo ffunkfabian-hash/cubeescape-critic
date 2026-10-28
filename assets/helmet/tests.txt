@@ -1,0 +1,57 @@
+Unveränderte Modell-/Runner-Suite: 19 Node-Tests und 4 Python-IoU-Tests
+
+
+> critic-helm-web@0.3.0 test
+> node --test --test-concurrency=1 tools/*.test.mjs && python3 -I tools/test_iou.py
+
+✔ body study keeps separately editable, uniquely named geometry (16.414ms)
+(node:8790) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+✔ separate jaw inserts follow their supporting plates (986.763625ms)
+✔ collar surface attributes remain finite after boolean pocket cuts (1.896542ms)
+✔ panel interiors expose recessed floors, with no residual original wall facets (4.87325ms)
+✔ slot is deeper than the panel, socket is recessed, and surrounding wall is retained (1.546458ms)
+✔ manifest detects source and authoritative reference changes, excluding generated output (12.166125ms)
+✔ verification overwrites old passed status on missing-source (76.126333ms)
+✔ verification overwrites old passed status on server-initialization (257.760083ms)
+✔ reference comparison overwrites old passed status on missing-file (72.7655ms)
+✔ reference comparison overwrites old passed status on wrong-hash (93.417084ms)
+✔ lower-face fit preserves crown and shortens connected lower geometry (3.640208ms)
+✔ instanced fasteners follow the same fit as their supporting plates (1.943083ms)
+✔ identity fit leaves geometry unchanged and invalid fitting values fail (1.35325ms)
+(node:8861) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+✔ ambient-occlusion denoising is reproducible without altering global random state (32.449ms)
+✔ UV projection stays consistent within triangles despite varying vertex normals (1.4855ms)
+(node:8865) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+✔ rounded forehead does not lower the dark cap over the rear housing (1095.818542ms)
+✔ process launch failures and signals cannot pass as exit zero (0.63575ms)
+✔ GLB smoke inspection reads the model and its materials (0.331625ms)
+✔ GLB inspection rejects truncated and mislabeled downloads (0.38875ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3963.592291
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.057s
+
+OK
+
+Zusätzliche Regressionen für die korrigierte Belegsicherung: 8 Python-Tests
+
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.073s
+
+OK

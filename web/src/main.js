@@ -10,7 +10,9 @@ import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
 import GUI from 'lil-gui';
 import { createMaterials } from './materials.js';
+import { denoiseTexture, DENOISE_SEED } from './textures.js';
 import { buildHelmet } from './helmet.js';
+import { buildBodyStudy } from './parts/bodyStudy.js';
 import { D, resetParams } from './params.js';
 
 const query = new URLSearchParams(location.search);
@@ -19,6 +21,7 @@ if (query.get('ui') === '0') document.body.classList.add('noui');
 const BG = 0x8c8c8c;
 // ?static=1: no animation loop, frames only via window.renderFrame() (headless checks with software GL).
 const STATIC = query.get('static') === '1';
+const BODY_STUDY = query.get('body') === '1';
 const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: STATIC });
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -67,12 +70,12 @@ scene.add(lightRig, new THREE.HemisphereLight(0xffffff, 0x444444, 0.25));
 
 // Camera views matched to the extracted video frames (refs/ref_*.png: 0 s, 1.5 s, 3 s, 4.5 s).
 const camera = new THREE.PerspectiveCamera(30, 1, 0.05, 50);
-const target = new THREE.Vector3(0, -0.06, 0);
+const target = new THREE.Vector3(0, BODY_STUDY ? -0.8 : -0.06, 0);
 const VIEWS = {
-  front: { az: 0, el: 3, dist: 2.6 },
-  left: { az: 64, el: 4, dist: 2.6 },
-  back: { az: 180, el: 7, dist: 2.6 },
-  right: { az: 298, el: 4, dist: 2.6 },
+  front: { az: 0, el: 3, dist: BODY_STUDY ? 5.4 : 2.6 },
+  left: { az: 64, el: 4, dist: BODY_STUDY ? 5.4 : 2.6 },
+  back: { az: 180, el: 7, dist: BODY_STUDY ? 5.4 : 2.6 },
+  right: { az: 298, el: 4, dist: BODY_STUDY ? 5.4 : 2.6 },
 };
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
@@ -151,6 +154,10 @@ document.getElementById('btn-overlay').addEventListener('click', () => toggleOve
 const composer = new EffectComposer(renderer, new THREE.WebGLRenderTarget(1, 1, { type: THREE.HalfFloatType, samples: 4 }));
 composer.addPass(new RenderPass(scene, camera));
 const gtao = new GTAOPass(scene, camera, 1, 1);
+gtao.pdNoiseTexture.dispose();
+gtao.pdNoiseTexture = denoiseTexture();
+gtao.pdMaterial.uniforms.tNoise.value = gtao.pdNoiseTexture;
+window.renderSettings = { denoiseSeed: DENOISE_SEED };
 gtao.updateGtaoMaterial({ radius: 0.12, distanceExponent: 1.5, thickness: 0.6, scale: 1.0 });
 gtao.blendIntensity = 0.9;
 composer.addPass(gtao);
@@ -187,6 +194,7 @@ function rebuild() {
   }
   const t0 = performance.now();
   model = buildHelmet(M);
+  if (BODY_STUDY) model.add(buildBodyStudy(M));
   model.rotation.y = rot;
   scene.add(model);
   console.log(`model built in ${(performance.now() - t0).toFixed(0)} ms`);
@@ -196,7 +204,7 @@ async function exportGLB() {
   const glb = await new GLTFExporter().parseAsync(model, { binary: true });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([glb], { type: 'model/gltf-binary' }));
-  a.download = 'scifi_helmet.glb';
+  a.download = BODY_STUDY ? 'scifi_body_study.glb' : 'scifi_helmet.glb';
   a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }

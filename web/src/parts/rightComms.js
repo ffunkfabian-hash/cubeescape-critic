@@ -37,10 +37,16 @@ export function buildRightComms(M) {
   const face = e.outerX - 0.002;
   const buttons = new THREE.Group();
   buttons.name = 'Buttons';
-  for (const [dz, dy, w, h] of [[0.02, -0.03, 0.05, 0.075], [-0.035, -0.06, 0.04, 0.05]]) {
-    const pad = new THREE.Mesh(new THREE.BoxGeometry(0.02, h, w), M.blackRubber);
+  for (const [index, dz, dy, w, h, angle] of [[0,0.01,-0.025,0.052,0.07,0.6],
+    [1,0.035,-0.075,0.05,0.055,-0.45], [2,0.04,-0.115,0.042,0.026,0]]) {
+    const geometry = new THREE.ExtrudeGeometry(roundedRect(w, h, 0.009), {
+      depth: 0.01, bevelEnabled: true, bevelSize: 0.003, bevelThickness: 0.002, bevelSegments: 2,
+    });
+    geometry.rotateZ(angle);
+    geometry.rotateY(-Math.PI / 2);
+    const pad = new THREE.Mesh(geometry, M.blackRubber);
+    pad.name = `Radio_Button_${index + 1}`;
     pad.position.set(face, e.cy + dy, e.cz + dz);
-    pad.rotation.x = 0.35;
     buttons.add(pad);
   }
   const knob = new THREE.Mesh(new THREE.CylinderGeometry(0.014, 0.014, 0.014, 24).rotateZ(Math.PI / 2), M.darkMetal);
@@ -75,12 +81,12 @@ export function buildRightComms(M) {
   // Rear tech box: mounting plate, box with a recessed polygonal field and logo, four corner screws, cylindrical side
   // connectors (the coiled cord leaves through the one on the cord side).
   const bb = D.backBox, zBack = -(D.core.rz - D.core.cz) + 0.035;
-  const plateGeo = new THREE.ExtrudeGeometry(roundedRect(bb.w + 0.03, bb.h + 0.03, 0.02), { depth: 0.09, bevelEnabled: false });
+  const plateGeo = new THREE.ExtrudeGeometry(roundedRect(bb.w + 0.03, bb.h + 0.03, 0.02), { depth: 0.035, bevelEnabled: false });
   plateGeo.rotateY(Math.PI); // faces -Z, extrusion towards -Z
   plateGeo.translate(0, bb.cy, zBack);
   const plate = new THREE.Mesh(plateGeo, M.oliveTech);
   plate.name = 'BackBox_Mount';
-  const boxFront = zBack - 0.09;
+  const boxFront = zBack - 0.035;
   const boxGeo = new THREE.ExtrudeGeometry(roundedRect(bb.w, bb.h, 0.025), { depth: 0.035, bevelEnabled: true, bevelThickness: 0.008, bevelSize: 0.008, bevelSegments: 3 });
   boxGeo.rotateY(Math.PI);
   boxGeo.translate(0, bb.cy, boxFront);
@@ -101,7 +107,7 @@ export function buildRightComms(M) {
   const tabs = [-1, 1].map((s) => {
     const t = new THREE.Mesh(new THREE.CylinderGeometry(0.017, 0.017, 0.045, 20).rotateZ(Math.PI / 2), M.darkMetal);
     t.name = 'BackBox_Connector';
-    t.position.set(s * (bb.w / 2 + 0.022), bb.cy - 0.03, boxFront - 0.02);
+    t.position.set(s * (bb.w / 2 + 0.022), bb.cy + 0.02, boxFront - 0.02);
     return t;
   });
   const corner = [];
@@ -116,7 +122,9 @@ export function buildRightComms(M) {
   // Coiled cord: a helix wound around a Catmull-Rom path (Frenet frames), with three light clamps. It leaves the back box
   // sideways, loops out and down, runs along the lower side frame and rises to the radio module.
   const T = D.tube;
-  const path = new THREE.CatmullRomCurve3(T.points.map((p) => new THREE.Vector3(...p)));
+  const points = T.points.map((p) => new THREE.Vector3(...p));
+  points[0].set(-(bb.w / 2 + 0.042), bb.cy + 0.02, boxFront - 0.02);
+  const path = new THREE.CatmullRomCurve3(points);
   const len = path.getLength();
   const turns = Math.round(len / T.pitch);
   const steps = turns * 16;

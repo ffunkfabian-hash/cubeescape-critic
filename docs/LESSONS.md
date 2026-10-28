@@ -14,3 +14,11 @@
 - Drehteller-Videos: das Licht bleibt beim Betrachter – Licht-Rig und Umgebung mit der Kamera drehen (`lightRig`, `environmentRotation` in `web/src/main.js`), sonst sind Seiten und Rücken flach.
 - Neue Grundprofile können innere Teile freilegen (weißer Kern durch die Stirn) – innere Volumen auf ihren sichtbaren Bereich beschneiden.
 - Fremde Formbeschreibungen sind Startwerte: ein zu stark zurückweichendes Gesicht (15°) verschlechterte Seiten-IoU und Augen – Teile einzeln übernehmen und je Durchlauf messen ([HELM_VERLAUF.md](HELM_VERLAUF.md) #22–#25).
+- Vertiefungen mit identischer Außenfläche von Grundkörper und CSG-Cutter können koplanare Reste erzeugen; Cutter über die Wand hinausführen und Boden/Rand per Strahltest prüfen ([HELM_VERLAUF.md](HELM_VERLAUF.md), #30).
+
+- Oberflächen-Einlagen aus einer dünnen Schicht des Trägers ableiten: passende Eckpunkte allein verhindern Durchdringung zwischen den Dreiecken nicht ([Fidelity](versions/0.2.md)).
+- GTAO-Denoising erzeugt ohne festen Seed bei jedem Laden andere Pixel; neben Geometrie-/Textur-Seeds auch Postprocessing prüfen ([Reproduktion](../web/README.md#reproduzierbarer-stand-02-fidelity)).
+- Three.js-`bumpMap` wird nicht als glTF-Kernkanal exportiert: verwendete Relief-PNGs samt UV-/Materialzuordnung separat sichern, statt den GLB als vollständige Materialreproduktion auszugeben ([Sidework](versions/0.3.md)).
+- Beim Verschieben eines Anbauteils beide Enden seiner Halterung an realen Flächen neu bestimmen und geometrisch prüfen; ein mitbewegtes Gehäuse allein trennt sonst die Verbindung ([Sidework](versions/0.3.md)).
+
+- „Vorher“ ist keine Versionskennung: Nutzerbilder zuerst gegen gespeicherte Vergleichsbilder identifizieren und bei Wiederherstellungen alle Ansichten/GLB gegen die gewählte Quelle prüfen ([Fehlzuordnung 50 statt 46](HELM_VERLAUF.md#runde-12--tatsächliche-mittlere-variante-wiederhergestellt-28102026)).

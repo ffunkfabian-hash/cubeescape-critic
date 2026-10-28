@@ -1,7 +1,7 @@
 // LeftEar_Cap (+X): contoured white ear cap with a textured insert, the head band over the top and the dark bracket.
 import * as THREE from 'three';
 import { D } from '../params.js';
-import { brush, csg, shape, hitSurface, orient, SUBTRACTION, INTERSECTION } from '../geo.js';
+import { brush, csg, hitSurface, orient, SUBTRACTION, INTERSECTION } from '../geo.js';
 import { headVolume } from './headVolume.js';
 
 // Side module B: flat, angular, irregular quadrilateral in (z, y) relative to its centre; top and bottom edges slanted,
@@ -9,7 +9,17 @@ import { headVolume } from './headVolume.js';
 const CAP = [[0.09, 0.125], [-0.12, 0.15], [-0.135, -0.11], [-0.02, -0.15], [0.055, -0.135], [0.09, -0.09]];
 
 function sidePlate(pts, depth, bevel, outerX, cz, cy) {
-  const geo = new THREE.ExtrudeGeometry(shape(pts), {
+  // Round corners along the existing polygon instead of beveling a rectangular-looking silhouette.
+  const rounded = new THREE.Shape();
+  const edges = pts.map((p, i) => {
+    const previous = pts[(i + pts.length - 1) % pts.length], next = pts[(i + 1) % pts.length];
+    return { p, in: [p[0] + (previous[0] - p[0]) * 0.17, p[1] + (previous[1] - p[1]) * 0.17],
+      out: [p[0] + (next[0] - p[0]) * 0.17, p[1] + (next[1] - p[1]) * 0.17] };
+  });
+  rounded.moveTo(...edges[0].in);
+  for (const e of edges) { rounded.lineTo(...e.in); rounded.quadraticCurveTo(...e.p, ...e.out); }
+  rounded.closePath();
+  const geo = new THREE.ExtrudeGeometry(rounded, {
     depth, bevelEnabled: bevel > 0, bevelThickness: bevel, bevelSize: bevel, bevelSegments: 3, curveSegments: 6,
   });
   geo.rotateY(-Math.PI / 2); // (u, v, w) -> (-w, v, u): outline in (z, y), thickness towards -X
@@ -36,7 +46,7 @@ export function buildLeftEar(M) {
   const insertPts = CAP.map(([z, y]) => [z * 0.74 - 0.008, y * 0.74]);
   const insert = new THREE.Mesh(sidePlate(insertPts, 0.01, 0.003, e.outerX + 0.008, e.cz, e.cy), M.whiteTextured);
   insert.name = 'EarCap_Insert';
-  const fold = new THREE.Mesh(new THREE.BoxGeometry(0.003, 0.003, 0.22), M.darkMetal);
+  const fold = new THREE.Mesh(new THREE.BoxGeometry(0.002, 0.002, 0.22), M.whiteTextured);
   fold.position.set(e.outerX + 0.009, e.cy, e.cz);
   fold.rotation.x = -0.75;
   g.add(cap, insert, fold);

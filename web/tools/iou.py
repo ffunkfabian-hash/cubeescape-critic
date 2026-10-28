@@ -85,21 +85,41 @@ def silhouette_view(ref_path, a, b):
     return out.clip(0, 255).astype(np.uint8)
 
 
+def validate_inputs(refs, renders):
+    """Require one complete, equally sized set instead of silently mixing or skipping views."""
+    for view in VIEWS:
+        paths = [os.path.join(refs, f'ref_{view}.png')]
+        paths += [os.path.join(renders, f'{kind}_{view}.png') for kind in ('mask', 'render')]
+        for path in paths:
+            if not os.path.isfile(path):
+                raise ValueError(f'Missing input: {path}')
+            with Image.open(path) as image:
+                if image.size != (1280, 720):
+                    raise ValueError(f'Expected 1280x720 input, got {image.size}: {path}')
+
+
+def measure_iou(reference, rendered, cut):
+    """Compare a complete pair using the documented scarf crop, without changing its inputs."""
+    if reference.shape != rendered.shape:
+        raise ValueError('Reference and render masks must have identical dimensions')
+    a, b = reference.copy(), rendered.copy()
+    a[cut:] = False
+    b[cut:] = False
+    if not a.any() or not b.any():
+        raise ValueError('Reference and render must both contain a helmet above the scarf crop')
+    inter, union = (a & b).sum(), (a | b).sum()
+    return round(float(inter / union), 4), a, b
+
+
 def main():
     root = sys.argv[1] if len(sys.argv) > 1 else os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     refs, renders = os.path.join(root, 'refs'), os.path.join(root, 'renders')
+    validate_inputs(refs, renders)
     result, rows = {}, []
     for v in VIEWS:
         ref_p, mask_p = os.path.join(refs, f'ref_{v}.png'), os.path.join(renders, f'mask_{v}.png')
-        if not (os.path.exists(ref_p) and os.path.exists(mask_p)):
-            continue
         a, b = reference_mask(ref_p), render_mask(mask_p)
-        if a.shape != b.shape:
-            b = np.asarray(Image.fromarray(b).resize(a.shape[::-1]))
-        a[CUT[v]:] = False
-        b[CUT[v]:] = False
-        inter, union = (a & b).sum(), (a | b).sum()
-        result[v] = round(float(inter / union), 4) if union else 0.0
+        result[v], a, b = measure_iou(a, b, CUT[v])
         sil = silhouette_view(ref_p, a, b)
         Image.fromarray(sil).save(os.path.join(renders, f'silhouette_{v}.png'))
         tiles = [Image.open(ref_p).convert('RGB'), Image.open(os.path.join(renders, f'render_{v}.png')).convert('RGB'),
@@ -111,10 +131,14 @@ def main():
             for c, t in enumerate(row):
                 sheet.paste(t, (c * 640, r * 360))
         sheet.save(os.path.join(renders, 'compare.png'))
-    result['mean'] = round(sum(result[v] for v in result) / max(len(result), 1), 4)
-    json.dump(result, open(os.path.join(renders, 'iou.json'), 'w'), indent=2)
+    result['mean'] = round(sum(result[v] for v in VIEWS) / len(VIEWS), 4)
+    with open(os.path.join(renders, 'iou.json'), 'w') as output:
+        json.dump(result, output, indent=2)
     print('IoU ' + '  '.join(f'{k}={v:.3f}' for k, v in result.items()))
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except (ValueError, OSError) as error:
+        sys.exit(f'IoU failed: {error}')

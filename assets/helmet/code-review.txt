@@ -1,0 +1,31 @@
+Unabhängige Gesamtprüfung – GPT-6.1 Sol high
+
+ce_judge: 50 Dateien, 4753 Diff-Zeilen, Richter sol (gpt-6.1-sol high), Grund: expliziter --model=sol; automatisch wäre sol (4653 Diff-Zeilen (Schwelle 300)), Basis origin/main
+| Nr | Datei:Zeile | Schwere (blocker/hoch/niedrig/ok) | Befund | Vorschlag |
+|---|---|---|---|---|
+| 1 | .ce-repo.json:3 | ok | Projektversion geändert; keine Änderung an SaveData, LevelFormat oder Unity-Verträgen im Diff. | Keine Migration erforderlich. |
+| 2 | docs/HELM_TEILE.md:14 | ok | H01–H19 sind dokumentiert; keine bestehenden persistenten IDs oder Enums geändert. | — |
+| 3 | web/src/main.js:266 | ok | Kein Unity-Code; die genannten Unity-Fallen sind nicht betroffen. | — |
+| 4 | web/tools/save_pass.py:15 | hoch | Keine Testlöschung sichtbar. Die Belegsicherung übernimmt jedoch ungeprüft vorhandene Messdateien: Nach fehlgeschlagenem Renderlauf oder `--no-iou` können alte IoU-Werte mit neuen Bildern als neuer Durchlauf gespeichert werden. | Erfolgreichen Lauf mit abgeschlossener IoU und passenden Ausgabehashes verlangen; beide Fehlerfälle testen. |
+| 5 | web/src/parts/lowerArmor.js:151 | niedrig | Wesentliche Kieferkonturen stehen als Zahlenlisten im Generator, obwohl die Spezifikation zentrale Formparameter verlangt. Sie fehlen in `helmetParams.json`. | Kieferprofile als benannte Parameter auslagern und dokumentieren. |
+| 6 | docs/versions/0.3.md:5 | ok | Verhalten, Lieferstand, Einschränkungen und verworfene Varianten sind in Systemdoku, Changelog und aktuellem Versionsbericht beschrieben. | — |
+| 7 | AGENTS.md:34 | ok | Keine verbotenen Git-Aktionen im Diff; Commit/Push sind ausdrücklich autorisiert, Merge bleibt ausgeschlossen. | — |
+| 8 | docs/versions/0.3.md:43 | ok | Großer Versionsumfang, aber vom autorisierten Gesamtstand gedeckt; die frühere Körperstudie ist ausdrücklich als optionaler Entwurf eingeordnet. | — |
+
+Nachbessern: 4, 5
+
+Gezielte Nachprüfung nach Behebung des hohen Befunds
+
+ce_judge: 5 Dateien, 407 Diff-Zeilen, Richter sol (gpt-6.1-sol high), Grund: expliziter --model=sol; automatisch wäre sol (397 Diff-Zeilen (Schwelle 300)), Basis origin/main
+| Nr | Datei:Zeile | Schwere (blocker/hoch/niedrig/ok) | Befund | Vorschlag |
+|---|---|---|---|---|
+| 1 | web/tools/save_pass.py:20 | ok | Keine Änderung der genannten Spielverträge; Laufstatus, Vollständigkeit und Hashes werden vor dem Speichern geprüft. | — |
+| 2 | web/verify_renders.mjs:19 | ok | Keine Änderung persistenter IDs oder Enums im Prüfumfang. | — |
+| 3 | web/verify_renders.mjs:1 | ok | Kein Unity-Code; genannte Unity-Fallen nicht betroffen. | — |
+| 4 | web/tools/test_save_pass.py:41; web/package.json:10 | ok | Acht Regressionstests eingebunden; keine Tests gelöscht oder abgeschwächt. Tests nicht erneut ausgeführt; `test_map.json` außerhalb des erlaubten Prüfumfangs. | — |
+| 5 | docs/versions/0.3.md:28 | ok | Keine neue problematische Sonderlogik. Bekannter niedriger Kieferkontur-Befund ausdrücklich als späterer Patch dokumentiert. | — |
+| 6 | docs/versions/0.3.md:25 | ok | Geänderte Belegsicherung und Regressionstests beschrieben. | Nachprüfergebnis und Ist-Zeit nach Abschluss ergänzen. |
+| 7 | web/tools/save_pass.py:54; docs/versions/0.3.md:47 | ok | Validierung erfolgt vor Ausgabeverzeichnissen und Kopien. Keine verbotenen Git-Aktionen sichtbar; Commit/Push autorisiert, Merge ausgeschlossen. | — |
+| 8 | web/tools/save_pass.py:17; web/verify_renders.mjs:143 | ok | Gezielte Nachprüfung bleibt beim Belegsicherungsbefund. Der vorgelegte Diff entspricht dem Arbeitsstand auf `5af89bd`; der Commit allein enthält diese Korrekturen noch nicht. | Freigabe auf den vorgelegten Arbeitsdiff beziehen. |
+
+Freigabe

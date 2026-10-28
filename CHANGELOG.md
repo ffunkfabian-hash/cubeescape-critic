@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.3.0 „Sidework“ – 2026-10-28
+
+- Finale Auswahl 64: runde Haube und akzeptierte Augen, moderat kantiger heller Rahmen; eckige Hauben 62/63 verworfen.
+- Generator, GLB mit 89 Meshes, fünf Textur-PNGs, Teileverzeichnis, Stilbeschreibung und Bildverlauf im Repo gebündelt.
+- 31 Tests, Build, Vier-Ansichten-Prüfung und bytegleiche Wiederherstellung bestanden; [Prüfbericht](docs/versions/0.3.md).
+
+## 0.2.0 „Fidelity“ – 2026-10-28 (lokal)
+
+- Haube, Maske, Wangen und Kiefer getrennt; Heckmodul, Kabel, Einlagen und Befestigungen anhand des Videos überarbeitet.
+- Augen erhalten; mittlere Silhouetten-IoU 0,9143 → 0,9152, mit Rückschritten in Front und Seite A.
+- Feste Render-Seeds, Quellen-/Referenz-Hashes und reproduzierbarer Vergleich mit der ergänzenden Meshy-Referenz.
+- [Prüfstand, Einschränkungen und Reproduktion](docs/versions/0.2.md).
+
+## 0.1.0 „Contour“ – 2026-10-28
+
+- Gesamtform gegen vier feste Referenzansichten angepasst: rundere Haube, kürzeres Untergesicht und angepasste Augen;
+  Vorher-/Nachher-Vergleich und aktualisierte Teilekarte. Mittlere Silhouetten-IoU von 0,8982 auf 0,9090.
+- Bestehendes Three.js-Modell weitergeführt: schräger Abschluss des Nackenrahmens, echte Seitenvertiefungen und
+  zusätzliche kleine Felder mit zurückgesetzten Böden; vorhandene Materialien erhalten.
+- Teilekarte mit stabilen H-Kennungen zur Besprechung von Geometrieänderungen, HTML/PNG/PDF-Ausgabe.
+- Reproduzierbare Browserprüfung mit gespeichertem GLB-Export und Laufstatus; unvollständige Messungen schlagen fehl.
+  Playwright und Python-Messabhängigkeiten gepinnt; Logiktests und Build in CI. Leuchtstärke-/Bloom-Doku korrigiert.
+
 ## 0.0.2 „Browser Helmet“ – 2026-10-27
 
 - `web/`: Three.js-Nachbau des Helms ohne lokale 3D-Software – fünf benannte Bauteilgruppen (three-bvh-csg, Schal mit

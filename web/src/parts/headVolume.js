@@ -39,7 +39,14 @@ export function loftGeometry(rows = 72) {
     const t = j / rows;
     const y = yBot + (yTop - yBot) * Math.sin((t * Math.PI) / 2);
     const hw = Math.max(w(y), 1e-4), f = zf(y), b = zb(y);
-    for (const [u, v] of ring) pos.push(u * hw, y, b + ((v + 1) / 2) * (f - b));
+    const rounding = D.crownRounding;
+    const round = rounding.strength * THREE.MathUtils.smoothstep(y, rounding.startY, rounding.endY);
+    for (const [u, v] of ring) {
+      const length = Math.hypot(u, v);
+      const ru = THREE.MathUtils.lerp(u, u / length, round);
+      const rv = THREE.MathUtils.lerp(v, v / length, round);
+      pos.push(ru * hw, y, b + ((rv + 1) / 2) * (f - b));
+    }
   }
   const n = ring.length;
   for (let j = 0; j < rows; j++) {

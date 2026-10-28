@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "finalPass": 64,
+  "geometryMatchesPass": 61,
+  "roundedCrownMatchesPass": 46,
+  "byteIdenticalOutputs": 21,
+  "targetGLBSHA256": "b6284f6f42b9e54d8efb5dc92ea6293d867a9100b2d319489bf250abd2273aca",
+  "measurementHashesIncluded": true
+}

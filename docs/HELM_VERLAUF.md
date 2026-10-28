@@ -77,7 +77,222 @@ Bilder: [22](belege/helm/22.jpg) · [23](belege/helm/23.jpg) · [24](belege/helm
 Bilder der Durchläufe 1–21 gibt es nicht mehr (Renders wurden überschrieben); abrufbar sind die Rundenenden als
 Commits (`eb8bb58`, `0c4008b`, `966721d`).
 
+## Runde 5 – Nackenrahmen und echte Vertiefungen (28.10.2026, Messung B)
+
+Basis: `claude/threejs-helm`, Commit `5af89bd`. Nutzerentscheidung: Materialien erhalten, Geometrie verbessern.
+Vorherstand #29 in dieser Cloud reproduziert: front 0,9193 / left 0,9142 / back 0,8785 / right 0,8915, Mittel 0,9009.
+Getrenntes Ausblenden bestätigte den vorderen Abschluss von `Collar` als Quelle des weißen Blocks unter dem Seitenmodul;
+`Jaw` und `Core` waren nicht die Ursache. Hauptprofile, Augen, Kiefer und Materialien bleiben unverändert.
+
+Durchlauf **30**: Nackenrahmen vorn schräg abgeschlossen; längliche Seitenfelder und kleinere Taschen tatsächlich aus
+der Rahmenwand geschnitten, Böden und vertiefte Schlitze separat. Der erste Schnitt ließ koplanare Außenfragmente stehen;
+ein über die Außenwand hinausreichender Schnittkörper beseitigt die Streifen. Strahltests prüfen Rand, Boden und Schlitz.
+Die IoU sinkt leicht auf rund **0,898**. Das ist keine Verbesserung der Silhouette; behalten wird die lokale Verbesserung
+von Übergang und Vertiefungen nach Nahvergleich. Kamera, Referenzmasken und Messausschnitt sind unverändert.
+
+[Vergleich #30](belege/helm/30.jpg), vollständige Werte und Bilder in `runs/helm/30/`; tatsächlicher GLB-Export und Laufstatus
+in `web/renders/verification.json`. Die [Teilekarte](HELM_TEILE.md) dient der nächsten gezielten Rückmeldung.
+
 ## Offen
 
-Seitenfläche neben dem Auge zu flach; weißer Block zwischen Schläfenplatte und Seitenmodul B klotzig; Stufe 4 der
-Beschreibung (Fugen, flache Vertiefungen im Seitenrahmen) nur teilweise; Weiß auf Weiß hinten kontrastarm.
+Seitenfläche neben dem Auge weiterhin flach; weitere feine Flächendetails noch möglich; Weiß auf Weiß hinten kontrastarm.
+Die Teilekarte erleichtert die Abstimmung dieser Bereiche. Keine vollständige Maßrekonstruktion oder Drucktauglichkeitsabnahme.
+
+## Runde 6 – Gesamtform an die Referenz annähern (28.10.2026)
+
+Nutzerauftrag: systematisch Haube, Gesichtsprofil und Kieferkontur vergleichen; Materialien und Kameras beibehalten.
+Ausgangsstand ist #30. Vorab wurden sechs Profil-/Proportionskandidaten mit denselben vier Kameras verglichen
+(`runs/helm/shape-fit/`, verkleinerte 320×180-Masken nur zur Vorauswahl). Eine stärkere Rundungsvariante wurde nach
+nicht abgeschlossenem Aufbau abgebrochen; sie ist nicht als Qualitätsmessung gewertet. Gesichtsfaktoren 0,92 / 0,86 /
+0,82 wurden gesichtet: 0,86 trifft den Kinnabschluss besser, ohne das Gesicht so stark zu stauchen wie 0,82.
+Alle Werte unten stammen aus der vollständigen bisherigen 1280×720-Prüfung, nicht aus der Vorauswahl.
+
+| # | Änderung / Entscheidung | front | left | back | right | Mittel |
+|---|---|---|---|---|---|---|
+| 30 | Ausgangsstand | 0,9155 | 0,9131 | 0,8736 | 0,8905 | 0,8982 |
+| 31 | Rundere Frontprofile, unteres Gesicht 14 % kürzer, kleinere Sehschlitze; Kern gegen Haube begrenzt | 0,9216 | 0,9158 | 0,8886 | 0,8978 | 0,9060 |
+| 32 | Runde Stirn ergänzt; wegen koplanarer Pixelartefakte verworfen | 0,922 | 0,915 | 0,891 | 0,897 | 0,906 |
+| 33 | Haube und Gesichtsmaske vor Vereinigung räumlich partitioniert; Artefakte entfernt | 0,922 | 0,914 | 0,891 | 0,896 | 0,905 |
+| 34 | Oberste Profilpunkte runder, Augenfassungen schmaler; hinten zu tiefe Haube | 0,9241 | 0,9173 | 0,8983 | 0,8988 | 0,9096 |
+| 35 | Stirnkorrektur auf Front begrenzt, hintere Kante erhalten; **behalten** | **0,9241** | **0,9160** | **0,8963** | **0,8994** | **0,9090** |
+
+[Referenz / vorher / nachher](bilder/helm_r5_vorher_nachher.jpg) · Belege:
+[31](belege/helm/31.jpg), [32](belege/helm/32.jpg), [33](belege/helm/33.jpg), [34](belege/helm/34.jpg), [35](belege/helm/35.jpg).
+Genaue Messwerte je Durchlauf unter `runs/helm/<Nr>/iou.json`.
+
+Die kohärente Formanpassung in `web/src/shapeFit.js` verkürzt sämtliche unteren Bauteile einschließlich ihrer
+Befestigungen ab Augenhöhe. Oberhalb bleibt die Geometrie unverändert; Materialien, Licht und Kameras bleiben erhalten.
+`profile.front`, `shapeFit`, `browOutline` und `visor` sind die zentralen Parameter. Tests prüfen die konsistente Position
+von Bauteilen und vormals instanzierten Befestigungen sowie endliche Normalen. GLB-Export enthält weiterhin alle neun Materialien.
+
+Die Verbesserung beträgt 1,08 Prozentpunkte gegenüber #30 und betrifft alle vier Silhouetten. Sie beweist keine
+vollständige Vorlagentreue: die Maske bleibt kantiger, die Seitenfläche neben dem Auge flach und einige Anbauten vereinfacht.
+Kinn und Wangen liegen zum Teil unter dem IoU-Messausschnitt und wurden zusätzlich im direkten Bildvergleich beurteilt.
+
+## Durchlauf 36 – Augenöffnungen H04
+
+Auf Nutzerhinweis die türkisfarbenen Einsätze verbreitert und erhöht und im Schlitz nach vorn versetzt. Der direkte
+Vergleich zeigt in der Frontansicht deutlich größere sichtbare Leuchtflächen; die Seitenansichten wurden ebenfalls geprüft.
+Ein erster, stärkerer Versatz wurde wegen des seitlichen Überstands reduziert. Silhouetten-IoU bleibt bei 0,909;
+dieser Wert misst nicht die Füllung der Augen. Die seitliche Augenfassung und die kantige Seitenmaske bleiben vereinfacht.
+[Vergleich zur Referenz](belege/helm/36.jpg); aktueller Vorher-/Nachher-Ausschnitt lokal `web/renders/h04_vergleich.png`.
+
+## Durchlauf 37 – H04 und bestätigte Referenz
+
+Das nachgereichte Video ist bytegleich mit `reference/helm/turnaround.mp4` (SHA-256 `fac039db10d9d3ee3c74373c38e323dd53489df69eee18971e736c9d971e70de`). Die bestehenden vier Vergleichsbilder und Kameras bleiben daher gültig.
+Der vorherige Ansatz versetzte Schlitz und Einsatz auf der globalen Z-Achse, obwohl beide gedreht sind; dies verschob die Passung insbesondere in Seitenansichten. Ausschnitte und Scheibe folgen nun derselben lokalen Tiefenachse. Die Scheibe ist 0,002 Einheiten kleiner als der Schlitz und sitzt hinter der äußeren Öffnung. Front und beide Seiten wurden verglichen; die stark kantige Seitenmaske und Perspektive der schrägen Öffnung bleiben Abweichungen. [Vergleich aller vier Ansichten](belege/helm/37.jpg). Silhouetten-IoU 0,909; sie misst keine Augenfüllung.
+
+## Durchlauf 38 – Seitenmaske
+
+Auf Nutzerwunsch die verbleibende kantige Seitenfläche visuell gegen die bestätigte Videoreferenz verglichen. Die seitlichen
+Facetten der Gesichtsplatte flacher gestellt und die Fasenbreite von 0,004 auf 0,002 verkleinert; die Sehschlitze und ihre
+Einsätze bleiben unverändert. Alle vier Ansichten und der GLB-Export wurden geprüft. Die Silhouetten-IoU bleibt gerundet
+bei 0,909; sie misst den optischen Übergang der Flächen nicht. Die Änderung ist klein: Das Modell bleibt gegenüber der
+Vorlage kantiger und die Wangen-/Kieferübergänge sind weiterhin vereinfacht. [Vier Ansichten](belege/helm/38.jpg),
+direkter Vorher-/Nachher-Vergleich lokal unter `web/renders/vergleich_seitenmaske.png`.
+
+## Runde 7 – visueller Formabgleich, Durchläufe 39–41
+
+Ausgangspunkt #38, bestätigt vom Nutzer: H04 erhalten. Die Referenz zeigt einen längeren, nach hinten fallenden Gesichtszug;
+das Modell verlief dort steiler. In #39 wurden die unteren Punkte von `profile.sideFront` schrittweise zurückgenommen.
+In #40 folgen die Leisten des Mitteleinsatzes der tatsächlichen Tiefe der Oberfläche, statt auf einer konstanten Ebene zu
+liegen. In #41 wurden die Ecken des Seitenmoduls B gerundet und seine auffällig dunkle diagonale Linie abgemildert.
+Die Augenparameter und Materialien wurden nicht geändert. [Referenz, vorher, nachher](bilder/helm_r7_visueller_abgleich.jpg),
+[Durchlauf 39](belege/helm/39.jpg), [40](belege/helm/40.jpg), [41](belege/helm/41.jpg).
+
+| Ansicht | #38 | #41 |
+|---|---:|---:|
+| Front | 0,9239 | 0,9239 |
+| Seite B (`left`) | 0,9180 | 0,9237 |
+| Rückseite | 0,8963 | 0,8965 |
+| Seite A (`right`) | 0,8995 | 0,8940 |
+| Mittel | 0,9094 | 0,9095 |
+
+Die Messung zeigt einen Zielkonflikt zwischen den beiden Seiten; sie bewertet nur den Außenumriss oberhalb der
+Schalkante. Die abgerundete Kontur des Seitenmoduls und der angepasste Einsatz wurden zusätzlich visuell beurteilt.
+Die Seitenmaske bleibt vereinfacht und flächiger als die Referenz; die modularen Wangen- und Kieferübergänge und die
+Form des Seitenmoduls sind noch nicht vollständig nachgebildet. Dieser Stand beansprucht keine fertige visuelle Abnahme.
+
+## Runde 8 – Ziel 95 % und Vorbereitung Mac (28.10.2026)
+
+Ziel der Vorauswahl ist mittlere Silhouetten-IoU über die vier vorhandenen Ansichten, ohne Änderung der Kameras oder
+Referenzmasken. Getestet wurden Profilbreite, Front- und Rücktiefe, obere Haubenbreite, Ohrposition, Untergesicht,
+Gehäuse und Nackenrahmen. Schnelle Kandidatenwerte bei 320×180 Pixeln dienen ausschließlich der Vorauswahl und sind
+nicht direkt mit den vollständigen 1280×720-Werten vergleichbar. Auffällige Knicke oder Verschlechterungen einzelner
+Ansichten werden nicht allein für eine höhere mittlere Zahl übernommen.
+
+Behalten: Nackenrahmen `collar.rx` und `collar.rz` jeweils um 0,025 vergrößert. Vollständiger Lauf #42:
+front 0,9268, left 0,9289, back 0,9033, right 0,8980, Mittel **0,9143**. Ausgang #41: 0,9239 / 0,9237 /
+0,8965 / 0,8940, Mittel **0,9095**. Alle vier Ansichten verbessert; 0,95 ist noch nicht erreicht.
+[Referenz und Vorher/Nachher](bilder/helm_95_vergleich.jpg), [Durchlauf 42](belege/helm/42.jpg).
+Das Maß vergleicht nur die Außenkontur oberhalb des Schals und ist kein Prozentwert für die Gesamtähnlichkeit.
+
+Für die Fortsetzung: Referenzmasken und die aus Video abgeleiteten Kamerawinkel kritisch gegen die Bilder prüfen,
+dann rückwärtige und seitliche Silhouette, Ohrmodule und Kabel gezielt angleichen. Kamerakalibrierung einmal transparent
+festlegen und Ausgangs- und Folgestände gleich messen. Zusätzlich Bildvergleich und Prüfung der akzeptierten Augen und
+Wangen-/Kieferformen durchführen. Varianten mit Messwerten und visueller Entscheidung dokumentieren; kein 95-%-Ziel
+allein durch veränderte Bildausrichtung oder ungleiche Messregeln behaupten.
+
+## Runde 9 – Fidelity, Durchläufe 43–46 (28.10.2026)
+
+Auftrag: Haube/Seitenmaske, Heck/Funkseite, Wangen/Kiefer und Oberflächendetails anhand der vier Videoansichten
+verbessern; akzeptierte Augen erhalten. Das Video bleibt maßgeblich, die nachgereichte Meshy-Datei nur Zusatzreferenz.
+
+| # | Änderung | front | left | back | right | Mittel |
+|---|---|---:|---:|---:|---:|---:|
+| 42 | Ausgang | 0,9268 | 0,9289 | 0,9033 | 0,8980 | 0,9143 |
+| 43 | Durchgehende Seitenmaske, getrennte Haube | 0,9282 | 0,9283 | 0,9044 | 0,8974 | 0,9146 |
+| 44 | Kleineres/flacheres Heckmodul und enger geführtes Kabel | 0,9252 | 0,9397 | 0,9049 | 0,8884 | 0,9145 |
+| 45 | Getrennte Wangen/Kiefer, Fugen und Einlagen | 0,9252 | 0,9397 | 0,9049 | 0,8877 | 0,9144 |
+| 46 | Haubenquerschnitt moderat gerundet, Wangenverjüngung, Details und angepasster Mitteleinsatz | 0,9214 | 0,9429 | 0,9068 | 0,8898 | 0,9152 |
+
+Eine zu weit ausladende erste Kabelvariante und ein zu stark gerundeter Haubenquerschnitt wurden verworfen.
+Die akzeptierten Augen stimmen in Position, Größe und Drehung innerhalb 0,000001 Einheiten mit #42 überein;
+Strahltests prüfen zusätzlich, dass ihre Öffnungen frei bleiben. Die Kamera-/Maskenkalibrierung ist unverändert.
+Silhouettengewinne sind klein und nicht in allen Ansichten vorhanden. [Versionsbericht](versions/0.2.md) und
+[Vergleich Video / vorher / nachher](bilder/helm_fidelity_vergleich.jpg). Belege: [43](belege/helm/43.jpg),
+[44](belege/helm/44.jpg), [45](belege/helm/45.jpg), [46](belege/helm/46.jpg).
+
+## Runde 10 – Sidework, Durchläufe 47–50 (28.10.2026)
+
+Auftrag: Kiefer/Seitenschalen sowie Funkmodul/Kabel. Haube und Augen festhalten; Video maßgeblich, Texturen und Einzelteile reproduzierbar.
+
+| # | Änderung | front | left | back | right | Mittel |
+|---|---|---:|---:|---:|---:|---:|
+| 47 | Seitenschalen, Einlagen, Funkdeckel und Kabel | 0,9149 | 0,9429 | 0,8911 | 0,8869 | 0,9090 |
+| 48 | Seitenschalen zurückgesetzt, Kabelkontur und größere Einlagen | 0,9176 | 0,9429 | 0,8959 | 0,8951 | 0,9129 |
+| 49 | Einfassungen, Texturskalierung und gerundete Knöpfe | 0,9180 | 0,9429 | 0,8966 | 0,8922 | 0,9124 |
+| 50 | Separate Funkbuchse und Textur-PNG-Ausgabe | 0,9181 | 0,9429 | 0,8966 | 0,8922 | 0,9124 |
+
+Die erste Variante ragte unter der Maskenhalterung vor und verbreiterte den Kabelbogen; beide Stellen wurden zurückgenommen.
+Endstand #50 verbessert die Detailgliederung, senkt aber das IoU-Mittel gegenüber #46 von 0,9152 auf 0,9124.
+[Bericht](versions/0.3.md), [Vergleich](bilder/helm_sidework_vergleich.jpg).
+
+## Runde 11 – Variantenprüfung und Nutzerauswahl, Durchläufe 51–59 (28.10.2026)
+
+Die Versuche änderten Kieferplatten, Halsring, Seiteneinlagen und Funkanordnung. Nach dem Vier-Ansichten-Vergleich
+bevorzugte der Nutzer die mittlere Variante. Diese wurde zunächst irrtümlich als #50 eingeordnet. Lauf #59 stellt #50 wieder her und
+behält ausschließlich die konstruktive Bügelkorrektur: Träger und beide Drahtbügel treffen die tatsächlichen Flächen.
+
+| # | Änderung | front | left | back | right | Mittel |
+|---|---|---:|---:|---:|---:|---:|
+| [51](belege/helm/51.jpg) | Dünne Kieferplatten mit echten Vertiefungen | 0,9121 | 0,9429 | 0,8966 | 0,8922 | 0,9109 |
+| [52](belege/helm/52.jpg) | Geöffneter Halsring und Einlagen | 0,9146 | 0,9429 | 0,9041 | 0,8907 | 0,9131 |
+| [53](belege/helm/53.jpg) | Weitere Kiefer-/Rahmenabstimmung | 0,9079 | 0,9416 | 0,9016 | 0,8903 | 0,9103 |
+| [54](belege/helm/54.jpg) | Funk-/Halterungsanordnung | 0,9094 | 0,9424 | 0,9046 | 0,8904 | 0,9117 |
+| [55](belege/helm/55.jpg) | Kinnmuldenboden | 0,9133 | 0,9424 | 0,9046 | 0,8904 | 0,9127 |
+| [56](belege/helm/56.jpg) | Flachere Gelenkbolzen | 0,9131 | 0,9424 | 0,9046 | 0,8904 | 0,9126 |
+| [57](belege/helm/57.jpg) | Geometrisch verbundener Funkträger | 0,9138 | 0,9424 | 0,9034 | 0,8904 | 0,9125 |
+| [58](belege/helm/58.jpg) | Funkmuschel zurück zum Bügel | 0,9090 | 0,9425 | 0,9126 | 0,8899 | 0,9135 |
+| [59](belege/helm/59.jpg) | Fehlzuordnung zu #50; Bügelkorrektur beibehalten | 0,9189 | 0,9429 | 0,8941 | 0,8919 | 0,9120 |
+
+96 der 99 Meshes in #59 stimmen inklusive Transformationen exakt mit #50 überein. Abweichend sind nur `Yoke`,
+`Radio_Bail_Rear` und `Radio_Bail_Front`; Haube/Augen bleiben unverändert. 30 Tests und zwei bytegleiche unabhängige
+Browserläufe bestehen. Das IoU-Mittel bleibt mit 0,9120 gegenüber 0,9124 nahezu gleich; keine höhere Gesamtähnlichkeit behauptet.
+[Inzwischen verworfener Stand #59](bilder/helm_sidework_auswahl.jpg), [nicht ausgewählte Variante #58](bilder/helm_sidework_fortsetzung.jpg),
+[Bericht](versions/0.3.md).
+
+## Runde 12 – Tatsächliche mittlere Variante wiederhergestellt (28.10.2026)
+
+Das erneut angehängte Nutzerbild entspricht `helm_sidework_vergleich.jpg`: **Video / Stand 46 / Stand 50**.
+Die Zuordnung der mittleren Spalte zu #50 war ein Fehler; #59 ist nicht freigegeben. In Prüflauf #60 sind sämtliche
+16 Modellquelldateien exakt auf #46 zurückgesetzt, einschließlich Kiefer, Funkmuschel, Bügel und Kabel.
+Keine spätere Geometrieänderung wurde beibehalten.
+
+| Lauf | Modellstand | front | left | back | right | Mittel |
+|---|---|---:|---:|---:|---:|---:|
+| [60](belege/helm/60.jpg) | Vollständige Wiederherstellung #46 | 0,9214 | 0,9429 | 0,9068 | 0,8898 | 0,9152 |
+
+Alle 13 historischen Ausgaben sind bytegleich: vier gerenderte Ansichten, vier Masken, vier Overlays und das vollständige
+GLB mit 89 Meshes. 23 Tests bestehen; Textur-PNGs werden weiterhin zusätzlich ausgegeben.
+[Original und Wiederherstellung, eindeutig beschriftet](bilder/helm_stand46_wiederhergestellt.jpg), [Bericht](versions/0.3.md).
+
+## Runde 13 – Etwas kantigere Formprobe 61 (28.10.2026)
+
+Auf Wunsch des Nutzers wird der bestätigte Stand #46 moderat kantiger gestaltet. Der helle Seiten-/Heckrahmen erhält
+16 ebene Mantelflächen, eine schmalere obere Fase und gerade abgeschrägte Taschen. Haube, Augen, Kieferform,
+Funkmuschel, Kabel und Halsring bleiben geometrisch unverändert. 77/89 Meshes und alle Texturkarten sind unverändert.
+
+| Lauf | front | left | back | right | Mittel |
+|---|---:|---:|---:|---:|---:|
+| [61](belege/helm/61.jpg) | 0,9199 | 0,9418 | 0,9053 | 0,8887 | 0,9139 |
+
+Formprobe, noch keine bestätigte Ablösung der Basis #46. Der Silhouettenwert sinkt leicht; keine höhere Gesamtähnlichkeit behauptet.
+23 Tests, Build und Projektprüfung bestehen. [Video / Basis 46 / Variante 61](bilder/helm_kantiger_46_61.jpg), [Bericht](versions/0.3.md).
+
+## Runde 14 – Haubenversuche und finale Auswahl 64 (28.10.2026)
+
+Der Nutzer wünschte zunächst auch eine kantigere Kopfoberseite. #62 flachte den Scheitel ab, #63 verbreiterte die
+Schrägflächen und passte den Kopfbügel an. Nach der Bildprüfung bevorzugte der Nutzer ausdrücklich die runde Haube:
+die markierte Fläche wirkte merkwürdig. Beide Versuche sind verworfen.
+
+| Lauf | Entscheidung | front | left | back | right | Mittel |
+|---|---|---:|---:|---:|---:|---:|
+| [62](belege/helm/62.jpg) | Erste abgeflachte Haube, verworfen | 0,9193 | 0,9441 | 0,9104 | 0,8916 | 0,9163 |
+| [63](belege/helm/63.jpg) | Breitere Schrägflächen, vom Nutzer verworfen | 0,9160 | 0,9458 | 0,9120 | 0,8926 | 0,9166 |
+| [64](belege/helm/64.jpg) | Runde Haube, Rahmen aus 61; Lieferstand | 0,9199 | 0,9418 | 0,9053 | 0,8887 | 0,9139 |
+
+Alle 21 gesicherten Ausgaben von #64 sind bytegleich mit #61; einschließlich der nach der Codeprüfung ergänzten Hashes für IoU und Vergleichsbild. Der etwas höhere Silhouettenwert der kantigen Versuche ist kein Grund,
+die ausdrückliche Formauswahl zu übergehen. [Aktuelles Bild](bilder/helm_aktuell.jpg),
+[Nutzerfeedback zur verworfenen Haube](bilder/helm_haube_verworfen.jpg), [Stilbeschreibung](HELM_STIL.md).
+Der Nutzer hat anschließend das Hochladen des Gesamtstands einschließlich Dokumentation autorisiert.
