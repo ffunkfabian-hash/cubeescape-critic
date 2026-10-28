@@ -1,0 +1,13 @@
+ce_judge: 9 Dateien, 736 Diff-Zeilen, Richter sol (gpt-6.1-sol high), Grund: expliziter --model=sol; automatisch wäre sol (718 Diff-Zeilen (Schwelle 300)), Basis HEAD
+| Nr | Datei:Zeile | Schwere (blocker/hoch/niedrig/ok) | Befund | Vorschlag |
+|---|---|---|---|---|
+| 1 | web/src/assemblyOptions.js:1 | ok | Keine Änderung der genannten bestehenden Formate oder Vertragsversionen erkennbar; Optionen werden validiert. | — |
+| 2 | web/src/parts/shoulderStudy.js:8 | ok | Neue B01–B22 sind explizit vergeben; bestehende Helmkennungen bleiben erhalten. Keine Enum-Umsortierung. | — |
+| 3 | web/src/assemblyLabels.js:18 | ok | Keine Unity-spezifischen Fallen betroffen. SVG-Knoten werden zwischen Aktualisierungen wiederverwendet. | — |
+| 4 | web/src/assembly.js:98; web/src/assemblyLabels.js:46 | niedrig | Inventarzentren liegen bereits in Weltkoordinaten. Die Labelprojektion wendet `model.matrixWorld` nochmals an; bei verschobenem, gedrehtem oder skaliertem Modell zeigen Verbindungslinien dadurch auf falsche Positionen. Dieser Fall ist ungetestet. Keine Tests gelöscht oder abgeschwächt; `test_map.json` im Prüfausschnitt nicht belegt. | Zentren relativ zum Modell speichern und einmal transformieren; Regressionstest mit nicht identischer Modelltransformation ergänzen. Testzuordnung nachweisen. |
+| 5 | web/src/shoulderStudyParams.json:11 | ok | Schulterform, Wölbung und Dicke sind datengetrieben; keine bereichsabhängige Sonderlogik erkennbar. | — |
+| 6 | — | ok | Dokumentationsabgleich ist mit den ausschließlich zugelassenen Dateien nicht abschließend prüfbar. | — |
+| 7 | — | ok | Keine verbotenen Git- oder Worktree-Aktionen im Diff erkennbar. | — |
+| 8 | — | ok | Explosionsdarstellung und Schulterstudie bilden zwei zusammenhängende Ziele; keine offensichtlich fachfremden Änderungen. | — |
+
+Nachbessern: Nr 4

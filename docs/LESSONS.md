@@ -1,6 +1,9 @@
 # Lehren (Critic)
 ≤ 60 Zeilen, eine Zeile je Lehre, Link zur Langform. Verlauf aller Helm-Durchläufe: [HELM_VERLAUF.md](HELM_VERLAUF.md).
 
+- Explosionsbilder nach stabilen Teile-IDs gruppieren, alle enthaltenen Meshpfade zusätzlich ausgeben; Weltmatrix und Herkunft im GLB erhalten. [Assembly](HELM_AUFBAU.md#datenfluss-und-teilelogik).
+- Schultermasse getrennt über Breite, obere Wölbung und Schalendicke steuern; Halsverkürzung durch Anheben des Oberkörpers bei festem Helm. Referenzstil ist kein vermessenes Körpermaß. [Formentscheidung](HELM_AUFBAU.md#rückmeldungen-und-formentscheidung).
+
 - three-bvh-csg liefert das Ergebnis im lokalen System des **ersten** Körpers – Transformationen vorher in die Geometrie einbacken (`web/src/geo.js` › `brush`), sonst verschwinden Position/Neigung still.
 - Headless-Chromium hat nur Software-GL (SwiftShader): Animationsschleife + GTAO/Bloom lässt Screenshots in den Timeout laufen – Einzelbild-Modus `?static=1` mit `renderFrame()` (`web/verify_renders.mjs`).
 - Umrisse aus drei Profilen per Schnitt ergeben Kisten (jeder waagerechte Schnitt = Draufsicht); ein Loft (Draufsicht je Höhe auf Breite/Tiefe skaliert) trifft alle drei Profile und verjüngt weich (`web/src/parts/headVolume.js`).

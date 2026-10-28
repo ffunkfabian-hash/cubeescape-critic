@@ -1,6 +1,12 @@
 # Critic – parametrischer Helm im Browser
 
-**Aktueller Versuch 0.4 „Continuity“:** weichere Übergänge neben den Augen und zwei von der Stirn bis zum Hinterkopf
+**Aktueller Versuch 0.5 „Assembly“:** beschriftete Explosionsansicht, ausblendbare Kopfhörer mit Bügel und eine
+separate Hals-/Schulterstudie mit kürzerem Hals und höheren, kräftigeren Schulterkappen.
+[Aufbau und Reproduktion](docs/HELM_AUFBAU.md) · [Exporte](assets/helmet-assembly/README.md) · [Prüfbericht](docs/versions/0.5.md).
+Die bestehenden Helmformen und Materialproben bleiben erhalten. Das Video bleibt die Helmreferenz;
+die Titan-Recherche aus `cubeescape-reference` ergänzt die Stilbetrachtung des Oberkörpers.
+
+**Form- und Materialbasis 0.4 „Continuity“:** weichere Übergänge neben den Augen und zwei von der Stirn bis zum Hinterkopf
 verlängerte Streifen. Auf derselben Geometrie stehen Originalmaterial, glänzendes Metall und feines dunkles Graphit
 zum Vergleich; noch keine Materialauswahl durch den Nutzer. [Vergleich und Exporte](assets/helmet-continuity/README.md) ·
 [Prüfbericht](docs/versions/0.4.md). Der Generator zeigt standardmäßig die neue Form mit Originalmaterial.

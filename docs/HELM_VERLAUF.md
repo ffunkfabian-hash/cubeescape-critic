@@ -492,3 +492,25 @@ Viewer, Runner und aktiven Exporten entfernt; fünf ausschließlich zugehörige,
 Ihr vollständiger Aufbau und ihre Exporte bleiben im [Git-Stand vor Rücknahme](https://github.com/ffunkfabian-hash/cubeescape-critic/blob/caf7a79dc46269b9f02801587b909d5c947f73d8/assets/helmet-continuity/README.md).
 Die Varianten 80–88 einschließlich Metall/Graphit ohne Blenden bleiben unverändert verfügbar. Keine neue Geometrie-
 oder Materialauswahl wird daraus abgeleitet; Video, Augen und Einzelteilaufbau behalten ihre bisherigen Vorgaben.
+
+## Assembly 0.5 – Aufbau und Oberkörper (28.10.2026)
+
+Quelle `6090262`: Der Nutzer wünscht eine beschriftete Explosionsansicht, einen Blick ohne Kopfhörer/Kopfbügel
+und den Beginn eines passenden Oberkörpers. Die Helmform bleibt erhalten. 104 Meshes werden auseinandergezogen,
+34 Gruppen im Bild benannt und alle Einzelmeshes in `assembly.json` aufgeführt. Der Headsetschalter entfernt
+40 zugehörige Meshes einschließlich Kabeln und Antennen; Heckmodul und Maskenhalter bleiben stehen.
+
+Der Oberkörper ergänzt 22 eigene Teile. Erste Rückmeldung: Hals zu lang, Schultern zu schmal und zu wenig stämmig.
+Daraufhin Hals 0,49 → 0,31 und Breite 1,97 → 2,3198. Zweite Rückmeldung: mehr Schultermasse nach oben.
+Zusätzlicher Bogen 0,23, weiße Dicke 0,10 und kräftigere dunkle Unterlage heben die obere Kontur um etwa 0,15.
+Helm und Halsposition bleiben bei dieser zweiten Korrektur unverändert.
+
+![Drei Formschritte](bilder/helm_assembly_schulterverlauf.jpg)
+
+Der Hinweis des Nutzers auf `cubeescape-reference` führt zur noch uncommitteten Titan-Auswertung im Worktree
+`titan-style`. Sie stützt geschichtete gerundete Schutzschalen und dunkle Zwischenlagen, liefert aber keine
+verbindlichen Körpermaße. Quellenhashes und gelesene Abschnitte stehen im [Aufbaudokument](HELM_AUFBAU.md).
+Die erhöhte Schulterform war beim Quellenfund bereits umgesetzt. Die endgültige Formbewertung durch den Nutzer ist offen.
+
+[Vier Körperansichten](bilder/helm_assembly_schultern.jpg) · [Explosionsbild](bilder/helm_assembly_explosion.jpg) ·
+[Headsetvergleich](bilder/helm_assembly_headset.jpg) · [GLB/Texturen/Prüfbelege](../assets/helmet-assembly/README.md).

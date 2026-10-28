@@ -1,0 +1,13 @@
+ce_judge: 2 Dateien, 238 Diff-Zeilen, Richter luna (gpt-6-luna medium), Grund: expliziter --model=luna; automatisch wäre luna (Routineänderung (234 Diff-Zeilen, kein erkannter Kern-/Vertragspfad)), Basis HEAD
+| Nr | Datei:Zeile | Schwere (blocker/hoch/niedrig/ok) | Befund | Vorschlag |
+|---|---|---|---|---|
+| 1 | `web/src/assembly.js:1–152` | ok | Im Diff ist keine Änderung an SaveData, LevelFormat, unity_contract oder Vertragsversion erkennbar. | — |
+| 2 | `web/src/assembly.js:1–152` | ok | Keine Änderung an PersistentId, Szenen-, Item-, Baustein- oder Seed-IDs beziehungsweise Enums erkennbar. | — |
+| 3 | `web/src/assembly.js:50–52, 117–152` | ok | Keine UnityEngine.Object-, Time-, statischen Zustands- oder Unity-Update/Tick-Fallen im gezeigten Three.js-Code erkennbar. | — |
+| 4 | `web/tools/assembly.test.mjs:14–25` | niedrig | Der Koordinatenbefund wird mit Translation, Rotation und nichtuniformer Skalierung geprüft; im erlaubten Diff ist kein Eintrag für `test_map.json` sichtbar. Gelöschte Tests oder Golden-/Hash-Änderungen sind nicht erkennbar. | Test in `test_map.json` eintragen, falls dort neue Tests registriert werden müssen. |
+| 5 | `web/src/assembly.js:64–83, 90–99` | niedrig | `category` ordnet Meshes über viele Namens-/Ancestor-Sonderfälle zu; Standard-Offsets für Studienteile sind Magic Numbers ohne erkennbare Datenquelle. | Zuordnung und Offsets bei Bedarf als explizite Daten pflegen; die Studienwerte klar als Präsentationswerte markieren. |
+| 6 | `web/src/assembly.js:1–152` | ok | Keine Doku-Dateien im Diff; laut Auftrag ist der Körper/Rig/Fertigung weiterhin Studie. | — |
+| 7 | `web/src/assembly.js:1–152`, `web/tools/assembly.test.mjs:1–82` | ok | Keine Push-, Merge-, Force-Push-, Stash- oder fremden Worktree-Aktionen im Diff erkennbar. | — |
+| 8 | `web/src/assembly.js:1–152`, `web/tools/assembly.test.mjs:1–82` | ok | Die zwei gezeigten Dateien betreffen Assembly-Darstellung und deren Prüfung; kein zusätzlicher unabhängiger Auftrag erkennbar. | — |
+
+Freigabe

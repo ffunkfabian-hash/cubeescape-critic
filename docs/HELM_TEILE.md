@@ -1,5 +1,10 @@
 # Helm – Teile und Abschnitte
 
+**Assembly 0.5:** Die bestehenden H01–H21 bleiben stabil. Die Explosionsbeschriftung unterscheidet ergänzend
+Seiten A/B, F01–F03 (bestehende zusammengefasste Schrauben) und P01 (Präsentationshals).
+Die neue Körperstudie erhält **B01–B22**; [vollständige Zuordnung und Anschlüsse](HELM_AUFBAU.md).
+Im Viewer zeigt **Aufbau und Varianten → Bauteile / Anschlüsse** jedes enthaltene Mesh mit eindeutigem Pfad.
+
 Diese Nummern bleiben über Modelländerungen hinweg gleich. Für einen Änderungswunsch genügen **Nummer, Seite und Richtung**:
 „H07 schmaler“, „H11 auf Seite B tiefer“ oder „H10 vorne flacher anschließen“.
 

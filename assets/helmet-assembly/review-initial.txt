@@ -1,0 +1,13 @@
+ce_judge: 13 Dateien, 738 Diff-Zeilen, Richter sol (gpt-6.1-sol high), Grund: expliziter --model=sol; automatisch wäre sol (712 Diff-Zeilen (Schwelle 300)), Basis 5b07344
+| Nr | Datei:Zeile | Schwere (blocker/hoch/niedrig/ok) | Befund | Vorschlag |
+|---|---|---|---|---|
+| 1 | .ce-repo.json:3 | ok | Produktversion erhöht; keine Änderung der genannten Speicher-/Unity-Verträge im Diff. Migration und Abnehmer-Mindestversion daher nicht erforderlich. | — |
+| 2 | web/src/parts/shoulderStudy.js:8 | ok | B01–B22 kommen hinzu; keine bestehenden persistenten IDs oder Enums im Diff geändert. | — |
+| 3 | web/src/assemblyLabels.js:39 | niedrig | Keine Unity-Fallen betroffen. Allerdings werden bei aktiver Explosion sämtliche SVG-Verbindungslinien und Punkte pro Bild entfernt und neu erzeugt. | SVG-Elemente wiederverwenden; Attribute aktualisieren. |
+| 4 | web/tools/assembly.test.mjs:25 | niedrig | Keine Tests gelöscht oder abgeschwächt, keine Golden-/Hash-Änderungen. Tests sichern Transformationsmatrizen und Meshzahlen, aber keine vollständige semantische Meshzuordnung und keinen GLB-Rückimport. Ein test_map.json-Eintrag ist im Diff nicht belegt. | Erwartete Mesh→Teil-Zuordnung und exportierte Transformationen prüfen; Testzuordnung ergänzen beziehungsweise nachweisen. |
+| 5 | web/src/assembly.js:78 | niedrig | Die beiden Geschwister nach `Yoke` werden allein aufgrund ihrer Reihenfolge H15A/B zugeordnet. Ein eingefügtes Detail kann dadurch unbemerkt die falsche Beschriftung und Explosionsbewegung erhalten. | Namen oder explizite Teilkennungen statt Geschwisterpositionen verwenden. |
+| 6 | web/src/main.js:248 | niedrig | Neue Bedienung und Varianten sind vorhanden; Systemdoku, Changelog und Versionsbericht fehlen im vorgelegten Diff. Dies ist ausdrücklich als nachgelagerte Arbeit angekündigt. | Nach Sichtprüfung vor Merge ergänzen, einschließlich Kameras, Exportvarianten und `--no-iou`. |
+| 7 | web/tools/runnerFailure.test.mjs:73 | ok | Löschungen betreffen eigene temporäre Testverzeichnisse. Keine Force-Push-, Stash-, Worktree- oder unautorisierten Push-/Merge-Aktionen im Diff. | — |
+| 8 | web/src/main.js:217 | ok | Umfang entspricht den zwei ausdrücklich beauftragten Zielen. Keine fachfremden Änderungen im vorgelegten Diff. | — |
+
+Freigabe

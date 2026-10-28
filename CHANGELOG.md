@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.0 „Assembly“ – 2026-10-28 (Aufbaustudie)
+
+- Beschriftete Explosionsansicht mit vollständiger Meshzuordnung und offenen Montageverbindungen; GLB erhält Teilemetadaten.
+- Beide Headsets mit Bügeln, Kabeln und Antennen optional ausblendbar; Heckmodul und bestehende Helmform bleiben erhalten.
+- 22 separate Hals-/Oberkörperteile, nach Nutzerfeedback kürzerer Hals sowie breitere, höhere und dickere Schulterkappen.
+- Ergänzende Titan-Recherche mit Quellstatus dokumentiert; 54 Tests, Build und reproduzierbare Ansichten/Exporte.
+
 ## 0.4.0 „Continuity“ – 2026-10-28 (Material- und Formversuch)
 
 - Breitere gerundete Maskenübergänge neben unveränderten Augen; zwei separate Stirnstreifen bis zum Hinterkopf.

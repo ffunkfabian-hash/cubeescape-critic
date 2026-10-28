@@ -1,0 +1,1345 @@
+{
+  "meshCount": 78,
+  "parts": [
+    {
+      "node": 2,
+      "name": "Crown",
+      "mesh": 0,
+      "materials": [
+        "crownArmor"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 3,
+      "name": "Cheek_R",
+      "mesh": 1,
+      "materials": [
+        "darkArmor"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 4,
+      "name": "Cheek_L",
+      "mesh": 2,
+      "materials": [
+        "darkArmor"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 5,
+      "name": "Mouth_Insert",
+      "mesh": 3,
+      "materials": [
+        "blackRubber"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 6,
+      "name": "MouthRail_R",
+      "mesh": 4,
+      "materials": [
+        "darkArmor"
+      ],
+      "transform": {
+        "matrix": [
+          -0.23258859436599177,
+          -0.8995705929155259,
+          -0.36969621871539593,
+          0,
+          0.8995705929155259,
+          -0.0544894768274069,
+          -0.4333631794196239,
+          0,
+          0.36969621871539593,
+          -0.4333631794196239,
+          0.8219008824614152,
+          0,
+          -0.0852,
+          -0.1985,
+          0.42305021227433226,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 7,
+      "name": "MouthRail_L",
+      "mesh": 5,
+      "materials": [
+        "darkArmor"
+      ],
+      "transform": {
+        "matrix": [
+          0.23259218261800352,
+          -0.8995844710078673,
+          -0.3696601900482242,
+          0,
+          0.8995844710078673,
+          0.34345501140558343,
+          -0.26978961184946765,
+          0,
+          0.3696601900482242,
+          -0.26978961184946765,
+          0.8891371712124201,
+          0,
+          0.0852,
+          -0.1985,
+          0.4230566708099158,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 8,
+      "name": "MaskGap",
+      "mesh": 6,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 9,
+      "name": "MaskGap",
+      "mesh": 7,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 10,
+      "name": "Shell",
+      "mesh": 8,
+      "materials": [
+        "darkArmor"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 11,
+      "name": "Visor_R",
+      "mesh": 9,
+      "materials": [
+        "visorGlow"
+      ],
+      "transform": {
+        "matrix": [
+          0.8986325224009334,
+          -0.2923717047227367,
+          0.327075489697496,
+          0,
+          0.2747395334545522,
+          0.9563047559630354,
+          0.0999970123536405,
+          0,
+          -0.34202014332566866,
+          0,
+          0.9396926207859084,
+          0,
+          -0.15563515398032193,
+          0.08,
+          0.447644329721591,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 12,
+      "name": "Visor_L",
+      "mesh": 10,
+      "materials": [
+        "visorGlow"
+      ],
+      "transform": {
+        "matrix": [
+          0.8986325224009334,
+          0.2923717047227367,
+          -0.327075489697496,
+          0,
+          -0.2747395334545522,
+          0.9563047559630354,
+          0.0999970123536405,
+          0,
+          0.34202014332566866,
+          0,
+          0.9396926207859084,
+          0,
+          0.15563515398032193,
+          0.08,
+          0.4476443080953216,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 13,
+      "name": "Brim",
+      "mesh": 11,
+      "materials": [
+        "darkArmor"
+      ],
+      "transform": {
+        "matrix": [
+          0.39,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0.475,
+          0,
+          0,
+          0.314,
+          0,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 15,
+      "name": null,
+      "mesh": 12,
+      "materials": [
+        "accessoryArmor"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 16,
+      "name": null,
+      "mesh": 13,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          -0.017,
+          -0.01,
+          0.026,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 17,
+      "name": null,
+      "mesh": 14,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          -0.009000000000000001,
+          -0.01,
+          0.026,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 18,
+      "name": null,
+      "mesh": 15,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          -0.0010000000000000009,
+          -0.01,
+          0.026,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 19,
+      "name": null,
+      "mesh": 16,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0.006999999999999999,
+          -0.01,
+          0.026,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 20,
+      "name": null,
+      "mesh": 17,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0.015,
+          -0.01,
+          0.026,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 21,
+      "name": null,
+      "mesh": 18,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          2.220446049250313e-16,
+          1,
+          0,
+          0,
+          -1,
+          2.220446049250313e-16,
+          0,
+          0,
+          0.13,
+          0.012,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 23,
+      "name": null,
+      "mesh": 19,
+      "materials": [
+        "accessoryArmor"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 24,
+      "name": null,
+      "mesh": 20,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          -0.017,
+          -0.01,
+          0.026,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 25,
+      "name": null,
+      "mesh": 21,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          -0.009000000000000001,
+          -0.01,
+          0.026,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 26,
+      "name": null,
+      "mesh": 22,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          -0.0010000000000000009,
+          -0.01,
+          0.026,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 27,
+      "name": null,
+      "mesh": 23,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0.006999999999999999,
+          -0.01,
+          0.026,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 28,
+      "name": null,
+      "mesh": 24,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0.015,
+          -0.01,
+          0.026,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 29,
+      "name": null,
+      "mesh": 25,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          2.220446049250313e-16,
+          1,
+          0,
+          0,
+          -1,
+          2.220446049250313e-16,
+          0,
+          0,
+          0.13,
+          0.012,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 30,
+      "name": "Screws_Upper",
+      "mesh": 26,
+      "materials": [
+        "lightFastener"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 32,
+      "name": "Core",
+      "mesh": 27,
+      "materials": [
+        "whiteArmor"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 33,
+      "name": "RearPanel",
+      "mesh": 28,
+      "materials": [
+        "whiteTextured"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 34,
+      "name": "Collar",
+      "mesh": 29,
+      "materials": [
+        "whiteArmor"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 35,
+      "name": "CollarSlotFloor_R",
+      "mesh": 30,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 36,
+      "name": "CollarPanelFloor_R",
+      "mesh": 31,
+      "materials": [
+        "whiteTextured"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 37,
+      "name": "CollarSocketFloor_R",
+      "mesh": 32,
+      "materials": [
+        "whiteTextured"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 38,
+      "name": "CollarSlotFloor_L",
+      "mesh": 33,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 39,
+      "name": "CollarPanelFloor_L",
+      "mesh": 34,
+      "materials": [
+        "whiteTextured"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 40,
+      "name": "CollarSocketFloor_L",
+      "mesh": 35,
+      "materials": [
+        "whiteTextured"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 41,
+      "name": "CollarDipPlate",
+      "mesh": 36,
+      "materials": [
+        "whiteTextured"
+      ],
+      "transform": {
+        "matrix": [
+          -0.9999765677962973,
+          8.553975101021186e-06,
+          -0.006845712904232977,
+          0,
+          -8.470329472543003e-22,
+          0.9999992193289116,
+          0.0012495365410212975,
+          0,
+          0.006845718248487292,
+          0.0012495072616265342,
+          -0.9999757871435018,
+          0,
+          -2.738287299394917e-05,
+          -0.002221211304718694,
+          -0.4540305293431399,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 42,
+      "name": null,
+      "mesh": 37,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0.016,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 43,
+      "name": "NeckRing",
+      "mesh": 38,
+      "materials": [
+        "whiteArmor"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 44,
+      "name": "Chin",
+      "mesh": 39,
+      "materials": [
+        "whiteArmor"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 45,
+      "name": "Jaw_R",
+      "mesh": 40,
+      "materials": [
+        "whiteArmor"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 46,
+      "name": "Jaw_L",
+      "mesh": 41,
+      "materials": [
+        "whiteArmor"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 47,
+      "name": "Jaw_Insert_R",
+      "mesh": 42,
+      "materials": [
+        "whiteTextured"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 48,
+      "name": "Jaw_InsertSlot_R",
+      "mesh": 43,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {
+        "matrix": [
+          2.220446049250313e-16,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          -1,
+          0,
+          2.220446049250313e-16,
+          0,
+          -0.255,
+          -0.375,
+          0.23,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 49,
+      "name": "Jaw_Insert_L",
+      "mesh": 44,
+      "materials": [
+        "whiteTextured"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 50,
+      "name": "Jaw_InsertSlot_L",
+      "mesh": 45,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {
+        "matrix": [
+          -2.220446049250313e-16,
+          0,
+          1,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          2.220446049250313e-16,
+          0,
+          0.255,
+          -0.375,
+          0.23,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 51,
+      "name": "Screws_Chin",
+      "mesh": 46,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 52,
+      "name": "Screws_Side",
+      "mesh": 47,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 55,
+      "name": "BackBox_Mount",
+      "mesh": 48,
+      "materials": [
+        "oliveTech"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 56,
+      "name": "BackBox",
+      "mesh": 49,
+      "materials": [
+        "oliveTech"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 58,
+      "name": null,
+      "mesh": 50,
+      "materials": [
+        "oliveTech"
+      ],
+      "transform": {
+        "matrix": [
+          0.9393727128473789,
+          -0.34289780745545134,
+          0,
+          0,
+          0.34289780745545134,
+          0.9393727128473789,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          -0.018,
+          0.19,
+          -0.4950000000000001,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 59,
+      "name": null,
+      "mesh": 51,
+      "materials": [
+        "oliveTech"
+      ],
+      "transform": {
+        "matrix": [
+          0.9393727128473789,
+          0.34289780745545134,
+          0,
+          0,
+          -0.34289780745545134,
+          0.9393727128473789,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0.018,
+          0.19,
+          -0.4950000000000001,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 60,
+      "name": null,
+      "mesh": 52,
+      "materials": [
+        "oliveTech"
+      ],
+      "transform": {
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0.185,
+          -0.4950000000000001,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 61,
+      "name": "BackBox_Connector",
+      "mesh": 53,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          -0.142,
+          0.21,
+          -0.4800000000000001,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 62,
+      "name": "BackBox_Connector",
+      "mesh": 54,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0.142,
+          0.21,
+          -0.4800000000000001,
+          1
+        ]
+      },
+      "metadata": {}
+    },
+    {
+      "node": 63,
+      "name": "Screws_BackBox",
+      "mesh": 55,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {},
+      "metadata": {}
+    },
+    {
+      "node": 65,
+      "name": "NeckFlex",
+      "mesh": 56,
+      "materials": [
+        "blackRubber"
+      ],
+      "transform": {},
+      "metadata": {
+        "partId": "B01",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 66,
+      "name": "NeckRibs",
+      "mesh": 57,
+      "materials": [
+        "blackRubber"
+      ],
+      "transform": {},
+      "metadata": {
+        "partId": "B02",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 67,
+      "name": "CollarFront",
+      "mesh": 58,
+      "materials": [
+        "whiteArmor"
+      ],
+      "transform": {},
+      "metadata": {
+        "partId": "B03",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 68,
+      "name": "CollarRear",
+      "mesh": 59,
+      "materials": [
+        "darkArmor"
+      ],
+      "transform": {},
+      "metadata": {
+        "partId": "B04",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 69,
+      "name": "UpperTorsoCore",
+      "mesh": 60,
+      "materials": [
+        "blackRubber"
+      ],
+      "transform": {},
+      "metadata": {
+        "partId": "B05",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 70,
+      "name": "ShoulderBase_R",
+      "mesh": 61,
+      "materials": [
+        "darkArmor"
+      ],
+      "transform": {},
+      "metadata": {
+        "partId": "B06",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 71,
+      "name": "ShoulderFront_R",
+      "mesh": 62,
+      "materials": [
+        "whiteArmor"
+      ],
+      "transform": {},
+      "metadata": {
+        "partId": "B07",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 72,
+      "name": "ShoulderRear_R",
+      "mesh": 63,
+      "materials": [
+        "whiteArmor"
+      ],
+      "transform": {},
+      "metadata": {
+        "partId": "B08",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 73,
+      "name": "ClavicleArmor_R",
+      "mesh": 64,
+      "materials": [
+        "whiteArmor"
+      ],
+      "transform": {},
+      "metadata": {
+        "partId": "B12",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 74,
+      "name": "ChestInsert_R",
+      "mesh": 65,
+      "materials": [
+        "darkArmor"
+      ],
+      "transform": {},
+      "metadata": {
+        "partId": "B14",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 75,
+      "name": "ScapulaArmor_R",
+      "mesh": 66,
+      "materials": [
+        "darkArmor"
+      ],
+      "transform": {},
+      "metadata": {
+        "partId": "B16",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 76,
+      "name": "ClavicleFastener_R",
+      "mesh": 67,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {},
+      "metadata": {
+        "partId": "B19",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 77,
+      "name": "RearFastener_R",
+      "mesh": 68,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {},
+      "metadata": {
+        "partId": "B21",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 78,
+      "name": "ShoulderBase_L",
+      "mesh": 69,
+      "materials": [
+        "darkArmor"
+      ],
+      "transform": {},
+      "metadata": {
+        "partId": "B09",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 79,
+      "name": "ShoulderFront_L",
+      "mesh": 70,
+      "materials": [
+        "whiteArmor"
+      ],
+      "transform": {},
+      "metadata": {
+        "partId": "B10",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 80,
+      "name": "ShoulderRear_L",
+      "mesh": 71,
+      "materials": [
+        "whiteArmor"
+      ],
+      "transform": {},
+      "metadata": {
+        "partId": "B11",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 81,
+      "name": "ClavicleArmor_L",
+      "mesh": 72,
+      "materials": [
+        "whiteArmor"
+      ],
+      "transform": {},
+      "metadata": {
+        "partId": "B13",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 82,
+      "name": "ChestInsert_L",
+      "mesh": 73,
+      "materials": [
+        "darkArmor"
+      ],
+      "transform": {},
+      "metadata": {
+        "partId": "B15",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 83,
+      "name": "ScapulaArmor_L",
+      "mesh": 74,
+      "materials": [
+        "darkArmor"
+      ],
+      "transform": {},
+      "metadata": {
+        "partId": "B17",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 84,
+      "name": "ClavicleFastener_L",
+      "mesh": 75,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {},
+      "metadata": {
+        "partId": "B20",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 85,
+      "name": "RearFastener_L",
+      "mesh": 76,
+      "materials": [
+        "darkMetal"
+      ],
+      "transform": {},
+      "metadata": {
+        "partId": "B22",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 86,
+      "name": "BackSpineInsert",
+      "mesh": 77,
+      "materials": [
+        "whiteTextured"
+      ],
+      "transform": {},
+      "metadata": {
+        "partId": "B18",
+        "assembly": "ShoulderStudy"
+      }
+    }
+  ]
+}

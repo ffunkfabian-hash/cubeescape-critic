@@ -2,6 +2,13 @@
 
 ## Verbindlicher Stand
 
+**Ergänzung 0.5 „Assembly“:** Der neue Oberkörper setzt den Helmstil mit gebrochen weißen Schutzschalen,
+dunkler Unterstruktur und wenigen Befestigungen fort. Kurzer gerippter Hals, breite Brust und nach oben gewölbte,
+dickere Schulterkappen sollen stämmiger wirken. Front- und Rückenkappen bleiben getrennt. Die runde Haube und
+akzeptierten Augen werden dafür nicht verändert. Headsets können für die Formbetrachtung vollständig ausgeblendet werden.
+Die Titan-Recherche unterstützt große geschichtete Gehäuse und dunkle Bewegungszonen; sie liefert keine verbindlichen
+Körpermaße. [Formentscheidungen und Herkunft](HELM_AUFBAU.md). Der Oberkörper bleibt eine ungeriggte Studie.
+
 **Versuch 0.4 „Continuity“, noch zur Auswahl:** Die seitlichen Übergänge der Augenmaske werden gerundet;
 H20/H21 laufen als zwei getrennte Streifen von der Stirn über die Haube bis zur hinteren Haubenkante.
 Die Trapezform bleibt im Stirnbereich erkennbar, der Mittelstreifen frei. Der bestehende Kopfbügel liegt darüber.

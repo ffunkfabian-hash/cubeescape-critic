@@ -2,7 +2,7 @@
 
 ## Status und Bedeutung dieses Dokuments
 
-Stand: 28.10.2026, Version **0.4 „Continuity“**. Dies ist die Beschreibung des erzeugten Modells und der Versuche,
+Stand: 28.10.2026, Version **0.5 „Assembly“** auf der Form-/Materialbasis 0.4. Dies ist die Beschreibung des erzeugten Modells und der Versuche,
 kein eigenständiger Auftrag zur weiteren Änderung. Aktuelle Nutzeranweisungen haben Vorrang.
 
 - **Letzter früherer Lieferexport:** 79 unter `assets/helmet/`, reproduzierbar aus Commit `0a6bda5`.
@@ -11,8 +11,17 @@ kein eigenständiger Auftrag zur weiteren Änderung. Aktuelle Nutzeranweisungen 
 - **Zusätzliche Formproben:** 87/88 ohne Blenden bleiben verfügbar. Die Muster 89–91 wurden anschließend ausdrücklich
   komplett verworfen; Musterfunktion und aktive Musterexporte sind entfernt.
 - **Nutzerwahl:** noch offen. Positive Rückmeldungen bedeuten keine eindeutige Auswahl zwischen den Kombinationen.
-- **Repo:** Branch `codex/critic-0.4-continuity`, aufgebaut auf dem offenen 0.3-Entwurf. Kein Merge auf `main`.
+- **Repo:** Branch `codex/critic-0.5-assembly`, aufgebaut auf dem offenen 0.4-Entwurf. Kein Merge auf `main`.
+- **Neu:** beschriftete Explosionsansicht, ausblendbare komplette Headsets und getrennte Oberkörperstudie B01–B22.
+  Nutzerkorrekturen: kürzerer Hals, breiterer Körper, höhere und dickere Schulterkappen.
+  [Aufbau, Parametrisierung, Titan-Referenz und noch offene Verbindungen](HELM_AUFBAU.md).
 - **Quelle der Wahrheit:** Generator und Parameter; Exporte und Bilder sind daraus abgeleitete Prüfbelege.
+
+**Eindruck 0.5:** Die erhöhten Schulterkappen ergeben eine kräftigere, gewölbte Silhouette; der verkürzte Hals bindet
+den Kopf kompakter an den Rumpf. Seitlich sind Vorder- und Hinterkappe als getrennte Schalen erkennbar.
+Die dunkle Unterstruktur wirkt noch wie eine grobe Gelenkabdeckung, weil Arme und echte Aufnahmen fehlen.
+Die Explosionsansicht hilft vor allem beim Erkennen dieser konstruktiven Lücken. Das ist die Einschätzung des Agenten,
+keine bestätigte neue Material- oder Körperfreigabe des Nutzers.
 
 Einstiege: [Stil](HELM_STIL.md), [Teilekennungen](HELM_TEILE.md), [Chronologie](HELM_VERLAUF.md),
 [Varianten und Exporte](../assets/helmet-continuity/README.md), [Prüfbericht](versions/0.4.md).
@@ -171,11 +180,16 @@ Die vorhandenen Streifen-/Reset-Funktionen bleiben erhalten. Frühere Runner-Mus
 
 Historischer Aufbau, Parameter und Bilder bleiben über den [gesicherten Stand](https://github.com/ffunkfabian-hash/cubeescape-critic/blob/caf7a79dc46269b9f02801587b909d5c947f73d8/docs/HELM_AGENTEN.md)
 und den [Verlauf](HELM_VERLAUF.md) nachvollziehbar. Sie sind keine verfügbare Variante und kein Auftrag zur Wiederherstellung.
-Die aktuellen Optionen sind ausschließlich `finish`, `accents` und `strips`.
+Die Material-/Blendenoptionen sind `finish`, `accents` und `strips`. 0.5 ergänzt `headset`, `body` und `exploded`;
+das ist keine Wiederaufnahme der verworfenen Haubenmuster.
 
 ## Abnahme, Reproduktion und nächste Schritte
 
-45 Tests: 32 Node-, fünf IoU- und acht Belegsicherungsprüfungen. Build, Projekt-/Dokumentationsprüfung und unabhängige
+0.5: **54 Tests**, davon 41 Node-, fünf IoU- und acht Belegsicherungsprüfungen. Aktuelle Nachweise stehen im
+[Assembly-Bericht](versions/0.5.md). Die neuen Körperteile werden auf geschlossene Oberflächen, positive Volumina,
+deterministische Erzeugung, sichtbare Platten und die korrigierten Proportionen geprüft.
+
+Historische Basis 0.4: 45 Tests, davon 32 Node-, fünf IoU- und acht Belegsicherungsprüfungen. Build, Projekt-/Dokumentationsprüfung und unabhängige
 Codeprüfung gehören zum [Versionsbericht](versions/0.4.md). Der unabhängige Richter hat Freigabe erteilt.
 Vier identische Kameras je Variante, gleiche Referenzen, Lichtführung und feste Seeds. Die Umgebung dreht mit dem
 Kameraazimut wie bei einer Drehtelleraufnahme; deshalb identische Ansichten vergleichen, nicht beliebige Perspektiven.

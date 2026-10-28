@@ -11,6 +11,8 @@ Antworten, Doku und Commit-Messages auf Deutsch; Code, Bezeichner und Kommentare
 - `web/` – Three.js-Nachbau im Browser mit Playwright-Prüfung und Umriss-IoU (`web/README.md`); `web/renders/` nicht im Repo.
 - `docs/HELM_STIL.md` – bestätigte Form-/Materialvorgaben; runde Haube, Augen erhalten, maßgeblich ist das Video.
 - `docs/HELM_AGENTEN.md` – technischer Aufbau, Material-/Akzentvarianten, Prüfumfang, visueller Eindruck und offene Nutzerwahl; vor Helm-Fortsetzungen gezielt lesen.
+- `docs/HELM_AUFBAU.md` – Assembly 0.5: Explosionslogik, Headsetschalter, Körperteile B01–B22, Nutzerkorrekturen und ergänzende Titan-Referenz.
+- `assets/helmet-assembly/` – geprüfte Assembly-Exporte und Belege; neue Körperstudie `body=shoulders`, ältere Studie weiter `body=1|legacy`.
 - `assets/helmet/` – bewusst versionierter Lieferexport mit GLB, Texturen, Teileliste und Prüfmanifest; keine beliebigen Caches.
 - `assets/helmet-continuity/` – einzeln gesicherte Form- und Materialproben 80–88; Muster 89–91 sind verworfen und nur historisch dokumentiert; Index nennt Auswahl, Quellen und Reproduktionsbefehle.
 - `docs/HELM_TEILE.md` – stabile Teilekennungen H01–H21 für Nutzerfeedback; nummerierte Teilekarte über

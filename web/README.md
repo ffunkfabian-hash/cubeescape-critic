@@ -35,7 +35,14 @@ vorhandene Bilder allein können noch aus einem früheren Lauf stammen. `--no-io
 
 ## Körperstudie
 
-Mit `http://127.0.0.1:5173/?body=1` erscheint eine erste Proportionsstudie unter dem Helm. Sie ist ein Entwurf ohne
+**Neu in 0.5:** `?body=shoulders&headset=off` zeigt den verkürzten Hals, kräftige höhere Schulterkappen, Brust und Rücken.
+22 separate Körpermeshes, parametrisch reproduzierbar. `?headset=off` blendet beide kompletten Kopfhörer samt Bügel,
+Kabeln und Antennen aus; das zentrale Heckmodul bleibt. `?exploded=1&view=assembly` öffnet die beschriftete
+Explosionsübersicht. Alle Optionen auch rechts oben unter **Aufbau und Varianten**; die Teileliste nennt offene Anschlüsse.
+[Technik, IDs, Parameter und Grenzen](../docs/HELM_AUFBAU.md) · [Geprüfte Exporte](../assets/helmet-assembly/README.md).
+Körper-/Explosionsprüfungen benötigen `--no-iou`; ihre Kameras sind nicht mit den Helm-Videobildern vergleichbar.
+
+Mit `http://127.0.0.1:5173/?body=1` erscheint weiterhin die **ältere** Proportionsstudie unter dem Helm. Sie ist ein Entwurf ohne
 Körperreferenz, noch keine vollständige Figur. Brust, Rücken, Bauch, Becken, Halsanschluss, Schultern und Gelenke sind
 getrennte, benannte Meshes im GLB-Export `scifi_body_study.glb`. Arme und Beine fehlen noch. Ohne `?body=1` bleiben
 Helmansicht, Kameras, Export und Silhouettenprüfung unverändert.
