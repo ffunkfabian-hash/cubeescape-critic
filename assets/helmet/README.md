@@ -1,7 +1,8 @@
-# Lieferstand 71 – feine Haubenstruktur
+# Lieferstand 73 – verdeckter Haubenanschluss
 
-Stand 71 ergänzt eine feine Lackkörnung auf der Haube; Graphitgrundfarbe und matter Glanz bleiben erhalten.
-Alle 89 Geometrien, UVs und Transformationen sind gegenüber Stand 69 unverändert; nur `crownArmor` wurde angepasst.
+Stand 73 reduziert die helle Fugenlinie zwischen Haube und Augenmaske durch eine minimale verdeckte Überlappung.
+87/89 Geometrien sind gegenüber Stand 71 unverändert; nur Haube und ihre Schrauben folgen dem angepassten Rand.
+Alle Materialien und Texturbilder bleiben erhalten. Haube und Maske sind weiterhin separate Meshes.
 Die eckigen Hauben 62/63 sind verworfen. [Stilbeschreibung](../../docs/HELM_STIL.md).
 
 - [scifi_helmet.glb](scifi_helmet.glb): 89 Meshes, neun verwendete Materialien; getrennte Baugruppen.
@@ -10,7 +11,7 @@ Die eckigen Hauben 62/63 sind verworfen. [Stilbeschreibung](../../docs/HELM_STIL
 - `render_front/left/back/right.png`: vier feste Ansichten; zugehörige Masken und Overlays sind Prüfbelege.
 - [verification.json](verification.json): Quell-/Referenzhashes, Laufzeitumgebung, Kameras, Parameter und 24 Ausgabehashes.
 - [code-review.txt](code-review.txt) und [tests.txt](tests.txt): unabhängige Codeprüfung einschließlich der Nachprüfung von Stand 68 und aktuelle Testbelege.
-- [selection.json](selection.json): Vergleich der 89 Exportobjekte mit Stand 69 einschließlich Material-/Texturprüfung und Hashes des aktuellen Exports.
+- [selection.json](selection.json): Vergleich der 89 Exportobjekte mit Stand 71 einschließlich Material-/Texturprüfung und Hashes des aktuellen Exports.
 
 Erzeugen über [web/README.md](../../web/README.md). Nach `npm run verify` vom Repo-Hauptverzeichnis vergleichen:
 

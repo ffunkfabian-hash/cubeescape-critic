@@ -333,3 +333,15 @@ Alle 89 Geometrien, UVs und Transformationen sowie vier Silhouettenmasken sind b
 ist verändert. Die Normalenkarte ist im regulären glTF-Materialkanal enthalten; ihre Vektoren wurden numerisch geprüft.
 31 Tests, Build und Projektprüfung bestehen. [Probe 70](belege/helm/70.jpg) · [Stand 71](belege/helm/71.jpg) ·
 [Video / Stand 69 / Stand 71](bilder/helm_struktur_69_71.jpg).
+
+## Runde 18 – Fugenlinie möglichst verbergen 73 (28.10.2026)
+
+Der Nutzer wünscht einen möglichst unsichtbaren Anschluss zwischen Haube und Maske. #72 ersetzt den Abstand durch
+eine minimale Überlappung, lässt aber helle Restkanten. #73 ergänzt eine kleine Randabdeckung. Die helle Linie ist
+an der Stirn weitgehend verschwunden und an den Seiten reduziert; der Materialübergang bleibt je nach Licht erkennbar.
+Haube und Maske bleiben getrennte Meshes. 87/89 Geometrien sind einschließlich Transformationen unverändert gegenüber #71;
+nur Haube und ihre Schrauben sind angepasst. Alle Materialien und Texturbilder bleiben unverändert.
+Der frühere Test auf eine offene Teilefuge ist entsprechend dem geänderten Nutzerwunsch durch 33 Proben auf einen
+geschlossenen Anschluss ersetzt. Eine Negativkontrolle mit der alten offenen Fuge schlägt gezielt fehl.
+31 Tests, Build und Projektprüfung bestehen. [Zwischenstand 72](belege/helm/72.jpg) · [Stand 73](belege/helm/73.jpg) ·
+[Vergleich 71/73](bilder/helm_fuge_71_73.jpg) · [Nahvergleich](bilder/helm_fuge_71_73_detail.jpg).

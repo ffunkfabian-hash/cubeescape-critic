@@ -526,7 +526,8 @@
     "slope": 0.42,
     "anchorZ": 0.06,
     "blendHeight": 0.07,
-    "clearance": 0.0005,
+    "rimOverlap": 0.001,
+    "rimCover": 0.001,
     "sideBlendWidth": 0.05
   },
   "crownRounding": {

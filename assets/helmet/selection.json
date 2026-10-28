@@ -1,21 +1,22 @@
 {
   "status": "passed",
-  "finalPass": 71,
-  "basedOnPass": 69,
+  "finalPass": 73,
+  "basedOnPass": 71,
   "meshCount": 89,
-  "unchangedMeshGeometryAndTransforms": 89,
-  "changedMaterials": [
-    "crownArmor"
+  "unchangedMeshGeometryAndTransforms": 87,
+  "changedGeometry": [
+    "2:Crown",
+    "30:Screws_Upper"
   ],
-  "maskMaterialUnchanged": true,
-  "crownBaseColorMatchesMask": true,
-  "normalMapInCoreGLTF": true,
-  "normalMapMaxLengthError": 0.004312117661084525,
-  "textureSeed": 73,
-  "identicalSilhouetteMasks": 4,
-  "targetGLBSHA256": "4e00274fb3842b7e58b48c5a0af1349af6f3de68a47fa061690eb3d80e3a86b2",
+  "allMaterialsAndTextureImagesUnchanged": true,
+  "closedJointProbes": 33,
+  "oldSeamNegativeControl": "failed as expected; restored before verification",
+  "identicalSilhouetteMasks": [
+    "back"
+  ],
+  "targetGLBSHA256": "1f6a5204e161e06dadb523fce0ea22f05018f47e011eef6c7ea5b145cd815d57",
   "geometryHashes": {
-    "2:Crown": "eea2ff7f9bda01be2e841ec7da1162cc0b264a423f932603cf909696eaf14210",
+    "2:Crown": "72fd7f37a89775c3ac6f86f57026b42048a4cfae258ac557d1b07bffe3398854",
     "3:Cheek_R": "a6ac05ad157122f6671cd685cb1940b866c96acb58306e14f725b8a6a6cb5141",
     "4:Cheek_L": "57622422c83755d0b76815f0a8ce5868b7241deb7c9bb72baa0e35715cfea308",
     "5:Mouth_Insert": "0a8636b4dbfc2d000a559565b56e056ab3f689058ebbccb6dfc79befd3048e33",
@@ -41,7 +42,7 @@
     "27:Node_27": "0506cc9bf1f8adcbc17598b6c2cc1c01778529885c28a41b68e17b5ea0bc5620",
     "28:Node_28": "b55f4d61626b4e371119e422f02ab1722a46cc9b5504942248e333779bc58f3e",
     "29:Node_29": "0f81b1ead0995538d911c0e02f9a32a999d5f59f38cfc69181b62686a9c3dfc9",
-    "30:Screws_Upper": "8cebb528a006327ba8bf95e30b15fba98dead1f564152af9bced3d9069bc267c",
+    "30:Screws_Upper": "3c9770b6a04686525b5700f635ca6ba4fc0e71ee9db9df9e5ce716d736a7a2ae",
     "32:Core": "b66bea137705ef8282133bc4bae716e3a5f2ce68e0e8fd317215cbdae41f5f54",
     "33:RearPanel": "95ed1b285a941beb2ebc2794a6d2053c3deb1ef348bd1179939f4ce1cdfeec9c",
     "34:Collar": "a7d289c55cb90ab8426b5606bb159422a45da1be35a089413f4c1f655fc40d99",

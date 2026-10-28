@@ -154,11 +154,13 @@ Der Referenzlauf erzeugt Textur- und Geometrieansichten sowie `comparison.json` 
 Die globale Aufstellung ist zur Sichtprüfung angenähert; aus diesen Bildern wird **kein Meshy-IoU** berechnet.
 Die Bildausschnitte des Kontaktbogens sind Darstellungszuschnitte, keine Änderung der Helm-Messung.
 
-## Aktueller Lieferstand 71
+## Aktueller Lieferstand 73
 
 Nach Nutzerfeedback ist die Haube auch um den Kopfbügel quer und längs gewölbt (`crownDome`).
-`crownTransition.blendHeight` führt den Haubenrand weich zur Augenmaske; `clearance` hält eine feine Teilefuge.
-Alle 89 Meshgeometrien einschließlich UVs und Transformationen sind gegenüber Stand 69 unverändert.
+`crownTransition.blendHeight` führt den Haubenrand weich zur Augenmaske. `rimOverlap` und `rimCover` (je 0,001
+Modelleinheiten) schließen den sichtbaren Abstand und decken die helle Schnittkante ab. `clearance` ist dadurch ersetzt.
+87/89 Meshgeometrien einschließlich UVs und Transformationen sind gegenüber Stand 71 unverändert; angepasst sind nur
+Haube und ihre Schrauben. Der Anschluss wird mit 33 Strahlen geprüft; die alte offene Fuge lässt den Test gezielt fehlschlagen.
 `crownArmor` behält die Graphitgrundfarbe der Maske und den gedämpften Glanz. `crownMaps(seed=73)` erzeugt sichtbare feine
 Lackkörnung als Farb-, Normalen- und Rauheitskarte. Die übrigen Materialien bleiben erhalten; die Haubennormalenkarte wird im glTF-Kernkanal exportiert.
 Die Haubenversuche 62/63 sind verworfen. Aktuelle Quellen und alle 24 Ausgaben sind über SHA256 dokumentiert.

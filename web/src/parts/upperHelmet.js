@@ -34,9 +34,9 @@ function blendCrownRim(geometry, volume, face) {
     const fit = cache.get(key);
     if (!fit) continue;
     const blend = fit.fade * (1 - THREE.MathUtils.smoothstep(t, 0, height));
-    const scale = 1 + fit.delta / fit.base * blend;
-    // Move along the sloping brow plane: the separate parts meet on the same rim.
-    position.setXYZ(i, x * scale, y - slope * z * (scale - 1) + D.crownTransition.clearance * blend, z * scale);
+    const scale = 1 + (fit.delta + D.crownTransition.rimCover) / fit.base * blend;
+    // Hide the assembly slit with a small overlap; both parts remain separate.
+    position.setXYZ(i, x * scale, y - slope * z * (scale - 1) - D.crownTransition.rimOverlap * blend, z * scale);
   }
   // Weld the outer surface, but keep the underside separate for normal generation.
   // Otherwise the broad closing faces pull the narrow rim's normals downwards.

@@ -2,7 +2,7 @@
 
 ## Verbindlicher Stand
 
-Aktueller Lieferstand: **Prüflauf 71**. Nach Nutzerfeedback ist der Scheitel nun quer und längs gewölbt;
+Aktueller Lieferstand: **Prüflauf 73**. Nach Nutzerfeedback ist der Scheitel nun quer und längs gewölbt;
 der Kopfbügel folgt der Haube. Ihr Rand läuft weich zur Augenmaske aus. Der helle Rahmen bleibt moderat kantiger.
 Die abgeflachten, eckigen Haubenversuche 62/63 wurden vom Nutzer ausdrücklich verworfen.
 
@@ -16,7 +16,8 @@ Die Zuordnung ist im [Verlauf](HELM_VERLAUF.md) dokumentiert. „Vorher“ bezei
 
 - **Schädelhaube H01:** geschlossene, ruhig gewölbte Schale mit fließendem Scheitel. Keine flache Platte oben,
   keine abgeschnittenen hellen Flecken und keine ausgeprägten geraden Schulterflächen. Der Bügel folgt der Rundung.
-  Der Übergang zur Augenmaske ist weich gewölbt, mit feiner Teilefuge statt heller Absatzkante; H01 und H02 bleiben getrennt.
+  Der Übergang zur Augenmaske soll möglichst ohne sichtbare Fugenlinie wirken. Eine minimale verdeckte Überlappung
+  und Randabdeckung reduzieren die helle Linie; H01 und H02 bleiben getrennt. Material-/Lichtunterschiede können den Übergang noch zeigen.
 - **Gesicht H02–H06:** dunkle, kantige Panzerplatten mit schmalen Fugen, zurückgesetztem trapezförmigem Mitteleinsatz
   und klaren Wangenflächen. Die akzeptierten cyanfarbenen Augen bleiben in Form, Lage und Leuchtwirkung erhalten.
 - **Heller Rahmen H07–H11:** kräftige, asymmetrisch gegliederte technische Konstruktion. Die gewählte Kieferkontur aus
@@ -66,4 +67,4 @@ Einzelne Meshes sind noch keine Zusicherung fertiger Druckwandstärken, Montagep
 Standnummern beschriften. Messwerte ergänzen die Sichtprüfung; Silhouetten-IoU ist kein Prozentwert für die Gesamtähnlichkeit.
 Die optionale Körperstudie (`?body=1`) ist ein separater Proportionsentwurf und nicht als fertige Körperform freigegeben.
 
-[Reproduktionsanleitung](../web/README.md#aktueller-lieferstand-71) · [GLB und Prüfbelege](../assets/helmet/README.md)
+[Reproduktionsanleitung](../web/README.md#aktueller-lieferstand-73) · [GLB und Prüfbelege](../assets/helmet/README.md)

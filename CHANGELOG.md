@@ -2,6 +2,12 @@
 
 ## 0.3.0 „Sidework“ – 2026-10-28 (offener Entwurf)
 
+- Stand 73: helle Fugenlinie zwischen Haube und Augenmaske durch verdeckten Überlappungsrand deutlich reduziert.
+- Teile bleiben getrennt; 87/89 Geometrien sowie alle Materialien und Texturen unverändert gegenüber 71.
+- 31 Tests und Build bestehen; 33 Anschlussproben und Negativkontrolle prüfen den geschlossenen Rand.
+
+### Strukturstand 71
+
 - Stand 71: sichtbare feine Lackkörnung auf der Haube mit festen Farb-, Normalen- und Rauheitskarten (Seed 73).
 - Alle 89 Geometrien/UVs, vier Silhouettenmasken und übrigen Materialien bleiben unverändert gegenüber 69.
 - 31 Tests, Build und vier Ansichten geprüft; Normalenkarte auch im GLB enthalten.
