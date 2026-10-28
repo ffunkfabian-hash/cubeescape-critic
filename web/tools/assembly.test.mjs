@@ -73,9 +73,9 @@ test('headset removal and exploded assembly preserve every retained source mesh'
     assert.equal(stripped.getObjectByName('Neck'),undefined);assert.equal(assemblyInventory(stripped).length,58);
     const {buildShoulderStudy}=await server.ssrLoadModule('/src/parts/shoulderStudy.js');
     stripped.add(buildShoulderStudy(palette));
-    const withBody=assemblyInventory(stripped);assert.equal(withBody.length,80);
-    assert.equal(withBody.filter(e=>e.id.startsWith('B')).length,22);
-    assert.equal(assemblyDescription(createExplodedAssembly(stripped,1)).reduce((n,g)=>n+g.meshes.length,0),80);
+    const withBody=assemblyInventory(stripped);assert.equal(withBody.length,84);
+    assert.equal(withBody.filter(e=>e.id.startsWith('B')).length,26);
+    assert.equal(assemblyDescription(createExplodedAssembly(stripped,1)).reduce((n,g)=>n+g.meshes.length,0),84);
   } finally {
     model?.traverse(o=>o.geometry?.dispose());for(const material of materials.values())material.dispose();await server.close();
   }

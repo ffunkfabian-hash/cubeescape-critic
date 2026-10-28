@@ -90,6 +90,7 @@ const BODY_LABELS = {
   B06:'Schulterbasis A', B07:'Schulter vorne A', B08:'Schulter hinten A', B09:'Schulterbasis B', B10:'Schulter vorne B', B11:'Schulter hinten B',
   B12:'Brustplatte A', B13:'Brustplatte B', B14:'Brusteinsatz A', B15:'Brusteinsatz B', B16:'Rückenplatte A', B17:'Rückenplatte B', B18:'Rückeneinsatz',
   B19:'Brustbefestigung A', B20:'Brustbefestigung B', B21:'Rückenbefestigung A', B22:'Rückenbefestigung B',
+  B23:'Schulterlamelle A', B24:'Schulterlamelle B', B25:'Schultergelenk A', B26:'Schultergelenk B',
 };
 
 export function assemblyInventory(model) {

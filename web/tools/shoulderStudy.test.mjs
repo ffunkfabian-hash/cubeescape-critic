@@ -29,8 +29,8 @@ test('upper-body proposal stays a short independently editable bust and reuses t
   assert.ok(bounds.min.y >= -1.53 + shoulderStudyParams.placement.upperBodyRise && bounds.max.y <= -0.33,
     `${bounds.min.y}..${bounds.max.y}`);
   assert.ok(bounds.max.x < 1.18 && bounds.min.x > -1.18);
-  assert.ok(bounds.max.x - bounds.min.x >= 2.25, 'the revised shoulders must keep the requested sturdy width');
-  assert.ok(bounds.max.z < 0.46 && bounds.min.z > -0.46);
+  assert.ok(bounds.max.x - bounds.min.x >= 1.85 && bounds.max.x - bounds.min.x < 2.1, 'shoulders wrap closer to the sturdy torso');
+  assert.ok(bounds.max.z < 0.53 && bounds.min.z > -0.46);
   const core = new THREE.Box3().setFromObject(body.getObjectByName('UpperTorsoCore'));
   assert.ok(core.max.z - core.min.z > 0.69 && core.max.z - core.min.z < 0.75, 'sturdy torso depth');
 });
@@ -76,8 +76,8 @@ test('body parameters reproduce geometry and isolated edits leave the opposite s
 test('front and rear armor remain outside the support rather than disappearing inside it', () => {
   const body = buildShoulderStudy(palette);
   body.updateMatrixWorld(true);
-  for (const [x, y, z, name] of [[0.15, -1.25, 2, 'ChestInsert_L'],
-    [-0.12, -1.4, 2, 'ChestInsert_R'], [0.3, -1, 2, 'ClavicleArmor_L'],
+  for (const [x, y, z, name] of [[0.15, -1.41, 2, 'ChestInsert_L'],
+    [-0.12, -1.42, 2, 'ChestInsert_R'], [0.3, -1, 2, 'ClavicleArmor_L'],
     [0.15, -1, -2, 'ScapulaArmor_L'], [0, -1.35, -2, 'BackSpineInsert']]) {
     const ray = new THREE.Raycaster(new THREE.Vector3(x, y + shoulderStudyParams.placement.upperBodyRise, z),
       new THREE.Vector3(0, 0, -Math.sign(z)));
@@ -98,8 +98,10 @@ test('lower angular shoulders retain the short neck, helmet anchor, outer downtu
   const inner = [], outer = [];
   for (let i = 0; i < position.count; i++) {
     if (position.getX(i) < 0.5) inner.push(position.getY(i));
-    if (position.getX(i) > 1.1) outer.push(position.getY(i));
+    // Cuirass wraps within X=0.995; the former 1.1 selector would select no vertices.
+    if (position.getX(i) > 0.92) outer.push(position.getY(i));
   }
+  assert.ok(inner.length && outer.length, 'both shoulder regions must contain vertices');
   assert.ok(Math.max(...inner) - Math.max(...outer) > 0.12, 'outer shoulder cap must still turn down');
   assert.ok(new THREE.Box3().setFromObject(shoulder).max.y < -0.58, 'avoid the previous raised shoulder hump');
   const plain = structuredClone(shoulderStudyParams);
@@ -113,10 +115,15 @@ test('lower angular shoulders retain the short neck, helmet anchor, outer downtu
   assert.ok(topAtCenter(unnotched) - topAtCenter(body) > 0.03, 'the front V must lower the physical rim');
 });
 
-test('the historical high arch remains reproducible while the current caps are lower and faceted', () => {
+test('historical high and low shoulder profiles remain reproducible with wrapping disabled', () => {
   const historical = structuredClone(shoulderStudyParams);
+  historical.shoulder.wrap.enabled = false;
+  // Keep the historical cap thickness/chamfer instead of inheriting Cuirass values.
+  Object.assign(historical.shoulder, { thickness:0.1, bevel:0.014 });
   Object.assign(historical.shoulder, { archHeight:0.23, curveSubdivisions:2, slope:0.31, outerDrop:0.14 });
-  const body = buildShoulderStudy(palette, historical), current = buildShoulderStudy(palette);
+  const blocky = structuredClone(historical);
+  Object.assign(blocky.shoulder, { archHeight:0.04, curveSubdivisions:0, slope:0.16, outerDrop:0.085 });
+  const body = buildShoulderStudy(palette, historical), current = buildShoulderStudy(palette, blocky);
   const previous = structuredClone(historical);
   previous.shoulder.archHeight = 0;
   previous.shoulder.thickness = 0.078;
@@ -140,4 +147,30 @@ test('the historical high arch remains reproducible while the current caps are l
     assert.deepEqual(body.getObjectByName(name).geometry.attributes.position.array,
       flatter.getObjectByName(name).geometry.attributes.position.array, `${name}: shoulder arch moved an unrelated part`);
   }
+});
+
+test('separate lower lames wrap around a visible dark shoulder joint', () => {
+  const body = buildShoulderStudy(palette); body.updateMatrixWorld(true);
+  for (const [side, suffix] of [[1,'L'],[-1,'R']]) {
+    const main = new THREE.Box3().setFromObject(body.getObjectByName(`ShoulderFront_${suffix}`));
+    const lame = new THREE.Box3().setFromObject(body.getObjectByName(`ShoulderLame_${suffix}`));
+    assert.ok(lame.min.y < main.min.y - .08, 'secondary plate extends below primary shell');
+    const ray = new THREE.Raycaster(new THREE.Vector3(side * 2, -1.10, .08), new THREE.Vector3(-side,0,0));
+    const hits = ray.intersectObject(body,true);
+    assert.equal(hits[0]?.object.name, `ShoulderLame_${suffix}`);
+    assert.ok(hits.some(hit=>hit.object.name===`ShoulderJoint_${suffix}`), 'joint supports the shoulder plates');
+    const upper = new THREE.Raycaster(new THREE.Vector3(side * 2, -.76, .13), new THREE.Vector3(-side,0,0));
+    assert.equal(upper.intersectObject(body,true)[0]?.object.name, `ShoulderFront_${suffix}`,
+      'dark joint must stay behind the white upper shell');
+  }
+});
+
+test('the two breastplate halves form a raised central ridge and the collar flares toward the chest', () => {
+  const body=buildShoulderStudy(palette);body.updateMatrixWorld(true);
+  const hitAt=x=>new THREE.Raycaster(new THREE.Vector3(x,-.9,2),new THREE.Vector3(0,0,-1)).intersectObject(body,true)[0];
+  const center=hitAt(.035), outer=hitAt(.32);
+  assert.equal(center.object.name,'ClavicleArmor_L');assert.equal(outer.object.name,'ClavicleArmor_L');
+  assert.ok(center.point.z - outer.point.z > .08, 'physical midrib must rise above the side face');
+  const p=shoulderStudyParams.collar;
+  assert.ok(p.outerRz < .37 && p.outerRz+p.baseFlareZ >= .42, 'compact top and broader chest-side collar');
 });

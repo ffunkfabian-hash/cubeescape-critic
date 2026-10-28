@@ -12,6 +12,7 @@ export const SHOULDER_STUDY_PARTS = Object.freeze({
   B12: 'ClavicleArmor_R', B13: 'ClavicleArmor_L', B14: 'ChestInsert_R', B15: 'ChestInsert_L',
   B16: 'ScapulaArmor_R', B17: 'ScapulaArmor_L', B18: 'BackSpineInsert',
   B19: 'ClavicleFastener_R', B20: 'ClavicleFastener_L', B21: 'RearFastener_R', B22: 'RearFastener_L',
+  B23: 'ShoulderLame_R', B24: 'ShoulderLame_L', B25: 'ShoulderJoint_R', B26: 'ShoulderJoint_L',
 });
 
 // Closed custom solids use flat facets and deterministic world-space box UVs.
@@ -105,9 +106,10 @@ function torsoGeometry(p) {
 function collarGeometry(p, start, end) {
   const vertices = [], triangles = [], n = p.segments + 1;
   const b = p.bevel;
+  const baseRx = p.outerRx + (p.baseFlareX ?? 0), baseRz = p.outerRz + (p.baseFlareZ ?? 0);
   // A chamfered octagonal section replaces the flat-cut cylindrical ring.
   const section = [[p.outerRx - b, p.outerRz - b, 0], [p.outerRx, p.outerRz, -b],
-    [p.outerRx, p.outerRz, -p.height + b], [p.outerRx - b, p.outerRz - b, -p.height],
+    [baseRx, baseRz, -p.height + b], [baseRx - b, baseRz - b, -p.height],
     [p.innerRx + b, p.innerRz + b, -p.height], [p.innerRx, p.innerRz, -p.height + b],
     [p.innerRx, p.innerRz, -p.innerTopDrop - b], [p.innerRx + b, p.innerRz + b, -p.innerTopDrop]];
   for (const [rx, rz, offset] of section) {
@@ -135,7 +137,7 @@ function collarGeometry(p, start, end) {
 export function buildShoulderStudy(M, p = shoulderStudyParams) {
   const root = new THREE.Group();
   root.name = 'ShoulderStudy';
-  root.userData.study = 'Assembly: neck, collar and shoulder proposal';
+  root.userData.study = `${p.name ?? 'Assembly'}: neck, collar and shoulder proposal`;
   const add = (id, geometry, material) => {
     if (!['B01', 'B02'].includes(id)) geometry.translate(0, p.placement.upperBodyRise, 0);
     const mesh = new THREE.Mesh(geometry, material);
@@ -173,32 +175,51 @@ export function buildShoulderStudy(M, p = shoulderStudyParams) {
   add('B05', torsoGeometry(p.torso), M.blackRubber);
 
   const s = p.shoulder, chest = p.chest;
+  const wrap = s.wrap?.enabled ? s.wrap : null;
   const shoulderX = x => s.innerX + (x - s.innerX) * s.widthScale;
   const shoulderY = (x, z) => {
     const t = THREE.MathUtils.clamp((x - s.innerX) / (s.outerX - s.innerX), 0, 1);
     return s.crownY - (x - s.innerX) * s.slope - s.arc * z * z - s.outerDrop * t ** 3
       + s.archHeight * Math.sin(Math.PI * t) ** s.archPower;
   };
-  const panel = (points, side, z, depth = chest.depth, lift = 0) => beveledPlate(points, depth, chest.bevel,
+  // Bend the closed plate around the shoulder, with thickness along the ellipse normal.
+  const shoulderSurface = (side, x, z, d, drop = 0, outset = 0) => {
+    if (!wrap) return [side * shoulderX(x), shoulderY(x, z) - drop - d, z];
+    const t = (x - s.innerX) / (s.outerX - s.innerX);
+    const angle = wrap.startAngle + (wrap.endAngle - wrap.startAngle) * t;
+    const nx = Math.sin(angle) / wrap.rx, ny = Math.cos(angle) / wrap.ry, length = Math.hypot(nx, ny);
+    return [side * (wrap.centerX + wrap.rx * Math.sin(angle) + (outset - d) * nx / length),
+      wrap.centerY + wrap.ry * Math.cos(angle) - s.arc * z * z - drop + (outset - d) * ny / length, z];
+  };
+  const ridge = x => (chest.ridgeHeight ?? 0) * Math.max(0, 1 - Math.abs(x) / (chest.ridgeWidth ?? 1));
+  const panel = (points, side, z, depth = chest.depth, lift = 0, raised = false) => beveledPlate(points, depth, chest.bevel,
     (x, y, d) => [side * x * chest.widthScale, y,
-      z + lift - (Math.max(0, -y - 1.02) * chest.recede + chest.sideSweep * x * x + d) * Math.sign(z)]);
+      z + lift + (raised ? ridge(x) : 0) - (Math.max(0, -y - 1.02) * chest.recede + chest.sideSweep * x * x + d) * Math.sign(z)]);
   for (const [side, ids] of [[-1, ['B06', 'B07', 'B08', 'B12', 'B14', 'B16', 'B19', 'B21']],
     [1, ['B09', 'B10', 'B11', 'B13', 'B15', 'B17', 'B20', 'B22']]]) {
     add(ids[0], beveledPlate(s.base, s.baseThickness, s.bevel,
-      (x, z, d) => [side * shoulderX(x), shoulderY(x, z) - s.baseDrop - d, z], s.curveSubdivisions), M.darkArmor);
+      (x, z, d) => shoulderSurface(side, x, z, d + (wrap ? s.baseDrop : 0), wrap ? 0 : s.baseDrop), s.curveSubdivisions), M.darkArmor);
     for (const [index, points] of [[1, s.front], [2, s.rear]]) add(ids[index],
       beveledPlate(points, s.thickness, s.bevel,
-        (x, z, d) => [side * shoulderX(x), shoulderY(x, z) - d, z], s.curveSubdivisions), M.whiteArmor);
-    add(ids[3], panel(chest.white, side, chest.frontZ), M.whiteArmor);
+        (x, z, d) => shoulderSurface(side, x, z, d), s.curveSubdivisions), M.whiteArmor);
+    add(ids[3], panel(chest.white, side, chest.frontZ, chest.depth, 0, true), M.whiteArmor);
     add(ids[4], panel(chest.insert, side, chest.frontZ, 0.043, -0.014), M.darkArmor);
     add(ids[5], panel(chest.back, side, chest.rearZ), M.darkArmor);
-    for (const [id, x, y, z] of [[ids[6], 0.358, -0.971, chest.frontZ + 0.004 - chest.sideSweep * 0.358 ** 2],
+    for (const [id, x, y, z] of [[ids[6], 0.358, -0.971, chest.frontZ + ridge(0.358) + 0.004 - chest.sideSweep * 0.358 ** 2],
       [ids[7], 0.319, -0.969, chest.rearZ - 0.004 + chest.sideSweep * 0.319 ** 2]]) {
       const fastener = new THREE.CylinderGeometry(p.hardware.fastenerRadius, p.hardware.fastenerRadius,
         p.hardware.fastenerDepth, p.hardware.segments);
       fastener.rotateX(Math.PI / 2);
       fastener.translate(side * x * chest.widthScale, y, z);
       add(id, fastener, M.darkMetal);
+    }
+    if (wrap) {
+      add(side < 0 ? 'B23' : 'B24', beveledPlate(wrap.lame, wrap.lameThickness, s.bevel,
+        (x, z, d) => shoulderSurface(side, x, z, d, wrap.lameDrop, wrap.lameOutset), s.curveSubdivisions), M.whiteArmor);
+      const joint = new THREE.CylinderGeometry(wrap.jointRadius, wrap.jointRadius * 0.92, wrap.jointHeight, 12);
+      joint.scale(1, 1, wrap.jointDepthScale); joint.rotateZ(-side * 0.08);
+      joint.translate(side * wrap.jointX, wrap.jointY, 0);
+      add(side < 0 ? 'B25' : 'B26', joint, M.blackRubber);
     }
   }
   add('B18', panel(chest.spine, 1, chest.rearZ, 0.042), M.whiteTextured);
