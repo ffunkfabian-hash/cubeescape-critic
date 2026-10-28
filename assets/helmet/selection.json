@@ -1,21 +1,19 @@
 {
   "status": "passed",
-  "finalPass": 69,
-  "basedOnPass": 68,
+  "finalPass": 71,
+  "basedOnPass": 69,
   "meshCount": 89,
   "unchangedMeshGeometryAndTransforms": 89,
-  "changedMaterialAssignments": [
-    "Crown: darkArmor -> crownArmor"
+  "changedMaterials": [
+    "crownArmor"
   ],
-  "originalMaterialsUnchanged": true,
-  "crownMatchesMaskBaseColorAndTextureMaps": true,
-  "identicalSilhouetteMasks": [
-    "mask_front.png",
-    "mask_left.png",
-    "mask_back.png",
-    "mask_right.png"
-  ],
-  "targetGLBSHA256": "e89ff7b3575fb56387bd4479050993c11f47a72d2d93f241cc8061e03e14e213",
+  "maskMaterialUnchanged": true,
+  "crownBaseColorMatchesMask": true,
+  "normalMapInCoreGLTF": true,
+  "normalMapMaxLengthError": 0.004312117661084525,
+  "textureSeed": 73,
+  "identicalSilhouetteMasks": 4,
+  "targetGLBSHA256": "4e00274fb3842b7e58b48c5a0af1349af6f3de68a47fa061690eb3d80e3a86b2",
   "geometryHashes": {
     "2:Crown": "eea2ff7f9bda01be2e841ec7da1162cc0b264a423f932603cf909696eaf14210",
     "3:Cheek_R": "a6ac05ad157122f6671cd685cb1940b866c96acb58306e14f725b8a6a6cb5141",

@@ -2,7 +2,7 @@
 
 ## Verbindlicher Stand
 
-Aktueller Lieferstand: **Prüflauf 69**. Nach Nutzerfeedback ist der Scheitel nun quer und längs gewölbt;
+Aktueller Lieferstand: **Prüflauf 71**. Nach Nutzerfeedback ist der Scheitel nun quer und längs gewölbt;
 der Kopfbügel folgt der Haube. Ihr Rand läuft weich zur Augenmaske aus. Der helle Rahmen bleibt moderat kantiger.
 Die abgeflachten, eckigen Haubenversuche 62/63 wurden vom Nutzer ausdrücklich verworfen.
 
@@ -29,10 +29,11 @@ Die Zuordnung ist im [Verlauf](HELM_VERLAUF.md) dokumentiert. „Vorher“ bezei
 
 ## Material- und Farbpalette
 
-Haube und Maske verwenden exakt dieselbe Grundfarbe und dieselben Körnungs-/Rauheitsbilder bei gleichem
-Texturmaßstab. Die Haube leitet `crownArmor` von `darkArmor` ab: Rauheit 0,90 statt 0,75, Glanzintensität 0,45 und
-Umgebungsreflexion 0,35 statt 0,60. So dominieren auf der Rundung weniger helle Glanzflecken. Das Maskenmaterial bleibt
-unverändert. Diese Anpassung betrifft die Lichtantwort; Licht und Flächenrichtung erzeugen weiterhin Helligkeitsunterschiede.
+Haube und Maske verwenden dieselbe Graphitgrundfarbe. Die Haube erhält eine sichtbare, feine Lackkörnung aus
+prozeduraler Farb-, Normalen- und Rauheitskarte (`crownMaps`, Seed 73). Das Relief verändert die Lichtantwort, nicht die
+runde Geometrie. Die Normalenkarte ist im regulären GLB-Materialkanal enthalten. Das Maskenmaterial bleibt unverändert.
+Rauheit 0,90, Glanzintensität 0,45 und Umgebungsreflexion 0,35 dämpfen weiterhin breite helle Glanzflecken.
+Die grobe, lederartige erste Texturprobe 70 ist verworfen; Stand 71 verwendet ein deutlich flacheres Relief.
 
 Die Werte stammen aus [materials.js](../web/src/materials.js); das Rendering ergänzt Licht, Tonemapping und Texturen.
 
@@ -46,7 +47,7 @@ Die Werte stammen aus [materials.js](../web/src/materials.js); das Rendering erg
 | Gummi und Kabel | `#141414` | Dunkel, rau |
 | Metallhalter | `#1A1A1A` | Dunkles Metall mit kontrollierten Glanzkanten |
 
-Texturen werden prozedural mit festen Seeds erzeugt. Fünf unterschiedliche Karten liegen in sieben PNG-Dateien (Haube/Maskenkarten bytegleich) im [Lieferstand](../assets/helmet/textures/).
+Texturen werden prozedural mit festen Seeds erzeugt. Acht unterschiedliche Karten liegen als PNG-Dateien im [Lieferstand](../assets/helmet/textures/).
 `materials.json` enthält Wiederholung und Bump-Stärke. Farb-/Rauheitskarten sind im GLB eingebettet; Three.js-Reliefkarten
 zusätzlich als Höhen-/Bump-Texturen zuordnen, da glTF diesen Kanal nicht direkt übernimmt.
 
@@ -65,4 +66,4 @@ Einzelne Meshes sind noch keine Zusicherung fertiger Druckwandstärken, Montagep
 Standnummern beschriften. Messwerte ergänzen die Sichtprüfung; Silhouetten-IoU ist kein Prozentwert für die Gesamtähnlichkeit.
 Die optionale Körperstudie (`?body=1`) ist ein separater Proportionsentwurf und nicht als fertige Körperform freigegeben.
 
-[Reproduktionsanleitung](../web/README.md#aktueller-lieferstand-69) · [GLB und Prüfbelege](../assets/helmet/README.md)
+[Reproduktionsanleitung](../web/README.md#aktueller-lieferstand-71) · [GLB und Prüfbelege](../assets/helmet/README.md)

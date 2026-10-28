@@ -154,13 +154,14 @@ Der Referenzlauf erzeugt Textur- und Geometrieansichten sowie `comparison.json` 
 Die globale Aufstellung ist zur Sichtprüfung angenähert; aus diesen Bildern wird **kein Meshy-IoU** berechnet.
 Die Bildausschnitte des Kontaktbogens sind Darstellungszuschnitte, keine Änderung der Helm-Messung.
 
-## Aktueller Lieferstand 69
+## Aktueller Lieferstand 71
 
 Nach Nutzerfeedback ist die Haube auch um den Kopfbügel quer und längs gewölbt (`crownDome`).
 `crownTransition.blendHeight` führt den Haubenrand weich zur Augenmaske; `clearance` hält eine feine Teilefuge.
-Alle 89 Meshgeometrien einschließlich UVs und Transformationen sind gegenüber Stand 68 unverändert.
-`crownArmor` übernimmt Farbe und Texturkarten der Maske und dämpft nur den Haubenglanz. Die bisherigen Materialien bleiben erhalten.
-Die Haubenversuche 62/63 sind verworfen. Aktuelle Quellen und alle 23 Ausgaben sind über SHA256 dokumentiert.
+Alle 89 Meshgeometrien einschließlich UVs und Transformationen sind gegenüber Stand 69 unverändert.
+`crownArmor` behält die Graphitgrundfarbe der Maske und den gedämpften Glanz. `crownMaps(seed=73)` erzeugt sichtbare feine
+Lackkörnung als Farb-, Normalen- und Rauheitskarte. Die übrigen Materialien bleiben erhalten; die Haubennormalenkarte wird im glTF-Kernkanal exportiert.
+Die Haubenversuche 62/63 sind verworfen. Aktuelle Quellen und alle 24 Ausgaben sind über SHA256 dokumentiert.
 
 `lowerArmorEdges` parametrisiert 16 ebene Mantelflächen, die schmalere obere Fase und gerade Eckabschrägungen der Taschen.
 Der Halsring bleibt rund. Die Taschenböden folgen derselben facettierten Form wie ihre Träger und bleiben separate Teile.
@@ -189,7 +190,7 @@ Der absolute Pfad ist nötig, weil ce den Befehl vom Repo-Hauptverzeichnis start
 funktionieren Generator und npm-Befehle ebenfalls.
 
 `renders/verification.json` dokumentiert Quellen, Video-/Referenzhashes, Parameter, Kameras, Laufzeit und Ausgabehashes.
-`npm run verify` sichert sieben Textur-PNGs (fünf unterschiedliche Karten, Haube/Maskenkarten bytegleich) und `textures/materials.json` mit Materialzuordnung, UV-Wiederholung und Bump-Stärke.
+`npm run verify` sichert acht Textur-PNGs und `textures/materials.json` mit Materialzuordnung, UV-Wiederholung und Bump-Stärke.
 GLB enthält unterstützte Farb-/Rauheitskarten; Reliefkarten beim Import zusätzlich als Höhen-/Bump-Texturen zuordnen,
 da glTF Three.js-`bumpMap` nicht direkt übernimmt. Die Texturen entstehen mit festen Seeds ohne externe Bildquelle.
 

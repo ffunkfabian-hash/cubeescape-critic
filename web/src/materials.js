@@ -1,6 +1,6 @@
 // Material library (values from the master prompt) with procedural canvas maps.
 import * as THREE from 'three';
-import { stippleMap, shellMaps, honeycombMaps, grimeMaps } from './textures.js';
+import { stippleMap, shellMaps, crownMaps, honeycombMaps, grimeMaps } from './textures.js';
 
 export function createMaterials() {
   const stipple = stippleMap();
@@ -30,11 +30,12 @@ export function createMaterials() {
     bandStripe: new THREE.MeshStandardMaterial({ name: 'bandStripe', color: 0x8d8e8b, roughness: 0.6, metalness: 0.2 }),
     bust: new THREE.MeshStandardMaterial({ name: 'bust', color: 0x1e1e1e, roughness: 0.8 }),
   };
-  // Same graphite colour and texture maps as the mask, with the broad dome
-  // reflection subdued so the curved surface reads as the same matte coating.
+  // Keep the mask's graphite base colour; make its coating readable on the dome.
+  const [crownColor, crownNormal, crownRough] = crownMaps();
   materials.crownArmor = materials.darkArmor.clone();
   Object.assign(materials.crownArmor, {
     name: 'crownArmor', roughness: 0.9, envMapIntensity: 0.35, specularIntensity: 0.45,
+    map: crownColor, normalMap: crownNormal, roughnessMap: crownRough, bumpMap: null,
   });
   return materials;
 }

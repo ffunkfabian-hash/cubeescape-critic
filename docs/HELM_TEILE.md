@@ -62,8 +62,8 @@ Die Karte verwendet die vier vorhandenen Renderansichten mit 1280×720 Pixeln. C
 vergeben; zusätzliche Bereiche erhalten neue Nummern. Die Karte dokumentiert einen Modellstand und ersetzt keinen
 Vergleich mit den Referenzbildern.
 
-Aktueller Lieferstand: **69**, mit quer und längs gewölbtem Scheitel, angepasstem Bügel und weichem Übergang
+Aktueller Lieferstand: **71**, mit quer und längs gewölbtem Scheitel, angepasstem Bügel und weichem Übergang
 zwischen H01 und H02. Beide Teile bleiben getrennt; H09–H11 bleiben moderat facettiert.
-Die Haube besitzt dieselbe Graphitfarbe und Körnung wie die Maske, mit gedämpftem Glanz.
+Die Haube besitzt dieselbe Graphitgrundfarbe wie die Maske, mit sichtbarer feiner Lackkörnung und gedämpftem Glanz.
 Teilekennungen und 89 Meshes bleiben erhalten; [Exportverzeichnis](../assets/helmet/parts.json),
 [Stilbeschreibung](HELM_STIL.md), [Prüfbericht](versions/0.3.md).

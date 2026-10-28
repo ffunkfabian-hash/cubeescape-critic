@@ -1,7 +1,7 @@
 # Critic – parametrischer Helm im Browser
 
-Aktueller Lieferstand **69**: durchgehend gewölbter Scheitel mit angepasstem Kopfbügel und weichem Übergang zur
-Augenmaske. Haube und Maske teilen Graphitfarbe und Texturkarten; der Haubenglanz ist gedämpft. Augen, Kiefer und moderat kantiger heller Rahmen sind erhalten. Das Video bleibt maßgeblich.
+Aktueller Lieferstand **71**: durchgehend gewölbter Scheitel mit angepasstem Kopfbügel und weichem Übergang zur
+Augenmaske. Die Haube trägt eine sichtbare feine Lackkörnung im Graphitton der Maske; der Glanz bleibt gedämpft. Augen, Kiefer und moderat kantiger heller Rahmen sind erhalten. Das Video bleibt maßgeblich.
 
 ![Aktueller Helm](docs/bilder/helm_aktuell.jpg)
 

@@ -323,3 +323,13 @@ dämpft seine Glanzantwort. Grundfarbe, Bump-/Rauheitsbilder und Texturmaßstab 
 Alle 89 Meshgeometrien, UVs und Transformationen sowie die vier Silhouettenmasken sind bytegleich mit #68.
 31 Tests, Build und Projektprüfung bestehen. Neun Materialien; sieben PNGs mit fünf unterschiedlichen Texturbildern.
 [Stand 69 gegen Video](belege/helm/69.jpg) · [Video / Stand 68 / Stand 69](bilder/helm_material_68_69.jpg).
+
+## Runde 17 – Sichtbarere Haubenstruktur 71 (28.10.2026)
+
+Der Nutzer wünscht mehr Struktur auf der Haube. Die Umsetzung beginnt mit feiner Lackkörnung; zusätzliche Fugen/Flächen
+sind nicht Teil dieses Stands. #70 wirkte zu grob und lederartig und wurde bei der Sichtprüfung verworfen. #71 reduziert
+das Relief deutlich und nutzt Farb-, Normalen- und Rauheitskarten mit Seed 73. Die Graphitgrundfarbe bleibt erhalten.
+Alle 89 Geometrien, UVs und Transformationen sowie vier Silhouettenmasken sind bytegleich mit #69. Nur das Haubenmaterial
+ist verändert. Die Normalenkarte ist im regulären glTF-Materialkanal enthalten; ihre Vektoren wurden numerisch geprüft.
+31 Tests, Build und Projektprüfung bestehen. [Probe 70](belege/helm/70.jpg) · [Stand 71](belege/helm/71.jpg) ·
+[Video / Stand 69 / Stand 71](bilder/helm_struktur_69_71.jpg).

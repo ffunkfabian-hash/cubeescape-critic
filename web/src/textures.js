@@ -81,6 +81,31 @@ export function shellMaps(seed = 11) {
   return [bump, rough];
 }
 
+// Readable powder-coat grain on the curved crown, without changing its silhouette.
+// The normal map is exported in core glTF, so the relief also survives in viewers.
+export function crownMaps(seed = 73) {
+  const size = 512, random = rng(seed);
+  const coat = valueNoise(size, 56, random), fine = valueNoise(size, 144, random);
+  const wear = valueNoise(size, 10, random);
+  const height = Float32Array.from(coat, (v, i) => 0.66 * v + 0.24 * fine[i] + 0.1 * wear[i]);
+  const color = grayImage(size, i => 0.90 + 0.07 * coat[i] + 0.03 * fine[i]);
+  const [normal, ctx] = canvas(size), pixels = ctx.createImageData(size, size);
+  const sample = (x, y) => height[((y + size) % size) * size + (x + size) % size];
+  for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+    const nx = (sample(x - 1, y) - sample(x + 1, y)) * 0.45;
+    // Canvas rows run downwards; tangent-space +Y runs upwards after flipY.
+    const ny = (sample(x, y + 1) - sample(x, y - 1)) * 0.45;
+    const length = Math.hypot(nx, ny, 1), i = (y * size + x) * 4;
+    pixels.data[i] = Math.round((nx / length * 0.5 + 0.5) * 255);
+    pixels.data[i + 1] = Math.round((ny / length * 0.5 + 0.5) * 255);
+    pixels.data[i + 2] = Math.round((1 / length * 0.5 + 0.5) * 255);
+    pixels.data[i + 3] = 255;
+  }
+  ctx.putImageData(pixels, 0, 0);
+  const roughness = grayImage(size, i => 0.68 + 0.16 * coat[i] + 0.08 * wear[i]);
+  return [tex(color, [1, 1], true), tex(normal), tex(roughness)];
+}
+
 // Worn paint for the white armour: soft dirt clouds, fine grain and short scratches: [colour, roughness].
 export function grimeMaps(seed = 21) {
   const r = rng(seed);

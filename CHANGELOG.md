@@ -2,6 +2,12 @@
 
 ## 0.3.0 „Sidework“ – 2026-10-28 (offener Entwurf)
 
+- Stand 71: sichtbare feine Lackkörnung auf der Haube mit festen Farb-, Normalen- und Rauheitskarten (Seed 73).
+- Alle 89 Geometrien/UVs, vier Silhouettenmasken und übrigen Materialien bleiben unverändert gegenüber 69.
+- 31 Tests, Build und vier Ansichten geprüft; Normalenkarte auch im GLB enthalten.
+
+### Materialstand 69
+
 - Stand 69: Haube übernimmt Maskenfarbe und -texturkarten mit gedämpftem Glanz.
 - Alle 89 Meshgeometrien/UVs und bisherigen Materialien unverändert; vier Silhouettenmasken bytegleich mit 68.
 - 31 Tests, Build und vier Ansichten geprüft; Export und Dokumentation aktualisiert.

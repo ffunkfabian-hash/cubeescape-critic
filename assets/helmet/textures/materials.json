@@ -3,6 +3,22 @@
     "crownArmor": {
       "bumpScale": 0.03,
       "maps": {
+        "map": {
+          "file": "crownArmor_map.png",
+          "repeat": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "rotation": 0,
+          "wrapS": 1000,
+          "wrapT": 1000,
+          "flipY": true,
+          "colorSpace": "srgb"
+        },
         "roughnessMap": {
           "file": "crownArmor_roughnessMap.png",
           "repeat": [
@@ -19,8 +35,8 @@
           "flipY": true,
           "colorSpace": ""
         },
-        "bumpMap": {
-          "file": "crownArmor_bumpMap.png",
+        "normalMap": {
+          "file": "crownArmor_normalMap.png",
           "repeat": [
             1,
             1

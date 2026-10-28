@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-10-28T14:10:51.466Z",
+  "startedAt": "2026-10-28T14:25:16.105Z",
   "status": "passed",
   "views": [
     "front",
@@ -103,29 +103,30 @@
     }
   },
   "outputs": {
-    "textures/crownArmor_roughnessMap.png": "6ee24b8c34e86709354f4685927c7347d188eb617b4141a158e1c6a7d8849b08",
-    "textures/crownArmor_bumpMap.png": "a837da04e90b49b70f28625459ccfab34e03c06908fbfbb20c857aeb85adc27b",
+    "textures/crownArmor_map.png": "93b8c54d9eeef45c450f42c918ae37c173f763341bc0d6d4d40f1049480c1825",
+    "textures/crownArmor_roughnessMap.png": "119daca3c458ad940b022d8977ce5072d2021e2806edd49625dff1f1b3857aa6",
+    "textures/crownArmor_normalMap.png": "70c5b4932548d873ff6b1c515ba4a9340cba2d288b128af5b29b53bb859997f0",
     "textures/darkArmor_roughnessMap.png": "6ee24b8c34e86709354f4685927c7347d188eb617b4141a158e1c6a7d8849b08",
     "textures/darkArmor_bumpMap.png": "a837da04e90b49b70f28625459ccfab34e03c06908fbfbb20c857aeb85adc27b",
     "textures/whiteArmor_map.png": "e3d8f7e39ec3b338fec42aa58b39cbdd08ae33fbc20442b41f202d24527edf57",
     "textures/whiteArmor_roughnessMap.png": "e905554a48bc8c7f728613e80e22987b82686b8232bdf49f94e50b7bcc647182",
     "textures/whiteTextured_bumpMap.png": "c4ace6c801244697c9be598a42d9a5a36dae194fb3551c26df59a3b8c789bd61",
-    "textures/materials.json": "bff94e86f0ebffb357827634ab2bc223c4e88f817e1f9469a3bf2bdecc2ce738",
-    "scifi_helmet.glb": "e89ff7b3575fb56387bd4479050993c11f47a72d2d93f241cc8061e03e14e213",
-    "render_front.png": "fdba22867c09a9301ff690bd3ea17ec9a8d9c5cde568dad53d09aeac74c24296",
+    "textures/materials.json": "d94d7e1fd156bb4faa3fd9f9ba5db561748c4a19ebf77f80df71a04b3fe30fd4",
+    "scifi_helmet.glb": "4e00274fb3842b7e58b48c5a0af1349af6f3de68a47fa061690eb3d80e3a86b2",
+    "render_front.png": "14432d634e5201c18703f9b840c2851a75d28bf109204aebb431044bf3848c31",
     "mask_front.png": "b8b8771b089e2b944a49e78b5e7466957b611194aafffd8ea781106701a0d28e",
-    "overlay_front.png": "931d69dfb73dcfc1e598189ae7758d23fbbd744769f2a6de813df1f5e758e19a",
-    "render_left.png": "48d1639a9a0d236a210f6c3c4b2ed4add2bf419cd9c3c9d3f33d37be772e5481",
+    "overlay_front.png": "796af80b83f0396af38915388911097619f1ac8b0764836dbfb5f396602dc900",
+    "render_left.png": "4f664f966ed1e57e26eead39b0291d154ed07cb7d87e1c32866bceeaf9e83107",
     "mask_left.png": "a04e74e8f75ae87f4b1c3ccabc51d5cc06016911ba7e6a6453e2f19713b8ec58",
-    "overlay_left.png": "71a08b1e55c27063d43bcf0a729f1de543ce89e66254a62aff3bf123f09a0c4c",
-    "render_back.png": "306dd0f7623b745c225cbb72aa6f28895770ba3ad8bb09f99c90f70ffb307ae3",
+    "overlay_left.png": "852a204ec6f54bc21387708ca466b692afebef2bce464cb8c1cf7e893e6a8144",
+    "render_back.png": "3da2da4157742e519be87bafab285e47a830f9badf143cffbef805a11ef432a8",
     "mask_back.png": "474de3bd4ecaf5806c4c7ace38fb3dfea2cd83af7ffa6713ae1cf05513016a4e",
-    "overlay_back.png": "56ea3f8ee9491c81655c8c95a644ecb32a2da19ad6a500b49c89fb3e5fd82e85",
-    "render_right.png": "61ac74eb0a13e84ec227ef7beb1f220ccaa6d968b6b9d25ef0d99e85b339da1f",
+    "overlay_back.png": "b587fd0a130059129c0ad55e314c719c944c24bef8a93b2ba42f0591da054d23",
+    "render_right.png": "f3dc9c9d158dbb8d48b94f684a6da3df9414422d8afd1d87312cec80b237ae25",
     "mask_right.png": "0022bf6f7bd154c5373558d3398422d777429ee924fc43b4c8a6561d0aee397f",
-    "overlay_right.png": "247d1c86f823093b337b67fc08fd7908bcae00183297a5324150232091ea7d67",
+    "overlay_right.png": "773d903cc3bf9f9a8319a0a6c89a9168c62010a2524c82f3047f6c10d50ae00b",
     "iou.json": "590538c4cd96649df70a2616f0cd668cba321ca2466109932cb51c478fe38b32",
-    "compare.png": "3a102cd6ab52dd8e28934948e2a6aa58851f016ae92fb5abc6f892f838f2a7a8"
+    "compare.png": "0a1e0ff27fe53d5b632a02aa77b387bf190fe210ef7844fe6be302db57027126"
   },
   "sources": {
     "files": {
@@ -133,7 +134,7 @@
       "src/helmet.js": "10c578579b83457e5b60b37d5411121a7b20b8b6169ffa4ccc55d76bec44f461",
       "src/helmetParams.json": "9b38756b9f76f05acfdcd9f46e3670af29c9406039e9827257ff01ad59a0b34d",
       "src/main.js": "12a9976636ce7537453294adc1be1933a64f73df2150dc3c0c390fc0a2cc76da",
-      "src/materials.js": "367eb448d883ced1be5fdaca4ab361729779f7786eb30a27b77b6727e339598f",
+      "src/materials.js": "38359a25e7c6695f4f9c979c78df1b5b36c63e59bf6acd23b7f62e71daf211c5",
       "src/params.js": "24b2e7cee16b44ca26b518beb689982e0fec092026a6f42d18bb08203e6db170",
       "src/parts/bodyStudy.js": "fe45c21c425de5367e1770735d6f9e7510d78d148e941d3ad8fc7de6c4bae4ce",
       "src/parts/common.js": "07c66f0f95ea400c4dcfdaadab2e2f3bbe96af2378af01b8b613699f5ba7a58b",
@@ -144,7 +145,7 @@
       "src/parts/rightComms.js": "0f1c7a8eebee5830ecb06f4cc8d421588cb720d2b44e6e672af84fc19af8e86a",
       "src/parts/upperHelmet.js": "5ee5f2b9aebe462fb12d41ba61cafb0f172b2a3049013014301157fe6f41471c",
       "src/shapeFit.js": "57c4a7b94b0edbcbed61a38e2f1939af7e721101ce9b04d73c0de96159640ed8",
-      "src/textures.js": "4316102ba362735b59b3aa2a2e27a684aeb45314aedd1f34907b51dde4c14414",
+      "src/textures.js": "02d14cfc27a5334c7c013c7db2def61e19c53f158e9cf6b3f0c8492d2e04cc54",
       "refs/meshy-reference.json": "47f6e9df33dada643dafadbbb90994b69c66ce522789f4eae25b7ec7f78fa673",
       "refs/ref_back.png": "633b725f396863ea0181b0d44c0f905308bb8460562c5fa23d73a3029dba857d",
       "refs/ref_front.png": "e0c6b0e6466301c3d27922038435fe06ec34203be5a9b66d650a82f910eb6fa4",
@@ -176,7 +177,7 @@
       ".nvmrc": "7e8a2fa94951112b894a3dbe3d05efef5e9263741fa49125f0a70f40fedab4cc",
       "../reference/helm/turnaround.mp4": "fac039db10d9d3ee3c74373c38e323dd53489df69eee18971e736c9d971e70de"
     },
-    "digest": "267628f52ce74ba64d61ebfa55a16026fdfcc2c399f459a29937703a9dcf914d"
+    "digest": "f767b17537cacdbbfce9f7eac6173d7304f5dfa37fa40229874f0fd13ed068fa"
   },
   "runtime": {
     "node": "v24.19.0",
@@ -749,14 +750,14 @@
     "denoiseSeed": 47
   },
   "glb": {
-    "bytes": 4822584,
+    "bytes": 5415020,
     "meshes": 89,
     "nodes": 103,
     "materials": 9,
-    "images": 6
+    "images": 8
   },
   "textures": {
-    "maps": 7,
+    "maps": 8,
     "manifest": "textures/materials.json"
   },
   "iou": {
@@ -766,5 +767,5 @@
     "right": 0.8968,
     "mean": 0.9163
   },
-  "finishedAt": "2026-10-28T14:11:02.730Z"
+  "finishedAt": "2026-10-28T14:25:26.934Z"
 }
