@@ -108,7 +108,11 @@ function setCameraView(name) {
   const v = { ...VIEWS[name] };
   if (!VIEWS[name]) throw new Error(`unknown view ${name}`);
   setTurntable(false);
-  if (presentationOptions.exploded > 0) { target.set(0, .05, 0); v.dist = name === 'assembly' ? 7.8 : 8.8; }
+  if (presentationOptions.exploded > 0) {
+    const withShoulders = presentationOptions.body === 'shoulders';
+    target.set(0, withShoulders ? -.55 : .05, 0);
+    v.dist = withShoulders ? 9.8 : name === 'assembly' ? 7.8 : 8.8;
+  }
   else if (presentationOptions.body === 'shoulders') { target.set(0, -.49, 0); v.dist = 4.7; }
   else if (presentationOptions.body === 'legacy') { target.set(0, -.8, 0); v.dist = 5.4; }
   else target.set(0, -.06, 0);

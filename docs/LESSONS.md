@@ -1,6 +1,7 @@
 # Lehren (Critic)
 ≤ 60 Zeilen, eine Zeile je Lehre, Link zur Langform. Verlauf aller Helm-Durchläufe: [HELM_VERLAUF.md](HELM_VERLAUF.md).
 
+- Geschlossene Einzelmeshes können sich sichtbar durchdringen: Gelenke nach vier Ansichten prüfen und auffällige Stellen mit Sichtstrahlen absichern. [Cuirass](HELM_CUIRASS.md#geometrie-und-datenfluss).
 - Explosionsbilder nach stabilen Teile-IDs gruppieren, alle enthaltenen Meshpfade zusätzlich ausgeben; Weltmatrix und Herkunft im GLB erhalten. [Assembly](HELM_AUFBAU.md#datenfluss-und-teilelogik).
 - Schultermasse getrennt über Breite, obere Wölbung und Schalendicke steuern; Halsverkürzung durch Anheben des Oberkörpers bei festem Helm. Referenzstil ist kein vermessenes Körpermaß. [Formentscheidung](HELM_AUFBAU.md#rückmeldungen-und-formentscheidung).
 
@@ -27,3 +28,4 @@
 - „Vorher“ ist keine Versionskennung: Nutzerbilder zuerst gegen gespeicherte Vergleichsbilder identifizieren und bei Wiederherstellungen alle Ansichten/GLB gegen die gewählte Quelle prüfen ([Fehlzuordnung 50 statt 46](HELM_VERLAUF.md#runde-12--tatsächliche-mittlere-variante-wiederhergestellt-28102026)).
 - Radial verformte CSG-Schalen brauchen mit der inversen transponierten Ableitung transportierte Normalen; bloße Neuberechnung kann sichtbare Bänder an Schnittpunkten erzeugen ([Continuity-Aufbau](HELM_AGENTEN.md#geometrische-änderung-04)).
 - Transparente Bemalungsträger beim Silhouettenrender ausblenden und danach den vorherigen Sichtbarkeitszustand wiederherstellen; sonst misst der Test die Trägerfläche statt der Grundform ([historischer, später verworfener Musterversuch](https://github.com/ffunkfabian-hash/cubeescape-critic/blob/caf7a79dc46269b9f02801587b909d5c947f73d8/docs/HELM_AGENTEN.md#optionale-haube-ohne-blenden-und-spielerische-muster)).
+- Der Artefakt-Host liefert kein `.glb` aus: Modell für Webseiten als glTF-JSON mit eingebettetem Puffer (`web/tools/marker_build.mjs`); Vite-Abhängigkeitsscan auf `index.html` begrenzen, sonst meldet der Dev-Server die erst gebaute Markierseite als fehlenden Import ([MARKER.md](MARKER.md)).

@@ -1,5 +1,7 @@
 # Assembly 0.5 – Aufbau, Explosionsansicht und Oberkörper
 
+**Historischer Körperstand 0.5/0.5.1.** Die aktuelle Form und Teilezahl B01–B26 stehen in [Cuirass 0.6](HELM_CUIRASS.md); Bedienung und Explosionsmechanik bleiben gültig.
+
 Arbeitsstand vom 28.10.2026. Quelle bleibt der Three.js-Generator. Dies ist eine technische Beschreibung,
 kein zusätzlicher Auftrag. Der Helm bleibt an das Video gebunden; der Oberkörper ist ein eigener Formversuch.
 

@@ -522,3 +522,32 @@ Kerntiefe +35,8 %, Schulteroberkante rund 0,135 niedriger, große Facetten bei e
 Kragen, Brust und Rücken folgen der größeren Tiefe; Hals und Helm bleiben gleich. 22 separate Körperteile erhalten.
 54 Tests, Build und vier Ansichten geprüft. [Vergleich](bilder/helm_bulkhead_vergleich.jpg) ·
 [Vier Ansichten](bilder/helm_bulkhead_vier_ansichten.jpg) · [Lieferexport](../assets/helmet-assembly/shoulders-blocky/scifi_helmet.glb).
+
+
+## Cuirass 0.6 – Paladin-inspirierter Oberkörper (28.10.2026)
+
+Nach der Nutzerzeichnung und „Dann leg mal los“: Hauptschalen nach unten um den Armansatz gebogen,
+pro Seite eine kleinere Lamelle und ein dunkler Gelenkkörper ergänzt. Brusthälften bilden einen Mittelgrat;
+der Kragen liegt oben enger an und weitet sich zur Brust. Helm, kurzer Hals und Rumpfkerntiefe bleiben erhalten.
+26 statt 22 Körpermeshes, Außenbreite 1,99 statt 2,3198.
+
+Die erste Seitenansicht zeigte einen dunklen Gelenküberstand durch die weiße Schulter. Rücksetzen der
+Oberkante plus gezielte Strahlprobe beheben ihn. Keine neue Helm-IoU, keine finale Nutzerfreigabe der Körperform.
+[Aufbau, Stil und Grenzen](HELM_CUIRASS.md) · [Prüfbericht](versions/0.6.md).
+
+![Vorher / Cuirass](bilder/helm_cuirass_vergleich.jpg)
+
+
+## Bastion 0.7 – technische Gehäuse und geschlossene Brust (28.10.2026)
+
+Vier neue Nutzerbilder führen nach „Dann leg mal los“ zu kantigen, tiefen Schultergehäusen mit separater
+unterer Lage. B27 ergänzt die durchgehende Brustmitte; B28/B29 die Flanken, B30/B31 gefaltete Schulterdächer.
+31 Körperteile; Helm, kurzer Hals und tiefer Rumpfkern erhalten. Die erste Brustfläche wird nach Sichtprüfung
+planar, der gemessene Flankenabstand vergrößert. Frühere Cuirass-Formtests bleiben über eine Parameterfixture erhalten.
+[Aufbau/Stil](HELM_BASTION.md) · [Prüfbericht](versions/0.7.md).
+
+![Cuirass / Bastion](bilder/helm_bastion_vergleich.jpg)
+
+Nachgereicht während 0.7: Schultern etwas zu kantig, Brust seitlich zu flach. Zwei Facettenbilder führen zu
+einer reliefartig vorgewölbten Brust mit definierten inneren Scheiteln sowie stärker gefasten Schulterkanten.
+Die plane Zwischenprobe bleibt nur im lokalen Belegcache; sie ist nicht der Lieferstand.
