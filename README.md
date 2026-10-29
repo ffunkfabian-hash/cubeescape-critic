@@ -1,10 +1,8 @@
 # Critic – parametrischer Helm im Browser
 
-**Aktueller Versuch 0.5 „Assembly“:** beschriftete Explosionsansicht, ausblendbare Kopfhörer mit Bügel und eine
-separate Hals-/Schulterstudie mit kürzerem Hals und höheren, kräftigeren Schulterkappen.
-[Aufbau und Reproduktion](docs/HELM_AUFBAU.md) · [Exporte](assets/helmet-assembly/README.md) · [Prüfbericht](docs/versions/0.5.md).
-Die bestehenden Helmformen und Materialproben bleiben erhalten. Das Video bleibt die Helmreferenz;
-die Titan-Recherche aus `cubeescape-reference` ergänzt die Stilbetrachtung des Oberkörpers.
+**Aktueller Versuch 0.7 „Bastion“:** tiefe kantige Schultergehäuse mit unterer Panzerlage, geschlossene Brustmitte
+und separate Flanken. 31 Körperteile; Helm, kurzer Hals und kräftiger Rumpfkern erhalten.
+[Aufbau und Stil](docs/HELM_BASTION.md) · [Exporte](assets/helmet-bastion/README.md) · [Prüfbericht](docs/versions/0.7.md).
 
 **Form- und Materialbasis 0.4 „Continuity“:** weichere Übergänge neben den Augen und zwei von der Stirn bis zum Hinterkopf
 verlängerte Streifen. Auf derselben Geometrie stehen Originalmaterial, glänzendes Metall und feines dunkles Graphit

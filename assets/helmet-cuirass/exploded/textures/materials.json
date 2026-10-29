@@ -1,0 +1,681 @@
+{
+  "finish": {
+    "name": "graphite",
+    "sharedArmorMaps": true,
+    "color": 3224632,
+    "roughness": 0.9,
+    "metalness": 0.15,
+    "envMapIntensity": 0.35,
+    "specularIntensity": 0.45,
+    "normalScale": 1,
+    "textureSeed": 73
+  },
+  "accents": {
+    "name": "light-fasteners",
+    "lightFasteners": true,
+    "whiteStrips": false
+  },
+  "strips": "off",
+  "assembly": {
+    "headset": "off",
+    "body": "shoulders",
+    "exploded": 1
+  },
+  "materials": {
+    "crownArmor": {
+      "color": "313438",
+      "roughness": 0.9,
+      "alphaTest": 0,
+      "transparent": false,
+      "metalness": 0.15,
+      "envMapIntensity": 0.35,
+      "specularIntensity": 0.45,
+      "normalScale": [
+        1,
+        1
+      ],
+      "bumpScale": 0.03,
+      "maps": {
+        "map": {
+          "file": "crownArmor_map.png",
+          "repeat": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "rotation": 0,
+          "wrapS": 1000,
+          "wrapT": 1000,
+          "flipY": true,
+          "colorSpace": "srgb"
+        },
+        "roughnessMap": {
+          "file": "crownArmor_roughnessMap.png",
+          "repeat": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "rotation": 0,
+          "wrapS": 1000,
+          "wrapT": 1000,
+          "flipY": true,
+          "colorSpace": ""
+        },
+        "normalMap": {
+          "file": "crownArmor_normalMap.png",
+          "repeat": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "rotation": 0,
+          "wrapS": 1000,
+          "wrapT": 1000,
+          "flipY": true,
+          "colorSpace": ""
+        }
+      }
+    },
+    "darkArmor": {
+      "color": "313438",
+      "roughness": 0.9,
+      "alphaTest": 0,
+      "transparent": false,
+      "metalness": 0.15,
+      "envMapIntensity": 0.35,
+      "specularIntensity": 0.45,
+      "normalScale": [
+        1,
+        1
+      ],
+      "bumpScale": 0.03,
+      "maps": {
+        "map": {
+          "file": "darkArmor_map.png",
+          "repeat": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "rotation": 0,
+          "wrapS": 1000,
+          "wrapT": 1000,
+          "flipY": true,
+          "colorSpace": "srgb"
+        },
+        "roughnessMap": {
+          "file": "darkArmor_roughnessMap.png",
+          "repeat": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "rotation": 0,
+          "wrapS": 1000,
+          "wrapT": 1000,
+          "flipY": true,
+          "colorSpace": ""
+        },
+        "normalMap": {
+          "file": "darkArmor_normalMap.png",
+          "repeat": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "rotation": 0,
+          "wrapS": 1000,
+          "wrapT": 1000,
+          "flipY": true,
+          "colorSpace": ""
+        }
+      }
+    },
+    "blackRubber": {
+      "color": "141414",
+      "roughness": 0.75,
+      "alphaTest": 0,
+      "transparent": false,
+      "metalness": 0,
+      "envMapIntensity": 1,
+      "normalScale": [
+        1,
+        1
+      ],
+      "bumpScale": 1,
+      "maps": {}
+    },
+    "darkMetal": {
+      "color": "1a1a1a",
+      "roughness": 0.3,
+      "alphaTest": 0,
+      "transparent": false,
+      "metalness": 0.8,
+      "envMapIntensity": 1,
+      "normalScale": [
+        1,
+        1
+      ],
+      "bumpScale": 1,
+      "maps": {}
+    },
+    "visorGlow": {
+      "color": "5fe3d6",
+      "roughness": 0.2,
+      "alphaTest": 0,
+      "transparent": false,
+      "metalness": 0,
+      "envMapIntensity": 1,
+      "normalScale": [
+        1,
+        1
+      ],
+      "bumpScale": 1,
+      "maps": {}
+    },
+    "accessoryArmor": {
+      "color": "313438",
+      "roughness": 0.75,
+      "alphaTest": 0,
+      "transparent": false,
+      "metalness": 0.15,
+      "envMapIntensity": 0.6,
+      "specularIntensity": 1,
+      "normalScale": [
+        1,
+        1
+      ],
+      "bumpScale": 0.03,
+      "maps": {
+        "roughnessMap": {
+          "file": "accessoryArmor_roughnessMap.png",
+          "repeat": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "rotation": 0,
+          "wrapS": 1000,
+          "wrapT": 1000,
+          "flipY": true,
+          "colorSpace": ""
+        },
+        "bumpMap": {
+          "file": "accessoryArmor_bumpMap.png",
+          "repeat": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "rotation": 0,
+          "wrapS": 1000,
+          "wrapT": 1000,
+          "flipY": true,
+          "colorSpace": ""
+        }
+      }
+    },
+    "lightFastener": {
+      "color": "d6d7d5",
+      "roughness": 0.6,
+      "alphaTest": 0,
+      "transparent": false,
+      "metalness": 0.05,
+      "envMapIntensity": 1,
+      "normalScale": [
+        1,
+        1
+      ],
+      "bumpScale": 1,
+      "maps": {}
+    },
+    "whiteArmor": {
+      "color": "d6d7d5",
+      "roughness": 0.6,
+      "alphaTest": 0,
+      "transparent": false,
+      "metalness": 0.05,
+      "envMapIntensity": 1,
+      "specularIntensity": 1,
+      "normalScale": [
+        1,
+        1
+      ],
+      "bumpScale": 1,
+      "maps": {
+        "map": {
+          "file": "whiteArmor_map.png",
+          "repeat": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "rotation": 0,
+          "wrapS": 1000,
+          "wrapT": 1000,
+          "flipY": true,
+          "colorSpace": "srgb"
+        },
+        "roughnessMap": {
+          "file": "whiteArmor_roughnessMap.png",
+          "repeat": [
+            1,
+            1
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "rotation": 0,
+          "wrapS": 1000,
+          "wrapT": 1000,
+          "flipY": true,
+          "colorSpace": ""
+        }
+      }
+    },
+    "whiteTextured": {
+      "color": "a8a9a6",
+      "roughness": 0.8,
+      "alphaTest": 0,
+      "transparent": false,
+      "metalness": 0.05,
+      "envMapIntensity": 1,
+      "normalScale": [
+        1,
+        1
+      ],
+      "bumpScale": 0.6,
+      "maps": {
+        "bumpMap": {
+          "file": "whiteTextured_bumpMap.png",
+          "repeat": [
+            9,
+            9
+          ],
+          "offset": [
+            0,
+            0
+          ],
+          "rotation": 0,
+          "wrapS": 1000,
+          "wrapT": 1000,
+          "flipY": true,
+          "colorSpace": ""
+        }
+      }
+    },
+    "oliveTech": {
+      "color": "4a493e",
+      "roughness": 0.6,
+      "alphaTest": 0,
+      "transparent": false,
+      "metalness": 0.15,
+      "envMapIntensity": 1,
+      "normalScale": [
+        1,
+        1
+      ],
+      "bumpScale": 1,
+      "maps": {}
+    }
+  },
+  "parts": [
+    {
+      "part": "H01_Crown_1",
+      "material": "crownArmor"
+    },
+    {
+      "part": "H05A_Cheek_R_1",
+      "material": "darkArmor"
+    },
+    {
+      "part": "H05B_Cheek_L_1",
+      "material": "darkArmor"
+    },
+    {
+      "part": "H06_Mouth_Insert_1",
+      "material": "blackRubber"
+    },
+    {
+      "part": "H06_MouthRail_R_2",
+      "material": "darkArmor"
+    },
+    {
+      "part": "H06_MouthRail_L_3",
+      "material": "darkArmor"
+    },
+    {
+      "part": "H06_MaskGap_4",
+      "material": "darkMetal"
+    },
+    {
+      "part": "H06_MaskGap_5",
+      "material": "darkMetal"
+    },
+    {
+      "part": "H03_Shell_1",
+      "material": "darkArmor"
+    },
+    {
+      "part": "H04A_Visor_R_1",
+      "material": "visorGlow"
+    },
+    {
+      "part": "H04B_Visor_L_1",
+      "material": "visorGlow"
+    },
+    {
+      "part": "H02_Brim_1",
+      "material": "darkArmor"
+    },
+    {
+      "part": "H14A_Detail[0]_1",
+      "material": "accessoryArmor"
+    },
+    {
+      "part": "H14A_Detail[1]_2",
+      "material": "darkMetal"
+    },
+    {
+      "part": "H14A_Detail[2]_3",
+      "material": "darkMetal"
+    },
+    {
+      "part": "H14A_Detail[3]_4",
+      "material": "darkMetal"
+    },
+    {
+      "part": "H14A_Detail[4]_5",
+      "material": "darkMetal"
+    },
+    {
+      "part": "H14A_Detail[5]_6",
+      "material": "darkMetal"
+    },
+    {
+      "part": "H14A_Detail[6]_7",
+      "material": "darkMetal"
+    },
+    {
+      "part": "H14B_Detail[0]_1",
+      "material": "accessoryArmor"
+    },
+    {
+      "part": "H14B_Detail[1]_2",
+      "material": "darkMetal"
+    },
+    {
+      "part": "H14B_Detail[2]_3",
+      "material": "darkMetal"
+    },
+    {
+      "part": "H14B_Detail[3]_4",
+      "material": "darkMetal"
+    },
+    {
+      "part": "H14B_Detail[4]_5",
+      "material": "darkMetal"
+    },
+    {
+      "part": "H14B_Detail[5]_6",
+      "material": "darkMetal"
+    },
+    {
+      "part": "H14B_Detail[6]_7",
+      "material": "darkMetal"
+    },
+    {
+      "part": "F01_Screws_Upper_1",
+      "material": "lightFastener"
+    },
+    {
+      "part": "H09_Core_1",
+      "material": "whiteArmor"
+    },
+    {
+      "part": "H09_RearPanel_2",
+      "material": "whiteTextured"
+    },
+    {
+      "part": "H10_Collar_1",
+      "material": "whiteArmor"
+    },
+    {
+      "part": "H11A_CollarSlotFloor_R_1",
+      "material": "darkMetal"
+    },
+    {
+      "part": "H11A_CollarPanelFloor_R_2",
+      "material": "whiteTextured"
+    },
+    {
+      "part": "H11A_CollarSocketFloor_R_3",
+      "material": "whiteTextured"
+    },
+    {
+      "part": "H11B_CollarSlotFloor_L_1",
+      "material": "darkMetal"
+    },
+    {
+      "part": "H11B_CollarPanelFloor_L_2",
+      "material": "whiteTextured"
+    },
+    {
+      "part": "H11B_CollarSocketFloor_L_3",
+      "material": "whiteTextured"
+    },
+    {
+      "part": "H10_CollarDipPlate_2",
+      "material": "whiteTextured"
+    },
+    {
+      "part": "H10_Detail[0]_3",
+      "material": "darkMetal"
+    },
+    {
+      "part": "H19_NeckRing_1",
+      "material": "whiteArmor"
+    },
+    {
+      "part": "H07_Chin_1",
+      "material": "whiteArmor"
+    },
+    {
+      "part": "H08A_Jaw_R_1",
+      "material": "whiteArmor"
+    },
+    {
+      "part": "H08B_Jaw_L_1",
+      "material": "whiteArmor"
+    },
+    {
+      "part": "H11A_Jaw_Insert_R_4",
+      "material": "whiteTextured"
+    },
+    {
+      "part": "H11A_Jaw_InsertSlot_R_5",
+      "material": "darkMetal"
+    },
+    {
+      "part": "H11B_Jaw_Insert_L_4",
+      "material": "whiteTextured"
+    },
+    {
+      "part": "H11B_Jaw_InsertSlot_L_5",
+      "material": "darkMetal"
+    },
+    {
+      "part": "F02_Screws_Chin_1",
+      "material": "darkMetal"
+    },
+    {
+      "part": "F03_Screws_Side_1",
+      "material": "darkMetal"
+    },
+    {
+      "part": "H16_BackBox_Mount_1",
+      "material": "oliveTech"
+    },
+    {
+      "part": "H16_BackBox_2",
+      "material": "oliveTech"
+    },
+    {
+      "part": "H16_Detail[0]_3",
+      "material": "oliveTech"
+    },
+    {
+      "part": "H16_Detail[1]_4",
+      "material": "oliveTech"
+    },
+    {
+      "part": "H16_Detail[2]_5",
+      "material": "oliveTech"
+    },
+    {
+      "part": "H16_BackBox_Connector_6",
+      "material": "darkMetal"
+    },
+    {
+      "part": "H16_BackBox_Connector_7",
+      "material": "darkMetal"
+    },
+    {
+      "part": "H16_Screws_BackBox_8",
+      "material": "darkMetal"
+    },
+    {
+      "part": "B01_NeckFlex_1",
+      "material": "blackRubber"
+    },
+    {
+      "part": "B02_NeckRibs_1",
+      "material": "blackRubber"
+    },
+    {
+      "part": "B03_CollarFront_1",
+      "material": "whiteArmor"
+    },
+    {
+      "part": "B04_CollarRear_1",
+      "material": "darkArmor"
+    },
+    {
+      "part": "B05_UpperTorsoCore_1",
+      "material": "blackRubber"
+    },
+    {
+      "part": "B06_ShoulderBase_R_1",
+      "material": "darkArmor"
+    },
+    {
+      "part": "B07_ShoulderFront_R_1",
+      "material": "whiteArmor"
+    },
+    {
+      "part": "B08_ShoulderRear_R_1",
+      "material": "whiteArmor"
+    },
+    {
+      "part": "B12_ClavicleArmor_R_1",
+      "material": "whiteArmor"
+    },
+    {
+      "part": "B14_ChestInsert_R_1",
+      "material": "darkArmor"
+    },
+    {
+      "part": "B16_ScapulaArmor_R_1",
+      "material": "darkArmor"
+    },
+    {
+      "part": "B19_ClavicleFastener_R_1",
+      "material": "darkMetal"
+    },
+    {
+      "part": "B21_RearFastener_R_1",
+      "material": "darkMetal"
+    },
+    {
+      "part": "B23_ShoulderLame_R_1",
+      "material": "whiteArmor"
+    },
+    {
+      "part": "B25_ShoulderJoint_R_1",
+      "material": "blackRubber"
+    },
+    {
+      "part": "B09_ShoulderBase_L_1",
+      "material": "darkArmor"
+    },
+    {
+      "part": "B10_ShoulderFront_L_1",
+      "material": "whiteArmor"
+    },
+    {
+      "part": "B11_ShoulderRear_L_1",
+      "material": "whiteArmor"
+    },
+    {
+      "part": "B13_ClavicleArmor_L_1",
+      "material": "whiteArmor"
+    },
+    {
+      "part": "B15_ChestInsert_L_1",
+      "material": "darkArmor"
+    },
+    {
+      "part": "B17_ScapulaArmor_L_1",
+      "material": "darkArmor"
+    },
+    {
+      "part": "B20_ClavicleFastener_L_1",
+      "material": "darkMetal"
+    },
+    {
+      "part": "B22_RearFastener_L_1",
+      "material": "darkMetal"
+    },
+    {
+      "part": "B24_ShoulderLame_L_1",
+      "material": "whiteArmor"
+    },
+    {
+      "part": "B26_ShoulderJoint_L_1",
+      "material": "blackRubber"
+    },
+    {
+      "part": "B18_BackSpineInsert_1",
+      "material": "whiteTextured"
+    }
+  ]
+}

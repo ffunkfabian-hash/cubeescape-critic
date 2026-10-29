@@ -1,0 +1,42 @@
+{
+  "sourceRevision": "2bbd72f118f5e9202e8ca986d0428256379ec613",
+  "baseline": "../helmet-assembly/shoulders-blocky",
+  "unchangedHelmetMeshes": 56,
+  "unchangedBodyMeshes": [
+    "NeckFlex",
+    "NeckRibs",
+    "UpperTorsoCore",
+    "ScapulaArmor_R",
+    "RearFastener_R",
+    "ScapulaArmor_L",
+    "RearFastener_L",
+    "BackSpineInsert"
+  ],
+  "sameAssembledCameras": true,
+  "sameHelmetParameters": true,
+  "unchangedTextureMaps": [
+    "textures/crownArmor_map.png",
+    "textures/crownArmor_roughnessMap.png",
+    "textures/crownArmor_normalMap.png",
+    "textures/darkArmor_map.png",
+    "textures/darkArmor_roughnessMap.png",
+    "textures/darkArmor_normalMap.png",
+    "textures/accessoryArmor_roughnessMap.png",
+    "textures/accessoryArmor_bumpMap.png",
+    "textures/whiteArmor_map.png",
+    "textures/whiteArmor_roughnessMap.png",
+    "textures/whiteTextured_bumpMap.png"
+  ],
+  "bodyParts": 26,
+  "meshCount": 82,
+  "labelGroups": 48,
+  "testOnlyReviewCorrectionChangedImages": false,
+  "sourceDigest": "e89dcb7ec2a8c6a693e8078f5b6d1cca9fe9658e819a79abe0f9965e0feb83c2",
+  "assembledGlbSha256": "a44417857444e01479268250618ecdd031a8fe3f22c5d9c6932f271caccf1521",
+  "explodedRoundtrip": {
+    "meshes": 82,
+    "positionsIdentical": true,
+    "maximumTransformError": 5.551115123125783e-16,
+    "metadataPreserved": true
+  }
+}

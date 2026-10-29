@@ -1,7 +1,7 @@
 {
   "name": "cubeescape-critic",
-  "version": "0.5.0",
-  "version_name": "Assembly",
+  "version": "0.7.1",
+  "version_name": "Bastion",
   "check": {
     "quick": [
       [
