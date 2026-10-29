@@ -21,6 +21,7 @@ import { resolveAssemblyOptions } from './assemblyOptions.js';
 import { createAssemblyLabels } from './assemblyLabels.js';
 import { D, resetParams } from './params.js';
 import { loadScout, scoutParts, SCOUT_FRAME } from './scout.js';
+import { ROBOT_MODELS, loadRobot, setRobotExplosion, robotParts } from './robotBodies.js';
 
 const query = new URLSearchParams(location.search);
 const materialFinish = resolveFinish(query.get('finish') ?? 'original');
@@ -30,9 +31,12 @@ if (!['on', 'off'].includes(strips)) throw new Error(`Unknown strips ${JSON.stri
 D.foreheadPlates.enabled = strips === 'on';
 if (query.get('ui') === '0') document.body.classList.add('noui');
 // ?model=scout: the Blender-built Scout v3 (blender/scout) as GLB instead of the three.js helmet; geometry GUI is off.
+// ?model=waechter|paladin|mechanik: one of the three Ballon robot bodies (blender/robot) as GLB, framed like body=full.
 const modelName = query.get('model') ?? 'critic';
-if (!['critic', 'scout'].includes(modelName)) throw new Error(`Unknown model ${JSON.stringify(modelName)}; expected critic or scout`);
+const MODEL_NAMES = ['critic', 'scout', ...Object.keys(ROBOT_MODELS)];
+if (!MODEL_NAMES.includes(modelName)) throw new Error(`Unknown model ${JSON.stringify(modelName)}; expected ${MODEL_NAMES.join(', ')}`);
 const scoutModels = modelName === 'scout' ? { assembled: await loadScout(false), exploded: await loadScout(true) } : null;
+const robotModel = ROBOT_MODELS[modelName] ? await loadRobot(modelName) : null;
 
 const BG = 0x8c8c8c;
 // ?static=1: no animation loop, frames only via window.renderFrame() (headless checks with software GL).
@@ -40,6 +44,7 @@ const STATIC = query.get('static') === '1';
 const presentationOptions = resolveAssemblyOptions({ headset: query.get('headset') ?? 'on', body: query.get('body') ?? 'none', exploded: query.get('exploded') ?? '0' });
 const annotation = createAssemblyLabels();
 if (scoutModels) document.querySelector('#assembly-labels .assembly-footnote').textContent = 'S01–S13 = Scout-Teile · R/L = Seite (R = rechts in der Frontansicht) · Abstände nur zur Darstellung';
+if (robotModel) document.querySelector('#assembly-labels .assembly-footnote').textContent = 'Baugruppen des Ballon-Roboters (Runde 5) · R/L = Körperseite des Roboters · Socket_* = Anker zur Elternbaugruppe · Abstände nur zur Darstellung';
 let assemblyParts = [];
 const showLabels = query.get('labels') !== '0';
 const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: STATIC });
@@ -116,6 +121,11 @@ function setCameraView(name) {
   if (!VIEWS[name]) throw new Error(`unknown view ${name}`);
   setTurntable(false);
   if (scoutModels && presentationOptions.exploded > 0) { target.set(...SCOUT_FRAME.explodedTarget); v.dist = SCOUT_FRAME.explodedDist; }
+  else if (robotModel) {
+    const exploded = presentationOptions.exploded > 0;
+    target.set(0, exploded ? fullBodyParams.camera.explodedTarget : fullBodyParams.camera.target, 0);
+    v.dist = exploded ? fullBodyParams.camera.explodedDist : fullBodyParams.camera.dist;
+  }
   else if (presentationOptions.exploded > 0) {
     const withShoulders = presentationOptions.body === 'shoulders', full = presentationOptions.body === 'full';
     target.set(0, full ? fullBodyParams.camera.explodedTarget : withShoulders ? -.55 : .05, 0);
@@ -158,7 +168,7 @@ const overlay = document.getElementById('overlay');
 let overlayOn = false;
 let overlayMode = 'normal';
 function updateOverlay() {
-  const show = overlayOn && !turntable && presentationOptions.body === 'none' && presentationOptions.exploded === 0 && current !== 'assembly';
+  const show = overlayOn && !turntable && !robotModel && presentationOptions.body === 'none' && presentationOptions.exploded === 0 && current !== 'assembly';
   overlay.style.display = show ? 'block' : 'none';
   if (show) overlay.src = `/refs/ref_${current}.png`;
   overlay.classList.toggle('diff', overlayMode === 'difference');
@@ -223,12 +233,22 @@ function rebuild() {
   const rot = model ? model.rotation.y : 0;
   if (model) {
     scene.remove(model);
-    if (!scoutModels) disposeModel(model);
+    if (!scoutModels && !robotModel) disposeModel(model);
   }
   const t0 = performance.now();
   if (scoutModels) {
     model = presentationOptions.exploded > 0 ? scoutModels.exploded : scoutModels.assembled;
     assemblyParts = presentationOptions.exploded > 0 ? scoutParts(model) : [];
+    annotation.setGroups(assemblyParts);
+    model.rotation.y = rot;
+    scene.add(model);
+    window.assemblyParts = assemblyParts;
+    return;
+  }
+  if (robotModel) {
+    model = robotModel;
+    setRobotExplosion(model, presentationOptions.exploded);
+    assemblyParts = presentationOptions.exploded > 0 ? robotParts(model) : [];
     annotation.setGroups(assemblyParts);
     model.rotation.y = rot;
     scene.add(model);
@@ -255,7 +275,7 @@ async function exportGLB() {
   const glb = await new GLTFExporter().parseAsync(model, { binary: true });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([glb], { type: 'model/gltf-binary' }));
-  a.download = scoutModels ? (presentationOptions.exploded > 0 ? 'scout_exploded.glb' : 'scout.glb') : presentationOptions.exploded > 0 ? 'scifi_helmet_exploded.glb' : presentationOptions.body === 'shoulders' ? 'scifi_shoulder_study.glb' : presentationOptions.body === 'full' ? 'scifi_full_body.glb' : presentationOptions.body === 'legacy' ? 'scifi_body_study.glb' : 'scifi_helmet.glb';
+  a.download = robotModel ? `${model.name}.glb` : scoutModels ? (presentationOptions.exploded > 0 ? 'scout_exploded.glb' : 'scout.glb') : presentationOptions.exploded > 0 ? 'scifi_helmet_exploded.glb' : presentationOptions.body === 'shoulders' ? 'scifi_shoulder_study.glb' : presentationOptions.body === 'full' ? 'scifi_full_body.glb' : presentationOptions.body === 'legacy' ? 'scifi_body_study.glb' : 'scifi_helmet.glb';
   a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }
@@ -278,6 +298,21 @@ function buildGui() {
     look.add(gtao, 'blendIntensity', 0, 1, 0.01).name('AO');
     look.add(renderer, 'toneMappingExposure', 0.4, 2, 0.01).name('Belichtung');
     gui.add({ exportGLB }, 'exportGLB').name('scout.glb');
+    return;
+  }
+  if (robotModel) {
+    // Robot bodies come from the Ballon generator (blender/robot): choose the study, the explosion and the look only.
+    gui.title(`Roboter ${ROBOT_MODELS[modelName].de}`);
+    const pick = { model: modelName };
+    assembly.add(pick, 'model', Object.fromEntries(Object.entries(ROBOT_MODELS).map(([k, r]) => [r.de, k]))).name('Körperstudie')
+      .onFinishChange(v => { query.set('model', v); location.search = query.toString(); });
+    assembly.add(presentationOptions, 'exploded', 0, 1, .05).name('Explosionsabstand').onFinishChange(changeAssembly);
+    assembly.add({ parts:()=>annotation.togglePanel() }, 'parts').name('Baugruppen');
+    const look = gui.addFolder('Look');
+    look.add(bloom, 'strength', 0, 2, 0.01).name('Bloom');
+    look.add(gtao, 'blendIntensity', 0, 1, 0.01).name('AO');
+    look.add(renderer, 'toneMappingExposure', 0.4, 2, 0.01).name('Belichtung');
+    gui.add({ exportGLB }, 'exportGLB').name(`robot_${modelName}.glb`);
     return;
   }
   assembly.add(presentationOptions, 'headset', { sichtbar:'on', ausgeblendet:'off' }).name('Kopfhörer + Band').onFinishChange(changeAssembly);

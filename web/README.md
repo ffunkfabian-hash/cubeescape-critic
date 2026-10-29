@@ -40,6 +40,12 @@ vorhandene Bilder allein können noch aus einem früheren Lauf stammen. `--no-io
 `&exploded=1` zeigt die Explosionsansicht mit den Teil-IDs S01–S13. Die Materialien im GLB sind flache Ersatzmaterialien; maßgeblich
 sind die Cycles-Ansichten. [Aufbau, Nachbau und Grenzen](../docs/HELM_SCOUT.md).
 
+## Roboterkörper aus Ballon (0.10)
+
+`?model=waechter`, `?model=paladin` und `?model=mechanik` zeigen die drei Körperstudien aus `cubeescape-ballon` als GLB aus
+`assets/robot-bodies/`. Sie stehen im Rahmen von `body=full`, also mit denselben Kameras. `&exploded=0..1` verschiebt die Baugruppen
+entlang der Ballon-Anker. In der GUI wechselt „Körperstudie“ das Modell. [Quelle, Export und Grenzen](../docs/ROBOTER_BALLON.md).
+
 ## Körperstudie
 
 **Aktuell 0.7:** `?body=shoulders&headset=off` zeigt kurzen Hals, kantige Schultergehäuse mit unteren Lamellen,
