@@ -1,0 +1,266 @@
+{
+ "units": "Blender units, helmet height H = 1.0 (≈ 30 cm); glTF Y up, front = +Z",
+ "side_rule": "R = +X in helmet space (right in the front view); object names are not reliable for the side",
+ "parts": [
+  {
+   "id": "S01",
+   "label": "S01 Haube (Guss)",
+   "side": "",
+   "objects": [
+    "Kappe"
+   ],
+   "exploded_offset": [
+    0.0,
+    0.0,
+    0.3
+   ]
+  },
+  {
+   "id": "S02",
+   "label": "S02 Augen",
+   "side": "",
+   "objects": [
+    "Auge_L",
+    "Auge_R",
+    "Augenhoehle_L",
+    "Augenhoehle_R"
+   ],
+   "exploded_offset": [
+    0.0,
+    -0.1,
+    0.3
+   ]
+  },
+  {
+   "id": "S03",
+   "label": "S03 Gelenkscheibe R",
+   "side": "R",
+   "objects": [
+    "Maske_Gelenk_R"
+   ],
+   "exploded_offset": [
+    0.1,
+    0.0,
+    0.3
+   ]
+  },
+  {
+   "id": "S03",
+   "label": "S03 Gelenkscheibe L",
+   "side": "L",
+   "objects": [
+    "Maske_Gelenk_L"
+   ],
+   "exploded_offset": [
+    -0.1,
+    0.0,
+    0.3
+   ]
+  },
+  {
+   "id": "S04",
+   "label": "S04 Krempe",
+   "side": "",
+   "objects": [
+    "Krempe"
+   ],
+   "exploded_offset": [
+    0.0,
+    0.0,
+    0.16
+   ]
+  },
+  {
+   "id": "S05",
+   "label": "S05 Mundvertiefung",
+   "side": "",
+   "objects": [
+    "Mund_Vertiefung"
+   ],
+   "exploded_offset": [
+    0.0,
+    -0.32,
+    0.04
+   ]
+  },
+  {
+   "id": "S06",
+   "label": "S06 Kinnblock",
+   "side": "",
+   "objects": [
+    "Kinnblock"
+   ],
+   "exploded_offset": [
+    0.0,
+    -0.34,
+    -0.14
+   ]
+  },
+  {
+   "id": "S07",
+   "label": "S07 Kieferstück R",
+   "side": "R",
+   "objects": [
+    "Kiefer_L"
+   ],
+   "exploded_offset": [
+    0.28,
+    -0.12,
+    -0.14
+   ]
+  },
+  {
+   "id": "S07",
+   "label": "S07 Kieferstück L",
+   "side": "L",
+   "objects": [
+    "Kiefer_R"
+   ],
+   "exploded_offset": [
+    -0.28,
+    -0.12,
+    -0.14
+   ]
+  },
+  {
+   "id": "S08",
+   "label": "S08 Seitenschale (Kern)",
+   "side": "",
+   "objects": [
+    "Kern"
+   ],
+   "exploded_offset": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "id": "S09",
+   "label": "S09 Kragen",
+   "side": "",
+   "objects": [
+    "Kragen"
+   ],
+   "exploded_offset": [
+    0.0,
+    0.05,
+    -0.3
+   ]
+  },
+  {
+   "id": "S10",
+   "label": "S10 Funkmuschel R",
+   "side": "R",
+   "objects": [
+    "Ohrmodul_Buegel_R",
+    "Ohrmodul_Halter_R",
+    "Ohrmodul_Kappe_R",
+    "Ohrmodul_R",
+    "Ohrmodul_Ring_R"
+   ],
+   "exploded_offset": [
+    0.34,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "id": "S10",
+   "label": "S10 Funkmuschel L",
+   "side": "L",
+   "objects": [
+    "Ohrmodul_Buegel_L",
+    "Ohrmodul_Halter_L",
+    "Ohrmodul_Kappe_L",
+    "Ohrmodul_L",
+    "Ohrmodul_Ring_L"
+   ],
+   "exploded_offset": [
+    -0.34,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "id": "S11",
+   "label": "S11 Antenne R",
+   "side": "R",
+   "objects": [
+    "Antenne_Stummel_R"
+   ],
+   "exploded_offset": [
+    0.34,
+    0.0,
+    0.1
+   ]
+  },
+  {
+   "id": "S11",
+   "label": "S11 Antenne L",
+   "side": "L",
+   "objects": [
+    "Antenne_L"
+   ],
+   "exploded_offset": [
+    -0.34,
+    0.0,
+    0.1
+   ]
+  },
+  {
+   "id": "S12",
+   "label": "S12 Rückmodul",
+   "side": "",
+   "objects": [
+    "Rueckmodul",
+    "Rueckmodul_Hebel",
+    "Rueckmodul_Hebel_Arm",
+    "Rueckmodul_Platte",
+    "Rueckmodul_Schraube_0",
+    "Rueckmodul_Schraube_1",
+    "Rueckmodul_Schraube_2",
+    "Rueckmodul_Schraube_3"
+   ],
+   "exploded_offset": [
+    0.0,
+    0.4,
+    0.0
+   ]
+  },
+  {
+   "id": "S13",
+   "label": "S13 Spiralkabel R",
+   "side": "R",
+   "objects": [
+    "Kabel_Huelse_R0",
+    "Kabel_Huelse_R1",
+    "Kabel_R",
+    "Schlauch_Anschluss_R",
+    "Schlauch_Stecker_R"
+   ],
+   "exploded_offset": [
+    0.2,
+    0.22,
+    -0.05
+   ]
+  },
+  {
+   "id": "S13",
+   "label": "S13 Spiralkabel L",
+   "side": "L",
+   "objects": [
+    "Kabel_Huelse_L0",
+    "Kabel_Huelse_L1",
+    "Kabel_L",
+    "Schlauch_Anschluss_L",
+    "Schlauch_Stecker_L"
+   ],
+   "exploded_offset": [
+    -0.2,
+    0.22,
+    -0.05
+   ]
+  }
+ ]
+}
