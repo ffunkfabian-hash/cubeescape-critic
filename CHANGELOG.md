@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.10.0 „Roster“ – 2026-10-29 (drei Roboterkörper aus Ballon)
+
+- Die drei Körperstudien aus `cubeescape-ballon` Roboter Runde 5 (Commit `14bd78d`) als eigene Modelle: Wächter, Paladin, Mechanik.
+- Export `blender/robot/export_robot.py` mit gepinnter Quelle `SOURCE.json`; Lieferpaket `assets/robot-bodies/` mit GLB, Baugruppen und Manifest je Körper.
+- Viewer: `?model=waechter|paladin|mechanik`, im Rahmen des Gesamtkörpers, Explosion 0–1 über die Ballon-Anker, Etiketten, Studienwahl in der GUI.
+- Doku `docs/ROBOTER_BALLON.md`; neun Tests in `robotBodies.test.mjs`, insgesamt 65 Node-Tests grün.
+
 ## 0.9.1 – 2026-10-29 (Patch: Lamellen-Testmatcher)
 
 - `fullBody.test.mjs` prüft beim Ablehnen einer falschen Lamellenzahl jetzt die Meldung `waist.lamellae needs N bands`

@@ -33,4 +33,6 @@
 
 - Prozedurale Blender-Materialien (Rauschen/Mix vor dem Base Color) exportiert glTF als Weiß: für den GLB flache Ersatzmaterialien aus `diffuse_color` erzeugen ([Scout](HELM_SCOUT.md#viewer), `blender/scout/export_scout.py`).
 - Per `exec(open(…).read())` geladene Blender-Skripte kennen kein `__file__`: Pfade einmal im Einstieg setzen (`SCOUT_DIR`/`SCOUT_REF`/`SCOUT_RUNS` in `blender/scout/run.py`), nie absolute Arbeitsordner-Pfade im Generator ([Scout](HELM_SCOUT.md#nachbau)).
+- Fremde Blender-Generatoren mit großem Abhängigkeitsbaum (Ballon-Roboter) pinnen statt kopieren: `SOURCE.json` mit Commit, `git archive` nach `runs/`, nur ein Exportskript im Repo; Explosion über die Segmentwurzeln im GLB statt zweitem GLB ([Roster](ROBOTER_BALLON.md#quelle-und-export)).
+- Auf dem Mac fehlen `node`/`npm` im PATH: Node 24 der Codex-Laufzeit (`~/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin`), npm-Skripte direkt aufrufen, Pillow/NumPy über `uv run --no-project --with-requirements web/requirements.txt` ([0.10](versions/0.10.md)).
 - Der Artefakt-Host liefert kein `.glb` aus: Modell für Webseiten als glTF-JSON mit eingebettetem Puffer (`web/tools/marker_build.mjs`); Vite-Abhängigkeitsscan auf `index.html` begrenzen, sonst meldet der Dev-Server die erst gebaute Markierseite als fehlenden Import ([MARKER.md](MARKER.md)).

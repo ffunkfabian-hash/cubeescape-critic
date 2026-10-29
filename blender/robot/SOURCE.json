@@ -1,0 +1,7 @@
+{
+ "repo": "ffunkfabian-hash/cubeescape-ballon",
+ "branch": "claude/ballon-0-23-gauntlet-runde5-b524af",
+ "commit": "14bd78d84c3b8d497482ad458981e6e9732477f2",
+ "generator": ["basic/robot/studies/", "basic/robot/", "tools/robot_build.py"],
+ "note": "Roboter Runde 5 – drei Körperstudien (Ballon 0.23 „Gauntlet“, nicht in Ballon main gemergt)"
+}

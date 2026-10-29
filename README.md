@@ -24,6 +24,7 @@ Augenmaske mit weitgehend verdeckter Fugenlinie. Die Haube trägt eine sichtbare
 
 - [Stil- und Formbeschreibung](docs/HELM_STIL.md)
 - [Scout v3 – zweiter Helm aus Blender (0.8)](docs/HELM_SCOUT.md) · Viewer `?model=scout`
+- [Drei Roboterkörper aus Ballon (0.10)](docs/ROBOTER_BALLON.md) · Viewer `?model=waechter|paladin|mechanik`
 - [GLB, Texturen, Einzelteilverzeichnis und Prüfbelege](assets/helmet/README.md)
 - [Start, Bedienung und Reproduktion](web/README.md)
 - [Teilekarte H01–H21](docs/HELM_TEILE.md) · [Verlauf mit Vergleichsbildern](docs/HELM_VERLAUF.md)
