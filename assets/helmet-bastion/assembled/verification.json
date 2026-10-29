@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-10-28T20:15:51.102Z",
+  "startedAt": "2026-10-29T09:08:50.039Z",
   "status": "passed",
   "views": [
     "front",
@@ -30,7 +30,7 @@
     "exploded": 0
   },
   "referenceCompatible": false,
-  "outputDirectory": "/Users/ffunk/Library/Caches/Critic/helm-bastion-20261028/delivery-assembled",
+  "outputDirectory": "/Users/ffunk/Library/Caches/Critic/helm-bastion-facets-20261029/guarded-assembled",
   "iouSkipped": true,
   "cameras": {
     "front": {
@@ -139,16 +139,16 @@
     "textures/whiteArmor_roughnessMap.png": "e905554a48bc8c7f728613e80e22987b82686b8232bdf49f94e50b7bcc647182",
     "textures/whiteTextured_bumpMap.png": "c4ace6c801244697c9be598a42d9a5a36dae194fb3551c26df59a3b8c789bd61",
     "textures/materials.json": "9a2e1b083d77c8375d33847a3baaef5a9e20cb092211bb9a7822042ce67edb58",
-    "assembly.json": "8829526b87ea8470f889e1bbacf23f28ac7c74839ee0cda81a30e16c5eba8908",
-    "scifi_helmet.glb": "99545587caf3e27fa36d0044abc022a7912e4b11f1bba11d8b90be63e1a5544c",
-    "render_front.png": "e617f434c8367130e738b4e20d56d3230bb213bafac2397fd13cd6d3d12df5f8",
+    "assembly.json": "d915994e2e6e85566669fa9e248b16424ff6a31637f02a50de3c39c4da6b6371",
+    "scifi_helmet.glb": "c85c9b596d0cda1269f5436d5f86a0bfbfd43ad85eeb9e203ba024dd4c0c1baf",
+    "render_front.png": "25811a1f4e38f7ed898c7c58671cef9c487ff62eb7f405066970a63ac1d3a6b8",
     "mask_front.png": "01ecbd55eab73803f364e509e0af233ee0e2b81fc3f79ec80200599e386d1128",
-    "render_left.png": "8f1eb0ff446ee4aa635bc47610aff7b95b46ee42398f3d1dcf508a536ea65604",
-    "mask_left.png": "528c3f43a3497944f56ab7712bb4d69d5f162e92745269313133a26a4f3d02a9",
+    "render_left.png": "2d67461eac8539a5964667f1e18a7b53244e959bdafc820ef6ea9a61ff5f34f7",
+    "mask_left.png": "c76a764ebbcf025e9d537cfbd0434b6f4f9b06125b6e0f0e16c099e62cb220ca",
     "render_back.png": "9f5cf5c593eb70fd5bf171dff8af51313efea17a9182d68b1ca37263d0427456",
     "mask_back.png": "7df75f727545fc6ee8eb798eb37355245dc251aa0efdd8c17bd529f5ec808f2a",
-    "render_right.png": "3f308443aa958b9d77e8e6e1c7059824dfb7aa73342b6a977a629587b2012026",
-    "mask_right.png": "fd170da7aa4ec6fdce260c9b71fb832bdb2b2d5a0a2dc05812f3a4ad3d3a52bc"
+    "render_right.png": "3012aa4be880452bd0c1041251e7bea2b7ef935e51120408a3acc5e4f69b0085",
+    "mask_right.png": "54ea05e530a8d9bea30634cb88a0a6eb0bd80f171ae501ca2fa0e762db01ffd8"
   },
   "sources": {
     "files": {
@@ -171,10 +171,10 @@
       "src/parts/mirrorComms.js": "068c25cbb6c5728382afd5f330c69d3486d33c9f4fde3cd7c5a8ec309b05ed37",
       "src/parts/neck.js": "df7208322bef09cdd445fe14e724869851604377d8bcdf4ae6a9c57ed96d5110",
       "src/parts/rightComms.js": "72d2fd5533648f20bec1e76f9b5e98beee7483c03d6e5893ef3d2ac121b768cc",
-      "src/parts/shoulderStudy.js": "bd7d327d7686900e53ec8af396e24f5e92c78fc30391851d7df33b4d4c84886f",
+      "src/parts/shoulderStudy.js": "bd0dbd87001c376f21c8abe687e7eaa0b4366b5039dacae7845bddc8c55ba5ec",
       "src/parts/upperHelmet.js": "35b63462a2360304e3ff304ce07e323cf419f7c9e5d7d52e0cea90ae39dc0abf",
       "src/shapeFit.js": "57c4a7b94b0edbcbed61a38e2f1939af7e721101ce9b04d73c0de96159640ed8",
-      "src/shoulderStudyParams.json": "068155722724a9abb3b66784ceb03db1c94e4c651efd5353fb6167ad66edb938",
+      "src/shoulderStudyParams.json": "d674924c9dbe834cde7b7d3fabdd3c3b498f16b568b1f724eb8304bd0a168ad0",
       "src/textures.js": "02d14cfc27a5334c7c013c7db2def61e19c53f158e9cf6b3f0c8492d2e04cc54",
       "refs/meshy-reference.json": "47f6e9df33dada643dafadbbb90994b69c66ce522789f4eae25b7ec7f78fa673",
       "refs/ref_back.png": "633b725f396863ea0181b0d44c0f905308bb8460562c5fa23d73a3029dba857d",
@@ -198,7 +198,7 @@
       "tools/runnerFailure.test.mjs": "381f8c306b51725d7c3c7e509cca3c8eb107de7ce0acc9ee962c8592f98deda1",
       "tools/save_pass.py": "75b14c2c1ccc97261b6918cad15bd49c699d9454f1f4eb0a75b70b261fe7e459",
       "tools/shapeFit.test.mjs": "986718a779f898cc6d6e808de055ec5555d3e7ff542e3afabe76003406dca4b8",
-      "tools/shoulderStudy.test.mjs": "05441bd7cf5bd4fb0f299f8207a899570f5a34c3f89bf81065273a3beeea4ffb",
+      "tools/shoulderStudy.test.mjs": "af6de498e2f8c145135a908892cc329a5ed359f65628c4c48b6cad71d5bf8307",
       "tools/stripToggle.test.mjs": "2e2d4589787e781032c60a77eff2c5c47946b0afdf7cbf812a3ba6e096943c43",
       "tools/test_iou.py": "b8eb89df5ce55cf7618a73297f21e4806e2087e4ba31ecc72656264788d4ed98",
       "tools/test_save_pass.py": "32706b25972fb725dc9851907221e0ca8404fb7ecb6468bf051a49d6f0f455b0",
@@ -214,7 +214,7 @@
       ".nvmrc": "7e8a2fa94951112b894a3dbe3d05efef5e9263741fa49125f0a70f40fedab4cc",
       "../reference/helm/turnaround.mp4": "fac039db10d9d3ee3c74373c38e323dd53489df69eee18971e736c9d971e70de"
     },
-    "digest": "b273baeb704beb62ed22fd2d077d821b9069bf693bebb2b853913c41d25b9cc2"
+    "digest": "125cf5ebe0c7648202fcac71b08dc0804273d84467c271deb4603b1f823d84c6"
   },
   "runtime": {
     "node": "v24.19.0",
@@ -1794,7 +1794,7 @@
       "center": [
         0,
         -0.8450000286102295,
-        0.5058938711881638
+        0.5263585597276688
       ]
     },
     {
@@ -2144,6 +2144,7 @@
       "ridgeHeight": 0.045,
       "ridgeWidth": 0.34,
       "depth": 0.07,
+      "centerDepth": 0.135,
       "bevel": 0.012,
       "sideSweep": 0.5,
       "widthScale": 1.1,
@@ -2316,20 +2317,30 @@
       "flankX": 0.65,
       "flankTaper": 0.3,
       "flankTaperStart": 1.05,
-      "centerLift": 0.035,
+      "centerLift": 0.1,
       "centerSlope": 0.06,
       "centerSlopeOrigin": -0.84,
       "relief": {
         "vertices": [
           [
             0,
-            -0.93,
-            0.16
+            -0.9,
+            0.08
+          ],
+          [
+            0.17,
+            -1,
+            0.15
+          ],
+          [
+            -0.17,
+            -1,
+            0.15
           ],
           [
             0,
-            -1.115,
-            0.2
+            -1.13,
+            0.12
           ]
         ],
         "triangles": [
@@ -2339,51 +2350,79 @@
             8
           ],
           [
-            0,
-            8,
-            7
-          ],
-          [
-            8,
-            9,
-            7
+            1,
+            2,
+            9
           ],
           [
             1,
-            2,
-            8
-          ],
-          [
-            2,
             9,
             8
           ],
           [
-            7,
-            9,
-            6
+            0,
+            8,
+            10
           ],
           [
-            6,
-            9,
-            5
+            0,
+            10,
+            7
           ],
           [
-            5,
+            8,
             9,
-            4
+            11
+          ],
+          [
+            8,
+            11,
+            10
           ],
           [
             2,
             3,
             9
+          ],
+          [
+            9,
+            3,
+            11
           ],
           [
             3,
             4,
-            9
+            11
+          ],
+          [
+            7,
+            10,
+            6
+          ],
+          [
+            6,
+            10,
+            11
+          ],
+          [
+            6,
+            11,
+            5
+          ],
+          [
+            4,
+            5,
+            11
           ]
-        ]
+        ],
+        "pads": {
+          "groove": 0.008,
+          "height": 0.022,
+          "chamfer": 0.008,
+          "embed": 0.006,
+          "minMargin": 0.005,
+          "minNormalZ": 0.4
+        }
       }
     },
     "hardware": {
@@ -2396,7 +2435,7 @@
     "denoiseSeed": 47
   },
   "glb": {
-    "bytes": 4482812,
+    "bytes": 4510048,
     "meshes": 87,
     "nodes": 96,
     "materials": 10,
@@ -2406,5 +2445,5 @@
     "maps": 11,
     "manifest": "textures/materials.json"
   },
-  "finishedAt": "2026-10-28T20:15:58.777Z"
+  "finishedAt": "2026-10-29T09:08:57.915Z"
 }

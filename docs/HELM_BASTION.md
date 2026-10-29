@@ -41,16 +41,28 @@ Lamelle bildet die zweite Lage; sie verjüngt sich nach unten. Die dunklen Gelen
 Die weißen Dachoberkanten bleiben unter Y = −0,58, dem bereits geprüften Grenzwert für die niedrige Schulterlage.
 
 **Brust:** B27 schließt die Mitte als eine einzelne, nach vorne gewölbte Platte. Die Grundebene lautet
-`Z = frontZ + centerLift + centerSlope * (Y - centerSlopeOrigin) - depth`, mit `centerSlopeOrigin = -0.84`. Zwei innere Scheitelpunkte liegen 0,16 und 0,20
-vor dieser Ebene. Zehn ausdrücklich vorgegebene Dreiecksflächen verbinden sie mit dem achtteiligen Rand;
+`Z = frontZ + centerLift + centerSlope * (Y - centerSlopeOrigin) - depth`, mit `centerSlopeOrigin = -0.84`,
+`centerLift = 0.10` und eigener Plattentiefe `centerDepth = 0.135` (vorher 0,035 bzw. 0,07). Die Platte ist damit
+ein Körper mit sichtbarer Seitenwand statt eines dünnen Keils. Vier innere Punkte liegen vor dieser Ebene:
+Brustbein 0,08, zwei seitliche Brustscheitel bei X ±0,17 je 0,15 und ein unterer Mittelpunkt 0,12.
+Vierzehn ausdrücklich vorgegebene Dreiecksflächen verbinden sie mit dem achtteiligen Rand;
 so entstehen symmetrische, bewusst gesetzte Facetten statt zufälliger Triangulationsmuster.
-Der Rand und die Rückseite bleiben am bisherigen Anschluss, die Brust gewinnt nach vorne Volumen.
 `beveledPlate` ergänzt dafür optional innere Punkte nur an der Frontkappe; Rückseite, Fasen und Seitenwände
 bleiben geschlossen. Die Indizes berücksichtigen eine mögliche Umkehrung der Konturreihenfolge.
 
+**Fugen:** Nach dem zweiten Facettenbild trägt jede der vierzehn Flächen ein eigenes erhabenes Feld (`relief.pads`).
+Jedes Feld ist ein geschlossener Körper: um `groove = 0.008` von allen Facettenkanten eingerückt, mit Fugenwand und
+zweistufiger Rundfase (`chamfer = 0.008`). Die Feldoberseite liegt auf der um `height = 0.022` entlang der Normale
+versetzten Facettenebene; die Ringe sind aber entlang +Z extrudiert. So decken die Felder steiler Nachbarfacetten
+keine Fuge ab: Alle 17 Innenkanten bleiben in der Frontalansicht offen, und die Felder bleiben exakt im Plattenumriss.
+Eine erste Variante entlang der Normale verdeckte vier Fugen und stand bis 0,004 über den Umriss; der Richter
+und eine Messung aller Kanten haben das aufgedeckt. Felder und Platte bilden zusammen weiterhin das eine
+Teil B27; Kennungen und Explosionszuordnung ändern sich nicht.
+
 Die erste Probe hatte unruhige Dreiecke aus einer verzogenen Randkontur, die nächste eine plane Brustfläche.
 Der Nutzer empfand diese seitlich als aufgedrückt und flach und wünschte mehr Volumen und Struktur.
-Die neue Reliefgeometrie setzt genau diese Korrektur um. B12/B13 bleiben seitliche Brustsegmente mit stabilen
+Die erste Reliefgeometrie mit zwei Scheiteln auf der Mittellinie wirkte im Profil noch wie ein spitzer Keil vor dem
+Schultergehäuse. Daher steht die ganze Platte jetzt weiter vor, und die Fugen gliedern die Facetten. B12/B13 bleiben seitliche Brustsegmente mit stabilen
 Kennungen und internen Namen. Die Fläche ist kein Bemalungsmuster und keine Wiederaufnahme der verworfenen Haubenmuster.
 
 **Flanken:** B28/B29 sind eigene seitliche Platten. Ihr X-Abstand nimmt nach unten ab, passend zur Taille.
@@ -92,12 +104,16 @@ npm --prefix web run build
 ./ce lock gpu -- node assets/helmet-bastion/browser-qa.mjs
 ```
 
-59 Tests: 46 Node-, fünf IoU- und acht Belegsicherungsprüfungen. Geschlossene Kanten, konsistente Orientierung,
+60 Tests: 47 Node-, fünf IoU- und acht Belegsicherungsprüfungen. Geschlossene Kanten, konsistente Orientierung,
 positive Volumina, UVs und deterministische Erzeugung prüfen weiterhin die aktuelle gesamte Körperstudie.
 Die formgebundenen Cuirass-Prüfungen verwenden jetzt dessen unveränderte Parameter aus
 `web/tools/fixtures/cuirass.json`; sie werden nicht an die neue Form angepasst oder gelöscht.
 Drei zusätzliche Bastion-Tests prüfen die geschlossene Brustmitte, sichtbare Flanken, tiefe Schulterdächer
-über den Gelenken, die untere Lage den Rückweg auf das gerundete Schulterverfahren sowie mehr als 0,15 echte Brustprojektion gegenüber der planen Negativkontrolle bei unverändertem Rand.
+über den Gelenken, die untere Lage den Rückweg auf das gerundete Schulterverfahren. Für die Brust gilt: Jede der
+vierzehn Facetten steht vor der planen Negativkontrolle, die stärkste um mehr als 0,10; der Umriss ist exakt gleich;
+B27 reicht weiter als die erste Reliefprobe (Z > 0,66) und ist ohne Felder über 0,29, mit Feldern über 0,30 tief.
+Ein weiterer Test belegt die Fugen aus den Parametern: An allen 17 gemeinsamen Facettenkanten liegt die
+Plattenoberfläche frontal frei, in allen vierzehn Facettenmitten steht das Feld genau um seine Höhe darüber.
 Für den exakten alten Lieferstand gelten weiterhin dessen Quellpin und vollständige Parameter.
 
 Die Körperkameras sind unverändert, daher sind Vorher/Nachher direkt vergleichbar. Keine neue Video-IoU:
@@ -106,15 +122,19 @@ Die Körperansichten sind keine Helmreferenzmessung. [Lieferindex](../assets/hel
 
 ## Gemessene Größen
 
-Gegenüber Cuirass: Außenbreite 1,9900 → 2,0700 Modelleinheiten, größte Vorderposition Z 0,5046 → 0,6435,
-gesamte Körperbautiefe 0,9296 → 1,0685. Die Kerntiefe bleibt 0,7200; der Zugewinn entsteht durch die äußere
+Gegenüber Cuirass: Außenbreite 1,9900 → 2,0700 Modelleinheiten, größte Vorderposition Z 0,5046 → 0,6844
+(erste Reliefprobe 0,6435), gesamte Körperbautiefe 0,9296 → 1,1094 (erste Reliefprobe 1,0685).
+B27 allein ist jetzt 0,3161 tief (erste Reliefprobe 0,2752). Am Brustbein, wo jetzt eine Fuge verläuft, liegt die
+Front mit Z 0,622 etwas hinter der ersten Reliefprobe (0,638); die Masse sitzt nun bei den seitlichen Brustscheiteln. Die Kerntiefe bleibt 0,7200; der Zugewinn entsteht durch die äußere
 Panzerung. Halslänge 0,3100. Die montierten Kameras sind für alle Vergleiche identisch.
 
 ![Flache Zwischenprobe und Volumenkorrektur](bilder/helm_bastion_volumenvergleich.jpg)
 
+![Erste Reliefprobe und gefugte Facettenbrust](bilder/helm_bastion_fugenvergleich.jpg)
+
 ## Eindruck und offene Konstruktion
 
-Aus Sicht des Agenten liest sich der Oberkörper jetzt technischer: voluminöse Brustmitte mit großen symmetrischen Facetten, abgesetzte Flanken,
+Aus Sicht des Agenten liest sich der Oberkörper jetzt technischer: eine Brustmitte mit Körper auch im Profil, gefugte symmetrische Facettenfelder, abgesetzte Flanken,
 tiefe Schulterkästen und eine klare zweite Panzerlage. Er ist kantiger und etwas breiter als Cuirass; die nachgereichte Korrektur bricht die Schulterkanten weicher, ohne den
 Hals zu verlängern oder die Schultern stark anzuheben. Die Seitenansicht zeigt die Gehäusetiefe besonders deutlich.
 

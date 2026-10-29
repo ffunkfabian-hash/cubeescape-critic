@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-10-28T20:15:58.900Z",
+  "startedAt": "2026-10-29T09:08:58.059Z",
   "status": "passed",
   "views": [
     "assembly",
@@ -31,7 +31,7 @@
     "exploded": 1
   },
   "referenceCompatible": false,
-  "outputDirectory": "/Users/ffunk/Library/Caches/Critic/helm-bastion-20261028/delivery-exploded",
+  "outputDirectory": "/Users/ffunk/Library/Caches/Critic/helm-bastion-facets-20261029/guarded-exploded",
   "iouSkipped": true,
   "cameras": {
     "assembly": {
@@ -163,18 +163,18 @@
     "textures/whiteArmor_roughnessMap.png": "e905554a48bc8c7f728613e80e22987b82686b8232bdf49f94e50b7bcc647182",
     "textures/whiteTextured_bumpMap.png": "c4ace6c801244697c9be598a42d9a5a36dae194fb3551c26df59a3b8c789bd61",
     "textures/materials.json": "588575bf179573b66c41662e97c06844512d536b93263caa52c8bb93845e1923",
-    "assembly.json": "1caa2ef9a7c06f1730d38c39bbd8567081ee608b730286dea97a4657691e28f0",
-    "scifi_helmet.glb": "09b0940338c3225c62fc6d62fdc4d9958c31d99ed9f202755b4b7a63bceff7f6",
-    "render_assembly.png": "d40e97e504bb138876112b22a3035bd40088017a31ed765f63e953fe9cd79aed",
-    "mask_assembly.png": "e1cac2251a684d420f50e69017c1bebfe4b25aa3016e9132df63c13677cfb8b4",
-    "render_front.png": "46259e757322396c01c6c007fba257e01b3ea1718298e7b150e3bc017e34cf07",
+    "assembly.json": "1855f7cd1d5782e75d271482b62b4c7ba49f87c160c7081bc1cdf0c62b100932",
+    "scifi_helmet.glb": "d3467fe292e01222a5bd636501c5ef3454c4594cdc8d4cc023e08cd03399ccbb",
+    "render_assembly.png": "ad14d6eb09d5f85b36436bc5b99cc1ebb2962185ebfea3fa19275c1d14ca3121",
+    "mask_assembly.png": "a02e910d80aeaaeb237e6acfb82a7bb883ce12bfade4b1301436470691d4e394",
+    "render_front.png": "a1d4007bf15c9d49ae5f528db056e2ba6a91feb1667eb4bb9013f783e43b13b4",
     "mask_front.png": "5e219546fe74f2cbc7768b9e2344a22991e681229b5b9433e1c764360cea460e",
-    "render_left.png": "41cbe9d017cf726fe17e330e591be0a2d43e591ebaebba0fbd546e0c64fb02c0",
-    "mask_left.png": "6878bb2e3ea3c1c2653abfbe97dac8d9ee264e9c8c82568214daa8bd4b02b3c5",
-    "render_back.png": "ea0635136d3efaf1fc0e10d446bde6af8b96bf0af3b882f593d3def2f94baa04",
-    "mask_back.png": "71e0dca91f12aadc5f2284d971668c9abde62cbfaa2c6ad405cb5682c6e19449",
-    "render_right.png": "f6e08cdf5d0c8046ea891a0ff4a168200b95e442acf29f6641aa38c234810c00",
-    "mask_right.png": "92e3807e07686e3e30abe3fd3b4d40e690bf52523b9d845b6ee32753403bdf85"
+    "render_left.png": "9b415c617eb2037f89705125fc3b9e89be6a9fde5057e34d872f1685d2c087e2",
+    "mask_left.png": "e582542e04cd472e7a2022c30c210a65d6d0f6c64ca0547514a815d1722cf372",
+    "render_back.png": "125333f8efef0e74523b41a5fefd02d77eb8aded5fab6c626776ea1da2eca5c8",
+    "mask_back.png": "51b0c20921234eb56bcadc996fe691cc49f1d4b4e9016fae5747cd1dcf50001b",
+    "render_right.png": "43d7d625c829b43a266f7f55ee871569de8ff44b01222b44aaf66019ab672ce8",
+    "mask_right.png": "1106753c4845526a17b67495aa245ebae2750f475f66747e42a7ab646bf97713"
   },
   "sources": {
     "files": {
@@ -197,10 +197,10 @@
       "src/parts/mirrorComms.js": "068c25cbb6c5728382afd5f330c69d3486d33c9f4fde3cd7c5a8ec309b05ed37",
       "src/parts/neck.js": "df7208322bef09cdd445fe14e724869851604377d8bcdf4ae6a9c57ed96d5110",
       "src/parts/rightComms.js": "72d2fd5533648f20bec1e76f9b5e98beee7483c03d6e5893ef3d2ac121b768cc",
-      "src/parts/shoulderStudy.js": "bd7d327d7686900e53ec8af396e24f5e92c78fc30391851d7df33b4d4c84886f",
+      "src/parts/shoulderStudy.js": "bd0dbd87001c376f21c8abe687e7eaa0b4366b5039dacae7845bddc8c55ba5ec",
       "src/parts/upperHelmet.js": "35b63462a2360304e3ff304ce07e323cf419f7c9e5d7d52e0cea90ae39dc0abf",
       "src/shapeFit.js": "57c4a7b94b0edbcbed61a38e2f1939af7e721101ce9b04d73c0de96159640ed8",
-      "src/shoulderStudyParams.json": "068155722724a9abb3b66784ceb03db1c94e4c651efd5353fb6167ad66edb938",
+      "src/shoulderStudyParams.json": "d674924c9dbe834cde7b7d3fabdd3c3b498f16b568b1f724eb8304bd0a168ad0",
       "src/textures.js": "02d14cfc27a5334c7c013c7db2def61e19c53f158e9cf6b3f0c8492d2e04cc54",
       "refs/meshy-reference.json": "47f6e9df33dada643dafadbbb90994b69c66ce522789f4eae25b7ec7f78fa673",
       "refs/ref_back.png": "633b725f396863ea0181b0d44c0f905308bb8460562c5fa23d73a3029dba857d",
@@ -224,7 +224,7 @@
       "tools/runnerFailure.test.mjs": "381f8c306b51725d7c3c7e509cca3c8eb107de7ce0acc9ee962c8592f98deda1",
       "tools/save_pass.py": "75b14c2c1ccc97261b6918cad15bd49c699d9454f1f4eb0a75b70b261fe7e459",
       "tools/shapeFit.test.mjs": "986718a779f898cc6d6e808de055ec5555d3e7ff542e3afabe76003406dca4b8",
-      "tools/shoulderStudy.test.mjs": "05441bd7cf5bd4fb0f299f8207a899570f5a34c3f89bf81065273a3beeea4ffb",
+      "tools/shoulderStudy.test.mjs": "af6de498e2f8c145135a908892cc329a5ed359f65628c4c48b6cad71d5bf8307",
       "tools/stripToggle.test.mjs": "2e2d4589787e781032c60a77eff2c5c47946b0afdf7cbf812a3ba6e096943c43",
       "tools/test_iou.py": "b8eb89df5ce55cf7618a73297f21e4806e2087e4ba31ecc72656264788d4ed98",
       "tools/test_save_pass.py": "32706b25972fb725dc9851907221e0ca8404fb7ecb6468bf051a49d6f0f455b0",
@@ -240,7 +240,7 @@
       ".nvmrc": "7e8a2fa94951112b894a3dbe3d05efef5e9263741fa49125f0a70f40fedab4cc",
       "../reference/helm/turnaround.mp4": "fac039db10d9d3ee3c74373c38e323dd53489df69eee18971e736c9d971e70de"
     },
-    "digest": "b273baeb704beb62ed22fd2d077d821b9069bf693bebb2b853913c41d25b9cc2"
+    "digest": "125cf5ebe0c7648202fcac71b08dc0804273d84467c271deb4603b1f823d84c6"
   },
   "runtime": {
     "node": "v24.19.0",
@@ -1820,7 +1820,7 @@
       "center": [
         0,
         -1.4450000286102296,
-        0.9258938711881637
+        0.9463585597276687
       ]
     },
     {
@@ -2170,6 +2170,7 @@
       "ridgeHeight": 0.045,
       "ridgeWidth": 0.34,
       "depth": 0.07,
+      "centerDepth": 0.135,
       "bevel": 0.012,
       "sideSweep": 0.5,
       "widthScale": 1.1,
@@ -2342,20 +2343,30 @@
       "flankX": 0.65,
       "flankTaper": 0.3,
       "flankTaperStart": 1.05,
-      "centerLift": 0.035,
+      "centerLift": 0.1,
       "centerSlope": 0.06,
       "centerSlopeOrigin": -0.84,
       "relief": {
         "vertices": [
           [
             0,
-            -0.93,
-            0.16
+            -0.9,
+            0.08
+          ],
+          [
+            0.17,
+            -1,
+            0.15
+          ],
+          [
+            -0.17,
+            -1,
+            0.15
           ],
           [
             0,
-            -1.115,
-            0.2
+            -1.13,
+            0.12
           ]
         ],
         "triangles": [
@@ -2365,51 +2376,79 @@
             8
           ],
           [
-            0,
-            8,
-            7
-          ],
-          [
-            8,
-            9,
-            7
+            1,
+            2,
+            9
           ],
           [
             1,
-            2,
-            8
-          ],
-          [
-            2,
             9,
             8
           ],
           [
-            7,
-            9,
-            6
+            0,
+            8,
+            10
           ],
           [
-            6,
-            9,
-            5
+            0,
+            10,
+            7
           ],
           [
-            5,
+            8,
             9,
-            4
+            11
+          ],
+          [
+            8,
+            11,
+            10
           ],
           [
             2,
             3,
             9
+          ],
+          [
+            9,
+            3,
+            11
           ],
           [
             3,
             4,
-            9
+            11
+          ],
+          [
+            7,
+            10,
+            6
+          ],
+          [
+            6,
+            10,
+            11
+          ],
+          [
+            6,
+            11,
+            5
+          ],
+          [
+            4,
+            5,
+            11
           ]
-        ]
+        ],
+        "pads": {
+          "groove": 0.008,
+          "height": 0.022,
+          "chamfer": 0.008,
+          "embed": 0.006,
+          "minMargin": 0.005,
+          "minNormalZ": 0.4
+        }
       }
     },
     "hardware": {
@@ -2422,7 +2461,7 @@
     "denoiseSeed": 47
   },
   "glb": {
-    "bytes": 4520388,
+    "bytes": 4547624,
     "meshes": 87,
     "nodes": 88,
     "materials": 10,
@@ -2438,5 +2477,5 @@
     "maps": 11,
     "manifest": "textures/materials.json"
   },
-  "finishedAt": "2026-10-28T20:16:07.572Z"
+  "finishedAt": "2026-10-29T09:09:06.860Z"
 }
