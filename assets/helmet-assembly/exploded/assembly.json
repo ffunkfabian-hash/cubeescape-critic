@@ -1,0 +1,833 @@
+{
+  "options": {
+    "headset": "on",
+    "body": "none",
+    "exploded": 1
+  },
+  "parts": [
+    {
+      "id": "H01",
+      "label": "Schädelhaube",
+      "connection": "Verdeckte Auflage und Befestigung an H09/H03 konstruieren.",
+      "meshes": [
+        {
+          "name": "H01_Crown_1",
+          "path": "SciFiHelmet/H01_Crown_1[0]"
+        }
+      ],
+      "center": [
+        0.000004410743713378906,
+        1.1415728774666785,
+        0.032858386635780334
+      ]
+    },
+    {
+      "id": "H05A",
+      "label": "Wange A",
+      "connection": "Fugen und Befestigung zur Augenmaske und zum Kiefer.",
+      "meshes": [
+        {
+          "name": "H05A_Cheek_R_1",
+          "path": "SciFiHelmet/H05A_Cheek_R_1[0]"
+        }
+      ],
+      "center": [
+        -0.6585336881876008,
+        -0.3088361451774836,
+        0.9720909851789472
+      ]
+    },
+    {
+      "id": "H05B",
+      "label": "Wange B",
+      "connection": "Fugen und Befestigung zur Augenmaske und zum Kiefer.",
+      "meshes": [
+        {
+          "name": "H05B_Cheek_L_1",
+          "path": "SciFiHelmet/H05B_Cheek_L_1[0]"
+        }
+      ],
+      "center": [
+        0.6585372048616427,
+        -0.30882930088788274,
+        0.9720910000801086
+      ]
+    },
+    {
+      "id": "H06",
+      "label": "Mitteleinsatz / Schienen",
+      "connection": "Einsatz und Schienen sind eigene Meshes; Haltepunkte offen.",
+      "meshes": [
+        {
+          "name": "H06_Mouth_Insert_1",
+          "path": "SciFiHelmet/H06_Mouth_Insert_1[0]"
+        },
+        {
+          "name": "H06_MouthRail_R_2",
+          "path": "SciFiHelmet/H06_MouthRail_R_2[0]"
+        },
+        {
+          "name": "H06_MouthRail_L_3",
+          "path": "SciFiHelmet/H06_MouthRail_L_3[0]"
+        },
+        {
+          "name": "H06_MaskGap_4",
+          "path": "SciFiHelmet/H06_MaskGap_4[0]"
+        },
+        {
+          "name": "H06_MaskGap_5",
+          "path": "SciFiHelmet/H06_MaskGap_5[0]"
+        }
+      ],
+      "center": [
+        0.050000001348271074,
+        -0.5673368535885708,
+        1.4378249688020017
+      ]
+    },
+    {
+      "id": "H03",
+      "label": "Augenmaske",
+      "connection": "Maskenauflage und lösbare Anschlüsse zum hellen Rahmen.",
+      "meshes": [
+        {
+          "name": "H03_Shell_1",
+          "path": "SciFiHelmet/H03_Shell_1[0]"
+        }
+      ],
+      "center": [
+        1.4901161193847656e-8,
+        0.14080061435699465,
+        0.9876069857552647
+      ]
+    },
+    {
+      "id": "H04A",
+      "label": "Auge A",
+      "connection": "Leuchteinsatz, Halter und elektrische Durchführung fehlen.",
+      "meshes": [
+        {
+          "name": "H04A_Visor_R_1",
+          "path": "SciFiHelmet/H04A_Visor_R_1[0]"
+        }
+      ],
+      "center": [
+        -0.3056351530276189,
+        0.13352656281322645,
+        1.5676443230782544
+      ]
+    },
+    {
+      "id": "H04B",
+      "label": "Auge B",
+      "connection": "Leuchteinsatz, Halter und elektrische Durchführung fehlen.",
+      "meshes": [
+        {
+          "name": "H04B_Visor_L_1",
+          "path": "SciFiHelmet/H04B_Visor_L_1[0]"
+        }
+      ],
+      "center": [
+        0.30563515065560865,
+        0.13352656301176774,
+        1.5676443085777456
+      ]
+    },
+    {
+      "id": "H02",
+      "label": "Brauenkante",
+      "connection": "Übergang zur Augenmaske; getrennte schmale Kante.",
+      "meshes": [
+        {
+          "name": "H02_Brim_1",
+          "path": "SciFiHelmet/H02_Brim_1[0]"
+        }
+      ],
+      "center": [
+        0,
+        0.6300000134557485,
+        0.4711194078624249
+      ]
+    },
+    {
+      "id": "H14A",
+      "label": "Maskenhalter A",
+      "connection": "Gelenk- und Schraubverbindung an der Maske.",
+      "meshes": [
+        {
+          "name": "H14A_Detail[0]_1",
+          "path": "SciFiHelmet/H14A_Detail[0]_1[0]"
+        },
+        {
+          "name": "H14A_Detail[1]_2",
+          "path": "SciFiHelmet/H14A_Detail[1]_2[0]"
+        },
+        {
+          "name": "H14A_Detail[2]_3",
+          "path": "SciFiHelmet/H14A_Detail[2]_3[0]"
+        },
+        {
+          "name": "H14A_Detail[3]_4",
+          "path": "SciFiHelmet/H14A_Detail[3]_4[0]"
+        },
+        {
+          "name": "H14A_Detail[4]_5",
+          "path": "SciFiHelmet/H14A_Detail[4]_5[0]"
+        },
+        {
+          "name": "H14A_Detail[5]_6",
+          "path": "SciFiHelmet/H14A_Detail[5]_6[0]"
+        },
+        {
+          "name": "H14A_Detail[6]_7",
+          "path": "SciFiHelmet/H14A_Detail[6]_7[0]"
+        }
+      ],
+      "center": [
+        -1.1016031755667162,
+        0.3875283771837258,
+        0.5594977990321024
+      ]
+    },
+    {
+      "id": "H14B",
+      "label": "Maskenhalter B",
+      "connection": "Gelenk- und Schraubverbindung an der Maske.",
+      "meshes": [
+        {
+          "name": "H14B_Detail[0]_1",
+          "path": "SciFiHelmet/H14B_Detail[0]_1[0]"
+        },
+        {
+          "name": "H14B_Detail[1]_2",
+          "path": "SciFiHelmet/H14B_Detail[1]_2[0]"
+        },
+        {
+          "name": "H14B_Detail[2]_3",
+          "path": "SciFiHelmet/H14B_Detail[2]_3[0]"
+        },
+        {
+          "name": "H14B_Detail[3]_4",
+          "path": "SciFiHelmet/H14B_Detail[3]_4[0]"
+        },
+        {
+          "name": "H14B_Detail[4]_5",
+          "path": "SciFiHelmet/H14B_Detail[4]_5[0]"
+        },
+        {
+          "name": "H14B_Detail[5]_6",
+          "path": "SciFiHelmet/H14B_Detail[5]_6[0]"
+        },
+        {
+          "name": "H14B_Detail[6]_7",
+          "path": "SciFiHelmet/H14B_Detail[6]_7[0]"
+        }
+      ],
+      "center": [
+        1.252263109825788,
+        0.3659261627069426,
+        0.5594977987599788
+      ]
+    },
+    {
+      "id": "F01",
+      "label": "Schraubensatz oben",
+      "connection": "Visualisierte Köpfe; keine konstruierten Gewinde / Bohrungen.",
+      "meshes": [
+        {
+          "name": "F01_Screws_Upper_1",
+          "path": "SciFiHelmet/F01_Screws_Upper_1[0]"
+        }
+      ],
+      "center": [
+        -0.639995842576027,
+        0.620033684372902,
+        1.1812491315603255
+      ]
+    },
+    {
+      "id": "H09",
+      "label": "Seiten- / Heckgehäuse",
+      "connection": "Träger für Haube, Rahmen und Anbauten; Wandstärken offen.",
+      "meshes": [
+        {
+          "name": "H09_Core_1",
+          "path": "SciFiHelmet/H09_Core_1[0]"
+        },
+        {
+          "name": "H09_RearPanel_2",
+          "path": "SciFiHelmet/H09_RearPanel_2[0]"
+        }
+      ],
+      "center": [
+        0.012499999999999997,
+        0.17274999747797848,
+        -0.8822273635864257
+      ]
+    },
+    {
+      "id": "H10",
+      "label": "Nacken- / Seitenrahmen",
+      "connection": "Auflage und Verschraubung des hellen Gehäuses.",
+      "meshes": [
+        {
+          "name": "H10_Collar_1",
+          "path": "SciFiHelmet/H10_Collar_1[0]"
+        },
+        {
+          "name": "H10_CollarDipPlate_2",
+          "path": "SciFiHelmet/H10_CollarDipPlate_2[0]"
+        },
+        {
+          "name": "H10_Detail[0]_3",
+          "path": "SciFiHelmet/H10_Detail[0]_3[0]"
+        }
+      ],
+      "center": [
+        0.025031946455846943,
+        -0.5458699636224281,
+        -0.5031707333021092
+      ]
+    },
+    {
+      "id": "H11A",
+      "label": "Einlagen A",
+      "connection": "Einlagen und Taschenböden; Aufnahme im Rahmen konstruieren.",
+      "meshes": [
+        {
+          "name": "H11A_CollarSlotFloor_R_1",
+          "path": "SciFiHelmet/H11A_CollarSlotFloor_R_1[0]"
+        },
+        {
+          "name": "H11A_CollarPanelFloor_R_2",
+          "path": "SciFiHelmet/H11A_CollarPanelFloor_R_2[0]"
+        },
+        {
+          "name": "H11A_CollarSocketFloor_R_3",
+          "path": "SciFiHelmet/H11A_CollarSocketFloor_R_3[0]"
+        },
+        {
+          "name": "H11A_Jaw_Insert_R_4",
+          "path": "SciFiHelmet/H11A_Jaw_Insert_R_4[0]"
+        },
+        {
+          "name": "H11A_Jaw_InsertSlot_R_5",
+          "path": "SciFiHelmet/H11A_Jaw_InsertSlot_R_5[0]"
+        }
+      ],
+      "center": [
+        -1.0205544240763413,
+        -0.5285810474753381,
+        0.1752284402437508
+      ]
+    },
+    {
+      "id": "H11B",
+      "label": "Einlagen B",
+      "connection": "Einlagen und Taschenböden; Aufnahme im Rahmen konstruieren.",
+      "meshes": [
+        {
+          "name": "H11B_CollarSlotFloor_L_1",
+          "path": "SciFiHelmet/H11B_CollarSlotFloor_L_1[0]"
+        },
+        {
+          "name": "H11B_CollarPanelFloor_L_2",
+          "path": "SciFiHelmet/H11B_CollarPanelFloor_L_2[0]"
+        },
+        {
+          "name": "H11B_CollarSocketFloor_L_3",
+          "path": "SciFiHelmet/H11B_CollarSocketFloor_L_3[0]"
+        },
+        {
+          "name": "H11B_Jaw_Insert_L_4",
+          "path": "SciFiHelmet/H11B_Jaw_Insert_L_4[0]"
+        },
+        {
+          "name": "H11B_Jaw_InsertSlot_L_5",
+          "path": "SciFiHelmet/H11B_Jaw_InsertSlot_L_5[0]"
+        }
+      ],
+      "center": [
+        1.1203034616997465,
+        -0.5291198865026236,
+        0.1727965008644387
+      ]
+    },
+    {
+      "id": "H19",
+      "label": "Halsanschluss",
+      "connection": "Übergang zu flexiblem Hals; Bewegungsfreiraum später prüfen.",
+      "meshes": [
+        {
+          "name": "H19_NeckRing_1",
+          "path": "SciFiHelmet/H19_NeckRing_1[0]"
+        }
+      ],
+      "center": [
+        0,
+        -1.2595999974012375,
+        -0.12000001072883605
+      ]
+    },
+    {
+      "id": "H07",
+      "label": "Kinnblock",
+      "connection": "Seitliche Verbindung zu den Kieferstücken konstruieren.",
+      "meshes": [
+        {
+          "name": "H07_Chin_1",
+          "path": "SciFiHelmet/H07_Chin_1[0]"
+        }
+      ],
+      "center": [
+        4.0978193283081055e-7,
+        -0.9108999998122453,
+        0.9174999979138374
+      ]
+    },
+    {
+      "id": "H08A",
+      "label": "Kiefer A",
+      "connection": "Anschluss an Kinn und Seitenrahmen.",
+      "meshes": [
+        {
+          "name": "H08A_Jaw_R_1",
+          "path": "SciFiHelmet/H08A_Jaw_R_1[0]"
+        }
+      ],
+      "center": [
+        -0.7889998853206635,
+        -0.7364771563559771,
+        0.40825000196695327
+      ]
+    },
+    {
+      "id": "H08B",
+      "label": "Kiefer B",
+      "connection": "Anschluss an Kinn und Seitenrahmen.",
+      "meshes": [
+        {
+          "name": "H08B_Jaw_L_1",
+          "path": "SciFiHelmet/H08B_Jaw_L_1[0]"
+        }
+      ],
+      "center": [
+        0.788999117910862,
+        -0.7364771563559771,
+        0.40825000196695327
+      ]
+    },
+    {
+      "id": "F02",
+      "label": "Schraubensatz Kinn",
+      "connection": "Visualisierte Köpfe; keine konstruierten Gewinde / Bohrungen.",
+      "meshes": [
+        {
+          "name": "F02_Screws_Chin_1",
+          "path": "SciFiHelmet/F02_Screws_Chin_1[0]"
+        }
+      ],
+      "center": [
+        0.55,
+        -1.2656999957561492,
+        1.4875500094890595
+      ]
+    },
+    {
+      "id": "F03",
+      "label": "Schraubensatz Rahmen",
+      "connection": "Visualisierte Köpfe; keine konstruierten Gewinde / Bohrungen.",
+      "meshes": [
+        {
+          "name": "F03_Screws_Side_1",
+          "path": "SciFiHelmet/F03_Screws_Side_1[0]"
+        }
+      ],
+      "center": [
+        -0.5600000149011612,
+        -1.016830417161691,
+        -0.06999215006828308
+      ]
+    },
+    {
+      "id": "H15",
+      "label": "Kopfhörerband",
+      "connection": "Band, Mittelstreifen und Klemmen; Verbindung zu Seitenhaltern.",
+      "meshes": [
+        {
+          "name": "H15_HeadBand_1",
+          "path": "SciFiHelmet/H15_HeadBand_1[0]"
+        },
+        {
+          "name": "H15_HeadBand_Stripe_2",
+          "path": "SciFiHelmet/H15_HeadBand_Stripe_2[0]"
+        },
+        {
+          "name": "H15_BandClip_R_3",
+          "path": "SciFiHelmet/H15_BandClip_R_3[0]"
+        },
+        {
+          "name": "H15_BandClip_L_4",
+          "path": "SciFiHelmet/H15_BandClip_L_4[0]"
+        }
+      ],
+      "center": [
+        0.03758097668616922,
+        1.766908157513829,
+        -0.1328451575013249
+      ]
+    },
+    {
+      "id": "H12",
+      "label": "Funkmuschel A",
+      "connection": "Gehäuse, Polster und Bedienungen; interne Befestigungen offen.",
+      "meshes": [
+        {
+          "name": "H12_RadioModule_1",
+          "path": "SciFiHelmet/H12_RadioModule_1[0]"
+        },
+        {
+          "name": "H12_Detail[0]_2",
+          "path": "SciFiHelmet/H12_Detail[0]_2[0]"
+        },
+        {
+          "name": "H12_Radio_Button_1_3",
+          "path": "SciFiHelmet/H12_Radio_Button_1_3[0]"
+        },
+        {
+          "name": "H12_Radio_Button_2_4",
+          "path": "SciFiHelmet/H12_Radio_Button_2_4[0]"
+        },
+        {
+          "name": "H12_Radio_Button_3_5",
+          "path": "SciFiHelmet/H12_Radio_Button_3_5[0]"
+        },
+        {
+          "name": "H12_Detail[0]_6",
+          "path": "SciFiHelmet/H12_Detail[0]_6[0]"
+        }
+      ],
+      "center": [
+        -1.490000003572398,
+        0.2238505069381713,
+        -0.05999999884342155
+      ]
+    },
+    {
+      "id": "H17A",
+      "label": "Antenne A",
+      "connection": "Antennenfuß mit lösbarem Anschluss.",
+      "meshes": [
+        {
+          "name": "H17A_Detail[0]_1",
+          "path": "SciFiHelmet/H17A_Detail[0]_1[0]"
+        },
+        {
+          "name": "H17A_Detail[1]_2",
+          "path": "SciFiHelmet/H17A_Detail[1]_2[0]"
+        },
+        {
+          "name": "H17A_Detail[2]_3",
+          "path": "SciFiHelmet/H17A_Detail[2]_3[0]"
+        }
+      ],
+      "center": [
+        -1.7150000004656614,
+        1.1006666666666667,
+        -0.3662000000000001
+      ]
+    },
+    {
+      "id": "H15A",
+      "label": "Kopfhörerhalter A",
+      "connection": "Bügelenden, Gelenk und Drahtauflagen ausarbeiten.",
+      "meshes": [
+        {
+          "name": "H15A_Yoke_1",
+          "path": "SciFiHelmet/H15A_Yoke_1[0]"
+        },
+        {
+          "name": "H15A_Detail[1]_2",
+          "path": "SciFiHelmet/H15A_Detail[1]_2[0]"
+        },
+        {
+          "name": "H15A_Detail[2]_3",
+          "path": "SciFiHelmet/H15A_Detail[2]_3[0]"
+        }
+      ],
+      "center": [
+        -1.4840934782475232,
+        0.968531563818455,
+        -0.13193086231748263
+      ]
+    },
+    {
+      "id": "H16",
+      "label": "Hinterkopfmodul",
+      "connection": "Montageplatte, Kasten und Steckverbinder; Kabeldurchführungen offen.",
+      "meshes": [
+        {
+          "name": "H16_BackBox_Mount_1",
+          "path": "SciFiHelmet/H16_BackBox_Mount_1[0]"
+        },
+        {
+          "name": "H16_BackBox_2",
+          "path": "SciFiHelmet/H16_BackBox_2[0]"
+        },
+        {
+          "name": "H16_Detail[0]_3",
+          "path": "SciFiHelmet/H16_Detail[0]_3[0]"
+        },
+        {
+          "name": "H16_Detail[1]_4",
+          "path": "SciFiHelmet/H16_Detail[1]_4[0]"
+        },
+        {
+          "name": "H16_Detail[2]_5",
+          "path": "SciFiHelmet/H16_Detail[2]_5[0]"
+        },
+        {
+          "name": "H16_BackBox_Connector_6",
+          "path": "SciFiHelmet/H16_BackBox_Connector_6[0]"
+        },
+        {
+          "name": "H16_BackBox_Connector_7",
+          "path": "SciFiHelmet/H16_BackBox_Connector_7[0]"
+        },
+        {
+          "name": "H16_Screws_BackBox_8",
+          "path": "SciFiHelmet/H16_Screws_BackBox_8[0]"
+        }
+      ],
+      "center": [
+        0.08750000000000001,
+        0.5784187502805332,
+        -1.5662500041676686
+      ]
+    },
+    {
+      "id": "H18A",
+      "label": "Kabel / Stecker A",
+      "connection": "Kabelenden, Zugentlastung und Halteklammern.",
+      "meshes": [
+        {
+          "name": "H18A_Hose_Coil_1",
+          "path": "SciFiHelmet/H18A_Hose_Coil_1[0]"
+        },
+        {
+          "name": "H18A_Hose_Plug_2",
+          "path": "SciFiHelmet/H18A_Hose_Plug_2[0]"
+        },
+        {
+          "name": "H18A_Hose_Plug_3",
+          "path": "SciFiHelmet/H18A_Hose_Plug_3[0]"
+        },
+        {
+          "name": "H18A_Detail[0]_4",
+          "path": "SciFiHelmet/H18A_Detail[0]_4[0]"
+        },
+        {
+          "name": "H18A_Detail[1]_5",
+          "path": "SciFiHelmet/H18A_Detail[1]_5[0]"
+        },
+        {
+          "name": "H18A_Detail[2]_6",
+          "path": "SciFiHelmet/H18A_Detail[2]_6[0]"
+        }
+      ],
+      "center": [
+        -1.3876476246361313,
+        -0.5169765643658147,
+        -0.25420024476738035
+      ]
+    },
+    {
+      "id": "P01",
+      "label": "Präsentationshals",
+      "connection": "Bisheriger Darstellungsunterbau; kein konstruiertes Helmbauteil.",
+      "meshes": [
+        {
+          "name": "P01_NeckCore_1",
+          "path": "SciFiHelmet/P01_NeckCore_1[0]"
+        },
+        {
+          "name": "P01_Detail[0]_2",
+          "path": "SciFiHelmet/P01_Detail[0]_2[0]"
+        },
+        {
+          "name": "P01_Detail[1]_3",
+          "path": "SciFiHelmet/P01_Detail[1]_3[0]"
+        },
+        {
+          "name": "P01_Detail[2]_4",
+          "path": "SciFiHelmet/P01_Detail[2]_4[0]"
+        },
+        {
+          "name": "P01_Detail[3]_5",
+          "path": "SciFiHelmet/P01_Detail[3]_5[0]"
+        },
+        {
+          "name": "P01_Detail[4]_6",
+          "path": "SciFiHelmet/P01_Detail[4]_6[0]"
+        }
+      ],
+      "center": [
+        0.0625,
+        -1.6643666659668088,
+        0.18637333469775816
+      ]
+    },
+    {
+      "id": "H20",
+      "label": "Stirn- / Scheitelblende A",
+      "connection": "Dünne separate Schale; verdeckte Auflage und Befestigung offen.",
+      "meshes": [
+        {
+          "name": "H20_ForeheadPlate_R_1",
+          "path": "SciFiHelmet/H20_ForeheadPlate_R_1[0]"
+        }
+      ],
+      "center": [
+        -0.5774994698166847,
+        0.7223069459199906,
+        0.3787102162837982
+      ]
+    },
+    {
+      "id": "H21",
+      "label": "Stirn- / Scheitelblende B",
+      "connection": "Dünne separate Schale; verdeckte Auflage und Befestigung offen.",
+      "meshes": [
+        {
+          "name": "H21_ForeheadPlate_L_1",
+          "path": "SciFiHelmet/H21_ForeheadPlate_L_1[0]"
+        }
+      ],
+      "center": [
+        0.5775199887156486,
+        0.7223069533705712,
+        0.3787439078092575
+      ]
+    },
+    {
+      "id": "H13",
+      "label": "Funkmuschel B",
+      "connection": "Spiegelbaugruppe zu A; interne Befestigungen offen.",
+      "meshes": [
+        {
+          "name": "H13_RadioModule_B_1",
+          "path": "SciFiHelmet/H13_RadioModule_B_1[0]"
+        },
+        {
+          "name": "H13_RadioDetail_B_1_2",
+          "path": "SciFiHelmet/H13_RadioDetail_B_1_2[0]"
+        },
+        {
+          "name": "H13_Radio_Button_1_B_3",
+          "path": "SciFiHelmet/H13_Radio_Button_1_B_3[0]"
+        },
+        {
+          "name": "H13_Radio_Button_2_B_4",
+          "path": "SciFiHelmet/H13_Radio_Button_2_B_4[0]"
+        },
+        {
+          "name": "H13_Radio_Button_3_B_5",
+          "path": "SciFiHelmet/H13_Radio_Button_3_B_5[0]"
+        },
+        {
+          "name": "H13_RadioDetail_B_2_6",
+          "path": "SciFiHelmet/H13_RadioDetail_B_2_6[0]"
+        }
+      ],
+      "center": [
+        1.6150000035762784,
+        0.22385050658641073,
+        -0.05999999896933635
+      ]
+    },
+    {
+      "id": "H17B",
+      "label": "Antenne B",
+      "connection": "Antennenfuß mit lösbarem Anschluss.",
+      "meshes": [
+        {
+          "name": "H17B_RadioDetail_B_3_1",
+          "path": "SciFiHelmet/H17B_RadioDetail_B_3_1[0]"
+        },
+        {
+          "name": "H17B_RadioDetail_B_4_2",
+          "path": "SciFiHelmet/H17B_RadioDetail_B_4_2[0]"
+        },
+        {
+          "name": "H17B_RadioDetail_B_5_3",
+          "path": "SciFiHelmet/H17B_RadioDetail_B_5_3[0]"
+        }
+      ],
+      "center": [
+        1.7650000005960464,
+        1.1006666670640308,
+        -0.3661999998986721
+      ]
+    },
+    {
+      "id": "H15B",
+      "label": "Kopfhörerhalter B",
+      "connection": "Bügelenden, Gelenk und Drahtauflagen ausarbeiten.",
+      "meshes": [
+        {
+          "name": "H15B_Yoke_B_1",
+          "path": "SciFiHelmet/H15B_Yoke_B_1[0]"
+        },
+        {
+          "name": "H15B_RadioDetail_B_6_2",
+          "path": "SciFiHelmet/H15B_RadioDetail_B_6_2[0]"
+        },
+        {
+          "name": "H15B_RadioDetail_B_7_3",
+          "path": "SciFiHelmet/H15B_RadioDetail_B_7_3[0]"
+        }
+      ],
+      "center": [
+        1.5340934785207114,
+        0.9685315635204317,
+        -0.1319308626651764
+      ]
+    },
+    {
+      "id": "H18B",
+      "label": "Kabel / Stecker B",
+      "connection": "Kabelenden, Zugentlastung und Halteklammern.",
+      "meshes": [
+        {
+          "name": "H18B_Hose_Coil_B_1",
+          "path": "SciFiHelmet/H18B_Hose_Coil_B_1[0]"
+        },
+        {
+          "name": "H18B_Hose_Plug_B_2",
+          "path": "SciFiHelmet/H18B_Hose_Plug_B_2[0]"
+        },
+        {
+          "name": "H18B_Hose_Plug_B_3",
+          "path": "SciFiHelmet/H18B_Hose_Plug_B_3[0]"
+        },
+        {
+          "name": "H18B_RadioDetail_B_8_4",
+          "path": "SciFiHelmet/H18B_RadioDetail_B_8_4[0]"
+        },
+        {
+          "name": "H18B_RadioDetail_B_9_5",
+          "path": "SciFiHelmet/H18B_RadioDetail_B_9_5[0]"
+        },
+        {
+          "name": "H18B_RadioDetail_B_10_6",
+          "path": "SciFiHelmet/H18B_RadioDetail_B_10_6[0]"
+        }
+      ],
+      "center": [
+        1.5126476248105367,
+        -0.5169765643666808,
+        -0.25420024485948184
+      ]
+    }
+  ]
+}

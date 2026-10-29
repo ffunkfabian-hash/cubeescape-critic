@@ -14,6 +14,10 @@ import { resolveFinish, resolveAccents } from './finishPresets.js';
 import { denoiseTexture, DENOISE_SEED } from './textures.js';
 import { buildHelmet } from './helmet.js';
 import { buildBodyStudy } from './parts/bodyStudy.js';
+import { buildShoulderStudy, shoulderStudyParams } from './parts/shoulderStudy.js';
+import { configureHelmetAssembly, createExplodedAssembly, assemblyDescription } from './assembly.js';
+import { resolveAssemblyOptions } from './assemblyOptions.js';
+import { createAssemblyLabels } from './assemblyLabels.js';
 import { D, resetParams } from './params.js';
 
 const query = new URLSearchParams(location.search);
@@ -27,7 +31,10 @@ if (query.get('ui') === '0') document.body.classList.add('noui');
 const BG = 0x8c8c8c;
 // ?static=1: no animation loop, frames only via window.renderFrame() (headless checks with software GL).
 const STATIC = query.get('static') === '1';
-const BODY_STUDY = query.get('body') === '1';
+const presentationOptions = resolveAssemblyOptions({ headset: query.get('headset') ?? 'on', body: query.get('body') ?? 'none', exploded: query.get('exploded') ?? '0' });
+const annotation = createAssemblyLabels();
+let assemblyParts = [];
+const showLabels = query.get('labels') !== '0';
 const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: STATIC });
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -76,12 +83,13 @@ scene.add(lightRig, new THREE.HemisphereLight(0xffffff, 0x444444, 0.25));
 
 // Camera views matched to the extracted video frames (refs/ref_*.png: 0 s, 1.5 s, 3 s, 4.5 s).
 const camera = new THREE.PerspectiveCamera(30, 1, 0.05, 50);
-const target = new THREE.Vector3(0, BODY_STUDY ? -0.8 : -0.06, 0);
+const target = new THREE.Vector3(0, -0.06, 0);
 const VIEWS = {
-  front: { az: 0, el: 3, dist: BODY_STUDY ? 5.4 : 2.6 },
-  left: { az: 64, el: 4, dist: BODY_STUDY ? 5.4 : 2.6 },
-  back: { az: 180, el: 7, dist: BODY_STUDY ? 5.4 : 2.6 },
-  right: { az: 298, el: 4, dist: BODY_STUDY ? 5.4 : 2.6 },
+  front: { az: 0, el: 3, dist: 2.6 },
+  left: { az: 64, el: 4, dist: 2.6 },
+  back: { az: 180, el: 7, dist: 2.6 },
+  right: { az: 298, el: 4, dist: 2.6 },
+  assembly: { az: 325, el: 18, dist: 7.8 },
 };
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
@@ -97,9 +105,17 @@ function setCameraView(name) {
     setTurntable(!turntable);
     return;
   }
-  const v = VIEWS[name];
-  if (!v) throw new Error(`unknown view ${name}`);
+  const v = { ...VIEWS[name] };
+  if (!VIEWS[name]) throw new Error(`unknown view ${name}`);
   setTurntable(false);
+  if (presentationOptions.exploded > 0) {
+    const withShoulders = presentationOptions.body === 'shoulders';
+    target.set(0, withShoulders ? -.55 : .05, 0);
+    v.dist = withShoulders ? 9.8 : name === 'assembly' ? 7.8 : 8.8;
+  }
+  else if (presentationOptions.body === 'shoulders') { target.set(0, -.49, 0); v.dist = 4.7; }
+  else if (presentationOptions.body === 'legacy') { target.set(0, -.8, 0); v.dist = 5.4; }
+  else target.set(0, -.06, 0);
   current = name;
   const az = THREE.MathUtils.degToRad(v.az), el = THREE.MathUtils.degToRad(v.el);
   lightRig.rotation.y = az;
@@ -119,7 +135,7 @@ function setTurntable(on) {
     current = 'front';
     lightRig.rotation.y = 0;
     scene.environmentRotation.set(0, 0, 0);
-    const v = VIEWS.front, el = THREE.MathUtils.degToRad(v.el);
+    const v = { ...VIEWS.front, dist: camera.position.distanceTo(target) }, el = THREE.MathUtils.degToRad(v.el);
     camera.position.set(0, Math.sin(el), Math.cos(el)).multiplyScalar(v.dist).add(target);
     controls.target.copy(target);
     controls.update();
@@ -133,7 +149,7 @@ const overlay = document.getElementById('overlay');
 let overlayOn = false;
 let overlayMode = 'normal';
 function updateOverlay() {
-  const show = overlayOn && !turntable;
+  const show = overlayOn && !turntable && presentationOptions.body === 'none' && presentationOptions.exploded === 0 && current !== 'assembly';
   overlay.style.display = show ? 'block' : 'none';
   if (show) overlay.src = `/refs/ref_${current}.png`;
   overlay.classList.toggle('diff', overlayMode === 'difference');
@@ -202,11 +218,17 @@ function rebuild() {
   }
   const t0 = performance.now();
   model = buildHelmet(M);
-  if (BODY_STUDY) model.add(buildBodyStudy(M));
+  configureHelmetAssembly(model, presentationOptions);
+  if (presentationOptions.body === 'legacy') model.add(buildBodyStudy(M));
   applyArmorFinish(model, M);
   applyArmorAccents(model, M, materialAccents.name);
+  if (presentationOptions.body === 'shoulders') model.add(buildShoulderStudy(M));
+  if (presentationOptions.exploded > 0) model = createExplodedAssembly(model, presentationOptions.exploded);
+  assemblyParts = assemblyDescription(model);
+  annotation.setGroups(assemblyParts);
   model.rotation.y = rot;
   scene.add(model);
+  window.assemblyParts = assemblyParts;
   console.log(`model built in ${(performance.now() - t0).toFixed(0)} ms`);
 }
 
@@ -214,7 +236,7 @@ async function exportGLB() {
   const glb = await new GLTFExporter().parseAsync(model, { binary: true });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([glb], { type: 'model/gltf-binary' }));
-  a.download = BODY_STUDY ? 'scifi_body_study.glb' : 'scifi_helmet.glb';
+  a.download = presentationOptions.exploded > 0 ? 'scifi_helmet_exploded.glb' : presentationOptions.body === 'shoulders' ? 'scifi_shoulder_study.glb' : presentationOptions.body === 'legacy' ? 'scifi_body_study.glb' : 'scifi_helmet.glb';
   a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }
@@ -225,6 +247,12 @@ function buildGui() {
   const gui = new GUI({ title: 'Helm-Parameter' });
   gui.close();
   const re = () => rebuild();
+  const assembly = gui.addFolder('Aufbau und Varianten');
+  const changeAssembly = () => { rebuild(); setCameraView(presentationOptions.exploded > 0 ? 'assembly' : 'front'); };
+  assembly.add(presentationOptions, 'headset', { sichtbar:'on', ausgeblendet:'off' }).name('Kopfhörer + Band').onFinishChange(changeAssembly);
+  assembly.add(presentationOptions, 'body', { 'nur Helm':'none', 'Schultern + Hals':'shoulders', 'alte Körperstudie':'legacy' }).name('Körper').onFinishChange(changeAssembly);
+  assembly.add(presentationOptions, 'exploded', 0, 1, .05).name('Explosionsabstand').onFinishChange(changeAssembly);
+  assembly.add({ parts:()=>annotation.togglePanel() }, 'parts').name('Bauteile / Anschlüsse');
   const f1 = gui.addFolder('Proportionen');
   f1.add(D.head, 'tilt', -0.3, 0.3, 0.01).name('Kuppel Neigung').onFinishChange(re);
   f1.add(D, 'capEdgeY', 0.2, 0.42, 0.005).name('Kappenkante Y').onFinishChange(re);
@@ -261,11 +289,12 @@ function buildGui() {
 
 rebuild();
 buildGui();
-setCameraView(VIEWS[query.get('view')] ? query.get('view') : 'front');
+setCameraView(VIEWS[query.get('view')] ? query.get('view') : presentationOptions.exploded > 0 ? 'assembly' : 'front');
 if (query.get('turntable') === '1') setTurntable(true);
 if (query.get('overlay')) toggleOverlay(true, query.get('overlay') === 'diff' ? 'difference' : 'normal');
 
 function renderFrame() {
+  annotation.update(camera, model, showLabels && presentationOptions.exploded > 0 && !maskMode);
   if (maskMode) {
     scene.overrideMaterial = maskMaterial;
     scene.background = new THREE.Color(0x000000);
@@ -295,4 +324,4 @@ if (STATIC) {
   });
 }
 
-Object.assign(window, { THREE, scene, camera, controls, renderFrame, setCameraView, toggleOverlay, setMaskMode, exportGLB, rebuild, helmetParams: D, materialFinish, materialAccents });
+Object.assign(window, { THREE, scene, camera, controls, renderFrame, setCameraView, toggleOverlay, setMaskMode, exportGLB, rebuild, helmetParams: D, materialFinish, materialAccents, presentationOptions, assemblyParts, shoulderStudyParams });

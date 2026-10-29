@@ -2,6 +2,23 @@
 
 ## Verbindlicher Stand
 
+**Aktueller Versuch 0.7 „Bastion“:** Die neuen Nutzerreferenzen führen zu kantigen, tiefen Schultergehäusen
+mit abgeschrägten Ecken und separaten unteren Lamellen. Eine breite durchgehende, deutlich vorgewölbte Brustmitte mit wenigen großen Facetten ersetzt die
+auffällige Mittelfuge; seitliche Brust- und Flankenplatten bleiben getrennt. Große ruhige weiße Flächen
+stehen vor dunklen Gelenkzonen. Kurzer Hals und kräftiger Rumpfkern bleiben erhalten; keine hochgezogenen
+Schulterspitzen, Gurte oder Taschen in dieser Etappe. Nach Nutzerfeedback werden die Schulterkanten weicher
+und die Brust erhält anhand zweier Facettenreferenzen echtes Relief statt einer planen Fläche. [Aufbau und Herkunft](HELM_BASTION.md).
+Die Form bleibt ein Vorschlag zur Sichtung, keine endgültige Nutzerfreigabe.
+
+**Versuch 0.6 „Cuirass“:** Gebrochen weiße Schulterpanzer umschließen den Armansatz; kleinere Lamellen
+bilden eine zweite Schutzlage über dunklen Gelenkvolumen. Die breite Brust erhält einen Mittelgrat und eine
+schmale Mittelfuge. Der enger anliegende Kragen weitet sich zur Brust. Kurzer Hals, kräftige Kerntiefe,
+runde Helmhaube und akzeptierte Augen bleiben erhalten. Die Schulterdächer sitzen weiterhin niedrig.
+Die vom Nutzer gezeigte Paladin-/Titan-Zeichnung dient als Stilinspiration, ohne verbindliche Körpermaße
+oder Übernahme ihres Helms. Headsets und Stirnstreifen sind in der Vergleichsprobe ausgeblendet.
+[Aufbau, Referenzidentität und Einschätzung](HELM_CUIRASS.md). Der Oberkörper bleibt eine ungeriggte Studie;
+eine endgültige Form-/Materialwahl ist noch offen.
+
 **Versuch 0.4 „Continuity“, noch zur Auswahl:** Die seitlichen Übergänge der Augenmaske werden gerundet;
 H20/H21 laufen als zwei getrennte Streifen von der Stirn über die Haube bis zur hinteren Haubenkante.
 Die Trapezform bleibt im Stirnbereich erkennbar, der Mittelstreifen frei. Der bestehende Kopfbügel liegt darüber.

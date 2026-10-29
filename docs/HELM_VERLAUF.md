@@ -492,3 +492,62 @@ Viewer, Runner und aktiven Exporten entfernt; fünf ausschließlich zugehörige,
 Ihr vollständiger Aufbau und ihre Exporte bleiben im [Git-Stand vor Rücknahme](https://github.com/ffunkfabian-hash/cubeescape-critic/blob/caf7a79dc46269b9f02801587b909d5c947f73d8/assets/helmet-continuity/README.md).
 Die Varianten 80–88 einschließlich Metall/Graphit ohne Blenden bleiben unverändert verfügbar. Keine neue Geometrie-
 oder Materialauswahl wird daraus abgeleitet; Video, Augen und Einzelteilaufbau behalten ihre bisherigen Vorgaben.
+
+## Assembly 0.5 – Aufbau und Oberkörper (28.10.2026)
+
+Quelle `6090262`: Der Nutzer wünscht eine beschriftete Explosionsansicht, einen Blick ohne Kopfhörer/Kopfbügel
+und den Beginn eines passenden Oberkörpers. Die Helmform bleibt erhalten. 104 Meshes werden auseinandergezogen,
+34 Gruppen im Bild benannt und alle Einzelmeshes in `assembly.json` aufgeführt. Der Headsetschalter entfernt
+40 zugehörige Meshes einschließlich Kabeln und Antennen; Heckmodul und Maskenhalter bleiben stehen.
+
+Der Oberkörper ergänzt 22 eigene Teile. Erste Rückmeldung: Hals zu lang, Schultern zu schmal und zu wenig stämmig.
+Daraufhin Hals 0,49 → 0,31 und Breite 1,97 → 2,3198. Zweite Rückmeldung: mehr Schultermasse nach oben.
+Zusätzlicher Bogen 0,23, weiße Dicke 0,10 und kräftigere dunkle Unterlage heben die obere Kontur um etwa 0,15.
+Helm und Halsposition bleiben bei dieser zweiten Korrektur unverändert.
+
+![Drei Formschritte](bilder/helm_assembly_schulterverlauf.jpg)
+
+Der Hinweis des Nutzers auf `cubeescape-reference` führt zur noch uncommitteten Titan-Auswertung im Worktree
+`titan-style`. Sie stützt geschichtete gerundete Schutzschalen und dunkle Zwischenlagen, liefert aber keine
+verbindlichen Körpermaße. Quellenhashes und gelesene Abschnitte stehen im [Aufbaudokument](HELM_AUFBAU.md).
+Die erhöhte Schulterform war beim Quellenfund bereits umgesetzt. Die endgültige Formbewertung durch den Nutzer ist offen.
+
+[Vier Körperansichten](bilder/helm_assembly_schultern.jpg) · [Explosionsbild](bilder/helm_assembly_explosion.jpg) ·
+[Headsetvergleich](bilder/helm_assembly_headset.jpg) · [GLB/Texturen/Prüfbelege](../assets/helmet-assembly/README.md).
+
+### Patch 0.5.1 – mehr Tiefe, niedrigere kantige Schultern
+
+Nutzer: oberer Rumpf zu dünn, Schultern zu hochgezogen, kantiger gewünscht. Quelle `d8e0b2e`:
+Kerntiefe +35,8 %, Schulteroberkante rund 0,135 niedriger, große Facetten bei erhaltener Schalendicke.
+Kragen, Brust und Rücken folgen der größeren Tiefe; Hals und Helm bleiben gleich. 22 separate Körperteile erhalten.
+54 Tests, Build und vier Ansichten geprüft. [Vergleich](bilder/helm_bulkhead_vergleich.jpg) ·
+[Vier Ansichten](bilder/helm_bulkhead_vier_ansichten.jpg) · [Lieferexport](../assets/helmet-assembly/shoulders-blocky/scifi_helmet.glb).
+
+
+## Cuirass 0.6 – Paladin-inspirierter Oberkörper (28.10.2026)
+
+Nach der Nutzerzeichnung und „Dann leg mal los“: Hauptschalen nach unten um den Armansatz gebogen,
+pro Seite eine kleinere Lamelle und ein dunkler Gelenkkörper ergänzt. Brusthälften bilden einen Mittelgrat;
+der Kragen liegt oben enger an und weitet sich zur Brust. Helm, kurzer Hals und Rumpfkerntiefe bleiben erhalten.
+26 statt 22 Körpermeshes, Außenbreite 1,99 statt 2,3198.
+
+Die erste Seitenansicht zeigte einen dunklen Gelenküberstand durch die weiße Schulter. Rücksetzen der
+Oberkante plus gezielte Strahlprobe beheben ihn. Keine neue Helm-IoU, keine finale Nutzerfreigabe der Körperform.
+[Aufbau, Stil und Grenzen](HELM_CUIRASS.md) · [Prüfbericht](versions/0.6.md).
+
+![Vorher / Cuirass](bilder/helm_cuirass_vergleich.jpg)
+
+
+## Bastion 0.7 – technische Gehäuse und geschlossene Brust (28.10.2026)
+
+Vier neue Nutzerbilder führen nach „Dann leg mal los“ zu kantigen, tiefen Schultergehäusen mit separater
+unterer Lage. B27 ergänzt die durchgehende Brustmitte; B28/B29 die Flanken, B30/B31 gefaltete Schulterdächer.
+31 Körperteile; Helm, kurzer Hals und tiefer Rumpfkern erhalten. Die erste Brustfläche wird nach Sichtprüfung
+planar, der gemessene Flankenabstand vergrößert. Frühere Cuirass-Formtests bleiben über eine Parameterfixture erhalten.
+[Aufbau/Stil](HELM_BASTION.md) · [Prüfbericht](versions/0.7.md).
+
+![Cuirass / Bastion](bilder/helm_bastion_vergleich.jpg)
+
+Nachgereicht während 0.7: Schultern etwas zu kantig, Brust seitlich zu flach. Zwei Facettenbilder führen zu
+einer reliefartig vorgewölbten Brust mit definierten inneren Scheiteln sowie stärker gefasten Schulterkanten.
+Die plane Zwischenprobe bleibt nur im lokalen Belegcache; sie ist nicht der Lieferstand.

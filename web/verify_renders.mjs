@@ -6,6 +6,7 @@
 // verification.json identifies this run's status, completed views and optional IoU.
 // Older files may remain after a failure or --no-iou; they are not evidence for the current run.
 // Usage: node verify_renders.mjs [--no-iou] [--finish=original|metal|graphite]
+//   [--headset=on|off] [--body=none|shoulders|legacy] [--exploded=0..1] (body/exploded require --no-iou)
 //   [--accents=original|light-fasteners|white-strips|contrast-strips] [--strips=on|off] [--out=renders]
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
@@ -14,13 +15,14 @@ import path from 'node:path';
 import { inspectGLB, subprocessExitCode } from './tools/verification.mjs';
 import { sha256, sourceManifest } from './tools/provenance.mjs';
 import { resolveFinish, resolveAccents } from './src/finishPresets.js';
+import { resolveAssemblyOptions } from './src/assemblyOptions.js';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
-const options = { finish: 'original', accents: 'original', strips: 'on', out: 'renders', noIou: false };
+const options = { finish: 'original', accents: 'original', strips: 'on', headset: 'on', body: 'none', exploded: '0', out: 'renders', noIou: false };
 const seen = new Set();
 const args = process.argv.slice(2);
 for (let i = 0; i < args.length; i++) {
-  const match = /^(--finish|--accents|--strips|--out)(?:=(.*))?$/.exec(args[i]);
+  const match = /^(--finish|--accents|--strips|--headset|--body|--exploded|--out)(?:=(.*))?$/.exec(args[i]);
   const key = args[i] === '--no-iou' ? 'noIou' : match?.[1].slice(2);
   if (!key) throw new Error(`Unknown argument: ${args[i]}`);
   if (seen.has(key)) throw new Error(`Duplicate argument: ${args[i]}`);
@@ -35,11 +37,14 @@ const finish = resolveFinish(options.finish);
 const accents = resolveAccents(options.accents);
 const strips = options.strips;
 if (!['on', 'off'].includes(strips)) throw new Error(`Unknown strips ${JSON.stringify(strips)}; expected on or off`);
+const assembly = resolveAssemblyOptions(options);
+const referenceCompatible = assembly.body === 'none' && assembly.exploded === 0;
+if (!referenceCompatible && !options.noIou) throw new Error('Body and exploded views require --no-iou');
 const out = path.resolve(root, options.out);
 mkdirSync(out, { recursive: true });
-const VIEWS = ['front', 'left', 'back', 'right'];
+const VIEWS = assembly.exploded > 0 ? ['assembly', 'front', 'left', 'back', 'right'] : ['front', 'left', 'back', 'right'];
 const result = { startedAt: new Date().toISOString(), status: 'running', views: [],
-  finish, accents, strips, outputDirectory: out, iouSkipped: options.noIou, cameras: {}, outputs: {} };
+  finish, accents, strips, assembly, referenceCompatible, outputDirectory: out, iouSkipped: options.noIou, cameras: {}, outputs: {} };
 const record = () => writeFileSync(path.join(out, 'verification.json'), JSON.stringify(result, null, 2) + '\n');
 record();
 
@@ -74,7 +79,7 @@ try {
   page.on('response', (response) => {
     if (response.status() >= 400) errors.push(`HTTP ${response.status()}: ${response.url()}`);
   });
-  await page.goto(`${url}?ui=0&static=1&finish=${encodeURIComponent(finish.name)}&accents=${encodeURIComponent(accents.name)}&strips=${strips}`);
+  await page.goto(`${url}?ui=0&static=1&finish=${encodeURIComponent(finish.name)}&accents=${encodeURIComponent(accents.name)}&strips=${strips}&headset=${assembly.headset}&body=${assembly.body}&exploded=${assembly.exploded}`);
   await page.waitForFunction(() => window.__ready === true, null, { timeout: 180000 });
   result.parameters = await page.evaluate(() => window.helmetParams);
   result.finish = await page.evaluate(() => window.materialFinish);
@@ -83,6 +88,10 @@ try {
   if (JSON.stringify(result.accents) !== JSON.stringify(accents)) throw new Error('Rendered accents do not match requested preset');
   result.strips = await page.evaluate(() => window.helmetParams.foreheadPlates.enabled !== false ? 'on' : 'off');
   if (result.strips !== strips) throw new Error('Rendered strips do not match requested state');
+  result.assembly = await page.evaluate(() => window.presentationOptions);
+  if (JSON.stringify(result.assembly) !== JSON.stringify(assembly)) throw new Error('Rendered assembly does not match requested options');
+  result.assemblyParts = await page.evaluate(() => window.assemblyParts);
+  if (assembly.body === 'shoulders') result.bodyParameters = await page.evaluate(() => window.shoulderStudyParams);
   result.renderSettings = await page.evaluate(() => window.renderSettings);
   const settle = () => page.evaluate(() => { const t = performance.now(); window.renderFrame(); return performance.now() - t; });
   for (const v of VIEWS) {
@@ -92,6 +101,7 @@ try {
       target: window.controls.target.toArray(), viewport: [innerWidth, innerHeight] }));
     console.log(`${v}: frame ${(await settle()).toFixed(0)} ms`);
     await page.screenshot({ path: path.join(out, `render_${v}.png`) });
+    if (referenceCompatible) {
     await page.evaluate(() => window.toggleOverlay(true, 'difference'));
     await page.evaluate(async () => {
       const overlay = document.getElementById('overlay');
@@ -100,6 +110,7 @@ try {
     });
     await settle();
     await page.screenshot({ path: path.join(out, `overlay_${v}.png`) });
+    }
     await page.evaluate(() => { window.toggleOverlay(false); window.setMaskMode(true); });
     await settle();
     await page.screenshot({ path: path.join(out, `mask_${v}.png`) });
@@ -115,6 +126,28 @@ try {
   const failure = await download.failure();
   if (failure) throw new Error(`GLB download failed: ${failure}`);
   result.glb = inspectGLB(readFileSync(glbPath));
+  if (assembly.exploded > 0) {
+    result.glbRoundtrip = await page.evaluate(async encoded => {
+      const { GLTFLoader } = await import('/node_modules/three/examples/jsm/loaders/GLTFLoader.js');
+      const bytes = Uint8Array.from(atob(encoded), character => character.charCodeAt(0));
+      const imported = (await new GLTFLoader().parseAsync(bytes.buffer, '')).scene;
+      const source = window.scene.getObjectByName('SciFiHelmet'); source.updateMatrixWorld(true); imported.updateMatrixWorld(true);
+      const expected = new Map(); source.traverse(o => { if (o.isMesh) expected.set(o.userData.sourcePath, o); });
+      let count = 0, maximumTransformError = 0;
+      imported.traverse(mesh => {
+        if (!mesh.isMesh) return;
+        const original = expected.get(mesh.userData.sourcePath);
+        if (!original || mesh.userData.partId !== original.userData.partId) throw new Error('GLB lost assembly part metadata');
+        const a = mesh.geometry.attributes.position.array, b = original.geometry.attributes.position.array;
+        if (a.length !== b.length || a.some((value,i) => value !== b[i])) throw new Error(`GLB changed geometry of ${mesh.name}`);
+        mesh.matrixWorld.elements.forEach((value,i) => { maximumTransformError = Math.max(maximumTransformError, Math.abs(value-original.matrixWorld.elements[i])); });
+        expected.delete(mesh.userData.sourcePath); count++;
+      });
+      if (expected.size || maximumTransformError > 1e-6) throw new Error('GLB lost meshes or changed explosion transforms');
+      imported.traverse(object => { object.geometry?.dispose(); if (object.material) for (const material of [].concat(object.material)) material.dispose(); });
+      return { meshes:count, positionsIdentical:true, maximumTransformError, metadataPreserved:true };
+    }, readFileSync(glbPath).toString('base64'));
+  }
   // Preserve the actual procedural source maps as PNGs as well. Core glTF
   // exports colour/roughness maps, but does not represent Three.js bumpMap.
   const textureBundle = await page.evaluate(() => {
@@ -153,13 +186,16 @@ try {
     writeFileSync(path.join(textureDir, name), bytes);
     result.outputs[`textures/${name}`] = sha256(bytes);
   }
-  const textureManifest = JSON.stringify({ finish: result.finish, accents: result.accents, strips: result.strips,
+  const textureManifest = JSON.stringify({ finish: result.finish, accents: result.accents, strips: result.strips, assembly: result.assembly,
     materials: textureBundle.materials, parts: textureBundle.parts }, null, 2) + '\n';
   writeFileSync(path.join(textureDir, 'materials.json'), textureManifest);
   result.outputs['textures/materials.json'] = sha256(textureManifest);
   result.textures = { maps: Object.keys(textureBundle.files).length, manifest: 'textures/materials.json' };
+  const assemblyFile = JSON.stringify({ options: result.assembly, parts: result.assemblyParts }, null, 2) + '\n';
+  writeFileSync(path.join(out, 'assembly.json'), assemblyFile);
+  result.outputs['assembly.json'] = sha256(assemblyFile);
   result.outputs['scifi_helmet.glb'] = sha256(readFileSync(glbPath));
-  for (const view of VIEWS) for (const kind of ['render', 'mask', 'overlay']) {
+  for (const view of VIEWS) for (const kind of (referenceCompatible ? ['render', 'mask', 'overlay'] : ['render', 'mask'])) {
     const name = `${kind}_${view}.png`;
     result.outputs[name] = sha256(readFileSync(path.join(out, name)));
   }

@@ -1,6 +1,10 @@
 # Critic – parametrischer Helm im Browser
 
-**Aktueller Versuch 0.4 „Continuity“:** weichere Übergänge neben den Augen und zwei von der Stirn bis zum Hinterkopf
+**Aktueller Versuch 0.7 „Bastion“:** tiefe kantige Schultergehäuse mit unterer Panzerlage, geschlossene Brustmitte
+und separate Flanken. 31 Körperteile; Helm, kurzer Hals und kräftiger Rumpfkern erhalten.
+[Aufbau und Stil](docs/HELM_BASTION.md) · [Exporte](assets/helmet-bastion/README.md) · [Prüfbericht](docs/versions/0.7.md).
+
+**Form- und Materialbasis 0.4 „Continuity“:** weichere Übergänge neben den Augen und zwei von der Stirn bis zum Hinterkopf
 verlängerte Streifen. Auf derselben Geometrie stehen Originalmaterial, glänzendes Metall und feines dunkles Graphit
 zum Vergleich; noch keine Materialauswahl durch den Nutzer. [Vergleich und Exporte](assets/helmet-continuity/README.md) ·
 [Prüfbericht](docs/versions/0.4.md). Der Generator zeigt standardmäßig die neue Form mit Originalmaterial.
