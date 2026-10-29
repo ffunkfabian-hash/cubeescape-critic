@@ -51,7 +51,7 @@ export function configureHelmetAssembly(model, options) {
     const comms = model.getObjectByName('RightComms_And_Tube');
     for (const child of [...(comms?.children ?? [])]) if (child.name !== 'BackBox_Group') remove(child);
   }
-  if (options.body === 'shoulders') remove(model.getObjectByName('Neck'));
+  if (['shoulders', 'full'].includes(options.body)) remove(model.getObjectByName('Neck'));
   return model;
 }
 
@@ -92,6 +92,22 @@ const BODY_LABELS = {
   B19:'Brustbefestigung A', B20:'Brustbefestigung B', B21:'Rückenbefestigung A', B22:'Rückenbefestigung B',
   B23:'Schulterlamelle A', B24:'Schulterlamelle B', B25:'Schultergelenk A', B26:'Schultergelenk B',
   B27:'Brustmitte', B28:'Flankenpanzer A', B29:'Flankenpanzer B', B30:'Schulterdach A', B31:'Schulterdach B',
+  B32:'Bauchlamelle 1', B33:'Bauchlamelle 2', B34:'Bauchlamelle 3', B35:'Beckengurt', B36:'Becken-/Taillenkern',
+  B37:'Hüftplatte A', B38:'Hüftplatte B', B39:'Oberarm A', B40:'Oberarm B', B41:'Ellbogen A', B42:'Ellbogen B',
+  B43:'Unterarm A', B44:'Unterarm B', B45:'Hand A', B46:'Hand B', B47:'Hüftgelenk A', B48:'Hüftgelenk B',
+  B49:'Oberschenkel A', B50:'Oberschenkel B', B51:'Knie A', B52:'Knie B', B53:'Knieschutz A', B54:'Knieschutz B',
+  B55:'Unterschenkel A', B56:'Unterschenkel B', B57:'Fuß A', B58:'Fuß B',
+};
+
+// Full-body parts move along their limb chain instead of the shared upper-body offset; X is mirrored per side.
+const LIMB_OFFSETS = {
+  B32:[0,-.35,.6], B33:[0,-.45,.85], B34:[0,-.55,1.1], B35:[0,-.75,.6], B36:[0,-.95,0], B37:[.95,-.9,0],
+  B39:[1.2,-.3,0], B41:[1.45,-.55,0], B43:[1.7,-.8,0], B45:[1.95,-1.1,0],
+  B47:[.5,-1,0], B49:[.7,-1.2,0], B51:[.85,-1.4,0], B53:[.85,-1.4,.6], B55:[1,-1.6,0], B57:[1.15,-1.85,.3],
+};
+const limbOffset = (id, x) => {
+  const number = Number(id.slice(1)), base = LIMB_OFFSETS[id] ?? LIMB_OFFSETS[`B${number - 1}`];
+  return base && number >= 32 ? [Math.sign(x) * base[0], base[1], base[2]] : null;
 };
 
 export function assemblyInventory(model) {
@@ -103,7 +119,8 @@ export function assemblyInventory(model) {
       const center = box.getCenter(new THREE.Vector3());
       const bodyPart = id.startsWith('B');
       const info = ASSEMBLY_PARTS[id] ?? { label: BODY_LABELS[id] ?? object.name.replaceAll('_', ' '),
-        offset: [Math.sign(center.x) * 0.65, -0.6, Math.sign(center.z) * 0.42], connection: 'Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.' };
+        offset: limbOffset(id, center.x) ?? [Math.sign(center.x) * 0.65, -0.6, Math.sign(center.z) * 0.42],
+        connection: Number(id.slice(1)) >= 32 ? 'Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.' : 'Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.' };
       entries.push({ id, label: info.label, connection: info.connection, path, name: object.name || path.split('/').at(-1),
         mesh: object, center: center.toArray(), offset: info.offset, presentationOnly: id === 'P01', study: bodyPart });
     }

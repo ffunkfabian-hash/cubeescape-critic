@@ -15,6 +15,7 @@ import { denoiseTexture, DENOISE_SEED } from './textures.js';
 import { buildHelmet } from './helmet.js';
 import { buildBodyStudy } from './parts/bodyStudy.js';
 import { buildShoulderStudy, shoulderStudyParams } from './parts/shoulderStudy.js';
+import { buildFullBody, fullBodyParams } from './parts/fullBody.js';
 import { configureHelmetAssembly, createExplodedAssembly, assemblyDescription } from './assembly.js';
 import { resolveAssemblyOptions } from './assemblyOptions.js';
 import { createAssemblyLabels } from './assemblyLabels.js';
@@ -109,11 +110,12 @@ function setCameraView(name) {
   if (!VIEWS[name]) throw new Error(`unknown view ${name}`);
   setTurntable(false);
   if (presentationOptions.exploded > 0) {
-    const withShoulders = presentationOptions.body === 'shoulders';
-    target.set(0, withShoulders ? -.55 : .05, 0);
-    v.dist = withShoulders ? 9.8 : name === 'assembly' ? 7.8 : 8.8;
+    const withShoulders = presentationOptions.body === 'shoulders', full = presentationOptions.body === 'full';
+    target.set(0, full ? -2.6 : withShoulders ? -.55 : .05, 0);
+    v.dist = full ? 17.5 : withShoulders ? 9.8 : name === 'assembly' ? 7.8 : 8.8;
   }
   else if (presentationOptions.body === 'shoulders') { target.set(0, -.49, 0); v.dist = 4.7; }
+  else if (presentationOptions.body === 'full') { target.set(0, -2.2, 0); v.dist = 11.8; }
   else if (presentationOptions.body === 'legacy') { target.set(0, -.8, 0); v.dist = 5.4; }
   else target.set(0, -.06, 0);
   current = name;
@@ -223,6 +225,7 @@ function rebuild() {
   applyArmorFinish(model, M);
   applyArmorAccents(model, M, materialAccents.name);
   if (presentationOptions.body === 'shoulders') model.add(buildShoulderStudy(M));
+  if (presentationOptions.body === 'full') model.add(buildFullBody(M));
   if (presentationOptions.exploded > 0) model = createExplodedAssembly(model, presentationOptions.exploded);
   assemblyParts = assemblyDescription(model);
   annotation.setGroups(assemblyParts);
@@ -236,7 +239,7 @@ async function exportGLB() {
   const glb = await new GLTFExporter().parseAsync(model, { binary: true });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([glb], { type: 'model/gltf-binary' }));
-  a.download = presentationOptions.exploded > 0 ? 'scifi_helmet_exploded.glb' : presentationOptions.body === 'shoulders' ? 'scifi_shoulder_study.glb' : presentationOptions.body === 'legacy' ? 'scifi_body_study.glb' : 'scifi_helmet.glb';
+  a.download = presentationOptions.exploded > 0 ? 'scifi_helmet_exploded.glb' : presentationOptions.body === 'shoulders' ? 'scifi_shoulder_study.glb' : presentationOptions.body === 'full' ? 'scifi_full_body.glb' : presentationOptions.body === 'legacy' ? 'scifi_body_study.glb' : 'scifi_helmet.glb';
   a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }
@@ -250,7 +253,7 @@ function buildGui() {
   const assembly = gui.addFolder('Aufbau und Varianten');
   const changeAssembly = () => { rebuild(); setCameraView(presentationOptions.exploded > 0 ? 'assembly' : 'front'); };
   assembly.add(presentationOptions, 'headset', { sichtbar:'on', ausgeblendet:'off' }).name('Kopfhörer + Band').onFinishChange(changeAssembly);
-  assembly.add(presentationOptions, 'body', { 'nur Helm':'none', 'Schultern + Hals':'shoulders', 'alte Körperstudie':'legacy' }).name('Körper').onFinishChange(changeAssembly);
+  assembly.add(presentationOptions, 'body', { 'nur Helm':'none', 'Schultern + Hals':'shoulders', 'Gesamtkörper':'full', 'alte Körperstudie':'legacy' }).name('Körper').onFinishChange(changeAssembly);
   assembly.add(presentationOptions, 'exploded', 0, 1, .05).name('Explosionsabstand').onFinishChange(changeAssembly);
   assembly.add({ parts:()=>annotation.togglePanel() }, 'parts').name('Bauteile / Anschlüsse');
   const f1 = gui.addFolder('Proportionen');
@@ -324,4 +327,4 @@ if (STATIC) {
   });
 }
 
-Object.assign(window, { THREE, scene, camera, controls, renderFrame, setCameraView, toggleOverlay, setMaskMode, exportGLB, rebuild, helmetParams: D, materialFinish, materialAccents, presentationOptions, assemblyParts, shoulderStudyParams });
+Object.assign(window, { THREE, scene, camera, controls, renderFrame, setCameraView, toggleOverlay, setMaskMode, exportGLB, rebuild, fullBodyParams, helmetParams: D, materialFinish, materialAccents, presentationOptions, assemblyParts, shoulderStudyParams });
