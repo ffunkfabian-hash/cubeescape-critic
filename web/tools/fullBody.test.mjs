@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
 import { resolveAssemblyOptions } from '../src/assemblyOptions.js';
-import { assemblyInventory, configureHelmetAssembly, createExplodedAssembly } from '../src/assembly.js';
+import { assemblyDescription, assemblyInventory, configureHelmetAssembly, createExplodedAssembly } from '../src/assembly.js';
 import { buildFullBody, FULL_BODY_PARTS, fullBodyParams } from '../src/parts/fullBody.js';
 import { buildShoulderStudy, SHOULDER_STUDY_PARTS } from '../src/parts/shoulderStudy.js';
 
@@ -94,6 +94,9 @@ test('full-body parameters drive only their parts; exploded view keeps every par
   assert.ok(offset('B46')[0] > offset('B44')[0] && offset('B44')[0] > offset('B40')[0], 'arm parts separate outward');
   assert.equal(Math.sign(offset('B45')[0]), -1);
   for (const id of Object.keys(FULL_BODY_PARTS)) assert.ok(entries.some(e => e.id === id && e.label && !e.label.includes('_')), id);
+  // Labels are built from the exploded copy as well, whose meshes carry renamed ids.
+  const labels = assemblyDescription(exploded);
+  for (const id of Object.keys(FULL_BODY_PARTS)) assert.ok(labels.some(g => g.id === id), `label ${id}`);
 });
 
 test('the full-body presentation replaces the helmet neck core like the shoulder study', () => {

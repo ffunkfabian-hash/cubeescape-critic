@@ -108,12 +108,10 @@ export function assemblyInventory(model) {
     if (object.isMesh) {
       const id = category(object), box = new THREE.Box3().setFromObject(object, true);
       const center = box.getCenter(new THREE.Vector3());
-      const bodyPart = id.startsWith('B'), fullBodyPart = /^B(3[2-9]|[45]\d)$/.test(id);
-      const limb = fullBodyPart ? fullBodyExplosionOffset(object.name, center.x) : null;
-      if (fullBodyPart && !limb) throw new Error(`Missing full-body explosion offset for ${object.name}`);
+      const bodyPart = id.startsWith('B'), limb = fullBodyExplosionOffset(id, center.x);
       const info = ASSEMBLY_PARTS[id] ?? { label: BODY_LABELS[id] ?? object.name.replaceAll('_', ' '),
         offset: limb ?? [Math.sign(center.x) * 0.65, -0.6, Math.sign(center.z) * 0.42],
-        connection: fullBodyPart ? 'Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.' : 'Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.' };
+        connection: limb ? 'Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.' : 'Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.' };
       entries.push({ id, label: info.label, connection: info.connection, path, name: object.name || path.split('/').at(-1),
         mesh: object, center: center.toArray(), offset: info.offset, presentationOnly: id === 'P01', study: bodyPart });
     }

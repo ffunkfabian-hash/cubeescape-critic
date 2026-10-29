@@ -6,9 +6,11 @@ import { beveledPlate, buildShoulderStudy, shoulderStudyParams, signedVolume, so
 
 export const fullBodyParams = structuredClone(defaults);
 
-// Exploded-view offset of a full-body mesh by its name; X is mirrored to the mesh's side. Null for other parts.
-export function fullBodyExplosionOffset(name, x, p = fullBodyParams) {
-  const base = p.explosion[name.replace(/_[RL]$/, '')];
+// Exploded-view offset of a full-body part, looked up by the stable name of its id (exploded copies are renamed);
+// X is mirrored to the part's side. Null for ids outside B32-B58.
+export function fullBodyExplosionOffset(id, x, p = fullBodyParams) {
+  const base = FULL_BODY_PARTS[id] && p.explosion[FULL_BODY_PARTS[id].replace(/_[RL]$/, '')];
+  if (FULL_BODY_PARTS[id] && !base) throw new Error(`Missing full-body explosion offset for ${id}`);
   return base ? [Math.sign(x) * base[0], base[1], base[2]] : null;
 }
 
