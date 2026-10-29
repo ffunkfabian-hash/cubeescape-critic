@@ -1,0 +1,13 @@
+ce_judge: 23 Dateien, 759 Diff-Zeilen, Richter sol (gpt-6.1-sol high), Grund: expliziter --model=sol; automatisch wäre sol (713 Diff-Zeilen (Schwelle 300)), Basis 0a6bda5
+| Nr | Datei:Zeile | Schwere (blocker/hoch/niedrig/ok) | Befund | Vorschlag |
+|---|---|---|---|---|
+| 1 | web/verify_renders.mjs:151 | ok | Manifest additiv erweitert; keine Änderung der genannten Speicher-/Unity-Verträge erkennbar. | Keine Migration erforderlich. |
+| 2 | docs/HELM_TEILE.md:34 | ok | H20/H21 bleiben erhalten; keine bestehenden IDs, Seeds oder Enum-Reihenfolgen geändert. | — |
+| 3 | web/src/main.js:201 | ok | Kein Unity-Code betroffen; neue Materialzuweisung erfolgt beim Neuaufbau, außerhalb der Bildschleife. | — |
+| 4 | web/tools/continuity.test.mjs:59; web/package.json:11 | ok | Neue Tests automatisch eingebunden; keine Tests im Diff gelöscht oder abgeschwächt. `test_map.json` außerhalb des erlaubten Lesebereichs. Finale Hashbelege vereinbarungsgemäß offen. | Hashbelege nach Abschluss ergänzen. |
+| 5 | web/src/helmetParams.json:434; web/src/finishPresets.js:3 | ok | Formparameter und Materialvarianten zentral definiert; keine gebietsspezifische Sonderlogik erkennbar. | — |
+| 6 | CHANGELOG.md:3; docs/versions/0.4.md:1 | ok | Verhaltensänderungen dokumentiert; ausstehende Abnahme und Montagepassung ausdrücklich benannt. Keine neuen Werkbank-Fenster. | — |
+| 7 | assets/helmet-continuity/README.md:30; docs/versions/0.4.md:42 | ok | Reproduktion mit GPU-Sperre dokumentiert; keine unerlaubten Git-/Aufräumaktionen im Diff. Kein Merge beauftragt. | — |
+| 8 | docs/versions/0.4.md:5 | ok | Zwei zusammenhängende Ziele: Formverbesserung und Materialvergleich. Runner, Tests und Doku unterstützen diese Ziele. | — |
+
+Freigabe

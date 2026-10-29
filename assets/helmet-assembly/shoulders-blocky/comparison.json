@@ -1,0 +1,15 @@
+{
+  "sourceRevision": "d8e0b2ed0174e66e1d049eff2dd4147893558b98",
+  "baseline": "../shoulders",
+  "unchangedHelmetMeshes": 56,
+  "unchangedNeckMeshes": [
+    "NeckFlex",
+    "NeckRibs"
+  ],
+  "sameCameras": true,
+  "bodyParts": 22,
+  "meshCount": 78,
+  "outputsVerified": 22,
+  "sourceDigest": "0b37ac45a3e22a5a21937886014ec40f274d09dda0b4c319bb55f7a45b49cbd6",
+  "glbSha256": "f3ecd1d1e3307814025a46e7ae803e1985bd06ed4a7f30dceb410875b2f78ef2"
+}

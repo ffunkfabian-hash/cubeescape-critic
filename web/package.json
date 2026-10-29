@@ -1,0 +1,24 @@
+{
+  "name": "critic-helm-web",
+  "private": true,
+  "version": "0.7.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5173",
+    "build": "vite build",
+    "verify": "node verify_renders.mjs",
+    "test": "node --test --test-concurrency=1 tools/*.test.mjs && python3 -I tools/test_iou.py && python3 -I tools/test_save_pass.py",
+    "verify:reference": "node tools/compare_reference.mjs"
+  },
+  "dependencies": {
+    "lil-gui": "0.21.0",
+    "simplex-noise": "4.0.3",
+    "three": "0.186.1",
+    "three-bvh-csg": "0.0.18",
+    "three-mesh-bvh": "0.9.16"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1",
+    "vite": "8.3.5"
+  }
+}

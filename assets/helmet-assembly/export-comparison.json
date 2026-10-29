@@ -1,0 +1,75 @@
+{
+  "variants": {
+    "control": {
+      "sourceRevision": "6090262c1720c98a89d857970f9f11156103d29f",
+      "meshCount": 102,
+      "sourceDigest": "de171045d1dc3a6274c6b155e661aa3bb7e00ab36f0d2c6353426c76e5f15161",
+      "outputsVerified": 28,
+      "sha256": "ff4616cb3310c994a355e323a7195ac0d748d261fbe1a3ddd9e7e74f3b84209f"
+    },
+    "headset-off": {
+      "sourceRevision": "6090262c1720c98a89d857970f9f11156103d29f",
+      "meshCount": 62,
+      "sourceDigest": "de171045d1dc3a6274c6b155e661aa3bb7e00ab36f0d2c6353426c76e5f15161",
+      "outputsVerified": 28,
+      "sha256": "7d131f43208536c686fb8e1c210258a51bd6391fa673e0f24e2adba9c1412407",
+      "retainedHelmetMeshesUnchanged": 62
+    },
+    "exploded": {
+      "sourceRevision": "3ff99582bdfc6ba1eaa06095632a40ae284c0099",
+      "meshCount": 104,
+      "sourceDigest": "e6b2e0b8a5d536da6ddb2ed0addc6b289bfc47a75f84cd79fcef3e2a3d2e426b",
+      "outputsVerified": 22,
+      "sha256": "e4acee6287f0f2367d73c8df9df404f52d7bc66cb97141c249639fbb31b04f52"
+    },
+    "shoulders": {
+      "sourceRevision": "6090262c1720c98a89d857970f9f11156103d29f",
+      "meshCount": 78,
+      "sourceDigest": "de171045d1dc3a6274c6b155e661aa3bb7e00ab36f0d2c6353426c76e5f15161",
+      "outputsVerified": 22,
+      "sha256": "1e45f26399ef2904ed4fbc5655265a5f4374367bee2aee2caed3c0767e74be35",
+      "retainedHelmetMeshesUnchanged": 56
+    }
+  },
+  "referenceBaseline": "assets/helmet-continuity/graphite-plain",
+  "baselineGeometryTransformMaterialMatches": 102,
+  "baselineSilhouettesIdentical": true,
+  "explodedRoundtrip": {
+    "meshes": 104,
+    "positionsIdentical": true,
+    "maximumTransformError": 5.551115123125783e-16,
+    "metadataPreserved": true
+  },
+  "explodedMaskBounds": {
+    "assembly": [
+      313,
+      31,
+      894,
+      680
+    ],
+    "front": [
+      383,
+      78,
+      907,
+      669
+    ],
+    "left": [
+      366,
+      74,
+      868,
+      669
+    ],
+    "back": [
+      350,
+      70,
+      925,
+      673
+    ],
+    "right": [
+      417,
+      75,
+      890,
+      669
+    ]
+  }
+}

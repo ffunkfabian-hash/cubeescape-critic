@@ -1,0 +1,8 @@
+{
+  "role": "supplementary-only-video-is-authoritative",
+  "sha256": "4a0822b0c8bc7d80de0c506bc0cc7aebdd9b21fc3c11dcdb1841866bd5d4e33d",
+  "scale": 0.72,
+  "translation": [0, -0.17, 0],
+  "rotation": [0, 0, 0],
+  "note": "Approximate global placement for visual inspection. Not calibrated for silhouette IoU."
+}

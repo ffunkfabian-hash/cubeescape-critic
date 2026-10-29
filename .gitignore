@@ -5,3 +5,8 @@ __pycache__/
 .claude/
 report.md
 runs/
+node_modules/
+web/dist/
+web/marker/dist/
+web/renders/
+web/public/robot/

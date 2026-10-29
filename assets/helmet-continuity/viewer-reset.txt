@@ -1,0 +1,4 @@
+heavy lock (gpu): waiting for /Users/ffunk/Library/Caches/CubeEscape/heavy-run.lock - held by node (PID 42138, /Users/ffunk/cubeescape-critic, since 2026-10-28 17:56:45) (CE_HEAVY_LOCK=0 skips the queue)
+heavy lock: free after 6 s
+{"count":103,"strips":false,"hasStrips":false,"hasMark":true,"hiddenPreserved":true,"shownPreserved":true}
+Viewer reset and mask visibility: PASS

@@ -1,0 +1,61 @@
+{
+  "sequence": [
+    {
+      "count": 62,
+      "parts": 62,
+      "band": false,
+      "neck": true,
+      "body": "none"
+    },
+    {
+      "count": 102,
+      "parts": 102,
+      "band": true,
+      "neck": true,
+      "body": "none"
+    },
+    {
+      "count": 118,
+      "parts": 118,
+      "band": true,
+      "neck": false,
+      "body": "shoulders"
+    },
+    {
+      "count": 78,
+      "parts": 78,
+      "band": false,
+      "neck": false,
+      "body": "shoulders"
+    },
+    {
+      "count": 78,
+      "parts": 78,
+      "band": false,
+      "neck": false,
+      "body": "shoulders"
+    },
+    {
+      "count": 78,
+      "parts": 78,
+      "band": false,
+      "neck": false,
+      "body": "shoulders"
+    },
+    {
+      "count": 62,
+      "parts": 62,
+      "band": false,
+      "neck": true,
+      "body": "none"
+    }
+  ],
+  "overlaps": false,
+  "clipped": false,
+  "hidden": true,
+  "shown": true,
+  "leadersReused": true,
+  "labels": 44,
+  "retainedStrips": false
+}
+Browser mode switches, reset, label bounds and mask exclusion: PASS

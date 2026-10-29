@@ -5,7 +5,7 @@ import ast, json, os, sys
 ROOT = os.path.dirname(os.path.abspath(__file__))
 err = []
 for base, dirs, files in os.walk(ROOT):
-    dirs[:] = [d for d in dirs if d not in ('.git', 'runs', '__pycache__')]
+    dirs[:] = [d for d in dirs if d not in ('.git', 'runs', '__pycache__', 'node_modules', 'dist', 'renders')]
     for f in files:
         p = os.path.join(base, f)
         rel = os.path.relpath(p, ROOT)

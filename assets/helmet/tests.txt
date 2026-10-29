@@ -1,0 +1,273 @@
+
+> critic-helm-web@0.3.0 test
+> node --test --test-concurrency=1 tools/*.test.mjs && python3 -I tools/test_iou.py && python3 -I tools/test_save_pass.py
+
+✔ body study keeps separately editable, uniquely named geometry (7.028542ms)
+(node:28198) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+✔ complete headsets mirror in world space with outward surfaces and one rear box (5142.1885ms)
+(node:28203) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+✔ separate jaw inserts follow their supporting plates (2251.862625ms)
+✔ collar surface attributes remain finite after boolean pocket cuts (4.283042ms)
+✔ rear core and collar follow a round elliptical outline (4.402ms)
+✔ panel interiors expose recessed floors, with no residual original wall facets (7.936875ms)
+✔ slot is deeper than the panel, socket is recessed, and surrounding wall is retained (5.222916ms)
+✔ manifest detects source and authoritative reference changes, excluding generated output (10.341375ms)
+✔ verification overwrites old passed status on missing-source (92.894333ms)
+✔ verification overwrites old passed status on server-initialization (232.062375ms)
+✔ reference comparison overwrites old passed status on missing-file (74.013417ms)
+✔ reference comparison overwrites old passed status on wrong-hash (70.312083ms)
+✔ lower-face fit preserves crown and shortens connected lower geometry (3.552ms)
+✔ instanced fasteners follow the same fit as their supporting plates (1.506083ms)
+✔ identity fit leaves geometry unchanged and invalid fitting values fail (0.321125ms)
+(node:28228) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+✔ ambient-occlusion denoising is reproducible without altering global random state (13.913041ms)
+✔ UV projection stays consistent within triangles despite varying vertex normals (0.772792ms)
+(node:28229) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+BVH: "maxLeafSize" option has been deprecated. Use "targetLeafSize", instead.
+✔ rounded forehead does not lower the dark cap over the rear housing (1719.625916ms)
+✔ process launch failures and signals cannot pass as exit zero (0.494084ms)
+✔ GLB smoke inspection reads the model and its materials (0.248166ms)
+✔ GLB inspection rejects truncated and mislabeled downloads (0.293167ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 10711.174333
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.039s
+
+OK
+........
+----------------------------------------------------------------------
+Ran 8 tests in 0.098s
+
+OK
+
+Stand 79: 18 gespiegelte Meshpaare punktweise in Weltkoordinaten geprüft; positive Exportskalierung, Flächenorientierung und einmaliges Heckmodul. Negativkontrolle mit invertierter Orientierung schlägt erwartungsgemäß fehl.

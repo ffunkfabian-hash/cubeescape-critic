@@ -1,0 +1,21 @@
+(node:37786) [THREE_CJS_DEPRECATED] DeprecationWarning: `require("three")` is deprecated and will be removed.
+Replace `const THREE = require("three")` with `import * as THREE from "three"`.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+✔ finish selection defaults to original and rejects unrecognized names (0.901166ms)
+✔ accent selection is independent and rejects unrecognized names (0.186667ms)
+✔ accent choices change only upper screws and optionally both forehead strips for every finish (3128.9855ms)
+✔ finishes share armor maps, preserve original, and leave other parts unchanged (461.592833ms)
+✔ verification overwrites old passed status on missing-source (135.719833ms)
+✔ verification overwrites old passed status on server-initialization (589.437375ms)
+✔ reference comparison overwrites old passed status on missing-file (119.347375ms)
+✔ reference comparison overwrites old passed status on wrong-hash (120.421333ms)
+✔ verification rejects invalid arguments before starting the renderer or writing output (1373.83625ms)
+✔ verification records selected preset and failure in its separate output directory (410.492625ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3861.030584

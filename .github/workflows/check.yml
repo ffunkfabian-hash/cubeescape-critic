@@ -30,3 +30,14 @@ jobs:
         uses: ffunkfabian-hash/ce-agent-tools/.github/actions/ce-tools@f8a13fc9fb1c7d2b4038b7bf619d2fccd9f00d4a
       - name: check.quick aus .ce-repo.json
         run: ./ce check
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Browser-Modell – Abhängigkeiten, Logiktests und Build
+        run: |
+          python3 -m pip install -r web/requirements.txt
+          npm --prefix web ci
+          npm --prefix web test
+          npm --prefix web run build
