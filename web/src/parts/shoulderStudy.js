@@ -29,7 +29,9 @@ function signedVolume(vertices, triangles) {
 }
 
 // Raised closed pad inset from one forward-facing relief facet; the exposed plate between pads reads as a groove.
-// The rings give a vertical groove wall followed by a two-step rounded chamfer onto the pad top.
+// The rings give a groove wall followed by a two-step rounded chamfer onto the pad top. Each ring lies on the facet
+// plane offset by its height along the normal, but is extruded along +Z: walls stay parallel to the frontal view,
+// so steep neighbours never overhang a groove and pads stay inside the plate outline.
 function appendFacetPad(vertices, triangles, corners, pad, orientation) {
   const [a, b, c] = corners.map(p => new THREE.Vector3(...p));
   const cross = b.clone().sub(a).cross(c.clone().sub(a)), normal = cross.clone().normalize();
@@ -38,13 +40,13 @@ function appendFacetPad(vertices, triangles, corners, pad, orientation) {
   const incenter = a.clone().multiplyScalar(la).addScaledVector(b, lb).addScaledVector(c, lc).divideScalar(perimeter);
   // Scaling about the incenter moves every edge inward by the same distance.
   const radius = cross.length() / perimeter, k = 1 - Math.SQRT1_2;
-  if (radius < pad.groove + pad.chamfer + 0.005) throw new Error(`relief facet too small for a pad (r=${radius.toFixed(4)})`);
+  if (radius < pad.groove + pad.chamfer + pad.minMargin) throw new Error(`relief facet too small for a pad (r=${radius.toFixed(4)})`);
   const start = vertices.length;
   for (const [inset, height] of [[pad.groove, -pad.embed], [pad.groove, pad.height - pad.chamfer],
     [pad.groove + k * pad.chamfer, pad.height - k * pad.chamfer], [pad.groove + pad.chamfer, pad.height]]) {
     const scale = (radius - inset) / radius;
     for (const p of [a, b, c]) vertices.push(p.clone().sub(incenter).multiplyScalar(scale).add(incenter)
-      .addScaledVector(normal, height).toArray());
+      .add(new THREE.Vector3(0, 0, height / normal.z)).toArray());
   }
   const shell = [start, start + 2, start + 1, start + 9, start + 10, start + 11];
   for (let ring = 0; ring < 3; ring++) for (let i = 0; i < 3; i++) {
