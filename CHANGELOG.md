@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.1 – 2026-10-29 (Patch: Lamellen-Testmatcher)
+
+- `fullBody.test.mjs` prüft beim Ablehnen einer falschen Lamellenzahl jetzt die Meldung `waist.lamellae needs N bands`
+  statt nur irgendeinen Fehler (Restbefund der 0.9-Prüfung). Nur Test und Version; Generator und Lieferung 0.9 unverändert.
+
 ## 0.9.0 „Vanguard“ – 2026-10-29 (einfacher Gesamtkörper)
 
 - Körperoption `body=full`: Bastion-Oberkörper unverändert, dazu 27 Teile B32–B58 – drei dunkle Bauchlamellen,
