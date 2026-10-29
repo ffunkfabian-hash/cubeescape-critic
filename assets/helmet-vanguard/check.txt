@@ -1,0 +1,2 @@
+cubeescape-critic quick: GREEN (1 command(s), 0 s)
+  ok   python3 check (exit 0, 0 s)

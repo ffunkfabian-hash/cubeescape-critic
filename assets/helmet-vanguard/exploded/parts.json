@@ -1,0 +1,4396 @@
+{
+  "meshCount": 114,
+  "bodyParts": 58,
+  "parts": [
+    {
+      "node": 1,
+      "name": "H01_Crown_1",
+      "mesh": 0,
+      "materials": [
+        "crownArmor"
+      ],
+      "metadata": {
+        "partId": "H01",
+        "partLabel": "Sch\u00e4delhaube",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/Crown[0]",
+        "connectionNote": "Verdeckte Auflage und Befestigung an H09/H03 konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0,
+          0.82,
+          0
+        ]
+      }
+    },
+    {
+      "node": 2,
+      "name": "H05A_Cheek_R_1",
+      "mesh": 1,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "H05A",
+        "partLabel": "Wange A",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/Cheek_R[0]",
+        "connectionNote": "Fugen und Befestigung zur Augenmaske und zum Kiefer.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.48,
+          -0.16,
+          0.73
+        ]
+      }
+    },
+    {
+      "node": 3,
+      "name": "H05B_Cheek_L_1",
+      "mesh": 2,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "H05B",
+        "partLabel": "Wange B",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/Cheek_L[0]",
+        "connectionNote": "Fugen und Befestigung zur Augenmaske und zum Kiefer.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.48,
+          -0.16,
+          0.73
+        ]
+      }
+    },
+    {
+      "node": 4,
+      "name": "H06_Mouth_Insert_1",
+      "mesh": 3,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "H06",
+        "partLabel": "Mitteleinsatz / Schienen",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/Mouth_Insert[0]",
+        "connectionNote": "Einsatz und Schienen sind eigene Meshes; Haltepunkte offen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0,
+          -0.42,
+          1.05
+        ]
+      }
+    },
+    {
+      "node": 5,
+      "name": "H06_MouthRail_R_2",
+      "mesh": 4,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "H06",
+        "partLabel": "Mitteleinsatz / Schienen",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/MouthRail_R[0]",
+        "connectionNote": "Einsatz und Schienen sind eigene Meshes; Haltepunkte offen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          -0.23258859436599177,
+          -0.8995705929155259,
+          -0.36969621871539593,
+          0,
+          0.8995705929155259,
+          -0.0544894768274069,
+          -0.4333631794196239,
+          0,
+          0.36969621871539593,
+          -0.4333631794196239,
+          0.8219008824614152,
+          0,
+          -0.0852,
+          -0.1985,
+          0.42305021227433226,
+          1
+        ],
+        "explosionOffset": [
+          0.025,
+          -0.39599999999999996,
+          1.095
+        ]
+      }
+    },
+    {
+      "node": 6,
+      "name": "H06_MouthRail_L_3",
+      "mesh": 5,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "H06",
+        "partLabel": "Mitteleinsatz / Schienen",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/MouthRail_L[0]",
+        "connectionNote": "Einsatz und Schienen sind eigene Meshes; Haltepunkte offen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          0.23259218261800352,
+          -0.8995844710078673,
+          -0.3696601900482242,
+          0,
+          0.8995844710078673,
+          0.34345501140558343,
+          -0.26978961184946765,
+          0,
+          0.3696601900482242,
+          -0.26978961184946765,
+          0.8891371712124201,
+          0,
+          0.0852,
+          -0.1985,
+          0.4230566708099158,
+          1
+        ],
+        "explosionOffset": [
+          0.05,
+          -0.372,
+          1.1400000000000001
+        ]
+      }
+    },
+    {
+      "node": 7,
+      "name": "H06_MaskGap_4",
+      "mesh": 6,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "H06",
+        "partLabel": "Mitteleinsatz / Schienen",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/MaskGap[0]",
+        "connectionNote": "Einsatz und Schienen sind eigene Meshes; Haltepunkte offen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.07500000000000001,
+          -0.348,
+          1.185
+        ]
+      }
+    },
+    {
+      "node": 8,
+      "name": "H06_MaskGap_5",
+      "mesh": 7,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "H06",
+        "partLabel": "Mitteleinsatz / Schienen",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/MaskGap[1]",
+        "connectionNote": "Einsatz und Schienen sind eigene Meshes; Haltepunkte offen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.1,
+          -0.32399999999999995,
+          1.23
+        ]
+      }
+    },
+    {
+      "node": 9,
+      "name": "H03_Shell_1",
+      "mesh": 8,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "H03",
+        "partLabel": "Augenmaske",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/Shell[0]",
+        "connectionNote": "Maskenauflage und l\u00f6sbare Anschl\u00fcsse zum hellen Rahmen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0,
+          0.02,
+          0.72
+        ]
+      }
+    },
+    {
+      "node": 10,
+      "name": "H04A_Visor_R_1",
+      "mesh": 9,
+      "materials": [
+        "visorGlow"
+      ],
+      "metadata": {
+        "partId": "H04A",
+        "partLabel": "Auge A",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/Visor_R[0]",
+        "connectionNote": "Leuchteinsatz, Halter und elektrische Durchf\u00fchrung fehlen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          0.8986325224009334,
+          -0.2923717047227367,
+          0.327075489697496,
+          0,
+          0.2747395334545522,
+          0.9563047559630354,
+          0.0999970123536405,
+          0,
+          -0.34202014332566866,
+          0,
+          0.9396926207859084,
+          0,
+          -0.15563515398032193,
+          0.08,
+          0.447644329721591,
+          1
+        ],
+        "explosionOffset": [
+          -0.15,
+          0.05,
+          1.12
+        ]
+      }
+    },
+    {
+      "node": 11,
+      "name": "H04B_Visor_L_1",
+      "mesh": 10,
+      "materials": [
+        "visorGlow"
+      ],
+      "metadata": {
+        "partId": "H04B",
+        "partLabel": "Auge B",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/Visor_L[0]",
+        "connectionNote": "Leuchteinsatz, Halter und elektrische Durchf\u00fchrung fehlen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          0.8986325224009334,
+          0.2923717047227367,
+          -0.327075489697496,
+          0,
+          -0.2747395334545522,
+          0.9563047559630354,
+          0.0999970123536405,
+          0,
+          0.34202014332566866,
+          0,
+          0.9396926207859084,
+          0,
+          0.15563515398032193,
+          0.08,
+          0.4476443080953216,
+          1
+        ],
+        "explosionOffset": [
+          0.15,
+          0.05,
+          1.12
+        ]
+      }
+    },
+    {
+      "node": 12,
+      "name": "H02_Brim_1",
+      "mesh": 11,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "H02",
+        "partLabel": "Brauenkante",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/Brim[0]",
+        "connectionNote": "\u00dcbergang zur Augenmaske; getrennte schmale Kante.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          0.39,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0.475,
+          0,
+          0,
+          0.314,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0,
+          0.3,
+          0.68
+        ]
+      }
+    },
+    {
+      "node": 13,
+      "name": "H14A_Detail[0]_1",
+      "mesh": 12,
+      "materials": [
+        "accessoryArmor"
+      ],
+      "metadata": {
+        "partId": "H14A",
+        "partLabel": "Maskenhalter A",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_R[0]/Detail[0]",
+        "connectionNote": "Gelenk- und Schraubverbindung an der Maske.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          0.0112373292862179,
+          0.31437436410126646,
+          0.9492325750976089,
+          0,
+          0.026132458476110454,
+          0.9488759488382131,
+          -0.3145656184810653,
+          0,
+          -0.9995953266419906,
+          0.02834065828990423,
+          0.002447456473037457,
+          0,
+          -0.3962131991213186,
+          0.08028340658289905,
+          0.05002447456473038,
+          1
+        ],
+        "explosionOffset": [
+          -0.76,
+          0.22,
+          0.38
+        ]
+      }
+    },
+    {
+      "node": 14,
+      "name": "H14A_Detail[1]_2",
+      "mesh": 13,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "H14A",
+        "partLabel": "Maskenhalter A",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_R[0]/Detail[1]",
+        "connectionNote": "Gelenk- und Schraubverbindung an der Maske.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          0.0112373292862179,
+          0.31437436410126646,
+          0.9492325750976089,
+          0,
+          0.026132458476110454,
+          0.9488759488382131,
+          -0.3145656184810653,
+          0,
+          -0.9995953266419906,
+          0.02834065828990423,
+          0.002447456473037457,
+          0,
+          -0.42265503679663713,
+          0.06618714002033291,
+          0.037096810841180654,
+          1
+        ],
+        "explosionOffset": [
+          -0.735,
+          0.244,
+          0.425
+        ]
+      }
+    },
+    {
+      "node": 15,
+      "name": "H14A_Detail[2]_3",
+      "mesh": 14,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "H14A",
+        "partLabel": "Maskenhalter A",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_R[0]/Detail[2]",
+        "connectionNote": "Gelenk- und Schraubverbindung an der Maske.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          0.0112373292862179,
+          0.31437436410126646,
+          0.9492325750976089,
+          0,
+          0.026132458476110454,
+          0.9488759488382131,
+          -0.3145656184810653,
+          0,
+          -0.9995953266419906,
+          0.02834065828990423,
+          0.002447456473037457,
+          0,
+          -0.4225651381623474,
+          0.06870213493314303,
+          0.044690671441961524,
+          1
+        ],
+        "explosionOffset": [
+          -0.71,
+          0.268,
+          0.47
+        ]
+      }
+    },
+    {
+      "node": 16,
+      "name": "H14A_Detail[3]_4",
+      "mesh": 15,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "H14A",
+        "partLabel": "Maskenhalter A",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_R[0]/Detail[3]",
+        "connectionNote": "Gelenk- und Schraubverbindung an der Maske.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          0.0112373292862179,
+          0.31437436410126646,
+          0.9492325750976089,
+          0,
+          0.026132458476110454,
+          0.9488759488382131,
+          -0.3145656184810653,
+          0,
+          -0.9995953266419906,
+          0.02834065828990423,
+          0.002447456473037457,
+          0,
+          -0.42247523952805766,
+          0.07121712984595316,
+          0.052284532042742395,
+          1
+        ],
+        "explosionOffset": [
+          -0.685,
+          0.29200000000000004,
+          0.515
+        ]
+      }
+    },
+    {
+      "node": 17,
+      "name": "H14A_Detail[4]_5",
+      "mesh": 16,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "H14A",
+        "partLabel": "Maskenhalter A",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_R[0]/Detail[4]",
+        "connectionNote": "Gelenk- und Schraubverbindung an der Maske.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          0.0112373292862179,
+          0.31437436410126646,
+          0.9492325750976089,
+          0,
+          0.026132458476110454,
+          0.9488759488382131,
+          -0.3145656184810653,
+          0,
+          -0.9995953266419906,
+          0.02834065828990423,
+          0.002447456473037457,
+          0,
+          -0.4223853408937679,
+          0.0737321247587633,
+          0.059878392643523265,
+          1
+        ],
+        "explosionOffset": [
+          -0.66,
+          0.316,
+          0.56
+        ]
+      }
+    },
+    {
+      "node": 18,
+      "name": "H14A_Detail[5]_6",
+      "mesh": 17,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "H14A",
+        "partLabel": "Maskenhalter A",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_R[0]/Detail[5]",
+        "connectionNote": "Gelenk- und Schraubverbindung an der Maske.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          0.0112373292862179,
+          0.31437436410126646,
+          0.9492325750976089,
+          0,
+          0.026132458476110454,
+          0.9488759488382131,
+          -0.3145656184810653,
+          0,
+          -0.9995953266419906,
+          0.02834065828990423,
+          0.002447456473037457,
+          0,
+          -0.4222954422594782,
+          0.07624711967157342,
+          0.06747225324430414,
+          1
+        ],
+        "explosionOffset": [
+          -0.635,
+          0.33999999999999997,
+          0.605
+        ]
+      }
+    },
+    {
+      "node": 19,
+      "name": "H14A_Detail[6]_7",
+      "mesh": 18,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "H14A",
+        "partLabel": "Maskenhalter A",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_R[0]/Detail[6]",
+        "connectionNote": "Gelenk- und Schraubverbindung an der Maske.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          0.0112373292862179,
+          0.31437436410126646,
+          0.9492325750976089,
+          0,
+          -0.9995953266419906,
+          0.028340658289904442,
+          0.0024474564730373872,
+          0,
+          -0.026132458476110676,
+          -0.9488759488382131,
+          0.3145656184810653,
+          0,
+          -0.4048111234391281,
+          0.20397736783134562,
+          0.009160313639868342,
+          1
+        ],
+        "explosionOffset": [
+          -0.61,
+          0.364,
+          0.65
+        ]
+      }
+    },
+    {
+      "node": 20,
+      "name": "H14B_Detail[0]_1",
+      "mesh": 19,
+      "materials": [
+        "accessoryArmor"
+      ],
+      "metadata": {
+        "partId": "H14B",
+        "partLabel": "Maskenhalter B",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_L[0]/Detail[0]",
+        "connectionNote": "Gelenk- und Schraubverbindung an der Maske.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          0.006592855248088059,
+          -0.3145060454636099,
+          0.9492325750976521,
+          0,
+          0.02767187025028739,
+          -0.9488323030264452,
+          -0.31456561848107956,
+          0,
+          0.999595319044927,
+          0.028340926244119463,
+          0.0024474564544364474,
+          0,
+          0.39621319899019586,
+          0.0802834092624412,
+          0.05002447456454437,
+          1
+        ],
+        "explosionOffset": [
+          0.76,
+          0.22,
+          0.38
+        ]
+      }
+    },
+    {
+      "node": 21,
+      "name": "H14B_Detail[1]_2",
+      "mesh": 20,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "H14B",
+        "partLabel": "Maskenhalter B",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_L[0]/Detail[1]",
+        "connectionNote": "Gelenk- und Schraubverbindung an der Maske.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          0.006592855248088059,
+          -0.3145060454636099,
+          0.9492325750976521,
+          0,
+          0.02767187025028739,
+          -0.9488323030264452,
+          -0.31456561848107956,
+          0,
+          0.999595319044927,
+          0.028340926244119463,
+          0.0024474564544364474,
+          0,
+          0.4218138800436436,
+          0.09585519914793411,
+          0.037096810840510426,
+          1
+        ],
+        "explosionOffset": [
+          0.785,
+          0.244,
+          0.425
+        ]
+      }
+    },
+    {
+      "node": 22,
+      "name": "H14B_Detail[2]_3",
+      "mesh": 21,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "H14B",
+        "partLabel": "Maskenhalter B",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_L[0]/Detail[2]",
+        "connectionNote": "Gelenk- und Schraubverbindung an der Maske.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          0.006592855248088059,
+          -0.3145060454636099,
+          0.9492325750976521,
+          0,
+          0.02767187025028739,
+          -0.9488323030264452,
+          -0.31456561848107956,
+          0,
+          0.999595319044927,
+          0.028340926244119463,
+          0.0024474564544364474,
+          0,
+          0.4218666228856283,
+          0.09333915078422524,
+          0.04469067144129164,
+          1
+        ],
+        "explosionOffset": [
+          0.81,
+          0.268,
+          0.47
+        ]
+      }
+    },
+    {
+      "node": 23,
+      "name": "H14B_Detail[3]_4",
+      "mesh": 22,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "H14B",
+        "partLabel": "Maskenhalter B",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_L[0]/Detail[3]",
+        "connectionNote": "Gelenk- und Schraubverbindung an der Maske.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          0.006592855248088059,
+          -0.3145060454636099,
+          0.9492325750976521,
+          0,
+          0.02767187025028739,
+          -0.9488323030264452,
+          -0.31456561848107956,
+          0,
+          0.999595319044927,
+          0.028340926244119463,
+          0.0024474564544364474,
+          0,
+          0.421919365727613,
+          0.09082310242051636,
+          0.05228453204207286,
+          1
+        ],
+        "explosionOffset": [
+          0.835,
+          0.29200000000000004,
+          0.515
+        ]
+      }
+    },
+    {
+      "node": 24,
+      "name": "H14B_Detail[4]_5",
+      "mesh": 23,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "H14B",
+        "partLabel": "Maskenhalter B",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_L[0]/Detail[4]",
+        "connectionNote": "Gelenk- und Schraubverbindung an der Maske.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          0.006592855248088059,
+          -0.3145060454636099,
+          0.9492325750976521,
+          0,
+          0.02767187025028739,
+          -0.9488323030264452,
+          -0.31456561848107956,
+          0,
+          0.999595319044927,
+          0.028340926244119463,
+          0.0024474564544364474,
+          0,
+          0.4219721085695977,
+          0.08830705405680749,
+          0.05987839264285408,
+          1
+        ],
+        "explosionOffset": [
+          0.86,
+          0.316,
+          0.56
+        ]
+      }
+    },
+    {
+      "node": 25,
+      "name": "H14B_Detail[5]_6",
+      "mesh": 24,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "H14B",
+        "partLabel": "Maskenhalter B",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_L[0]/Detail[5]",
+        "connectionNote": "Gelenk- und Schraubverbindung an der Maske.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          0.006592855248088059,
+          -0.3145060454636099,
+          0.9492325750976521,
+          0,
+          0.02767187025028739,
+          -0.9488323030264452,
+          -0.31456561848107956,
+          0,
+          0.999595319044927,
+          0.028340926244119463,
+          0.0024474564544364474,
+          0,
+          0.4220248514115824,
+          0.08579100569309861,
+          0.06747225324363529,
+          1
+        ],
+        "explosionOffset": [
+          0.885,
+          0.33999999999999997,
+          0.605
+        ]
+      }
+    },
+    {
+      "node": 26,
+      "name": "H14B_Detail[6]_7",
+      "mesh": 25,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "H14B",
+        "partLabel": "Maskenhalter B",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_L[0]/Detail[6]",
+        "connectionNote": "Gelenk- und Schraubverbindung an der Maske.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          0.006592855248088059,
+          -0.3145060454636099,
+          0.9492325750976521,
+          0,
+          0.999595319044927,
+          0.02834092624411925,
+          0.0024474564544363776,
+          0,
+          -0.027671870250287167,
+          0.9488323030264452,
+          0.31456561848107956,
+          0,
+          0.4118056859512723,
+          -0.04272469901606725,
+          0.009160313639457261,
+          1
+        ],
+        "explosionOffset": [
+          0.91,
+          0.364,
+          0.65
+        ]
+      }
+    },
+    {
+      "node": 27,
+      "name": "F01_Screws_Upper_1",
+      "mesh": 26,
+      "materials": [
+        "lightFastener"
+      ],
+      "metadata": {
+        "partId": "F01",
+        "partLabel": "Schraubensatz oben",
+        "sourcePath": "SciFiHelmet/UpperHelmet_Dark[0]/Screws_Upper[0]",
+        "connectionNote": "Visualisierte K\u00f6pfe; keine konstruierten Gewinde / Bohrungen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.64,
+          0.55,
+          1.13
+        ]
+      }
+    },
+    {
+      "node": 28,
+      "name": "H09_Core_1",
+      "mesh": 27,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "H09",
+        "partLabel": "Seiten- / Heckgeh\u00e4use",
+        "sourcePath": "SciFiHelmet/LowerArmor_White[0]/Core[0]",
+        "connectionNote": "Tr\u00e4ger f\u00fcr Haube, Rahmen und Anbauten; Wandst\u00e4rken offen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0,
+          0,
+          -0.65
+        ]
+      }
+    },
+    {
+      "node": 29,
+      "name": "H09_RearPanel_2",
+      "mesh": 28,
+      "materials": [
+        "whiteTextured"
+      ],
+      "metadata": {
+        "partId": "H09",
+        "partLabel": "Seiten- / Heckgeh\u00e4use",
+        "sourcePath": "SciFiHelmet/LowerArmor_White[0]/RearPanel[0]",
+        "connectionNote": "Tr\u00e4ger f\u00fcr Haube, Rahmen und Anbauten; Wandst\u00e4rken offen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.025,
+          0.024,
+          -0.605
+        ]
+      }
+    },
+    {
+      "node": 30,
+      "name": "H10_Collar_1",
+      "mesh": 29,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "H10",
+        "partLabel": "Nacken- / Seitenrahmen",
+        "sourcePath": "SciFiHelmet/LowerArmor_White[0]/Collar[0]",
+        "connectionNote": "Auflage und Verschraubung des hellen Geh\u00e4uses.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0,
+          -0.55,
+          -0.18
+        ]
+      }
+    },
+    {
+      "node": 31,
+      "name": "H11A_CollarSlotFloor_R_1",
+      "mesh": 30,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "H11A",
+        "partLabel": "Einlagen A",
+        "sourcePath": "SciFiHelmet/LowerArmor_White[0]/CollarSlotFloor_R[0]",
+        "connectionNote": "Einlagen und Taschenb\u00f6den; Aufnahme im Rahmen konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.8,
+          -0.4,
+          0.12
+        ]
+      }
+    },
+    {
+      "node": 32,
+      "name": "H11A_CollarPanelFloor_R_2",
+      "mesh": 31,
+      "materials": [
+        "whiteTextured"
+      ],
+      "metadata": {
+        "partId": "H11A",
+        "partLabel": "Einlagen A",
+        "sourcePath": "SciFiHelmet/LowerArmor_White[0]/CollarPanelFloor_R[0]",
+        "connectionNote": "Einlagen und Taschenb\u00f6den; Aufnahme im Rahmen konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.775,
+          -0.376,
+          0.16499999999999998
+        ]
+      }
+    },
+    {
+      "node": 33,
+      "name": "H11A_CollarSocketFloor_R_3",
+      "mesh": 32,
+      "materials": [
+        "whiteTextured"
+      ],
+      "metadata": {
+        "partId": "H11A",
+        "partLabel": "Einlagen A",
+        "sourcePath": "SciFiHelmet/LowerArmor_White[0]/CollarSocketFloor_R[0]",
+        "connectionNote": "Einlagen und Taschenb\u00f6den; Aufnahme im Rahmen konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.75,
+          -0.35200000000000004,
+          0.21
+        ]
+      }
+    },
+    {
+      "node": 34,
+      "name": "H11B_CollarSlotFloor_L_1",
+      "mesh": 33,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "H11B",
+        "partLabel": "Einlagen B",
+        "sourcePath": "SciFiHelmet/LowerArmor_White[0]/CollarSlotFloor_L[0]",
+        "connectionNote": "Einlagen und Taschenb\u00f6den; Aufnahme im Rahmen konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.8,
+          -0.4,
+          0.12
+        ]
+      }
+    },
+    {
+      "node": 35,
+      "name": "H11B_CollarPanelFloor_L_2",
+      "mesh": 34,
+      "materials": [
+        "whiteTextured"
+      ],
+      "metadata": {
+        "partId": "H11B",
+        "partLabel": "Einlagen B",
+        "sourcePath": "SciFiHelmet/LowerArmor_White[0]/CollarPanelFloor_L[0]",
+        "connectionNote": "Einlagen und Taschenb\u00f6den; Aufnahme im Rahmen konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.8250000000000001,
+          -0.376,
+          0.16499999999999998
+        ]
+      }
+    },
+    {
+      "node": 36,
+      "name": "H11B_CollarSocketFloor_L_3",
+      "mesh": 35,
+      "materials": [
+        "whiteTextured"
+      ],
+      "metadata": {
+        "partId": "H11B",
+        "partLabel": "Einlagen B",
+        "sourcePath": "SciFiHelmet/LowerArmor_White[0]/CollarSocketFloor_L[0]",
+        "connectionNote": "Einlagen und Taschenb\u00f6den; Aufnahme im Rahmen konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.8500000000000001,
+          -0.35200000000000004,
+          0.21
+        ]
+      }
+    },
+    {
+      "node": 37,
+      "name": "H10_CollarDipPlate_2",
+      "mesh": 36,
+      "materials": [
+        "whiteTextured"
+      ],
+      "metadata": {
+        "partId": "H10",
+        "partLabel": "Nacken- / Seitenrahmen",
+        "sourcePath": "SciFiHelmet/LowerArmor_White[0]/CollarDipPlate[0]",
+        "connectionNote": "Auflage und Verschraubung des hellen Geh\u00e4uses.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          -0.9999765677962973,
+          8.553975101021186e-06,
+          -0.006845712904232977,
+          0,
+          -8.470329472543003e-22,
+          0.9999992193289116,
+          0.0012495365410212975,
+          0,
+          0.006845718248487292,
+          0.0012495072616265342,
+          -0.9999757871435018,
+          0,
+          -2.738287299394917e-05,
+          -0.002221211304718694,
+          -0.4540305293431399,
+          1
+        ],
+        "explosionOffset": [
+          0.025,
+          -0.526,
+          -0.135
+        ]
+      }
+    },
+    {
+      "node": 38,
+      "name": "H10_Detail[0]_3",
+      "mesh": 37,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "H10",
+        "partLabel": "Nacken- / Seitenrahmen",
+        "sourcePath": "SciFiHelmet/LowerArmor_White[0]/CollarDipPlate[0]/Detail[0]",
+        "connectionNote": "Auflage und Verschraubung des hellen Geh\u00e4uses.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          -0.9999765677962973,
+          8.553975101021186e-06,
+          -0.006845712904232977,
+          0,
+          -8.470329472543003e-22,
+          0.9999992193289116,
+          0.0012495365410212975,
+          0,
+          0.006845718248487292,
+          0.0012495072616265342,
+          -0.9999757871435018,
+          0,
+          8.214861898184751e-05,
+          -0.0022012191885326694,
+          -0.470030141937436,
+          1
+        ],
+        "explosionOffset": [
+          0.05,
+          -0.502,
+          -0.09
+        ]
+      }
+    },
+    {
+      "node": 39,
+      "name": "H19_NeckRing_1",
+      "mesh": 38,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "H19",
+        "partLabel": "Halsanschluss",
+        "sourcePath": "SciFiHelmet/LowerArmor_White[0]/NeckRing[0]",
+        "connectionNote": "\u00dcbergang zu flexiblem Hals; Bewegungsfreiraum sp\u00e4ter pr\u00fcfen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0,
+          -1.03,
+          -0.1
+        ]
+      }
+    },
+    {
+      "node": 40,
+      "name": "H07_Chin_1",
+      "mesh": 39,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "H07",
+        "partLabel": "Kinnblock",
+        "sourcePath": "SciFiHelmet/LowerArmor_White[0]/Chin[0]",
+        "connectionNote": "Seitliche Verbindung zu den Kieferst\u00fccken konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0,
+          -0.72,
+          0.72
+        ]
+      }
+    },
+    {
+      "node": 41,
+      "name": "H08A_Jaw_R_1",
+      "mesh": 40,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "H08A",
+        "partLabel": "Kiefer A",
+        "sourcePath": "SciFiHelmet/LowerArmor_White[0]/Jaw_R[0]",
+        "connectionNote": "Anschluss an Kinn und Seitenrahmen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.5,
+          -0.55,
+          0.24
+        ]
+      }
+    },
+    {
+      "node": 42,
+      "name": "H08B_Jaw_L_1",
+      "mesh": 41,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "H08B",
+        "partLabel": "Kiefer B",
+        "sourcePath": "SciFiHelmet/LowerArmor_White[0]/Jaw_L[0]",
+        "connectionNote": "Anschluss an Kinn und Seitenrahmen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.5,
+          -0.55,
+          0.24
+        ]
+      }
+    },
+    {
+      "node": 43,
+      "name": "H11A_Jaw_Insert_R_4",
+      "mesh": 42,
+      "materials": [
+        "whiteTextured"
+      ],
+      "metadata": {
+        "partId": "H11A",
+        "partLabel": "Einlagen A",
+        "sourcePath": "SciFiHelmet/LowerArmor_White[0]/Jaw_Insert_R[0]",
+        "connectionNote": "Einlagen und Taschenb\u00f6den; Aufnahme im Rahmen konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.7250000000000001,
+          -0.328,
+          0.255
+        ]
+      }
+    },
+    {
+      "node": 44,
+      "name": "H11A_Jaw_InsertSlot_R_5",
+      "mesh": 43,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "H11A",
+        "partLabel": "Einlagen A",
+        "sourcePath": "SciFiHelmet/LowerArmor_White[0]/Jaw_InsertSlot_R[0]",
+        "connectionNote": "Einlagen und Taschenb\u00f6den; Aufnahme im Rahmen konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          2.220446049250313e-16,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          -1,
+          0,
+          2.220446049250313e-16,
+          0,
+          -0.255,
+          -0.375,
+          0.23,
+          1
+        ],
+        "explosionOffset": [
+          -0.7000000000000001,
+          -0.30400000000000005,
+          0.3
+        ]
+      }
+    },
+    {
+      "node": 45,
+      "name": "H11B_Jaw_Insert_L_4",
+      "mesh": 44,
+      "materials": [
+        "whiteTextured"
+      ],
+      "metadata": {
+        "partId": "H11B",
+        "partLabel": "Einlagen B",
+        "sourcePath": "SciFiHelmet/LowerArmor_White[0]/Jaw_Insert_L[0]",
+        "connectionNote": "Einlagen und Taschenb\u00f6den; Aufnahme im Rahmen konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.875,
+          -0.328,
+          0.255
+        ]
+      }
+    },
+    {
+      "node": 46,
+      "name": "H11B_Jaw_InsertSlot_L_5",
+      "mesh": 45,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "H11B",
+        "partLabel": "Einlagen B",
+        "sourcePath": "SciFiHelmet/LowerArmor_White[0]/Jaw_InsertSlot_L[0]",
+        "connectionNote": "Einlagen und Taschenb\u00f6den; Aufnahme im Rahmen konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          -2.220446049250313e-16,
+          0,
+          1,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          2.220446049250313e-16,
+          0,
+          0.255,
+          -0.375,
+          0.23,
+          1
+        ],
+        "explosionOffset": [
+          0.9,
+          -0.30400000000000005,
+          0.3
+        ]
+      }
+    },
+    {
+      "node": 47,
+      "name": "F02_Screws_Chin_1",
+      "mesh": 46,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "F02",
+        "partLabel": "Schraubensatz Kinn",
+        "sourcePath": "SciFiHelmet/LowerArmor_White[0]/Screws_Chin[0]",
+        "connectionNote": "Visualisierte K\u00f6pfe; keine konstruierten Gewinde / Bohrungen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.55,
+          -0.92,
+          1.02
+        ]
+      }
+    },
+    {
+      "node": 48,
+      "name": "F03_Screws_Side_1",
+      "mesh": 47,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "F03",
+        "partLabel": "Schraubensatz Rahmen",
+        "sourcePath": "SciFiHelmet/LowerArmor_White[0]/Screws_Side[0]",
+        "connectionNote": "Visualisierte K\u00f6pfe; keine konstruierten Gewinde / Bohrungen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.56,
+          -0.85,
+          -0.12
+        ]
+      }
+    },
+    {
+      "node": 49,
+      "name": "H16_BackBox_Mount_1",
+      "mesh": 48,
+      "materials": [
+        "oliveTech"
+      ],
+      "metadata": {
+        "partId": "H16",
+        "partLabel": "Hinterkopfmodul",
+        "sourcePath": "SciFiHelmet/RightComms_And_Tube[0]/BackBox_Group[0]/BackBox_Mount[0]",
+        "connectionNote": "Montageplatte, Kasten und Steckverbinder; Kabeldurchf\u00fchrungen offen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0,
+          0.3,
+          -1.24
+        ]
+      }
+    },
+    {
+      "node": 50,
+      "name": "H16_BackBox_2",
+      "mesh": 49,
+      "materials": [
+        "oliveTech"
+      ],
+      "metadata": {
+        "partId": "H16",
+        "partLabel": "Hinterkopfmodul",
+        "sourcePath": "SciFiHelmet/RightComms_And_Tube[0]/BackBox_Group[0]/BackBox[0]",
+        "connectionNote": "Montageplatte, Kasten und Steckverbinder; Kabeldurchf\u00fchrungen offen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.025,
+          0.324,
+          -1.195
+        ]
+      }
+    },
+    {
+      "node": 51,
+      "name": "H16_Detail[0]_3",
+      "mesh": 50,
+      "materials": [
+        "oliveTech"
+      ],
+      "metadata": {
+        "partId": "H16",
+        "partLabel": "Hinterkopfmodul",
+        "sourcePath": "SciFiHelmet/RightComms_And_Tube[0]/BackBox_Group[0]/Logo[0]/Detail[0]",
+        "connectionNote": "Montageplatte, Kasten und Steckverbinder; Kabeldurchf\u00fchrungen offen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          0.9393727128473789,
+          -0.34289780745545134,
+          0,
+          0,
+          0.34289780745545134,
+          0.9393727128473789,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          -0.018,
+          0.19,
+          -0.4950000000000001,
+          1
+        ],
+        "explosionOffset": [
+          0.05,
+          0.348,
+          -1.15
+        ]
+      }
+    },
+    {
+      "node": 52,
+      "name": "H16_Detail[1]_4",
+      "mesh": 51,
+      "materials": [
+        "oliveTech"
+      ],
+      "metadata": {
+        "partId": "H16",
+        "partLabel": "Hinterkopfmodul",
+        "sourcePath": "SciFiHelmet/RightComms_And_Tube[0]/BackBox_Group[0]/Logo[0]/Detail[1]",
+        "connectionNote": "Montageplatte, Kasten und Steckverbinder; Kabeldurchf\u00fchrungen offen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          0.9393727128473789,
+          0.34289780745545134,
+          0,
+          0,
+          -0.34289780745545134,
+          0.9393727128473789,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0.018,
+          0.19,
+          -0.4950000000000001,
+          1
+        ],
+        "explosionOffset": [
+          0.07500000000000001,
+          0.372,
+          -1.105
+        ]
+      }
+    },
+    {
+      "node": 53,
+      "name": "H16_Detail[2]_5",
+      "mesh": 52,
+      "materials": [
+        "oliveTech"
+      ],
+      "metadata": {
+        "partId": "H16",
+        "partLabel": "Hinterkopfmodul",
+        "sourcePath": "SciFiHelmet/RightComms_And_Tube[0]/BackBox_Group[0]/Logo[0]/Detail[2]",
+        "connectionNote": "Montageplatte, Kasten und Steckverbinder; Kabeldurchf\u00fchrungen offen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0.185,
+          -0.4950000000000001,
+          1
+        ],
+        "explosionOffset": [
+          0.1,
+          0.396,
+          -1.06
+        ]
+      }
+    },
+    {
+      "node": 54,
+      "name": "H16_BackBox_Connector_6",
+      "mesh": 53,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "H16",
+        "partLabel": "Hinterkopfmodul",
+        "sourcePath": "SciFiHelmet/RightComms_And_Tube[0]/BackBox_Group[0]/BackBox_Connector[0]",
+        "connectionNote": "Montageplatte, Kasten und Steckverbinder; Kabeldurchf\u00fchrungen offen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          -0.142,
+          0.21,
+          -0.4800000000000001,
+          1
+        ],
+        "explosionOffset": [
+          0.125,
+          0.42,
+          -1.0150000000000001
+        ]
+      }
+    },
+    {
+      "node": 55,
+      "name": "H16_BackBox_Connector_7",
+      "mesh": 54,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "H16",
+        "partLabel": "Hinterkopfmodul",
+        "sourcePath": "SciFiHelmet/RightComms_And_Tube[0]/BackBox_Group[0]/BackBox_Connector[1]",
+        "connectionNote": "Montageplatte, Kasten und Steckverbinder; Kabeldurchf\u00fchrungen offen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0.142,
+          0.21,
+          -0.4800000000000001,
+          1
+        ],
+        "explosionOffset": [
+          0.15000000000000002,
+          0.444,
+          -0.97
+        ]
+      }
+    },
+    {
+      "node": 56,
+      "name": "H16_Screws_BackBox_8",
+      "mesh": 55,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "H16",
+        "partLabel": "Hinterkopfmodul",
+        "sourcePath": "SciFiHelmet/RightComms_And_Tube[0]/BackBox_Group[0]/Screws_BackBox[0]",
+        "connectionNote": "Montageplatte, Kasten und Steckverbinder; Kabeldurchf\u00fchrungen offen.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.17500000000000002,
+          0.46799999999999997,
+          -0.925
+        ]
+      }
+    },
+    {
+      "node": 57,
+      "name": "B01_NeckFlex_1",
+      "mesh": 56,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B01",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Flexibler Hals",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/NeckFlex[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0,
+          -0.6,
+          0
+        ]
+      }
+    },
+    {
+      "node": 58,
+      "name": "B02_NeckRibs_1",
+      "mesh": 57,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B02",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Halsrippen",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/NeckRibs[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0,
+          -0.6,
+          0
+        ]
+      }
+    },
+    {
+      "node": 59,
+      "name": "B03_CollarFront_1",
+      "mesh": 58,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B03",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Kragen vorne",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/CollarFront[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0,
+          -0.6,
+          0.42
+        ]
+      }
+    },
+    {
+      "node": 60,
+      "name": "B04_CollarRear_1",
+      "mesh": 59,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B04",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Kragen hinten",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/CollarRear[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0,
+          -0.6,
+          -0.42
+        ]
+      }
+    },
+    {
+      "node": 61,
+      "name": "B05_UpperTorsoCore_1",
+      "mesh": 60,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B05",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Oberk\u00f6rperbasis",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/UpperTorsoCore[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0,
+          -0.6,
+          0
+        ]
+      }
+    },
+    {
+      "node": 62,
+      "name": "B06_ShoulderBase_R_1",
+      "mesh": 61,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B06",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Schulterbasis A",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/ShoulderBase_R[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.65,
+          -0.6,
+          0
+        ]
+      }
+    },
+    {
+      "node": 63,
+      "name": "B07_ShoulderFront_R_1",
+      "mesh": 62,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B07",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Schulter vorne A",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/ShoulderFront_R[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.65,
+          -0.6,
+          0.42
+        ]
+      }
+    },
+    {
+      "node": 64,
+      "name": "B08_ShoulderRear_R_1",
+      "mesh": 63,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B08",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Schulter hinten A",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/ShoulderRear_R[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.65,
+          -0.6,
+          -0.42
+        ]
+      }
+    },
+    {
+      "node": 65,
+      "name": "B30_ShoulderRoof_R_1",
+      "mesh": 64,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B30",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Schulterdach A",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/ShoulderRoof_R[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.65,
+          -0.6,
+          0.42
+        ]
+      }
+    },
+    {
+      "node": 66,
+      "name": "B12_ClavicleArmor_R_1",
+      "mesh": 65,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B12",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Brustplatte A",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/ClavicleArmor_R[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.65,
+          -0.6,
+          0.42
+        ]
+      }
+    },
+    {
+      "node": 67,
+      "name": "B14_ChestInsert_R_1",
+      "mesh": 66,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B14",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Brusteinsatz A",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/ChestInsert_R[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.65,
+          -0.6,
+          0.42
+        ]
+      }
+    },
+    {
+      "node": 68,
+      "name": "B16_ScapulaArmor_R_1",
+      "mesh": 67,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B16",
+        "assembly": "ShoulderStudy",
+        "partLabel": "R\u00fcckenplatte A",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/ScapulaArmor_R[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.65,
+          -0.6,
+          -0.42
+        ]
+      }
+    },
+    {
+      "node": 69,
+      "name": "B19_ClavicleFastener_R_1",
+      "mesh": 68,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "B19",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Brustbefestigung A",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/ClavicleFastener_R[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.65,
+          -0.6,
+          0.42
+        ]
+      }
+    },
+    {
+      "node": 70,
+      "name": "B21_RearFastener_R_1",
+      "mesh": 69,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "B21",
+        "assembly": "ShoulderStudy",
+        "partLabel": "R\u00fcckenbefestigung A",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/RearFastener_R[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.65,
+          -0.6,
+          -0.42
+        ]
+      }
+    },
+    {
+      "node": 71,
+      "name": "B23_ShoulderLame_R_1",
+      "mesh": 70,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B23",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Schulterlamelle A",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/ShoulderLame_R[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.65,
+          -0.6,
+          0.42
+        ]
+      }
+    },
+    {
+      "node": 72,
+      "name": "B25_ShoulderJoint_R_1",
+      "mesh": 71,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B25",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Schultergelenk A",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/ShoulderJoint_R[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.65,
+          -0.6,
+          0
+        ]
+      }
+    },
+    {
+      "node": 73,
+      "name": "B28_FlankArmor_R_1",
+      "mesh": 72,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B28",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Flankenpanzer A",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/FlankArmor_R[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.65,
+          -0.6,
+          0.42
+        ]
+      }
+    },
+    {
+      "node": 74,
+      "name": "B09_ShoulderBase_L_1",
+      "mesh": 73,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B09",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Schulterbasis B",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/ShoulderBase_L[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.65,
+          -0.6,
+          0
+        ]
+      }
+    },
+    {
+      "node": 75,
+      "name": "B10_ShoulderFront_L_1",
+      "mesh": 74,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B10",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Schulter vorne B",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/ShoulderFront_L[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.65,
+          -0.6,
+          0.42
+        ]
+      }
+    },
+    {
+      "node": 76,
+      "name": "B11_ShoulderRear_L_1",
+      "mesh": 75,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B11",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Schulter hinten B",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/ShoulderRear_L[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.65,
+          -0.6,
+          -0.42
+        ]
+      }
+    },
+    {
+      "node": 77,
+      "name": "B31_ShoulderRoof_L_1",
+      "mesh": 76,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B31",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Schulterdach B",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/ShoulderRoof_L[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.65,
+          -0.6,
+          0.42
+        ]
+      }
+    },
+    {
+      "node": 78,
+      "name": "B13_ClavicleArmor_L_1",
+      "mesh": 77,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B13",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Brustplatte B",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/ClavicleArmor_L[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.65,
+          -0.6,
+          0.42
+        ]
+      }
+    },
+    {
+      "node": 79,
+      "name": "B15_ChestInsert_L_1",
+      "mesh": 78,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B15",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Brusteinsatz B",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/ChestInsert_L[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.65,
+          -0.6,
+          0.42
+        ]
+      }
+    },
+    {
+      "node": 80,
+      "name": "B17_ScapulaArmor_L_1",
+      "mesh": 79,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B17",
+        "assembly": "ShoulderStudy",
+        "partLabel": "R\u00fcckenplatte B",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/ScapulaArmor_L[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.65,
+          -0.6,
+          -0.42
+        ]
+      }
+    },
+    {
+      "node": 81,
+      "name": "B20_ClavicleFastener_L_1",
+      "mesh": 80,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "B20",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Brustbefestigung B",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/ClavicleFastener_L[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.65,
+          -0.6,
+          0.42
+        ]
+      }
+    },
+    {
+      "node": 82,
+      "name": "B22_RearFastener_L_1",
+      "mesh": 81,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "B22",
+        "assembly": "ShoulderStudy",
+        "partLabel": "R\u00fcckenbefestigung B",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/RearFastener_L[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.65,
+          -0.6,
+          -0.42
+        ]
+      }
+    },
+    {
+      "node": 83,
+      "name": "B24_ShoulderLame_L_1",
+      "mesh": 82,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B24",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Schulterlamelle B",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/ShoulderLame_L[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.65,
+          -0.6,
+          0.42
+        ]
+      }
+    },
+    {
+      "node": 84,
+      "name": "B26_ShoulderJoint_L_1",
+      "mesh": 83,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B26",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Schultergelenk B",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/ShoulderJoint_L[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.65,
+          -0.6,
+          0
+        ]
+      }
+    },
+    {
+      "node": 85,
+      "name": "B29_FlankArmor_L_1",
+      "mesh": 84,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B29",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Flankenpanzer B",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/FlankArmor_L[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.65,
+          -0.6,
+          0.42
+        ]
+      }
+    },
+    {
+      "node": 86,
+      "name": "B27_BreastplateCenter_1",
+      "mesh": 85,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B27",
+        "assembly": "ShoulderStudy",
+        "partLabel": "Brustmitte",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/BreastplateCenter[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0,
+          -0.6,
+          0.42
+        ]
+      }
+    },
+    {
+      "node": 87,
+      "name": "B18_BackSpineInsert_1",
+      "mesh": 86,
+      "materials": [
+        "whiteTextured"
+      ],
+      "metadata": {
+        "partId": "B18",
+        "assembly": "ShoulderStudy",
+        "partLabel": "R\u00fcckeneinsatz",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/BackSpineInsert[0]",
+        "connectionNote": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0,
+          -0.6,
+          -0.42
+        ]
+      }
+    },
+    {
+      "node": 88,
+      "name": "B32_AbdomenLame_1_1",
+      "mesh": 87,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B32",
+        "assembly": "FullBodyStudy",
+        "partLabel": "Bauchlamelle 1",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/AbdomenLame_1[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0,
+          -0.35,
+          0.6
+        ]
+      }
+    },
+    {
+      "node": 89,
+      "name": "B33_AbdomenLame_2_1",
+      "mesh": 88,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B33",
+        "assembly": "FullBodyStudy",
+        "partLabel": "Bauchlamelle 2",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/AbdomenLame_2[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0,
+          -0.45,
+          0.85
+        ]
+      }
+    },
+    {
+      "node": 90,
+      "name": "B34_AbdomenLame_3_1",
+      "mesh": 89,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B34",
+        "assembly": "FullBodyStudy",
+        "partLabel": "Bauchlamelle 3",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/AbdomenLame_3[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0,
+          -0.55,
+          1.1
+        ]
+      }
+    },
+    {
+      "node": 91,
+      "name": "B35_WaistBelt_1",
+      "mesh": 90,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B35",
+        "assembly": "FullBodyStudy",
+        "partLabel": "Beckengurt",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/WaistBelt[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0,
+          -0.75,
+          0.6
+        ]
+      }
+    },
+    {
+      "node": 92,
+      "name": "B36_PelvisCore_1",
+      "mesh": 91,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B36",
+        "assembly": "FullBodyStudy",
+        "partLabel": "Becken-/Taillenkern",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/PelvisCore[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0,
+          -0.95,
+          0
+        ]
+      }
+    },
+    {
+      "node": 93,
+      "name": "B37_HipPlate_R_1",
+      "mesh": 92,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B37",
+        "assembly": "FullBodyStudy",
+        "partLabel": "H\u00fcftplatte A",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/HipPlate_R[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.95,
+          -0.9,
+          0
+        ]
+      }
+    },
+    {
+      "node": 94,
+      "name": "B39_UpperArm_R_1",
+      "mesh": 93,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B39",
+        "assembly": "FullBodyStudy",
+        "partLabel": "Oberarm A",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/UpperArm_R[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -1.2,
+          -0.3,
+          0
+        ]
+      }
+    },
+    {
+      "node": 95,
+      "name": "B41_Elbow_R_1",
+      "mesh": 94,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B41",
+        "assembly": "FullBodyStudy",
+        "partLabel": "Ellbogen A",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/Elbow_R[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -1.45,
+          -0.55,
+          0
+        ]
+      }
+    },
+    {
+      "node": 96,
+      "name": "B43_Forearm_R_1",
+      "mesh": 95,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B43",
+        "assembly": "FullBodyStudy",
+        "partLabel": "Unterarm A",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/Forearm_R[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -1.7,
+          -0.8,
+          0
+        ]
+      }
+    },
+    {
+      "node": 97,
+      "name": "B45_Hand_R_1",
+      "mesh": 96,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B45",
+        "assembly": "FullBodyStudy",
+        "partLabel": "Hand A",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/Hand_R[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -1.95,
+          -1.1,
+          0
+        ]
+      }
+    },
+    {
+      "node": 98,
+      "name": "B47_HipJoint_R_1",
+      "mesh": 97,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B47",
+        "assembly": "FullBodyStudy",
+        "partLabel": "H\u00fcftgelenk A",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/HipJoint_R[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.5,
+          -1,
+          0
+        ]
+      }
+    },
+    {
+      "node": 99,
+      "name": "B49_Thigh_R_1",
+      "mesh": 98,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B49",
+        "assembly": "FullBodyStudy",
+        "partLabel": "Oberschenkel A",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/Thigh_R[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.7,
+          -1.2,
+          0
+        ]
+      }
+    },
+    {
+      "node": 100,
+      "name": "B51_Knee_R_1",
+      "mesh": 99,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B51",
+        "assembly": "FullBodyStudy",
+        "partLabel": "Knie A",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/Knee_R[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.85,
+          -1.4,
+          0
+        ]
+      }
+    },
+    {
+      "node": 101,
+      "name": "B53_KneePad_R_1",
+      "mesh": 100,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B53",
+        "assembly": "FullBodyStudy",
+        "partLabel": "Knieschutz A",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/KneePad_R[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -0.85,
+          -1.4,
+          0.6
+        ]
+      }
+    },
+    {
+      "node": 102,
+      "name": "B55_Shin_R_1",
+      "mesh": 101,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B55",
+        "assembly": "FullBodyStudy",
+        "partLabel": "Unterschenkel A",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/Shin_R[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -1,
+          -1.6,
+          0
+        ]
+      }
+    },
+    {
+      "node": 103,
+      "name": "B57_Foot_R_1",
+      "mesh": 102,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B57",
+        "assembly": "FullBodyStudy",
+        "partLabel": "Fu\u00df A",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/Foot_R[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          -1.15,
+          -1.85,
+          0.3
+        ]
+      }
+    },
+    {
+      "node": 104,
+      "name": "B38_HipPlate_L_1",
+      "mesh": 103,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B38",
+        "assembly": "FullBodyStudy",
+        "partLabel": "H\u00fcftplatte B",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/HipPlate_L[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.95,
+          -0.9,
+          0
+        ]
+      }
+    },
+    {
+      "node": 105,
+      "name": "B40_UpperArm_L_1",
+      "mesh": 104,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B40",
+        "assembly": "FullBodyStudy",
+        "partLabel": "Oberarm B",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/UpperArm_L[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          1.2,
+          -0.3,
+          0
+        ]
+      }
+    },
+    {
+      "node": 106,
+      "name": "B42_Elbow_L_1",
+      "mesh": 105,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B42",
+        "assembly": "FullBodyStudy",
+        "partLabel": "Ellbogen B",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/Elbow_L[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          1.45,
+          -0.55,
+          0
+        ]
+      }
+    },
+    {
+      "node": 107,
+      "name": "B44_Forearm_L_1",
+      "mesh": 106,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B44",
+        "assembly": "FullBodyStudy",
+        "partLabel": "Unterarm B",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/Forearm_L[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          1.7,
+          -0.8,
+          0
+        ]
+      }
+    },
+    {
+      "node": 108,
+      "name": "B46_Hand_L_1",
+      "mesh": 107,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B46",
+        "assembly": "FullBodyStudy",
+        "partLabel": "Hand B",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/Hand_L[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          1.95,
+          -1.1,
+          0
+        ]
+      }
+    },
+    {
+      "node": 109,
+      "name": "B48_HipJoint_L_1",
+      "mesh": 108,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B48",
+        "assembly": "FullBodyStudy",
+        "partLabel": "H\u00fcftgelenk B",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/HipJoint_L[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.5,
+          -1,
+          0
+        ]
+      }
+    },
+    {
+      "node": 110,
+      "name": "B50_Thigh_L_1",
+      "mesh": 109,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B50",
+        "assembly": "FullBodyStudy",
+        "partLabel": "Oberschenkel B",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/Thigh_L[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.7,
+          -1.2,
+          0
+        ]
+      }
+    },
+    {
+      "node": 111,
+      "name": "B52_Knee_L_1",
+      "mesh": 110,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B52",
+        "assembly": "FullBodyStudy",
+        "partLabel": "Knie B",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/Knee_L[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.85,
+          -1.4,
+          0
+        ]
+      }
+    },
+    {
+      "node": 112,
+      "name": "B54_KneePad_L_1",
+      "mesh": 111,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B54",
+        "assembly": "FullBodyStudy",
+        "partLabel": "Knieschutz B",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/KneePad_L[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          0.85,
+          -1.4,
+          0.6
+        ]
+      }
+    },
+    {
+      "node": 113,
+      "name": "B56_Shin_L_1",
+      "mesh": 112,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B56",
+        "assembly": "FullBodyStudy",
+        "partLabel": "Unterschenkel B",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/Shin_L[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          1,
+          -1.6,
+          0
+        ]
+      }
+    },
+    {
+      "node": 114,
+      "name": "B58_Foot_L_1",
+      "mesh": 113,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B58",
+        "assembly": "FullBodyStudy",
+        "partLabel": "Fu\u00df B",
+        "sourcePath": "SciFiHelmet/FullBodyStudy[0]/Foot_L[0]",
+        "connectionNote": "Gesamtk\u00f6rperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+        "presentationOnly": false,
+        "assembledMatrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "explosionOffset": [
+          1.15,
+          -1.85,
+          0.3
+        ]
+      }
+    }
+  ]
+}

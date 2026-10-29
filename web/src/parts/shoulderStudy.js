@@ -17,7 +17,7 @@ export const SHOULDER_STUDY_PARTS = Object.freeze({
   B30: 'ShoulderRoof_R', B31: 'ShoulderRoof_L',
 });
 
-function signedVolume(vertices, triangles) {
+export function signedVolume(vertices, triangles) {
   let volume = 0;
   for (let i = 0; i < triangles.length; i += 3) {
     const a = new THREE.Vector3(...vertices[triangles[i]]);
@@ -63,7 +63,7 @@ function appendFacetPad(vertices, triangles, corners, pad, orientation) {
 }
 
 // Closed custom solids use flat facets and deterministic world-space box UVs.
-function solid(vertices, triangles) {
+export function solid(vertices, triangles) {
   if (signedVolume(vertices, triangles) < 0) for (let i = 0; i < triangles.length; i += 3) [triangles[i + 1], triangles[i + 2]] = [triangles[i + 2], triangles[i + 1]];
   const indexed = new THREE.BufferGeometry();
   indexed.setAttribute('position', new THREE.Float32BufferAttribute(vertices.flat(), 3));
@@ -83,7 +83,7 @@ function solid(vertices, triangles) {
 }
 
 // Four outline rings create a real back, sidewall and narrow edge chamfers.
-function beveledPlate(points, depth, bevel, map, subdivisions = 0, relief = null) {
+export function beveledPlate(points, depth, bevel, map, subdivisions = 0, relief = null) {
   // Earcut normalizes cap winding; the side loops must use the same orientation.
   const reversed = THREE.ShapeUtils.isClockWise(points.map(p => new THREE.Vector2(...p)));
   if (reversed) points = points.toReversed();

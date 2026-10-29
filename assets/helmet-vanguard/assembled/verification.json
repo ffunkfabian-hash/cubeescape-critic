@@ -1,0 +1,2270 @@
+{
+  "startedAt": "2026-10-29T09:27:30.248Z",
+  "status": "passed",
+  "views": [
+    "front",
+    "left",
+    "back",
+    "right"
+  ],
+  "finish": {
+    "name": "graphite",
+    "sharedArmorMaps": true,
+    "color": 3224632,
+    "roughness": 0.9,
+    "metalness": 0.15,
+    "envMapIntensity": 0.35,
+    "specularIntensity": 0.45,
+    "normalScale": 1,
+    "textureSeed": 73
+  },
+  "accents": {
+    "name": "light-fasteners",
+    "lightFasteners": true,
+    "whiteStrips": false
+  },
+  "strips": "off",
+  "assembly": {
+    "headset": "off",
+    "body": "full",
+    "exploded": 0
+  },
+  "referenceCompatible": false,
+  "outputDirectory": "/Users/ffunk/Library/Caches/Critic/vanguard-20261029/v833-assembled",
+  "iouSkipped": true,
+  "cameras": {
+    "front": {
+      "position": [
+        0,
+        -1.5824357163332614,
+        11.78382851010397
+      ],
+      "quaternion": [
+        -0.026176948307873225,
+        0,
+        0,
+        0.9996573249755573
+      ],
+      "fov": 30,
+      "target": [
+        0,
+        -2.2,
+        0
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    "left": {
+      "position": [
+        10.579934624272234,
+        -1.3768736098193224,
+        5.1601789011538814
+      ],
+      "quaternion": [
+        -0.029596451735373383,
+        0.5295964517353734,
+        0.01849391561469846,
+        0.8475314881697402
+      ],
+      "fov": 30,
+      "target": [
+        0,
+        -2.2,
+        0
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    "back": {
+      "position": [
+        1.4343117917840108e-15,
+        -0.7619417478192596,
+        -11.7120445893676
+      ],
+      "quaternion": [
+        -3.738144926699155e-18,
+        0.998134798421867,
+        0.06104853953485688,
+        6.111812930024638e-17
+      ],
+      "fov": 30,
+      "target": [
+        0,
+        -2.2,
+        0
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    "right": {
+      "position": [
+        -10.393401967414258,
+        -1.3768736098193224,
+        5.526269853123125
+      ],
+      "quaternion": [
+        -0.029914707384345002,
+        -0.5147243276306822,
+        -0.01797456959698588,
+        0.8566451375424098
+      ],
+      "fov": 30,
+      "target": [
+        0,
+        -2.2,
+        0
+      ],
+      "viewport": [
+        1280,
+        720
+      ]
+    }
+  },
+  "outputs": {
+    "textures/crownArmor_map.png": "93b8c54d9eeef45c450f42c918ae37c173f763341bc0d6d4d40f1049480c1825",
+    "textures/crownArmor_roughnessMap.png": "119daca3c458ad940b022d8977ce5072d2021e2806edd49625dff1f1b3857aa6",
+    "textures/crownArmor_normalMap.png": "70c5b4932548d873ff6b1c515ba4a9340cba2d288b128af5b29b53bb859997f0",
+    "textures/darkArmor_map.png": "93b8c54d9eeef45c450f42c918ae37c173f763341bc0d6d4d40f1049480c1825",
+    "textures/darkArmor_roughnessMap.png": "119daca3c458ad940b022d8977ce5072d2021e2806edd49625dff1f1b3857aa6",
+    "textures/darkArmor_normalMap.png": "70c5b4932548d873ff6b1c515ba4a9340cba2d288b128af5b29b53bb859997f0",
+    "textures/accessoryArmor_roughnessMap.png": "6ee24b8c34e86709354f4685927c7347d188eb617b4141a158e1c6a7d8849b08",
+    "textures/accessoryArmor_bumpMap.png": "a837da04e90b49b70f28625459ccfab34e03c06908fbfbb20c857aeb85adc27b",
+    "textures/whiteArmor_map.png": "e3d8f7e39ec3b338fec42aa58b39cbdd08ae33fbc20442b41f202d24527edf57",
+    "textures/whiteArmor_roughnessMap.png": "e905554a48bc8c7f728613e80e22987b82686b8232bdf49f94e50b7bcc647182",
+    "textures/whiteTextured_bumpMap.png": "c4ace6c801244697c9be598a42d9a5a36dae194fb3551c26df59a3b8c789bd61",
+    "textures/materials.json": "e8d405219d9b9ede3073f17b1f49efb96170fcdc0de27d68fa19abf0cf871684",
+    "assembly.json": "c6256e254ea6bcc52820cd007977cbe6b05174212f98bec8062ac50b6eafcf95",
+    "scifi_helmet.glb": "d475bbcb0b18f3cf5fff5188d6b57028b09d2eaa8bfd85ca53d528408a341e2f",
+    "render_front.png": "f485b005fdfcfc6c3585e416e7c65f16764672aefdf304d614bd43796f4e58a2",
+    "mask_front.png": "0852e69265a8f6d7240786ef64000d0c81b25d969111130f017f29cfdf8bf5f8",
+    "render_left.png": "f25185b9fccaca311581865f354485cfee74aeb60351b977d6d4b233d1758a91",
+    "mask_left.png": "16c3a433c0d37a3a5d3517b2eac6491438703795d46c1b600698cf391189934d",
+    "render_back.png": "961ee0ea5d83a4a0c1dc4e0e143074ac850dd90beb02489900358be07b5825f3",
+    "mask_back.png": "e22e684199c3331996e5d463aeae71e0566b84bf58d2fe69a1cf1ce6afb915d6",
+    "render_right.png": "ded92b2df4eddfa877ba448f96771160913e4159b29e06979be92f65a9b21877",
+    "mask_right.png": "aba03d2ff8d5378f887efa4f318f3d0220df64baa75701835706020b699a2b78"
+  },
+  "sources": {
+    "files": {
+      "src/assembly.js": "ba20e10875e9bb7fd0bcf158d0107887f5f81226eb43620d12490a7fd6bc6cb5",
+      "src/assemblyLabels.js": "e9f2ef0d36aa6ad790195f2038d967e507f370e10d5e5644400cd7684be2357b",
+      "src/assemblyOptions.js": "0e840a8766b254333808de69034e88eaead9ac3970143b760f75e251c0e1f012",
+      "src/finishPresets.js": "ff03dd6cbc80947cf2977d54250cb88a1dde0df52877d0add5038700cfa6fd96",
+      "src/fullBodyParams.json": "0466b8b93f6edf0949c80963a98071b26f046aac163e0f151b718bfca1c1c35c",
+      "src/geo.js": "ae2dfc529993cd9585028d9f2c3446960d8e6b18d7953258856adc07e87b9f6f",
+      "src/helmet.js": "76a12b52eae8fc98fddd254271978d5f38f0c277d78bc496365fdd8159c2dd63",
+      "src/helmetParams.json": "8c37de026923e8a7584608ba7ecc181b85d1d4ea14e6e9e35bb57238053dd9de",
+      "src/main.js": "0a5e094c8de2d5ed7233734551e45a737a31570f1b2a9400dfea5927d9864c85",
+      "src/materials.js": "427c00641715e4a2df1d8b5932ba56d311f660eac6aeb08003a8e2bbf5ef49d3",
+      "src/params.js": "24b2e7cee16b44ca26b518beb689982e0fec092026a6f42d18bb08203e6db170",
+      "src/parts/bodyStudy.js": "fe45c21c425de5367e1770735d6f9e7510d78d148e941d3ad8fc7de6c4bae4ce",
+      "src/parts/common.js": "07c66f0f95ea400c4dcfdaadab2e2f3bbe96af2378af01b8b613699f5ba7a58b",
+      "src/parts/foreheadPlates.js": "304e8f7ec92cefa1836c6e6a9a844d74ff5db78320018ecf8e5d0c9a10a00800",
+      "src/parts/fullBody.js": "6bf29c022fd658fd0e0b5992d25d74fbe41f7a79664f06f60d38a46229342851",
+      "src/parts/headVolume.js": "f1f501bfb3c0b694b78d66241396367016d5dc78d8ec564cdb24f63ef00bd987",
+      "src/parts/leftEar.js": "a60a19277b430c758b650b453857907b0eeb931615e466dbb0cf53de615d6555",
+      "src/parts/lowerArmor.js": "1f170cd0c8b14f5df043fb060df1b6589ef56cc302b7ab0637b4c7c1e188ed2d",
+      "src/parts/mirrorComms.js": "068c25cbb6c5728382afd5f330c69d3486d33c9f4fde3cd7c5a8ec309b05ed37",
+      "src/parts/neck.js": "df7208322bef09cdd445fe14e724869851604377d8bcdf4ae6a9c57ed96d5110",
+      "src/parts/rightComms.js": "72d2fd5533648f20bec1e76f9b5e98beee7483c03d6e5893ef3d2ac121b768cc",
+      "src/parts/shoulderStudy.js": "f404114f784d57e86ea2c0b5e585d26fb0b2459e25519ef8c9dae5703a8d34d8",
+      "src/parts/upperHelmet.js": "35b63462a2360304e3ff304ce07e323cf419f7c9e5d7d52e0cea90ae39dc0abf",
+      "src/shapeFit.js": "57c4a7b94b0edbcbed61a38e2f1939af7e721101ce9b04d73c0de96159640ed8",
+      "src/shoulderStudyParams.json": "d674924c9dbe834cde7b7d3fabdd3c3b498f16b568b1f724eb8304bd0a168ad0",
+      "src/textures.js": "02d14cfc27a5334c7c013c7db2def61e19c53f158e9cf6b3f0c8492d2e04cc54",
+      "refs/meshy-reference.json": "47f6e9df33dada643dafadbbb90994b69c66ce522789f4eae25b7ec7f78fa673",
+      "refs/ref_back.png": "633b725f396863ea0181b0d44c0f905308bb8460562c5fa23d73a3029dba857d",
+      "refs/ref_front.png": "e0c6b0e6466301c3d27922038435fe06ec34203be5a9b66d650a82f910eb6fa4",
+      "refs/ref_left.png": "235e4f0799080735c8cf0047eaff24bb185934f98ec180b6264892c9b655b87e",
+      "refs/ref_right.png": "7bc737ccc95e47e0784bacb9168ad4083b427ac733b5ea6f918f8a881d873b84",
+      "tools/assembly.test.mjs": "bb199b1e964d9af043344b90c770d61accd3c5e4063d1e811580622788508464",
+      "tools/bodyStudy.test.mjs": "a42f25fccfb5e483a630626d3f6550d8edea2be523084b112f264dad3408f092",
+      "tools/commsSymmetry.test.mjs": "251749416a0674236a7afe4ec85dc4061249e620c0b556b0e98d19c55fd43a7a",
+      "tools/compare_reference.mjs": "81ed7deb4d3ae1230556a00570be3d263c50de06e68d91ca119cc8f032e1c56f",
+      "tools/continuity.test.mjs": "cbe5dad1ae9d80ef6d467f4dac5ab871914241c46cfac70fd1c4d80636004256",
+      "tools/fixtures/cuirass.json": "4dac2752c6cb11b2ee35e925cb2342f36a4ff00f61a0e45475763aec3c5bc5fb",
+      "tools/fullBody.test.mjs": "964f13aa86ae0f30ef34065d5e94413adfb890bb04dcf7450f1468c82dc64d92",
+      "tools/geometry.test.mjs": "bdb20ae92c09ed7ac540cc1798ea2a33377f346f9c95a5551e4ac5e3d041db79",
+      "tools/iou.py": "2165a77352f466f0f9bc3433261302c362eeca3559a4e22b622c63604a891de0",
+      "tools/marker_build.mjs": "668a0bb9916b6b82c538d340ffc87f790e6d12739a109c02b1c3f4531acdb9fb",
+      "tools/marker_check.mjs": "f2c8ac3c2606384ba714e4b55696e895d9e173d49a7ed3da98f716b5d2cf03fc",
+      "tools/marker_shot.mjs": "d36c66973f7556a4de41cf7d4cbed09c16416076f3e84abe870277da4b54cb02",
+      "tools/materialFinishes.test.mjs": "0ffeffb76856ac1b4f452528fded98408722ce88cb7e0a414d0003c0c27638eb",
+      "tools/pairs.py": "218a718ce6704691b9d11b0dd5ed673e7fbfad07fd3fa3f3dc7d7172d0b90e6f",
+      "tools/parts_sheet.py": "534d5c966584ccb6b8d5c0c8426b4589d8b906e19f6e198d68d01c0729a74524",
+      "tools/probe.mjs": "a4ce50c7410bec0fed6b475b97a30d64c29d56257fa50b524eb996dcc92372ac",
+      "tools/provenance.mjs": "048f2d6ba44c74e7eaa96e424a49679c7650478073e5b9a6a7c10620c231afe5",
+      "tools/provenance.test.mjs": "6bd36bf468f5f11be39589c8efaaf743573da915d8f4cb43e9de138f23396b19",
+      "tools/runnerFailure.test.mjs": "381f8c306b51725d7c3c7e509cca3c8eb107de7ce0acc9ee962c8592f98deda1",
+      "tools/save_pass.py": "75b14c2c1ccc97261b6918cad15bd49c699d9454f1f4eb0a75b70b261fe7e459",
+      "tools/shapeFit.test.mjs": "986718a779f898cc6d6e808de055ec5555d3e7ff542e3afabe76003406dca4b8",
+      "tools/shoulderStudy.test.mjs": "af6de498e2f8c145135a908892cc329a5ed359f65628c4c48b6cad71d5bf8307",
+      "tools/stripToggle.test.mjs": "2e2d4589787e781032c60a77eff2c5c47946b0afdf7cbf812a3ba6e096943c43",
+      "tools/test_iou.py": "b8eb89df5ce55cf7618a73297f21e4806e2087e4ba31ecc72656264788d4ed98",
+      "tools/test_save_pass.py": "32706b25972fb725dc9851907221e0ca8404fb7ecb6468bf051a49d6f0f455b0",
+      "tools/textureProjection.test.mjs": "556dfb910000cd2e84d2d785c23fe0af0db2a0ed029cff590d96c60182034bac",
+      "tools/upperProfile.test.mjs": "6a8469826d8475119bbbe3129eb25e317a9953860298e0e85b64dddb99042604",
+      "tools/verification.mjs": "0b42c187226dda7c46805bc5c2f83b07050e09a905c1d39c396ac35e41e897c4",
+      "tools/verification.test.mjs": "65ad99da80c2e987c10c325962f08f3743cab2678dc9b9472edcde33b923f1d3",
+      "index.html": "c5e4e5eebbc27db0b771c54bff889bdbc14ad104d11f5953ffc7e2d0934a42a5",
+      "package.json": "ba5cdca6d06d82abff828901ea78ee09227261bb594a7fb0097bfb0d3719eeab",
+      "package-lock.json": "7cdfcfb679e2d38841b2cedae7481855c9f5b1052f1bdc3f3c9f94cad35c9118",
+      "requirements.txt": "bbb105bf023cb1e96eb99063d4c6d94738f38012567c08103cb7f19281deb7ea",
+      "verify_renders.mjs": "d71352f70224b70bb0fc7f7e64559c4cb3fbbe6e629ce46cb068b4888e6ae5f6",
+      ".nvmrc": "7e8a2fa94951112b894a3dbe3d05efef5e9263741fa49125f0a70f40fedab4cc",
+      "../reference/helm/turnaround.mp4": "fac039db10d9d3ee3c74373c38e323dd53489df69eee18971e736c9d971e70de"
+    },
+    "digest": "737390be96812938f33680b7a35d9048cdf9ed31ed97f84df004c933a51f0541"
+  },
+  "runtime": {
+    "node": "v24.19.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "python": "Python 3.12.10",
+    "pythonPackages": "numpy=2.2.6, Pillow=12.1.1",
+    "packages": {
+      "three": "0.186.1",
+      "three-bvh-csg": "0.0.18",
+      "three-mesh-bvh": "0.9.16",
+      "vite": "8.3.5",
+      "playwright": "1.62.1"
+    },
+    "browser": "151.0.7922.34",
+    "graphics": "ANGLE SwiftShader"
+  },
+  "parameters": {
+    "head": {
+      "tilt": 0
+    },
+    "profile": {
+      "front": [
+        [
+          0,
+          0.507
+        ],
+        [
+          0.08499999999999999,
+          0.497
+        ],
+        [
+          0.175,
+          0.47
+        ],
+        [
+          0.23570000000000002,
+          0.433
+        ],
+        [
+          0.29236666666666666,
+          0.397
+        ],
+        [
+          0.3375333333333333,
+          0.332
+        ],
+        [
+          0.362,
+          0.25
+        ],
+        [
+          0.372,
+          0.15
+        ],
+        [
+          0.376,
+          0
+        ],
+        [
+          0.372,
+          -0.2
+        ],
+        [
+          0.36,
+          -0.42
+        ]
+      ],
+      "sideFront": [
+        [
+          0,
+          0.507
+        ],
+        [
+          0.2,
+          0.492
+        ],
+        [
+          0.31,
+          0.452
+        ],
+        [
+          0.39,
+          0.385
+        ],
+        [
+          0.45,
+          0.295
+        ],
+        [
+          0.495,
+          0.185
+        ],
+        [
+          0.515,
+          0.05
+        ],
+        [
+          0.48,
+          -0.12
+        ],
+        [
+          0.41,
+          -0.3
+        ],
+        [
+          0.35,
+          -0.42
+        ]
+      ],
+      "sideBack": [
+        [
+          0,
+          0.507
+        ],
+        [
+          -0.18,
+          0.497
+        ],
+        [
+          -0.3,
+          0.467
+        ],
+        [
+          -0.39,
+          0.417
+        ],
+        [
+          -0.44,
+          0.362
+        ],
+        [
+          -0.46,
+          0.3
+        ],
+        [
+          -0.465,
+          0
+        ],
+        [
+          -0.46,
+          -0.42
+        ]
+      ],
+      "topHalf": [
+        [
+          0,
+          1
+        ],
+        [
+          0.45,
+          0.95
+        ],
+        [
+          0.78,
+          0.86
+        ],
+        [
+          0.95,
+          0.65
+        ],
+        [
+          1,
+          0.3
+        ],
+        [
+          1,
+          -0.2
+        ],
+        [
+          0.95,
+          -0.55
+        ],
+        [
+          0.8,
+          -0.82
+        ],
+        [
+          0.5,
+          -0.97
+        ],
+        [
+          0,
+          -1
+        ]
+      ]
+    },
+    "capEdgeY": 0.33,
+    "maskBackZ": 0.02,
+    "visor": {
+      "angleDeg": 17,
+      "width": 0.17,
+      "height": 0.056,
+      "x": 0.17,
+      "y": 0.08,
+      "socketDepth": 0.04,
+      "slitDepth": 0.025,
+      "yawDeg": 20,
+      "socketMarginWidth": 0.025,
+      "socketMarginHeight": 0.018
+    },
+    "core": {
+      "rx": 0.35,
+      "rz": 0.44,
+      "cz": -0.02,
+      "y0": -0.06,
+      "y1": 0.335
+    },
+    "collar": {
+      "rx": 0.41500000000000004,
+      "rz": 0.48000000000000004,
+      "cz": -0.01,
+      "y0": -0.25,
+      "y1": 0.02,
+      "tilt": 0.08,
+      "dip": [
+        [
+          -0.13,
+          0.1
+        ],
+        [
+          0.13,
+          0.1
+        ],
+        [
+          0.125,
+          -0.02
+        ],
+        [
+          0.1,
+          -0.035
+        ],
+        [
+          0.085,
+          -0.09
+        ],
+        [
+          -0.085,
+          -0.09
+        ],
+        [
+          -0.1,
+          -0.035
+        ],
+        [
+          -0.125,
+          -0.02
+        ]
+      ]
+    },
+    "neckRing": {
+      "rx": 0.33,
+      "rz": 0.37,
+      "y0": -0.36,
+      "y1": -0.2
+    },
+    "band": {
+      "z": -0.12,
+      "half": 0.04
+    },
+    "earL": {
+      "cz": -0.2,
+      "cy": 0.1,
+      "outerX": 0.395
+    },
+    "earR": {
+      "cz": -0.14,
+      "cy": 0.1,
+      "outerX": -0.425,
+      "w": 0.21,
+      "h": 0.32
+    },
+    "antenna": {
+      "top": 0.58
+    },
+    "backBox": {
+      "cy": 0.19,
+      "w": 0.24,
+      "h": 0.2
+    },
+    "tube": {
+      "coilRadius": 0.016,
+      "wireRadius": 0.0068,
+      "pitch": 0.0125,
+      "points": [
+        [
+          -0.162,
+          0.21,
+          -0.48
+        ],
+        [
+          -0.24,
+          0.21,
+          -0.475
+        ],
+        [
+          -0.31,
+          0.16,
+          -0.45
+        ],
+        [
+          -0.32,
+          0.015,
+          -0.43
+        ],
+        [
+          -0.36,
+          -0.12,
+          -0.34
+        ],
+        [
+          -0.43,
+          -0.17,
+          -0.22
+        ],
+        [
+          -0.45,
+          -0.175,
+          -0.07
+        ],
+        [
+          -0.45,
+          -0.155,
+          0.035
+        ],
+        [
+          -0.44,
+          -0.055,
+          0.055
+        ],
+        [
+          -0.43,
+          0.005,
+          -0.035
+        ]
+      ]
+    },
+    "facets": [
+      [
+        [
+          0,
+          0,
+          0.512
+        ],
+        [
+          0.2079,
+          0,
+          0.9781
+        ]
+      ],
+      [
+        [
+          0,
+          0,
+          0.512
+        ],
+        [
+          -0.2079,
+          0,
+          0.9781
+        ]
+      ],
+      [
+        [
+          0.26,
+          0,
+          0.457
+        ],
+        [
+          0.7,
+          0,
+          0.714
+        ]
+      ],
+      [
+        [
+          -0.26,
+          0,
+          0.457
+        ],
+        [
+          -0.7,
+          0,
+          0.714
+        ]
+      ],
+      [
+        [
+          0,
+          0.3,
+          0.505
+        ],
+        [
+          0,
+          0.62,
+          0.785
+        ]
+      ],
+      [
+        [
+          0,
+          -0.1,
+          0.505
+        ],
+        [
+          0,
+          -0.228,
+          0.974
+        ]
+      ]
+    ],
+    "facetBevels": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        0,
+        4
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        0,
+        5
+      ],
+      [
+        1,
+        5
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "bevelWidth": 0.002,
+    "templeRound": {
+      "radius": 0.055,
+      "segments": 10
+    },
+    "mouth": {
+      "outline": [
+        [
+          -0.045,
+          -0.05
+        ],
+        [
+          0.045,
+          -0.05
+        ],
+        [
+          0.062,
+          -0.067
+        ],
+        [
+          0.13,
+          -0.35
+        ],
+        [
+          0.135,
+          -0.55
+        ],
+        [
+          -0.135,
+          -0.55
+        ],
+        [
+          -0.13,
+          -0.35
+        ],
+        [
+          -0.062,
+          -0.067
+        ]
+      ],
+      "depth": 0.035,
+      "railWidth": 0.018,
+      "slotWidth": 0.07,
+      "slotY": -0.075
+    },
+    "maskGap": [
+      [
+        -0.012,
+        0.3
+      ],
+      [
+        0.02,
+        0.06
+      ],
+      [
+        -0.01,
+        -0.19
+      ],
+      [
+        0.09,
+        -0.28
+      ],
+      [
+        0.15,
+        -0.325
+      ]
+    ],
+    "cheekSlot": {
+      "x": 0.32,
+      "y": -0.33,
+      "w": 0.035,
+      "h": 0.1,
+      "tilt": 0.15
+    },
+    "collarPanel": {
+      "width": 0.3,
+      "height": 0.085,
+      "radius": 0.014,
+      "depth": 0.014,
+      "y": -0.115,
+      "z": -0.16,
+      "slotWidth": 0.014,
+      "slotHeight": 0.034,
+      "slotDepth": 0.008,
+      "socketZ": -0.355,
+      "socketWidth": 0.045,
+      "socketHeight": 0.05
+    },
+    "collarFront": {
+      "topZ": -0.06,
+      "bottomZ": 0.18
+    },
+    "shapeFit": {
+      "lowerFaceScale": 0.86,
+      "lowerFaceAnchor": 0.08
+    },
+    "crownTransition": {
+      "slope": 0.42,
+      "anchorZ": 0.06,
+      "blendHeight": 0.07,
+      "rimOverlap": 0.001,
+      "rimCover": 0.001,
+      "sideBlendWidth": 0.05
+    },
+    "crownRounding": {
+      "strength": 0.35,
+      "startY": 0.2,
+      "endY": 0.38
+    },
+    "lowerArmorEdges": {
+      "radialSegments": 96,
+      "chamferHeight": 0.035,
+      "topScale": 0.975,
+      "cornerScale": 0.55
+    },
+    "crownDome": {
+      "startY": 0.33,
+      "endY": 0.43,
+      "baseY": 0.17,
+      "radiusX": 0.38,
+      "radiusFront": 0.51,
+      "radiusBack": 0.48
+    },
+    "foreheadPlates": {
+      "enabled": false,
+      "outline": [
+        [
+          0.055,
+          0.11
+        ],
+        [
+          0.275,
+          0.11
+        ],
+        [
+          0.17,
+          0.415
+        ],
+        [
+          0.17,
+          0.8
+        ],
+        [
+          0.065,
+          0.8
+        ],
+        [
+          0.065,
+          0.42
+        ]
+      ],
+      "wrapToRear": true,
+      "offsetCentreY": 0.1,
+      "offsetRadius": 0.45,
+      "projection": 0.007,
+      "embed": 0.001,
+      "joinBlendHeight": 0.05,
+      "joinOverlap": 0.003,
+      "joinLip": 0.003
+    },
+    "comms": {
+      "symmetric": true
+    }
+  },
+  "assemblyParts": [
+    {
+      "id": "H01",
+      "label": "Schädelhaube",
+      "connection": "Verdeckte Auflage und Befestigung an H09/H03 konstruieren.",
+      "meshes": [
+        {
+          "name": "Crown",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/Crown[0]"
+        }
+      ],
+      "center": [
+        0.000004410743713378906,
+        0.3215728774666786,
+        0.032858386635780334
+      ]
+    },
+    {
+      "id": "H05A",
+      "label": "Wange A",
+      "connection": "Fugen und Befestigung zur Augenmaske und zum Kiefer.",
+      "meshes": [
+        {
+          "name": "Cheek_R",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/Cheek_R[0]"
+        }
+      ],
+      "center": [
+        -0.17853368818760088,
+        -0.14883614517748356,
+        0.24209098517894725
+      ]
+    },
+    {
+      "id": "H05B",
+      "label": "Wange B",
+      "connection": "Fugen und Befestigung zur Augenmaske und zum Kiefer.",
+      "meshes": [
+        {
+          "name": "Cheek_L",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/Cheek_L[0]"
+        }
+      ],
+      "center": [
+        0.1785372048616427,
+        -0.1488293008878827,
+        0.24209100008010861
+      ]
+    },
+    {
+      "id": "H06",
+      "label": "Mitteleinsatz / Schienen",
+      "connection": "Einsatz und Schienen sind eigene Meshes; Haltepunkte offen.",
+      "meshes": [
+        {
+          "name": "Mouth_Insert",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/Mouth_Insert[0]"
+        },
+        {
+          "name": "MouthRail_R",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/MouthRail_R[0]"
+        },
+        {
+          "name": "MouthRail_L",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/MouthRail_L[0]"
+        },
+        {
+          "name": "MaskGap",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/MaskGap[0]"
+        },
+        {
+          "name": "MaskGap",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/MaskGap[1]"
+        }
+      ],
+      "center": [
+        1.3482710836676405e-9,
+        -0.19533685358857078,
+        0.2978249688020013
+      ]
+    },
+    {
+      "id": "H03",
+      "label": "Augenmaske",
+      "connection": "Maskenauflage und lösbare Anschlüsse zum hellen Rahmen.",
+      "meshes": [
+        {
+          "name": "Shell",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/Shell[0]"
+        }
+      ],
+      "center": [
+        1.4901161193847656e-8,
+        0.12080061435699463,
+        0.26760698575526476
+      ]
+    },
+    {
+      "id": "H04A",
+      "label": "Auge A",
+      "connection": "Leuchteinsatz, Halter und elektrische Durchführung fehlen.",
+      "meshes": [
+        {
+          "name": "Visor_R",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/Visor_R[0]"
+        }
+      ],
+      "center": [
+        -0.15563515302761888,
+        0.08352656281322646,
+        0.44764432307825436
+      ]
+    },
+    {
+      "id": "H04B",
+      "label": "Auge B",
+      "connection": "Leuchteinsatz, Halter und elektrische Durchführung fehlen.",
+      "meshes": [
+        {
+          "name": "Visor_L",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/Visor_L[0]"
+        }
+      ],
+      "center": [
+        0.15563515065560862,
+        0.08352656301176772,
+        0.4476443085777455
+      ]
+    },
+    {
+      "id": "H02",
+      "label": "Brauenkante",
+      "connection": "Übergang zur Augenmaske; getrennte schmale Kante.",
+      "meshes": [
+        {
+          "name": "Brim",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/Brim[0]"
+        }
+      ],
+      "center": [
+        0,
+        0.33000001345574853,
+        -0.20888059213757515
+      ]
+    },
+    {
+      "id": "H14A",
+      "label": "Maskenhalter A",
+      "connection": "Gelenk- und Schraubverbindung an der Maske.",
+      "meshes": [
+        {
+          "name": "Detail[0]",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_R[0]/Detail[0]"
+        },
+        {
+          "name": "Detail[1]",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_R[0]/Detail[1]"
+        },
+        {
+          "name": "Detail[2]",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_R[0]/Detail[2]"
+        },
+        {
+          "name": "Detail[3]",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_R[0]/Detail[3]"
+        },
+        {
+          "name": "Detail[4]",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_R[0]/Detail[4]"
+        },
+        {
+          "name": "Detail[5]",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_R[0]/Detail[5]"
+        },
+        {
+          "name": "Detail[6]",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_R[0]/Detail[6]"
+        }
+      ],
+      "center": [
+        -0.4166031755667161,
+        0.09552837718372585,
+        0.044497799032102395
+      ]
+    },
+    {
+      "id": "H14B",
+      "label": "Maskenhalter B",
+      "connection": "Gelenk- und Schraubverbindung an der Maske.",
+      "meshes": [
+        {
+          "name": "Detail[0]",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_L[0]/Detail[0]"
+        },
+        {
+          "name": "Detail[1]",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_L[0]/Detail[1]"
+        },
+        {
+          "name": "Detail[2]",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_L[0]/Detail[2]"
+        },
+        {
+          "name": "Detail[3]",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_L[0]/Detail[3]"
+        },
+        {
+          "name": "Detail[4]",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_L[0]/Detail[4]"
+        },
+        {
+          "name": "Detail[5]",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_L[0]/Detail[5]"
+        },
+        {
+          "name": "Detail[6]",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/Hinge_L[0]/Detail[6]"
+        }
+      ],
+      "center": [
+        0.41726310982578785,
+        0.07392616270694265,
+        0.044497798759978884
+      ]
+    },
+    {
+      "id": "F01",
+      "label": "Schraubensatz oben",
+      "connection": "Visualisierte Köpfe; keine konstruierten Gewinde / Bohrungen.",
+      "meshes": [
+        {
+          "name": "Screws_Upper",
+          "path": "SciFiHelmet/UpperHelmet_Dark[0]/Screws_Upper[0]"
+        }
+      ],
+      "center": [
+        0.000004157423973083496,
+        0.07003368437290192,
+        0.05124913156032562
+      ]
+    },
+    {
+      "id": "H09",
+      "label": "Seiten- / Heckgehäuse",
+      "connection": "Träger für Haube, Rahmen und Anbauten; Wandstärken offen.",
+      "meshes": [
+        {
+          "name": "Core",
+          "path": "SciFiHelmet/LowerArmor_White[0]/Core[0]"
+        },
+        {
+          "name": "RearPanel",
+          "path": "SciFiHelmet/LowerArmor_White[0]/RearPanel[0]"
+        }
+      ],
+      "center": [
+        0,
+        0.16074999747797847,
+        -0.2547273635864258
+      ]
+    },
+    {
+      "id": "H10",
+      "label": "Nacken- / Seitenrahmen",
+      "connection": "Auflage und Verschraubung des hellen Gehäuses.",
+      "meshes": [
+        {
+          "name": "Collar",
+          "path": "SciFiHelmet/LowerArmor_White[0]/Collar[0]"
+        },
+        {
+          "name": "CollarDipPlate",
+          "path": "SciFiHelmet/LowerArmor_White[0]/CollarDipPlate[0]"
+        },
+        {
+          "name": "Detail[0]",
+          "path": "SciFiHelmet/LowerArmor_White[0]/CollarDipPlate[0]/Detail[0]"
+        }
+      ],
+      "center": [
+        0.00003194645584694381,
+        -0.019869963622428058,
+        -0.3689709852371506
+      ]
+    },
+    {
+      "id": "H11A",
+      "label": "Einlagen A",
+      "connection": "Einlagen und Taschenböden; Aufnahme im Rahmen konstruieren.",
+      "meshes": [
+        {
+          "name": "CollarSlotFloor_R",
+          "path": "SciFiHelmet/LowerArmor_White[0]/CollarSlotFloor_R[0]"
+        },
+        {
+          "name": "CollarPanelFloor_R",
+          "path": "SciFiHelmet/LowerArmor_White[0]/CollarPanelFloor_R[0]"
+        },
+        {
+          "name": "CollarSocketFloor_R",
+          "path": "SciFiHelmet/LowerArmor_White[0]/CollarSocketFloor_R[0]"
+        },
+        {
+          "name": "Jaw_Insert_R",
+          "path": "SciFiHelmet/LowerArmor_White[0]/Jaw_Insert_R[0]"
+        },
+        {
+          "name": "Jaw_InsertSlot_R",
+          "path": "SciFiHelmet/LowerArmor_White[0]/Jaw_InsertSlot_R[0]"
+        }
+      ],
+      "center": [
+        -0.27055442407634106,
+        -0.17658104747533798,
+        -0.03477155975624919
+      ]
+    },
+    {
+      "id": "H11B",
+      "label": "Einlagen B",
+      "connection": "Einlagen und Taschenböden; Aufnahme im Rahmen konstruieren.",
+      "meshes": [
+        {
+          "name": "CollarSlotFloor_L",
+          "path": "SciFiHelmet/LowerArmor_White[0]/CollarSlotFloor_L[0]"
+        },
+        {
+          "name": "CollarPanelFloor_L",
+          "path": "SciFiHelmet/LowerArmor_White[0]/CollarPanelFloor_L[0]"
+        },
+        {
+          "name": "CollarSocketFloor_L",
+          "path": "SciFiHelmet/LowerArmor_White[0]/CollarSocketFloor_L[0]"
+        },
+        {
+          "name": "Jaw_Insert_L",
+          "path": "SciFiHelmet/LowerArmor_White[0]/Jaw_Insert_L[0]"
+        },
+        {
+          "name": "Jaw_InsertSlot_L",
+          "path": "SciFiHelmet/LowerArmor_White[0]/Jaw_InsertSlot_L[0]"
+        }
+      ],
+      "center": [
+        0.2703034616997465,
+        -0.17711988650262356,
+        -0.037203499135561285
+      ]
+    },
+    {
+      "id": "H19",
+      "label": "Halsanschluss",
+      "connection": "Übergang zu flexiblem Hals; Bewegungsfreiraum später prüfen.",
+      "meshes": [
+        {
+          "name": "NeckRing",
+          "path": "SciFiHelmet/LowerArmor_White[0]/NeckRing[0]"
+        }
+      ],
+      "center": [
+        0,
+        -0.2295999974012375,
+        -0.02000001072883606
+      ]
+    },
+    {
+      "id": "H07",
+      "label": "Kinnblock",
+      "connection": "Seitliche Verbindung zu den Kieferstücken konstruieren.",
+      "meshes": [
+        {
+          "name": "Chin",
+          "path": "SciFiHelmet/LowerArmor_White[0]/Chin[0]"
+        }
+      ],
+      "center": [
+        4.0978193283081055e-7,
+        -0.19089999981224537,
+        0.19749999791383743
+      ]
+    },
+    {
+      "id": "H08A",
+      "label": "Kiefer A",
+      "connection": "Anschluss an Kinn und Seitenrahmen.",
+      "meshes": [
+        {
+          "name": "Jaw_R",
+          "path": "SciFiHelmet/LowerArmor_White[0]/Jaw_R[0]"
+        }
+      ],
+      "center": [
+        -0.28899988532066345,
+        -0.18647715635597706,
+        0.16825000196695328
+      ]
+    },
+    {
+      "id": "H08B",
+      "label": "Kiefer B",
+      "connection": "Anschluss an Kinn und Seitenrahmen.",
+      "meshes": [
+        {
+          "name": "Jaw_L",
+          "path": "SciFiHelmet/LowerArmor_White[0]/Jaw_L[0]"
+        }
+      ],
+      "center": [
+        0.28899911791086197,
+        -0.18647715635597706,
+        0.16825000196695328
+      ]
+    },
+    {
+      "id": "F02",
+      "label": "Schraubensatz Kinn",
+      "connection": "Visualisierte Köpfe; keine konstruierten Gewinde / Bohrungen.",
+      "meshes": [
+        {
+          "name": "Screws_Chin",
+          "path": "SciFiHelmet/LowerArmor_White[0]/Screws_Chin[0]"
+        }
+      ],
+      "center": [
+        0,
+        -0.3456999957561493,
+        0.46755000948905945
+      ]
+    },
+    {
+      "id": "F03",
+      "label": "Schraubensatz Rahmen",
+      "connection": "Visualisierte Köpfe; keine konstruierten Gewinde / Bohrungen.",
+      "meshes": [
+        {
+          "name": "Screws_Side",
+          "path": "SciFiHelmet/LowerArmor_White[0]/Screws_Side[0]"
+        }
+      ],
+      "center": [
+        -1.4901161193847656e-8,
+        -0.166830417161691,
+        0.05000784993171692
+      ]
+    },
+    {
+      "id": "H16",
+      "label": "Hinterkopfmodul",
+      "connection": "Montageplatte, Kasten und Steckverbinder; Kabeldurchführungen offen.",
+      "meshes": [
+        {
+          "name": "BackBox_Mount",
+          "path": "SciFiHelmet/RightComms_And_Tube[0]/BackBox_Group[0]/BackBox_Mount[0]"
+        },
+        {
+          "name": "BackBox",
+          "path": "SciFiHelmet/RightComms_And_Tube[0]/BackBox_Group[0]/BackBox[0]"
+        },
+        {
+          "name": "Detail[0]",
+          "path": "SciFiHelmet/RightComms_And_Tube[0]/BackBox_Group[0]/Logo[0]/Detail[0]"
+        },
+        {
+          "name": "Detail[1]",
+          "path": "SciFiHelmet/RightComms_And_Tube[0]/BackBox_Group[0]/Logo[0]/Detail[1]"
+        },
+        {
+          "name": "Detail[2]",
+          "path": "SciFiHelmet/RightComms_And_Tube[0]/BackBox_Group[0]/Logo[0]/Detail[2]"
+        },
+        {
+          "name": "BackBox_Connector",
+          "path": "SciFiHelmet/RightComms_And_Tube[0]/BackBox_Group[0]/BackBox_Connector[0]"
+        },
+        {
+          "name": "BackBox_Connector",
+          "path": "SciFiHelmet/RightComms_And_Tube[0]/BackBox_Group[0]/BackBox_Connector[1]"
+        },
+        {
+          "name": "Screws_BackBox",
+          "path": "SciFiHelmet/RightComms_And_Tube[0]/BackBox_Group[0]/Screws_BackBox[0]"
+        }
+      ],
+      "center": [
+        0,
+        0.19441875028053326,
+        -0.48375000416766856
+      ]
+    },
+    {
+      "id": "B01",
+      "label": "Flexibler Hals",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "NeckFlex",
+          "path": "SciFiHelmet/FullBodyStudy[0]/NeckFlex[0]"
+        }
+      ],
+      "center": [
+        0,
+        -0.4949999898672104,
+        0
+      ]
+    },
+    {
+      "id": "B02",
+      "label": "Halsrippen",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "NeckRibs",
+          "path": "SciFiHelmet/FullBodyStudy[0]/NeckRibs[0]"
+        }
+      ],
+      "center": [
+        0,
+        -0.4999999850988388,
+        0
+      ]
+    },
+    {
+      "id": "B03",
+      "label": "Kragen vorne",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "CollarFront",
+          "path": "SciFiHelmet/FullBodyStudy[0]/CollarFront[0]"
+        }
+      ],
+      "center": [
+        0,
+        -0.5581722557544708,
+        0.21717155212536454
+      ]
+    },
+    {
+      "id": "B04",
+      "label": "Kragen hinten",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "CollarRear",
+          "path": "SciFiHelmet/FullBodyStudy[0]/CollarRear[0]"
+        }
+      ],
+      "center": [
+        0,
+        -0.48882773518562317,
+        -0.21717155212536454
+      ]
+    },
+    {
+      "id": "B05",
+      "label": "Oberkörperbasis",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "UpperTorsoCore",
+          "path": "SciFiHelmet/FullBodyStudy[0]/UpperTorsoCore[0]"
+        }
+      ],
+      "center": [
+        0,
+        -0.9750000238418579,
+        0
+      ]
+    },
+    {
+      "id": "B06",
+      "label": "Schulterbasis A",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "ShoulderBase_R",
+          "path": "SciFiHelmet/FullBodyStudy[0]/ShoulderBase_R[0]"
+        }
+      ],
+      "center": [
+        -0.7227999866008759,
+        -0.8357000350952148,
+        0
+      ]
+    },
+    {
+      "id": "B07",
+      "label": "Schulter vorne A",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "ShoulderFront_R",
+          "path": "SciFiHelmet/FullBodyStudy[0]/ShoulderFront_R[0]"
+        }
+      ],
+      "center": [
+        -0.7199999988079071,
+        -0.8350000381469727,
+        0.32750000059604645
+      ]
+    },
+    {
+      "id": "B08",
+      "label": "Schulter hinten A",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "ShoulderRear_R",
+          "path": "SciFiHelmet/FullBodyStudy[0]/ShoulderRear_R[0]"
+        }
+      ],
+      "center": [
+        -0.7199999988079071,
+        -0.8350000381469727,
+        -0.3075000047683716
+      ]
+    },
+    {
+      "id": "B30",
+      "label": "Schulterdach A",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "ShoulderRoof_R",
+          "path": "SciFiHelmet/FullBodyStudy[0]/ShoulderRoof_R[0]"
+        }
+      ],
+      "center": [
+        -0.7199999988079071,
+        -0.7949999868869781,
+        0.009999990463256836
+      ]
+    },
+    {
+      "id": "B12",
+      "label": "Brustplatte A",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "ClavicleArmor_R",
+          "path": "SciFiHelmet/FullBodyStudy[0]/ClavicleArmor_R[0]"
+        }
+      ],
+      "center": [
+        -0.4400000125169754,
+        -0.8775000274181366,
+        0.3017818033695221
+      ]
+    },
+    {
+      "id": "B14",
+      "label": "Brusteinsatz A",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "ChestInsert_R",
+          "path": "SciFiHelmet/FullBodyStudy[0]/ChestInsert_R[0]"
+        }
+      ],
+      "center": [
+        -0.25299999862909317,
+        -1.165000081062317,
+        0.3052099719643593
+      ]
+    },
+    {
+      "id": "B16",
+      "label": "Rückenplatte A",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "ScapulaArmor_R",
+          "path": "SciFiHelmet/FullBodyStudy[0]/ScapulaArmor_R[0]"
+        }
+      ],
+      "center": [
+        -0.2716999985277653,
+        -0.8535000085830688,
+        -0.32242296636104584
+      ]
+    },
+    {
+      "id": "B19",
+      "label": "Brustbefestigung A",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "ClavicleFastener_R",
+          "path": "SciFiHelmet/FullBodyStudy[0]/ClavicleFastener_R[0]"
+        }
+      ],
+      "center": [
+        -0.3937999904155731,
+        -0.7909999787807465,
+        0.3649179935455322
+      ]
+    },
+    {
+      "id": "B21",
+      "label": "Rückenbefestigung A",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "RearFastener_R",
+          "path": "SciFiHelmet/FullBodyStudy[0]/RearFastener_R[0]"
+        }
+      ],
+      "center": [
+        -0.35089999437332153,
+        -0.789000004529953,
+        -0.36211949586868286
+      ]
+    },
+    {
+      "id": "B23",
+      "label": "Schulterlamelle A",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "ShoulderLame_R",
+          "path": "SciFiHelmet/FullBodyStudy[0]/ShoulderLame_R[0]"
+        }
+      ],
+      "center": [
+        -0.9880279004573822,
+        -1.0999999940395355,
+        0.01000000536441803
+      ]
+    },
+    {
+      "id": "B25",
+      "label": "Schultergelenk A",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "ShoulderJoint_R",
+          "path": "SciFiHelmet/FullBodyStudy[0]/ShoulderJoint_R[0]"
+        }
+      ],
+      "center": [
+        -0.7615789175033569,
+        -1.049472600221634,
+        0
+      ]
+    },
+    {
+      "id": "B28",
+      "label": "Flankenpanzer A",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "FlankArmor_R",
+          "path": "SciFiHelmet/FullBodyStudy[0]/FlankArmor_R[0]"
+        }
+      ],
+      "center": [
+        -0.5762969255447388,
+        -0.995000034570694,
+        0.02499999850988388
+      ]
+    },
+    {
+      "id": "B09",
+      "label": "Schulterbasis B",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "ShoulderBase_L",
+          "path": "SciFiHelmet/FullBodyStudy[0]/ShoulderBase_L[0]"
+        }
+      ],
+      "center": [
+        0.7227999866008759,
+        -0.8357000350952148,
+        0
+      ]
+    },
+    {
+      "id": "B10",
+      "label": "Schulter vorne B",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "ShoulderFront_L",
+          "path": "SciFiHelmet/FullBodyStudy[0]/ShoulderFront_L[0]"
+        }
+      ],
+      "center": [
+        0.7199999988079071,
+        -0.8350000381469727,
+        0.32750000059604645
+      ]
+    },
+    {
+      "id": "B11",
+      "label": "Schulter hinten B",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "ShoulderRear_L",
+          "path": "SciFiHelmet/FullBodyStudy[0]/ShoulderRear_L[0]"
+        }
+      ],
+      "center": [
+        0.7199999988079071,
+        -0.8350000381469727,
+        -0.3075000047683716
+      ]
+    },
+    {
+      "id": "B31",
+      "label": "Schulterdach B",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "ShoulderRoof_L",
+          "path": "SciFiHelmet/FullBodyStudy[0]/ShoulderRoof_L[0]"
+        }
+      ],
+      "center": [
+        0.7199999988079071,
+        -0.7949999868869781,
+        0.009999990463256836
+      ]
+    },
+    {
+      "id": "B13",
+      "label": "Brustplatte B",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "ClavicleArmor_L",
+          "path": "SciFiHelmet/FullBodyStudy[0]/ClavicleArmor_L[0]"
+        }
+      ],
+      "center": [
+        0.4400000125169754,
+        -0.8775000274181366,
+        0.3017818033695221
+      ]
+    },
+    {
+      "id": "B15",
+      "label": "Brusteinsatz B",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "ChestInsert_L",
+          "path": "SciFiHelmet/FullBodyStudy[0]/ChestInsert_L[0]"
+        }
+      ],
+      "center": [
+        0.25299999862909317,
+        -1.165000081062317,
+        0.3052099719643593
+      ]
+    },
+    {
+      "id": "B17",
+      "label": "Rückenplatte B",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "ScapulaArmor_L",
+          "path": "SciFiHelmet/FullBodyStudy[0]/ScapulaArmor_L[0]"
+        }
+      ],
+      "center": [
+        0.2716999985277653,
+        -0.8535000085830688,
+        -0.32242296636104584
+      ]
+    },
+    {
+      "id": "B20",
+      "label": "Brustbefestigung B",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "ClavicleFastener_L",
+          "path": "SciFiHelmet/FullBodyStudy[0]/ClavicleFastener_L[0]"
+        }
+      ],
+      "center": [
+        0.3937999904155731,
+        -0.7909999787807465,
+        0.3649179935455322
+      ]
+    },
+    {
+      "id": "B22",
+      "label": "Rückenbefestigung B",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "RearFastener_L",
+          "path": "SciFiHelmet/FullBodyStudy[0]/RearFastener_L[0]"
+        }
+      ],
+      "center": [
+        0.35089999437332153,
+        -0.789000004529953,
+        -0.36211949586868286
+      ]
+    },
+    {
+      "id": "B24",
+      "label": "Schulterlamelle B",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "ShoulderLame_L",
+          "path": "SciFiHelmet/FullBodyStudy[0]/ShoulderLame_L[0]"
+        }
+      ],
+      "center": [
+        0.9880279004573822,
+        -1.0999999940395355,
+        0.01000000536441803
+      ]
+    },
+    {
+      "id": "B26",
+      "label": "Schultergelenk B",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "ShoulderJoint_L",
+          "path": "SciFiHelmet/FullBodyStudy[0]/ShoulderJoint_L[0]"
+        }
+      ],
+      "center": [
+        0.7615789175033569,
+        -1.049472600221634,
+        0
+      ]
+    },
+    {
+      "id": "B29",
+      "label": "Flankenpanzer B",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "FlankArmor_L",
+          "path": "SciFiHelmet/FullBodyStudy[0]/FlankArmor_L[0]"
+        }
+      ],
+      "center": [
+        0.5762969255447388,
+        -0.995000034570694,
+        0.02499999850988388
+      ]
+    },
+    {
+      "id": "B27",
+      "label": "Brustmitte",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "BreastplateCenter",
+          "path": "SciFiHelmet/FullBodyStudy[0]/BreastplateCenter[0]"
+        }
+      ],
+      "center": [
+        0,
+        -0.8450000286102295,
+        0.5263585597276688
+      ]
+    },
+    {
+      "id": "B18",
+      "label": "Rückeneinsatz",
+      "connection": "Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.",
+      "meshes": [
+        {
+          "name": "BackSpineInsert",
+          "path": "SciFiHelmet/FullBodyStudy[0]/BackSpineInsert[0]"
+        }
+      ],
+      "center": [
+        0,
+        -1.1440000236034393,
+        -0.3471637964248657
+      ]
+    },
+    {
+      "id": "B32",
+      "label": "Bauchlamelle 1",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "AbdomenLame_1",
+          "path": "SciFiHelmet/FullBodyStudy[0]/AbdomenLame_1[0]"
+        }
+      ],
+      "center": [
+        0,
+        -1.3700000047683716,
+        0.015000000596046448
+      ]
+    },
+    {
+      "id": "B33",
+      "label": "Bauchlamelle 2",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "AbdomenLame_2",
+          "path": "SciFiHelmet/FullBodyStudy[0]/AbdomenLame_2[0]"
+        }
+      ],
+      "center": [
+        0,
+        -1.5199999809265137,
+        0.01199999451637268
+      ]
+    },
+    {
+      "id": "B34",
+      "label": "Bauchlamelle 3",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "AbdomenLame_3",
+          "path": "SciFiHelmet/FullBodyStudy[0]/AbdomenLame_3[0]"
+        }
+      ],
+      "center": [
+        0,
+        -1.6650000214576721,
+        0.01199999451637268
+      ]
+    },
+    {
+      "id": "B35",
+      "label": "Beckengurt",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "WaistBelt",
+          "path": "SciFiHelmet/FullBodyStudy[0]/WaistBelt[0]"
+        }
+      ],
+      "center": [
+        0,
+        -1.8199999928474426,
+        0.004999995231628418
+      ]
+    },
+    {
+      "id": "B36",
+      "label": "Becken-/Taillenkern",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "PelvisCore",
+          "path": "SciFiHelmet/FullBodyStudy[0]/PelvisCore[0]"
+        }
+      ],
+      "center": [
+        0,
+        -1.7799999713897705,
+        0
+      ]
+    },
+    {
+      "id": "B37",
+      "label": "Hüftplatte A",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "HipPlate_R",
+          "path": "SciFiHelmet/FullBodyStudy[0]/HipPlate_R[0]"
+        }
+      ],
+      "center": [
+        -0.6021336019039154,
+        -2.0799999833106995,
+        0.004999995231628418
+      ]
+    },
+    {
+      "id": "B39",
+      "label": "Oberarm A",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "UpperArm_R",
+          "path": "SciFiHelmet/FullBodyStudy[0]/UpperArm_R[0]"
+        }
+      ],
+      "center": [
+        -0.7907612025737762,
+        -1.4399999976158142,
+        0
+      ]
+    },
+    {
+      "id": "B41",
+      "label": "Ellbogen A",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "Elbow_R",
+          "path": "SciFiHelmet/FullBodyStudy[0]/Elbow_R[0]"
+        }
+      ],
+      "center": [
+        -0.8299999833106995,
+        -1.9700000286102295,
+        0
+      ]
+    },
+    {
+      "id": "B43",
+      "label": "Unterarm A",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "Forearm_R",
+          "path": "SciFiHelmet/FullBodyStudy[0]/Forearm_R[0]"
+        }
+      ],
+      "center": [
+        -0.8549999892711639,
+        -2.309999942779541,
+        0.01000000536441803
+      ]
+    },
+    {
+      "id": "B45",
+      "label": "Hand A",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "Hand_R",
+          "path": "SciFiHelmet/FullBodyStudy[0]/Hand_R[0]"
+        }
+      ],
+      "center": [
+        -0.8734551668167114,
+        -2.809999942779541,
+        0.04043146222829819
+      ]
+    },
+    {
+      "id": "B47",
+      "label": "Hüftgelenk A",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "HipJoint_R",
+          "path": "SciFiHelmet/FullBodyStudy[0]/HipJoint_R[0]"
+        }
+      ],
+      "center": [
+        -0.28999999910593033,
+        -2.1999999284744263,
+        0
+      ]
+    },
+    {
+      "id": "B49",
+      "label": "Oberschenkel A",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "Thigh_R",
+          "path": "SciFiHelmet/FullBodyStudy[0]/Thigh_R[0]"
+        }
+      ],
+      "center": [
+        -0.30000000447034836,
+        -2.659999966621399,
+        0.01000000536441803
+      ]
+    },
+    {
+      "id": "B51",
+      "label": "Knie A",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "Knee_R",
+          "path": "SciFiHelmet/FullBodyStudy[0]/Knee_R[0]"
+        }
+      ],
+      "center": [
+        -0.2849999964237213,
+        -3.3000000715255737,
+        0
+      ]
+    },
+    {
+      "id": "B53",
+      "label": "Knieschutz A",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "KneePad_R",
+          "path": "SciFiHelmet/FullBodyStudy[0]/KneePad_R[0]"
+        }
+      ],
+      "center": [
+        -0.2850000038743019,
+        -3.3100000619888306,
+        0.20500000566244125
+      ]
+    },
+    {
+      "id": "B55",
+      "label": "Unterschenkel A",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "Shin_R",
+          "path": "SciFiHelmet/FullBodyStudy[0]/Shin_R[0]"
+        }
+      ],
+      "center": [
+        -0.2850000038743019,
+        -3.9299999475479126,
+        0.009999997913837433
+      ]
+    },
+    {
+      "id": "B57",
+      "label": "Fuß A",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "Foot_R",
+          "path": "SciFiHelmet/FullBodyStudy[0]/Foot_R[0]"
+        }
+      ],
+      "center": [
+        -0.2850000038743019,
+        -4.659999847412109,
+        0.12999999523162842
+      ]
+    },
+    {
+      "id": "B38",
+      "label": "Hüftplatte B",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "HipPlate_L",
+          "path": "SciFiHelmet/FullBodyStudy[0]/HipPlate_L[0]"
+        }
+      ],
+      "center": [
+        0.6021336019039154,
+        -2.0799999833106995,
+        0.004999995231628418
+      ]
+    },
+    {
+      "id": "B40",
+      "label": "Oberarm B",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "UpperArm_L",
+          "path": "SciFiHelmet/FullBodyStudy[0]/UpperArm_L[0]"
+        }
+      ],
+      "center": [
+        0.7907612025737762,
+        -1.4399999976158142,
+        0
+      ]
+    },
+    {
+      "id": "B42",
+      "label": "Ellbogen B",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "Elbow_L",
+          "path": "SciFiHelmet/FullBodyStudy[0]/Elbow_L[0]"
+        }
+      ],
+      "center": [
+        0.8299999833106995,
+        -1.9700000286102295,
+        0
+      ]
+    },
+    {
+      "id": "B44",
+      "label": "Unterarm B",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "Forearm_L",
+          "path": "SciFiHelmet/FullBodyStudy[0]/Forearm_L[0]"
+        }
+      ],
+      "center": [
+        0.8549999892711639,
+        -2.309999942779541,
+        0.01000000536441803
+      ]
+    },
+    {
+      "id": "B46",
+      "label": "Hand B",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "Hand_L",
+          "path": "SciFiHelmet/FullBodyStudy[0]/Hand_L[0]"
+        }
+      ],
+      "center": [
+        0.8734551668167114,
+        -2.809999942779541,
+        0.04043146222829819
+      ]
+    },
+    {
+      "id": "B48",
+      "label": "Hüftgelenk B",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "HipJoint_L",
+          "path": "SciFiHelmet/FullBodyStudy[0]/HipJoint_L[0]"
+        }
+      ],
+      "center": [
+        0.28999999910593033,
+        -2.1999999284744263,
+        0
+      ]
+    },
+    {
+      "id": "B50",
+      "label": "Oberschenkel B",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "Thigh_L",
+          "path": "SciFiHelmet/FullBodyStudy[0]/Thigh_L[0]"
+        }
+      ],
+      "center": [
+        0.30000000447034836,
+        -2.659999966621399,
+        0.01000000536441803
+      ]
+    },
+    {
+      "id": "B52",
+      "label": "Knie B",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "Knee_L",
+          "path": "SciFiHelmet/FullBodyStudy[0]/Knee_L[0]"
+        }
+      ],
+      "center": [
+        0.2849999964237213,
+        -3.3000000715255737,
+        0
+      ]
+    },
+    {
+      "id": "B54",
+      "label": "Knieschutz B",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "KneePad_L",
+          "path": "SciFiHelmet/FullBodyStudy[0]/KneePad_L[0]"
+        }
+      ],
+      "center": [
+        0.2850000038743019,
+        -3.3100000619888306,
+        0.20500000566244125
+      ]
+    },
+    {
+      "id": "B56",
+      "label": "Unterschenkel B",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "Shin_L",
+          "path": "SciFiHelmet/FullBodyStudy[0]/Shin_L[0]"
+        }
+      ],
+      "center": [
+        0.2850000038743019,
+        -3.9299999475479126,
+        0.009999997913837433
+      ]
+    },
+    {
+      "id": "B58",
+      "label": "Fuß B",
+      "connection": "Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.",
+      "meshes": [
+        {
+          "name": "Foot_L",
+          "path": "SciFiHelmet/FullBodyStudy[0]/Foot_L[0]"
+        }
+      ],
+      "center": [
+        0.2850000038743019,
+        -4.659999847412109,
+        0.12999999523162842
+      ]
+    }
+  ],
+  "renderSettings": {
+    "denoiseSeed": 47
+  },
+  "glb": {
+    "bytes": 4689736,
+    "meshes": 114,
+    "nodes": 123,
+    "materials": 10,
+    "images": 9
+  },
+  "textures": {
+    "maps": 11,
+    "manifest": "textures/materials.json"
+  },
+  "finishedAt": "2026-10-29T09:27:37.786Z"
+}

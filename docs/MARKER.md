@@ -5,7 +5,7 @@ gewünschte Änderung an **einem** Teil. Das Vorbild ist der Scout-Markierbogen 
 Hier ist er in 3D umgesetzt: Ein Klick trifft das Mesh selbst, Teil, Seite und Punkt liegen damit fest. Der Umsetzer
 muss nichts aus einem Bild zurückrechnen.
 
-- **Webseite:** https://claude.ai/artifact/5Pp2NuMCLqemQzdfPw6WSB (privat, nur der Nutzer). Aktueller Modellstand: **0.7 Bastion**.
+- **Webseite:** https://claude.ai/artifact/5Pp2NuMCLqemQzdfPw6WSB (privat, nur der Nutzer). Aktueller Modellstand: **0.9 Vanguard** (Gesamtkörper).
 - **Speicher:** Datenbank des Artefakts, Sammlung `marker`. Nur Claude Code liest und schreibt sie direkt (`ArtifactData`).
 - **Quelle:** `web/marker/` (Seite und Skript), `web/tools/marker_build.mjs`, `marker_check.mjs`, `marker_shot.mjs`.
 
@@ -29,7 +29,7 @@ muss nichts aus einem Bild zurückrechnen.
 | `strich` | nur bei `strich`: Liste von Punkten auf der Oberfläche (2 mm über der Fläche) |
 | `kamera` | `pos`, `ziel` – Blick, aus dem der Marker gesetzt wurde |
 | `vorschlag`, `mesh` | automatisch erkanntes Teil und Objektname unter dem Klick |
-| `teil`, `seite` | bestätigtes Teil (`H01`–`H21`, `F01`–`F03`, `P01`, `B01`–`B31`, `?`) und Seite (`A`, `B`, `beide`, `Mitte`) |
+| `teil`, `seite` | bestätigtes Teil (`H01`–`H21`, `F01`–`F03`, `P01`, `B01`–`B58`, `?`) und Seite (`A`, `B`, `beide`, `Mitte`) |
 | `stelle` | Oberkante, Unterkante, Vorderkante, Hinterkante, Ecke, Fläche außen, Boden, Fuge / Spalt, Übergang zum Nachbarteil, ganzes Teil |
 | `richtung` | Liste: vorn, hinten, oben, unten, außen, innen, schmaler, breiter, höher, flacher, runder, kantiger, schließen, entfernen, hinzufügen |
 | `betrag`, `cm` | „ein wenig“, „deutlich“, „bündig mit Nachbarteil“ oder „in cm“ mit Zahl |
@@ -39,7 +39,7 @@ muss nichts aus einem Bild zurückrechnen.
 
 ## Gemeinsame Sprache
 
-- **Teile:** [HELM_TEILE.md](HELM_TEILE.md) (H01–H21) und [HELM_BASTION.md](HELM_BASTION.md) (B01–B31). Die Seite erkennt das Teil mit
+- **Teile:** [HELM_TEILE.md](HELM_TEILE.md) (H01–H21), [HELM_BASTION.md](HELM_BASTION.md) (B01–B31) und [HELM_VANGUARD.md](HELM_VANGUARD.md) (B32–B58). Die Seite erkennt das Teil mit
   derselben Zuordnung wie die Explosionsansicht (`assemblyPartId` in `web/src/assembly.js`).
 - **Seiten:** A liegt in der Frontansicht links (−X), B rechts (+X), wie in der Teilekarte. Richtungen gelten aus Sicht des Trägers:
   vorn = Gesicht, außen = von der Mitte weg.

@@ -1,0 +1,1206 @@
+{
+  "meshCount": 114,
+  "bodyParts": 58,
+  "parts": [
+    {
+      "node": 2,
+      "name": "Crown",
+      "mesh": 0,
+      "materials": [
+        "crownArmor"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 3,
+      "name": "Cheek_R",
+      "mesh": 1,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 4,
+      "name": "Cheek_L",
+      "mesh": 2,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 5,
+      "name": "Mouth_Insert",
+      "mesh": 3,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 6,
+      "name": "MouthRail_R",
+      "mesh": 4,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 7,
+      "name": "MouthRail_L",
+      "mesh": 5,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 8,
+      "name": "MaskGap",
+      "mesh": 6,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 9,
+      "name": "MaskGap",
+      "mesh": 7,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 10,
+      "name": "Shell",
+      "mesh": 8,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 11,
+      "name": "Visor_R",
+      "mesh": 9,
+      "materials": [
+        "visorGlow"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 12,
+      "name": "Visor_L",
+      "mesh": 10,
+      "materials": [
+        "visorGlow"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 13,
+      "name": "Brim",
+      "mesh": 11,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 15,
+      "name": null,
+      "mesh": 12,
+      "materials": [
+        "accessoryArmor"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 16,
+      "name": null,
+      "mesh": 13,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 17,
+      "name": null,
+      "mesh": 14,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 18,
+      "name": null,
+      "mesh": 15,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 19,
+      "name": null,
+      "mesh": 16,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 20,
+      "name": null,
+      "mesh": 17,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 21,
+      "name": null,
+      "mesh": 18,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 23,
+      "name": null,
+      "mesh": 19,
+      "materials": [
+        "accessoryArmor"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 24,
+      "name": null,
+      "mesh": 20,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 25,
+      "name": null,
+      "mesh": 21,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 26,
+      "name": null,
+      "mesh": 22,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 27,
+      "name": null,
+      "mesh": 23,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 28,
+      "name": null,
+      "mesh": 24,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 29,
+      "name": null,
+      "mesh": 25,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 30,
+      "name": "Screws_Upper",
+      "mesh": 26,
+      "materials": [
+        "lightFastener"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 32,
+      "name": "Core",
+      "mesh": 27,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 33,
+      "name": "RearPanel",
+      "mesh": 28,
+      "materials": [
+        "whiteTextured"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 34,
+      "name": "Collar",
+      "mesh": 29,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 35,
+      "name": "CollarSlotFloor_R",
+      "mesh": 30,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 36,
+      "name": "CollarPanelFloor_R",
+      "mesh": 31,
+      "materials": [
+        "whiteTextured"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 37,
+      "name": "CollarSocketFloor_R",
+      "mesh": 32,
+      "materials": [
+        "whiteTextured"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 38,
+      "name": "CollarSlotFloor_L",
+      "mesh": 33,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 39,
+      "name": "CollarPanelFloor_L",
+      "mesh": 34,
+      "materials": [
+        "whiteTextured"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 40,
+      "name": "CollarSocketFloor_L",
+      "mesh": 35,
+      "materials": [
+        "whiteTextured"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 41,
+      "name": "CollarDipPlate",
+      "mesh": 36,
+      "materials": [
+        "whiteTextured"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 42,
+      "name": null,
+      "mesh": 37,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 43,
+      "name": "NeckRing",
+      "mesh": 38,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 44,
+      "name": "Chin",
+      "mesh": 39,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 45,
+      "name": "Jaw_R",
+      "mesh": 40,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 46,
+      "name": "Jaw_L",
+      "mesh": 41,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 47,
+      "name": "Jaw_Insert_R",
+      "mesh": 42,
+      "materials": [
+        "whiteTextured"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 48,
+      "name": "Jaw_InsertSlot_R",
+      "mesh": 43,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 49,
+      "name": "Jaw_Insert_L",
+      "mesh": 44,
+      "materials": [
+        "whiteTextured"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 50,
+      "name": "Jaw_InsertSlot_L",
+      "mesh": 45,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 51,
+      "name": "Screws_Chin",
+      "mesh": 46,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 52,
+      "name": "Screws_Side",
+      "mesh": 47,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 55,
+      "name": "BackBox_Mount",
+      "mesh": 48,
+      "materials": [
+        "oliveTech"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 56,
+      "name": "BackBox",
+      "mesh": 49,
+      "materials": [
+        "oliveTech"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 58,
+      "name": null,
+      "mesh": 50,
+      "materials": [
+        "oliveTech"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 59,
+      "name": null,
+      "mesh": 51,
+      "materials": [
+        "oliveTech"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 60,
+      "name": null,
+      "mesh": 52,
+      "materials": [
+        "oliveTech"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 61,
+      "name": "BackBox_Connector",
+      "mesh": 53,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 62,
+      "name": "BackBox_Connector",
+      "mesh": 54,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 63,
+      "name": "Screws_BackBox",
+      "mesh": 55,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {}
+    },
+    {
+      "node": 65,
+      "name": "NeckFlex",
+      "mesh": 56,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B01",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 66,
+      "name": "NeckRibs",
+      "mesh": 57,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B02",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 67,
+      "name": "CollarFront",
+      "mesh": 58,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B03",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 68,
+      "name": "CollarRear",
+      "mesh": 59,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B04",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 69,
+      "name": "UpperTorsoCore",
+      "mesh": 60,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B05",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 70,
+      "name": "ShoulderBase_R",
+      "mesh": 61,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B06",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 71,
+      "name": "ShoulderFront_R",
+      "mesh": 62,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B07",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 72,
+      "name": "ShoulderRear_R",
+      "mesh": 63,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B08",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 73,
+      "name": "ShoulderRoof_R",
+      "mesh": 64,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B30",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 74,
+      "name": "ClavicleArmor_R",
+      "mesh": 65,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B12",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 75,
+      "name": "ChestInsert_R",
+      "mesh": 66,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B14",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 76,
+      "name": "ScapulaArmor_R",
+      "mesh": 67,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B16",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 77,
+      "name": "ClavicleFastener_R",
+      "mesh": 68,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "B19",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 78,
+      "name": "RearFastener_R",
+      "mesh": 69,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "B21",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 79,
+      "name": "ShoulderLame_R",
+      "mesh": 70,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B23",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 80,
+      "name": "ShoulderJoint_R",
+      "mesh": 71,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B25",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 81,
+      "name": "FlankArmor_R",
+      "mesh": 72,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B28",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 82,
+      "name": "ShoulderBase_L",
+      "mesh": 73,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B09",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 83,
+      "name": "ShoulderFront_L",
+      "mesh": 74,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B10",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 84,
+      "name": "ShoulderRear_L",
+      "mesh": 75,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B11",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 85,
+      "name": "ShoulderRoof_L",
+      "mesh": 76,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B31",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 86,
+      "name": "ClavicleArmor_L",
+      "mesh": 77,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B13",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 87,
+      "name": "ChestInsert_L",
+      "mesh": 78,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B15",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 88,
+      "name": "ScapulaArmor_L",
+      "mesh": 79,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B17",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 89,
+      "name": "ClavicleFastener_L",
+      "mesh": 80,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "B20",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 90,
+      "name": "RearFastener_L",
+      "mesh": 81,
+      "materials": [
+        "darkMetal"
+      ],
+      "metadata": {
+        "partId": "B22",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 91,
+      "name": "ShoulderLame_L",
+      "mesh": 82,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B24",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 92,
+      "name": "ShoulderJoint_L",
+      "mesh": 83,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B26",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 93,
+      "name": "FlankArmor_L",
+      "mesh": 84,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B29",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 94,
+      "name": "BreastplateCenter",
+      "mesh": 85,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B27",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 95,
+      "name": "BackSpineInsert",
+      "mesh": 86,
+      "materials": [
+        "whiteTextured"
+      ],
+      "metadata": {
+        "partId": "B18",
+        "assembly": "ShoulderStudy"
+      }
+    },
+    {
+      "node": 96,
+      "name": "AbdomenLame_1",
+      "mesh": 87,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B32",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 97,
+      "name": "AbdomenLame_2",
+      "mesh": 88,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B33",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 98,
+      "name": "AbdomenLame_3",
+      "mesh": 89,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B34",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 99,
+      "name": "WaistBelt",
+      "mesh": 90,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B35",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 100,
+      "name": "PelvisCore",
+      "mesh": 91,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B36",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 101,
+      "name": "HipPlate_R",
+      "mesh": 92,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B37",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 102,
+      "name": "UpperArm_R",
+      "mesh": 93,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B39",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 103,
+      "name": "Elbow_R",
+      "mesh": 94,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B41",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 104,
+      "name": "Forearm_R",
+      "mesh": 95,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B43",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 105,
+      "name": "Hand_R",
+      "mesh": 96,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B45",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 106,
+      "name": "HipJoint_R",
+      "mesh": 97,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B47",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 107,
+      "name": "Thigh_R",
+      "mesh": 98,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B49",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 108,
+      "name": "Knee_R",
+      "mesh": 99,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B51",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 109,
+      "name": "KneePad_R",
+      "mesh": 100,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B53",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 110,
+      "name": "Shin_R",
+      "mesh": 101,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B55",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 111,
+      "name": "Foot_R",
+      "mesh": 102,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B57",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 112,
+      "name": "HipPlate_L",
+      "mesh": 103,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B38",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 113,
+      "name": "UpperArm_L",
+      "mesh": 104,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B40",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 114,
+      "name": "Elbow_L",
+      "mesh": 105,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B42",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 115,
+      "name": "Forearm_L",
+      "mesh": 106,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B44",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 116,
+      "name": "Hand_L",
+      "mesh": 107,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B46",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 117,
+      "name": "HipJoint_L",
+      "mesh": 108,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B48",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 118,
+      "name": "Thigh_L",
+      "mesh": 109,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B50",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 119,
+      "name": "Knee_L",
+      "mesh": 110,
+      "materials": [
+        "blackRubber"
+      ],
+      "metadata": {
+        "partId": "B52",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 120,
+      "name": "KneePad_L",
+      "mesh": 111,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B54",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 121,
+      "name": "Shin_L",
+      "mesh": 112,
+      "materials": [
+        "whiteArmor"
+      ],
+      "metadata": {
+        "partId": "B56",
+        "assembly": "FullBodyStudy"
+      }
+    },
+    {
+      "node": 122,
+      "name": "Foot_L",
+      "mesh": 113,
+      "materials": [
+        "darkArmor"
+      ],
+      "metadata": {
+        "partId": "B58",
+        "assembly": "FullBodyStudy"
+      }
+    }
+  ]
+}
