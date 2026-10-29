@@ -1,0 +1,5 @@
+shoulders GLB bytegleich zu 0.7 (assets/helmet-bastion, Pin 3e930f9)
+render_front bytegleich
+render_left bytegleich
+render_back bytegleich
+render_right bytegleich

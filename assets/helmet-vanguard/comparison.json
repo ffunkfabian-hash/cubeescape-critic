@@ -1,0 +1,19 @@
+{
+  "sourceRevision": "833d2872889d2885751a7352568c631729468684",
+  "baseline": "../helmet-bastion/assembled (0.7, Quellenpin 3e930f9)",
+  "unchangedHelmetMeshes": 56,
+  "unchangedUpperBodyMeshes": 31,
+  "newBodyParts": 27,
+  "bodyParts": 58,
+  "meshCount": 114,
+  "labelGroups": 80,
+  "shouldersModeByteIdenticalTo07": true,
+  "sourceDigest": "737390be96812938f33680b7a35d9048cdf9ed31ed97f84df004c933a51f0541",
+  "assembledGlbSha256": "d475bbcb0b18f3cf5fff5188d6b57028b09d2eaa8bfd85ca53d528408a341e2f",
+  "explodedRoundtrip": {
+    "meshes": 114,
+    "positionsIdentical": true,
+    "maximumTransformError": 5.551115123125783e-16,
+    "metadataPreserved": true
+  }
+}
