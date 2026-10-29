@@ -35,8 +35,8 @@ vorhandene Bilder allein können noch aus einem früheren Lauf stammen. `--no-io
 
 ## Körperstudie
 
-**Aktuell 0.6:** `?body=shoulders&headset=off` zeigt kurzen Hals, umschließende Schulterpanzer mit unteren Lamellen,
-breite Brust mit Mittelgrat und Rücken. 26 separate Körperteile; [Cuirass-Aufbau und Reproduktion](../docs/HELM_CUIRASS.md).
+**Aktuell 0.7:** `?body=shoulders&headset=off` zeigt kurzen Hals, kantige Schultergehäuse mit unteren Lamellen,
+zentrale Brust und Flanken. 31 separate Körperteile; [Bastion-Aufbau und Reproduktion](../docs/HELM_BASTION.md).
 22 separate Körpermeshes, parametrisch reproduzierbar. `?headset=off` blendet beide kompletten Kopfhörer samt Bügel,
 Kabeln und Antennen aus; das zentrale Heckmodul bleibt. `?exploded=1&view=assembly` öffnet die beschriftete
 Explosionsübersicht. Alle Optionen auch rechts oben unter **Aufbau und Varianten**; die Teileliste nennt offene Anschlüsse.
@@ -105,6 +105,17 @@ Einheit: Helmhöhe ≈ 1, Ursprung in der Kopfmitte, Y oben, Gesicht +Z, linke H
 | `collar.dip` | Absenkung in der Oberkante des hinteren Rahmens (`[x, Δy]` relativ zur Oberkante) |
 | `collarFront.topZ`, `bottomZ` | schräger vorderer Abschluss des Nackenrahmens unter der Maskenhalterung |
 | `collarPanel` | Größe, Lage und Tiefe der tatsächlich ausgeschnittenen Seitenfelder, des kleinen Felds und der Schlitze |
+
+## Markierbogen (`marker/`)
+
+Änderungswünsche setzt der Nutzer direkt am Modell: Nadel (Klick) oder Stift (auf die Oberfläche zeichnen), Teil und Seite
+werden aus dem getroffenen Mesh erkannt. Ablauf, Felder und Umsetzung: [`docs/MARKER.md`](../docs/MARKER.md).
+
+```sh
+node tools/marker_build.mjs "0.7 Bastion" ../assets/helmet-bastion/assembled/scifi_helmet.glb   # marker/dist/
+node tools/marker_check.mjs                                     # Desktop/Handy, Nadel und Strich, renders/marker_*.png
+node tools/marker_shot.mjs <export>/marker <out>                # je Marker Gesamt- und Nahansicht aus seiner Kamera
+```
 
 ## Über Änderungen sprechen
 

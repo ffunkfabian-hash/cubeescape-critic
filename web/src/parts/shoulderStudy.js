@@ -13,6 +13,8 @@ export const SHOULDER_STUDY_PARTS = Object.freeze({
   B16: 'ScapulaArmor_R', B17: 'ScapulaArmor_L', B18: 'BackSpineInsert',
   B19: 'ClavicleFastener_R', B20: 'ClavicleFastener_L', B21: 'RearFastener_R', B22: 'RearFastener_L',
   B23: 'ShoulderLame_R', B24: 'ShoulderLame_L', B25: 'ShoulderJoint_R', B26: 'ShoulderJoint_L',
+  B27: 'BreastplateCenter', B28: 'FlankArmor_R', B29: 'FlankArmor_L',
+  B30: 'ShoulderRoof_R', B31: 'ShoulderRoof_L',
 });
 
 // Closed custom solids use flat facets and deterministic world-space box UVs.
@@ -43,9 +45,10 @@ function solid(vertices, triangles) {
 }
 
 // Four outline rings create a real back, sidewall and narrow edge chamfers.
-function beveledPlate(points, depth, bevel, map, subdivisions = 0) {
+function beveledPlate(points, depth, bevel, map, subdivisions = 0, relief = null) {
   // Earcut normalizes cap winding; the side loops must use the same orientation.
-  if (THREE.ShapeUtils.isClockWise(points.map(p => new THREE.Vector2(...p)))) points = points.toReversed();
+  const reversed = THREE.ShapeUtils.isClockWise(points.map(p => new THREE.Vector2(...p)));
+  if (reversed) points = points.toReversed();
   const center = points.reduce((sum, p) => [sum[0] + p[0] / points.length, sum[1] + p[1] / points.length], [0, 0]);
   const extent = Math.min(...points.map(p => Math.hypot(p[0] - center[0], p[1] - center[1])));
   const inset = Math.min(bevel / extent, 0.2), edge = Math.min(bevel, depth * 0.3);
@@ -56,7 +59,21 @@ function beveledPlate(points, depth, bevel, map, subdivisions = 0) {
     for (const [u, v] of points) vertices.push([center[0] + (u - center[0]) * scale, center[1] + (v - center[1]) * scale, d]);
   }
   const caps = THREE.ShapeUtils.triangulateShape(points.map(p => new THREE.Vector2(...p)), []);
-  for (const [a, b, c] of caps) triangles.push(a, c, b, 3 * count + a, 3 * count + b, 3 * count + c);
+  for (const [a, b, c] of caps) {
+    if (!relief) triangles.push(a, c, b);
+    triangles.push(3 * count + a, 3 * count + b, 3 * count + c);
+  }
+  if (relief) {
+    // Deliberate interior peaks, not incidental triangulation of a warped perimeter.
+    const extra = vertices.length;
+    for (const [x,y,lift] of relief.vertices) vertices.push([x,y,-lift]);
+    const index = i => i < count ? (reversed ? count-1-i : i) : extra+i-count;
+    for (const face of relief.triangles) {
+      const [a,b,c] = face.map(index), [u,v,w] = [a,b,c].map(i=>vertices[i]);
+      const cross = (v[0]-u[0])*(w[1]-u[1])-(v[1]-u[1])*(w[0]-u[0]);
+      triangles.push(a,cross > 0 ? c : b,cross > 0 ? b : c);
+    }
+  }
   for (let ring = 0; ring < 3; ring++) for (let i = 0; i < count; i++) {
     const j = (i + 1) % count, a = ring * count + i, b = ring * count + j;
     triangles.push(a, b, b + count, a, b + count, a + count);
@@ -176,6 +193,7 @@ export function buildShoulderStudy(M, p = shoulderStudyParams) {
 
   const s = p.shoulder, chest = p.chest;
   const wrap = s.wrap?.enabled ? s.wrap : null;
+  const box = s.box?.enabled ? s.box : null;
   const shoulderX = x => s.innerX + (x - s.innerX) * s.widthScale;
   const shoulderY = (x, z) => {
     const t = THREE.MathUtils.clamp((x - s.innerX) / (s.outerX - s.innerX), 0, 1);
@@ -197,11 +215,23 @@ export function buildShoulderStudy(M, p = shoulderStudyParams) {
       z + lift + (raised ? ridge(x) : 0) - (Math.max(0, -y - 1.02) * chest.recede + chest.sideSweep * x * x + d) * Math.sign(z)]);
   for (const [side, ids] of [[-1, ['B06', 'B07', 'B08', 'B12', 'B14', 'B16', 'B19', 'B21']],
     [1, ['B09', 'B10', 'B11', 'B13', 'B15', 'B17', 'B20', 'B22']]]) {
-    add(ids[0], beveledPlate(s.base, s.baseThickness, s.bevel,
-      (x, z, d) => shoulderSurface(side, x, z, d + (wrap ? s.baseDrop : 0), wrap ? 0 : s.baseDrop), s.curveSubdivisions), M.darkArmor);
-    for (const [index, points] of [[1, s.front], [2, s.rear]]) add(ids[index],
-      beveledPlate(points, s.thickness, s.bevel,
-        (x, z, d) => shoulderSurface(side, x, z, d), s.curveSubdivisions), M.whiteArmor);
+    if (box) {
+      // Three independently closed panels form a deep housing around a recessed support.
+      const support = box.face.map(([x,y]) => [box.pivotX + (x-box.pivotX)*box.supportScale,
+        box.pivotY + (y-box.pivotY)*box.supportScale]);
+      add(ids[0], beveledPlate(support, box.supportDepth, s.bevel,
+        (x,y,d) => [side*x,y,box.supportDepth/2-d]), M.darkArmor);
+      for (const [index,z,sign] of [[1,box.frontZ,1],[2,box.rearZ,-1]]) add(ids[index],
+        beveledPlate(box.face,s.thickness,s.bevel,(x,y,d)=>[side*x,y,z-sign*d]),M.whiteArmor);
+      add(side < 0 ? 'B30' : 'B31',beveledPlate(box.roof,box.frontZ-box.rearZ-2*s.thickness,s.bevel,
+        (x,y,d)=>[side*x,y,box.frontZ-s.thickness-d]),M.whiteArmor);
+    } else {
+      add(ids[0], beveledPlate(s.base, s.baseThickness, s.bevel,
+        (x, z, d) => shoulderSurface(side, x, z, d + (wrap ? s.baseDrop : 0), wrap ? 0 : s.baseDrop), s.curveSubdivisions), M.darkArmor);
+      for (const [index, points] of [[1, s.front], [2, s.rear]]) add(ids[index],
+        beveledPlate(points, s.thickness, s.bevel,
+          (x, z, d) => shoulderSurface(side, x, z, d), s.curveSubdivisions), M.whiteArmor);
+    }
     add(ids[3], panel(chest.white, side, chest.frontZ, chest.depth, 0, true), M.whiteArmor);
     add(ids[4], panel(chest.insert, side, chest.frontZ, 0.043, -0.014), M.darkArmor);
     add(ids[5], panel(chest.back, side, chest.rearZ), M.darkArmor);
@@ -214,14 +244,22 @@ export function buildShoulderStudy(M, p = shoulderStudyParams) {
       add(id, fastener, M.darkMetal);
     }
     if (wrap) {
-      add(side < 0 ? 'B23' : 'B24', beveledPlate(wrap.lame, wrap.lameThickness, s.bevel,
-        (x, z, d) => shoulderSurface(side, x, z, d, wrap.lameDrop, wrap.lameOutset), s.curveSubdivisions), M.whiteArmor);
+      add(side < 0 ? 'B23' : 'B24', box
+        ? beveledPlate(box.lame,wrap.lameThickness,s.bevel,
+          (y,z,d)=>[side*(box.lameX-d-box.lameTaper*Math.max(0,-y-box.lameTaperStart)),y,z])
+        : beveledPlate(wrap.lame, wrap.lameThickness, s.bevel,
+          (x, z, d) => shoulderSurface(side, x, z, d, wrap.lameDrop, wrap.lameOutset), s.curveSubdivisions), M.whiteArmor);
       const joint = new THREE.CylinderGeometry(wrap.jointRadius, wrap.jointRadius * 0.92, wrap.jointHeight, 12);
       joint.scale(1, 1, wrap.jointDepthScale); joint.rotateZ(-side * 0.08);
       joint.translate(side * wrap.jointX, wrap.jointY, 0);
       add(side < 0 ? 'B25' : 'B26', joint, M.blackRubber);
     }
+    if (chest.central) add(side < 0 ? 'B28' : 'B29',
+      beveledPlate(chest.flank,chest.flankThickness,chest.bevel,
+        (y,z,d)=>[side*(chest.flankX-chest.flankTaper*Math.max(0,-y-chest.flankTaperStart)-d),y,z]),M.whiteArmor);
   }
+  if (chest.central) add('B27',beveledPlate(chest.central,chest.depth,chest.bevel,
+    (x,y,d)=>[x*chest.widthScale,y,chest.frontZ+chest.centerLift+chest.centerSlope*(y-chest.centerSlopeOrigin)-d],0,chest.relief),M.whiteArmor);
   add('B18', panel(chest.spine, 1, chest.rearZ, 0.042), M.whiteTextured);
   return root;
 }

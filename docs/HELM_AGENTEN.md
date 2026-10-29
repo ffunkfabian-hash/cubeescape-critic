@@ -2,7 +2,7 @@
 
 ## Status und Bedeutung dieses Dokuments
 
-Stand: 28.10.2026, Version **0.6 „Cuirass“** auf der Form-/Materialbasis 0.4. Dies ist die Beschreibung des erzeugten Modells und der Versuche,
+Stand: 28.10.2026, Version **0.7 „Bastion“** auf der Form-/Materialbasis 0.4. Dies ist die Beschreibung des erzeugten Modells und der Versuche,
 kein eigenständiger Auftrag zur weiteren Änderung. Aktuelle Nutzeranweisungen haben Vorrang.
 
 - **Letzter früherer Lieferexport:** 79 unter `assets/helmet/`, reproduzierbar aus Commit `0a6bda5`.
@@ -11,17 +11,17 @@ kein eigenständiger Auftrag zur weiteren Änderung. Aktuelle Nutzeranweisungen 
 - **Zusätzliche Formproben:** 87/88 ohne Blenden bleiben verfügbar. Die Muster 89–91 wurden anschließend ausdrücklich
   komplett verworfen; Musterfunktion und aktive Musterexporte sind entfernt.
 - **Nutzerwahl:** noch offen. Positive Rückmeldungen bedeuten keine eindeutige Auswahl zwischen den Kombinationen.
-- **Repo:** Versionsbranch `codex/critic-0.6-cuirass` auf `codex/critic-patch-bulkhead`. Kein Merge auf `main`.
-- **Neu:** umschließende Schulterpanzer, separate untere Lamellen und Gelenkkörper, breite Brust mit Mittelgrat,
-  zur Brust geweiteter Kragen. Körperteile B01–B26; kurzer Hals und tiefer Rumpfkern erhalten.
-  [Cuirass: Geometrie, Stil, Referenz, offene Verbindungen](HELM_CUIRASS.md).
+- **Repo:** Versionsbranch `codex/critic-0.7-bastion` auf `codex/critic-0.6-cuirass`. Kein Merge auf `main`.
+- **Neu:** kantige Schultergehäuse aus separaten Front-/Rückplatten und Dächern, untere Lamellen,
+  zentrale Brustmitte B27 und Flanken B28/B29. B01–B31; kurzer Hals, Kragen und Rumpfkern erhalten.
+  [Bastion: Geometrie, Stil, Referenzen, offene Verbindungen](HELM_BASTION.md).
 - **Quelle der Wahrheit:** Generator und Parameter; Exporte und Bilder sind daraus abgeleitete Prüfbelege.
 
-**Aktuell 0.6:** Die Schulterpanzer folgen dem Armansatz nach unten und liegen näher am Rumpf. Die breite
-helle Brust hat einen sichtbaren Mittelgrat; Kragen und dunkle Gelenkzonen gliedern den Übergang zum Helm.
-Gelenke und Plattenaufnahmen sind weiterhin Formstudien. Der erste Render zeigte einen durch die Schale
-ragenden Gelenkkörper; seine Oberkante ist korrigiert und gezielt geprüft. Ausführliche subjektive Bewertung
-und Grenzen: [Cuirass](HELM_CUIRASS.md#visueller-eindruck-des-agenten). Das ist keine bestätigte Nutzerwahl.
+**Aktuell 0.7:** Die Schultern bilden tiefe kantige Gehäuse mit zweiter Panzerlage. Die mittlere Brust
+ist eine durchgehende vorgewölbte Platte mit definierten Facetten; seitliche Segmente und Flanken bilden eigene Teile. Sichtprüfung und Tests
+haben den Flankenabstand korrigiert. Nach Nutzerfeedback erhält die Brust echte Reliefgeometrie und die
+Schultern weichere Kanten. Der Aufbau ist noch nicht
+für Fertigung oder Bewegung konstruiert. [Einschätzung und Grenzen](HELM_BASTION.md#eindruck-und-offene-konstruktion).
 
 Einstiege: [Stil](HELM_STIL.md), [Teilekennungen](HELM_TEILE.md), [Chronologie](HELM_VERLAUF.md),
 [Varianten und Exporte](../assets/helmet-continuity/README.md), [Prüfbericht](versions/0.4.md).
@@ -185,8 +185,8 @@ das ist keine Wiederaufnahme der verworfenen Haubenmuster.
 
 ## Abnahme, Reproduktion und nächste Schritte
 
-0.6: **56 Tests**, davon 43 Node-, fünf IoU- und acht Belegsicherungsprüfungen. Aktuelle Nachweise stehen im
-[Cuirass-Bericht](versions/0.6.md). Die neuen Körperteile werden auf geschlossene Oberflächen, positive Volumina,
+0.7: **59 Tests**, davon 46 Node-, fünf IoU- und acht Belegsicherungsprüfungen. Aktuelle Nachweise stehen im
+[Bastion-Bericht](versions/0.7.md). Die neuen Körperteile werden auf geschlossene Oberflächen, positive Volumina,
 deterministische Erzeugung, sichtbare Platten und die korrigierten Proportionen geprüft.
 
 Historische Basis 0.4: 45 Tests, davon 32 Node-, fünf IoU- und acht Belegsicherungsprüfungen. Build, Projekt-/Dokumentationsprüfung und unabhängige

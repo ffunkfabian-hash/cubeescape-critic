@@ -2,8 +2,9 @@
 
 **Assembly 0.5:** Die bestehenden H01–H21 bleiben stabil. Die Explosionsbeschriftung unterscheidet ergänzend
 Seiten A/B, F01–F03 (bestehende zusammengefasste Schrauben) und P01 (Präsentationshals).
-Die Körperstudie 0.6 erhält **B01–B26**: B23/B24 ergänzen untere Schulterlamellen, B25/B26 dunkle Gelenkkörper;
-[vollständige aktuelle Zuordnung und Anschlüsse](HELM_CUIRASS.md#einzelteile-und-noch-offene-verbindungen).
+Die Körperstudie 0.7 erhält **B01–B31**: B27 ist die neue Brustmitte, B28/B29 die Flanken, B30/B31 die Schulterdächer.
+[Aktueller Aufbau](HELM_BASTION.md). Die Kennungen aus 0.6 bleiben erhalten: B23/B24 ergänzen untere Schulterlamellen, B25/B26 dunkle Gelenkkörper;
+[historische Cuirass-Zuordnung und Anschlüsse](HELM_CUIRASS.md#einzelteile-und-noch-offene-verbindungen).
 B01–B22 aus 0.5 bleiben stabil; [historische Beschreibung](HELM_AUFBAU.md).
 Im Viewer zeigt **Aufbau und Varianten → Bauteile / Anschlüsse** jedes enthaltene Mesh mit eindeutigem Pfad.
 

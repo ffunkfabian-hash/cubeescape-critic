@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.7.1 – 2026-10-29 (Patch: Markierbogen)
+
+- Markierbogen in 3D: Nadeln und Stiftstriche direkt auf Helm und Oberkörper 0.7, Teil (H01–H21, B01–B31) und Seite A/B
+  werden aus dem getroffenen Mesh erkannt; gemeinsamer Speicher im Artefakt, Antworten des Umsetzers am Marker.
+- Werkzeuge zum Bauen, Prüfen und Rendern der Marker aus ihrer Kamera; Ablauf und Bezug zum Kritiker-Vertrag in `docs/MARKER.md`.
+
+## 0.7.0 „Bastion“ – 2026-10-28 (Oberkörperstudie)
+
+- Tiefe kantige Schultergehäuse mit eigenen Dächern und unterer Panzerlage; zentrale Brust und separate Flanken.
+- 31 Körperteile; Helm, kurzer Hals, Kragen, Rumpfkern und vorhandene Materialien erhalten.
+- Neue Nutzerreferenzen und Stil dokumentiert; 59 Tests, reproduzierbare Ansichten, GLBs und Explosionsübersicht.
+
 ## 0.6.0 „Cuirass“ – 2026-10-28 (Oberkörperstudie)
 
 - Umschließende Schulterpanzer mit separaten unteren Lamellen und dunklen Gelenkkörpern; 26 stabile Körperteile.
