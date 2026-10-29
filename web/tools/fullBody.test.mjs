@@ -85,7 +85,7 @@ test('full-body parameters drive only their parts; exploded view keeps every par
     .some((v, i) => v !== m.geometry.attributes.position.array[i])).map(m => m.name).sort();
   assert.deepEqual(changed, ['Shin_L', 'Shin_R'], 'a shin edit changes exactly the two shins');
   assert.ok(Math.abs(box(b, 'Shin_L').min.y - box(a, 'Shin_L').min.y + .1) < 1e-6);
-  assert.throws(() => build({ ...fullBodyParams, waist: { ...fullBodyParams.waist, lamellae: [...fullBodyParams.waist.lamellae, fullBodyParams.waist.lamellae[0]] } }));
+  assert.throws(() => build({ ...fullBodyParams, waist: { ...fullBodyParams.waist, lamellae: [...fullBodyParams.waist.lamellae, fullBodyParams.waist.lamellae[0]] } }), /waist\.lamellae needs \d+ bands/);
   const root = new THREE.Group(); root.name = 'SciFiHelmet'; root.add(a);
   const entries = assemblyInventory(root), exploded = createExplodedAssembly(root, 1);
   assert.equal(exploded.children.length, entries.length);
