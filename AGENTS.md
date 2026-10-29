@@ -16,6 +16,9 @@ Antworten, Doku und Commit-Messages auf Deutsch; Code, Bezeichner und Kommentare
   (`web/src/robotHelmet.js`, Varianten `criticHelmetVariants.json`) im einheitlichen Farbschema (`ballonRoles.json`,
   `robotHelmetColors.json`); Navigation links in `web/src/navigation.js`
   ([docs/ROBOTER_BALLON.md](docs/ROBOTER_BALLON.md)).
+- `web/src/robotgen/` – three.js-Generator der Körper ohne Blender (0.14, bisher Wächter; `?model=waechter&gen=three`): Übertragung der
+  gepinnten Ballon-Quelle, Prüfung gegen den Python-Abzug (`web/tools/robotgen_dump_spec.py`) und den GLB (`robotgen.test.mjs`,
+  `robotgen_compare.mjs`).
 - `docs/HELM_STIL.md` – bestätigte Form-/Materialvorgaben; runde Haube, Augen erhalten, maßgeblich ist das Video.
 - `docs/HELM_AGENTEN.md` – technischer Aufbau, Material-/Akzentvarianten, Prüfumfang, visueller Eindruck und offene Nutzerwahl; vor Helm-Fortsetzungen gezielt lesen.
 - Archiv (in 0.12 aus dem Viewer entfernt, Code in Git): Körperstudien `docs/HELM_AUFBAU.md` (0.5), `HELM_CUIRASS.md` (0.6),

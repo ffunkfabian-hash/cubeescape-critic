@@ -68,6 +68,11 @@ von Helm H auf allen Rollen) kleiden Körper und Helme einheitlich, gealtert wie
 `src/robotHelmetColors.json`); `&colors=original` zeigt jedes Modell in seinen eigenen Materialien. `verify` prüft Helm H standardmäßig
 in Originalfarben; `--colors=body|helmet --no-iou` prüft den Export im Schema.
 
+**three.js-Generator (0.14):** `&gen=three` baut den Wächter mit `src/robotgen/` statt ihn aus dem GLB zu laden (gleiche Szene, Extras
+und Materialien; Paladin, Mechanik und Scout folgen). `node tools/robotgen_compare.mjs [--model=waechter]` rendert beide Fassungen mit
+gleicher Kamera und misst die Umriss-IoU (`renders/robotgen/`, Vergleichsbögen `views.jpg`, `close.jpg`).
+[Aufbau und Messung](../docs/ROBOTER_BALLON.md#threejs-generator-014-foundry).
+
 Die früheren three.js-Körperstudien (`?body=shoulders|full|1`) sind in 0.12 entfernt; Archiv: [Assembly 0.5](../docs/HELM_AUFBAU.md),
 [Cuirass 0.6](../docs/HELM_CUIRASS.md), [Bastion 0.7](../docs/HELM_BASTION.md), [Vanguard 0.9](../docs/HELM_VANGUARD.md).
 `?headset=off` blendet beide Kopfhörer samt Bügel, Kabeln und Antennen aus; `?exploded=1&view=assembly` öffnet die beschriftete

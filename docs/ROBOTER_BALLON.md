@@ -128,10 +128,61 @@ In der GUI wechselt „Körperstudie“ zwischen den drei Modellen. Die Geometri
 **Seiten:** R/L ist die Körperseite des Roboters. Die rechte Seite liegt bei −X und erscheint in der Frontansicht links im Bild.
 Die three.js-Teile A/B und Scout R/L zählen anders.
 
+## three.js-Generator (0.14 „Foundry“)
+
+Nutzerentscheid vom 29.10.2026: three.js ist der Standard, Blender soll ganz raus, auch für die Geometrie. Seit 0.14 baut
+`web/src/robotgen/` den **Wächter** ohne Blender im Browser. Die GLB-Fassung bleibt Standard und Vergleich: `?model=waechter&gen=three`
+lädt den Generator, `&gen=glb` (Standard) den Export. Paladin, Mechanik und Scout folgen in der nächsten Etappe ([Übergabe](uebergabe-0.14-etappe2.md)).
+
+![Wächter: Blender-GLB · three.js · Umrissdifferenz in vier Ansichten](bilder/foundry_vergleich.jpg)
+
+**Aufbau** (Übertragung der gepinnten Ballon-Quelle, Commit `14bd78d`, Datei für Datei):
+
+| Datei | Ballon-Vorbild | Inhalt |
+|---|---|---|
+| `forms.js` | `basic/arms/forms.py` | Superellipsen-Querschnitte `sec`, monotone Hermite-Verdichtung, `loft`, `wrap`, `tube` |
+| `shapes.js`, `body.js` | `basic/robot/shapes.py`, `studies/body.py` | Teile-Bausteine und Formbaukasten aller drei Studien (Kopf, Rumpf, Becken, Beine, Oberarm) |
+| `studyHelmet.js` | `studies/helmet.py` | parametrischer Studienhelm (im Viewer hinter Helm H/Scout verborgen) |
+| `arm.js` | `basic/arms/robot_arm.py`, `basic/robot/arms.py` | Arm v3 mit Hand, vier Fingern und Daumen |
+| `studies.js`, `robot.js` | `studies/a_waechter.py`, `basic/robot/__init__.py` | Skelett, Segmente, Anker, Haltung `idle`, Explosionswege |
+| `bevel.js`, `mesh.js` | `tools/ego_build.py`, `robot_build._piece`, `kit.add_bevel` | Fasen als Geometrie, Fugen (CSG), Spiegeln, Kippen, Normalen |
+| `index.js` | `robot_build.build`, `export_robot.py` | Szene wie der GLB: Segmentwurzeln `SEG_*`/`ARM_*`, Extras, Materialien `MT_<rolle>_color`, Teileindex |
+
+- **Fasen als Geometrie** statt Fasen-Modifikator (Breite je Form wie Ballon, zwei Segmente, Kreisprofil): Lofts bekommen gerundete
+  Übergänge in beide Deckel; Platten (`wrap`) sind gerundete Quader in ihren eigenen Parametern (Winkel längs der Kontur, Querschnitt,
+  Abstand), also mit gerundeten Außen- und Innenkanten, Seitenwänden und Enden; Quader gerundet; konvexe Hüllen über die erodierte Hülle
+  plus Versatz entlang der Flächennormalen und ihrer Winkelhalbierenden; Zylinder mit gerundeten Rändern.
+- **Normalen wie der GLB:** Knickwinkel je Form (`sharp`, Lofts mindestens 44°, weil Blender Kanten zwischen 30° und 60° mit zwei
+  Segmenten fast und die Normalen dort in Schritten unter 30° drehen), gleichmäßig gewichtet wie Blenders Weighted-Normal bei Gewicht 50;
+  Zylinder mit flachen Deckeln und Mantel, Fasenreihen 22,5°/45°/67,5°. Materialien doppelseitig wie im Export.
+- **Fugen** (`cuts`) per three-bvh-csg; danach werden volumenlose Flächenpaare der Schnittreste entfernt (`dropSheets`) und
+  T-Kreuzungen geschlossen (`closeTJunctions`), sonst liest der Abrieb-Shader die Schnittkanten als offene Ränder. Jedes Mesh ist danach
+  geschlossen und einheitlich orientiert (Test).
+- Aufbau des ganzen Wächters ≈ 0,8–1,5 s (Node bzw. Headless-Browser), 408 Meshes, 377 735 Dreiecke (GLB 395 342).
+
+**Messung gegen den Blender-GLB** (`npm --prefix web test` › `robotgen.test.mjs`, `node web/tools/robotgen_compare.mjs`):
+
+| Prüfung | Ergebnis |
+|---|---|
+| Teileliste (294 Definitionen, alle Parameter), Segmente, Schulteranker gegen den Python-Abzug aus Ballon | identisch (Toleranz 10⁻⁶) |
+| 45 Segmentmatrizen gegen die GLB-Knoten | max. 5·10⁻⁷ |
+| Box je Objekt (408) gegen `manifest.json` | Median 0,05 mm, p90 0,29 mm, max. 0,65 mm (`solar`) |
+| Teileindex gegen `parts.json` | identisch |
+| Umriss-IoU vorn / links / hinten / rechts (gleicher Viewer, gleiche Kamera, Studienhelm) | 0,9992 / 0,9988 / 0,9995 / 0,9989 |
+| Abriebkanten gesamt (Rumpf, Becken, Beine) | 385 m gegen 341 m im GLB |
+
+![Nahvergleich mit gleicher Kamera: Brust gealtert, Kopf, Hüfte und Bein gealtert, Hand](bilder/foundry_nah.jpg)
+
+![Explosion: Blender-GLB · three.js](bilder/foundry_explosion.jpg)
+
+**Bekannte Abweichungen:** Fugenkanten (CSG) werden nicht nachträglich gefast; an einigen Plattenrändern (Brust, Kniekappen) verteilt
+sich der Rauschabrieb etwas anders als im GLB, weil die Fasenstreifen der Platten anders trianguliert sind; Blenders Bevel mit
+Winkelgrenze 30° auf Innenkanten (gefaste Querschnitte) wird nur über die Normalen nachgebildet, nicht als zusätzliche Fasenfläche.
+
 ## Grenzen und nächste Schritte
 
-- Die Studien bleiben Entwürfe aus Ballon; Änderungen an der Form gehören dort in `basic/robot/studies/` und kommen per neuem
-  Export und neuem Pin hierher.
+- Die Studien bleiben Entwürfe aus Ballon. Bis Paladin, Mechanik und Scout ebenfalls in three.js stehen und der Nutzer dem Entfernen
+  von Blender zustimmt, kommen Formänderungen weiter per neuem Export und neuem Pin hierher; danach ist `web/src/robotgen/` die Quelle.
 - Ohne Waffe und ohne Haltung `ready`: Die Pilotwaffe gehört zu Ballon und ist nicht exportiert.
 - Die GLBs selbst bleiben flach; gealtert wird erst im Viewer (siehe oben). Andere Programme sehen nur die Gestaltungsfarben.
 - Für die Körper gibt es keine Vorlagenbilder und keine IoU-Messung; der Vergleich mit den Ballon-Cycles-Bildern (`~/Library/Caches/CubeEscapeBallon/out/robot/studies/`) ist eine Sichtprüfung.

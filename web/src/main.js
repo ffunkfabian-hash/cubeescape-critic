@@ -32,12 +32,13 @@ if (!['on', 'off'].includes(strips)) throw new Error(`Unknown strips ${JSON.stri
 D.foreheadPlates.enabled = strips === 'on';
 if (query.get('ui') === '0') document.body.classList.add('noui');
 // ?model=scout: the Blender-built Scout v3 (blender/scout) as GLB instead of the three.js helmet; geometry GUI is off.
-// ?model=waechter|paladin|mechanik: one of the three robot bodies (blender/robot) as GLB in its own frame (ROBOT_FRAME).
+// ?model=waechter|paladin|mechanik: one of the three robot bodies (blender/robot) as GLB in its own frame (ROBOT_FRAME);
+// &gen=three builds the body with the three.js generator instead (web/src/robotgen, bodies in GENERATED).
 const modelName = query.get('model') ?? 'critic';
 const MODEL_NAMES = ['critic', 'scout', ...Object.keys(ROBOT_MODELS)];
 if (!MODEL_NAMES.includes(modelName)) throw new Error(`Unknown model ${JSON.stringify(modelName)}; expected ${MODEL_NAMES.join(', ')}`);
 const scoutModels = modelName === 'scout' ? { assembled: await loadScout(false), exploded: await loadScout(true) } : null;
-const robotModel = ROBOT_MODELS[modelName] ? await loadRobot(modelName) : null;
+const robotModel = ROBOT_MODELS[modelName] ? await loadRobot(modelName, { gen: query.get('gen') ?? 'glb' }) : null;
 // &wear=on|off: aged material of the colour scheme (robotWear.js) or its flat colours.
 const robotLook = { wear: query.get('wear') ?? 'on' };
 if (!['on', 'off'].includes(robotLook.wear)) throw new Error(`Unknown wear ${JSON.stringify(robotLook.wear)}; expected on or off`);

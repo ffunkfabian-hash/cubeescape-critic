@@ -32,10 +32,16 @@ export function explodeOffset(mm, side, amount) {
   return new THREE.Vector3(x, mm[2] * 0.001 * amount, -mm[1] * 0.001 * amount);
 }
 
-export async function loadRobot(name) {
+// gen: 'glb' (Blender export of Ballon) or 'three' (three.js generator web/src/robotgen, 0.14; bodies in GENERATED).
+export const GENERATED = ['waechter'];
+const generate = name => import('./robotgen/index.js').then(m => { const { scene, parts } = m.buildRobotBody(name); return [scene, parts]; });
+
+export async function loadRobot(name, { gen = 'glb' } = {}) {
   const entry = ROBOT_MODELS[name];
   if (!entry) throw new Error(`Unknown robot ${JSON.stringify(name)}; expected ${Object.keys(ROBOT_MODELS).join(', ')}`);
-  const [source, parts] = await Promise.all([load(entry.url), entry.parts().then(m => m.default)]);
+  if (!['glb', 'three'].includes(gen)) throw new Error(`Unknown gen ${JSON.stringify(gen)}; expected glb or three`);
+  if (gen === 'three' && !GENERATED.includes(name)) throw new Error(`No three.js generator for ${name} yet; available: ${GENERATED.join(', ')}`);
+  const [source, parts] = gen === 'three' ? await generate(name) : await Promise.all([load(entry.url), entry.parts().then(m => m.default)]);
   const inner = source.clone(true);
   const box = new THREE.Box3().setFromObject(source);
   const size = box.getSize(new THREE.Vector3()), mid = box.getCenter(new THREE.Vector3());
@@ -49,7 +55,7 @@ export async function loadRobot(name) {
   inner.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
   const model = new THREE.Group();
   model.name = `robot_${name}`;
-  model.userData = { robot: name, study: parts.study, parts, roleMaterials };
+  model.userData = { robot: name, study: parts.study, parts, roleMaterials, gen };
   model.add(inner);
   return model;
 }
