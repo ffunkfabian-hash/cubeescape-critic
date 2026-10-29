@@ -20,6 +20,7 @@ import { configureHelmetAssembly, createExplodedAssembly, assemblyDescription } 
 import { resolveAssemblyOptions } from './assemblyOptions.js';
 import { createAssemblyLabels } from './assemblyLabels.js';
 import { D, resetParams } from './params.js';
+import { loadScout, scoutParts, SCOUT_FRAME } from './scout.js';
 
 const query = new URLSearchParams(location.search);
 const materialFinish = resolveFinish(query.get('finish') ?? 'original');
@@ -28,12 +29,17 @@ const strips = query.get('strips') ?? 'on';
 if (!['on', 'off'].includes(strips)) throw new Error(`Unknown strips ${JSON.stringify(strips)}; expected on or off`);
 D.foreheadPlates.enabled = strips === 'on';
 if (query.get('ui') === '0') document.body.classList.add('noui');
+// ?model=scout: the Blender-built Scout v3 (blender/scout) as GLB instead of the three.js helmet; geometry GUI is off.
+const modelName = query.get('model') ?? 'critic';
+if (!['critic', 'scout'].includes(modelName)) throw new Error(`Unknown model ${JSON.stringify(modelName)}; expected critic or scout`);
+const scoutModels = modelName === 'scout' ? { assembled: await loadScout(false), exploded: await loadScout(true) } : null;
 
 const BG = 0x8c8c8c;
 // ?static=1: no animation loop, frames only via window.renderFrame() (headless checks with software GL).
 const STATIC = query.get('static') === '1';
 const presentationOptions = resolveAssemblyOptions({ headset: query.get('headset') ?? 'on', body: query.get('body') ?? 'none', exploded: query.get('exploded') ?? '0' });
 const annotation = createAssemblyLabels();
+if (scoutModels) document.querySelector('#assembly-labels .assembly-footnote').textContent = 'S01–S13 = Scout-Teile · R/L = Seite (R = rechts in der Frontansicht) · Abstände nur zur Darstellung';
 let assemblyParts = [];
 const showLabels = query.get('labels') !== '0';
 const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: STATIC });
@@ -109,7 +115,8 @@ function setCameraView(name) {
   const v = { ...VIEWS[name] };
   if (!VIEWS[name]) throw new Error(`unknown view ${name}`);
   setTurntable(false);
-  if (presentationOptions.exploded > 0) {
+  if (scoutModels && presentationOptions.exploded > 0) { target.set(...SCOUT_FRAME.explodedTarget); v.dist = SCOUT_FRAME.explodedDist; }
+  else if (presentationOptions.exploded > 0) {
     const withShoulders = presentationOptions.body === 'shoulders', full = presentationOptions.body === 'full';
     target.set(0, full ? fullBodyParams.camera.explodedTarget : withShoulders ? -.55 : .05, 0);
     v.dist = full ? fullBodyParams.camera.explodedDist : withShoulders ? 9.8 : name === 'assembly' ? 7.8 : 8.8;
@@ -216,9 +223,18 @@ function rebuild() {
   const rot = model ? model.rotation.y : 0;
   if (model) {
     scene.remove(model);
-    disposeModel(model);
+    if (!scoutModels) disposeModel(model);
   }
   const t0 = performance.now();
+  if (scoutModels) {
+    model = presentationOptions.exploded > 0 ? scoutModels.exploded : scoutModels.assembled;
+    assemblyParts = presentationOptions.exploded > 0 ? scoutParts(model) : [];
+    annotation.setGroups(assemblyParts);
+    model.rotation.y = rot;
+    scene.add(model);
+    window.assemblyParts = assemblyParts;
+    return;
+  }
   model = buildHelmet(M);
   configureHelmetAssembly(model, presentationOptions);
   if (presentationOptions.body === 'legacy') model.add(buildBodyStudy(M));
@@ -239,7 +255,7 @@ async function exportGLB() {
   const glb = await new GLTFExporter().parseAsync(model, { binary: true });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([glb], { type: 'model/gltf-binary' }));
-  a.download = presentationOptions.exploded > 0 ? 'scifi_helmet_exploded.glb' : presentationOptions.body === 'shoulders' ? 'scifi_shoulder_study.glb' : presentationOptions.body === 'full' ? 'scifi_full_body.glb' : presentationOptions.body === 'legacy' ? 'scifi_body_study.glb' : 'scifi_helmet.glb';
+  a.download = scoutModels ? (presentationOptions.exploded > 0 ? 'scout_exploded.glb' : 'scout.glb') : presentationOptions.exploded > 0 ? 'scifi_helmet_exploded.glb' : presentationOptions.body === 'shoulders' ? 'scifi_shoulder_study.glb' : presentationOptions.body === 'full' ? 'scifi_full_body.glb' : presentationOptions.body === 'legacy' ? 'scifi_body_study.glb' : 'scifi_helmet.glb';
   a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }
@@ -252,6 +268,18 @@ function buildGui() {
   const re = () => rebuild();
   const assembly = gui.addFolder('Aufbau und Varianten');
   const changeAssembly = () => { rebuild(); setCameraView(presentationOptions.exploded > 0 ? 'assembly' : 'front'); };
+  if (scoutModels) {
+    // Scout comes from the Blender generator: only the presentation can change here, not the geometry.
+    gui.title('Scout v3 (Blender)');
+    assembly.add(presentationOptions, 'exploded', { montiert: 0, explodiert: 1 }).name('Ansicht').onFinishChange(changeAssembly);
+    assembly.add({ parts:()=>annotation.togglePanel() }, 'parts').name('Bauteile S01–S13');
+    const look = gui.addFolder('Look');
+    look.add(bloom, 'strength', 0, 2, 0.01).name('Bloom');
+    look.add(gtao, 'blendIntensity', 0, 1, 0.01).name('AO');
+    look.add(renderer, 'toneMappingExposure', 0.4, 2, 0.01).name('Belichtung');
+    gui.add({ exportGLB }, 'exportGLB').name('scout.glb');
+    return;
+  }
   assembly.add(presentationOptions, 'headset', { sichtbar:'on', ausgeblendet:'off' }).name('Kopfhörer + Band').onFinishChange(changeAssembly);
   assembly.add(presentationOptions, 'body', { 'nur Helm':'none', 'Schultern + Hals':'shoulders', 'Gesamtkörper':'full', 'alte Körperstudie':'legacy' }).name('Körper').onFinishChange(changeAssembly);
   assembly.add(presentationOptions, 'exploded', 0, 1, .05).name('Explosionsabstand').onFinishChange(changeAssembly);
