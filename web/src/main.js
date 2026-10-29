@@ -22,6 +22,7 @@ import { createAssemblyLabels } from './assemblyLabels.js';
 import { D, resetParams } from './params.js';
 import { loadScout, scoutParts, SCOUT_FRAME } from './scout.js';
 import { ROBOT_MODELS, loadRobot, setRobotExplosion, robotParts } from './robotBodies.js';
+import { setRobotWear } from './robotWear.js';
 
 const query = new URLSearchParams(location.search);
 const materialFinish = resolveFinish(query.get('finish') ?? 'original');
@@ -37,6 +38,9 @@ const MODEL_NAMES = ['critic', 'scout', ...Object.keys(ROBOT_MODELS)];
 if (!MODEL_NAMES.includes(modelName)) throw new Error(`Unknown model ${JSON.stringify(modelName)}; expected ${MODEL_NAMES.join(', ')}`);
 const scoutModels = modelName === 'scout' ? { assembled: await loadScout(false), exploded: await loadScout(true) } : null;
 const robotModel = ROBOT_MODELS[modelName] ? await loadRobot(modelName) : null;
+// &wear=on|off (robots only): aged Ballon material (robotWear.js) or the flat GLB colours.
+const robotLook = { wear: query.get('wear') ?? 'on' };
+if (!['on', 'off'].includes(robotLook.wear)) throw new Error(`Unknown wear ${JSON.stringify(robotLook.wear)}; expected on or off`);
 
 const BG = 0x8c8c8c;
 // ?static=1: no animation loop, frames only via window.renderFrame() (headless checks with software GL).
@@ -247,6 +251,7 @@ function rebuild() {
   }
   if (robotModel) {
     model = robotModel;
+    setRobotWear(model, robotLook.wear === 'on');
     setRobotExplosion(model, presentationOptions.exploded);
     assemblyParts = presentationOptions.exploded > 0 ? robotParts(model) : [];
     annotation.setGroups(assemblyParts);
@@ -272,7 +277,10 @@ function rebuild() {
 }
 
 async function exportGLB() {
-  const glb = await new GLTFExporter().parseAsync(model, { binary: true });
+  // Robots export the flat GLB geometry and materials: the aged look is a viewer shader (non-indexed copies, custom attributes).
+  const aged = robotModel && robotLook.wear === 'on';
+  if (aged) setRobotWear(model, false);
+  const glb = await new GLTFExporter().parseAsync(model, { binary: true }).finally(() => { if (aged) setRobotWear(model, true); });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([glb], { type: 'model/gltf-binary' }));
   a.download = robotModel ? `${model.name}.glb` : scoutModels ? (presentationOptions.exploded > 0 ? 'scout_exploded.glb' : 'scout.glb') : presentationOptions.exploded > 0 ? 'scifi_helmet_exploded.glb' : presentationOptions.body === 'shoulders' ? 'scifi_shoulder_study.glb' : presentationOptions.body === 'full' ? 'scifi_full_body.glb' : presentationOptions.body === 'legacy' ? 'scifi_body_study.glb' : 'scifi_helmet.glb';
@@ -309,6 +317,7 @@ function buildGui() {
     assembly.add(presentationOptions, 'exploded', 0, 1, .05).name('Explosionsabstand').onFinishChange(changeAssembly);
     assembly.add({ parts:()=>annotation.togglePanel() }, 'parts').name('Baugruppen');
     const look = gui.addFolder('Look');
+    look.add(robotLook, 'wear', { gealtert: 'on', flach: 'off' }).name('Material').onFinishChange(() => rebuild());
     look.add(bloom, 'strength', 0, 2, 0.01).name('Bloom');
     look.add(gtao, 'blendIntensity', 0, 1, 0.01).name('AO');
     look.add(renderer, 'toneMappingExposure', 0.4, 2, 0.01).name('Belichtung');
@@ -390,4 +399,4 @@ if (STATIC) {
   });
 }
 
-Object.assign(window, { THREE, scene, camera, controls, renderFrame, setCameraView, toggleOverlay, setMaskMode, exportGLB, rebuild, fullBodyParams, helmetParams: D, materialFinish, materialAccents, presentationOptions, assemblyParts, shoulderStudyParams });
+Object.assign(window, { robotLook, THREE, scene, camera, controls, renderFrame, setCameraView, toggleOverlay, setMaskMode, exportGLB, rebuild, fullBodyParams, helmetParams: D, materialFinish, materialAccents, presentationOptions, assemblyParts, shoulderStudyParams });
