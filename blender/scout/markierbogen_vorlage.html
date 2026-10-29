@@ -1,0 +1,321 @@
+<title>Scout Markierbogen __STAND__</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Semi+Condensed:wght@500;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: Prüfbogen – links die Ansicht mit Markern (Werkbank), rechts Erfassung und Liste (Protokoll) */
+:root{
+  --grund:#e9ecee;      /* kühles Werkstattgrau */
+  --blatt:#f8f9fa;      /* Bogen */
+  --tinte:#1d2226;      /* Graphit der Haube */
+  --leise:#5d666d;
+  --linie:#c9d0d5;
+  --visier:#1f7f7c;     /* Visierglas, Akzent */
+  --signal:#d2462c;     /* Marker */
+  --ok:#3c7d45;
+  --display:"Saira Semi Condensed","Arial Narrow",sans-serif;
+  --text:"Barlow","Helvetica Neue",Arial,sans-serif;
+  --daten:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --grund:#121518;--blatt:#1a1e22;--tinte:#e6e9eb;--leise:#9aa3aa;--linie:#2f363c;--visier:#4fb3ae;--signal:#ef6a4c;--ok:#6fb479;color-scheme:dark}}
+:root[data-theme="dark"]{--grund:#121518;--blatt:#1a1e22;--tinte:#e6e9eb;--leise:#9aa3aa;--linie:#2f363c;--visier:#4fb3ae;--signal:#ef6a4c;--ok:#6fb479;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--grund);color:var(--tinte);font:15px/1.5 var(--text);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 40px}
+.kopf{max-width:1240px;margin:0 auto 14px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px}
+.kopf h1{font:700 26px/1.1 var(--display);letter-spacing:.01em;margin:0;text-wrap:balance}
+.kopf .meta{font:500 12px var(--daten);color:var(--leise);letter-spacing:.04em;text-transform:uppercase}
+.kopf p{flex-basis:100%;margin:0;color:var(--leise);max-width:68ch}
+main{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:20px;align-items:start}
+@media (max-width:900px){main{grid-template-columns:1fr}}
+.werkbank{background:var(--blatt);border:1px solid var(--linie);border-radius:6px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.reiter{display:flex;flex-wrap:wrap;gap:6px}
+.reiter button{font:600 13px var(--display);letter-spacing:.06em;text-transform:uppercase;padding:7px 12px;border:1px solid var(--linie);
+  background:transparent;color:var(--leise);border-radius:4px;cursor:pointer}
+.reiter button[aria-pressed="true"]{background:var(--tinte);color:var(--blatt);border-color:var(--tinte)}
+.reiter button .zahl{font:500 11px var(--daten);margin-left:6px;opacity:.8}
+.buehne{position:relative;width:100%;max-width:760px;aspect-ratio:1/1;margin:0 auto;cursor:crosshair;user-select:none;touch-action:manipulation}
+.buehne img{width:100%;height:100%;display:block;border-radius:3px;max-width:100%}
+.pin{position:absolute;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:var(--signal);color:#fff;
+  font:600 12px/26px var(--daten);text-align:center;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35);cursor:pointer;padding:0}
+.pin.entwurf{background:transparent;color:var(--signal);border:2px dashed var(--signal);box-shadow:none;background:rgba(255,255,255,.55)}
+.pin.erledigt{background:var(--ok)}
+.pin.aktiv{outline:3px solid var(--visier);outline-offset:2px}
+.hover{position:absolute;pointer-events:none;font:500 12px var(--daten);background:var(--tinte);color:var(--blatt);padding:3px 7px;border-radius:3px;
+  transform:translate(12px,12px);white-space:nowrap}
+.fuss{font:500 12px var(--daten);color:var(--leise);display:flex;flex-wrap:wrap;gap:4px 16px}
+aside{display:flex;flex-direction:column;gap:16px}
+.feld{background:var(--blatt);border:1px solid var(--linie);border-radius:6px;padding:14px;display:flex;flex-direction:column;gap:12px}
+.feld h2{font:700 15px var(--display);letter-spacing:.08em;text-transform:uppercase;margin:0;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.feld h2 small{font:500 12px var(--daten);letter-spacing:0;text-transform:none;color:var(--leise)}
+label.k{font:600 11px var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--leise);display:block;margin-bottom:4px}
+select,input[type=number],textarea{width:100%;font:15px var(--text);color:var(--tinte);background:var(--grund);border:1px solid var(--linie);border-radius:4px;padding:7px 9px}
+textarea{min-height:70px;resize:vertical}
+.zeile{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{font:500 13px var(--text);padding:5px 10px;border-radius:999px;border:1px solid var(--linie);background:transparent;color:var(--tinte);cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--visier);border-color:var(--visier);color:#fff}
+.satz{font:500 13px var(--daten);background:var(--grund);border-left:3px solid var(--signal);padding:8px 10px;border-radius:0 4px 4px 0;word-break:break-word}
+.knoepfe{display:flex;gap:8px;flex-wrap:wrap}
+.knopf{font:600 14px var(--display);letter-spacing:.06em;text-transform:uppercase;padding:9px 14px;border-radius:4px;border:1px solid var(--tinte);background:var(--tinte);color:var(--blatt);cursor:pointer}
+.knopf.leise{background:transparent;color:var(--tinte);border-color:var(--linie)}
+.knopf:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--visier);outline-offset:2px}
+.leer{color:var(--leise);font-size:14px;margin:0}
+ol.liste{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+ol.liste li{display:grid;grid-template-columns:30px 1fr auto;gap:8px;align-items:start;padding:8px;border:1px solid var(--linie);border-radius:4px;cursor:pointer}
+ol.liste li.aktiv{border-color:var(--visier)}
+.nr{font:600 13px/26px var(--daten);width:26px;height:26px;border-radius:50%;background:var(--signal);color:#fff;text-align:center}
+.nr.erledigt{background:var(--ok)}
+.inhalt{min-width:0;font-size:14px}
+.inhalt .wo{font:500 11px var(--daten);color:var(--leise);text-transform:uppercase;letter-spacing:.04em}
+.inhalt .antwort{margin-top:4px;font-size:13px;color:var(--ok)}
+.status{font:600 11px var(--display);letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:999px;border:1px solid currentColor;color:var(--signal);white-space:nowrap}
+.status.erledigt{color:var(--ok)}
+.weg{background:none;border:0;color:var(--leise);font:500 12px var(--text);cursor:pointer;padding:2px 0;text-decoration:underline}
+.hinweis{font-size:13px;color:var(--leise);margin:0}
+@media (prefers-reduced-motion:no-preference){.pin{transition:transform .12s}.pin:hover{transform:translate(-50%,-50%) scale(1.12)}}
+</style>
+
+<header class="kopf">
+  <h1>Scout Markierbogen __STAND__</h1>
+  <span class="meta">Helm Scout v3 · Stand __STAND__ · Helmhöhe 30 cm</span>
+  <p>In die Ansicht klicken, um einen Marker zu setzen. Teil, Seite und Höhe werden aus der Stelle vorgeschlagen; Stelle, Richtung und Betrag ergänzen, speichern. Claude liest die gespeicherten Marker direkt.</p>
+</header>
+
+<main>
+  <section class="werkbank" aria-label="Ansicht">
+    <div class="reiter" role="group" aria-label="Ansicht wählen" id="reiter"></div>
+    <div class="buehne" id="buehne">
+      <img id="bild" alt="Helm-Ansicht mit Teilekennungen und Höhenlinien">
+      <div class="hover" id="hover" hidden></div>
+    </div>
+    <div class="fuss"><span id="fussTeil">Zeiger über das Bild führen</span><span id="fussHoehe"></span></div>
+  </section>
+
+  <aside>
+    <section class="feld" id="formular" aria-label="Marker bearbeiten">
+      <h2>Marker <small id="formNr">kein Marker gewählt</small></h2>
+      <p class="hinweis" id="formLeer">Klick in die Ansicht setzt einen neuen Marker.</p>
+      <div id="formInhalt" hidden>
+        <div class="zeile">
+          <div><label class="k" for="teil">Teil</label><select id="teil"></select></div>
+          <div><label class="k" for="seite">Seite</label>
+            <select id="seite"><option value="">–</option><option>R</option><option>L</option><option value="beide">beide</option></select></div>
+        </div>
+        <div style="margin-top:12px"><label class="k" for="stelle">Stelle am Teil</label>
+          <select id="stelle">
+            <option value="">–</option><option>Oberkante</option><option>Unterkante</option><option>Vorderkante</option><option>Hinterkante</option>
+            <option>Ecke</option><option>Fläche außen</option><option>Boden</option><option>Fuge / Spalt</option><option>Übergang zum Nachbarteil</option><option>ganzes Teil</option>
+          </select></div>
+        <div style="margin-top:12px"><span class="k" id="richtungLabel">Richtung (aus Sicht des Trägers)</span>
+          <div class="chips" id="richtung" role="group" aria-labelledby="richtungLabel"></div></div>
+        <div class="zeile" style="margin-top:12px">
+          <div><label class="k" for="betrag">Betrag</label>
+            <select id="betrag"><option value="">–</option><option>ein wenig</option><option>deutlich</option><option>bündig mit Nachbarteil</option><option>in cm</option></select></div>
+          <div><label class="k" for="cm">cm</label><input type="number" id="cm" step="0.5" min="0" placeholder="z. B. 1" disabled></div>
+        </div>
+        <div style="margin-top:12px"><label class="k" for="notiz">Notiz</label>
+          <textarea id="notiz" placeholder="z. B. Lücke zur Haube schließen"></textarea></div>
+        <div class="satz" id="satz" style="margin-top:12px"></div>
+        <div class="knoepfe" style="margin-top:12px">
+          <button class="knopf" id="speichern">Marker speichern</button>
+          <button class="knopf leise" id="verwerfen">Verwerfen</button>
+        </div>
+        <p class="hinweis" id="meldung" style="margin-top:8px"></p>
+      </div>
+    </section>
+
+    <section class="feld" aria-label="Gespeicherte Marker">
+      <h2>Protokoll <small id="zaehler"></small></h2>
+      <p class="leer" id="listeLeer">Noch keine Marker. Der erste Klick in eine Ansicht legt Marker 1 an.</p>
+      <ol class="liste" id="liste"></ol>
+      <p class="hinweis" id="dbHinweis">Verbinde mit dem Speicher …</p>
+    </section>
+  </aside>
+</main>
+
+<script>
+const DATEN = __DATEN__;
+const ANSICHTEN = [["vorn","Vorn"],["seite","Seite R"],["dreiviertel","Dreiviertel"],["hinten","Hinten"]];
+const TEILE = [["S01","Haube (Guss)"],["S02","Augen"],["S03","Gelenkscheibe"],["S04","Krempe"],["S05","Mundvertiefung"],["S06","Kinnblock"],
+  ["S07","Kieferstück / Seitenplatte"],["S08","Seitenschale (Kern)"],["S09","Kragen"],["S10","Funkmuschel"],["S11","Antenne"],["S12","Rückmodul"],["S13","Spiralkabel"],["?","unklar"]];
+const RICHTUNGEN = ["vorn","hinten","oben","unten","außen","innen","schmaler","breiter","höher","flacher","runder","kantiger","schließen","entfernen","hinzufügen"];
+const HOEHE_CM = 30;
+
+let ansicht = "vorn", marker = [], entwurf = null, aktivId = null, db = null, sammlung = null;
+const $ = (id) => document.getElementById(id);
+
+// Teil unter einem Bildpunkt aus dem eingebetteten Raster
+function teilAn(u, v) {
+  const g = DATEN.ansichten[ansicht].raster, N = DATEN.N;
+  const i = Math.min(N - 1, Math.max(0, Math.floor(u * N))), j = Math.min(N - 1, Math.max(0, Math.floor(v * N)));
+  const c = g[j][i]; const k = parseInt(c, 36);
+  return k ? DATEN.labels[k - 1] : null;      // z. B. "S07 Kieferstück R"
+}
+function hoeheAn(v) {   // v von oben (Bild) → cm über Unterkante
+  const k = DATEN.ansichten[ansicht].kalib, vc = 1 - v;
+  return Math.round(HOEHE_CM * (vc - k.v0) / (k.v1 - k.v0) * 2) / 2;
+}
+function zerlegeLabel(lab) {
+  if (!lab) return {teil: "?", seite: ""};
+  const p = lab.split(" "); const s = p[p.length - 1];
+  return {teil: p[0], seite: (s === "R" || s === "L") ? s : ""};
+}
+function satzVon(m) {
+  const t = TEILE.find(x => x[0] === m.teil);
+  const teil = m.teil === "?" ? "Teil unklar" : `${m.teil}${t ? " " + t[1] : ""}`;
+  const teile = [teil + (m.seite ? " " + m.seite : "")];
+  if (m.stelle) teile.push(m.stelle);
+  if (m.richtung && m.richtung.length) teile.push(m.richtung.join(", "));
+  if (m.betrag) teile.push(m.betrag === "in cm" ? (m.cm ? `${m.cm} cm` : "Betrag offen") : m.betrag);
+  let s = teile.join(" · ");
+  if (m.notiz) s += ` – ${m.notiz}`;
+  return s;
+}
+
+// Reiter
+function zeichneReiter() {
+  const r = $("reiter"); r.textContent = "";
+  for (const [k, name] of ANSICHTEN) {
+    const b = document.createElement("button"); b.type = "button"; b.id = "reiter-" + k;
+    b.setAttribute("aria-pressed", String(k === ansicht));
+    const n = marker.filter(m => m.ansicht === k).length;
+    b.textContent = name; if (n) { const z = document.createElement("span"); z.className = "zahl"; z.textContent = n; b.append(z); }
+    b.onclick = () => { ansicht = k; zeichneAlles(); };
+    r.append(b);
+  }
+}
+function zeichneBild() {
+  $("bild").src = DATEN.ansichten[ansicht].bild;
+  for (const p of document.querySelectorAll(".pin")) p.remove();
+  const buehne = $("buehne");
+  for (const m of marker.filter(m => m.ansicht === ansicht)) {
+    const p = document.createElement("button"); p.type = "button";
+    p.className = "pin" + (m.status === "umgesetzt" ? " erledigt" : "") + (m.id === aktivId ? " aktiv" : "");
+    p.style.left = (m.u * 100) + "%"; p.style.top = (m.v * 100) + "%"; p.textContent = m.nr;
+    p.title = satzVon(m); p.setAttribute("aria-label", `Marker ${m.nr}: ${satzVon(m)}`);
+    p.onclick = (e) => { e.stopPropagation(); waehle(m.id); };
+    buehne.append(p);
+  }
+  if (entwurf && entwurf.ansicht === ansicht) {
+    const p = document.createElement("div"); p.className = "pin entwurf aktiv";
+    p.style.left = (entwurf.u * 100) + "%"; p.style.top = (entwurf.v * 100) + "%"; p.textContent = entwurf.nr;
+    buehne.append(p);
+  }
+}
+function zeichneListe() {
+  const l = $("liste"); l.textContent = "";
+  $("listeLeer").hidden = marker.length > 0;
+  const offen = marker.filter(m => m.status !== "umgesetzt").length;
+  $("zaehler").textContent = marker.length ? `${offen} offen · ${marker.length - offen} umgesetzt` : "";
+  for (const m of marker) {
+    const li = document.createElement("li"); if (m.id === aktivId) li.className = "aktiv";
+    const nr = document.createElement("span"); nr.className = "nr" + (m.status === "umgesetzt" ? " erledigt" : ""); nr.textContent = m.nr;
+    const inh = document.createElement("div"); inh.className = "inhalt";
+    const wo = document.createElement("div"); wo.className = "wo";
+    wo.textContent = `${(ANSICHTEN.find(a => a[0] === m.ansicht) || [0, m.ansicht])[1]} · ${m.hoehe_cm} cm`;
+    const s = document.createElement("div"); s.textContent = satzVon(m);
+    inh.append(wo, s);
+    if (m.antwort) { const a = document.createElement("div"); a.className = "antwort"; a.textContent = "Claude: " + m.antwort; inh.append(a); }
+    const rechts = document.createElement("div"); rechts.style.display = "flex"; rechts.style.flexDirection = "column"; rechts.style.alignItems = "flex-end"; rechts.style.gap = "4px";
+    const st = document.createElement("span"); st.className = "status" + (m.status === "umgesetzt" ? " erledigt" : ""); st.textContent = m.status || "offen";
+    rechts.append(st);
+    if (m.status !== "umgesetzt" && db) {
+      const w = document.createElement("button"); w.type = "button"; w.className = "weg"; w.textContent = "Löschen";
+      w.onclick = async (e) => { e.stopPropagation(); try { await sammlung.doc(m.id).delete(); } catch (err) { meldung("Löschen nicht möglich: " + (err.message || err.code)); } };
+      rechts.append(w);
+    }
+    li.append(nr, inh, rechts);
+    li.onclick = () => { ansicht = m.ansicht; waehle(m.id); };
+    l.append(li);
+  }
+}
+function zeichneAlles() { zeichneReiter(); zeichneBild(); zeichneListe(); }
+
+// Formular
+function formularFuellen(m) {
+  $("formLeer").hidden = !!m; $("formInhalt").hidden = !m;
+  if (!m) { $("formNr").textContent = "kein Marker gewählt"; return; }
+  $("formNr").textContent = `Nr. ${m.nr} · ${(ANSICHTEN.find(a => a[0] === m.ansicht) || [0, ""])[1]} · ${m.hoehe_cm} cm`;
+  $("teil").value = m.teil || "?"; $("seite").value = m.seite || ""; $("stelle").value = m.stelle || "";
+  $("betrag").value = m.betrag || ""; $("cm").value = m.cm ?? ""; $("cm").disabled = m.betrag !== "in cm"; $("notiz").value = m.notiz || "";
+  for (const b of $("richtung").children) b.setAttribute("aria-pressed", String((m.richtung || []).includes(b.dataset.r)));
+  $("speichern").textContent = m.id ? "Änderung speichern" : "Marker speichern";
+  $("speichern").disabled = !db; aktualisiereSatz();
+}
+function aktuellerMarker() { return entwurf || marker.find(m => m.id === aktivId) || null; }
+function ausFormular() {
+  const m = aktuellerMarker(); if (!m) return null;
+  m.teil = $("teil").value; m.seite = $("seite").value; m.stelle = $("stelle").value; m.betrag = $("betrag").value;
+  m.cm = $("cm").value === "" ? null : Number($("cm").value); m.notiz = $("notiz").value.trim();
+  m.richtung = [...$("richtung").children].filter(b => b.getAttribute("aria-pressed") === "true").map(b => b.dataset.r);
+  return m;
+}
+function aktualisiereSatz() { const m = ausFormular(); $("satz").textContent = m ? `${m.nr} · ${satzVon(m)}` : ""; }
+function waehle(id) { entwurf = null; aktivId = id; formularFuellen(marker.find(m => m.id === id)); zeichneAlles(); }
+function meldung(t) { $("meldung").textContent = t; }
+
+function initFormular() {
+  const sel = $("teil");
+  for (const [id, name] of TEILE) { const o = document.createElement("option"); o.value = id; o.textContent = id === "?" ? "unklar" : `${id} ${name}`; sel.append(o); }
+  for (const r of RICHTUNGEN) {
+    const b = document.createElement("button"); b.type = "button"; b.dataset.r = r; b.textContent = r; b.setAttribute("aria-pressed", "false");
+    b.onclick = () => { b.setAttribute("aria-pressed", String(b.getAttribute("aria-pressed") !== "true")); aktualisiereSatz(); };
+    $("richtung").append(b);
+  }
+  for (const id of ["teil", "seite", "stelle", "betrag", "cm", "notiz"]) $(id).addEventListener("input", () => {
+    if (id === "betrag") $("cm").disabled = $("betrag").value !== "in cm";
+    aktualisiereSatz();
+  });
+  $("verwerfen").onclick = () => { entwurf = null; aktivId = null; formularFuellen(null); meldung(""); zeichneAlles(); };
+  $("speichern").onclick = speichern;
+}
+async function speichern() {
+  const m = ausFormular(); if (!m || !db) return;
+  const body = {nr: m.nr, ansicht: m.ansicht, u: m.u, v: m.v, hoehe_cm: m.hoehe_cm, vorschlag: m.vorschlag || null,
+    teil: m.teil, seite: m.seite, stelle: m.stelle, richtung: m.richtung, betrag: m.betrag, cm: m.cm, notiz: m.notiz,
+    satz: satzVon(m), status: m.status || "offen", antwort: m.antwort || "", stand: DATEN.stand, erstellt: m.erstellt || new Date().toISOString()};
+  $("speichern").disabled = true;
+  try {
+    if (m.id) { await sammlung.doc(m.id).set(body); meldung(`Marker ${m.nr} geändert.`); }
+    else { const ref = sammlung.doc(); await ref.set(body); aktivId = ref.id; entwurf = null; meldung(`Marker ${m.nr} gespeichert.`); }
+  } catch (err) { meldung("Speichern nicht möglich: " + (err.message || err.code) + ". Bitte erneut versuchen."); }
+  $("speichern").disabled = false;
+}
+
+// Bühne
+function bildKoord(e) { const r = $("buehne").getBoundingClientRect(); return {u: (e.clientX - r.left) / r.width, v: (e.clientY - r.top) / r.height}; }
+$("buehne").addEventListener("mousemove", (e) => {
+  const {u, v} = bildKoord(e); const lab = teilAn(u, v), h = hoeheAn(v);
+  const hv = $("hover"); hv.hidden = !lab; if (lab) { hv.textContent = `${lab} · ${h} cm`; hv.style.left = (u * 100) + "%"; hv.style.top = (v * 100) + "%"; }
+  $("fussTeil").textContent = lab ? lab : "kein Teil unter dem Zeiger"; $("fussHoehe").textContent = `Höhe ${h} cm`;
+});
+$("buehne").addEventListener("mouseleave", () => { $("hover").hidden = true; });
+$("buehne").addEventListener("click", (e) => {
+  if (e.target.classList.contains("pin")) return;
+  const {u, v} = bildKoord(e); const lab = teilAn(u, v); const {teil, seite} = zerlegeLabel(lab);
+  const nr = Math.max(0, ...marker.map(m => m.nr || 0)) + 1;
+  entwurf = {nr, ansicht, u: +u.toFixed(4), v: +v.toFixed(4), hoehe_cm: hoeheAn(v), vorschlag: lab, teil, seite, stelle: "", richtung: [], betrag: "", cm: null, notiz: ""};
+  aktivId = null; formularFuellen(entwurf); meldung(db ? "" : "Speicher nicht verbunden – Marker kann nicht gesichert werden."); zeichneAlles();
+  $("notiz").focus({preventScroll: true});
+});
+
+// Speicher
+async function verbinden() {
+  try { db = await window.claude?.use?.("db"); } catch { db = null; }
+  if (!db) { $("dbHinweis").textContent = "Speicher nicht verfügbar (abgemeldet oder ohne Freigabe). Marker lassen sich setzen, aber nicht sichern."; return; }
+  sammlung = db.collection("marker");
+  sammlung.orderBy("nr").onSnapshot((snap) => {
+    marker = snap.docs.map(d => ({id: d.id, ...d.data()}));
+    $("dbHinweis").textContent = "Gespeichert wird automatisch beim Klick auf „Marker speichern“. Claude liest dieses Protokoll.";
+    if (aktivId && !entwurf) formularFuellen(marker.find(m => m.id === aktivId) || null);
+    zeichneAlles();
+  }, (err) => { $("dbHinweis").textContent = "Verbindung zum Speicher unterbrochen: " + (err.message || err.code); });
+  $("speichern").disabled = false;
+}
+
+initFormular(); zeichneAlles(); formularFuellen(null); verbinden();
+</script>

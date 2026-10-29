@@ -33,6 +33,13 @@ Zusätzlich wird der tatsächliche Browser-GLB-Export unter `renders/scifi_helme
 Laufstatus in `renders/verification.json` protokolliert. Nur `status: passed` bezeichnet einen abgeschlossenen Lauf;
 vorhandene Bilder allein können noch aus einem früheren Lauf stammen. `--no-iou` lässt die Messung ausdrücklich aus.
 
+## Scout v3 (0.8)
+
+`?model=scout` zeigt den zweiten Helm **Scout v3**, Stand D29. Er wird in Blender aus `blender/scout/` gebaut und hier als GLB aus
+`assets/helmet-scout/` geladen. Kameras, Turntable und Look bleiben gleich, die Geometrie-Regler sind ausgeblendet, weil die Quelle der Blender-Generator bleibt.
+`&exploded=1` zeigt die Explosionsansicht mit den Teil-IDs S01–S13. Die Materialien im GLB sind flache Ersatzmaterialien; maßgeblich
+sind die Cycles-Ansichten. [Aufbau, Nachbau und Grenzen](../docs/HELM_SCOUT.md).
+
 ## Körperstudie
 
 **Aktuell 0.7:** `?body=shoulders&headset=off` zeigt kurzen Hals, kantige Schultergehäuse mit unteren Lamellen,

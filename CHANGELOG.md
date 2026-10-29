@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.0 „Scout“ – 2026-10-29 (zweiter Helm aus Blender)
+
+- Scout v3 (Stand D29 aus dem Arbeitsordner `trialanderror`) als eigener Helm: Blender-Generator `blender/scout/` mit `run.py`
+  (Nachbau headless, GLB-Export, Ansichten), gebackene 2h-Haube `guss_2h.npz`, Vorlagen `reference/scout/`.
+- Lieferpaket `assets/helmet-scout/`: montierter und explodierter GLB mit Teile-IDs S01–S13, Teileliste, Manifest, vier Ansichten.
+- Viewer: `?model=scout` (auch `&exploded=1` mit Etiketten) lädt den GLB; three.js-Helm unverändert.
+- Doku `docs/HELM_SCOUT.md` mit Ständen D01–D29, Stil, Teilen und Marker-System; Nachbau aus dem Repo identisch zu D29.
+
 ## 0.7.0 „Bastion“ – 2026-10-28 (Oberkörperstudie)
 
 - Tiefe kantige Schultergehäuse mit eigenen Dächern und unterer Panzerlage; zentrale Brust und separate Flanken.

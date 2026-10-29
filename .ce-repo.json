@@ -1,7 +1,7 @@
 {
   "name": "cubeescape-critic",
-  "version": "0.7.0",
-  "version_name": "Bastion",
+  "version": "0.8.0",
+  "version_name": "Scout",
   "check": {
     "quick": [
       [
