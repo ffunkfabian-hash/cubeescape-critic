@@ -6,6 +6,12 @@ import { beveledPlate, buildShoulderStudy, shoulderStudyParams, signedVolume, so
 
 export const fullBodyParams = structuredClone(defaults);
 
+// Exploded-view offset of a full-body mesh by its name; X is mirrored to the mesh's side. Null for other parts.
+export function fullBodyExplosionOffset(name, x, p = fullBodyParams) {
+  const base = p.explosion[name.replace(/_[RL]$/, '')];
+  return base ? [Math.sign(x) * base[0], base[1], base[2]] : null;
+}
+
 // Stable feedback handles continue after the upper body's B01-B31. Side A is -X (the shoulder study's _R side).
 export const FULL_BODY_PARTS = Object.freeze({
   B32: 'AbdomenLame_1', B33: 'AbdomenLame_2', B34: 'AbdomenLame_3', B35: 'WaistBelt', B36: 'PelvisCore',
@@ -50,10 +56,10 @@ function shells(...parts) {
   return solid(vertices, triangles);
 }
 
-// Faceted capsule standing for a joint placeholder.
-function joint({ center: [cx, cy, cz], radius, halfHeight }, segments, side) {
-  return loftShell([[cy + halfHeight + 0.6 * radius, 0.6 * radius, 0.6 * radius, cx, cz], [cy + halfHeight, radius, radius, cx, cz],
-    [cy - halfHeight, radius, radius, cx, cz], [cy - halfHeight - 0.6 * radius, 0.6 * radius, 0.6 * radius, cx, cz]], segments, side);
+// Faceted capsule standing for a joint placeholder; `cap` scales the end rings and their distance.
+function joint({ center: [cx, cy, cz], radius, halfHeight, cap }, segments, side) {
+  return loftShell([[cy + halfHeight + cap * radius, cap * radius, cap * radius, cx, cz], [cy + halfHeight, radius, radius, cx, cz],
+    [cy - halfHeight, radius, radius, cx, cz], [cy - halfHeight - cap * radius, cap * radius, cap * radius, cx, cz]], segments, side);
 }
 
 export function buildFullBody(M, p = fullBodyParams, upper = shoulderStudyParams) {
@@ -72,13 +78,15 @@ export function buildFullBody(M, p = fullBodyParams, upper = shoulderStudyParams
   };
   const w = p.waist, a = p.arm, l = p.leg, bevel = p.bevel;
   // Overlapping dark lamellae: each band's narrow top tucks under the band above.
-  w.lamellae.forEach((rings, i) => add(`B3${2 + i}`, shells(loftShell(rings, w.segments)), M.darkArmor));
+  const lamellaIds = ['B32', 'B33', 'B34'];
+  if (w.lamellae.length !== lamellaIds.length) throw new Error(`waist.lamellae needs ${lamellaIds.length} bands`);
+  w.lamellae.forEach((rings, i) => add(lamellaIds[i], shells(loftShell(rings, w.segments)), M.darkArmor));
   add('B35', shells(loftShell(w.belt, w.segments)), M.whiteArmor);
   add('B36', shells(loftShell(w.core, w.segments)), M.blackRubber);
   for (const [side, ids] of [[-1, ['B37', 'B39', 'B41', 'B43', 'B45', 'B47', 'B49', 'B51', 'B53', 'B55', 'B57']],
     [1, ['B38', 'B40', 'B42', 'B44', 'B46', 'B48', 'B50', 'B52', 'B54', 'B56', 'B58']]]) {
     const [hip, upperArm, elbow, fore, hand, hipJoint, thigh, knee, kneePad, shin, foot] = ids;
-    const h = w.hipPlate, top = Math.max(...h.outline.map(p => p[1])), span = top - Math.min(...h.outline.map(p => p[1]));
+    const h = w.hipPlate, top = Math.max(...h.outline.map(pt => pt[1])), span = top - Math.min(...h.outline.map(pt => pt[1]));
     // Side tasset hangs from the belt and flares outward toward its lower edge.
     add(hip, beveledPlate(h.outline, h.thickness, bevel,
       (z, y, d) => [side * (h.x + h.flare * (top - y) / span + d), y, z]), M.whiteArmor);
@@ -86,7 +94,7 @@ export function buildFullBody(M, p = fullBodyParams, upper = shoulderStudyParams
     add(elbow, shells(joint(a.elbow, a.segments, side)), M.blackRubber);
     add(fore, shells(loftShell(a.fore, a.segments, side)), M.whiteArmor);
     // Mitten hand: palm block plus a separate thumb shell on the front edge.
-    add(hand, shells(loftShell(a.hand, a.segments, side), loftShell(a.thumb, 6, side)), M.darkArmor);
+    add(hand, shells(loftShell(a.hand, a.segments, side), loftShell(a.thumb, a.thumbSegments, side)), M.darkArmor);
     add(hipJoint, shells(joint(l.hip, l.segments, side)), M.blackRubber);
     add(thigh, shells(loftShell(l.thigh, l.segments, side)), M.whiteArmor);
     add(knee, shells(joint(l.knee, l.segments, side)), M.blackRubber);

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.9.0 „Vanguard“ – 2026-10-29 (einfacher Gesamtkörper)
+
+- Körperoption `body=full`: Bastion-Oberkörper unverändert, dazu 27 Teile B32–B58 – drei dunkle Bauchlamellen,
+  weißer Beckengurt mit Hüftplatten, Arme mit Ellbogen und Fäustlingshänden, Beine mit Hüft-/Kniegelenk, Knieschutz und Füßen.
+- Blockformen aus facettierten Lofts und gefasten Platten in `fullBodyParams.json`; Explosionswege je Gliedkette, 80 Beschriftungen.
+- `body=shoulders` bleibt bytegleich zur 0.7-Lieferung; 65 Tests, Ansichten, GLBs und Explosionsübersicht.
+
 ## 0.7.1 – 2026-10-29 (Patch: Markierbogen)
 
 - Markierbogen in 3D: Nadeln und Stiftstriche direkt auf Helm und Oberkörper 0.7, Teil (H01–H21, B01–B31) und Seite A/B

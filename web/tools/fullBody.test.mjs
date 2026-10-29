@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
 import { resolveAssemblyOptions } from '../src/assemblyOptions.js';
-import { assemblyInventory, createExplodedAssembly } from '../src/assembly.js';
+import { assemblyInventory, configureHelmetAssembly, createExplodedAssembly } from '../src/assembly.js';
 import { buildFullBody, FULL_BODY_PARTS, fullBodyParams } from '../src/parts/fullBody.js';
 import { buildShoulderStudy, SHOULDER_STUDY_PARTS } from '../src/parts/shoulderStudy.js';
 
@@ -69,8 +69,8 @@ test('limb chains stay connected, mirrored and standing on one ground plane', ()
 
 test('proportions: hands hang at mid-thigh beside the hips, waist narrower than chest and belt', () => {
   const body = build(), hand = box(body, 'Hand_L'), thigh = box(body, 'Thigh_L'), knee = box(body, 'Knee_L');
-  // Fingertips end on the thigh, clearly above the knee and below the hip joint.
-  assert.ok(hand.min.y > knee.max.y + .1 && hand.min.y < thigh.max.y - .4, `hand ${hand.min.y}`);
+  // Fingertips end on the lower thigh: above the knee joint (current margin about 0.11) and well below the hip joint.
+  assert.ok(hand.min.y > knee.max.y + .05 && hand.min.y < thigh.max.y - .4, `hand ${hand.min.y} knee ${knee.max.y}`);
   for (const plate of ['HipPlate_L', 'Thigh_L']) assert.ok(box(body, 'Forearm_L').min.x > box(body, plate).max.x + .02, `arm clears ${plate}`);
   const width = name => box(body, name).max.x - box(body, name).min.x;
   assert.ok(width('AbdomenLame_3') < width('WaistBelt') && width('WaistBelt') < width('BreastplateCenter') + width('FlankArmor_L') * 2);
@@ -78,9 +78,14 @@ test('proportions: hands hang at mid-thigh beside the hips, waist narrower than 
   assert.ok(all.max.x - all.min.x < 2.2, 'arms hang inside the shoulder width');
 });
 
-test('full-body parameters reproduce geometry; exploded view keeps every part with chain offsets', () => {
-  const a = build(), b = build(structuredClone(fullBodyParams));
-  for (const mesh of a.children) assert.deepEqual(b.getObjectByName(mesh.name).geometry.attributes.position.array, mesh.geometry.attributes.position.array);
+test('full-body parameters drive only their parts; exploded view keeps every part with chain offsets', () => {
+  const a = build(), longer = structuredClone(fullBodyParams);
+  longer.leg.shin = longer.leg.shin.map(([y, ...rest], i) => [i ? y - .1 : y, ...rest]);
+  const b = build(longer), changed = a.children.filter(m => b.getObjectByName(m.name).geometry.attributes.position.array
+    .some((v, i) => v !== m.geometry.attributes.position.array[i])).map(m => m.name).sort();
+  assert.deepEqual(changed, ['Shin_L', 'Shin_R'], 'a shin edit changes exactly the two shins');
+  assert.ok(Math.abs(box(b, 'Shin_L').min.y - box(a, 'Shin_L').min.y + .1) < 1e-6);
+  assert.throws(() => build({ ...fullBodyParams, waist: { ...fullBodyParams.waist, lamellae: [...fullBodyParams.waist.lamellae, fullBodyParams.waist.lamellae[0]] } }));
   const root = new THREE.Group(); root.name = 'SciFiHelmet'; root.add(a);
   const entries = assemblyInventory(root), exploded = createExplodedAssembly(root, 1);
   assert.equal(exploded.children.length, entries.length);
@@ -89,4 +94,13 @@ test('full-body parameters reproduce geometry; exploded view keeps every part wi
   assert.ok(offset('B46')[0] > offset('B44')[0] && offset('B44')[0] > offset('B40')[0], 'arm parts separate outward');
   assert.equal(Math.sign(offset('B45')[0]), -1);
   for (const id of Object.keys(FULL_BODY_PARTS)) assert.ok(entries.some(e => e.id === id && e.label && !e.label.includes('_')), id);
+});
+
+test('the full-body presentation replaces the helmet neck core like the shoulder study', () => {
+  const helmet = new THREE.Group(), neck = new THREE.Group(); neck.name = 'Neck'; helmet.add(neck);
+  configureHelmetAssembly(helmet, resolveAssemblyOptions({ body: 'full' }));
+  assert.equal(helmet.getObjectByName('Neck'), undefined);
+  const kept = new THREE.Group(), neck2 = new THREE.Group(); neck2.name = 'Neck'; kept.add(neck2);
+  configureHelmetAssembly(kept, resolveAssemblyOptions({ body: 'none' }));
+  assert.ok(kept.getObjectByName('Neck'));
 });

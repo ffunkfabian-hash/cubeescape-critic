@@ -111,11 +111,11 @@ function setCameraView(name) {
   setTurntable(false);
   if (presentationOptions.exploded > 0) {
     const withShoulders = presentationOptions.body === 'shoulders', full = presentationOptions.body === 'full';
-    target.set(0, full ? -2.6 : withShoulders ? -.55 : .05, 0);
-    v.dist = full ? 17.5 : withShoulders ? 9.8 : name === 'assembly' ? 7.8 : 8.8;
+    target.set(0, full ? fullBodyParams.camera.explodedTarget : withShoulders ? -.55 : .05, 0);
+    v.dist = full ? fullBodyParams.camera.explodedDist : withShoulders ? 9.8 : name === 'assembly' ? 7.8 : 8.8;
   }
   else if (presentationOptions.body === 'shoulders') { target.set(0, -.49, 0); v.dist = 4.7; }
-  else if (presentationOptions.body === 'full') { target.set(0, -2.2, 0); v.dist = 11.8; }
+  else if (presentationOptions.body === 'full') { target.set(0, fullBodyParams.camera.target, 0); v.dist = fullBodyParams.camera.dist; }
   else if (presentationOptions.body === 'legacy') { target.set(0, -.8, 0); v.dist = 5.4; }
   else target.set(0, -.06, 0);
   current = name;
