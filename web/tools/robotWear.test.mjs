@@ -2,7 +2,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
-import { prepareWearGeometry, roleOf, wearMaterial, setRobotWear, robotWearOn, WEAR_PARAMS } from '../src/robotWear.js';
+import { prepareWearGeometry, roleOf, wearMaterial, setRobotWear, robotWearOn, releaseRobotWear, setWearScale, WEAR_PARAMS } from '../src/robotWear.js';
 
 const triangles = g => {
   const bary = g.attributes.wearBary, edge = g.attributes.wearEdge, out = [];
@@ -92,4 +92,71 @@ test('setRobotWear toggles geometry and materials, shares materials per role, ke
   assert.equal(boxes[0].material, shell);
   setRobotWear(model, true);
   assert.equal(boxes[0].geometry, aged, 'prepared once, reused');
+});
+
+// The shader patch on stub shaders that carry the include points three.js uses.
+const compile = m => {
+  const shader = { uniforms: {},
+    vertexShader: '#include <common>\nvoid main() {\n#include <begin_vertex>\n}',
+    fragmentShader: '#include <common>\nvoid main() {\n#include <map_fragment>\n#include <roughnessmap_fragment>\n#include <metalnessmap_fragment>\n#include <normal_fragment_maps>\n}' };
+  m.onBeforeCompile(shader);
+  return shader;
+};
+
+test('shader patch: wearMeter declared and used in both shaders, uniforms carry unit, meter and wear factor', () => {
+  const s = compile(wearMaterial(new THREE.MeshStandardMaterial({ name: 'MT_shell_color' }), 'shell', 3.2, 0.25, 0.5));
+  for (const code of [s.vertexShader, s.fragmentShader]) assert.match(code, /uniform float wearMeter;/);
+  assert.match(s.vertexShader, /vWearPos = position \* wearMeter/);
+  assert.match(s.vertexShader, /vWearEdge = wearEdge \* wearMeter/);
+  assert.equal(s.uniforms.wearUnit.value, 3.2);
+  assert.equal(s.uniforms.wearMeter.value, 0.25);
+  assert.match(s.fragmentShader, /wearMask = 0\.50000 \*/, 'shell wear 1.0 × factor 0.5');
+  assert.match(s.fragmentShader, /scratchColor, 0\.27500 \*/, 'scratch 0.55 × factor 0.5');
+});
+
+test('setRobotWear: a scaled helmet mesh gets its own material in real metres, the body stays at 1; release frees the copies', () => {
+  const shell = new THREE.MeshStandardMaterial({ name: 'MT_shell_color' });
+  const body = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.1, 0.1), shell);
+  const helm = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.4, 0.4), shell);
+  const holder = new THREE.Group(); holder.scale.setScalar(0.25); holder.add(helm);
+  const inner = new THREE.Group(); inner.scale.setScalar(3); inner.add(body, holder);
+  const model = new THREE.Group(); model.add(inner);
+  setWearScale(helm, 0.35);
+  setRobotWear(model, true);
+  assert.notEqual(body.material, helm.material);
+  assert.ok(Math.abs(compile(body.material).uniforms.wearMeter.value - 1) < 1e-9);
+  assert.ok(Math.abs(compile(helm.material).uniforms.wearMeter.value - 0.25) < 1e-9);
+  assert.match(compile(helm.material).fragmentShader, /wearMask = 0\.35000 \*/);
+  assert.ok(!('wearScale' in helm.userData), 'factor not in userData (glTF extras)');
+  const aged = helm.geometry, flat = helm.geometry.attributes.wearEdge ? null : helm.geometry;
+  assert.ok(aged.attributes.wearEdge && !flat);
+  releaseRobotWear(holder);
+  assert.ok(!helm.geometry.attributes.wearEdge && helm.material === shell, 'flat geometry and material restored');
+  setRobotWear(model, true);
+  assert.ok(helm.geometry.attributes.wearEdge && helm.geometry !== aged, 'prepared anew after release');
+});
+
+test('setRobotWear on a helmet shown alone: metres per world unit given, no robot frame needed', () => {
+  const m = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({ name: 'MT_shell_color' }));
+  const root = new THREE.Group(); root.add(m);
+  setRobotWear(root, true, { metersPerWorld: 0.25 });
+  const s = compile(m.material);
+  assert.ok(Math.abs(s.uniforms.wearMeter.value - 0.25) < 1e-9);
+  assert.ok(Math.abs(s.uniforms.wearUnit.value - 4) < 1e-9);
+});
+
+test('releaseRobotWear keepGeometry: a colour-scheme change reuses the prepared copy; a full release prepares anew', () => {
+  const m = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({ name: 'MT_shell_color' }));
+  const inner = new THREE.Group(); inner.add(m);
+  const model = new THREE.Group(); model.add(inner);
+  setRobotWear(model, true);
+  const first = m.geometry;
+  releaseRobotWear(model, { keepGeometry: true });
+  m.material = new THREE.MeshStandardMaterial({ name: 'MT_shell_color', color: 0x8899aa }); // dressed in another scheme
+  setRobotWear(model, true);
+  assert.equal(m.geometry, first, 'same prepared copy');
+  assert.ok(m.material.color.equals(new THREE.Color(0x8899aa)) || m.material.name === 'MT_shell_color_aged');
+  releaseRobotWear(model);
+  setRobotWear(model, true);
+  assert.notEqual(m.geometry, first, 'disposed and prepared anew');
 });

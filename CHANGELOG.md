@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.12.0 „Fusion“ – 2026-10-29 (Helme auf den Robotern, Navigation links)
+
+- Ein Werkzeug: Körper Wächter, Paladin, Mechanik tragen Helm H (Standard, Varianten 80–88, Kopfhörer an/aus) oder Scout, eingepasst im Kopfsegment am Halsanker (`robotHelmet.js`).
+- Zwei einheitliche, gealterte Farbschemata für Körper und Helme, auch für Helme allein: „Creme“ (Körperpalette) und „Weiß-Graphit“ (Originalfarben von Helm H), dazu Original (`&colors=body|helmet|original`).
+- Alte three.js-Körperstudien 0.5–0.9 entfernt (Code, Schalter `body=`, Tests); Lieferpakete und Berichte bleiben Archiv. Studienhelm im Archiv (`&helmet=study`).
+- Navigation links: Modelle und Varianten, Ansichten mit Nahansichten, Bauteilbaum (hervorheben, ausblenden, isolieren, zoomen), Look & Material.
+- Rendern nur bei Änderungen, Schattenkarte statisch, AO beim Ziehen optional aus: kein Ruckeln mehr (p95 33 → 17 ms).
+- 67 Node-Tests (neu: Helmwahl, Farben, Varianten, Shader-Maßstab; entfernt mit ihrem Code: Tests der alten Körper); Kameraabstände für schmale Fenster.
+
 ## 0.11.0 „Patina“ – 2026-10-29 (gealterte Materialien der Roboterkörper)
 
 - Viewer zeigt Wächter, Paladin und Mechanik gealtert wie Ballons Cycles-Material „aaa“: Kantenabrieb im Radius 4 mm, Rauheitsschwankung,

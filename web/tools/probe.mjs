@@ -20,7 +20,7 @@ page.setDefaultTimeout(120000);
 page.on('pageerror', (e) => console.error(e.message));
 page.on('console', (m) => console.log(m.text()));
 try {
-  await page.goto(`${server.resolvedUrls.local[0]}?ui=0&static=1`);
+  await page.goto(`${server.resolvedUrls.local[0]}?ui=0&static=1&colors=original`);
   await page.waitForFunction(() => window.__ready === true, null, { timeout: 180000 });
   const log = await page.evaluate(([c, t, expr]) => {
     window.camera.position.set(...c);

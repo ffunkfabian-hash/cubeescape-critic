@@ -1,0 +1,59 @@
+{
+  "note": "Helmet material → Ballon role (MT_<role>_color of the robot GLB), modelled on the study helmet: shell cream, cap anodized, mask graphite, modules dark_metal, cables rubber, pins/strips trim, eyes reticle_cyan. Unlisted materials keep their own colour. An entry may depend on the Critic finish (original/metal/graphite) so the variants 80–88 stay distinct in robot colours.",
+  "wear": {
+    "critic": 0.35,
+    "scout": 0.5,
+    "note": "factor on edge wear and scratches of a helmet in robot colours: the faceted Critic helmet has far more hard edges than the study helmet and would look much more worn at full strength"
+  },
+  "critic": {
+    "whiteArmor": "shell",
+    "whiteTextured": "shell",
+    "darkArmor": {
+      "original": "anodized",
+      "metal": "dark_metal",
+      "graphite": "graphite"
+    },
+    "crownArmor": {
+      "original": "anodized",
+      "metal": "dark_metal",
+      "graphite": "graphite"
+    },
+    "darkMetal": "dark_metal",
+    "oliveTech": "dark_metal",
+    "blackRubber": "rubber",
+    "bandStripe": "trim",
+    "visorGlow": "reticle_cyan",
+    "accessoryArmor": {
+      "original": "anodized",
+      "metal": "dark_metal",
+      "graphite": "graphite"
+    },
+    "contrastStrip": {
+      "original": "graphite",
+      "metal": "graphite",
+      "graphite": "dark_metal"
+    },
+    "lightFastener": "trim"
+  },
+  "scout": {
+    "MAT_Weiss_glb": "shell",
+    "MAT_Dunkel_glb": "anodized",
+    "MAT_Metall_glb": "dark_metal",
+    "MAT_Modul_glb": "dark_metal",
+    "MAT_Kabel_glb": "rubber",
+    "MAT_Kabel_Huelse_glb": "trim",
+    "MAT_Leucht_glb": "reticle_cyan"
+  },
+  "scheme2": {
+    "note": "Farbschema 2: each role of the bodies takes the original material of helmet H (createMaterials('original','original')): white armour, dark graphite armour, dark metal, rubber, band stripe for trims, olive tech for the orange accents, visor glow for the lights. Colour, roughness, metalness and emission only (the bodies have no UVs for the helmet textures).",
+    "shell": "whiteArmor",
+    "anodized": "darkArmor",
+    "graphite": "darkArmor",
+    "dark_metal": "darkMetal",
+    "rubber": "blackRubber",
+    "trim": "bandStripe",
+    "accent": "oliveTech",
+    "reticle_cyan": "visorGlow",
+    "energy": "visorGlow"
+  }
+}

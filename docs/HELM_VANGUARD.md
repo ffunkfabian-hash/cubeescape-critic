@@ -1,5 +1,9 @@
 # Vanguard 0.9 – einfacher Gesamtkörper
 
+> **Archiv (seit 0.12):** Diese Körperstudie ist aus dem Viewer und dem Code entfernt („wir bauen dann auf ballon auf“). Die hier
+> genannten Quellen, Schalter (`body=…`, `--body`) und Reproduktionsbefehle gelten für Commit `4e63f05`
+> (`git checkout 4e63f05`); Lieferpakete und Belege bleiben unverändert.
+
 Auftrag: „Baue einen einfachen Gesamtkörper mit Körper, Arme, Beine, Schultern, Hände, Füße.“ Zuvor hatte der Nutzer
 für den Bereich zwischen Brust und Hüfte **dunkle Bauchlamellen und einen weißen Beckengurt mit Hüftplatten** gewählt.
 Vanguard setzt beides als Blockform auf den unveränderten Bastion-Oberkörper. Keine Finger, kein Rig, keine

@@ -40,27 +40,38 @@ vorhandene Bilder allein können noch aus einem früheren Lauf stammen. `--no-io
 `&exploded=1` zeigt die Explosionsansicht mit den Teil-IDs S01–S13. Die Materialien im GLB sind flache Ersatzmaterialien; maßgeblich
 sind die Cycles-Ansichten. [Aufbau, Nachbau und Grenzen](../docs/HELM_SCOUT.md).
 
-## Roboterkörper aus Ballon (0.10)
+## Navigation links (0.12)
 
-`?model=waechter`, `?model=paladin` und `?model=mechanik` zeigen die drei Körperstudien aus `cubeescape-ballon` als GLB aus
-`assets/robot-bodies/`. Sie stehen im Rahmen von `body=full`, also mit denselben Kameras. `&exploded=0..1` verschiebt die Baugruppen
-entlang der Ballon-Anker. In der GUI wechselt „Körperstudie“ das Modell. Seit 0.11 sind die Materialien gealtert (Kantenabrieb, Rauheit, Relief, Kratzer nach
-Ballons Cycles-Material); `&wear=off` zeigt die flachen GLB-Farben. [Quelle, Export und Grenzen](../docs/ROBOTER_BALLON.md).
+Links sitzt eine einklappbare Navigation (`web/src/navigation.js`; mit `?ui=0` ausgeblendet, der Zustand „eingeklappt“ wird im Browser
+gemerkt):
+- **Modelle:** Körper und Helme als Links; beim Körper Helm, Farbschema, Variante 80–88 und Kopfhörer, beim Helm allein Variante,
+  Kopfhörer und Farbschema (Creme, Weiß-Graphit, Original).
+- **Ansichten:** Front, Links, Hinten, Rechts, Übersicht, Drehteller und Nahansichten (Roboter je Baugruppe, sonst nach Höhe).
+- **Bauteile:** Baum nach Baugruppe und Teil mit Suche; Klick hebt hervor, Haken blendet aus, ◎ isoliert, ⌖ zoomt heran.
+- **Look & Material:** gealtert/flach, Explosion, Beschriftungen, Belichtung, Bloom, AO, Qualität beim Drehen, Overlay, GLB-Export.
+Oben rechts bleiben nur die Geometrieregler von Helm H (lil-gui). Die Fußzeile zeigt die Bildzeit, solange gerendert wird.
 
-## Körperstudie
+**Rendern bei Bedarf:** Der Viewer zeichnet nur nach einer Änderung, die Schattenkarte nur bei Modell-, Licht- oder Sichtbarkeitswechsel.
+Beim Ziehen der Kamera entfällt auf Wunsch die AO. Ergebnis im App-Browser (Apple M5, Paladin gealtert, Kamera kreist automatisch):
+p95 33,4 → 17,2 ms, schlechtestes Bild 50,5 → 17,7 ms. Im Drehteller dreht sich das Modell, dort wird die Schattenkarte weiter je Bild
+neu gezeichnet. Headless (`?static=1`) aktualisiert die Schatten wie bisher in jedem Bild.
 
-**Aktuell 0.7:** `?body=shoulders&headset=off` zeigt kurzen Hals, kantige Schultergehäuse mit unteren Lamellen,
-zentrale Brust und Flanken. 31 separate Körperteile; [Bastion-Aufbau und Reproduktion](../docs/HELM_BASTION.md).
-22 separate Körpermeshes, parametrisch reproduzierbar. `?headset=off` blendet beide kompletten Kopfhörer samt Bügel,
-Kabeln und Antennen aus; das zentrale Heckmodul bleibt. `?exploded=1&view=assembly` öffnet die beschriftete
-Explosionsübersicht. Alle Optionen auch rechts oben unter **Aufbau und Varianten**; die Teileliste nennt offene Anschlüsse.
-[Technik, IDs, Parameter und Grenzen](../docs/HELM_AUFBAU.md) · [Geprüfte Exporte](../assets/helmet-assembly/README.md).
-Körper-/Explosionsprüfungen benötigen `--no-iou`; ihre Kameras sind nicht mit den Helm-Videobildern vergleichbar.
+## Körper (0.10–0.12)
 
-Mit `http://127.0.0.1:5173/?body=1` erscheint weiterhin die **ältere** Proportionsstudie unter dem Helm. Sie ist ein Entwurf ohne
-Körperreferenz, noch keine vollständige Figur. Brust, Rücken, Bauch, Becken, Halsanschluss, Schultern und Gelenke sind
-getrennte, benannte Meshes im GLB-Export `scifi_body_study.glb`. Arme und Beine fehlen noch. Ohne `?body=1` bleiben
-Helmansicht, Kameras, Export und Silhouettenprüfung unverändert.
+`?model=waechter`, `?model=paladin` und `?model=mechanik` zeigen die drei Körper als GLB aus `assets/robot-bodies/` (Herkunft:
+`cubeescape-ballon`, Roboter Runde 5). Sie stehen im Rahmen `ROBOT_FRAME` (`src/robotBodies.js`). `&exploded=0..1` verschiebt die
+Baugruppen entlang der Anker. Seit 0.11 sind die Materialien gealtert (`&wear=off` flach), seit 0.12 trägt jeder Körper Helm H (Standard)
+oder Scout: `&helmet=critic|scout`, `&helmetVariant=80…88`, `&headset=on|off`. [Quelle, Export und Grenzen](../docs/ROBOTER_BALLON.md).
+
+**Farbschemata (0.12):** `&colors=body` (Standard, Schema 1 „Creme“) oder `&colors=helmet` (Schema 2 „Weiß-Graphit“, die Originalfarben
+von Helm H auf allen Rollen) kleiden Körper und Helme einheitlich, gealtert wie die Körper (`src/ballonRoles.json`,
+`src/robotHelmetColors.json`); `&colors=original` zeigt jedes Modell in seinen eigenen Materialien. `verify` prüft Helm H standardmäßig
+in Originalfarben; `--colors=body|helmet --no-iou` prüft den Export im Schema.
+
+Die früheren three.js-Körperstudien (`?body=shoulders|full|1`) sind in 0.12 entfernt; Archiv: [Assembly 0.5](../docs/HELM_AUFBAU.md),
+[Cuirass 0.6](../docs/HELM_CUIRASS.md), [Bastion 0.7](../docs/HELM_BASTION.md), [Vanguard 0.9](../docs/HELM_VANGUARD.md).
+`?headset=off` blendet beide Kopfhörer samt Bügel, Kabeln und Antennen aus; `?exploded=1&view=assembly` öffnet die beschriftete
+Explosionsübersicht des Helms. Explosionsprüfungen benötigen `--no-iou`.
 
 ## Bedienung
 

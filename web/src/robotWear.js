@@ -15,7 +15,8 @@ export const WEAR_PARAMS = P;
 // not by the facets: an edge wears when the normals jump across it (> sharpAngleDeg, hard or flat-shaded edge), when it borders a
 // rounded triangle (normals turning by ≥ sharpAngleDeg faster than roundDegPerMm, i.e. a bevel strip that wears entirely), or when it
 // is an open boundary. Smooth-shaded facets of a curved shell stay clean. Positions are matched across split vertices.
-export function prepareWearGeometry(geometry, sharpAngleDeg = P.sharpAngleDeg, roundDegPerMm = P.roundDegPerMm) {
+// meter: metres per object unit (helmets hung in scaled), so the bevel-strip rate is judged in real millimetres.
+export function prepareWearGeometry(geometry, sharpAngleDeg = P.sharpAngleDeg, roundDegPerMm = P.roundDegPerMm, meter = 1) {
   const g = geometry.index ? geometry.toNonIndexed() : geometry.clone();
   if (!g.attributes.normal) g.computeVertexNormals();
   const pos = g.attributes.position.array, nor = g.attributes.normal.array, tris = pos.length / 9;
@@ -32,7 +33,7 @@ export function prepareWearGeometry(geometry, sharpAngleDeg = P.sharpAngleDeg, r
     // only turns of at least sharpAngleDeg count: tiny bevels on shallow creases and slivers stay clean
     const P3 = [a, b, c], rate = [[0, 1], [1, 2], [0, 2]].map(([i, j]) => {
       const deg = THREE.MathUtils.radToDeg(N(t * 3 + i).angleTo(N(t * 3 + j)));
-      return deg < sharpAngleDeg ? 0 : deg / Math.max(P3[i].distanceTo(P3[j]) * 1000, 1e-6);
+      return deg < sharpAngleDeg ? 0 : deg / Math.max(P3[i].distanceTo(P3[j]) * meter * 1000, 1e-6);
     });
     rounded[t] = area2[t] > 0 && Math.max(...rate) > roundDegPerMm ? 1 : 0;
   }
@@ -76,6 +77,7 @@ varying vec3 vWearPos;
 varying vec3 vWearBary;
 varying vec3 vWearEdge;
 uniform float wearUnit;
+uniform float wearMeter;
 float wHash(vec3 p) { p = fract(p * vec3(0.1031, 0.1030, 0.0973)); p += dot(p, p.yxz + 33.33); return fract((p.x + p.y) * p.z); }
 float wValue(vec3 p) {
   vec3 i = floor(p), f = fract(p), u = f * f * f * (f * (f * 6.0 - 15.0) + 10.0);
@@ -94,8 +96,15 @@ float wNoise(vec3 p, float scale) {
   return sum / norm;
 }`;
 
+// Materials whose colour the wear shader keeps (Farbschema 2); held here, not in userData (glTF extras).
+const keptColors = new WeakSet();
+export function keepColor(material) { keptColors.add(material); }
+
 // Per-role shader patch on a clone of the GLB material.
-export function wearMaterial(source, role, unit) {
+// unit = world units per metre (bump heights in view units); meter = metres per object unit of the meshes using this material
+// (1 for the robot, the fit scale for a helmet hung into the head segment), so radius and noise stay in real millimetres.
+// scale: factor on edge wear and scratches (helmets in robot colours, robotHelmetColors.json › wear).
+export function wearMaterial(source, role, unit, meter = 1, scale = 1) {
   const r = P.roles[role];
   if (!r) return source;
   const m = r.specular !== undefined ? THREE.MeshStandardMaterial.prototype.copy.call(new THREE.MeshPhysicalMaterial(), source) : source.clone();
@@ -103,15 +112,15 @@ export function wearMaterial(source, role, unit) {
     m.defines = { STANDARD: '', PHYSICAL: '' }; // the standard copy() sets STANDARD only; without PHYSICAL specular is ignored
     m.specularIntensity = r.specular;
   }
-  if (r.color) m.color.set(r.color);
+  if (r.color && !keptColors.has(source)) m.color.set(r.color); // Ballon aaa colour for the body palette only, not for Farbschema 2
   m.name = `${source.name}_aged`;
   m.userData.wearRole = role;
-  const u = { wearUnit: { value: unit }, wearColor: { value: new THREE.Color(P.wear.color) }, scratchColor: { value: new THREE.Color(P.scratch.color) } };
+  const u = { wearUnit: { value: unit }, wearMeter: { value: meter }, wearColor: { value: new THREE.Color(P.wear.color) }, scratchColor: { value: new THREE.Color(P.scratch.color) } };
   m.onBeforeCompile = shader => {
     Object.assign(shader.uniforms, u);
     shader.vertexShader = shader.vertexShader
-      .replace('#include <common>', `#include <common>\nattribute vec3 wearBary;\nattribute vec3 wearEdge;\nvarying vec3 vWearPos;\nvarying vec3 vWearBary;\nvarying vec3 vWearEdge;`)
-      .replace('#include <begin_vertex>', `#include <begin_vertex>\nvWearPos = position; vWearBary = wearBary; vWearEdge = wearEdge;`);
+      .replace('#include <common>', `#include <common>\nattribute vec3 wearBary;\nattribute vec3 wearEdge;\nuniform float wearMeter;\nvarying vec3 vWearPos;\nvarying vec3 vWearBary;\nvarying vec3 vWearEdge;`)
+      .replace('#include <begin_vertex>', `#include <begin_vertex>\nvWearPos = position * wearMeter; vWearBary = wearBary; vWearEdge = wearEdge * wearMeter;`);
     const f = (x) => x.toFixed(5);
     shader.fragmentShader = shader.fragmentShader
       .replace('#include <common>', `#include <common>\n${NOISE}\nuniform vec3 wearColor;\nuniform vec3 scratchColor;`)
@@ -122,13 +131,13 @@ export function wearMaterial(source, role, unit) {
           vec3 dist = mix(vec3(1e3), max(vWearBary, 0.0) * vWearEdge, step(0.0, vWearEdge));
           float d = min(min(dist.x, dist.y), dist.z);
           float edge = 1.0 - smoothstep(0.0, ${f(P.wear.radius)}, d);
-          wearMask = ${f(r.wear)} * wRange(edge * wNoise(vWearPos, ${f(P.wear.breakupScale)}), ${f(P.wear.threshold[0])}, ${f(P.wear.threshold[1])});
+          wearMask = ${f(r.wear * scale)} * wRange(edge * wNoise(vWearPos, ${f(P.wear.breakupScale)}), ${f(P.wear.threshold[0])}, ${f(P.wear.threshold[1])});
         }` : ''}
         diffuseColor.rgb = mix(diffuseColor.rgb, wearColor, wearMask);
         ${r.scratch ? `{
           float s = wRange(wNoise(vWearPos * vec3(${f(P.scratch.stretchX)}, 1.0, 1.0), ${f(P.scratch.scale)}),
             ${f(P.scratch.threshold[0])}, ${f(P.scratch.threshold[1])});
-          diffuseColor.rgb = mix(diffuseColor.rgb, scratchColor, ${f(P.scratch.amount)} * s);
+          diffuseColor.rgb = mix(diffuseColor.rgb, scratchColor, ${f(P.scratch.amount * scale)} * s);
         }` : ''}`)
       .replace('#include <roughnessmap_fragment>', `#include <roughnessmap_fragment>
         roughnessFactor *= mix(${f(P.roughness.min)}, ${f(P.roughness.max)}, wNoise(vWearPos, ${f(P.roughness.scale)}));
@@ -146,7 +155,7 @@ export function wearMaterial(source, role, unit) {
           normal = normalize(mix(normal, bumped, ${f(r.bump[1])}));
         }` : ''}`);
   };
-  m.customProgramCacheKey = () => `robotWear_${role}_${unit.toFixed(4)}`;
+  m.customProgramCacheKey = () => `robotWear_${role}_${scale}`;
   return m;
 }
 
@@ -154,8 +163,15 @@ export function wearMaterial(source, role, unit) {
 // prepared once per mesh and kept (also while flat), so toggling is cheap; unit = world units per object metre (the viewer's
 // fit scale). The state lives in a WeakMap, not in userData: GLTFExporter writes userData as extras.
 const state = new WeakMap();
-export function setRobotWear(model, on) {
-  const unit = model.children[0].scale.x;
+const scales = new WeakMap();
+const agedGeometry = new WeakMap(); // flat geometry → Map(metre key → prepared copy); independent of the material
+// Factor on edge wear and scratches of one mesh (helmets in robot colours); kept here, not in userData (glTF extras).
+export function setWearScale(mesh, scale) { scales.set(mesh, scale); }
+// opts.metersPerWorld: metres per world unit (default: the robot's fit scale, model.children[0]); helmets shown alone pass it.
+export function setRobotWear(model, on, opts = {}) {
+  model.updateMatrixWorld(true);
+  const ws = new THREE.Vector3();
+  const mpw = opts.metersPerWorld ?? 1 / model.children[0].getWorldScale(ws).x, unit = 1 / mpw;
   const shared = new Map();
   model.traverse(o => {
     if (!o.isMesh) return;
@@ -164,8 +180,14 @@ export function setRobotWear(model, on) {
     const role = roleOf(d.flat.material);
     if (on && role && P.roles[role]) {
       if (!d.aged) {
-        if (!shared.has(d.flat.material)) shared.set(d.flat.material, wearMaterial(d.flat.material, role, unit));
-        d.aged = { geometry: prepareWearGeometry(d.flat.geometry), material: shared.get(d.flat.material) };
+        const meter = o.getWorldScale(ws).x * mpw;
+        const scale = scales.get(o) ?? 1;
+        const key = `${d.flat.material.uuid}|${meter.toFixed(4)}|${scale}`;
+        if (!shared.has(key)) shared.set(key, wearMaterial(d.flat.material, role, unit, meter, scale));
+        const cache = agedGeometry.get(d.flat.geometry) ?? new Map(), gkey = meter.toFixed(4);
+        if (!cache.has(gkey)) cache.set(gkey, prepareWearGeometry(d.flat.geometry, undefined, undefined, meter));
+        agedGeometry.set(d.flat.geometry, cache);
+        d.aged = { geometry: cache.get(gkey), material: shared.get(key) };
       }
       o.geometry = d.aged.geometry; o.material = d.aged.material;
     } else {
@@ -176,3 +198,20 @@ export function setRobotWear(model, on) {
 }
 
 export const robotWearOn = model => state.get(model) === true;
+
+// Free the aged state of the meshes below root: the meshes get their flat geometry and material back (that geometry belongs to
+// its owner). keepGeometry (colour-scheme change on the same body): the prepared copies stay cached for the next setRobotWear;
+// otherwise (a helmet taken off) they are disposed.
+export function releaseRobotWear(root, { keepGeometry = false } = {}) {
+  root.traverse(o => {
+    const d = o.isMesh && state.get(o);
+    if (!d) return;
+    o.geometry = d.flat.geometry;
+    o.material = d.flat.material;
+    if (!keepGeometry) {
+      for (const g of agedGeometry.get(d.flat.geometry)?.values() ?? []) g.dispose();
+      agedGeometry.delete(d.flat.geometry);
+    }
+    state.delete(o);
+  });
+}

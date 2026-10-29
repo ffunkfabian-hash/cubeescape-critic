@@ -40,7 +40,7 @@ export function createAssemblyLabels() {
       layer.hidden = !show;
       if (!show) return;
       model.updateMatrixWorld(true); camera.updateMatrixWorld(true);
-      const width = innerWidth, height = innerHeight, labelWidth = Math.min(234, width * .22), margin = 16;
+      const width = layer.clientWidth || innerWidth, height = layer.clientHeight || innerHeight, labelWidth = Math.min(234, width * .22), margin = 16;
       svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
       const points = groups.map((g,i) => {
         const projected = new THREE.Vector3(...g.center).applyMatrix4(model.matrixWorld).project(camera);

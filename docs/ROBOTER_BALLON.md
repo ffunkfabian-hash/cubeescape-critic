@@ -1,9 +1,9 @@
-# Roboterkörper aus Ballon (Version 0.10)
+# Körper, Helme und Farbschema (0.10–0.12)
 
 In `cubeescape-ballon` sind in „Roboter Runde 5“ drei Körperstudien für den BASIC-Roboter entstanden. Die Runde gehört zu Ballon 0.23 „Gauntlet“,
 liegt auf dem Branch `claude/ballon-0-23-gauntlet-runde5-b524af`, Commit `14bd78d`, und ist dort nicht nach `main` gemergt.
-Ein Nutzer hat noch keine der Studien gewählt. Critic übernimmt alle drei als eigene Modelle in den Viewer, damit man sie neben Helm,
-Scout und Gesamtkörper ansehen und mit dem Kritiker-Ablauf weiterbearbeiten kann.
+Ein Nutzer hat noch keine der Studien gewählt. Critic übernimmt alle drei als eigene Modelle in den Viewer. Seit 0.12 sind sie die einzigen
+Körper des Werkzeugs („wir bauen dann auf ballon auf“); die früheren three.js-Körperstudien 0.5–0.9 sind entfernt und nur noch Archiv.
 
 ![Drei Körper – vorn, links, hinten, rechts, explodiert](bilder/roster_koerper.jpg)
 
@@ -76,10 +76,50 @@ bleiben nach dem ersten Altern im Speicher, auch wenn auf flach umgeschaltet wir
 - Anisotropie der Zierkanten (`trim`) und Glasmuster fehlen.
 - Der GLB-Export im Viewer schreibt die flache Fassung; das Altern ist ein Viewer-Shader.
 
+## Helmwahl (0.12 „Fusion“)
+
+![Drei Körper mit Helm H und Scout, Explosion mit Helm, Navigation links](bilder/fusion_kontaktbogen.jpg)
+
+Jeder Körper trägt **Helm H** (der three.js-Helm, H01–H21; Standard) oder **Scout** (S01–S13): Navigation „Modelle › Helm“ oder
+`&helmet=critic|scout` (`web/src/robotHelmet.js`). Helm H lässt sich in allen gesicherten Varianten 80–88 aufsetzen (Oberfläche,
+Akzente, Stirnblenden; `&helmetVariant=`, Daten `web/src/criticHelmetVariants.json`) und mit oder ohne Kopfhörer (`&headset=`).
+Der **Studienhelm** aus dem GLB ist ins Archiv gewandert: nicht mehr in der Auswahl, per `&helmet=study` weiter erreichbar.
+- Der Helm hängt im Kopfsegment `SEG_head`, dessen Ursprung der Halsanker `Socket_Neck` ist. Er folgt damit Kopfneigung, Kopfdrehung
+  und Explosion. Critic und Scout schauen nach +Z, das Gesicht im Segment nach −Z: eine halbe Drehung um Y.
+- Eingepasst wird gleichmäßig auf die Box des Studienhelms ohne Antennen: gleiche Höhe, gleiche Unterkante, gleiche Mitte in x/z.
+  Bei Helm H entfällt vorher der Präsentationshals (`configureHelmetAssembly(…, { neck: false })`), die Schale reicht dann
+  vom Kinn bis zum Kopfhörerband.
+- Der Roboterhals (`neck`, `neck_ring`, `neck_trim`) bleibt; die Teile des Studienhelms werden ausgeblendet, nicht gelöscht.
+- In der Explosion gehört der Helm zur Gruppe Kopf; im Bauteilbaum steht er als eigener Zweig unter Kopf mit seinen Kennungen.
+- **Helmfarben** (Nutzerwunsch „Die Farben des Helms müssen noch an die des roboters angepasst werden“): Standard Farbschema 1 (`colors=body`).
+  Jedes Helmmaterial bekommt das flache Rollenmaterial des Roboters, zugeordnet über eine feste Tabelle in `web/src/robotHelmetColors.json`
+  nach dem Vorbild des Studienhelms: Schale Creme, Haube und Maske Eloxal, Module brüniertes Metall, Kabel Gummi, Streifen Zierkante,
+  Augen Cyan. Damit altert der Helm mit demselben Shader wie der Körper. Abriebradius und Rauschen rechnen je Mesh in echten Metern,
+  trotz der Skalierung im Kopfsegment. Der facettenreiche Helm H bekommt einen Abriebfaktor von 0,35, Scout 0,5; mit voller
+  Stärke wirkten die vielen harten Kanten deutlich abgenutzter als Körper und Studienhelm. Die dunkle Rüstung von Helm H folgt der
+  Oberfläche der Variante (original → Eloxal, Metall → brüniertes Metall, Graphit → Graphit), damit 80–88 unterscheidbar bleiben.
+  `&colors=original` oder „Helmfarben › Original“ zeigt die eigenen Materialien der Helme.
+- **Einheitliche Farbschemata für alles** (Nutzer: „nimm die aufteilung zwischen ballon und critic raus. Das wird ein Tool“, dann
+  „Vielleicht passen wir die farben auch an die original farben vom helm an 🙂 Variante 1 und Variante 2“): `&colors=body|helmet|original`.
+  - **Farbschema 1 „Creme“** (`body`, Standard): Palette der Körper; Werte in `web/src/ballonRoles.json` wie in den Körper-GLBs (Test
+    gleicht ab).
+  - **Farbschema 2 „Weiß-Graphit“** (`helmet`): Jede Rolle der Körper übernimmt Farbe, Rauheit, Metall und Leuchten des passenden
+    Originalmaterials von Helm H (`robotHelmetColors.json › scheme2`: Schale → Weiß, Eloxal/Graphit → Graphit-Rüstung, Metall →
+    dunkles Metall, Akzent → Oliv, Lichter → Visier-Cyan); die Werte werden live aus `createMaterials('original','original')` gelesen.
+  - **Original**: jedes Modell in seinen eigenen Materialien (Körper in Schema 1, Helme mit Texturen).
+  Helm H und Scout allein folgen demselben Schema und altern wie die Körper (Maßstab des Helmrahmens 0,25 m je Einheit). Der GLB-Export
+  schreibt die flache Fassung: Körper und Helme im Schema mit dessen Rollenmaterialien, bei `original` die eigenen.
+
+![Schema 1 und 2: Paladin, Wächter, Mechanik mit Scout, Kopf nah, Helm H allein](bilder/fusion_farbschemata.jpg)
+
+![Studienhelm · Helm H original · Helm H einheitlich · Scout original · Scout einheitlich](bilder/fusion_helmfarben.jpg)
+
+![Werkzeug: Paladin, Helm H 80/81/86 einheitlich, Helm H original, Scout, Paladin mit 81 und 86](bilder/fusion_werkzeug.jpg)
+
 ## Viewer
 
 `?model=waechter`, `?model=paladin` oder `?model=mechanik` lädt den GLB. Der Viewer skaliert den Körper auf den Rahmen des
-three.js-Gesamtkörpers (`body=full`, Höhe 5,44, Füße bei y = −4,85), damit dessen Kameras (`front`, `left`, `back`, `right`)
+früheren three.js-Gesamtkörpers 0.9 (`ROBOT_FRAME`, Höhe 5,44, Füße bei y = −4,85), damit dessen Kameras (`front`, `left`, `back`, `right`)
 ohne Anpassung passen. Mit `&exploded=0..1` oder dem Regler „Explosionsabstand“ öffnet sich die Explosionsansicht. Dafür verschiebt der Viewer die Segmentknoten
 (GLB-Wurzeln mit Extras `asm`/`side`) um `explode_mm` aus `parts.json`, genau wie `robot_build.explode()` in Ballon; der Oberkörper
 bleibt stehen. Die Etiketten zeigen sieben Gruppen (Kopf, Arm R/L, Oberkörper, Unterkörper, Bein R/L) mit Anker und Teilezahl.
@@ -95,4 +135,4 @@ Die three.js-Teile A/B und Scout R/L zählen anders.
 - Ohne Waffe und ohne Haltung `ready`: Die Pilotwaffe gehört zu Ballon und ist nicht exportiert.
 - Die GLBs selbst bleiben flach; gealtert wird erst im Viewer (siehe oben). Andere Programme sehen nur die Gestaltungsfarben.
 - Für die Körper gibt es keine Vorlagenbilder und keine IoU-Messung; der Vergleich mit den Ballon-Cycles-Bildern (`~/Library/Caches/CubeEscapeBallon/out/robot/studies/`) ist eine Sichtprüfung.
-- Offen ist die Wahl des Nutzers: Welche Studie soll weiter ausgearbeitet werden, und soll sie den Critic-Helm (H01–H21) oder Scout tragen?
+- Offen ist die Wahl des Nutzers: Welcher Körper wird weiter ausgearbeitet, mit welchem Helm und welcher Variante?

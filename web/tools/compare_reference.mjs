@@ -33,7 +33,7 @@ try {
   page.setDefaultTimeout(180000);
   const errors = [];
   page.on('pageerror', e => errors.push(e.message));
-  await page.goto(server.resolvedUrls.local[0] + '?ui=0&static=1');
+  await page.goto(server.resolvedUrls.local[0] + '?ui=0&static=1&colors=original');
   await page.waitForFunction(() => window.__ready === true);
   await page.evaluate(async config => {
     const { GLTFLoader } = await import('/node_modules/three/examples/jsm/loaders/GLTFLoader.js');

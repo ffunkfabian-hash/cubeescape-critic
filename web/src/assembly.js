@@ -1,6 +1,5 @@
 // Presentation changes operate after construction. Source geometry and the assembled helmet stay intact.
 import * as THREE from 'three';
-import { fullBodyExplosionOffset } from './parts/fullBody.js';
 
 const part = (label, offset, connection) => ({ label, offset, connection });
 export const ASSEMBLY_PARTS = {
@@ -52,7 +51,8 @@ export function configureHelmetAssembly(model, options) {
     const comms = model.getObjectByName('RightComms_And_Tube');
     for (const child of [...(comms?.children ?? [])]) if (child.name !== 'BackBox_Group') remove(child);
   }
-  if (['shoulders', 'full'].includes(options.body)) remove(model.getObjectByName('Neck'));
+  // neck: false – helmet on a body (the body brings its own neck), without the presentation neck
+  if (options.neck === false) remove(model.getObjectByName('Neck'));
   return model;
 }
 
@@ -86,19 +86,6 @@ function category(mesh) {
   throw new Error(`Unclassified assembly mesh ${ancestors.reverse().join('/')}`);
 }
 
-const BODY_LABELS = {
-  B01:'Flexibler Hals', B02:'Halsrippen', B03:'Kragen vorne', B04:'Kragen hinten', B05:'Oberkörperbasis',
-  B06:'Schulterbasis A', B07:'Schulter vorne A', B08:'Schulter hinten A', B09:'Schulterbasis B', B10:'Schulter vorne B', B11:'Schulter hinten B',
-  B12:'Brustplatte A', B13:'Brustplatte B', B14:'Brusteinsatz A', B15:'Brusteinsatz B', B16:'Rückenplatte A', B17:'Rückenplatte B', B18:'Rückeneinsatz',
-  B19:'Brustbefestigung A', B20:'Brustbefestigung B', B21:'Rückenbefestigung A', B22:'Rückenbefestigung B',
-  B23:'Schulterlamelle A', B24:'Schulterlamelle B', B25:'Schultergelenk A', B26:'Schultergelenk B',
-  B27:'Brustmitte', B28:'Flankenpanzer A', B29:'Flankenpanzer B', B30:'Schulterdach A', B31:'Schulterdach B',
-  B32:'Bauchlamelle 1', B33:'Bauchlamelle 2', B34:'Bauchlamelle 3', B35:'Beckengurt', B36:'Becken-/Taillenkern',
-  B37:'Hüftplatte A', B38:'Hüftplatte B', B39:'Oberarm A', B40:'Oberarm B', B41:'Ellbogen A', B42:'Ellbogen B',
-  B43:'Unterarm A', B44:'Unterarm B', B45:'Hand A', B46:'Hand B', B47:'Hüftgelenk A', B48:'Hüftgelenk B',
-  B49:'Oberschenkel A', B50:'Oberschenkel B', B51:'Knie A', B52:'Knie B', B53:'Knieschutz A', B54:'Knieschutz B',
-  B55:'Unterschenkel A', B56:'Unterschenkel B', B57:'Fuß A', B58:'Fuß B',
-};
 
 
 export function assemblyInventory(model) {
@@ -108,12 +95,10 @@ export function assemblyInventory(model) {
     if (object.isMesh) {
       const id = category(object), box = new THREE.Box3().setFromObject(object, true);
       const center = box.getCenter(new THREE.Vector3());
-      const bodyPart = id.startsWith('B'), limb = fullBodyExplosionOffset(id, center.x);
-      const info = ASSEMBLY_PARTS[id] ?? { label: BODY_LABELS[id] ?? object.name.replaceAll('_', ' '),
-        offset: limb ?? [Math.sign(center.x) * 0.65, -0.6, Math.sign(center.z) * 0.42],
-        connection: limb ? 'Gesamtkörperstudie: Blockform, Gelenke und Aufnahmen noch konstruieren.' : 'Schulter-/Halsstudie: Aufnahmen und Montage noch konstruieren.' };
+      const info = ASSEMBLY_PARTS[id] ?? { label: object.name.replaceAll('_', ' '),
+        offset: [Math.sign(center.x) * 0.65, -0.6, Math.sign(center.z) * 0.42], connection: 'Aufnahmen und Montage noch konstruieren.' };
       entries.push({ id, label: info.label, connection: info.connection, path, name: object.name || path.split('/').at(-1),
-        mesh: object, center: center.toArray(), offset: info.offset, presentationOnly: id === 'P01', study: bodyPart });
+        mesh: object, center: center.toArray(), offset: info.offset, presentationOnly: id === 'P01' });
     }
     const occurrences = new Map();
     for (const child of object.children) {
@@ -162,4 +147,4 @@ export function assemblyDescription(model) {
 }
 
 // Shared with the marker page (web/marker): part id of one mesh and the body labels.
-export { category as assemblyPartId, BODY_LABELS };
+export { category as assemblyPartId };
