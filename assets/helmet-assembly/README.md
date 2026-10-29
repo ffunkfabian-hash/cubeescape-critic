@@ -1,5 +1,9 @@
 # Assembly 0.5 – Einzelteile und Oberkörper
 
+> **Archiv (seit 0.12):** Diese Körperstudie ist aus dem Viewer und dem Code entfernt („wir bauen dann auf ballon auf“). Die hier
+> genannten Quellen, Schalter (`body=…`, `--body`) und Reproduktionsbefehle gelten für Commit `4e63f05`
+> (`git checkout 4e63f05`); Lieferpakete und Belege bleiben unverändert.
+
 Prüfexporte des bestehenden Three.js-Generators. Materialvarianten bleiben frei wählbar; die hier benannten
 Kombinationen dienen dem Vergleich. Helmform und Augen bleiben gegenüber 0.4 erhalten.
 

@@ -1,5 +1,9 @@
 # Cuirass 0.6 – geschichteter Schulterpanzer und Brustgrat
 
+> **Archiv (seit 0.12):** Diese Körperstudie ist aus dem Viewer und dem Code entfernt („wir bauen dann auf ballon auf“). Die hier
+> genannten Quellen, Schalter (`body=…`, `--body`) und Reproduktionsbefehle gelten für Commit `4e63f05`
+> (`git checkout 4e63f05`); Lieferpakete und Belege bleiben unverändert.
+
 Die neue Oberkörperstudie überträgt die vom Nutzer gezeigte Paladin-/Titan-Inspiration auf den vorhandenen
 Helm. Sie ist ein reproduzierbarer Formvorschlag, keine bestätigte Fertigungskonstruktion. Der Helm bleibt
 an die Videovorlage gebunden. Die Konfiguration für diese Betrachtung lautet `finish=graphite`,

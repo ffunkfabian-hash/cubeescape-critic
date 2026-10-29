@@ -1,5 +1,9 @@
 # Bastion 0.7 – Lieferstand
 
+> **Archiv (seit 0.12):** Diese Körperstudie ist aus dem Viewer und dem Code entfernt („wir bauen dann auf ballon auf“). Die hier
+> genannten Quellen, Schalter (`body=…`, `--body`) und Reproduktionsbefehle gelten für Commit `4e63f05`
+> (`git checkout 4e63f05`); Lieferpakete und Belege bleiben unverändert.
+
 Montierte und explodierte Oberkörperstudie mit Graphit, hellen Befestigungen, ohne Headset und Stirnstreifen.
 31 separate Körpermeshes, insgesamt 87 Meshes und 53 beschriftete Gruppen. Die Brustmitte B27 trägt seit der
 Nacharbeit vierzehn gefugte, erhabene Facettenfelder und steht als dickere Platte vor.

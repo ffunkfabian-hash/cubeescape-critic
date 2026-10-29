@@ -6,7 +6,8 @@
 // verification.json identifies this run's status, completed views and optional IoU.
 // Older files may remain after a failure or --no-iou; they are not evidence for the current run.
 // Usage: node verify_renders.mjs [--no-iou] [--finish=original|metal|graphite]
-//   [--headset=on|off] [--body=none|shoulders|legacy] [--exploded=0..1] (body/exploded require --no-iou)
+//   [--headset=on|off] [--exploded=0..1] (exploded requires --no-iou) [--colors=original|body|helmet] (default original: the
+//   delivered materials; a colour scheme requires --no-iou)
 //   [--accents=original|light-fasteners|white-strips|contrast-strips] [--strips=on|off] [--out=renders]
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
@@ -18,11 +19,11 @@ import { resolveFinish, resolveAccents } from './src/finishPresets.js';
 import { resolveAssemblyOptions } from './src/assemblyOptions.js';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
-const options = { finish: 'original', accents: 'original', strips: 'on', headset: 'on', body: 'none', exploded: '0', out: 'renders', noIou: false };
+const options = { finish: 'original', accents: 'original', strips: 'on', headset: 'on', exploded: '0', colors: 'original', out: 'renders', noIou: false };
 const seen = new Set();
 const args = process.argv.slice(2);
 for (let i = 0; i < args.length; i++) {
-  const match = /^(--finish|--accents|--strips|--headset|--body|--exploded|--out)(?:=(.*))?$/.exec(args[i]);
+  const match = /^(--finish|--accents|--strips|--headset|--exploded|--colors|--out)(?:=(.*))?$/.exec(args[i]);
   const key = args[i] === '--no-iou' ? 'noIou' : match?.[1].slice(2);
   if (!key) throw new Error(`Unknown argument: ${args[i]}`);
   if (seen.has(key)) throw new Error(`Duplicate argument: ${args[i]}`);
@@ -38,8 +39,9 @@ const accents = resolveAccents(options.accents);
 const strips = options.strips;
 if (!['on', 'off'].includes(strips)) throw new Error(`Unknown strips ${JSON.stringify(strips)}; expected on or off`);
 const assembly = resolveAssemblyOptions(options);
-const referenceCompatible = assembly.body === 'none' && assembly.exploded === 0;
-if (!referenceCompatible && !options.noIou) throw new Error('Body and exploded views require --no-iou');
+if (!['original', 'body', 'helmet'].includes(options.colors)) throw new Error(`Unknown colors ${JSON.stringify(options.colors)}`);
+const referenceCompatible = assembly.exploded === 0 && options.colors === 'original';
+if (!referenceCompatible && !options.noIou) throw new Error('Exploded views and colour schemes require --no-iou');
 const out = path.resolve(root, options.out);
 mkdirSync(out, { recursive: true });
 const VIEWS = assembly.exploded > 0 ? ['assembly', 'front', 'left', 'back', 'right'] : ['front', 'left', 'back', 'right'];
@@ -79,7 +81,7 @@ try {
   page.on('response', (response) => {
     if (response.status() >= 400) errors.push(`HTTP ${response.status()}: ${response.url()}`);
   });
-  await page.goto(`${url}?ui=0&static=1&finish=${encodeURIComponent(finish.name)}&accents=${encodeURIComponent(accents.name)}&strips=${strips}&headset=${assembly.headset}&body=${assembly.body}&exploded=${assembly.exploded}`);
+  await page.goto(`${url}?ui=0&static=1&colors=${options.colors}&finish=${encodeURIComponent(finish.name)}&accents=${encodeURIComponent(accents.name)}&strips=${strips}&headset=${assembly.headset}&exploded=${assembly.exploded}`);
   await page.waitForFunction(() => window.__ready === true, null, { timeout: 180000 });
   result.parameters = await page.evaluate(() => window.helmetParams);
   result.finish = await page.evaluate(() => window.materialFinish);
@@ -91,7 +93,6 @@ try {
   result.assembly = await page.evaluate(() => window.presentationOptions);
   if (JSON.stringify(result.assembly) !== JSON.stringify(assembly)) throw new Error('Rendered assembly does not match requested options');
   result.assemblyParts = await page.evaluate(() => window.assemblyParts);
-  if (assembly.body === 'shoulders') result.bodyParameters = await page.evaluate(() => window.shoulderStudyParams);
   result.renderSettings = await page.evaluate(() => window.renderSettings);
   const settle = () => page.evaluate(() => { const t = performance.now(); window.renderFrame(); return performance.now() - t; });
   for (const v of VIEWS) {

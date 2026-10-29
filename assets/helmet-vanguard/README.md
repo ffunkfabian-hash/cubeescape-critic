@@ -1,5 +1,9 @@
 # Vanguard 0.9 – Lieferstand
 
+> **Archiv (seit 0.12):** Diese Körperstudie ist aus dem Viewer und dem Code entfernt („wir bauen dann auf ballon auf“). Die hier
+> genannten Quellen, Schalter (`body=…`, `--body`) und Reproduktionsbefehle gelten für Commit `4e63f05`
+> (`git checkout 4e63f05`); Lieferpakete und Belege bleiben unverändert.
+
 Einfacher Gesamtkörper mit Graphit, hellen Befestigungen, ohne Headset und Stirnstreifen (`body=full`).
 58 separate Körpermeshes (B01–B31 Bastion, B32–B58 neu), insgesamt 114 Meshes und 80 beschriftete Gruppen.
 

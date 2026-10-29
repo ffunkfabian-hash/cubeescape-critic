@@ -6,11 +6,10 @@ import * as THREE from 'three';
 import { resolveAssemblyOptions } from '../src/assemblyOptions.js';
 import { assemblyInventory, configureHelmetAssembly, createExplodedAssembly, assemblyDescription } from '../src/assembly.js';
 
-test('assembly options preserve the legacy body alias and reject invalid values', () => {
-  assert.deepEqual(resolveAssemblyOptions(), { headset:'on', body:'none', exploded:0 });
-  assert.equal(resolveAssemblyOptions({ body:'1' }).body, 'legacy');
-  assert.equal(resolveAssemblyOptions({ body:'shoulders', headset:'off', exploded:'.5' }).exploded,.5);
-  for (const options of [{headset:'none'},{body:'all'},{exploded:'NaN'},{exploded:2},{exploded:-1},{exploded:''}]) assert.throws(()=>resolveAssemblyOptions(options));
+test('assembly options (headset, explosion) and rejection of invalid values', () => {
+  assert.deepEqual(resolveAssemblyOptions(), { headset:'on', exploded:0 });
+  assert.equal(resolveAssemblyOptions({ headset:'off', exploded:'.5' }).exploded,.5);
+  for (const options of [{headset:'none'},{exploded:'NaN'},{exploded:2},{exploded:-1},{exploded:''}]) assert.throws(()=>resolveAssemblyOptions(options));
 });
 
 test('label anchors apply translated, rotated and scaled model transforms exactly once', () => {
@@ -60,7 +59,7 @@ test('headset removal and exploded assembly preserve every retained source mesh'
         assert.deepEqual([...source.mesh.position],source.position);
       }
     }
-    const stripped=configureHelmetAssembly(model,{headset:'off',body:'none'});
+    const stripped=configureHelmetAssembly(model,{headset:'off'});
     const retained=assemblyInventory(stripped); assert.equal(retained.length,64);
     assert.ok(stripped.getObjectByName('BackBox_Group'));
     for(const name of ['RadioModule','RadioModule_B','HeadBand','HeadBand_Stripe','Yoke','Yoke_B','Antenna','Antenna_B','Hose','Hose_B']) assert.equal(stripped.getObjectByName(name),undefined,name);
@@ -69,13 +68,10 @@ test('headset removal and exploded assembly preserve every retained source mesh'
       assert.equal(entry.mesh.geometry,before.geometry);assert.equal(entry.mesh.material,before.material);
       assert.deepEqual(entry.mesh.matrixWorld.elements,before.matrix);
     }
-    configureHelmetAssembly(stripped,{headset:'off',body:'shoulders'});
+    // helmet on a body: the presentation neck goes, the body brings its own (robotHelmet.js)
+    configureHelmetAssembly(stripped,{headset:'off',neck:false});
     assert.equal(stripped.getObjectByName('Neck'),undefined);assert.equal(assemblyInventory(stripped).length,58);
-    const {buildShoulderStudy}=await server.ssrLoadModule('/src/parts/shoulderStudy.js');
-    stripped.add(buildShoulderStudy(palette));
-    const withBody=assemblyInventory(stripped);assert.equal(withBody.length,89);
-    assert.equal(withBody.filter(e=>e.id.startsWith('B')).length,31);
-    assert.equal(assemblyDescription(createExplodedAssembly(stripped,1)).reduce((n,g)=>n+g.meshes.length,0),89);
+    assert.equal(assemblyDescription(createExplodedAssembly(stripped,1)).reduce((n,g)=>n+g.meshes.length,0),58);
   } finally {
     model?.traverse(o=>o.geometry?.dispose());for(const material of materials.values())material.dispose();await server.close();
   }

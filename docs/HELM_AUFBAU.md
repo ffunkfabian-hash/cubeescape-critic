@@ -1,5 +1,9 @@
 # Assembly 0.5 – Aufbau, Explosionsansicht und Oberkörper
 
+> **Archiv (seit 0.12):** Diese Körperstudie ist aus dem Viewer und dem Code entfernt („wir bauen dann auf ballon auf“). Die hier
+> genannten Quellen, Schalter (`body=…`, `--body`) und Reproduktionsbefehle gelten für Commit `4e63f05`
+> (`git checkout 4e63f05`); Lieferpakete und Belege bleiben unverändert.
+
 **Historischer Körperstand 0.5/0.5.1.** Die aktuelle Form und Teilezahl B01–B26 stehen in [Cuirass 0.6](HELM_CUIRASS.md); Bedienung und Explosionsmechanik bleiben gültig.
 
 Arbeitsstand vom 28.10.2026. Quelle bleibt der Three.js-Generator. Dies ist eine technische Beschreibung,

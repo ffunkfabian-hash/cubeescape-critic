@@ -1,8 +1,10 @@
-# Critic – parametrischer Helm im Browser
+# Critic – Roboter-Viewer im Browser
 
-**Aktueller Versuch 0.7 „Bastion“:** tiefe kantige Schultergehäuse mit unterer Panzerlage, geschlossene Brustmitte
-und separate Flanken. 31 Körperteile; Helm, kurzer Hals und kräftiger Rumpfkern erhalten.
-[Aufbau und Stil](docs/HELM_BASTION.md) · [Exporte](assets/helmet-bastion/README.md) · [Prüfbericht](docs/versions/0.7.md).
+**Stand 0.12 „Fusion“:** ein Werkzeug für Körper und Helme. Drei Körper (Wächter, Paladin, Mechanik) tragen wahlweise Helm H
+(H01–H21, Varianten 80–88) oder Scout (S01–S13), alles in einem einheitlichen, gealterten Farbschema. Links eine Navigation mit
+Modellen, Ansichten, Bauteilbaum sowie Look und Material. [Körper, Helme, Farben](docs/ROBOTER_BALLON.md) · [Viewer](web/README.md) ·
+[Prüfbericht](docs/versions/0.12.md). Die früheren three.js-Körperstudien 0.5–0.9 sind in 0.12 entfernt; ihre Lieferpakete und Berichte
+bleiben als Archiv (`assets/helmet-assembly|cuirass|bastion|vanguard/`, `docs/HELM_AUFBAU|CUIRASS|BASTION|VANGUARD.md`).
 
 **Form- und Materialbasis 0.4 „Continuity“:** weichere Übergänge neben den Augen und zwei von der Stirn bis zum Hinterkopf
 verlängerte Streifen. Auf derselben Geometrie stehen Originalmaterial, glänzendes Metall und feines dunkles Graphit

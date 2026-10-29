@@ -63,11 +63,11 @@ test('verification rejects invalid arguments before starting the renderer or wri
     for (const args of [['--finish=chrome'], ['--finish='], ['--finish'], ['--out='],
       ['--out', '--no-iou'], ['--unknown'], ['--finish=metal', '--finish=graphite'],
       ['--accents=white'], ['--accents=contrast'], ['--accents='], ['--accents'], ['--accents=white-strips', '--accents=original'],
-      ['--body=unknown'], ['--headset=hidden'], ['--exploded=NaN'], ['--exploded=2'], ['--body=shoulders'], ['--exploded=1'], ['--strips=hidden'], ['--strips='], ['--strips'], ['--strips=on', '--strips=off'],
+      ['--body=shoulders'], ['--headset=hidden'], ['--exploded=NaN'], ['--exploded=2'], ['--exploded=1'], ['--strips=hidden'], ['--strips='], ['--strips'], ['--strips=on', '--strips=off'],
       ['--crown-pattern=none'], ['--crown-pattern=chevron'], ['--crown-pattern=hex'], ['--crown-pattern=tech']]) {
       const run = spawnSync(process.execPath, [path.join(f.root, 'verify_renders.mjs'), ...args], { timeout: 10000 });
       assert.equal(run.status, 1, run.stderr?.toString());
-      assert.match(run.stderr.toString(), /Unknown finish|Unknown accents|Unknown strips|Unknown body|Unknown headset|Exploded amount|require --no-iou|Missing value|Unknown argument|Duplicate argument/);
+      assert.match(run.stderr.toString(), /Unknown finish|Unknown accents|Unknown strips|Unknown headset|Exploded amount|require --no-iou|Missing value|Unknown argument|Duplicate argument/);
     }
     assert.equal(existsSync(path.join(f.root, 'renders')), false);
   } finally { rmSync(f.directory, { recursive: true, force: true }); }

@@ -1,0 +1,100 @@
+{
+  "source": "Flat materials MT_<role>_color of the robot GLBs (assets/robot-bodies/*, Ballon basic/kit.py MATERIALS, mode color); linear RGB as in glTF. Used to dress helmets shown without a robot in Ballon colours.",
+  "helmetFrameMeters": 0.25,
+  "helmetFrameNote": "metres per world unit of the Critic helmet frame (Scout is fitted to it): the fit scale of the Critic helmet on the robots is 0.25 ± 0.01",
+  "roles": {
+    "graphite": {
+      "color": [
+        0.0252,
+        0.0273,
+        0.0331
+      ],
+      "metalness": 0,
+      "roughness": 0.75
+    },
+    "dark_metal": {
+      "color": [
+        0.0685,
+        0.0762,
+        0.0908
+      ],
+      "metalness": 0.8,
+      "roughness": 0.45
+    },
+    "shell": {
+      "color": [
+        0.6867,
+        0.6038,
+        0.4564
+      ],
+      "metalness": 0,
+      "roughness": 0.55
+    },
+    "trim": {
+      "color": [
+        0.5841,
+        0.6105,
+        0.6445
+      ],
+      "metalness": 1.0,
+      "roughness": 0.22
+    },
+    "accent": {
+      "color": [
+        0.7454,
+        0.1301,
+        0.013
+      ],
+      "metalness": 0,
+      "roughness": 0.5
+    },
+    "anodized": {
+      "color": [
+        0.0144,
+        0.016,
+        0.0203
+      ],
+      "metalness": 0.6,
+      "roughness": 0.4
+    },
+    "rubber": {
+      "color": [
+        0.0103,
+        0.011,
+        0.013
+      ],
+      "metalness": 0,
+      "roughness": 0.85
+    },
+    "reticle_cyan": {
+      "color": [
+        0.1144,
+        0.6514,
+        0.7454
+      ],
+      "metalness": 0,
+      "roughness": 0.3,
+      "emissive": [
+        0.0687,
+        0.3908,
+        0.4472
+      ],
+      "emissiveIntensity": 1.0
+    },
+    "energy": {
+      "color": [
+        0.1144,
+        0.6514,
+        0.7454
+      ],
+      "metalness": 0,
+      "roughness": 0.3,
+      "emissive": [
+        0.1535,
+        0.8739,
+        1
+      ],
+      "emissiveIntensity": 2.2362
+    }
+  }
+}

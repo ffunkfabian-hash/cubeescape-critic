@@ -1,5 +1,9 @@
 # Cuirass 0.6 – Lieferstand
 
+> **Archiv (seit 0.12):** Diese Körperstudie ist aus dem Viewer und dem Code entfernt („wir bauen dann auf ballon auf“). Die hier
+> genannten Quellen, Schalter (`body=…`, `--body`) und Reproduktionsbefehle gelten für Commit `4e63f05`
+> (`git checkout 4e63f05`); Lieferpakete und Belege bleiben unverändert.
+
 Reproduzierbare Oberkörperstudie mit 26 Körpermeshes und unverändertem Helm. Die Bilder zeigen Graphit
 mit hellen Befestigungen, ohne Headset und ohne Stirnstreifen. Das ist eine Sichtungsvariante, kein neuer
 Standard für die Materialwahl.

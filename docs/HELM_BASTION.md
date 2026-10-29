@@ -1,5 +1,9 @@
 # Bastion 0.7 – kantige Schultergehäuse und zentrale Brust
 
+> **Archiv (seit 0.12):** Diese Körperstudie ist aus dem Viewer und dem Code entfernt („wir bauen dann auf ballon auf“). Die hier
+> genannten Quellen, Schalter (`body=…`, `--body`) und Reproduktionsbefehle gelten für Commit `4e63f05`
+> (`git checkout 4e63f05`); Lieferpakete und Belege bleiben unverändert.
+
 Dieser Versuch setzt die vier vom Nutzer gezeigten Rüstungsbilder und zwei nachgereichte Facettenreferenzen um: tiefe kastenförmige Schultern,
 geschichtete Schutzplatten, eine zentrale helle Brust und separate Flanken über dunklem Unterbau.
 Der Helm folgt weiter der Videovorlage; die neuen Bilder betreffen den Oberkörper. Keine neue endgültige

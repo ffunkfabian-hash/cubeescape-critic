@@ -1,0 +1,15 @@
+{
+  "source": "assets/helmet-continuity/README.md (Stände 80–88) and the verification.json of each folder: finish, accents, strips",
+  "default": "80",
+  "variants": {
+    "80": { "label": "Original", "finish": "original", "accents": "original", "strips": "on" },
+    "81": { "label": "Metall", "finish": "metal", "accents": "light-fasteners", "strips": "on" },
+    "82": { "label": "Graphit", "finish": "graphite", "accents": "light-fasteners", "strips": "on" },
+    "83": { "label": "Graphit, weiße Streifen", "finish": "graphite", "accents": "white-strips", "strips": "on" },
+    "84": { "label": "Metall, weiße Streifen", "finish": "metal", "accents": "white-strips", "strips": "on" },
+    "85": { "label": "Graphit, Kontraststreifen", "finish": "graphite", "accents": "contrast-strips", "strips": "on" },
+    "86": { "label": "Metall, Kontraststreifen", "finish": "metal", "accents": "contrast-strips", "strips": "on" },
+    "87": { "label": "Metall ohne Blenden", "finish": "metal", "accents": "light-fasteners", "strips": "off" },
+    "88": { "label": "Graphit ohne Blenden", "finish": "graphite", "accents": "light-fasteners", "strips": "off" }
+  }
+}
