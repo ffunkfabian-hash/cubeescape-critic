@@ -51,11 +51,13 @@ so entstehen symmetrische, bewusst gesetzte Facetten statt zufälliger Triangula
 bleiben geschlossen. Die Indizes berücksichtigen eine mögliche Umkehrung der Konturreihenfolge.
 
 **Fugen:** Nach dem zweiten Facettenbild trägt jede der vierzehn Flächen ein eigenes erhabenes Feld (`relief.pads`).
-Jedes Feld ist ein geschlossener Körper: um `groove = 0.008` von allen Facettenkanten eingerückt, `height = 0.022`
-entlang der Facettennormale erhaben, mit senkrechter Fugenwand und zweistufiger Rundfase (`chamfer = 0.008`).
-Zwischen den Feldern bleibt die Platte als vertiefte Fuge sichtbar. Felder und Platte bilden zusammen weiterhin das eine
-Teil B27; Kennungen und Explosionszuordnung ändern sich nicht. Auf den steilen oberen und unteren Facetten
-stehen die Felder entlang ihrer Normale bis zu 0,004 über den Umriss hinaus.
+Jedes Feld ist ein geschlossener Körper: um `groove = 0.008` von allen Facettenkanten eingerückt, mit Fugenwand und
+zweistufiger Rundfase (`chamfer = 0.008`). Die Feldoberseite liegt auf der um `height = 0.022` entlang der Normale
+versetzten Facettenebene; die Ringe sind aber entlang +Z extrudiert. So decken die Felder steiler Nachbarfacetten
+keine Fuge ab: Alle 17 Innenkanten bleiben in der Frontalansicht offen, und die Felder bleiben exakt im Plattenumriss.
+Eine erste Variante entlang der Normale verdeckte vier Fugen und stand bis 0,004 über den Umriss; der Richter
+und eine Messung aller Kanten haben das aufgedeckt. Felder und Platte bilden zusammen weiterhin das eine
+Teil B27; Kennungen und Explosionszuordnung ändern sich nicht.
 
 Die erste Probe hatte unruhige Dreiecke aus einer verzogenen Randkontur, die nächste eine plane Brustfläche.
 Der Nutzer empfand diese seitlich als aufgedrückt und flach und wünschte mehr Volumen und Struktur.
@@ -107,10 +109,11 @@ positive Volumina, UVs und deterministische Erzeugung prüfen weiterhin die aktu
 Die formgebundenen Cuirass-Prüfungen verwenden jetzt dessen unveränderte Parameter aus
 `web/tools/fixtures/cuirass.json`; sie werden nicht an die neue Form angepasst oder gelöscht.
 Drei zusätzliche Bastion-Tests prüfen die geschlossene Brustmitte, sichtbare Flanken, tiefe Schulterdächer
-über den Gelenken, die untere Lage den Rückweg auf das gerundete Schulterverfahren sowie mehr als 0,09 Reliefprojektion
-gegenüber der planen Negativkontrolle bei nahezu unverändertem Rand und mehr als 0,30 Plattentiefe.
-Ein weiterer Test belegt die Fugen: Auf einer gemeinsamen Facettenkante liegt die Plattenoberfläche frei,
-in der Facettenmitte steht das Feld etwa um seine Höhe darüber.
+über den Gelenken, die untere Lage den Rückweg auf das gerundete Schulterverfahren. Für die Brust gilt: Jede der
+vierzehn Facetten steht vor der planen Negativkontrolle, die stärkste um mehr als 0,10; der Umriss ist exakt gleich;
+B27 reicht weiter als die erste Reliefprobe (Z > 0,66) und ist ohne Felder über 0,29, mit Feldern über 0,30 tief.
+Ein weiterer Test belegt die Fugen aus den Parametern: An allen 17 gemeinsamen Facettenkanten liegt die
+Plattenoberfläche frontal frei, in allen vierzehn Facettenmitten steht das Feld genau um seine Höhe darüber.
 Für den exakten alten Lieferstand gelten weiterhin dessen Quellpin und vollständige Parameter.
 
 Die Körperkameras sind unverändert, daher sind Vorher/Nachher direkt vergleichbar. Keine neue Video-IoU:
@@ -119,9 +122,10 @@ Die Körperansichten sind keine Helmreferenzmessung. [Lieferindex](../assets/hel
 
 ## Gemessene Größen
 
-Gegenüber Cuirass: Außenbreite 1,9900 → 2,0700 Modelleinheiten, größte Vorderposition Z 0,5046 → 0,6789
-(erste Reliefprobe 0,6435), gesamte Körperbautiefe 0,9296 → 1,1039 (erste Reliefprobe 1,0685).
-B27 allein ist jetzt 0,3106 tief. Die Kerntiefe bleibt 0,7200; der Zugewinn entsteht durch die äußere
+Gegenüber Cuirass: Außenbreite 1,9900 → 2,0700 Modelleinheiten, größte Vorderposition Z 0,5046 → 0,6844
+(erste Reliefprobe 0,6435), gesamte Körperbautiefe 0,9296 → 1,1094 (erste Reliefprobe 1,0685).
+B27 allein ist jetzt 0,3161 tief (erste Reliefprobe 0,2752). Am Brustbein, wo jetzt eine Fuge verläuft, liegt die
+Front mit Z 0,622 etwas hinter der ersten Reliefprobe (0,638); die Masse sitzt nun bei den seitlichen Brustscheiteln. Die Kerntiefe bleibt 0,7200; der Zugewinn entsteht durch die äußere
 Panzerung. Halslänge 0,3100. Die montierten Kameras sind für alle Vergleiche identisch.
 
 ![Flache Zwischenprobe und Volumenkorrektur](bilder/helm_bastion_volumenvergleich.jpg)

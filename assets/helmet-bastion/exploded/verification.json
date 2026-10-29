@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-10-29T08:57:27.096Z",
+  "startedAt": "2026-10-29T09:08:58.059Z",
   "status": "passed",
   "views": [
     "assembly",
@@ -31,7 +31,7 @@
     "exploded": 1
   },
   "referenceCompatible": false,
-  "outputDirectory": "/Users/ffunk/Library/Caches/Critic/helm-bastion-facets-20261029/final-exploded",
+  "outputDirectory": "/Users/ffunk/Library/Caches/Critic/helm-bastion-facets-20261029/guarded-exploded",
   "iouSkipped": true,
   "cameras": {
     "assembly": {
@@ -163,18 +163,18 @@
     "textures/whiteArmor_roughnessMap.png": "e905554a48bc8c7f728613e80e22987b82686b8232bdf49f94e50b7bcc647182",
     "textures/whiteTextured_bumpMap.png": "c4ace6c801244697c9be598a42d9a5a36dae194fb3551c26df59a3b8c789bd61",
     "textures/materials.json": "588575bf179573b66c41662e97c06844512d536b93263caa52c8bb93845e1923",
-    "assembly.json": "b9a3b95090f09127596a1c4d5097084f4a8e171e521f055578e489e6c7d3b759",
-    "scifi_helmet.glb": "80330a8fc171f8605c693529a3371ef4030405582db80d615726a34e95dc48a5",
-    "render_assembly.png": "7c1b8b14048429091fe9b26f2fbcec3f31e00aa1236eee2eb5ec4ee4207acf22",
-    "mask_assembly.png": "270f703ebb53009ddae075b2af06b38f2bb1204a34394978b431e4846db175da",
-    "render_front.png": "1b991be80dc68aa51fb7afe9568d71f9538594e43d683240266a2703c2dbd693",
+    "assembly.json": "1855f7cd1d5782e75d271482b62b4c7ba49f87c160c7081bc1cdf0c62b100932",
+    "scifi_helmet.glb": "d3467fe292e01222a5bd636501c5ef3454c4594cdc8d4cc023e08cd03399ccbb",
+    "render_assembly.png": "ad14d6eb09d5f85b36436bc5b99cc1ebb2962185ebfea3fa19275c1d14ca3121",
+    "mask_assembly.png": "a02e910d80aeaaeb237e6acfb82a7bb883ce12bfade4b1301436470691d4e394",
+    "render_front.png": "a1d4007bf15c9d49ae5f528db056e2ba6a91feb1667eb4bb9013f783e43b13b4",
     "mask_front.png": "5e219546fe74f2cbc7768b9e2344a22991e681229b5b9433e1c764360cea460e",
-    "render_left.png": "680c2d4aa93749c75e867f8f8fc23b3cac898f37a8d99be175a1ff274dd56867",
-    "mask_left.png": "9ecbf618d592545f62992e67f048aae7897324351a349e450739c1d17995aa72",
-    "render_back.png": "da9a5676204ace6480ae609505f93614af3111569fed7b36bbc87423bdfb2d70",
+    "render_left.png": "9b415c617eb2037f89705125fc3b9e89be6a9fde5057e34d872f1685d2c087e2",
+    "mask_left.png": "e582542e04cd472e7a2022c30c210a65d6d0f6c64ca0547514a815d1722cf372",
+    "render_back.png": "125333f8efef0e74523b41a5fefd02d77eb8aded5fab6c626776ea1da2eca5c8",
     "mask_back.png": "51b0c20921234eb56bcadc996fe691cc49f1d4b4e9016fae5747cd1dcf50001b",
-    "render_right.png": "98a7b96f8e1395904b568b7149a613c02f4aaaa06a38f1ab6b52132edf5a25ce",
-    "mask_right.png": "34b251d5edb1aa38975aee52f9aa45dac507d35b59af4caadd5c4ba6eb4b530c"
+    "render_right.png": "43d7d625c829b43a266f7f55ee871569de8ff44b01222b44aaf66019ab672ce8",
+    "mask_right.png": "1106753c4845526a17b67495aa245ebae2750f475f66747e42a7ab646bf97713"
   },
   "sources": {
     "files": {
@@ -197,10 +197,10 @@
       "src/parts/mirrorComms.js": "068c25cbb6c5728382afd5f330c69d3486d33c9f4fde3cd7c5a8ec309b05ed37",
       "src/parts/neck.js": "df7208322bef09cdd445fe14e724869851604377d8bcdf4ae6a9c57ed96d5110",
       "src/parts/rightComms.js": "72d2fd5533648f20bec1e76f9b5e98beee7483c03d6e5893ef3d2ac121b768cc",
-      "src/parts/shoulderStudy.js": "75b642dfe164afce50b8d21cef30204c68b6dfabaaf3325ffb12fd74e01f2fc3",
+      "src/parts/shoulderStudy.js": "bd0dbd87001c376f21c8abe687e7eaa0b4366b5039dacae7845bddc8c55ba5ec",
       "src/parts/upperHelmet.js": "35b63462a2360304e3ff304ce07e323cf419f7c9e5d7d52e0cea90ae39dc0abf",
       "src/shapeFit.js": "57c4a7b94b0edbcbed61a38e2f1939af7e721101ce9b04d73c0de96159640ed8",
-      "src/shoulderStudyParams.json": "99abdd5e39803116313ffe1f002647fa8319c6d98410a06a55898ce2d814565d",
+      "src/shoulderStudyParams.json": "d674924c9dbe834cde7b7d3fabdd3c3b498f16b568b1f724eb8304bd0a168ad0",
       "src/textures.js": "02d14cfc27a5334c7c013c7db2def61e19c53f158e9cf6b3f0c8492d2e04cc54",
       "refs/meshy-reference.json": "47f6e9df33dada643dafadbbb90994b69c66ce522789f4eae25b7ec7f78fa673",
       "refs/ref_back.png": "633b725f396863ea0181b0d44c0f905308bb8460562c5fa23d73a3029dba857d",
@@ -224,7 +224,7 @@
       "tools/runnerFailure.test.mjs": "381f8c306b51725d7c3c7e509cca3c8eb107de7ce0acc9ee962c8592f98deda1",
       "tools/save_pass.py": "75b14c2c1ccc97261b6918cad15bd49c699d9454f1f4eb0a75b70b261fe7e459",
       "tools/shapeFit.test.mjs": "986718a779f898cc6d6e808de055ec5555d3e7ff542e3afabe76003406dca4b8",
-      "tools/shoulderStudy.test.mjs": "0520be7d526ef7b64eaa2a6cbd48f313cef597689b8955b4d2f6947f04a0084a",
+      "tools/shoulderStudy.test.mjs": "af6de498e2f8c145135a908892cc329a5ed359f65628c4c48b6cad71d5bf8307",
       "tools/stripToggle.test.mjs": "2e2d4589787e781032c60a77eff2c5c47946b0afdf7cbf812a3ba6e096943c43",
       "tools/test_iou.py": "b8eb89df5ce55cf7618a73297f21e4806e2087e4ba31ecc72656264788d4ed98",
       "tools/test_save_pass.py": "32706b25972fb725dc9851907221e0ca8404fb7ecb6468bf051a49d6f0f455b0",
@@ -240,7 +240,7 @@
       ".nvmrc": "7e8a2fa94951112b894a3dbe3d05efef5e9263741fa49125f0a70f40fedab4cc",
       "../reference/helm/turnaround.mp4": "fac039db10d9d3ee3c74373c38e323dd53489df69eee18971e736c9d971e70de"
     },
-    "digest": "b975e3d7da87f50babacd556f56146a9b28780068ba9857aae177432941f25e1"
+    "digest": "125cf5ebe0c7648202fcac71b08dc0804273d84467c271deb4603b1f823d84c6"
   },
   "runtime": {
     "node": "v24.19.0",
@@ -1819,8 +1819,8 @@
       ],
       "center": [
         0,
-        -1.446044659614563,
-        0.9435852748155593
+        -1.4450000286102296,
+        0.9463585597276687
       ]
     },
     {
@@ -2445,7 +2445,9 @@
           "groove": 0.008,
           "height": 0.022,
           "chamfer": 0.008,
-          "embed": 0.006
+          "embed": 0.006,
+          "minMargin": 0.005,
+          "minNormalZ": 0.4
         }
       }
     },
@@ -2459,7 +2461,7 @@
     "denoiseSeed": 47
   },
   "glb": {
-    "bytes": 4547656,
+    "bytes": 4547624,
     "meshes": 87,
     "nodes": 88,
     "materials": 10,
@@ -2475,5 +2477,5 @@
     "maps": 11,
     "manifest": "textures/materials.json"
   },
-  "finishedAt": "2026-10-29T08:57:35.534Z"
+  "finishedAt": "2026-10-29T09:09:06.860Z"
 }

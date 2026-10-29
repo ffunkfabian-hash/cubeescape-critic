@@ -1,5 +1,5 @@
 {
-  "sourceRevision": "b8e6726f2be989aa47fa9a50d858578ce6e20554",
+  "sourceRevision": "3e930f967ba1924f40034b47eb5b1abff9bac551",
   "baseline": "ca2ec9f61cfa0eae79e3511c706de247579abde8 assets/helmet-bastion (erste Reliefprobe)",
   "changedMeshes": [
     "BreastplateCenter"
@@ -23,8 +23,8 @@
   "bodyParts": 31,
   "meshCount": 87,
   "labelGroups": 53,
-  "sourceDigest": "b975e3d7da87f50babacd556f56146a9b28780068ba9857aae177432941f25e1",
-  "assembledGlbSha256": "62623fd33a80d15d70d6056b765e9bce1efa563cb2778baa05ea2b74a5d1881f",
+  "sourceDigest": "125cf5ebe0c7648202fcac71b08dc0804273d84467c271deb4603b1f823d84c6",
+  "assembledGlbSha256": "c85c9b596d0cda1269f5436d5f86a0bfbfd43ad85eeb9e203ba024dd4c0c1baf",
   "explodedRoundtrip": {
     "meshes": 87,
     "positionsIdentical": true,

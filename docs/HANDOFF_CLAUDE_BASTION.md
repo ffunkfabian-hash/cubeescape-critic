@@ -3,7 +3,7 @@
 bereit – Modell und Lieferpaket sind geprüft und gepusht; Nutzer-Sichtabnahme sowie PR-/CI-Abschluss stehen aus.
 
 > **Überholt am 29.10.2026:** Draft-PR #10 existiert; die Brust wurde danach mit Fugen und mehr Tiefe nachgearbeitet
-> (Quellenpin `b8e6726`). Aktuellen Stand aus `docs/versions/0.7.md` und `assets/helmet-bastion/README.md` lesen.
+> (Quellenpin `3e930f9`). Aktuellen Stand aus `docs/versions/0.7.md` und `assets/helmet-bastion/README.md` lesen.
 
 ## Startauftrag für eine frische Sitzung
 

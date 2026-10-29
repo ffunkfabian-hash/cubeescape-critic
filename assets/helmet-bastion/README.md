@@ -7,7 +7,7 @@ Nacharbeit vierzehn gefugte, erhabene Facettenfelder und steht als dickere Platt
 `assembled/` enthält die vier Ansichten; `exploded/` fünf Ansichten einschließlich beschrifteter Übersicht.
 Beide enthalten GLB, Originaltexturen, Teilelisten und Prüfmanifeste. `comparison.json` hält den Vergleich
 zur ersten Reliefprobe (`ca2ec9f`) fest: nur `BreastplateCenter` ist geändert, die übrigen 86 Meshes, die Kameras und
-elf Texturkarten sind identisch. **Quellenpin:** `b8e6726f2be989aa47fa9a50d858578ce6e20554`. Beide Quellmanifeste und sämtliche Ausgabedateien sind gegen diesen Commit geprüft.
+elf Texturkarten sind identisch. **Quellenpin:** `3e930f967ba1924f40034b47eb5b1abff9bac551`. Beide Quellmanifeste und sämtliche Ausgabedateien sind gegen diesen Commit geprüft.
 Der vorige Quellenpin `c445de5` gilt für den Lieferstand bis `ca2ec9f`.
 Der unabhängige Opus-Richter hat für den ersten Reliefstand nach Nachweis der historischen Fixture Freigabe ohne blockierende Befunde erteilt;
 die Prüfung der Fugennacharbeit steht im [Versionsbericht](../../docs/versions/0.7.md).
