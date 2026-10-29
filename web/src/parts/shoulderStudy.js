@@ -17,8 +17,7 @@ export const SHOULDER_STUDY_PARTS = Object.freeze({
   B30: 'ShoulderRoof_R', B31: 'ShoulderRoof_L',
 });
 
-// Closed custom solids use flat facets and deterministic world-space box UVs.
-function solid(vertices, triangles) {
+function signedVolume(vertices, triangles) {
   let volume = 0;
   for (let i = 0; i < triangles.length; i += 3) {
     const a = new THREE.Vector3(...vertices[triangles[i]]);
@@ -26,7 +25,40 @@ function solid(vertices, triangles) {
     const c = new THREE.Vector3(...vertices[triangles[i + 2]]);
     volume += a.dot(b.cross(c));
   }
-  if (volume < 0) for (let i = 0; i < triangles.length; i += 3) [triangles[i + 1], triangles[i + 2]] = [triangles[i + 2], triangles[i + 1]];
+  return volume;
+}
+
+// Raised closed pad inset from one forward-facing relief facet; the exposed plate between pads reads as a groove.
+// The rings give a vertical groove wall followed by a two-step rounded chamfer onto the pad top.
+function appendFacetPad(vertices, triangles, corners, pad, orientation) {
+  const [a, b, c] = corners.map(p => new THREE.Vector3(...p));
+  const cross = b.clone().sub(a).cross(c.clone().sub(a)), normal = cross.clone().normalize();
+  if (normal.z < 0) normal.negate();
+  const la = b.distanceTo(c), lb = c.distanceTo(a), lc = a.distanceTo(b), perimeter = la + lb + lc;
+  const incenter = a.clone().multiplyScalar(la).addScaledVector(b, lb).addScaledVector(c, lc).divideScalar(perimeter);
+  // Scaling about the incenter moves every edge inward by the same distance.
+  const radius = cross.length() / perimeter, k = 1 - Math.SQRT1_2;
+  if (radius < pad.groove + pad.chamfer + 0.005) throw new Error(`relief facet too small for a pad (r=${radius.toFixed(4)})`);
+  const start = vertices.length;
+  for (const [inset, height] of [[pad.groove, -pad.embed], [pad.groove, pad.height - pad.chamfer],
+    [pad.groove + k * pad.chamfer, pad.height - k * pad.chamfer], [pad.groove + pad.chamfer, pad.height]]) {
+    const scale = (radius - inset) / radius;
+    for (const p of [a, b, c]) vertices.push(p.clone().sub(incenter).multiplyScalar(scale).add(incenter)
+      .addScaledVector(normal, height).toArray());
+  }
+  const shell = [start, start + 2, start + 1, start + 9, start + 10, start + 11];
+  for (let ring = 0; ring < 3; ring++) for (let i = 0; i < 3; i++) {
+    const p = start + ring * 3 + i, q = start + ring * 3 + (i + 1) % 3;
+    shell.push(p, q, q + 3, p, q + 3, p + 3);
+  }
+  if (Math.sign(signedVolume(vertices, shell)) !== orientation)
+    for (let i = 0; i < shell.length; i += 3) [shell[i + 1], shell[i + 2]] = [shell[i + 2], shell[i + 1]];
+  triangles.push(...shell);
+}
+
+// Closed custom solids use flat facets and deterministic world-space box UVs.
+function solid(vertices, triangles) {
+  if (signedVolume(vertices, triangles) < 0) for (let i = 0; i < triangles.length; i += 3) [triangles[i + 1], triangles[i + 2]] = [triangles[i + 2], triangles[i + 1]];
   const indexed = new THREE.BufferGeometry();
   indexed.setAttribute('position', new THREE.Float32BufferAttribute(vertices.flat(), 3));
   indexed.setIndex(triangles);
@@ -54,7 +86,7 @@ function beveledPlate(points, depth, bevel, map, subdivisions = 0, relief = null
   const inset = Math.min(bevel / extent, 0.2), edge = Math.min(bevel, depth * 0.3);
   const vertices = [];
   let triangles = [];
-  const count = points.length;
+  const count = points.length, reliefFaces = [];
   for (const [scale, d] of [[1 - inset, 0], [1, edge], [1, depth - edge], [1 - inset, depth]]) {
     for (const [u, v] of points) vertices.push([center[0] + (u - center[0]) * scale, center[1] + (v - center[1]) * scale, d]);
   }
@@ -72,6 +104,7 @@ function beveledPlate(points, depth, bevel, map, subdivisions = 0, relief = null
       const [a,b,c] = face.map(index), [u,v,w] = [a,b,c].map(i=>vertices[i]);
       const cross = (v[0]-u[0])*(w[1]-u[1])-(v[1]-u[1])*(w[0]-u[0]);
       triangles.push(a,cross > 0 ? c : b,cross > 0 ? b : c);
+      reliefFaces.push([a,b,c]);
     }
   }
   for (let ring = 0; ring < 3; ring++) for (let i = 0; i < count; i++) {
@@ -96,7 +129,13 @@ function beveledPlate(points, depth, bevel, map, subdivisions = 0, relief = null
     }
     triangles = refined;
   }
-  return solid(vertices.map(vertex => map(...vertex)), triangles);
+  const mapped = vertices.map(vertex => map(...vertex));
+  if (relief?.pads) {
+    // Pads follow the bent facets in model space and share the plate's winding, so each shell stays closed and outward.
+    const orientation = Math.sign(signedVolume(mapped, triangles));
+    for (const face of reliefFaces) appendFacetPad(mapped, triangles, face.map(i => mapped[i]), relief.pads, orientation);
+  }
+  return solid(mapped, triangles);
 }
 
 function torsoGeometry(p) {
@@ -258,7 +297,7 @@ export function buildShoulderStudy(M, p = shoulderStudyParams) {
       beveledPlate(chest.flank,chest.flankThickness,chest.bevel,
         (y,z,d)=>[side*(chest.flankX-chest.flankTaper*Math.max(0,-y-chest.flankTaperStart)-d),y,z]),M.whiteArmor);
   }
-  if (chest.central) add('B27',beveledPlate(chest.central,chest.depth,chest.bevel,
+  if (chest.central) add('B27',beveledPlate(chest.central,chest.centerDepth ?? chest.depth,chest.bevel,
     (x,y,d)=>[x*chest.widthScale,y,chest.frontZ+chest.centerLift+chest.centerSlope*(y-chest.centerSlopeOrigin)-d],0,chest.relief),M.whiteArmor);
   add('B18', panel(chest.spine, 1, chest.rearZ, 0.042), M.whiteTextured);
   return root;

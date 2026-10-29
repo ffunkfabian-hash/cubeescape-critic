@@ -33,8 +33,8 @@ test('upper-body proposal stays a short independently editable bust and reuses t
     `${bounds.min.y}..${bounds.max.y}`);
   assert.ok(bounds.max.x < 1.18 && bounds.min.x > -1.18);
   assert.ok(bounds.max.x - bounds.min.x >= 1.85 && bounds.max.x - bounds.min.x < 2.1, 'shoulders wrap closer to the sturdy torso');
-  // Bastion intentionally projects the chest to Z=0.6435; Cuirass ended near 0.505.
-  assert.ok(bounds.max.z < 0.68 && bounds.min.z > -0.46);
+  // Bastion intentionally projects the grooved chest pads to Z=0.679 (0.6435 before the pads); Cuirass ended near 0.505.
+  assert.ok(bounds.max.z < 0.72 && bounds.min.z > -0.46);
   const core = new THREE.Box3().setFromObject(body.getObjectByName('UpperTorsoCore'));
   assert.ok(core.max.z - core.min.z > 0.69 && core.max.z - core.min.z < 0.75, 'sturdy torso depth');
 });
@@ -223,8 +223,23 @@ test('Bastion chest relief creates deliberate physical volume while retaining th
  const flat=buildShoulderStudy(palette,flatParams);raised.updateMatrixWorld(true);flat.updateMatrixWorld(true);
  const probe=root=>new THREE.Raycaster(new THREE.Vector3(0,-.90,2),new THREE.Vector3(0,0,-1))
    .intersectObject(root.getObjectByName('BreastplateCenter'))[0].point.z;
- assert.ok(probe(raised)-probe(flat)>.15,'visible forward volume rather than just a texture');
+ assert.ok(probe(raised)-probe(flat)>.09,'visible forward volume rather than just a texture');
  const a=new THREE.Box3().setFromObject(raised.getObjectByName('BreastplateCenter'));
  const b=new THREE.Box3().setFromObject(flat.getObjectByName('BreastplateCenter'));
- assert.equal(a.min.x,b.min.x);assert.equal(a.max.x,b.max.x);assert.equal(a.min.y,b.min.y);assert.equal(a.max.y,b.max.y);
+ // Pads on the steep top and bottom facets rise along their normals and may overhang the outline by a few thousandths.
+ for (const key of ['min','max']) for (const axis of ['x','y'])
+   assert.ok(Math.abs(a[key][axis]-b[key][axis])<.005,`${key}.${axis} ${a[key][axis]} vs ${b[key][axis]}`);
+ assert.ok(a.max.z-a.min.z>.3,'thick breastplate body that reads from the side, not a thin wedge');
+});
+
+test('Bastion chest facets are separate raised pads divided by recessed grooves', () => {
+ const padded=buildShoulderStudy(palette);const plainParams=structuredClone(shoulderStudyParams);delete plainParams.chest.relief.pads;
+ const plain=buildShoulderStudy(palette,plainParams);padded.updateMatrixWorld(true);plain.updateMatrixWorld(true);
+ const rise=shoulderStudyParams.placement.upperBodyRise, scale=shoulderStudyParams.chest.widthScale;
+ const z=(root,x,y)=>new THREE.Raycaster(new THREE.Vector3(x*scale,y+rise,2),new THREE.Vector3(0,0,-1))
+   .intersectObject(root.getObjectByName('BreastplateCenter'))[0].point.z;
+ // Shared edge 8-11 on the centre line is a groove; the centroid of facet 8-9-11 carries a pad.
+ assert.ok(Math.abs(z(padded,0,-1.0)-z(plain,0,-1.0))<1e-6,'groove floor exposes the plate surface');
+ const pad=z(padded,.0567,-1.01)-z(plain,.0567,-1.01), height=shoulderStudyParams.chest.relief.pads.height;
+ assert.ok(pad>height*.9&&pad<height*1.6,`pad rises above the groove by about its height (${pad})`);
 });
