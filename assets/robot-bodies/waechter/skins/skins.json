@@ -1,0 +1,43 @@
+{
+ "body": "waechter",
+ "size": 4096,
+ "orm_size": 2048,
+ "mm_per_px": 1.102,
+ "template": "template.png",
+ "source": {
+  "maps": "runs/robot/maps/waechter",
+  "recipes": "blender/robot/skins.json"
+ },
+ "skins": {
+  "rost": {
+   "de": "Rost",
+   "energy": "#4FD8FF",
+   "emissive_intensity": 1.0,
+   "files": {
+    "basecolor": "rost/basecolor.jpg",
+    "orm": "rost/orm.png",
+    "emissive": "rost/emissive.png"
+   }
+  },
+  "glut": {
+   "de": "Glut",
+   "energy": "#FF3A1E",
+   "emissive_intensity": 2.0,
+   "files": {
+    "basecolor": "glut/basecolor.jpg",
+    "orm": "glut/orm.png",
+    "emissive": "glut/emissive.png"
+   }
+  },
+  "ornat": {
+   "de": "Ornat",
+   "energy": "#A35CFF",
+   "emissive_intensity": 1.5,
+   "files": {
+    "basecolor": "ornat/basecolor.jpg",
+    "orm": "ornat/orm.png",
+    "emissive": "ornat/emissive.png"
+   }
+  }
+ }
+}

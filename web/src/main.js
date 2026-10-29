@@ -20,6 +20,7 @@ import { D, resetParams } from './params.js';
 import { loadScout, scoutParts, SCOUT_FRAME } from './scout.js';
 import { ROBOT_MODELS, ROBOT_FRAME, loadRobot, setRobotExplosion, robotParts } from './robotBodies.js';
 import { setRobotWear, releaseRobotWear } from './robotWear.js';
+import { applySkin, loadSkinMaterial } from './robotSkins.js';
 import { HELMETS, CRITIC_VARIANTS, COLOR_SCHEMES, HELMET_FRAME_METERS, dressBody, isStudyHelmetPart, matchRobotColors, paletteMaterials, schemePalette, setRobotHelmet } from './robotHelmet.js';
 import { createNavigation } from './navigation.js';
 import { FINISH_PRESETS, ACCENT_PRESETS } from './finishPresets.js';
@@ -41,6 +42,12 @@ const robotModel = ROBOT_MODELS[modelName] ? await loadRobot(modelName) : null;
 // &wear=on|off: aged material of the colour scheme (robotWear.js) or its flat colours.
 const robotLook = { wear: query.get('wear') ?? 'on' };
 if (!['on', 'off'].includes(robotLook.wear)) throw new Error(`Unknown wear ${JSON.stringify(robotLook.wear)}; expected on or off`);
+// &skin=none|<key> (robots only): texture skin of the body (robotSkins.js, assets/robot-bodies/<body>/skins). Wear and dirt are
+// baked into it, so the aged shader is off for the whole robot while a skin is shown.
+robotLook.skin = query.get('skin') ?? 'none';
+const bodySkins = ROBOT_MODELS[modelName]?.skins ?? {};
+if (robotLook.skin !== 'none' && !bodySkins[robotLook.skin]) throw new Error(`Unknown skin ${JSON.stringify(robotLook.skin)} for ${modelName}; expected none${Object.keys(bodySkins).map(k => ', ' + k).join('')}`);
+let skinMat = robotLook.skin !== 'none' ? await loadSkinMaterial(robotLook.skin, bodySkins[robotLook.skin]) : null;
 // &helmet=study|critic|scout (robots only): helmet on the robot's head segment (robotHelmet.js).
 const robotHelmet = { kind: query.get('helmet') ?? 'critic' }; // 'study' (helmet of the body GLB) stays reachable by URL as archive
 if (!HELMETS[robotHelmet.kind]) throw new Error(`Unknown helmet ${JSON.stringify(robotHelmet.kind)}; expected ${Object.keys(HELMETS).join(', ')}`);
@@ -318,7 +325,8 @@ function rebuildModel() {
   }
   if (robotModel) {
     model = robotModel;
-    setRobotWear(model, robotLook.wear === 'on');
+    setRobotWear(model, robotLook.wear === 'on' && !skinMat);
+    if (skinMat) applySkin(model, skinMat);
     setRobotExplosion(model, presentationOptions.exploded);
     assemblyParts = presentationOptions.exploded > 0 ? robotParts(model) : [];
     annotation.setGroups(assemblyParts);
@@ -345,7 +353,7 @@ async function exportGLB() {
   // The aged look is a viewer shader (non-indexed copies, custom attributes): bodies and helmets export flat. A helmet alone in a
   // colour scheme exports the scheme's flat role materials, in `colors=original` its own.
   clearHighlight(); // first: the highlight remembers the aged materials
-  const aged = robotLook.wear === 'on' && (robotModel || robotHelmet.colors !== 'original');
+  const aged = robotLook.wear === 'on' && !skinMat && (robotModel || robotHelmet.colors !== 'original'); // a skin exports its textures
   const opts = robotModel ? {} : { metersPerWorld: HELMET_FRAME_METERS };
   if (aged) setRobotWear(model, false, opts);
   const glb = await new GLTFExporter().parseAsync(model, { binary: true }).finally(() => { if (aged) setRobotWear(model, true, opts); });
@@ -589,8 +597,24 @@ function buildNavigation() {
     robotLook.wear = v;
     query.set('wear', v);
     history.replaceState(null, '', '?' + query);
-    if (robotModel) { setRobotWear(robotModel, v === 'on'); requestRender(true); } else rebuild();
+    if (robotModel) { if (!skinMat) setRobotWear(robotModel, v === 'on'); requestRender(true); } else rebuild();
   });
+  if (robotModel && Object.keys(bodySkins).length) {
+    let skinRun = 0;
+    nav.choice(sLook, 'Skin', [{ value: 'none', label: 'aus', title: 'Farbschema und gealtertes Material' },
+      ...Object.entries(bodySkins).map(([value, s]) => ({ value, label: s.de, title: `Skin ${s.de}: eine Textur im UV-Atlas, Abrieb eingebacken` }))],
+    robotLook.skin, async v => {
+      const run = ++skinRun, material = v === 'none' ? null : await loadSkinMaterial(v, bodySkins[v]);
+      if (run !== skinRun) return; // a later click won
+      clearHighlight();
+      robotLook.skin = v;
+      skinMat = material;
+      query.set('skin', v);
+      history.replaceState(null, '', '?' + query);
+      rebuild();
+    });
+    nav.note(sLook, 'Skins: Abrieb und Schmutz sind in die Textur gebacken; der Schalter „Material“ wirkt dann nicht. Ein Helm H oder Scout behält seine Farben.');
+  }
   const explode = v => { presentationOptions.exploded = v; rebuild(); setCameraView(v > 0 ? 'assembly' : 'front'); };
   if (scoutModels) nav.choice(sLook, 'Explosion', [{ value: 0, label: 'montiert' }, { value: 1, label: 'explodiert' }], presentationOptions.exploded > 0 ? 1 : 0, explode);
   else nav.slider(sLook, 'Explosion', { min: 0, max: 1, step: 0.05, value: presentationOptions.exploded, format: v => v.toFixed(2), live: !!robotModel }, explode);
@@ -668,4 +692,4 @@ if (STATIC) {
   });
 }
 
-Object.assign(window, { robotLook, robotHelmet, partTree, requestRender, renderer, THREE, scene, camera, controls, renderFrame, setCameraView, toggleOverlay, setMaskMode, exportGLB, rebuild, helmetParams: D, materialFinish, materialAccents, presentationOptions, assemblyParts });
+Object.assign(window, { GLTFExporter, robotLook, robotHelmet, partTree, requestRender, renderer, THREE, scene, camera, controls, renderFrame, setCameraView, toggleOverlay, setMaskMode, exportGLB, rebuild, helmetParams: D, materialFinish, materialAccents, presentationOptions, assemblyParts });

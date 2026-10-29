@@ -72,6 +72,15 @@
    }
   }
  },
+ "uv": {
+  "surface_m2": 10.0569,
+  "coverage": 0.4937,
+  "margin": 0.001,
+  "mm_per_px": {
+   "2048": 2.204,
+   "4096": 1.102
+  }
+ },
  "anchor_gap_mm": {
   "Socket_Neck": 0.0,
   "Socket_Shoulder_R": 0.0,

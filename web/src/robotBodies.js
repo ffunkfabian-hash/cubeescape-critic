@@ -7,6 +7,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import waechterUrl from '../../assets/robot-bodies/waechter/assembled/waechter.glb?url';
 import paladinUrl from '../../assets/robot-bodies/paladin/assembled/paladin.glb?url';
 import mechanikUrl from '../../assets/robot-bodies/mechanik/assembled/mechanik.glb?url';
+import { skinCatalog } from './robotSkins.js';
 
 // parts.json is loaded only when a robot is shown, so the helmet build does not carry it.
 export const ROBOT_MODELS = {
@@ -14,6 +15,13 @@ export const ROBOT_MODELS = {
   paladin: { url: paladinUrl, parts: () => import('../../assets/robot-bodies/paladin/parts.json'), de: 'Paladin (athletisch)' },
   mechanik: { url: mechanikUrl, parts: () => import('../../assets/robot-bodies/mechanik/parts.json'), de: 'Mechanik (schlank-mechanisch)' },
 };
+// Skins (0.13): skins.json per body and its texture files, resolved by Vite (textures are fetched only when a skin is shown).
+const SKIN_INDEX = import.meta.glob('../../assets/robot-bodies/*/skins/skins.json', { eager: true, import: 'default' });
+const SKIN_FILES = import.meta.glob('../../assets/robot-bodies/*/skins/*/*.{jpg,png}', { eager: true, query: '?url', import: 'default' });
+for (const [name, entry] of Object.entries(ROBOT_MODELS)) {
+  const dir = `../../assets/robot-bodies/${name}/skins/`;
+  entry.skins = skinCatalog(SKIN_INDEX[`${dir}skins.json`], file => SKIN_FILES[dir + file]);
+}
 // Frame of the bodies in the viewer (measured on the former three.js full body 0.9): feet at y = −4.85, height 5.44, helmet
 // frame at the top; camera target and distance for assembled and exploded views.
 export const ROBOT_FRAME = { height: 5.44, floor: -4.85, camera: { target: -2.2, dist: 11.8, explodedTarget: -2.6, explodedDist: 17.5 } };
