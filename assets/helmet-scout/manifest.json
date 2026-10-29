@@ -1,0 +1,798 @@
+{
+ "objects": [
+  {
+   "name": "Kappe",
+   "part": "S01 Haube (Guss)",
+   "verts": 72475,
+   "faces": 69653,
+   "bbox": [
+    [
+     -0.3654,
+     -0.4691,
+     0.2
+    ],
+    [
+     0.3654,
+     0.5359,
+     1.0
+    ]
+   ]
+  },
+  {
+   "name": "Auge_L",
+   "part": "S02 Augen",
+   "verts": 32,
+   "faces": 1,
+   "bbox": [
+    [
+     -0.2411,
+     -0.4118,
+     0.5309
+    ],
+    [
+     -0.0911,
+     -0.2222,
+     0.6089
+    ]
+   ]
+  },
+  {
+   "name": "Auge_R",
+   "part": "S02 Augen",
+   "verts": 32,
+   "faces": 1,
+   "bbox": [
+    [
+     0.0911,
+     -0.4118,
+     0.5309
+    ],
+    [
+     0.2411,
+     -0.2223,
+     0.6089
+    ]
+   ]
+  },
+  {
+   "name": "Augenhoehle_L",
+   "part": "S02 Augen",
+   "verts": 128,
+   "faces": 128,
+   "bbox": [
+    [
+     -0.2775,
+     -0.4453,
+     0.512
+    ],
+    [
+     -0.0864,
+     -0.2062,
+     0.6248
+    ]
+   ]
+  },
+  {
+   "name": "Augenhoehle_R",
+   "part": "S02 Augen",
+   "verts": 128,
+   "faces": 128,
+   "bbox": [
+    [
+     0.0864,
+     -0.4453,
+     0.512
+    ],
+    [
+     0.2775,
+     -0.2062,
+     0.6248
+    ]
+   ]
+  },
+  {
+   "name": "Maske_Gelenk_R",
+   "part": "S03 Gelenkscheibe R",
+   "verts": 468,
+   "faces": 404,
+   "bbox": [
+    [
+     0.2867,
+     -0.2152,
+     0.549
+    ],
+    [
+     0.3247,
+     -0.1453,
+     0.6211
+    ]
+   ]
+  },
+  {
+   "name": "Maske_Gelenk_L",
+   "part": "S03 Gelenkscheibe L",
+   "verts": 468,
+   "faces": 404,
+   "bbox": [
+    [
+     -0.3253,
+     -0.2151,
+     0.5491
+    ],
+    [
+     -0.2861,
+     -0.1457,
+     0.6213
+    ]
+   ]
+  },
+  {
+   "name": "Krempe",
+   "part": "S04 Krempe",
+   "verts": 1398,
+   "faces": 1284,
+   "bbox": [
+    [
+     -0.3718,
+     0.07,
+     0.725
+    ],
+    [
+     0.3718,
+     0.532,
+     0.7699
+    ]
+   ]
+  },
+  {
+   "name": "Mund_Vertiefung",
+   "part": "S05 Mundvertiefung",
+   "verts": 222,
+   "faces": 112,
+   "bbox": [
+    [
+     -0.1223,
+     -0.4373,
+     0.175
+    ],
+    [
+     0.1223,
+     -0.2674,
+     0.443
+    ]
+   ]
+  },
+  {
+   "name": "Kinnblock",
+   "part": "S06 Kinnblock",
+   "verts": 60,
+   "faces": 32,
+   "bbox": [
+    [
+     -0.172,
+     -0.35,
+     0.087
+    ],
+    [
+     0.172,
+     0.14,
+     0.755
+    ]
+   ]
+  },
+  {
+   "name": "Kiefer_L",
+   "part": "S07 Kieferstück R",
+   "verts": 70,
+   "faces": 37,
+   "bbox": [
+    [
+     0.178,
+     -0.35,
+     0.087
+    ],
+    [
+     0.37,
+     0.14,
+     0.755
+    ]
+   ]
+  },
+  {
+   "name": "Kiefer_R",
+   "part": "S07 Kieferstück L",
+   "verts": 70,
+   "faces": 37,
+   "bbox": [
+    [
+     -0.37,
+     -0.35,
+     0.087
+    ],
+    [
+     -0.178,
+     0.14,
+     0.755
+    ]
+   ]
+  },
+  {
+   "name": "Kern",
+   "part": "S08 Seitenschale (Kern)",
+   "verts": 122,
+   "faces": 63,
+   "bbox": [
+    [
+     -0.33,
+     -0.09,
+     0.433
+    ],
+    [
+     0.33,
+     0.45,
+     0.778
+    ]
+   ]
+  },
+  {
+   "name": "Kragen",
+   "part": "S09 Kragen",
+   "verts": 428,
+   "faces": 238,
+   "bbox": [
+    [
+     -0.3596,
+     0.03,
+     0.2438
+    ],
+    [
+     0.3596,
+     0.4825,
+     0.5475
+    ]
+   ]
+  },
+  {
+   "name": "Ohrmodul_Buegel_R",
+   "part": "S10 Funkmuschel R",
+   "verts": 8,
+   "faces": 6,
+   "bbox": [
+    [
+     0.2871,
+     0.1825,
+     0.7205
+    ],
+    [
+     0.3031,
+     0.2175,
+     0.793
+    ]
+   ]
+  },
+  {
+   "name": "Ohrmodul_Halter_R",
+   "part": "S10 Funkmuschel R",
+   "verts": 8,
+   "faces": 6,
+   "bbox": [
+    [
+     0.2851,
+     0.175,
+     0.673
+    ],
+    [
+     0.3251,
+     0.225,
+     0.753
+    ]
+   ]
+  },
+  {
+   "name": "Ohrmodul_Kappe_R",
+   "part": "S10 Funkmuschel R",
+   "verts": 65,
+   "faces": 65,
+   "bbox": [
+    [
+     0.3751,
+     0.212,
+     0.495
+    ],
+    [
+     0.3871,
+     0.248,
+     0.531
+    ]
+   ]
+  },
+  {
+   "name": "Ohrmodul_R",
+   "part": "S10 Funkmuschel R",
+   "verts": 602,
+   "faces": 640,
+   "bbox": [
+    [
+     0.3001,
+     0.1,
+     0.443
+    ],
+    [
+     0.3751,
+     0.3,
+     0.743
+    ]
+   ]
+  },
+  {
+   "name": "Ohrmodul_Ring_R",
+   "part": "S10 Funkmuschel R",
+   "verts": 160,
+   "faces": 84,
+   "bbox": [
+    [
+     0.3711,
+     0.145,
+     0.588
+    ],
+    [
+     0.3851,
+     0.235,
+     0.678
+    ]
+   ]
+  },
+  {
+   "name": "Ohrmodul_Buegel_L",
+   "part": "S10 Funkmuschel L",
+   "verts": 8,
+   "faces": 6,
+   "bbox": [
+    [
+     -0.3031,
+     0.1825,
+     0.7205
+    ],
+    [
+     -0.2871,
+     0.2175,
+     0.793
+    ]
+   ]
+  },
+  {
+   "name": "Ohrmodul_Halter_L",
+   "part": "S10 Funkmuschel L",
+   "verts": 8,
+   "faces": 6,
+   "bbox": [
+    [
+     -0.3251,
+     0.175,
+     0.673
+    ],
+    [
+     -0.2851,
+     0.225,
+     0.753
+    ]
+   ]
+  },
+  {
+   "name": "Ohrmodul_Kappe_L",
+   "part": "S10 Funkmuschel L",
+   "verts": 65,
+   "faces": 65,
+   "bbox": [
+    [
+     -0.3871,
+     0.212,
+     0.495
+    ],
+    [
+     -0.3751,
+     0.248,
+     0.531
+    ]
+   ]
+  },
+  {
+   "name": "Ohrmodul_L",
+   "part": "S10 Funkmuschel L",
+   "verts": 602,
+   "faces": 640,
+   "bbox": [
+    [
+     -0.3751,
+     0.1,
+     0.443
+    ],
+    [
+     -0.3001,
+     0.3,
+     0.743
+    ]
+   ]
+  },
+  {
+   "name": "Ohrmodul_Ring_L",
+   "part": "S10 Funkmuschel L",
+   "verts": 160,
+   "faces": 84,
+   "bbox": [
+    [
+     -0.3851,
+     0.145,
+     0.588
+    ],
+    [
+     -0.3711,
+     0.235,
+     0.678
+    ]
+   ]
+  },
+  {
+   "name": "Antenne_Stummel_R",
+   "part": "S11 Antenne R",
+   "verts": 120,
+   "faces": 66,
+   "bbox": [
+    [
+     0.3371,
+     0.182,
+     0.723
+    ],
+    [
+     0.3731,
+     0.218,
+     0.915
+    ]
+   ]
+  },
+  {
+   "name": "Antenne_L",
+   "part": "S11 Antenne L",
+   "verts": 88,
+   "faces": 50,
+   "bbox": [
+    [
+     -0.3948,
+     0.188,
+     0.7222
+    ],
+    [
+     -0.3432,
+     0.212,
+     1.2122
+    ]
+   ]
+  },
+  {
+   "name": "Rueckmodul",
+   "part": "S12 Rückmodul",
+   "verts": 174,
+   "faces": 164,
+   "bbox": [
+    [
+     -0.12,
+     0.4405,
+     0.513
+    ],
+    [
+     0.18,
+     0.4755,
+     0.753
+    ]
+   ]
+  },
+  {
+   "name": "Rueckmodul_Hebel",
+   "part": "S12 Rückmodul",
+   "verts": 48,
+   "faces": 26,
+   "bbox": [
+    [
+     0.016,
+     0.4635,
+     0.619
+    ],
+    [
+     0.044,
+     0.4715,
+     0.647
+    ]
+   ]
+  },
+  {
+   "name": "Rueckmodul_Hebel_Arm",
+   "part": "S12 Rückmodul",
+   "verts": 8,
+   "faces": 6,
+   "bbox": [
+    [
+     -0.0064,
+     0.4755,
+     0.6257
+    ],
+    [
+     0.0377,
+     0.4815,
+     0.6929
+    ]
+   ]
+  },
+  {
+   "name": "Rueckmodul_Platte",
+   "part": "S12 Rückmodul",
+   "verts": 8,
+   "faces": 6,
+   "bbox": [
+    [
+     -0.135,
+     0.3985,
+     0.498
+    ],
+    [
+     0.195,
+     0.4405,
+     0.768
+    ]
+   ]
+  },
+  {
+   "name": "Rueckmodul_Schraube_0",
+   "part": "S12 Rückmodul",
+   "verts": 33,
+   "faces": 33,
+   "bbox": [
+    [
+     0.146,
+     0.4755,
+     0.529
+    ],
+    [
+     0.164,
+     0.4845,
+     0.547
+    ]
+   ]
+  },
+  {
+   "name": "Rueckmodul_Schraube_1",
+   "part": "S12 Rückmodul",
+   "verts": 33,
+   "faces": 33,
+   "bbox": [
+    [
+     -0.104,
+     0.4755,
+     0.529
+    ],
+    [
+     -0.086,
+     0.4845,
+     0.547
+    ]
+   ]
+  },
+  {
+   "name": "Rueckmodul_Schraube_2",
+   "part": "S12 Rückmodul",
+   "verts": 33,
+   "faces": 33,
+   "bbox": [
+    [
+     -0.104,
+     0.4755,
+     0.719
+    ],
+    [
+     -0.086,
+     0.4845,
+     0.737
+    ]
+   ]
+  },
+  {
+   "name": "Rueckmodul_Schraube_3",
+   "part": "S12 Rückmodul",
+   "verts": 33,
+   "faces": 33,
+   "bbox": [
+    [
+     0.146,
+     0.4755,
+     0.719
+    ],
+    [
+     0.164,
+     0.4845,
+     0.737
+    ]
+   ]
+  },
+  {
+   "name": "Kabel_Huelse_R0",
+   "part": "S13 Spiralkabel R",
+   "verts": 40,
+   "faces": 22,
+   "bbox": [
+    [
+     0.4251,
+     0.1918,
+     0.3837
+    ],
+    [
+     0.4508,
+     0.2198,
+     0.4112
+    ]
+   ]
+  },
+  {
+   "name": "Kabel_Huelse_R1",
+   "part": "S13 Spiralkabel R",
+   "verts": 40,
+   "faces": 22,
+   "bbox": [
+    [
+     0.2459,
+     0.4329,
+     0.587
+    ],
+    [
+     0.2725,
+     0.4602,
+     0.6128
+    ]
+   ]
+  },
+  {
+   "name": "Kabel_R",
+   "part": "S13 Spiralkabel R",
+   "verts": 6550,
+   "faces": 6536,
+   "bbox": [
+    [
+     0.2186,
+     0.1412,
+     0.3688
+    ],
+    [
+     0.463,
+     0.5983,
+     0.6256
+    ]
+   ]
+  },
+  {
+   "name": "Schlauch_Anschluss_R",
+   "part": "S13 Spiralkabel R",
+   "verts": 60,
+   "faces": 34,
+   "bbox": [
+    [
+     0.19,
+     0.3955,
+     0.581
+    ],
+    [
+     0.22,
+     0.4355,
+     0.625
+    ]
+   ]
+  },
+  {
+   "name": "Schlauch_Stecker_R",
+   "part": "S13 Spiralkabel R",
+   "verts": 80,
+   "faces": 44,
+   "bbox": [
+    [
+     0.426,
+     0.206,
+     0.443
+    ],
+    [
+     0.454,
+     0.234,
+     0.493
+    ]
+   ]
+  },
+  {
+   "name": "Kabel_Huelse_L0",
+   "part": "S13 Spiralkabel L",
+   "verts": 40,
+   "faces": 22,
+   "bbox": [
+    [
+     -0.4508,
+     0.1918,
+     0.3837
+    ],
+    [
+     -0.4251,
+     0.2198,
+     0.4112
+    ]
+   ]
+  },
+  {
+   "name": "Kabel_Huelse_L1",
+   "part": "S13 Spiralkabel L",
+   "verts": 40,
+   "faces": 22,
+   "bbox": [
+    [
+     -0.2725,
+     0.4329,
+     0.587
+    ],
+    [
+     -0.2459,
+     0.4602,
+     0.6128
+    ]
+   ]
+  },
+  {
+   "name": "Kabel_L",
+   "part": "S13 Spiralkabel L",
+   "verts": 6550,
+   "faces": 6536,
+   "bbox": [
+    [
+     -0.4636,
+     0.1523,
+     0.3687
+    ],
+    [
+     -0.2186,
+     0.6001,
+     0.625
+    ]
+   ]
+  },
+  {
+   "name": "Schlauch_Anschluss_L",
+   "part": "S13 Spiralkabel L",
+   "verts": 60,
+   "faces": 34,
+   "bbox": [
+    [
+     -0.22,
+     0.3955,
+     0.581
+    ],
+    [
+     -0.19,
+     0.4355,
+     0.625
+    ]
+   ]
+  },
+  {
+   "name": "Schlauch_Stecker_L",
+   "part": "S13 Spiralkabel L",
+   "verts": 80,
+   "faces": 44,
+   "bbox": [
+    [
+     -0.454,
+     0.206,
+     0.443
+    ],
+    [
+     -0.426,
+     0.234,
+     0.493
+    ]
+   ]
+  }
+ ],
+ "count": 44,
+ "verts": 91905
+}

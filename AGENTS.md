@@ -9,6 +9,8 @@ Antworten, Doku und Commit-Messages auf Deutsch; Code, Bezeichner und Kommentare
 - `critic/` – Kritiker-Prompt und JSON-Schema der Antwort (Vertrag zwischen Kritiker und Arbeiter).
 - `generator/`, `tools/` – entstehen mit Version 0.1 (Blender-Generator, Ansichten, Kritiker-Aufruf, Messung).
 - `web/` – Three.js-Nachbau im Browser mit Playwright-Prüfung und Umriss-IoU (`web/README.md`); `web/renders/` nicht im Repo.
+- `blender/scout/`, `assets/helmet-scout/`, `reference/scout/` – zweiter Helm **Scout v3** (0.8): Blender-Generator mit Einstieg `run.py`,
+  GLB-Lieferpaket, Vorlagen; Viewer `?model=scout` ([docs/HELM_SCOUT.md](docs/HELM_SCOUT.md)).
 - `docs/HELM_STIL.md` – bestätigte Form-/Materialvorgaben; runde Haube, Augen erhalten, maßgeblich ist das Video.
 - `docs/HELM_AGENTEN.md` – technischer Aufbau, Material-/Akzentvarianten, Prüfumfang, visueller Eindruck und offene Nutzerwahl; vor Helm-Fortsetzungen gezielt lesen.
 - `docs/HELM_BASTION.md` – aktueller Oberkörper 0.7: kantige Schultergehäuse, zentrale Brust und Flanken B01–B31; Exporte in `assets/helmet-bastion/`.
