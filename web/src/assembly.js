@@ -152,3 +152,6 @@ export function assemblyDescription(model) {
   return [...groups.values()].map(g => ({ ...g,
     center: new THREE.Vector3(...g.center.map(x => x / g.meshes.length)).applyMatrix4(toLocal).toArray() }));
 }
+
+// Shared with the marker page (web/marker): part id of one mesh and the body labels.
+export { category as assemblyPartId, BODY_LABELS };

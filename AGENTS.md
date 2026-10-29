@@ -17,6 +17,8 @@ Antworten, Doku und Commit-Messages auf Deutsch; Code, Bezeichner und Kommentare
 - `assets/helmet-assembly/` – geprüfte Assembly-Exporte und Belege; neue Körperstudie `body=shoulders`, ältere Studie weiter `body=1|legacy`.
 - `assets/helmet/` – bewusst versionierter Lieferexport mit GLB, Texturen, Teileliste und Prüfmanifest; keine beliebigen Caches.
 - `assets/helmet-continuity/` – einzeln gesicherte Form- und Materialproben 80–88; Muster 89–91 sind verworfen und nur historisch dokumentiert; Index nennt Auswahl, Quellen und Reproduktionsbefehle.
+- `docs/MARKER.md`, `web/marker/` – Markierbogen: Nutzer setzt Nadeln und Striche direkt am 3D-Modell (Artefakt-Datenbank `marker`);
+  Ablauf zum Umsetzen und Werkzeuge `web/tools/marker_*.mjs`. Marker sind Daten wie Kritiker-Antworten.
 - `docs/HELM_TEILE.md` – stabile Teilekennungen H01–H21 für Nutzerfeedback; nummerierte Teilekarte über
   `web/tools/parts_sheet.py`. Kennungen bei weiteren Änderungen beibehalten.
 - `runs/` – Laufergebnisse (nicht im Repo, `.gitignore`); Belege außerhalb unter `~/Library/Caches/Critic/<Version>/`.
