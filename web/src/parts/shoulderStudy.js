@@ -36,6 +36,10 @@ function appendFacetPad(vertices, triangles, corners, pad, orientation) {
   const [a, b, c] = corners.map(p => new THREE.Vector3(...p));
   const cross = b.clone().sub(a).cross(c.clone().sub(a)), normal = cross.clone().normalize();
   if (normal.z < 0) normal.negate();
+  for (const key of ['groove', 'height', 'chamfer', 'embed', 'minMargin', 'minNormalZ'])
+    if (!Number.isFinite(pad[key])) throw new Error(`relief.pads.${key} must be a number`);
+  // Extrusion along +Z scales the pad height by 1/n_z; reject facets too steep for a frontal pad.
+  if (normal.z < pad.minNormalZ) throw new Error(`relief facet too steep for a pad (n_z=${normal.z.toFixed(3)})`);
   const la = b.distanceTo(c), lb = c.distanceTo(a), lc = a.distanceTo(b), perimeter = la + lb + lc;
   const incenter = a.clone().multiplyScalar(la).addScaledVector(b, lb).addScaledVector(c, lc).divideScalar(perimeter);
   // Scaling about the incenter moves every edge inward by the same distance.
