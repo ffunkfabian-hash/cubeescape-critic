@@ -113,6 +113,17 @@ Einheit: Helmhöhe ≈ 1, Ursprung in der Kopfmitte, Y oben, Gesicht +Z, linke H
 | `collarFront.topZ`, `bottomZ` | schräger vorderer Abschluss des Nackenrahmens unter der Maskenhalterung |
 | `collarPanel` | Größe, Lage und Tiefe der tatsächlich ausgeschnittenen Seitenfelder, des kleinen Felds und der Schlitze |
 
+## Markierbogen (`marker/`)
+
+Änderungswünsche setzt der Nutzer direkt am Modell: Nadel (Klick) oder Stift (auf die Oberfläche zeichnen), Teil und Seite
+werden aus dem getroffenen Mesh erkannt. Ablauf, Felder und Umsetzung: [`docs/MARKER.md`](../docs/MARKER.md).
+
+```sh
+node tools/marker_build.mjs "0.7 Bastion" ../assets/helmet-bastion/assembled/scifi_helmet.glb   # marker/dist/
+node tools/marker_check.mjs                                     # Desktop/Handy, Nadel und Strich, renders/marker_*.png
+node tools/marker_shot.mjs <export>/marker <out>                # je Marker Gesamt- und Nahansicht aus seiner Kamera
+```
+
 ## Über Änderungen sprechen
 
 Die [Teilekarte](../docs/HELM_TEILE.md) vergibt stabile Kennungen H01–H21. Bitte Kennung, Seite und gewünschte Änderung
