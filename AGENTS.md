@@ -12,7 +12,8 @@ Antworten, Doku und Commit-Messages auf Deutsch; Code, Bezeichner und Kommentare
 - `blender/scout/`, `assets/helmet-scout/`, `reference/scout/` – zweiter Helm **Scout v3** (0.8): Blender-Generator mit Einstieg `run.py`,
   GLB-Lieferpaket, Vorlagen; Viewer `?model=scout` ([docs/HELM_SCOUT.md](docs/HELM_SCOUT.md)).
 - `blender/robot/`, `assets/robot-bodies/` – drei Roboterkörper aus Ballon Runde 5 (0.10): Export mit gepinnter Ballon-Quelle
-  (`SOURCE.json`), GLB je Körper; Viewer `?model=waechter|paladin|mechanik` ([docs/ROBOTER_BALLON.md](docs/ROBOTER_BALLON.md)).
+  (`SOURCE.json`), GLB je Körper; Viewer `?model=waechter|paladin|mechanik`, seit 0.11 gealtert (`web/src/robotWear.js`)
+  ([docs/ROBOTER_BALLON.md](docs/ROBOTER_BALLON.md)).
 - `docs/HELM_STIL.md` – bestätigte Form-/Materialvorgaben; runde Haube, Augen erhalten, maßgeblich ist das Video.
 - `docs/HELM_AGENTEN.md` – technischer Aufbau, Material-/Akzentvarianten, Prüfumfang, visueller Eindruck und offene Nutzerwahl; vor Helm-Fortsetzungen gezielt lesen.
 - `docs/HELM_BASTION.md` – aktueller Oberkörper 0.7: kantige Schultergehäuse, zentrale Brust und Flanken B01–B31; Exporte in `assets/helmet-bastion/`.

@@ -1,0 +1,21 @@
+{
+  "source": "cubeescape-ballon 14bd78d basic/kit.py: MATERIALS (aaa_color, spec), BUMP, WEAR, WEAR_RADIUS, GRIME, SCRATCH, aaa_nodes() with skin 'standard'",
+  "sharpAngleDeg": 30,
+  "roundDegPerMm": 2.5,
+  "bumpDistance": 0.0004,
+  "specularNote": "roles.*.specular = 2 × Ballon Specular IOR Level (0.5 is neutral in Blender, 1.0 in three.js): graphite 0.25 → 0.5, rubber 0.2 → 0.4; rubber stippling is Voronoi in Ballon, value noise here",
+  "roughness": { "scale": 60, "min": 0.85, "max": 1.15 },
+  "wear": { "radius": 0.004, "breakupScale": 420, "threshold": [0.30, 0.42], "color": "#9EA3A9", "roughness": 0.28, "metalness": 0.35,
+    "note": "Ballon mixes metallic to 1.0; the viewer studio is darker than Ballon's grey world, full metal reads as dark marks" },
+  "scratch": { "scale": 900, "stretchX": 0.04, "threshold": [0.70, 0.74], "amount": 0.55, "color": "#A7ACB2" },
+  "roles": {
+    "shell":      { "wear": 1.0,  "bump": [400, 0.04],  "scratch": true },
+    "accent":     { "wear": 0.8,  "scratch": true },
+    "graphite":   { "wear": 0.15, "bump": [900, 0.12],  "color": "#141518", "specular": 0.5 },
+    "anodized":   { "wear": 0.3,  "scratch": true },
+    "dark_metal": { "wear": 0.25, "bump": [1200, 0.05] },
+    "rubber":     { "bump": [2600, 0.5], "color": "#111214", "specular": 0.4 },
+    "metal":      {},
+    "trim":       {}
+  }
+}

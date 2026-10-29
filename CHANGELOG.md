@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.11.0 „Patina“ – 2026-10-29 (gealterte Materialien der Roboterkörper)
+
+- Viewer zeigt Wächter, Paladin und Mechanik gealtert wie Ballons Cycles-Material „aaa“: Kantenabrieb im Radius 4 mm, Rauheitsschwankung,
+  Feinrelief und feine Kratzer je Materialrolle (`robotWear.js`, Parameter `robotWearParams.json`); `&wear=off` bleibt flach.
+- Abriebkanten nach Schattierungsnormalen (Normalensprung oder Fasenstreifen) beim Laden bestimmt; GLBs aus 0.10 unverändert.
+- Acht neue Tests (73 Node-Tests), Vergleich gegen die Ballon-Cycles-Bilder in `docs/bilder/patina_vergleich.jpg`.
+
 ## 0.10.0 „Roster“ – 2026-10-29 (drei Roboterkörper aus Ballon)
 
 - Die drei Körperstudien aus `cubeescape-ballon` Roboter Runde 5 (Commit `14bd78d`) als eigene Modelle: Wächter, Paladin, Mechanik.

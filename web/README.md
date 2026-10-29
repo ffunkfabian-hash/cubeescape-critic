@@ -44,7 +44,8 @@ sind die Cycles-Ansichten. [Aufbau, Nachbau und Grenzen](../docs/HELM_SCOUT.md).
 
 `?model=waechter`, `?model=paladin` und `?model=mechanik` zeigen die drei Körperstudien aus `cubeescape-ballon` als GLB aus
 `assets/robot-bodies/`. Sie stehen im Rahmen von `body=full`, also mit denselben Kameras. `&exploded=0..1` verschiebt die Baugruppen
-entlang der Ballon-Anker. In der GUI wechselt „Körperstudie“ das Modell. [Quelle, Export und Grenzen](../docs/ROBOTER_BALLON.md).
+entlang der Ballon-Anker. In der GUI wechselt „Körperstudie“ das Modell. Seit 0.11 sind die Materialien gealtert (Kantenabrieb, Rauheit, Relief, Kratzer nach
+Ballons Cycles-Material); `&wear=off` zeigt die flachen GLB-Farben. [Quelle, Export und Grenzen](../docs/ROBOTER_BALLON.md).
 
 ## Körperstudie
 
