@@ -75,7 +75,9 @@ export function buildRightComms(M) {
   g.add(yoke);
   for (const dz of [-0.085, 0.085]) {
     const [, geo] = tube([[e.outerX + 0.06, ay + 0.06, D.band.z], [e.outerX + 0.005, ay + 0.04, e.cz + dz], [e.outerX + 0.01, ay - 0.02, e.cz + dz]], 0.004);
-    g.add(new THREE.Mesh(geo, M.darkMetal));
+    const bail = new THREE.Mesh(geo, M.darkMetal);
+    bail.userData.assemblyRole = 'headset-bail';
+    g.add(bail);
   }
 
   // Rear tech box: mounting plate, box with a recessed polygonal field and logo, four corner screws, cylindrical side

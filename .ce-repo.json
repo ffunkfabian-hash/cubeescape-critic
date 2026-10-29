@@ -1,7 +1,7 @@
 {
   "name": "cubeescape-critic",
-  "version": "0.3.0",
-  "version_name": "Sidework",
+  "version": "0.7.1",
+  "version_name": "Bastion",
   "check": {
     "quick": [
       [

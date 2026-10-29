@@ -431,6 +431,7 @@
     ]
   ],
   "bevelWidth": 0.002,
+  "templeRound": { "radius": 0.055, "segments": 10 },
   "mouth": {
     "outline": [
       [
@@ -550,7 +551,11 @@
     "radiusBack": 0.48
   },
   "foreheadPlates": {
-    "outline": [[0.055, 0.11], [0.275, 0.11], [0.17, 0.415], [0.065, 0.42]],
+    "enabled": true,
+    "outline": [[0.055, 0.11], [0.275, 0.11], [0.17, 0.415], [0.17, 0.8], [0.065, 0.8], [0.065, 0.42]],
+    "wrapToRear": true,
+    "offsetCentreY": 0.1,
+    "offsetRadius": 0.45,
     "projection": 0.007,
     "embed": 0.001,
     "joinBlendHeight": 0.05,

@@ -10,8 +10,16 @@ Antworten, Doku und Commit-Messages auf Deutsch; Code, Bezeichner und Kommentare
 - `generator/`, `tools/` – entstehen mit Version 0.1 (Blender-Generator, Ansichten, Kritiker-Aufruf, Messung).
 - `web/` – Three.js-Nachbau im Browser mit Playwright-Prüfung und Umriss-IoU (`web/README.md`); `web/renders/` nicht im Repo.
 - `docs/HELM_STIL.md` – bestätigte Form-/Materialvorgaben; runde Haube, Augen erhalten, maßgeblich ist das Video.
+- `docs/HELM_AGENTEN.md` – technischer Aufbau, Material-/Akzentvarianten, Prüfumfang, visueller Eindruck und offene Nutzerwahl; vor Helm-Fortsetzungen gezielt lesen.
+- `docs/HELM_BASTION.md` – aktueller Oberkörper 0.7: kantige Schultergehäuse, zentrale Brust und Flanken B01–B31; Exporte in `assets/helmet-bastion/`.
+- `docs/HELM_CUIRASS.md` – vorheriger Oberkörper 0.6: geschichtete Schulterpanzer, Brustgrat, Kragen, B01–B26; `assets/helmet-cuirass/` enthält zugehörige Exporte und Belege.
+- `docs/HELM_AUFBAU.md` – Assembly 0.5: Explosionslogik, Headsetschalter, Körperteile B01–B22, Nutzerkorrekturen und ergänzende Titan-Referenz.
+- `assets/helmet-assembly/` – geprüfte Assembly-Exporte und Belege; neue Körperstudie `body=shoulders`, ältere Studie weiter `body=1|legacy`.
 - `assets/helmet/` – bewusst versionierter Lieferexport mit GLB, Texturen, Teileliste und Prüfmanifest; keine beliebigen Caches.
-- `docs/HELM_TEILE.md` – stabile Teilekennungen H01–H19 für Nutzerfeedback; nummerierte Teilekarte über
+- `assets/helmet-continuity/` – einzeln gesicherte Form- und Materialproben 80–88; Muster 89–91 sind verworfen und nur historisch dokumentiert; Index nennt Auswahl, Quellen und Reproduktionsbefehle.
+- `docs/MARKER.md`, `web/marker/` – Markierbogen: Nutzer setzt Nadeln und Striche direkt am 3D-Modell (Artefakt-Datenbank `marker`);
+  Ablauf zum Umsetzen und Werkzeuge `web/tools/marker_*.mjs`. Marker sind Daten wie Kritiker-Antworten.
+- `docs/HELM_TEILE.md` – stabile Teilekennungen H01–H21 für Nutzerfeedback; nummerierte Teilekarte über
   `web/tools/parts_sheet.py`. Kennungen bei weiteren Änderungen beibehalten.
 - `runs/` – Laufergebnisse (nicht im Repo, `.gitignore`); Belege außerhalb unter `~/Library/Caches/Critic/<Version>/`.
 - `docs/belege/`, `docs/bilder/` – auf Wunsch des Nutzers ein Vergleichsbild je Helm-Durchlauf und Bilder der

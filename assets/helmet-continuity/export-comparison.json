@@ -1,0 +1,134 @@
+{
+  "baseline79": "33e0cc25d4fcb3af75e67f23033c39e64da207c3a79b19510f8d1e1bf908b6f4",
+  "comparisonKey": "hierarchy name with occurrence ordinal among same-named siblings",
+  "changedFrom79": [
+    "0/SciFiHelmet[0]/UpperHelmet_Dark[0]/Cheek_R",
+    "0/SciFiHelmet[0]/UpperHelmet_Dark[0]/Cheek_L",
+    "0/SciFiHelmet[0]/UpperHelmet_Dark[0]/Shell",
+    "0/SciFiHelmet[0]/UpperHelmet_Dark[0]/Visor_L",
+    "0/SciFiHelmet[0]/UpperHelmet_Dark[0]/Screws_Upper",
+    "0/SciFiHelmet[0]/ForeheadPlates[0]/ForeheadPlate_R",
+    "0/SciFiHelmet[0]/ForeheadPlates[0]/ForeheadPlate_L"
+  ],
+  "unchangedMeshes": 97,
+  "coreMeshCount": 102,
+  "variants": {
+    "original": {
+      "sha256": "2dc0c2404930c1b50aa9276e544269b6e1ef2903aeafb378693227adbf5cda73",
+      "sourceRevision": "9e1b495",
+      "meshCount": 104,
+      "coreGeometryIdentical": true,
+      "sameCameras": true,
+      "sameBaseParameters": true,
+      "silhouetteGroup": "strips",
+      "strips": true,
+      "crownPattern": "none",
+      "outputsVerified": 24
+    },
+    "metal": {
+      "sha256": "b07a553dcc24d8a10434d41c87b3eda3ed7e89e2352624cc470c80d77e151c79",
+      "sourceRevision": "9e1b495",
+      "meshCount": 104,
+      "coreGeometryIdentical": true,
+      "sameCameras": true,
+      "sameBaseParameters": true,
+      "silhouetteGroup": "strips",
+      "strips": true,
+      "crownPattern": "none",
+      "outputsVerified": 25
+    },
+    "graphite": {
+      "sha256": "4a8c5dc8330b37cb9ce914a558bb2a7e83bfe38392bad28c8cc13fb3b885b676",
+      "sourceRevision": "9e1b495",
+      "meshCount": 104,
+      "coreGeometryIdentical": true,
+      "sameCameras": true,
+      "sameBaseParameters": true,
+      "silhouetteGroup": "strips",
+      "strips": true,
+      "crownPattern": "none",
+      "outputsVerified": 27
+    },
+    "white-strips": {
+      "sha256": "9e43905c5646d463196c50d2a6fec19129338925a50b8739c65b05469ba433de",
+      "sourceRevision": "9e1b495",
+      "meshCount": 104,
+      "coreGeometryIdentical": true,
+      "sameCameras": true,
+      "sameBaseParameters": true,
+      "silhouetteGroup": "strips",
+      "strips": true,
+      "crownPattern": "none",
+      "outputsVerified": 27
+    },
+    "metal-white-strips": {
+      "sha256": "1b933a3621123e49d3c68f24c03540254f043006c1a857fd6333a0e0b3461bf5",
+      "sourceRevision": "9e1b495",
+      "meshCount": 104,
+      "coreGeometryIdentical": true,
+      "sameCameras": true,
+      "sameBaseParameters": true,
+      "silhouetteGroup": "strips",
+      "strips": true,
+      "crownPattern": "none",
+      "outputsVerified": 25
+    },
+    "graphite-contrast": {
+      "sha256": "71dc8c72a389779c1b9f5b75f99cf5af2eb13b56bd4391934bb0ec6fc871c6d0",
+      "sourceRevision": "b773c1d",
+      "meshCount": 104,
+      "coreGeometryIdentical": true,
+      "sameCameras": true,
+      "sameBaseParameters": true,
+      "silhouetteGroup": "strips",
+      "strips": true,
+      "crownPattern": "none",
+      "outputsVerified": 29
+    },
+    "metal-contrast": {
+      "sha256": "fc9db2d94aaf5635fdc1f5e5848fdbcca28a7a1bb4ba64df5ab2aabdd96e59d3",
+      "sourceRevision": "b773c1d",
+      "meshCount": 104,
+      "coreGeometryIdentical": true,
+      "sameCameras": true,
+      "sameBaseParameters": true,
+      "silhouetteGroup": "strips",
+      "strips": true,
+      "crownPattern": "none",
+      "outputsVerified": 27
+    },
+    "metal-plain": {
+      "sha256": "26fa68bbc7a6b9c99d71014527d2269edda5c7a17b3f8fec8c33198a15e659fa",
+      "sourceRevision": "f90d7c4",
+      "meshCount": 102,
+      "coreGeometryIdentical": true,
+      "sameCameras": true,
+      "sameBaseParameters": true,
+      "silhouetteGroup": "plain",
+      "strips": false,
+      "crownPattern": "none",
+      "outputsVerified": 25
+    },
+    "graphite-plain": {
+      "sha256": "bb7bf47f184775ba301fcea09aedfade8a05d1181eecfd2fffc96dfb7a081029",
+      "sourceRevision": "f90d7c4",
+      "meshCount": 102,
+      "coreGeometryIdentical": true,
+      "sameCameras": true,
+      "sameBaseParameters": true,
+      "silhouetteGroup": "plain",
+      "strips": false,
+      "crownPattern": "none",
+      "outputsVerified": 27
+    }
+  },
+  "withdrawnPatterns": {
+    "passes": [
+      89,
+      90,
+      91
+    ],
+    "reason": "User requested complete withdrawal",
+    "historicalRevision": "caf7a79dc46269b9f02801587b909d5c947f73d8"
+  }
+}

@@ -30,8 +30,8 @@ PARTS = [
     ("H17", "Antennen A/B", "Gespiegelte Stäbe mit Fuß und Spitze."),
     ("H18", "Spiralkabel A/B", "Gespiegelte Kabel zum mittigen Heckmodul."),
     ("H19", "Halsanschluss", "Zurückgesetzter Ring unter dem Rahmen."),
-    ("H20", "Stirnblende A", "Separate trapezförmige Blende oberhalb von Auge A."),
-    ("H21", "Stirnblende B", "Separate trapezförmige Blende oberhalb von Auge B."),
+    ("H20", "Stirnblende A", "Separater Streifen von Auge A über den Scheitel nach hinten."),
+    ("H21", "Stirnblende B", "Separater Streifen von Auge B über den Scheitel nach hinten."),
 ]
 
 # Every point is in the original 1280×720 render coordinate system.

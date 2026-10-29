@@ -426,3 +426,128 @@ Quellen: [Maskenaufbau](../web/src/parts/upperHelmet.js), [Facettenparameter](..
 Vorgeschlagener Folgeschritt: breiterer, sanfter gerundeter Übergang neben den Augen, bei erhaltener Augenform und
 runder Haube. Vor Übernahme aus allen vier festen Ansichten prüfen. Diese Anpassung ist **noch nicht umgesetzt**;
 Lieferstand, Renderbilder und Messwerte bleiben bei 79. Der Befund und das Ziel sind in der [Stilbeschreibung](HELM_STIL.md) festgehalten.
+
+## Runde 23 – Durchgängige Form und Material-/Akzentproben 80–84 (28.10.2026)
+
+Der Nutzer beauftragt die breitere Rundung neben den Augen und die Verlängerung der beiden Stirntrapeze bis zum
+Hinterkopf. Zusätzlich sollen die dunkle Haubenstruktur und ein metallischer Look verglichen werden. Im laufenden
+Vergleich ergänzt der Nutzer helle Befestigungspunkte auf dunklem Grund sowie weiße Streifen für beide Materialien.
+
+| Stand | Variante | Zweck |
+|---|---|---|
+| [80](belege/helm/80.jpg) | Neue Form, Originalmaterial | Formvergleich mit 79 |
+| [81](belege/helm/81.jpg) | Metall, helle obere Schrauben | Metallische Materialrichtung |
+| [82](belege/helm/82.jpg) | Graphit, helle obere Schrauben | Geschlossene dunkle Materialrichtung |
+| [83](belege/helm/83.jpg) | Graphit, helle Schrauben, weiße Streifen | Helle Akzentprobe |
+| [84](belege/helm/84.jpg) | Metall, helle Schrauben, weiße Streifen | Vervollständigung des Material-/Akzentvergleichs |
+
+Die Stirnstreifen bleiben echte separate Bauteile. Ihre radiale Form folgt der Haube über den Scheitel nach hinten;
+der bestehende Bügel liegt darüber. Die seitlichen Maskenknicke erhalten tangentiale Rundungen mit Radius .055.
+Die erste Metalltextur war zu fleckig und wurde vor den nummerierten Materialproben geglättet.
+
+44 Tests, Build und unabhängige Prüfung bestehen. Alle Varianten haben dieselben 104 Meshes, Kameras und Silhouetten;
+mittlere IoU 90,89 %. Gegenüber 79 bleiben 97 Meshes bytegleich; die sehr kleinen numerischen Augenabweichungen sind
+im [Prüfbericht](versions/0.4.md) quantifiziert. Keine Materialwahl wird aus dem positiven Nutzerfeedback abgeleitet.
+[Materialauswahl, später um 85/86 ergänzt](bilder/helm_continuity_varianten.jpg) · [Alle Ansichten](bilder/helm_continuity_vier_ansichten.jpg) ·
+[Formvergleich](bilder/helm_continuity_form.jpg) · [Agentenübergabe mit visueller Einschätzung](HELM_AGENTEN.md).
+
+### Ergänzung 85/86 – dunkle Streifen besser lesbar
+
+Die schwarzen Stirnblenden gefallen dem Nutzer auf Metall, verschwinden ihm aber auf Graphit zu stark. Auf Wunsch
+wird das Kontrastverfahren bei beiden Finishes ausprobiert: [85](belege/helm/85.jpg) setzt glattere, hellere
+Anthrazitstreifen auf raues Graphit; [86](belege/helm/86.jpg) setzt mattere Anthrazitstreifen auf glänzendes Metall.
+Die Ausgangsvarianten bleiben erhalten. Nur Materialien ändern sich; 104 Meshes, Transformationen und Silhouetten
+stimmen mit 80–84 überein. Zehn gezielte Tests und die unabhängige Nachprüfung bestehen.
+[Metallvergleich](bilder/helm_continuity_metall_auswahl.jpg) · [Graphitvergleich](bilder/helm_continuity_graphit_auswahl.jpg).
+
+
+### Ergänzung 87–91 – ohne Blenden und alternative Haubenmuster
+
+Der Nutzer möchte die Kopfoberseite ohne Stirnblenden sehen und statt der Bänder andere Muster „just for fun“
+ausprobieren. `strips=off` lässt ausschließlich H20/H21 weg; die bereits darunter vorhandene Haube bleibt unverändert.
+Die Materialproben [87 Metall](belege/helm/87.jpg) und [88 Graphit](belege/helm/88.jpg) zeigen diese ruhigere Form mit
+hellen oberen Schrauben. Die 102 verbleibenden Grundmeshes sind identisch zu 80–86.
+
+[89 Winkel](belege/helm/89.jpg), [90 Hexagon](belege/helm/90.jpg) und [91 Technik](belege/helm/91.jpg) verwenden Graphit
+ohne Blenden und ergänzen ausschließlich `CrownMarking`: einen separaten Träger für deterministische weiße PNG-Bemalung.
+Die drei Trägergeometrien sind identisch; nur ihre Motive unterscheiden sich. GLB-Alpha-Masken und PNGs sind exportiert.
+Die Markierungen belegen den vorderen/oberen Scheitel, nicht das Heck. Die Technikmarkierungen sind bewusst asymmetrisch.
+
+Nach Sichtprüfung wirkt die blendenlose Form ruhiger, das Winkelmotiv klar und leicht, das Hexagonraster feiner und
+auf Distanz unruhiger; die Technikmarkierungen erinnern an auflackierte Kennzeichnungen. Dies sind Einschätzungen des
+Agenten, keine Nutzerentscheidung. Alle bisherigen Blenden- und Materialproben bleiben verfügbar.
+
+50 Tests und Build bestehen. Unabhängige Nachprüfung: Freigabe; der ergänzend verlangte Browsercheck bestätigt
+Reset-/Rebuild-Verhalten und Wiederherstellung der Mustersichtbarkeit nach dem Maskenrender. Vier Ansichten pro Probe
+geprüft. Die fünf Silhouettensätze sind bytegleich, mittlere IoU 90,73 %; dies bewertet keine Mustergestaltung.
+[Mustervergleich](bilder/helm_continuity_muster_vier_ansichten.jpg) ·
+[Ohne Blenden](bilder/helm_continuity_ohne_blenden.jpg) · [Aufbau und Reproduktion](HELM_AGENTEN.md).
+
+
+### Nutzerentscheidung nach 91 – Muster vollständig verworfen
+
+Der Nutzer verwirft alle drei Muster ausdrücklich komplett. Winkel, Hexagon und Technik sind daher aus Generator,
+Viewer, Runner und aktiven Exporten entfernt; fünf ausschließlich zugehörige, vorher bestandene Tests entfallen.
+45 verbleibende Tests und Build bestehen. Die Musterbilder oben sind ausschließlich historische Belege verworfener Versuche.
+Ihr vollständiger Aufbau und ihre Exporte bleiben im [Git-Stand vor Rücknahme](https://github.com/ffunkfabian-hash/cubeescape-critic/blob/caf7a79dc46269b9f02801587b909d5c947f73d8/assets/helmet-continuity/README.md).
+Die Varianten 80–88 einschließlich Metall/Graphit ohne Blenden bleiben unverändert verfügbar. Keine neue Geometrie-
+oder Materialauswahl wird daraus abgeleitet; Video, Augen und Einzelteilaufbau behalten ihre bisherigen Vorgaben.
+
+## Assembly 0.5 – Aufbau und Oberkörper (28.10.2026)
+
+Quelle `6090262`: Der Nutzer wünscht eine beschriftete Explosionsansicht, einen Blick ohne Kopfhörer/Kopfbügel
+und den Beginn eines passenden Oberkörpers. Die Helmform bleibt erhalten. 104 Meshes werden auseinandergezogen,
+34 Gruppen im Bild benannt und alle Einzelmeshes in `assembly.json` aufgeführt. Der Headsetschalter entfernt
+40 zugehörige Meshes einschließlich Kabeln und Antennen; Heckmodul und Maskenhalter bleiben stehen.
+
+Der Oberkörper ergänzt 22 eigene Teile. Erste Rückmeldung: Hals zu lang, Schultern zu schmal und zu wenig stämmig.
+Daraufhin Hals 0,49 → 0,31 und Breite 1,97 → 2,3198. Zweite Rückmeldung: mehr Schultermasse nach oben.
+Zusätzlicher Bogen 0,23, weiße Dicke 0,10 und kräftigere dunkle Unterlage heben die obere Kontur um etwa 0,15.
+Helm und Halsposition bleiben bei dieser zweiten Korrektur unverändert.
+
+![Drei Formschritte](bilder/helm_assembly_schulterverlauf.jpg)
+
+Der Hinweis des Nutzers auf `cubeescape-reference` führt zur noch uncommitteten Titan-Auswertung im Worktree
+`titan-style`. Sie stützt geschichtete gerundete Schutzschalen und dunkle Zwischenlagen, liefert aber keine
+verbindlichen Körpermaße. Quellenhashes und gelesene Abschnitte stehen im [Aufbaudokument](HELM_AUFBAU.md).
+Die erhöhte Schulterform war beim Quellenfund bereits umgesetzt. Die endgültige Formbewertung durch den Nutzer ist offen.
+
+[Vier Körperansichten](bilder/helm_assembly_schultern.jpg) · [Explosionsbild](bilder/helm_assembly_explosion.jpg) ·
+[Headsetvergleich](bilder/helm_assembly_headset.jpg) · [GLB/Texturen/Prüfbelege](../assets/helmet-assembly/README.md).
+
+### Patch 0.5.1 – mehr Tiefe, niedrigere kantige Schultern
+
+Nutzer: oberer Rumpf zu dünn, Schultern zu hochgezogen, kantiger gewünscht. Quelle `d8e0b2e`:
+Kerntiefe +35,8 %, Schulteroberkante rund 0,135 niedriger, große Facetten bei erhaltener Schalendicke.
+Kragen, Brust und Rücken folgen der größeren Tiefe; Hals und Helm bleiben gleich. 22 separate Körperteile erhalten.
+54 Tests, Build und vier Ansichten geprüft. [Vergleich](bilder/helm_bulkhead_vergleich.jpg) ·
+[Vier Ansichten](bilder/helm_bulkhead_vier_ansichten.jpg) · [Lieferexport](../assets/helmet-assembly/shoulders-blocky/scifi_helmet.glb).
+
+
+## Cuirass 0.6 – Paladin-inspirierter Oberkörper (28.10.2026)
+
+Nach der Nutzerzeichnung und „Dann leg mal los“: Hauptschalen nach unten um den Armansatz gebogen,
+pro Seite eine kleinere Lamelle und ein dunkler Gelenkkörper ergänzt. Brusthälften bilden einen Mittelgrat;
+der Kragen liegt oben enger an und weitet sich zur Brust. Helm, kurzer Hals und Rumpfkerntiefe bleiben erhalten.
+26 statt 22 Körpermeshes, Außenbreite 1,99 statt 2,3198.
+
+Die erste Seitenansicht zeigte einen dunklen Gelenküberstand durch die weiße Schulter. Rücksetzen der
+Oberkante plus gezielte Strahlprobe beheben ihn. Keine neue Helm-IoU, keine finale Nutzerfreigabe der Körperform.
+[Aufbau, Stil und Grenzen](HELM_CUIRASS.md) · [Prüfbericht](versions/0.6.md).
+
+![Vorher / Cuirass](bilder/helm_cuirass_vergleich.jpg)
+
+
+## Bastion 0.7 – technische Gehäuse und geschlossene Brust (28.10.2026)
+
+Vier neue Nutzerbilder führen nach „Dann leg mal los“ zu kantigen, tiefen Schultergehäusen mit separater
+unterer Lage. B27 ergänzt die durchgehende Brustmitte; B28/B29 die Flanken, B30/B31 gefaltete Schulterdächer.
+31 Körperteile; Helm, kurzer Hals und tiefer Rumpfkern erhalten. Die erste Brustfläche wird nach Sichtprüfung
+planar, der gemessene Flankenabstand vergrößert. Frühere Cuirass-Formtests bleiben über eine Parameterfixture erhalten.
+[Aufbau/Stil](HELM_BASTION.md) · [Prüfbericht](versions/0.7.md).
+
+![Cuirass / Bastion](bilder/helm_bastion_vergleich.jpg)
+
+Nachgereicht während 0.7: Schultern etwas zu kantig, Brust seitlich zu flach. Zwei Facettenbilder führen zu
+einer reliefartig vorgewölbten Brust mit definierten inneren Scheiteln sowie stärker gefasten Schulterkanten.
+Die plane Zwischenprobe bleibt nur im lokalen Belegcache; sie ist nicht der Lieferstand.

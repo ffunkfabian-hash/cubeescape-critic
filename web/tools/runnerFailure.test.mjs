@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, copyFileSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, copyFileSync, writeFileSync, readFileSync, rmSync, realpathSync, existsSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 import os from 'node:os';
@@ -12,7 +12,7 @@ function fixture() {
     const file = path.join(root, name); mkdirSync(path.dirname(file), { recursive: true });
     writeFileSync(file, typeof value === 'string' ? value : JSON.stringify(value));
   };
-  for (const file of ['verify_renders.mjs', 'tools/provenance.mjs', 'tools/verification.mjs', 'tools/compare_reference.mjs']) {
+  for (const file of ['verify_renders.mjs', 'src/finishPresets.js', 'src/assemblyOptions.js', 'tools/provenance.mjs', 'tools/verification.mjs', 'tools/compare_reference.mjs']) {
     put(file, ''); copyFileSync(new URL('../' + file, import.meta.url), path.join(root, file));
   }
   return { directory, root, put };
@@ -35,6 +35,7 @@ for (const failure of ['missing-source', 'server-initialization']) {
       assert.equal(run.status, 1, run.stderr?.toString());
       const result = JSON.parse(readFileSync(path.join(f.root, 'renders/verification.json')));
       assert.equal(result.status, 'failed'); assert.equal(result.old, undefined);
+      assert.equal(result.strips, 'on');
       if (failure === 'server-initialization') assert.match(result.error, /fixture server failure/);
     } finally { rmSync(f.directory, { recursive: true, force: true }); }
   });
@@ -55,3 +56,38 @@ for (const failure of ['missing-file', 'wrong-hash']) {
     } finally { rmSync(f.directory, { recursive: true, force: true }); }
   });
 }
+
+test('verification rejects invalid arguments before starting the renderer or writing output', () => {
+  const f = fixture();
+  try {
+    for (const args of [['--finish=chrome'], ['--finish='], ['--finish'], ['--out='],
+      ['--out', '--no-iou'], ['--unknown'], ['--finish=metal', '--finish=graphite'],
+      ['--accents=white'], ['--accents=contrast'], ['--accents='], ['--accents'], ['--accents=white-strips', '--accents=original'],
+      ['--body=unknown'], ['--headset=hidden'], ['--exploded=NaN'], ['--exploded=2'], ['--body=shoulders'], ['--exploded=1'], ['--strips=hidden'], ['--strips='], ['--strips'], ['--strips=on', '--strips=off'],
+      ['--crown-pattern=none'], ['--crown-pattern=chevron'], ['--crown-pattern=hex'], ['--crown-pattern=tech']]) {
+      const run = spawnSync(process.execPath, [path.join(f.root, 'verify_renders.mjs'), ...args], { timeout: 10000 });
+      assert.equal(run.status, 1, run.stderr?.toString());
+      assert.match(run.stderr.toString(), /Unknown finish|Unknown accents|Unknown strips|Unknown body|Unknown headset|Exploded amount|require --no-iou|Missing value|Unknown argument|Duplicate argument/);
+    }
+    assert.equal(existsSync(path.join(f.root, 'renders')), false);
+  } finally { rmSync(f.directory, { recursive: true, force: true }); }
+});
+
+test('verification records selected preset and failure in its separate output directory', () => {
+  const f = fixture();
+  try {
+    f.put('renders/verification.json', { status: 'passed', original: true });
+    const run = spawnSync(process.execPath, [path.join(f.root, 'verify_renders.mjs'), '--finish=metal', '--accents=light-fasteners', '--strips=off', '--out=variants/metal', '--no-iou'], { timeout: 10000 });
+    assert.equal(run.status, 1, run.stderr?.toString());
+    const result = JSON.parse(readFileSync(path.join(f.root, 'variants/metal/verification.json')));
+    assert.equal(result.status, 'failed');
+    assert.equal(result.finish.name, 'metal');
+    assert.equal(result.finish.metalness, 0.55);
+    assert.deepEqual(result.finish.textureSeeds, { normal: 73, roughness: 11 });
+    assert.deepEqual(result.accents, { name: 'light-fasteners', lightFasteners: true, whiteStrips: false });
+    assert.equal(result.strips, 'off');
+    assert.equal(result.iouSkipped, true);
+    assert.equal(result.outputDirectory, realpathSync(path.join(f.root, 'variants/metal')));
+    assert.equal(JSON.parse(readFileSync(path.join(f.root, 'renders/verification.json'))).original, true);
+  } finally { rmSync(f.directory, { recursive: true, force: true }); }
+});

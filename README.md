@@ -1,6 +1,23 @@
 # Critic – parametrischer Helm im Browser
 
-Aktueller Lieferstand **79**: durchgehend gewölbter Scheitel mit angepasstem Kopfbügel und weichem Übergang zur
+**Aktueller Versuch 0.7 „Bastion“:** tiefe kantige Schultergehäuse mit unterer Panzerlage, geschlossene Brustmitte
+und separate Flanken. 31 Körperteile; Helm, kurzer Hals und kräftiger Rumpfkern erhalten.
+[Aufbau und Stil](docs/HELM_BASTION.md) · [Exporte](assets/helmet-bastion/README.md) · [Prüfbericht](docs/versions/0.7.md).
+
+**Form- und Materialbasis 0.4 „Continuity“:** weichere Übergänge neben den Augen und zwei von der Stirn bis zum Hinterkopf
+verlängerte Streifen. Auf derselben Geometrie stehen Originalmaterial, glänzendes Metall und feines dunkles Graphit
+zum Vergleich; noch keine Materialauswahl durch den Nutzer. [Vergleich und Exporte](assets/helmet-continuity/README.md) ·
+[Prüfbericht](docs/versions/0.4.md). Der Generator zeigt standardmäßig die neue Form mit Originalmaterial.
+[Agentendokumentation: Aufbau, Entscheidungen und visueller Eindruck](docs/HELM_AGENTEN.md).
+
+![Sechs Material- und Akzentkombinationen](docs/bilder/helm_continuity_varianten.jpg)
+
+Zusätzliche Proben: [Metall und Graphit ohne Stirnblenden](docs/bilder/helm_continuity_ohne_blenden.jpg).
+Die neun Stände 80–88 sind mit Quellstand, Parametern, Einzelteilen und Texturen im
+[Variantenverzeichnis](assets/helmet-continuity/README.md) gesichert. Die alternativen Haubenmuster 89–91 wurden
+auf Nutzerwunsch vollständig verworfen; sie bleiben ausschließlich als Historie dokumentiert.
+
+Bisheriger Lieferstand **79**: durchgehend gewölbter Scheitel mit angepasstem Kopfbügel und weichem Übergang zur
 Augenmaske mit weitgehend verdeckter Fugenlinie. Die Haube trägt eine sichtbare feine Lackkörnung im Graphitton der Maske; der Glanz bleibt gedämpft. Hinterkopfgehäuse und Nackenrahmen sind wieder rund; Augen und kantige Kieferplatten bleiben erhalten. Zwei separate trapezförmige Stirnblenden schließen direkt an die Augenmaske an und setzen deren Flächen nach oben fort. Funkmuschel, Kabel, Halterung und Antenne sind jetzt von Seite A nach B gespiegelt. Das Video bleibt für den übrigen Helm maßgeblich.
 
 ![Aktueller Helm](docs/bilder/helm_aktuell.jpg)

@@ -1,8 +1,11 @@
 // Material library (values from the master prompt) with procedural canvas maps.
 import * as THREE from 'three';
 import { stippleMap, shellMaps, crownMaps, honeycombMaps, grimeMaps } from './textures.js';
+import { resolveFinish, resolveAccents } from './finishPresets.js';
 
-export function createMaterials() {
+export function createMaterials(finish = 'original', accents = 'original') {
+  const preset = resolveFinish(finish);
+  const accentPreset = resolveAccents(accents);
   const stipple = stippleMap();
   stipple.repeat.set(9, 9);
   const [shellBump, shellRough] = shellMaps();
@@ -37,5 +40,61 @@ export function createMaterials() {
     name: 'crownArmor', roughness: 0.9, envMapIntensity: 0.35, specularIntensity: 0.45,
     map: crownColor, normalMap: crownNormal, roughnessMap: crownRough, bumpMap: null,
   });
+  if (preset.sharedArmorMaps) {
+    materials.accessoryArmor = materials.darkArmor.clone();
+    materials.accessoryArmor.name = 'accessoryArmor';
+    // Both armor surfaces use the same real texture objects and PBR factors.
+    // Tangent-space normals survive core glTF export, unlike bumpMap.
+    for (const material of [materials.darkArmor, materials.crownArmor]) {
+      material.color.setHex(preset.color);
+      Object.assign(material, {
+        roughness: preset.roughness, metalness: preset.metalness,
+        envMapIntensity: preset.envMapIntensity, specularIntensity: preset.specularIntensity,
+        map: preset.name === 'metal' ? null : crownColor,
+        normalMap: crownNormal, roughnessMap: preset.name === 'metal' ? shellRough : crownRough, bumpMap: null,
+      });
+      material.normalScale.setScalar(preset.normalScale);
+    }
+  }
+  if (accentPreset.lightFasteners) {
+    materials.lightFastener = new THREE.MeshStandardMaterial({
+      name: 'lightFastener', color: 0xd6d7d5, roughness: 0.6, metalness: 0.05,
+    });
+  }
+  if (accentPreset.contrastStrips) {
+    const profile = accentPreset.stripProfiles[preset.name];
+    materials.contrastStrip = materials.darkArmor.clone();
+    materials.contrastStrip.color.setHex(profile.color);
+    Object.assign(materials.contrastStrip, { name: 'contrastStrip', map: null,
+      roughness: profile.roughness, metalness: profile.metalness, envMapIntensity: profile.envMapIntensity,
+      normalMap: crownNormal, bumpMap: null });
+    materials.contrastStrip.normalScale.setScalar(profile.normalScale);
+  }
   return materials;
+}
+
+const FINISHED_ARMOR_PARTS = new Set(['Crown', 'Shell', 'Cheek_L', 'Cheek_R',
+  'MouthRail_L', 'MouthRail_R', 'Brim', 'ForeheadPlate_L', 'ForeheadPlate_R']);
+
+// Some brackets and radio yokes reuse darkArmor in the generator. Preserve their
+// accepted coating while changing only the requested dark helmet surfaces.
+export function applyArmorFinish(model, materials) {
+  if (!materials.accessoryArmor) return;
+  model.traverse(object => {
+    if (!object.isMesh || FINISHED_ARMOR_PARTS.has(object.name)) return;
+    const keepAccessory = material => material === materials.darkArmor ? materials.accessoryArmor : material;
+    object.material = Array.isArray(object.material) ? object.material.map(keepAccessory) : keepAccessory(object.material);
+  });
+}
+
+export function applyArmorAccents(model, materials, accents = 'original') {
+  const preset = resolveAccents(accents);
+  if (preset.lightFasteners && !materials.lightFastener) throw new Error('Missing light fastener material');
+  if (preset.contrastStrips && !materials.contrastStrip) throw new Error('Missing contrast strip material');
+  model.traverse(object => {
+    if (!object.isMesh) return;
+    if (preset.lightFasteners && object.name === 'Screws_Upper') object.material = materials.lightFastener;
+    if (preset.whiteStrips && ['ForeheadPlate_L', 'ForeheadPlate_R'].includes(object.name)) object.material = materials.whiteArmor;
+    if (preset.contrastStrips && ['ForeheadPlate_L', 'ForeheadPlate_R'].includes(object.name)) object.material = materials.contrastStrip;
+  });
 }

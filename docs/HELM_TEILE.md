@@ -1,9 +1,17 @@
 # Helm – Teile und Abschnitte
 
+**Assembly 0.5:** Die bestehenden H01–H21 bleiben stabil. Die Explosionsbeschriftung unterscheidet ergänzend
+Seiten A/B, F01–F03 (bestehende zusammengefasste Schrauben) und P01 (Präsentationshals).
+Die Körperstudie 0.7 erhält **B01–B31**: B27 ist die neue Brustmitte, B28/B29 die Flanken, B30/B31 die Schulterdächer.
+[Aktueller Aufbau](HELM_BASTION.md). Die Kennungen aus 0.6 bleiben erhalten: B23/B24 ergänzen untere Schulterlamellen, B25/B26 dunkle Gelenkkörper;
+[historische Cuirass-Zuordnung und Anschlüsse](HELM_CUIRASS.md#einzelteile-und-noch-offene-verbindungen).
+B01–B22 aus 0.5 bleiben stabil; [historische Beschreibung](HELM_AUFBAU.md).
+Im Viewer zeigt **Aufbau und Varianten → Bauteile / Anschlüsse** jedes enthaltene Mesh mit eindeutigem Pfad.
+
 Diese Nummern bleiben über Modelländerungen hinweg gleich. Für einen Änderungswunsch genügen **Nummer, Seite und Richtung**:
 „H07 schmaler“, „H11 auf Seite B tiefer“ oder „H10 vorne flacher anschließen“.
 
-![Teilekarte des Helms](bilder/helm_teile.jpg)
+![Teilekarte des Helms](bilder/helm_continuity_teile.jpg)
 
 **Seite A** liegt in der Frontansicht links, im Three.js-Modell `−X`, Kamera-Schaltfläche `Right`.
 **Seite B** liegt in der Frontansicht rechts, im Modell `+X`, Schaltfläche `Left`. Seit Stand 79 tragen beide Seiten
@@ -31,12 +39,15 @@ Diese Bezeichnungen gelten unabhängig davon, von welcher Richtung man gerade au
 | H17 | Antennen A/B | Gespiegelte Stäbe mit Fuß und Endkappe; bei Feedback Seite angeben. |
 | H18 | Spiralkabel A/B | Gespiegelte Kabelschleifen mit Klammern und Anschlüssen zum gemeinsamen Heckmodul. |
 | H19 | Halsanschluss | Zurückgesetzter Ring unter dem Nackenrahmen. Der darunterliegende schwarze Hals dient als Träger. |
-| H20 | Stirnblende A | Trapezförmige separate Blende oberhalb des Auges auf Seite A. |
-| H21 | Stirnblende B | Entsprechende separate Blende auf Seite B; Mittelstreifen bleibt frei. |
+| H20 | Stirnblende A | Separater trapezförmiger Stirnstreifen auf Seite A; in Versuch 0.4 über den Scheitel bis zum Hinterkopf verlängert. |
+| H21 | Stirnblende B | Entsprechender separater Streifen auf Seite B; Mittelstreifen bleibt frei. |
 
 Die IDs bezeichnen sichtbare Abschnitte, nicht zwingend einzelne Meshes. Seit Fidelity sind Haube, Augenmaske, beide Wangen, Kinn und beide Kieferstücke getrennte Meshes.
-Die Bildkarte zeigt Stand 79 mit H20/H21; aktuelle Vier-Ansichten-Belege stehen im [Prüfbericht](versions/0.3.md).
+Die Bildkarte zeigt Probe 83; dieselbe Bauteilgeometrie gilt für 80–86. Aktuelle Vier-Ansichten-Belege stehen im [Prüfbericht](versions/0.4.md).
 Farben helfen beim Zuordnen; ein Änderungswunsch an H11 betrifft die Geometrie, solange keine Materialänderung genannt wird.
+
+In den optionalen Proben 87/88 sind H20/H21 ausgeschaltet, ihre Kennungen bleiben reserviert. Die übrigen 102 Meshes
+bleiben unverändert. Die kurz erprobten Bemalungsträger aus 89–91 sind vollständig entfernt; sie erhalten keine Teilekennung. Die tatsächlichen Objekte stehen in `parts.json` des jeweiligen [Variantenordners](../assets/helmet-continuity/README.md).
 
 ## Zuordnung für die Umsetzung
 
@@ -67,7 +78,7 @@ Die Karte verwendet die vier vorhandenen Renderansichten mit 1280×720 Pixeln. C
 vergeben; zusätzliche Bereiche erhalten neue Nummern. Die Karte dokumentiert einen Modellstand und ersetzt keinen
 Vergleich mit den Referenzbildern.
 
-Aktueller Lieferstand: **79**, mit quer und längs gewölbtem Scheitel, angepasstem Bügel und weichem Übergang
+Bisheriger Lieferstand vor 0.4: **79**, mit quer und längs gewölbtem Scheitel, angepasstem Bügel und weichem Übergang
 zwischen H01 und H02. Die Fugenlinie ist durch einen verdeckten Überlappungsrand reduziert. Beide Teile bleiben getrennt; H09/H10 sind wieder rund; die separaten Vertiefungen H11 folgen der neuen Rundung.
 Die Haube besitzt dieselbe Graphitgrundfarbe wie die Maske, mit sichtbarer feiner Lackkörnung und gedämpftem Glanz.
 H20/H21 schließen mit einem auslaufenden Überlappungsrand direkt an die Augenmaske an, bleiben aber eigenständige Meshes.

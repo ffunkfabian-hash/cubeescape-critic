@@ -1,0 +1,13 @@
+ce_judge: 9 Dateien, 467 Diff-Zeilen, Richter sol (gpt-6.1-sol high), Grund: expliziter --model=sol; automatisch wäre sol (449 Diff-Zeilen (Schwelle 300)), Basis b773c1d
+| Nr | Datei:Zeile | Schwere (blocker/hoch/niedrig/ok) | Befund | Vorschlag |
+|---|---|---|---|---|
+| 1 | web/verify_renders.mjs:168 | ok | Exportmanifest additiv erweitert; keine Änderung an SaveData, LevelFormat oder Unity-Verträgen erkennbar. Keine Migration oder neue Abnehmer-Mindestversion erforderlich. | — |
+| 2 | web/src/crownPatternPresets.js:4 | ok | Neue benannte Muster; bestehende persistente IDs, Seeds und Enum-Werte im Diff unverändert. | — |
+| 3 | web/src/main.js:278 | ok | Keine UnityEngine.Object-, SubsystemRegistration- oder GameClock-Stellen betroffen; keine neue Allokation im regulären Animationspfad. | — |
+| 4 | web/tools/stripToggle.test.mjs:7; web/tools/crownPatterns.test.mjs:82 | ok | Keine Tests gelöscht oder abgeschwächt. Geometrie, Muster und CLI ergänzt geprüft; Reset-Regressionsprüfung und test_map-Zuordnung im Diff nicht belegt. Keine Golden-/Hash-Änderung. Tests hier nicht ausgeführt; finale Bildprüfung läuft laut Auftrag. | Reset-/Rebuild-Verhalten zusätzlich im Browser absichern; test_map-Zuordnung prüfen. |
+| 5 | web/src/crownPatterns.js:23 | ok | Musterabhängige Zeichenlogik entspricht den drei Motiven; Material- und Exportparameter stehen im Preset. Keine fachfremden Bereichssonderfälle. | — |
+| 6 | web/verify_renders.mjs:8 | niedrig | CLI-Hilfe aktualisiert; Systemdoku, Changelog und Versionsbericht im vorgelegten Diff noch nicht enthalten, ausdrücklich angekündigt. | Dokumentation anschließend nachführen. |
+| 7 | web/tools/runnerFailure.test.mjs:93 | ok | Löschungen betreffen eigene temporäre Testverzeichnisse. Keine Force-Push-, Stash-, fremden Worktree- oder unautorisierten Push-/Merge-Aktionen im Diff. | — |
+| 8 | web/src/main.js:24 | ok | Zwei zusammengehörige Ziele: Stirnblenden abschalten und drei Texturmuster erproben. Geänderte Dateien bleiben innerhalb der Web-Implementierung und ihrer Prüfungen. | — |
+
+Freigabe

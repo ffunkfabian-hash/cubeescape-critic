@@ -5,6 +5,17 @@ lokale 3D-Software. Kein Kritiker-API-Aufruf: der Abgleich läuft über Screensh
 
 ## Start
 
+Der aktuelle Generator enthält den Formversuch 0.4. `?finish=original` (Standard), `?finish=metal` und
+`?finish=graphite` wählen das Finish der dunklen Rüstung. Alle drei bauen dieselbe Geometrie. Stand 79 bleibt
+als früherer Export unter `assets/helmet/`; seine Quelle liegt bei Git-Commit `0a6bda5`.
+Unabhängig davon wählt `&accents=light-fasteners` helle obere Schrauben; `&accents=white-strips` ergänzt weiße
+Stirn-/Scheitelstreifen; `&accents=contrast-strips` wählt anthrazitfarbene Streifen mit zum Finish passendem Glanzkontrast.
+Standard ist `accents=original`. Die [exportierten Proben](../assets/helmet-continuity/README.md)
+enthalten die genaue Auswahl samt Quell- und Ausgabehashes.
+`&strips=off` erzeugt die Haube ohne die beiden Stirn-/Scheitelblenden; Standard ist `on`.
+Die entsprechende Runner-Option heißt `--strips=off`. Die kurz erprobten Haubenmuster wurden auf Nutzerwunsch
+vollständig entfernt; `--crown-pattern` wird nicht mehr unterstützt.
+
 ```sh
 cd web
 npm ci
@@ -24,7 +35,15 @@ vorhandene Bilder allein können noch aus einem früheren Lauf stammen. `--no-io
 
 ## Körperstudie
 
-Mit `http://127.0.0.1:5173/?body=1` erscheint eine erste Proportionsstudie unter dem Helm. Sie ist ein Entwurf ohne
+**Aktuell 0.7:** `?body=shoulders&headset=off` zeigt kurzen Hals, kantige Schultergehäuse mit unteren Lamellen,
+zentrale Brust und Flanken. 31 separate Körperteile; [Bastion-Aufbau und Reproduktion](../docs/HELM_BASTION.md).
+22 separate Körpermeshes, parametrisch reproduzierbar. `?headset=off` blendet beide kompletten Kopfhörer samt Bügel,
+Kabeln und Antennen aus; das zentrale Heckmodul bleibt. `?exploded=1&view=assembly` öffnet die beschriftete
+Explosionsübersicht. Alle Optionen auch rechts oben unter **Aufbau und Varianten**; die Teileliste nennt offene Anschlüsse.
+[Technik, IDs, Parameter und Grenzen](../docs/HELM_AUFBAU.md) · [Geprüfte Exporte](../assets/helmet-assembly/README.md).
+Körper-/Explosionsprüfungen benötigen `--no-iou`; ihre Kameras sind nicht mit den Helm-Videobildern vergleichbar.
+
+Mit `http://127.0.0.1:5173/?body=1` erscheint weiterhin die **ältere** Proportionsstudie unter dem Helm. Sie ist ein Entwurf ohne
 Körperreferenz, noch keine vollständige Figur. Brust, Rücken, Bauch, Becken, Halsanschluss, Schultern und Gelenke sind
 getrennte, benannte Meshes im GLB-Export `scifi_body_study.glb`. Arme und Beine fehlen noch. Ohne `?body=1` bleiben
 Helmansicht, Kameras, Export und Silhouettenprüfung unverändert.
@@ -87,10 +106,21 @@ Einheit: Helmhöhe ≈ 1, Ursprung in der Kopfmitte, Y oben, Gesicht +Z, linke H
 | `collarFront.topZ`, `bottomZ` | schräger vorderer Abschluss des Nackenrahmens unter der Maskenhalterung |
 | `collarPanel` | Größe, Lage und Tiefe der tatsächlich ausgeschnittenen Seitenfelder, des kleinen Felds und der Schlitze |
 
+## Markierbogen (`marker/`)
+
+Änderungswünsche setzt der Nutzer direkt am Modell: Nadel (Klick) oder Stift (auf die Oberfläche zeichnen), Teil und Seite
+werden aus dem getroffenen Mesh erkannt. Ablauf, Felder und Umsetzung: [`docs/MARKER.md`](../docs/MARKER.md).
+
+```sh
+node tools/marker_build.mjs "0.7 Bastion" ../assets/helmet-bastion/assembled/scifi_helmet.glb   # marker/dist/
+node tools/marker_check.mjs                                     # Desktop/Handy, Nadel und Strich, renders/marker_*.png
+node tools/marker_shot.mjs <export>/marker <out>                # je Marker Gesamt- und Nahansicht aus seiner Kamera
+```
+
 ## Über Änderungen sprechen
 
 Die [Teilekarte](../docs/HELM_TEILE.md) vergibt stabile Kennungen H01–H21. Bitte Kennung, Seite und gewünschte Änderung
-nennen, etwa „H11 auf Seite B tiefer“. Seite A trägt Funkmuschel, Antenne und Kabel; Seite B das kantige Modul.
+nennen, etwa „H11 auf Seite B tiefer“. Seit Stand 79 tragen beide Seiten gespiegelte Funkmuscheln, Antennen und Kabel.
 Die Seitennamen beziehen sich auf Bauteile und ändern sich beim Drehen nicht.
 
 Gezielte Prüfungen: `npm test` (Prüfablauf und Messung), `npm run build` und `npm run verify` (Browser, Bilder, GLB und IoU).

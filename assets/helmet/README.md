@@ -1,5 +1,9 @@
 # Lieferstand 79 – symmetrische Funkmuscheln und Kabel
 
+Dieser Export bleibt als Vergleich erhalten. Seit 0.4 erzeugt der aktuelle Generator den
+[neuen Form-/Materialversuch](../helmet-continuity/README.md). Zur exakten Reproduktion von 79 die Quelle aus
+Commit `0a6bda5` in einem separaten Checkout verwenden; der folgende Hashvergleich gilt dort.
+
 Die komplette seitliche Einheit von A ist an X=0 nach B gespiegelt: Funkmuschel, Knöpfe, Kabel, Halterung und Antenne.
 18 separate Meshes ersetzen dort das frühere Ohrmodul mit fünf Meshes. Das mittige Heckmodul bleibt einmal erhalten.
 86 bisherige Geometrien einschließlich UVs und Transformationen sind unverändert; insgesamt 104 Meshes.

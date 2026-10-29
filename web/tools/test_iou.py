@@ -3,6 +3,9 @@ import importlib.util
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
+import json
+import sys
 
 import numpy as np
 from PIL import Image
@@ -13,6 +16,27 @@ spec.loader.exec_module(iou)
 
 
 class MeasurementTests(unittest.TestCase):
+    def test_alternate_output_reads_and_writes_its_own_complete_set(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            refs, default, variant = root / 'refs', root / 'renders', root / 'metal'
+            for folder in (refs, default, variant):
+                folder.mkdir()
+            (default / 'iou.json').write_text('{"untouched": true}')
+            reference = np.full((720, 1280, 3), 140, dtype=np.uint8)
+            reference[120:400, 450:800] = 35
+            mask = np.zeros_like(reference)
+            mask[120:400, 450:800] = 255
+            for view in iou.VIEWS:
+                Image.fromarray(reference).save(refs / f'ref_{view}.png')
+                Image.fromarray(reference).save(variant / f'render_{view}.png')
+                Image.fromarray(mask).save(variant / f'mask_{view}.png')
+            with patch.object(sys, 'argv', ['iou.py', str(root), str(variant)]):
+                iou.main()
+            self.assertEqual(json.loads((variant / 'iou.json').read_text())['mean'], 1)
+            self.assertTrue((variant / 'compare.png').is_file())
+            self.assertEqual(json.loads((default / 'iou.json').read_text()), {'untouched': True})
+
     def test_missing_views_cannot_produce_a_successful_mean(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
