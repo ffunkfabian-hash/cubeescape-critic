@@ -280,12 +280,17 @@ export function indexGeometry(geo) {
   return g;
 }
 
+// First of build(0), build(1), … (at most `retries` repeats) without defects; the last one when none is closed.
+export function firstClosed(build, defects, retries) {
+  let geo = build(0);
+  for (let k = 1; k <= retries && defects(geo); k++) geo = build(k);
+  return geo;
+}
+
 // Geometry of one part for side sx (+1 right/centre, −1 left), metres, segment frame.
 export function partGeometry(kind, params, sx = 1, retries = CUT_RETRIES) {
   const p = FORMS.has(kind) ? params : mirrorParams(kind, params, sx);
   const retry = FORMS.has(kind) && p.cuts?.length ? retries : 0;
   const build = k => shapeGeometry(kind, p, sx, k * CUT_JITTER).scale(0.001, 0.001, 0.001);
-  let geo = build(0);
-  for (let k = 1; k <= retry && meshDefects(geo); k++) geo = build(k);
-  return geo;
+  return firstClosed(build, meshDefects, retry);
 }

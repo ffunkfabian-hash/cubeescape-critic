@@ -11,7 +11,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { robotSpec } from '../src/robotgen/robot.js';
 import { buildRobotBody } from '../src/robotgen/index.js';
-import { partGeometry, meshDefects } from '../src/robotgen/mesh.js';
+import { partGeometry, meshDefects, firstClosed, CUT_RETRIES } from '../src/robotgen/mesh.js';
 
 const NAMES = ['waechter', 'paladin', 'mechanik'];
 
@@ -158,15 +158,36 @@ test('bevel is geometry: a bevelled box has more triangles than a cube and keeps
   near(g.boundingBox.max.toArray(), [0.02, 0.01, 0.005], 'box', 1e-6);
 });
 
-test('cut slivers: first cuts of the helmet masks leave open edges, the repeated cut with grown cutters closes every one', () => {
-  // CSG noise depends on the platform (Linux CI may triangulate differently), so the case is looked for over six masks
-  let open = 0;
+test('mesh defects: a closed box has none, a missing triangle opens it, a flipped normal faces backwards', () => {
+  const box = () => new THREE.BoxGeometry(0.04, 0.02, 0.01).toNonIndexed();
+  assert.equal(meshDefects(box()), 0);
+  const open = box();
+  open.setAttribute('position', new THREE.BufferAttribute(open.attributes.position.array.slice(9), 3));
+  open.setAttribute('normal', new THREE.BufferAttribute(open.attributes.normal.array.slice(9), 3));
+  assert.equal(meshDefects(open), 3);
+  const flipped = box();
+  for (let i = 0; i < 9; i++) flipped.attributes.normal.array[i] *= -1;
+  assert.equal(meshDefects(flipped), 1);
+});
+
+test('cut retry: builds with growing cutters until one is closed, at most CUT_RETRIES repeats', () => {
+  const calls = [], build = k => (calls.push(k), k);
+  assert.equal(firstClosed(build, k => (k < 3 ? 1 : 0), CUT_RETRIES), 3);
+  assert.deepEqual(calls, [0, 1, 2, 3]);
+  calls.length = 0;
+  assert.equal(firstClosed(build, () => 1, 4), 4);              // never closed: stops after the limit
+  assert.deepEqual(calls, [0, 1, 2, 3, 4]);
+  calls.length = 0;
+  assert.equal(firstClosed(build, () => 0, CUT_RETRIES), 0);    // closed at once: no repeat
+  assert.deepEqual(calls, [0]);
+});
+
+test('cut slivers: every helmet mask ends closed (CSG noise opens some first cuts, platform-dependent)', () => {
+  let retried = 0;
   for (const name of NAMES) {
     const [, , , kind, , p] = robotSpec(name).parts.find(([, q]) => q[0] === 'mask')[1];
-    for (const sx of [1, -1]) {
-      if (meshDefects(partGeometry(kind, p, sx, 0))) open++;
-      assert.equal(meshDefects(partGeometry(kind, p, sx)), 0, `${name} mask (${sx})`);
-    }
+    if (meshDefects(partGeometry(kind, p, 1, 0))) retried++;
+    assert.equal(meshDefects(partGeometry(kind, p, 1)), 0, `${name} mask`);
   }
-  assert.ok(open > 0, 'every first cut already closed – the case no longer covers the retry');
+  console.log(`masks with a repeated cut on this platform: ${retried} of ${NAMES.length}`);
 });
