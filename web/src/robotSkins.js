@@ -3,7 +3,7 @@
 // tools/skin_bake.mjs); a skin is one material per atlas. Wear and dirt are part of the recipe, so the aged shader (robotWear.js)
 // stays off while a skin is shown. The textures of a skin can be exported (bakeSkinTextures) and go into the GLB export.
 import * as THREE from 'three';
-import { readAtlas, skinMeshes, geometrySignature, sameSignature, skinGeometry, transferGeometry, unmappedGeometry } from './skinAtlas.js';
+import { readAtlas, skinMeshes, geometrySignature, sameSignature, closeSignature, skinGeometry, transferGeometry, unmappedGeometry } from './skinAtlas.js';
 import { describeSkinMeshes, SKIN_RECIPES } from './skinParts.js';
 import { skinLayerMask, skinMaterial, skinBakeMaterial } from './skinShader.js';
 
@@ -35,8 +35,6 @@ export function loadSkinAtlas(model) {
 // 'scout'; skip: meshes below root that belong to another atlas (a helmet hung into a body). materials: flat material per mesh
 // (the description judges roles from it). Geometry is built once per root and mesh.
 const prepared = new WeakMap();
-// bounding boxes that differ by at most 2 % of the larger size (same part, slightly different triangulation)
-const closeBox = (a, b) => { const s = Math.max(...[0, 1, 2].map(i => a[i + 3] - a[i]), 1e-6); return a.every((v, i) => Math.abs(v - b[i]) <= 0.02 * s); };
 export function prepareSkin(root, kind, atlas, { skip = () => false, materials = null } = {}) {
   let state = prepared.get(root);
   if (state && state.atlas === atlas) return state;
@@ -48,7 +46,7 @@ export function prepareSkin(root, kind, atlas, { skip = () => false, materials =
     const sig = geometrySignature(mesh.geometry), candidates = atlas.entries.get(key) ?? [];
     let entry = candidates.find(e => sameSignature(e.sig, sig)) ?? null, geometry;
     if (entry) geometry = skinGeometry(mesh.geometry, entry);
-    else if ((entry = candidates.find(e => e.pos && closeBox(e.sig.box, sig.box)) ?? null)) { geometry = transferGeometry(mesh.geometry, entry); transferred++; }
+    else if ((entry = candidates.find(e => e.pos && closeSignature(e.sig, sig)) ?? null)) { geometry = transferGeometry(mesh.geometry, entry); transferred++; }
     else geometry = unmappedGeometry(mesh.geometry, scale.clone().multiply(inv).multiply(mesh.matrixWorld));
     if (entry) mapped++;
     geometry.computeBoundingBox();

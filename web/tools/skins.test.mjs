@@ -7,7 +7,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { readAtlas, skinMeshes, geometrySignature, sameSignature, skinGeometry, transferGeometry, encodeEdge, decodeEdge, ATLAS_FORMAT } from '../src/skinAtlas.js';
+import { readAtlas, skinMeshes, geometrySignature, sameSignature, closeSignature, skinGeometry, transferGeometry, encodeEdge, decodeEdge, ATLAS_FORMAT } from '../src/skinAtlas.js';
 import { skinLayerMask, skinGLSL } from '../src/skinShader.js';
 import { encodePNG, decodePNG } from './skinPng.mjs';
 import { buildAtlas, weld } from './skinXatlas.mjs';
@@ -24,11 +24,21 @@ async function glbScene(file) {
   return (await new GLTFLoader().parseAsync(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength), '')).scene;
 }
 
-// every mesh has an entry of its signature; the remapped geometry has the same triangles (positions per corner)
-function checkRemap(root, a) {
+// every mesh has an entry of its signature; the remapped geometry has the same triangles (positions per corner). With
+// transfer (Helm H, built at runtime): a mesh whose CSG came out slightly different on this machine takes its UVs from the
+// nearest baked triangles instead – all inside the atlas – and is counted in stats.transferred.
+function checkRemap(root, a, stats = null) {
   let corners = 0;
   for (const { mesh, key } of skinMeshes(root)) {
-    const entry = a.entries.get(key)?.find(e => sameSignature(e.sig, geometrySignature(mesh.geometry)));
+    const sig = geometrySignature(mesh.geometry), entry = a.entries.get(key)?.find(e => sameSignature(e.sig, sig));
+    const near = !entry && stats ? a.entries.get(key)?.find(e => e.pos && closeSignature(e.sig, sig)) : null;
+    if (near) {
+      const uv = transferGeometry(mesh.geometry, near).attributes.uv.array;
+      assert.ok(uv.every(v => v > -0.01 && v < 1.01), `${key}: transferred UVs outside the atlas`);
+      stats.transferred.push(key);
+      corners += uv.length / 2;
+      continue;
+    }
     assert.ok(entry, `${a.model}: no atlas entry for ${key}`);
     const g = skinGeometry(mesh.geometry, entry), P = mesh.geometry.attributes.position, Q = g.attributes.position;
     const I = mesh.geometry.index?.array ?? [...Array(P.count).keys()], J = g.index.array;
@@ -92,6 +102,7 @@ test('critic: atlas covers Helm H with and without forehead strips, on a robot a
   const M = new Proxy({}, { get: (_, n) => typeof n === 'string' ? new THREE.MeshStandardMaterial({ name: n }) : undefined });
   const warn = console.warn;
   console.warn = (...x) => { if (!String(x[0]).includes('deprecated')) warn(...x); };
+  const stats = { transferred: [] };
   try {
     for (const [strips, neck] of [['on', true], ['off', false], ['on', false]]) {
       const keep = D.foreheadPlates.enabled;
@@ -99,9 +110,11 @@ test('critic: atlas covers Helm H with and without forehead strips, on a robot a
       let root;
       try { root = buildHelmet(M); } finally { D.foreheadPlates.enabled = keep; }
       configureHelmetAssembly(root, { headset: 'on', ...(neck ? {} : { neck: false }) });
-      assert.ok(checkRemap(root, a) > 1e5);
+      assert.ok(checkRemap(root, a, stats) > 1e5);
     }
   } finally { console.warn = warn; }
+  // the bake machine reproduces every mesh; elsewhere (Linux CI, Chrome) single CSG parts may differ by a few triangles
+  assert.ok(stats.transferred.length <= 3, `transferred: ${stats.transferred.join(', ')}`);
   assert.ok(overlap(a) < 0.01, 'charts overlap');
 });
 

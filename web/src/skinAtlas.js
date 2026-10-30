@@ -43,6 +43,12 @@ export function geometrySignature(geometry) {
 }
 
 export const sameSignature = (a, b) => a.verts === b.verts && a.corners === b.corners && a.box.every((v, i) => Math.abs(v - b.box[i]) <= 2e-4);
+// Same part, slightly different triangulation (CSG in another JavaScript engine or on another CPU): boxes within 2 % of the larger
+// size; such a mesh takes its UVs by transferGeometry from an entry with baked positions.
+export const closeSignature = (a, b) => {
+  const s = Math.max(...[0, 1, 2].map(i => a.box[i + 3] - a.box[i]), 1e-6);
+  return a.box.every((v, i) => Math.abs(v - b.box[i]) <= 0.02 * s);
+};
 
 // Corner list of a geometry (indexed or not).
 export function cornerIndex(geometry) {
