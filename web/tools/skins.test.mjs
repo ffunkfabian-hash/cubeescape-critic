@@ -221,3 +221,63 @@ test('xatlas: welding keeps hard edges apart, atlas is deterministic and covers 
   assert.equal(x.meshes[0].corner.length, box.index.count);
   assert.ok(Math.max(x.width, x.height) <= 256);
 });
+
+test('emblem anchor: the chest suns of Glut and Ornat are centred on the medallion part, not on the plate box', () => {
+  for (const key of ['glut', 'ornat']) {
+    const L = RECIPES.skins[key].layers.find(l => l.type === 'emblem');
+    assert.equal(L.anchor, 'emblem_disc', key);
+    assert.deepEqual(L.center, [0, 0], key);
+    assert.match(skinGLSL(RECIPES.skins[key]), /pos\.x - vSkinAnchor\.x/, key);
+  }
+  assert.doesNotMatch(skinGLSL(RECIPES.skins.rost), /vSkinAnchor\.x/);
+});
+
+test('texture layers: every swatch and decal sheet of a recipe exists and has its sampler in the GLSL', () => {
+  const dir = path.join(repo, 'assets', 'skins', 'textures');
+  let used = 0;
+  for (const [key, recipe] of Object.entries(RECIPES.skins)) {
+    const glsl = skinGLSL(recipe);
+    for (const L of recipe.layers.filter(l => l.type === 'tex' || l.type === 'decal')) {
+      used++;
+      assert.ok(['jpg', 'png'].some(e => existsSync(path.join(dir, `${L.texture}.${e}`))), `${key}: no texture ${L.texture}`);
+      assert.match(glsl, new RegExp(`uniform sampler2D skinTex_${L.texture};`), key);
+      if (L.type === 'decal') assert.equal(decodePNG(readFileSync(path.join(dir, `${L.texture}.png`))).channels, 4, `${L.texture}: decal sheet without alpha`);
+    }
+  }
+  assert.ok(used >= 4, `${used} texture layers`);
+});
+
+test('kinds: helmet layers apply to Helm H and Scout only, body motifs not to helmets', () => {
+  const r = RECIPES.skins.schrott, bit = (d, i) => Math.floor(skinLayerMask(r, d) / 2 ** i) % 2;
+  const helm = r.layers.findIndex(l => l.type === 'tex' && l.kinds), body = r.layers.findIndex(l => l.type === 'decal' && l.not_kinds);
+  const cap = { role: 'anodized', part: 'cap', asm: 'head', side: null }, chest = { role: 'shell', part: 'chest', asm: 'upper_body', side: 'C', kind: 'body' };
+  assert.equal(bit({ ...cap, kind: 'critic' }, helm), 1);
+  assert.equal(bit({ ...cap, kind: 'scout' }, helm), 1);
+  assert.equal(bit({ ...cap, kind: 'body' }, helm), 0);
+  assert.equal(bit({ ...cap, part: 'mask', kind: 'critic' }, helm), 0);
+  assert.equal(bit(chest, body), 1);
+  assert.equal(bit({ ...chest, kind: 'critic' }, body), 0);
+});
+
+test('emblem anchor: applySkin centres the chest sun on the medallion, other meshes keep their own centre', async () => {
+  const { applySkin } = await vite.ssrLoadModule('/src/robotSkins.js');
+  const mesh = (part, role, centre) => {
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(9), 3));
+    g.setAttribute('skinInfo', new THREE.BufferAttribute(new Float32Array(12), 4));
+    g.setAttribute('skinAnchor', new THREE.BufferAttribute(new Float32Array(9), 3));
+    return { mesh: new THREE.Mesh(new THREE.BufferGeometry(), new THREE.MeshStandardMaterial()), geometry: g, entry: {}, mirror: 1, half: 0.09,
+      centre: new THREE.Vector3(...centre), desc: { role, part, asm: 'upper_body', side: 'C', kind: 'body' } };
+  };
+  const chest = mesh('chest', 'shell', [0.021, 1.327, 0.084]), disc = mesh('emblem_disc', 'graphite', [0.034, 1.311, 0.135]);
+  const thigh = mesh('thigh_shell', 'shell', [0.1, 0.6, 0.05]);
+  const state = { atlas: { texture: null }, meshes: [chest, disc, thigh], materials: new Map(), active: null };
+  const anchor = m => [0, 1, 2].map(k => +m.geometry.attributes.skinAnchor.getComponent(0, k).toFixed(4));
+  for (const key of ['glut', 'ornat']) {
+    applySkin(state, key);
+    assert.deepEqual(anchor(chest), [0.034, 1.311, 0.135], key);   // the sun of the chest plate: around the medallion
+    assert.deepEqual(anchor(thigh), [0.1, 0.6, 0.05], key);         // no anchored layer: its own centre
+  }
+  applySkin(state, 'rost');
+  assert.deepEqual(anchor(chest), [0.021, 1.327, 0.084]);           // skins without an anchor: own centre again
+});

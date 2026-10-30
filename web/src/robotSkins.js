@@ -5,11 +5,27 @@
 import * as THREE from 'three';
 import { readAtlas, skinMeshes, geometrySignature, sameSignature, closeSignature, skinGeometry, transferGeometry, unmappedGeometry } from './skinAtlas.js';
 import { describeSkinMeshes, SKIN_RECIPES } from './skinParts.js';
-import { skinLayerMask, skinMaterial, skinBakeMaterial } from './skinShader.js';
+import { skinLayerMask, skinMaterial, skinBakeMaterial, skinTextureNames } from './skinShader.js';
 
 export const SKINS = Object.fromEntries(Object.entries(SKIN_RECIPES.skins).map(([key, r]) => [key, { de: r.de, energy: r.energy }]));
 const ATLAS_JSON = import.meta.glob('../../assets/skins/*/atlas.json', { import: 'default' });
 const ATLAS_FILES = import.meta.glob('../../assets/skins/*/*.{bin,png}', { eager: true, query: '?url', import: 'default' });
+
+const TEXTURE_FILES = import.meta.glob('../../assets/skins/textures/*.{jpg,png}', { eager: true, query: '?url', import: 'default' });
+const textures = {};
+// Images of the recipes' tex/decal layers (assets/skins/textures/<name>.jpg|png), loaded once; call before a skin is applied.
+export async function loadSkinTextures() {
+  const names = [...new Set(Object.values(SKIN_RECIPES.skins).flatMap(skinTextureNames))].filter(n => !textures[n]);
+  await Promise.all(names.map(async n => {
+    const url = TEXTURE_FILES[`../../assets/skins/textures/${n}.jpg`] ?? TEXTURE_FILES[`../../assets/skins/textures/${n}.png`];
+    if (!url) throw new Error(`Skin: no texture ${n} in assets/skins/textures/`);
+    const t = await new THREE.TextureLoader().loadAsync(url);
+    t.colorSpace = THREE.SRGBColorSpace;
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    t.anisotropy = 8;
+    textures[n] = t;
+  }));
+}
 
 const atlases = new Map();
 // Atlas and maps texture of a model (waechter, paladin, mechanik, critic, scout; generated bodies <body>-three), loaded once.
@@ -57,7 +73,8 @@ export function prepareSkin(root, kind, atlas, { skip = () => false, materials =
     const n = geometry.attributes.position.count;
     geometry.setAttribute('skinInfo', new THREE.BufferAttribute(new Float32Array(4 * n), 4));
     geometry.setAttribute('skinCentre', new THREE.BufferAttribute(new Float32Array(3 * n).map((_, j) => centre.getComponent(j % 3)), 3));
-    return { mesh, key, entry, geometry, desc: { ...desc[i], side: desc[i].side ?? side }, mirror: side === 'R' ? -1 : 1, half: Math.max(half.y, 1e-4) };
+    geometry.setAttribute('skinAnchor', geometry.attributes.skinCentre.clone());
+    return { mesh, key, entry, geometry, centre, desc: { ...desc[i], side: desc[i].side ?? side }, mirror: side === 'R' ? -1 : 1, half: Math.max(half.y, 1e-4) };
   });
   if (mapped < meshes.length) console.warn(`Skin ${atlas.model}: ${meshes.length - mapped} of ${meshes.length} meshes without atlas entry (painted without maps)`);
   if (transferred) console.info(`Skin ${atlas.model}: ${transferred} meshes differ slightly from the bake, UVs transferred`);
@@ -73,13 +90,18 @@ export function applySkin(state, key) {
   if (!key) return 0;
   const recipe = SKIN_RECIPES.skins[key];
   if (!recipe) throw new Error(`Unknown skin ${JSON.stringify(key)}; expected ${Object.keys(SKIN_RECIPES.skins).join(', ')}`);
-  if (!state.materials.has(key)) state.materials.set(key, skinMaterial(key, recipe, state.atlas.texture));
+  if (!state.materials.has(key)) state.materials.set(key, skinMaterial(key, recipe, state.atlas.texture, textures));
   const material = state.materials.get(key);
+  // emblems with an anchor part are centred on that part of the same model (the chest sun on its medallion); else the own centre
+  const anchors = recipe.layers.map(L => (L.anchor ? state.meshes.find(m => m.desc.part === L.anchor)?.centre ?? null : null));
   for (const m of state.meshes) {
     m.flat = { geometry: m.mesh.geometry, material: m.mesh.material };
     const info = m.geometry.attributes.skinInfo, mask = skinLayerMask(recipe, m.desc);
     for (let i = 0; i < info.count; i++) info.setXYZW(i, mask, m.mirror, m.entry ? 1 : 0, m.half);
     info.needsUpdate = true;
+    const at = anchors.find((c, i) => c && Math.floor(mask / 2 ** i) % 2) ?? m.centre, anchor = m.geometry.attributes.skinAnchor;
+    for (let i = 0; i < anchor.count; i++) anchor.setXYZ(i, at.x, at.y, at.z);
+    anchor.needsUpdate = true;
     m.mesh.geometry = m.geometry;
     m.mesh.material = material;
   }
@@ -102,7 +124,7 @@ export const skinState = root => prepared.get(root) ?? null;
 export function bakeSkinTextures(renderer, state, size = 2048) {
   const recipe = SKIN_RECIPES.skins[state.active];
   if (!recipe) throw new Error('bakeSkinTextures: no skin shown');
-  const material = skinBakeMaterial(recipe, state.atlas.texture), scene = new THREE.Scene();
+  const material = skinBakeMaterial(recipe, state.atlas.texture, textures), scene = new THREE.Scene();
   for (const m of state.meshes) if (m.entry) scene.add(new THREE.Mesh(m.geometry, material));
   const target = new THREE.WebGLRenderTarget(size, size, { type: THREE.UnsignedByteType, colorSpace: THREE.NoColorSpace });
   const camera = new THREE.Camera(), out = {}, prev = { target: renderer.getRenderTarget(), tone: renderer.toneMapping, color: renderer.getClearColor(new THREE.Color()), alpha: renderer.getClearAlpha() };
@@ -179,7 +201,7 @@ export function useBakedMaterial(state, textures) {
   const before = state.meshes.map(m => m.mesh.material), flats = [];
   for (const m of state.meshes) m.mesh.material = m.entry ? baked : flats[flats.push(flatSkinMaterial(state.active, m.desc)) - 1];
   const exported = state.meshes.map(m => m.mesh.material);
-  // the viewer's skin attributes stay out of the GLB: same attributes, without skinPos/skinNor/skinInfo/skinCentre
+  // the viewer's skin attributes stay out of the GLB: same attributes, without skinPos/skinNor/skinInfo/skinCentre/skinAnchor
   const geometryBefore = state.meshes.map(m => m.mesh.geometry), exportGeometry = state.meshes.map(m => {
     const g = new THREE.BufferGeometry();
     for (const [name, attr] of Object.entries(m.mesh.geometry.attributes)) if (!name.startsWith('skin')) g.setAttribute(name, attr);

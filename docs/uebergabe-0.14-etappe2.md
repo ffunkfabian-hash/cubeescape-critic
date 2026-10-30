@@ -17,8 +17,8 @@ Ersatz geprüft ist **und** der Nutzer zustimmt.
 
 ## Offen
 
-1. **Scout** (`blender/scout/`, `assets/helmet-scout/`, Viewer `web/src/scout.js`) – eigene Version (geplant 0.16): eigener
-   Blender-Generator mit Einstieg `run.py`, Teile S01–S13. Gleiches Vorgehen wie bei den Körpern: Geometrie-Bausteine übertragen,
+1. **Scout** (`blender/scout/`, `assets/helmet-scout/`, Viewer `web/src/scout.js`) – eigene Version (nächste freie Nummer; 0.16
+   ging an die Skins „Swatch“): eigener Blender-Generator mit Einstieg `run.py`, Teile S01–S13. Gleiches Vorgehen wie bei den Körpern: Geometrie-Bausteine übertragen,
    gegen den GLB des Lieferpakets messen (Box je Teil, IoU, Nahvergleich), im Viewer zuschaltbar, ohne die GLB-Fassung zu entfernen.
    Prozedurale Materialien gibt es im GLB nur flach (docs/LESSONS.md); die Texturen des Lieferpakets weiter verwenden. Der Scout-Atlas
    (`assets/skins/scout/`) braucht danach ebenfalls eine Generator-Fassung.

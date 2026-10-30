@@ -20,7 +20,7 @@ import { D, resetParams } from './params.js';
 import { loadScout, scoutParts, SCOUT_FRAME } from './scout.js';
 import { ROBOT_MODELS, ROBOT_FRAME, loadRobot, setRobotExplosion, robotParts } from './robotBodies.js';
 import { setRobotWear, releaseRobotWear } from './robotWear.js';
-import { SKINS, loadSkinAtlas, prepareSkin, applySkin, releaseSkin, skinState, bakeSkinTextures, useBakedMaterial } from './robotSkins.js';
+import { SKINS, loadSkinAtlas, loadSkinTextures, prepareSkin, applySkin, releaseSkin, skinState, bakeSkinTextures, useBakedMaterial } from './robotSkins.js';
 import { atlasName } from './skinAtlas.js';
 import { HELMETS, CRITIC_VARIANTS, COLOR_SCHEMES, HELMET_FRAME_METERS, dressBody, isStudyHelmetPart, matchRobotColors, paletteMaterials, schemePalette, setRobotHelmet } from './robotHelmet.js';
 import { createNavigation } from './navigation.js';
@@ -55,7 +55,7 @@ const skinOn = () => robotLook.skin !== 'none';
 const skinAtlases = {}, bodyAtlas = atlasName(modelName, robotGen);
 async function ensureSkinAtlases() {
   const names = robotModel ? [bodyAtlas, 'critic', 'scout'] : [modelName];
-  await Promise.all(names.map(async n => { skinAtlases[n] ??= await loadSkinAtlas(n); }));
+  await Promise.all([loadSkinTextures(), ...names.map(async n => { skinAtlases[n] ??= await loadSkinAtlas(n); })]);
 }
 if (skinOn()) await ensureSkinAtlases();
 // &helmet=study|critic|scout (robots only): helmet on the robot's head segment (robotHelmet.js).

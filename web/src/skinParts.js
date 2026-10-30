@@ -40,6 +40,6 @@ export function describeSkinMeshes(meshes, kind, root, { materials = null, finis
     const material = materials?.get(mesh) ?? mesh.material, x = mesh.userData;
     const id = ids?.get(mesh);
     return { role: skinRole(Array.isArray(material) ? material[0] : material, kind, finish),
-      part: x.part ?? (id ? alias[id] ?? id.toLowerCase() : mesh.name), asm: x.asm ?? 'head', side: x.side ?? null };
+      part: x.part ?? (id ? alias[id] ?? id.toLowerCase() : mesh.name), asm: x.asm ?? 'head', side: x.side ?? null, kind };
   });
 }

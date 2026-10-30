@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.16.0 „Swatch“ – 2026-10-30 (Skins Bronze und Schrott aus Nutzerbildern, Prompts für Nano Banana Pro)
+
+- Neue Skins Bronze und Schrott: Material je Rolle und leuchtende Linienmotive aus den generierten Bildern des Nutzers
+  (`web/tools/skin_swatches.py`), aufgelegt im Modellraum über die neuen Mischer-Schichten `tex` und `decal`; Helme mit eigenem Platz (`kinds`).
+- Vorlagenkarten je Atlas (`web/tools/skin_guide.py`) und Prompts für Nano Banana Pro in `docs/SKINS.md`.
+- Glut/Ornat: Brustsonne um das Medaillon zentriert (Emblem-Anker). 106 Node-Tests.
+
 ## 0.15.0 „Anvil“ – 2026-10-30 (Paladin und Mechanik als three.js-Generator, Skin-Atlas aus dem Generator)
 
 - Paladin und Mechanik entstehen ohne Blender in `web/src/robotgen/` (`?model=paladin|mechanik&gen=three`); gemessen gegen die GLBs:
