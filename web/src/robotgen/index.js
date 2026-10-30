@@ -1,13 +1,13 @@
-// three.js generator of the robot bodies (0.14 "Foundry"): replaces the Blender export of cubeescape-ballon round 5
-// (blender/robot/export_robot.py) and builds the same scene as the GLB in assets/robot-bodies/<name>/: one root node per segment
-// (SEG_<segment>, ARM_<side>_<segment>, extras asm and side), the meshes below it with extras asm, part, part_de, side and study,
-// flat role materials MT_<role>_color. glTF axes (metres, Y up, front +Z); the parts are built in the Ballon world (mm, Z up,
-// front −Y) and converted like the glTF exporter.
+// three.js generator of the robot bodies (0.14 "Foundry" Wächter, 0.15 "Anvil" Paladin and Mechanik): replaces the Blender
+// export of cubeescape-ballon round 5 (blender/robot/export_robot.py) and builds the same scene as the GLB in
+// assets/robot-bodies/<name>/: one root node per segment (SEG_<segment>, ARM_<side>_<segment>, extras asm and side), the meshes
+// below it (indexed like the GLB) with extras asm, part, part_de, side and study, flat role materials MT_<role>_color. glTF axes
+// (metres, Y up, front +Z); the parts are built in the Ballon world (mm, Z up, front −Y) and converted like the glTF exporter.
 import * as THREE from 'three';
 import roles from '../ballonRoles.json' with { type: 'json' };
 import { frameFrom } from './frame.js';
 import { robotSpec, ASSEMBLIES, asmOfSegment } from './robot.js';
-import { partGeometry } from './mesh.js';
+import { partGeometry, indexGeometry } from './mesh.js';
 import { UPPER_MM, FORE_MM, FINGER_X, FINGER_SCALE, FINGER_LINKS, KNUCKLE_Z, THUMB_BASE, THUMB_DIR, THUMB_LINKS, FINGER_POSES, SEGMENTS as ARM_SEGMENTS } from './arm.js';
 
 const MM = 0.001;
@@ -81,7 +81,7 @@ function segmentNode(name, M, asm, side) {
   return node;
 }
 
-// Body study as a scene like the GLB: { scene, spec }. name: waechter (more studies follow in later stages).
+// Body study as a scene like the GLB: { scene, spec }. name: waechter, paladin or mechanik (robotgen/studies.js).
 export function buildRobotBody(name) {
   const spec = robotSpec(name);
   const de = new Map(spec.parts.map(([asm, p]) => [`${asm}:${p[0]}`, p[1]]));
@@ -91,7 +91,7 @@ export function buildRobotBody(name) {
   const addParts = (node, list, side, naming) => {
     const sx = side === 'L' ? -1 : 1;
     for (const [asm, [pid, , , kind, role, p]] of list) {
-      const geo = partGeometry(kind, p, sx);
+      const geo = indexGeometry(partGeometry(kind, p, sx));
       geo.applyMatrix4(TO_GLTF);
       const mesh = new THREE.Mesh(geo, material(role));
       mesh.name = naming(pid);

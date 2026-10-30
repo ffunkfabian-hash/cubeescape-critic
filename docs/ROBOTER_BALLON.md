@@ -132,11 +132,12 @@ Die three.js-Teile A/B und Scout R/L zählen anders.
 `&skin=`); sie brauchen nur die Extras `asm`/`part`/`side` und die Rollenmaterialien `MT_<role>_color` der GLBs.
 [Werkzeugkette und Mischer](SKINS.md).
 
-## three.js-Generator (0.14 „Foundry“)
+## three.js-Generator (0.14 „Foundry“, 0.15 „Anvil“)
 
 Nutzerentscheid vom 29.10.2026: three.js ist der Standard, Blender soll ganz raus, auch für die Geometrie. Seit 0.14 baut
-`web/src/robotgen/` den **Wächter** ohne Blender im Browser. Die GLB-Fassung bleibt Standard und Vergleich: `?model=waechter&gen=three`
-lädt den Generator, `&gen=glb` (Standard) den Export. Paladin, Mechanik und Scout folgen in der nächsten Etappe ([Übergabe](uebergabe-0.14-etappe2.md)).
+`web/src/robotgen/` den **Wächter**, seit 0.15 auch **Paladin** und **Mechanik** ohne Blender im Browser. Die GLB-Fassung bleibt
+Standard und Vergleich: `?model=<körper>&gen=three` lädt den Generator, `&gen=glb` (Standard) den Export. Offen sind Scout und die
+Umstellung des Standards ([Übergabe](uebergabe-0.14-etappe2.md)).
 
 ![Wächter: Blender-GLB · three.js · Umrissdifferenz in vier Ansichten](bilder/foundry_vergleich.jpg)
 
@@ -148,7 +149,7 @@ lädt den Generator, `&gen=glb` (Standard) den Export. Paladin, Mechanik und Sco
 | `shapes.js`, `body.js` | `basic/robot/shapes.py`, `studies/body.py` | Teile-Bausteine und Formbaukasten aller drei Studien (Kopf, Rumpf, Becken, Beine, Oberarm) |
 | `studyHelmet.js` | `studies/helmet.py` | parametrischer Studienhelm (im Viewer hinter Helm H/Scout verborgen) |
 | `arm.js` | `basic/arms/robot_arm.py`, `basic/robot/arms.py` | Arm v3 mit Hand, vier Fingern und Daumen |
-| `studies.js`, `robot.js` | `studies/a_waechter.py`, `basic/robot/__init__.py` | Skelett, Segmente, Anker, Haltung `idle`, Explosionswege |
+| `studies.js`, `robot.js` | `studies/a_waechter.py`, `b_paladin.py`, `c_mechanik.py`, `basic/robot/__init__.py` | Skelett, Segmente, Anker, Haltung `idle`, Explosionswege |
 | `bevel.js`, `mesh.js` | `tools/ego_build.py`, `robot_build._piece`, `kit.add_bevel` | Fasen als Geometrie, Fugen (CSG), Spiegeln, Kippen, Normalen |
 | `index.js` | `robot_build.build`, `export_robot.py` | Szene wie der GLB: Segmentwurzeln `SEG_*`/`ARM_*`, Extras, Materialien `MT_<rolle>_color`, Teileindex |
 
@@ -162,18 +163,29 @@ lädt den Generator, `&gen=glb` (Standard) den Export. Paladin, Mechanik und Sco
 - **Fugen** (`cuts`) per three-bvh-csg; danach werden volumenlose Flächenpaare der Schnittreste entfernt (`dropSheets`) und
   T-Kreuzungen geschlossen (`closeTJunctions`), sonst liest der Abrieb-Shader die Schnittkanten als offene Ränder. Jedes Mesh ist danach
   geschlossen und einheitlich orientiert (Test).
-- Aufbau des ganzen Wächters ≈ 0,8–1,5 s (Node bzw. Headless-Browser), 408 Meshes, 377 735 Dreiecke (GLB 395 342).
+- **Splitter (0.15):** Wo die verschachtelten Augenhöhlen-Schneider der Maske fast mit der Triangulierung zusammenfallen, lässt
+  three-bvh-csg Splitter unter 0,01 mm (kollineare Nulldreiecke, Punktpaare im µm-Abstand), die das Mesh öffnen – bei etwa zwei Dritteln
+  aller Schneidergrößen, je nach Größe zufällig, beim Wächter zufällig nicht. Der Generator prüft jedes geschnittene Teil mit demselben
+  Schlüssel wie der Test (`meshDefects`) und wiederholt den Schnitt sonst mit um je 0,002 mm größeren Schneidern (`CUT_JITTER`, höchstens
+  32 Versuche = 0,064 mm). Paladin braucht 8, Mechanik 15 Versuche an der Maske.
+- **Indiziert wie der GLB (0.15):** Ecken mit gleicher Position und gleicher Schattierungsnormale teilen sich einen Punkt (`indexGeometry`,
+  Hashtabelle) – Schattierung unverändert, ein Viertel der Punkte (Wächter 271 833 statt 1,13 Mio.).
+- Aufbau (Node, warm): Wächter ≈ 1,2 s, Paladin ≈ 3,0 s, Mechanik ≈ 4,6 s – der Unterschied sind die Masken-Wiederholungen
+  (je ≈ 0,3 s); Headless-Browser 2,6 / 4,2 / 7,3 s (GLB ≈ 1,3–1,4 s).
 
 **Messung gegen den Blender-GLB** (`npm --prefix web test` › `robotgen.test.mjs`, `node web/tools/robotgen_compare.mjs`):
 
-| Prüfung | Ergebnis |
-|---|---|
-| Teileliste (294 Definitionen, alle Parameter), Segmente, Schulteranker gegen den Python-Abzug aus Ballon | identisch (Toleranz 10⁻⁶) |
-| 45 Segmentmatrizen gegen die GLB-Knoten | max. 5·10⁻⁷ |
-| Box je Objekt (408) gegen `manifest.json` | Median 0,05 mm, p90 0,29 mm, max. 0,65 mm (`solar`) |
-| Teileindex gegen `parts.json` | identisch |
-| Umriss-IoU vorn / links / hinten / rechts (gleicher Viewer, gleiche Kamera, Studienhelm) | 0,9992 / 0,9988 / 0,9995 / 0,9989 |
-| Abriebkanten gesamt (Rumpf, Becken, Beine) | 385 m gegen 341 m im GLB |
+| Prüfung | Wächter (0.14) | Paladin (0.15) | Mechanik (0.15) |
+|---|---|---|---|
+| Teileliste (alle Parameter), Segmente, Schulteranker gegen den Python-Abzug aus Ballon | 294 Definitionen identisch | 272 identisch | 263 identisch |
+| Segmentmatrizen gegen die GLB-Knoten | max. 5·10⁻⁷ | < 10⁻⁵ (Test) | < 10⁻⁵ (Test) |
+| Box je Objekt gegen `manifest.json`: Median / p90 / max. | 0,05 / 0,29 / 0,65 mm (408) | 0,05 / 0,28 / 0,87 mm (383) | 0,05 / 0,26 / 0,50 mm (380) |
+| Teileindex gegen `parts.json` | identisch | identisch | identisch |
+| Umriss-IoU vorn / links / hinten / rechts (gleicher Viewer, gleiche Kamera, Studienhelm) | 0,9992 / 0,9988 / 0,9995 / 0,9989 | 0,9992 / 0,9987 / 0,9994 / 0,9988 | 0,9992 / 0,9985 / 0,9992 / 0,9988 |
+| Dreiecke (GLB) | 377 735 (395 342) | 353 108 (368 088) | 353 001 (367 600) |
+| Abriebkanten gesamt (Rumpf, Becken, Beine) | 385 m gegen 341 m im GLB | – | – |
+
+![Paladin und Mechanik: Blender-GLB · three.js · Umrissdifferenz, vorn und links](bilder/anvil_vergleich.jpg)
 
 ![Nahvergleich mit gleicher Kamera: Brust gealtert, Kopf, Hüfte und Bein gealtert, Hand](bilder/foundry_nah.jpg)
 
@@ -183,12 +195,17 @@ lädt den Generator, `&gen=glb` (Standard) den Export. Paladin, Mechanik und Sco
 sich der Rauschabrieb etwas anders als im GLB, weil die Fasenstreifen der Platten anders trianguliert sind; Blenders Bevel mit
 Winkelgrenze 30° auf Innenkanten (gefaste Querschnitte) wird nur über die Normalen nachgebildet, nicht als zusätzliche Fasenfläche.
 
-**Skins (0.13) mit `&gen=three`:** Die Atlanten in `assets/skins/` sind aus den Körper-GLBs gebacken und binden Meshes über Pfad und Eckenzahl; die generierten Meshes haben andere Eckenzahlen. Der Skin-Mischer malt den generierten Wächter deshalb ohne Karten (0/408 im Atlas, Konsole „painted without maps“): Lackierung und Muster stimmen, Kantenabrieb und Schmutz in Vertiefungen fehlen. Abhilfe in Etappe 2: `web/tools/skin_bake.mjs` mit dem Generator als Quelle backen, sobald `gen=three` Standard wird.
+**Skins mit `&gen=three` (0.15):** Die GLB-Atlanten passen nicht zu den generierten Meshes (0.14: 0/408 im Atlas, ohne Kantenabrieb
+und Schmutz). Seit 0.15 hat jeder generierte Körper einen eigenen Atlas `assets/skins/<körper>-three/`, gebacken aus
+`buildRobotBody` (`node web/tools/skin_bake.mjs --model all --gen three`); `verify` meldet 408/408, 383/383 und 380/380 Meshes im Atlas.
+Teile mit CSG-Fugen behalten ihre gebackenen Positionen für den Übertrag auf andere Plattformen ([Skins](SKINS.md#ablauf)).
+
+![Skin Rost: oben Blender-GLB, unten three.js – Wächter, Paladin, Mechanik](bilder/anvil_skins.jpg)
 
 ## Grenzen und nächste Schritte
 
-- Die Studien bleiben Entwürfe aus Ballon. Bis Paladin, Mechanik und Scout ebenfalls in three.js stehen und der Nutzer dem Entfernen
-  von Blender zustimmt, kommen Formänderungen weiter per neuem Export und neuem Pin hierher; danach ist `web/src/robotgen/` die Quelle.
+- Die Studien bleiben Entwürfe aus Ballon. Bis Scout ebenfalls in three.js steht und der Nutzer dem Entfernen von Blender zustimmt,
+  kommen Formänderungen weiter per neuem Export und neuem Pin hierher; danach ist `web/src/robotgen/` die Quelle.
 - Ohne Waffe und ohne Haltung `ready`: Die Pilotwaffe gehört zu Ballon und ist nicht exportiert.
 - Die GLBs selbst bleiben flach; gealtert wird erst im Viewer (siehe oben). Andere Programme sehen nur die Gestaltungsfarben.
 - Für die Körper gibt es keine Vorlagenbilder und keine IoU-Messung; der Vergleich mit den Ballon-Cycles-Bildern (`~/Library/Caches/CubeEscapeBallon/out/robot/studies/`) ist eine Sichtprüfung.

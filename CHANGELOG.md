@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.15.0 „Anvil“ – 2026-10-30 (Paladin und Mechanik als three.js-Generator, Skin-Atlas aus dem Generator)
+
+- Paladin und Mechanik entstehen ohne Blender in `web/src/robotgen/` (`?model=paladin|mechanik&gen=three`); gemessen gegen die GLBs:
+  Teilelisten identisch, Boxen je Objekt ≤ 0,87 mm, Umriss-IoU 0,9985–0,9994 in vier Ansichten.
+- CSG-Splitter an der Maske: Schnitt mit minimal größeren Schneidern wiederholen, bis das Mesh geschlossen ist; Meshes indiziert wie im GLB.
+- Eigene Skin-Atlanten der generierten Körper (`assets/skins/<körper>-three/`, `skin_bake.mjs --gen three`); `verify` prüft alle drei
+  mit `&gen=three` (408/408, 383/383, 380/380). 103 Node-Tests.
+
 ## 0.14.0 „Foundry“ – 2026-10-29 (Roboterkörper als three.js-Generator, Etappe 1: Wächter)
 
 - Der Wächter entsteht ohne Blender in `web/src/robotgen/`: Übertragung von Ballons Formbaukasten (`forms.py`, `shapes.py`, `body.py`,

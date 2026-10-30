@@ -1,5 +1,6 @@
 // Skins 0.13: the baked atlases (assets/skins/<model>) fit their mesh sources, the remap rebuilds every triangle, charts do not
-// overlap, the maps match the atlas; recipe selection, PNG and xatlas helpers behave.
+// overlap, the maps match the atlas; recipe selection, PNG and xatlas helpers behave. 0.15: the bodies of the three.js generator
+// (gen three) have their own atlases (assets/skins/<body>-three) that cover every generated mesh.
 import test, { before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
@@ -7,7 +8,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { readAtlas, skinMeshes, geometrySignature, sameSignature, closeSignature, skinGeometry, transferGeometry, encodeEdge, decodeEdge, ATLAS_FORMAT } from '../src/skinAtlas.js';
+import { readAtlas, skinMeshes, geometrySignature, sameSignature, closeSignature, skinGeometry, transferGeometry, encodeEdge, decodeEdge, ATLAS_FORMAT, atlasName } from '../src/skinAtlas.js';
+import { buildRobotBody } from '../src/robotgen/index.js';
 import { skinLayerMask, skinGLSL } from '../src/skinShader.js';
 import { encodePNG, decodePNG } from './skinPng.mjs';
 import { buildAtlas, weld } from './skinXatlas.mjs';
@@ -78,6 +80,35 @@ for (const name of ['waechter', 'paladin', 'mechanik', 'scout']) {
     assert.equal(a.source, path.relative(repo, file));
     const corners = checkRemap(await glbScene(file), a);
     assert.ok(corners > 1e5, `${corners} corners`);
+    assert.ok(a.coverage > 0.4, `coverage ${a.coverage}`);
+    assert.deepEqual(a.edges, RECIPES.edges, 'edge parameters changed in skins.json: bake again');
+    assert.equal(a.ao.distanceMm, RECIPES.ao.distanceMm, 'AO distance changed in skins.json: bake again');
+    const png = decodePNG(readFileSync(path.join(a.dir, a.maps)));
+    assert.deepEqual([png.width, png.height, png.channels], [a.size, a.size, 3]);
+    assert.ok(overlap(a) < 0.01, 'charts overlap');
+  });
+}
+
+for (const name of ['waechter', 'paladin', 'mechanik']) {
+  test(`${name} (gen three): own atlas covers every mesh of the generated body and rebuilds its triangles`, () => {
+    const dir = atlasName(name, 'three');
+    assert.ok(existsSync(path.join(repo, 'assets', 'skins', dir, 'atlas.json')), `no atlas for ${dir}: node tools/skin_bake.mjs --model ${name} --gen three`);
+    const a = atlas(dir), glb = atlas(name);
+    assert.equal(a.model, dir);
+    assert.equal(a.source, `web/src/robotgen (buildRobotBody("${name}"))`);
+    const { scene: root, spec } = buildRobotBody(name), stats = { transferred: [] };
+    assert.ok(checkRemap(root, a, stats) > 1e5);
+    // parts with CSG grooves keep their baked positions: on another platform (Linux CI) a cut may come out a few triangles
+    // different and takes the UVs of the nearest baked triangle; everything else is rebuilt exactly
+    const cut = new Set(spec.parts.filter(([, p]) => p[5].cuts?.length).map(([, p]) => p[0]));
+    const withPos = [...a.entries.values()].flat().filter(e => e.pos);
+    assert.ok(withPos.length > 0 && withPos.every(e => skinMeshes(root).some(({ mesh, key }) => key === e.key && cut.has(mesh.userData.part))), 'baked positions only for cut parts');
+    assert.ok(stats.transferred.every(k => withPos.some(e => e.key === k)), `transferred: ${stats.transferred.join(', ')}`);
+    assert.equal(skinMeshes(root).length, a.entries.size);
+    // the GLB's atlas does not fit the generated meshes (the case 0.14 left open): only simple parts (cylinders) share a signature
+    const glbFit = skinMeshes(root).filter(({ mesh, key }) => (glb.entries.get(key) ?? []).some(e => sameSignature(e.sig, geometrySignature(mesh.geometry))));
+    console.log(`${name}: GLB atlas fits ${glbFit.length} of ${a.entries.size} generated meshes`);
+    assert.ok(glbFit.length < a.entries.size / 2, `${glbFit.length} generated meshes fit the GLB atlas`);
     assert.ok(a.coverage > 0.4, `coverage ${a.coverage}`);
     assert.deepEqual(a.edges, RECIPES.edges, 'edge parameters changed in skins.json: bake again');
     assert.equal(a.ao.distanceMm, RECIPES.ao.distanceMm, 'AO distance changed in skins.json: bake again');

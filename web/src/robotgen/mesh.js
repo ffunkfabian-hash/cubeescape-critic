@@ -195,12 +195,41 @@ export function creaseNormals(geo, creaseDeg) {
   return geo;
 }
 
-// Geometry of one part for side sx (+1 right/centre, −1 left), metres, segment frame.
-export function partGeometry(kind, params, sx = 1) {
-  const p = FORMS.has(kind) ? params : mirrorParams(kind, params, sx);
+// Open or flipped spots of a part (metres, segment frame): corners welded by the key of robotgen.test.mjs › closure (0.01 mm in
+// glTF axes x, z, −y, where the part ends up), directed edges without a reverse partner, plus triangles whose shading normals
+// face the back or lie almost in the face (a margin, so float rounding of the later axis turn cannot flip them).
+export function meshDefects(geo) {
+  const p = geo.attributes.position.array, n = geo.attributes.normal.array;
+  const key = i => `${Math.round(p[i * 3] * 1e5)},${Math.round(p[i * 3 + 2] * 1e5)},${Math.round(-p[i * 3 + 1] * 1e5)}`;
+  const E = new Map();
+  let back = 0;
+  const a = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3(), s = new THREE.Vector3();
+  for (let t = 0; t < p.length / 9; t++) {
+    const k = [0, 1, 2].map(j => key(t * 3 + j));
+    if (new Set(k).size < 3) continue;
+    for (let j = 0; j < 3; j++) { const d = `${k[j]}>${k[(j + 1) % 3]}`; E.set(d, (E.get(d) ?? 0) + 1); }
+    a.fromArray(p, t * 9); b.fromArray(p, t * 9 + 3).sub(a); c.fromArray(p, t * 9 + 6).sub(a);
+    s.fromArray(n, t * 9).add(a.fromArray(n, t * 9 + 3)).add(a.fromArray(n, t * 9 + 6));
+    b.cross(c);
+    if (b.dot(s) <= 1e-3 * b.length() * s.length()) back++;
+  }
+  let open = 0;
+  for (const [d, cnt] of E) { const [u, v] = d.split('>'); if (E.get(`${v}>${u}`) !== cnt) open++; }
+  return open + back;
+}
+
+// Where cutters nearly coincide with the tessellation (eye sockets of the helmet mask), three-bvh-csg can leave slivers below
+// 0.01 mm that open the mesh; Blender's exact boolean has none. The cut is then repeated with every cutter grown by
+// CUT_JITTER mm per attempt (deterministic, far below the 1 mm box tolerance) until the form is closed.
+export const CUT_JITTER = 0.002, CUT_RETRIES = 32;
+
+function shapeGeometry(kind, p, sx, grow) {
   const w = p.bevel ?? BEVEL[kind] ?? 1.0;
   let geo = toGeometry(rawShape(kind, p, w));
-  if (FORMS.has(kind) && p.cuts?.length) geo = dropSheets(closeTJunctions(dropSheets(cut(geo, p.cuts))));
+  if (FORMS.has(kind) && p.cuts?.length) {
+    const cuts = grow ? p.cuts.map(c => ({ ...c, d: c.d.map(v => v + 2 * grow) })) : p.cuts;
+    geo = dropSheets(closeTJunctions(dropSheets(cut(geo, cuts))));
+  }
   if (FORMS.has(kind) && sx < 0) {      // left side: mirrored at X, winding turned back outwards
     geo.scale(-1, 1, 1);
     const q = geo.attributes.position.array;
@@ -216,6 +245,52 @@ export function partGeometry(kind, params, sx = 1) {
   // corners (33–43°) of its cross-sections; only the 45° middle step of the cap bevels stays a hard (wearing) edge.
   // cylinders bring their own smooth normals (bevel.js › cylBevel)
   if (!geo.attributes.normal) creaseNormals(geo, { hull: p.sharp ?? 40, loft: Math.max(p.sharp ?? 35, LOFT_CREASE) }[kind] ?? p.sharp ?? 35);
-  geo.scale(0.001, 0.001, 0.001);
   return geo;
+}
+
+// Indexed geometry like the GLB: corners with equal position and shading normal (equal floats, hash table) share one vertex,
+// in order of first appearance; the triangles and their shading stay as they are (a third of the vertices of the triangle soup).
+export function indexGeometry(geo) {
+  const p = geo.attributes.position.array, n = geo.attributes.normal.array, count = p.length / 3;
+  const bits = a => new Uint32Array(a.buffer, a.byteOffset, a.length).map(w => (w === 0x80000000 ? 0 : w));   // −0 = +0
+  const P = bits(p), N = bits(n);
+  let size = 1;
+  while (size < 2 * count) size *= 2;
+  const table = new Int32Array(size).fill(-1), first = new Uint32Array(count), index = new Uint32Array(count);
+  let verts = 0;
+  for (let i = 0; i < count; i++) {
+    let h = 0x811c9dc5;
+    for (const w of [P[3 * i], P[3 * i + 1], P[3 * i + 2], N[3 * i], N[3 * i + 1], N[3 * i + 2]]) h = Math.imul(h ^ w, 0x01000193);
+    let slot = (h >>> 0) & (size - 1), v;
+    for (;; slot = (slot + 1) & (size - 1)) {
+      v = table[slot];
+      if (v < 0) { v = table[slot] = verts; first[verts++] = i; break; }
+      const j = first[v];
+      if (P[3 * j] === P[3 * i] && P[3 * j + 1] === P[3 * i + 1] && P[3 * j + 2] === P[3 * i + 2]
+        && N[3 * j] === N[3 * i] && N[3 * j + 1] === N[3 * i + 1] && N[3 * j + 2] === N[3 * i + 2]) break;
+    }
+    index[i] = v;
+  }
+  const pos = new Float32Array(3 * verts), nor = new Float32Array(3 * verts);
+  for (let v = 0; v < verts; v++) { pos.set(p.subarray(3 * first[v], 3 * first[v] + 3), 3 * v); nor.set(n.subarray(3 * first[v], 3 * first[v] + 3), 3 * v); }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  g.setAttribute('normal', new THREE.BufferAttribute(nor, 3));
+  g.setIndex(new THREE.BufferAttribute(verts > 65535 ? index : Uint16Array.from(index), 1));
+  return g;
+}
+
+// First of build(0), build(1), … (at most `retries` repeats) without defects; the last one when none is closed.
+export function firstClosed(build, defects, retries) {
+  let geo = build(0);
+  for (let k = 1; k <= retries && defects(geo); k++) geo = build(k);
+  return geo;
+}
+
+// Geometry of one part for side sx (+1 right/centre, −1 left), metres, segment frame.
+export function partGeometry(kind, params, sx = 1, retries = CUT_RETRIES) {
+  const p = FORMS.has(kind) ? params : mirrorParams(kind, params, sx);
+  const retry = FORMS.has(kind) && p.cuts?.length ? retries : 0;
+  const build = k => shapeGeometry(kind, p, sx, k * CUT_JITTER).scale(0.001, 0.001, 0.001);
+  return firstClosed(build, meshDefects, retry);
 }

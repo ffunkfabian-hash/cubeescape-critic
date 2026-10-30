@@ -12,11 +12,12 @@ const ATLAS_JSON = import.meta.glob('../../assets/skins/*/atlas.json', { import:
 const ATLAS_FILES = import.meta.glob('../../assets/skins/*/*.{bin,png}', { eager: true, query: '?url', import: 'default' });
 
 const atlases = new Map();
-// Atlas and maps texture of a model (waechter, paladin, mechanik, critic, scout), loaded once.
+// Atlas and maps texture of a model (waechter, paladin, mechanik, critic, scout; generated bodies <body>-three), loaded once.
 export function loadSkinAtlas(model) {
   if (!atlases.has(model)) atlases.set(model, (async () => {
     const dir = `../../assets/skins/${model}/`;
-    if (!ATLAS_JSON[`${dir}atlas.json`]) throw new Error(`Skin: no atlas for ${model} (node tools/skin_bake.mjs --model ${model})`);
+    const bake = model.endsWith('-three') ? `--model ${model.slice(0, -6)} --gen three` : `--model ${model}`;
+    if (!ATLAS_JSON[`${dir}atlas.json`]) throw new Error(`Skin: no atlas for ${model} (node tools/skin_bake.mjs ${bake})`);
     const json = await ATLAS_JSON[`${dir}atlas.json`]();
     const [buffer, maps] = await Promise.all([fetch(ATLAS_FILES[dir + json.bin]).then(r => { if (!r.ok) throw new Error(`Skin: ${json.bin} of ${model}: HTTP ${r.status}`); return r.arrayBuffer(); }),
       new THREE.TextureLoader().loadAsync(ATLAS_FILES[dir + json.maps])]);

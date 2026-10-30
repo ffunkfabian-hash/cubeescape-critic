@@ -16,7 +16,8 @@ Mesh-Quelle ──► Atlas (xatlas) ──► Karten im UV-Raum ──► Kante
 ```
 
 1. **Quelle** (`web/tools/skin_bake.mjs`): Körper- und Scout-GLB, Helm H direkt aus dem Generator (`buildHelmet`, Stirnblenden an
-   und aus; Ausführung und Akzente tauschen nur Materialien). Alles in Modellmetern: Körper 1, Helm H 0,25 m je Einheit
+   und aus; Ausführung und Akzente tauschen nur Materialien). Seit 0.15 mit `--gen three` auch die Körper aus dem three.js-Generator
+   (`buildRobotBody`, Ablage `assets/skins/<körper>-three/`, siehe unten). Alles in Modellmetern: Körper 1, Helm H 0,25 m je Einheit
    (`helmetFrameMeters`), Scout über seine Einpassung (`scoutFit`) ebenso.
 2. **Atlas** (`web/tools/skinXatlas.mjs`, xatlasjs 0.2.0, WASM): Punkte werden nur verschweißt, wenn auch die Schattierungsnormalen
    übereinstimmen (≤ 20°) – CSG-Dreiecke wachsen zu Flächen zusammen, harte Kanten bleiben Kartengrenzen. Diagramme einmal
@@ -35,7 +36,16 @@ Mesh-Quelle ──► Atlas (xatlas) ──► Karten im UV-Raum ──► Kante
 
 ```bash
 node tools/skin_bake.mjs --model all        # aus web/; je Modell 1–2 min, Karten zur Kontrolle in ../runs/skins/
+node tools/skin_bake.mjs --model all --gen three   # die drei generierten Körper (0.15), je ≈ 1 min
 ```
+
+**Generierte Körper (0.15 „Anvil“):** `?model=<körper>&gen=three` lädt den Atlas `assets/skins/<körper>-three/`
+(`skinAtlas.js › atlasName`), gebacken aus `buildRobotBody(name)`. Die GLB-Atlanten passen nicht: nur einfache Teile (Zylinder)
+haben dieselbe Signatur, 128–144 von 380–408 Meshes. Teile mit CSG-Fugen (Maske, Wangen, Brust, Schulterpanzer, Kniekappen,
+Schienbeinschalen) behalten ihre gebackenen Positionen wie Helm H: Rechnet eine andere Plattform den Schnitt anders, übernimmt das
+Dreieck die UVs des nächsten gebackenen Dreiecks (`transferGeometry`); der Rest des Generators ist reine Arithmetik und wird
+exakt nachgebaut. Größe je Körper ≈ 5 MB `atlas.bin` + 3,4 MB `maps.png` wie bei den GLB-Atlanten, Deckung ≈ 50 %
+(GLB 46 %). `verify` meldet für alle drei Körper mit `&gen=three` jedes Mesh im Atlas.
 
 ## Mischer (`web/src/skinShader.js`)
 

@@ -33,7 +33,7 @@ export function explodeOffset(mm, side, amount) {
 }
 
 // gen: 'glb' (Blender export of Ballon) or 'three' (three.js generator web/src/robotgen, 0.14; bodies in GENERATED).
-export const GENERATED = ['waechter'];
+export const GENERATED = ['waechter', 'paladin', 'mechanik'];
 const generate = name => import('./robotgen/index.js').then(m => { const { scene, parts } = m.buildRobotBody(name); return [scene, parts]; });
 
 export async function loadRobot(name, { gen = 'glb' } = {}) {
