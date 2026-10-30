@@ -201,6 +201,83 @@ try {
     result.outputs[name] = sha256(readFileSync(path.join(out, name)));
   }
   console.log(`GLB: ${result.glb.meshes} meshes, ${result.glb.materials} materials, ${result.glb.bytes} bytes`);
+  // Skins (0.13): the mixer compiles in Chromium on a robot with Helm H, every mesh finds its atlas entry, and the texture bake
+  // fills the atlas (share of covered texels, mean colour per output).
+  const skinPage = await browser.newPage({ viewport: { width: 640, height: 640 }, acceptDownloads: true });
+  skinPage.setDefaultTimeout(180000);
+  skinPage.on('pageerror', e => errors.push(`skin: ${e.message}`));
+  skinPage.on('console', m => { if (m.type() === 'error' || /without atlas entry/.test(m.text())) errors.push(`skin: ${m.text()}`); });
+  await skinPage.goto(`${url}?ui=0&static=1&model=waechter&helmet=critic&skin=rost`);
+  await skinPage.waitForFunction(() => window.__ready === true, null, { timeout: 180000 });
+  await skinPage.screenshot({ path: path.join(out, 'skin_waechter_rost.png') });
+  result.skins = await skinPage.evaluate(() => window.activeSkinStates().map(st => {
+    const t = window.bakeSkinTextures(window.renderer, st, 512), px = t.basecolor.data;
+    let lit = 0; const mean = [0, 0, 0];
+    for (let i = 0; i < px.length; i += 4) { if (px[i] + px[i + 1] + px[i + 2] > 0) lit++; for (let c = 0; c < 3; c++) mean[c] += px[i + c] / (px.length / 4); }
+    return { model: st.atlas.model, skin: st.active, meshes: st.meshes.length, mapped: st.mapped, filled: lit / (px.length / 4), meanBasecolor: mean.map(Math.round) };
+  }));
+  // GLB export with a skin: every material is a baked skin texture set (or a flat stand-in), none is the live shader
+  result.skinGlb = await skinPage.evaluate(async () => {
+    const mod = await import('/src/robotSkins.js');
+    const states = window.activeSkinStates(), restore = states.map(st => mod.useBakedMaterial(st, window.bakeSkinTextures(window.renderer, st, 256)));
+    let robot = null;
+    window.scene.traverse(o => { if (!robot && /^robot_/.test(o.name)) robot = o; });
+    const glb = await new window.GLTFExporter().parseAsync(robot, { binary: true }).finally(() => restore.forEach(r => r()));
+    const json = JSON.parse(new TextDecoder().decode(new Uint8Array(glb, 20, new DataView(glb).getUint32(12, true))));
+    return { materials: json.materials.map(m => m.name), images: json.images?.length ?? 0,
+      skinAttributes: json.meshes.flatMap(m => m.primitives.flatMap(p => Object.keys(p.attributes))).filter(a => /SKIN/i.test(a)).length };
+  });
+  const live = result.skinGlb.materials.filter(n => /^skin_[a-z]+$/.test(n));
+  if (live.length || result.skinGlb.images < 6 || result.skinGlb.skinAttributes) throw new Error(`skin GLB: live materials ${live}, ${result.skinGlb.images} images`);
+  // the real export, twice at once, with a skin change while it runs: both downloads arrive, the new skin stays on the model
+  const downloads = [];
+  skinPage.on('download', d => downloads.push(d));
+  result.skinExportRace = await skinPage.evaluate(async () => {
+    const runs = [window.exportGLB(), window.exportGLB()];
+    // wait until the first export has put its baked materials on (GLTFExporter is still running), then change the skin
+    const baked = () => window.activeSkinStates().some(st => st.meshes.some(m => /_(waechter|critic)$/.test(m.mesh.material.name)));
+    for (let t = 0; !baked(); t++) { if (t > 2000) throw new Error('export never swapped materials'); await new Promise(r => setTimeout(r, 0)); }
+    window.robotLook.skin = 'glut';
+    window.rebuild();
+    await Promise.all(runs);
+    const names = new Set(window.activeSkinStates().flatMap(st => st.meshes.map(m => m.mesh.material.name)));
+    window.robotLook.skin = 'rost';
+    window.rebuild();
+    return [...names];
+  });
+  for (let t = 0; downloads.length < 2 && t < 100; t++) await new Promise(r => setTimeout(r, 100));
+  if (downloads.length !== 2 || result.skinExportRace.join() !== 'skin_glut') throw new Error(`skin export race: ${downloads.length} downloads, materials ${result.skinExportRace}`);
+  // texture export: names and images are fixed before the first PNG is encoded, a skin change meanwhile does not mix them
+  result.skinTextureExport = await skinPage.evaluate(async () => {
+    const run = window.exportSkinTextures();
+    window.robotLook.skin = 'glut';
+    window.rebuild();
+    const names = await run;
+    window.robotLook.skin = 'rost';
+    window.rebuild();
+    return names;
+  });
+  if (result.skinTextureExport.length !== 6 || !result.skinTextureExport.every(n => n.includes('_rost_'))) throw new Error(`skin texture export: ${result.skinTextureExport}`);
+  await skinPage.close();
+  // A skin chosen in the navigation loads its atlases first; a rebuild while they load (e.g. the explosion slider) keeps the old paint.
+  const navPage = await browser.newPage({ viewport: { width: 1100, height: 800 } });
+  navPage.setDefaultTimeout(180000);
+  navPage.on('pageerror', e => errors.push(`skin nav: ${e.message}`));
+  await navPage.route('**/assets/skins/**', async route => { await new Promise(r => setTimeout(r, 1500)); await route.continue(); });
+  await navPage.goto(`${url}?static=1&model=paladin&helmet=scout`);
+  await navPage.waitForFunction(() => window.__ready === true, null, { timeout: 180000 });
+  await navPage.click('button[title^="Skin Glut"]');
+  await navPage.evaluate(() => { window.rebuild(); window.renderFrame(); });
+  await navPage.waitForFunction(() => location.search.includes('skin=glut'), null, { timeout: 60000 });
+  result.skinNavigation = await navPage.evaluate(() => window.activeSkinStates().map(st => `${st.atlas.model}:${st.active}:${st.mapped}/${st.meshes.length}`));
+  if (result.skinNavigation.length !== 2) throw new Error(`skin nav: ${result.skinNavigation}`);
+  await navPage.close();
+  console.log(`skin GLB: ${result.skinGlb.materials.join(', ')}; navigation: ${result.skinNavigation.join(', ')}`);
+  for (const s of result.skins) {
+    console.log(`skin ${s.skin} on ${s.model}: ${s.mapped}/${s.meshes} meshes mapped, bake fills ${(s.filled * 100).toFixed(1)} %`);
+    if (s.mapped !== s.meshes || s.filled < 0.9) throw new Error(`skin ${s.skin} on ${s.model}: ${s.mapped}/${s.meshes} mapped, ${s.filled} filled`);
+  }
+  result.outputs['skin_waechter_rost.png'] = sha256(readFileSync(path.join(out, 'skin_waechter_rost.png')));
   if (errors.length) throw new Error('Browser-Fehler:\n' + errors.join('\n'));
   if (!options.noIou) {
     const r = spawnSync('python3', ['-I', path.join(root, 'tools', 'iou.py'), root, out], { stdio: 'inherit' });
