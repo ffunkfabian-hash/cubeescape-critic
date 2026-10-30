@@ -49,7 +49,7 @@ Seit 0.20 „Livery“ (`web/src/navigation.js`; mit `?ui=0` ausgeblendet):
   Scout; auf dem Körper wird getauscht, ohne Körper sind es Links); Varianten 80–88 und Kopfhörer nur, solange Helm H der Kopf ist.
   Danach Nahansichten (Baugruppen bzw. Höhenbereiche); Bauteilbaum mit Suche (Klick hebt hervor, Haken blendet
   aus, ◎ isoliert, ⌖ zoomt heran); unten Modell und Bildzeit.
-- **Leiste rechts „Look“:** Lackierung (Farbschema Creme oder Weiß-Graphit, Schalter „gealtert“, 14 Skins als Bildkacheln),
+- **Leiste rechts „Look“:** Lackierung (Farbschema Creme oder Weiß-Graphit, Schalter „gealtert“, 15 Skins als Bildkacheln),
   Darstellung (Explosion, Beschriftungen, Belichtung, Bloom, AO, Qualität beim Drehen, Overlay), Helm-Geometrie (lil-gui, nur Helm H),
   Referenz & Export (Originalmaterialien als Prüfreferenz, GLB, Skin-Texturen, Quelle Export/Live/Blender).
 - Beide Seitenleisten einzeln ein- und ausblendbar (Knöpfe oben links und rechts, Tasten `[` und `]`, im Browser gemerkt); das Bild

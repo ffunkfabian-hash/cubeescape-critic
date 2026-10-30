@@ -1,7 +1,7 @@
 // Loading bar (0.20 "Livery"): a thin bar on top of the viewport while a model, helmet or skin loads. The first page load shows the
 // bar from index.html already (#loading.on); the module adopts that element. The bar creeps towards 90 % while work runs (there is
-// no byte count for cached GLBs or shader compiles), jumps to 100 % when the last job ends and fades out; a failed job turns it red
-// with the message until the next job starts.
+// no byte count for cached GLBs or shader compiles), jumps to 100 % when the last job ends and fades out. A failed job ends like any
+// other (the count of the jobs still running stays right) and turns the bar red with its message for 6 s or until the next job starts.
 export function createLoadingBar() {
   let root = document.getElementById('loading');
   if (!root) {
@@ -15,9 +15,11 @@ export function createLoadingBar() {
   const creep = () => { set(value + (0.9 - value) * 0.08); };
   if (jobs) timer = setInterval(creep, 120);
 
+  let failedUntil = 0;
   function start(text = 'Lädt …') {
     clearTimeout(hide);
-    root.classList.remove('failed', 'done');
+    root.classList.remove('done', 'failed'); // a new job replaces an error message
+    failedUntil = 0;
     if (!jobs++) {
       root.classList.add('on');
       set(0.08);
@@ -29,17 +31,16 @@ export function createLoadingBar() {
     if (jobs === 0 || --jobs) return;
     clearInterval(timer);
     set(1);
-    root.classList.add('done');
-    hide = setTimeout(() => { root.classList.remove('on', 'done'); set(0); }, 450);
+    const failed = Date.now() < failedUntil;
+    if (!failed) root.classList.add('done');
+    hide = setTimeout(() => { root.classList.remove('on', 'done', 'failed'); set(0); }, failed ? failedUntil - Date.now() : 450);
   }
+  // ends one job (like end) and shows its error; the message stays 6 s, also while other jobs still run
   function fail(message) {
-    jobs = 0;
-    clearInterval(timer);
-    clearTimeout(hide);
-    set(1);
+    failedUntil = Date.now() + 6000;
     root.classList.add('on', 'failed');
     label.textContent = message;
-    hide = setTimeout(() => { root.classList.remove('on', 'failed'); set(0); }, 6000);
+    end();
   }
   // Runs work (a promise or async function) under the bar; errors are shown and passed on.
   async function track(work, text) {

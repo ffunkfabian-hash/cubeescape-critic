@@ -159,7 +159,7 @@ bezogen“); Figuren- und Szenendetails (Umhang, Waffen, Aufkleber mit Motiven) 
 | **Sand** | Bild 4, dritter | Wüstenbeige mit großen Abplatzern, dunkelbrauner Unterbau, Staub in den Fugen | wear (Abplatzer) |
 | **Moos** | Bild 4, fünfter | Grüntarnung, Platten von Moos bewachsen, Mechanik schwarz-oliv | wear ohne Kante als Tarnflecken |
 | **Chrom** | Bild 4, sechster | polierter Chrom, glänzend violetter Unterbau | – |
-| **Frost** | Bild 4, achter | Schneetarnung Weiß/Grau, Schnee in den Fugen, Mechanik anthrazit, cyanfarbene Augen | dto. |
+| **Frost** | Bild 4, achter | Schneetarnung Weiß/Grau, Schnee in den Fugen, Mechanik anthrazit, cyanfarbene Augen | wear ohne Kante als Tarnflecken, heller dirt als Schnee |
 | **Signal** | Bild 4, neunter | Gunmetal, orange-schwarze Warnstreifen auf Schulterpanzern und Knien, dunkler Unterbau, bernsteinfarbene Augen | stripes mit `jitter: 0` |
 | **Galaxie** | Bild 4, zehnter | Platten tiefes Violett mit Nebeln in Magenta und Blau und Sternen, Mechanik glänzend schwarz | sparkle (zwei Größen) |
 | **Bronze** | Bild 5, vierter (gold) | graviertes Gold-Bronze, weinroter Unterbau und Seitenteile, türkise Augen | filigree, diamond |
@@ -191,7 +191,7 @@ mit Radius); `verify` setzt jeden Skin auf Wächter mit Helm H und rendert ihn (
 
 ## Viewer
 
-- Navigation **„Lackierung“**: Farbschema (Creme, Weiß-Graphit, Original) *oder* Skin (14 Rezepte als Bildkacheln in der rechten Leiste „Look“, Vorschaubilder aus `tools/nav_thumbs.mjs`), für Körper und
+- Navigation **„Lackierung“**: Farbschema (Creme, Weiß-Graphit; „Original“ ist ein Referenzschalter unter „Referenz & Export“) *oder* Skin (15 Rezepte als Bildkacheln in der rechten Leiste „Look“, Vorschaubilder aus `tools/nav_thumbs.mjs`), für Körper und
   Helm zusammen; „Material gealtert/flach“ wirkt nur beim Farbschema. URL `&skin=<Schlüssel in skins.json>` (Farbschema bleibt darunter
   `&colors=`).
 - **Texturen exportieren**: rendert den Mischer im UV-Raum (2048²) und lädt je Atlas Basisfarbe, ORM (glTF-Reihenfolge) und Emission

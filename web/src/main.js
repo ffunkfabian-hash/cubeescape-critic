@@ -25,6 +25,7 @@ import { SKINS, loadSkinAtlas, loadSkinTextures, prepareSkin, applySkin, release
 import { HELMETS, CRITIC_VARIANTS, COLOR_SCHEMES, HELMET_FRAME_METERS, dressBody, isStudyHelmetPart, matchRobotColors, paletteMaterials, schemePalette, setRobotHelmet } from './robotHelmet.js';
 import { createNavigation, thumb } from './navigation.js';
 import { createLoadingBar } from './loadingBar.js';
+import { SKIN_RECIPES } from './skinParts.js';
 import { FINISH_PRESETS, ACCENT_PRESETS } from './finishPresets.js';
 
 let query = new URLSearchParams(location.search);
@@ -557,7 +558,9 @@ function partTree() {
   return [parent('Helm H', helmetTree(model, 'critic'))];
 }
 
-let helmetRun = 0; // newest helmet request; slower older loads are dropped
+// newest helmet and paint requests; slower older loads are dropped. A page change bumps both (enterPage), so a helmet or skin
+// still loading for the previous page never writes into the next one.
+let helmetRun = 0, paintRun = 0;
 // Put a helmet on the robot and free the previous one (its aged copies; Critic geometry is built per helmet, Scout shares the cache).
 function putRobotHelmet(kind, helmet, colors) {
   let old = null;
@@ -702,7 +705,6 @@ function buildNavigation() {
   // Right panel: Look. Colour scheme or skin, for body and helmet together.
   const sPaint = nav.section('right', 'Lackierung');
   const setLinks = () => { for (const a of document.querySelectorAll('a.nav-link')) { const q = new URLSearchParams(a.search); if (skinOn()) q.set('skin', robotLook.skin); else q.delete('skin'); a.search = '?' + q; } };
-  let paintRun = 0;
   // Colour schemes 1 and 2 (one scheme for every model, 0.12); 'original' (each model in its own materials) is the reference of the
   // checks (verify, colors=original) and sits under "Referenz & Export".
   nav.heading(sPaint, 'Farbschema');
@@ -801,6 +803,8 @@ function leavePage() {
   model = null;
 }
 function enterPage(page) {
+  helmetRun++;
+  paintRun++;
   leavePage();
   query = page.query;
   ({ finish: materialFinish, accents: materialAccents, strips, name: modelName, gen: robotGen, scout: scoutModels, robot: robotModel } = page);
@@ -848,6 +852,7 @@ async function go(search, history_ = 'push') {
   loading.start(`Lade ${pageTitle(q.get('model') ?? 'critic')} …`);
   try {
     const page = await readPage(q);
+    if (run !== pageRun && page.helmetModel?.userData.finish) page.helmetModel.traverse(o => o.geometry?.dispose()); // Helm H built for an overtaken page
     if (run === pageRun) {
       enterPage(page);
       if (history_ === 'push') history.pushState(null, '', '?' + q);
@@ -859,7 +864,7 @@ async function go(search, history_ = 'push') {
     if (run === pageRun) {
       loading.fail(`Fehler: ${e.message ?? e}`);
       if (history_ === 'none') history.replaceState(null, '', '?' + query); // back/forward to a page that failed: show what is shown
-      if (query.get('ui') !== '0') buildNavigation(); // undo the link marked on click
+      if (query.get('ui') !== '0') { buildNavigation(); buildGui(); } // undo the link marked on click; lil-gui into the new panel
       return;
     }
   }
@@ -920,4 +925,4 @@ if (STATIC) {
   });
 }
 
-Object.assign(window, { GLTFExporter, SKINS, go, exportSkinTextures, activeSkinStates, bakeSkinTextures, robotLook, robotHelmet, partTree, requestRender, renderer, THREE, scene, camera, controls, renderFrame, setCameraView, toggleOverlay, setMaskMode, exportGLB, rebuild, helmetParams: D, materialFinish, materialAccents, presentationOptions, assemblyParts });
+Object.assign(window, { GLTFExporter, SKINS, SKIN_RECIPES, loadSkinTextures, go, exportSkinTextures, activeSkinStates, bakeSkinTextures, robotLook, robotHelmet, partTree, requestRender, renderer, THREE, scene, camera, controls, renderFrame, setCameraView, toggleOverlay, setMaskMode, exportGLB, rebuild, helmetParams: D, materialFinish, materialAccents, presentationOptions, assemblyParts });
