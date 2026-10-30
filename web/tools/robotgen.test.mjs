@@ -1,7 +1,8 @@
 // three.js body generator 0.14 (web/src/robotgen): the part list equals the Python reference of the pinned Ballon commit
 // (fixtures/robotgen_<name>_spec.json from robotgen_dump_spec.py), the built scene has the GLB's segment roots, objects, extras
 // and role materials, every object's box matches the Blender manifest within 1 mm, parts index = parts.json, build is
-// deterministic and every mesh is closed, consistently oriented, with outward volume and shading normals on the front of each face.
+// deterministic and every mesh is indexed like the GLB, closed, consistently oriented, with outward volume and shading normals on the
+// front of each face.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -10,9 +11,9 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { robotSpec } from '../src/robotgen/robot.js';
 import { buildRobotBody } from '../src/robotgen/index.js';
-import { partGeometry } from '../src/robotgen/mesh.js';
+import { partGeometry, meshDefects } from '../src/robotgen/mesh.js';
 
-const NAMES = ['waechter'];
+const NAMES = ['waechter', 'paladin', 'mechanik'];
 
 function near(a, b, path, tol = 1e-6) {
   if (typeof a === 'number') return assert.ok(Math.abs(a - b) <= tol * Math.max(1, Math.abs(a)), `${path}: ${a} ≠ ${b}`);
@@ -29,8 +30,11 @@ const loadGLB = file => {
   return new Promise((res, rej) => new GLTFLoader().parse(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength), '', g => res(g.scene), rej));
 };
 
+// triangle soup of a mesh (the generator's meshes are indexed like the GLB's)
+const soup = geo => (geo.index ? geo.toNonIndexed() : geo);
+
 function signedVolume(geo) {
-  const p = geo.attributes.position.array;
+  const p = soup(geo).attributes.position.array;
   let v = 0;
   for (let i = 0; i < p.length; i += 9) {
     v += p[i] * (p[i + 4] * p[i + 8] - p[i + 5] * p[i + 7]) - p[i + 1] * (p[i + 3] * p[i + 8] - p[i + 5] * p[i + 6]) + p[i + 2] * (p[i + 3] * p[i + 7] - p[i + 4] * p[i + 6]);
@@ -42,6 +46,7 @@ function signedVolume(geo) {
 // (open edges and flipped triangles break this; edges where two volumes touch occur twice in each direction). Returns the
 // number of offending edges and of triangles whose shading normals point to the back of the face.
 function closure(geo) {
+  geo = soup(geo);
   const p = geo.attributes.position.array, n = geo.attributes.normal.array;
   const key = i => `${Math.round(p[i * 3] * 1e5)},${Math.round(p[i * 3 + 1] * 1e5)},${Math.round(p[i * 3 + 2] * 1e5)}`;
   const E = new Map();
@@ -130,15 +135,19 @@ for (const name of NAMES) {
   test(`${name}: build is deterministic, meshes closed with outward normals`, () => {
     const hash = scene => {
       const h = createHash('sha256');
-      scene.traverse(o => { if (o.isMesh) h.update(o.name).update(Buffer.from(o.geometry.attributes.position.array.buffer)).update(Buffer.from(o.geometry.attributes.normal.array.buffer)); });
+      scene.traverse(o => { if (o.isMesh) h.update(o.name).update(Buffer.from(o.geometry.index.array.buffer)).update(Buffer.from(o.geometry.attributes.position.array.buffer)).update(Buffer.from(o.geometry.attributes.normal.array.buffer)); });
       return h.digest('hex');
     };
     assert.equal(hash(buildRobotBody(name).scene), hash(built.scene));
+    let corners = 0, verts = 0;
     built.scene.traverse(o => {
       if (!o.isMesh) return;
+      assert.ok(o.geometry.index, `${o.name}: not indexed`);
+      corners += o.geometry.index.count; verts += o.geometry.attributes.position.count;
       assert.ok(signedVolume(o.geometry) > 0, `${o.name}: volume ≤ 0`);
       assert.deepEqual(closure(o.geometry), { open: 0, back: 0 }, `${o.name}: open/flipped edges or normals facing backwards`);
     });
+    assert.ok(verts < 0.4 * corners, `${verts} vertices for ${corners} corners: corners of equal position and normal not shared`);
   });
 }
 
@@ -147,4 +156,17 @@ test('bevel is geometry: a bevelled box has more triangles than a cube and keeps
   assert.ok(g.attributes.position.count / 3 > 12);
   g.computeBoundingBox();
   near(g.boundingBox.max.toArray(), [0.02, 0.01, 0.005], 'box', 1e-6);
+});
+
+test('cut slivers: first cuts of the helmet masks leave open edges, the repeated cut with grown cutters closes every one', () => {
+  // CSG noise depends on the platform (Linux CI may triangulate differently), so the case is looked for over six masks
+  let open = 0;
+  for (const name of NAMES) {
+    const [, , , kind, , p] = robotSpec(name).parts.find(([, q]) => q[0] === 'mask')[1];
+    for (const sx of [1, -1]) {
+      if (meshDefects(partGeometry(kind, p, sx, 0))) open++;
+      assert.equal(meshDefects(partGeometry(kind, p, sx)), 0, `${name} mask (${sx})`);
+    }
+  }
+  assert.ok(open > 0, 'every first cut already closed – the case no longer covers the retry');
 });

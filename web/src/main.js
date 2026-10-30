@@ -21,6 +21,7 @@ import { loadScout, scoutParts, SCOUT_FRAME } from './scout.js';
 import { ROBOT_MODELS, ROBOT_FRAME, loadRobot, setRobotExplosion, robotParts } from './robotBodies.js';
 import { setRobotWear, releaseRobotWear } from './robotWear.js';
 import { SKINS, loadSkinAtlas, prepareSkin, applySkin, releaseSkin, skinState, bakeSkinTextures, useBakedMaterial } from './robotSkins.js';
+import { atlasName } from './skinAtlas.js';
 import { HELMETS, CRITIC_VARIANTS, COLOR_SCHEMES, HELMET_FRAME_METERS, dressBody, isStudyHelmetPart, matchRobotColors, paletteMaterials, schemePalette, setRobotHelmet } from './robotHelmet.js';
 import { createNavigation } from './navigation.js';
 import { FINISH_PRESETS, ACCENT_PRESETS } from './finishPresets.js';
@@ -39,7 +40,8 @@ const modelName = query.get('model') ?? 'critic';
 const MODEL_NAMES = ['critic', 'scout', ...Object.keys(ROBOT_MODELS)];
 if (!MODEL_NAMES.includes(modelName)) throw new Error(`Unknown model ${JSON.stringify(modelName)}; expected ${MODEL_NAMES.join(', ')}`);
 const scoutModels = modelName === 'scout' ? { assembled: await loadScout(false), exploded: await loadScout(true) } : null;
-const robotModel = ROBOT_MODELS[modelName] ? await loadRobot(modelName, { gen: query.get('gen') ?? 'glb' }) : null;
+const robotGen = query.get('gen') ?? 'glb';
+const robotModel = ROBOT_MODELS[modelName] ? await loadRobot(modelName, { gen: robotGen }) : null;
 // &wear=on|off: aged material of the colour scheme (robotWear.js) or its flat colours.
 const robotLook = { wear: query.get('wear') ?? 'on' };
 if (!['on', 'off'].includes(robotLook.wear)) throw new Error(`Unknown wear ${JSON.stringify(robotLook.wear)}; expected on or off`);
@@ -48,10 +50,11 @@ if (!['on', 'off'].includes(robotLook.wear)) throw new Error(`Unknown wear ${JSO
 robotLook.skin = query.get('skin') ?? 'none';
 if (robotLook.skin !== 'none' && !SKINS[robotLook.skin]) throw new Error(`Unknown skin ${JSON.stringify(robotLook.skin)}; expected none${Object.keys(SKINS).map(k => ', ' + k).join('')}`);
 const skinOn = () => robotLook.skin !== 'none';
-// atlases of the shown models (body and both helmets on a robot), loaded when a skin is first shown
-const skinAtlases = {};
+// atlases of the shown models (body and both helmets on a robot), loaded when a skin is first shown; a generated body
+// (&gen=three) has its own atlas
+const skinAtlases = {}, bodyAtlas = atlasName(modelName, robotGen);
 async function ensureSkinAtlases() {
-  const names = robotModel ? [modelName, 'critic', 'scout'] : [modelName];
+  const names = robotModel ? [bodyAtlas, 'critic', 'scout'] : [modelName];
   await Promise.all(names.map(async n => { skinAtlases[n] ??= await loadSkinAtlas(n); }));
 }
 if (skinOn()) await ensureSkinAtlases();
@@ -356,7 +359,7 @@ function rebuildModel() {
     // order matters: a skin restores the flat state it found, the aged shader records its own flat state
     if (!skinOn()) for (const root of robotSkinRoots()) applySkinIfPrepared(root.root, null);
     setRobotWear(model, robotLook.wear === 'on' && !skinOn());
-    if (skinOn()) for (const { root, kind, skip } of robotSkinRoots()) applySkin(prepareSkin(root, kind, skinAtlases[kind === 'body' ? modelName : kind], { skip }), robotLook.skin);
+    if (skinOn()) for (const { root, kind, skip } of robotSkinRoots()) applySkin(prepareSkin(root, kind, skinAtlases[kind === 'body' ? bodyAtlas : kind], { skip }), robotLook.skin);
     setRobotExplosion(model, presentationOptions.exploded);
     assemblyParts = presentationOptions.exploded > 0 ? robotParts(model) : [];
     annotation.setGroups(assemblyParts);

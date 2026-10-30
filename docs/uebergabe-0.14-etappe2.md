@@ -1,33 +1,45 @@
-# Übergabe 0.14 „Foundry“ → Etappe 2: Paladin, Mechanik, Scout in three.js
+# Übergabe – Roboterkörper in three.js, Stand nach 0.15 „Anvil“: Scout und Umstellung
 
-Stand nach Etappe 1 (29.10.2026): Der **Wächter** entsteht ohne Blender in `web/src/robotgen/` und ist gegen den Blender-GLB gemessen
-([Aufbau und Messung](ROBOTER_BALLON.md#threejs-generator-014-foundry)). Nutzerentscheid: three.js ist der Standard, Blender soll ganz
-raus, auch für die Geometrie. Blender-Dateien erst entfernen, wenn der Ersatz geprüft ist **und** der Nutzer zustimmt.
+Stand 30.10.2026: **Wächter** (0.14 „Foundry“), **Paladin** und **Mechanik** (0.15 „Anvil“) entstehen ohne Blender in
+`web/src/robotgen/` und sind gegen die Blender-GLBs gemessen ([Aufbau und Messung](ROBOTER_BALLON.md#threejs-generator-014-foundry-015-anvil),
+[Bericht 0.15](versions/0.15.md)). Skins haben für alle drei generierten Körper eigene Atlanten (`assets/skins/<körper>-three/`).
+Nutzerentscheid: three.js ist der Standard, Blender soll ganz raus, auch für die Geometrie. Blender-Dateien erst entfernen, wenn der
+Ersatz geprüft ist **und** der Nutzer zustimmt.
 
-## Ziel der Etappe
+## Erledigt
 
-1. **Paladin und Mechanik** auf derselben Basis. Der Formbaukasten `body.js` enthält schon alle Zweige von Ballons `body.py`
-   (z. B. `vribs`, `spine`, `split`, `panel`, `shoulder_pistons`, `thigh_piston`, `calf_piston`, `knee_pistons`, `crest`, `antenna`),
-   ungeprüft, weil der Wächter sie nicht nutzt. Zu tun:
-   - `runs/robot/src` aus Ballon entpacken (Befehl in `web/tools/robotgen_dump_spec.py`), Referenz abziehen:
-     `python3 -I web/tools/robotgen_dump_spec.py runs/robot/src b_paladin web/tools/fixtures/robotgen_paladin_spec.json` (ebenso `c_mechanik`).
-   - Studienparameter aus `basic/robot/studies/b_paladin.py` und `c_mechanik.py` nach `web/src/robotgen/studies.js` übertragen
-     (Muster: `waechter`), `NAMES` in `web/tools/robotgen.test.mjs` und `GENERATED` in `web/src/robotBodies.js` erweitern.
-   - Prüfen wie beim Wächter: `node --test tools/robotgen.test.mjs` (Teileliste identisch, Segmente, Box je Objekt < 1 mm, `parts.json`),
-     `node tools/robotgen_compare.mjs --model=paladin|mechanik` (IoU vier Ansichten, Nahvergleich, Explosion), Sichtprüfung gealtert.
-   - Mögliche Fallen: Formen `hull`/`hulls`/`prism`, die der Wächter nicht nutzt (`prism` fehlt in `mesh.js`), `pyRound` bei `hz`,
-     `rot` an weiteren Teilen.
-2. **Scout** (`blender/scout/`, `assets/helmet-scout/`, Viewer `web/src/scout.js`): eigener Blender-Generator mit Einstieg `run.py`,
-   Teile S01–S13. Gleiches Vorgehen: Geometrie-Bausteine übertragen, gegen den GLB des Lieferpakets messen (Box je Teil, IoU,
-   Nahvergleich), im Viewer zuschaltbar ohne die GLB-Fassung zu entfernen. Prozedurale Materialien gibt es im GLB nur flach
-   (docs/LESSONS.md); die Texturen des Lieferpakets weiter verwenden. Eher eigene Version (zwei Hauptziele je Auftrag).
-3. **Skin-Atlas aus dem Generator:** `web/tools/skin_bake.mjs` liest heute die Körper-GLBs; für `gen=three` dieselbe Bake-Kette mit `buildRobotBody(name)` als Quelle (eigener Atlas oder Variante im bestehenden), sonst fehlen bei Skins Kantenabrieb und Schmutz (heute 0/408 Meshes des generierten Wächters im Atlas). Prüfung: `verify` meldet „408/408 meshes mapped“ auch mit `&gen=three`.
-4. Danach mit Ja des Nutzers: Standard auf `gen=three` umstellen, `blender/robot/` und die Körper-GLBs ins Archiv.
+1. ~~Paladin und Mechanik~~ (0.15): Studien in `studies.js`, Referenzen `web/tools/fixtures/robotgen_<name>_spec.json`, alle
+   Generator-Tests für drei Körper; IoU 0,9985–0,9995 in vier Ansichten. Die befürchteten Fallen (`hull`/`hulls`/`prism`, `pyRound`
+   bei `hz`, `rot`) traten nicht auf: Alle drei Studien nutzen den parametrischen Helm (`style: 'mil'`), Kamm, Antenne, Ohrform und
+   `hz` gehen dort gar nicht ein. Neu war eine CSG-Falle (Splitter an der Maske, `mesh.js › CUT_JITTER`).
+2. ~~Skin-Atlas aus dem Generator~~ (0.15): `node web/tools/skin_bake.mjs --model all --gen three`; Viewer wählt den Atlas per
+   `skinAtlas.js › atlasName`; `verify` prüft alle drei Körper mit `&gen=three`.
+
+## Offen
+
+1. **Scout** (`blender/scout/`, `assets/helmet-scout/`, Viewer `web/src/scout.js`) – eigene Version (geplant 0.16): eigener
+   Blender-Generator mit Einstieg `run.py`, Teile S01–S13. Gleiches Vorgehen wie bei den Körpern: Geometrie-Bausteine übertragen,
+   gegen den GLB des Lieferpakets messen (Box je Teil, IoU, Nahvergleich), im Viewer zuschaltbar, ohne die GLB-Fassung zu entfernen.
+   Prozedurale Materialien gibt es im GLB nur flach (docs/LESSONS.md); die Texturen des Lieferpakets weiter verwenden. Der Scout-Atlas
+   (`assets/skins/scout/`) braucht danach ebenfalls eine Generator-Fassung.
+2. **Ladezeit vor der Umstellung:** Die Masken-Wiederholungen kosten Paladin ≈ 3 s und Mechanik ≈ 5 s (Node; Headless-Browser 4,2 bzw.
+   7,3 s gegen ≈ 1,3 s für den GLB). Möglichkeiten: gefundene Schneider-Stufe je Teil als geprüfte Tabelle mitliefern (Suche nur, wenn
+   die Stufe auf einer Plattform nicht schließt), oder die drei Schneider je Auge vorher vereinigen und einmal abziehen (weniger
+   Schnittkanten). Messen, dann entscheiden.
+3. **Umstellung** – nur mit Ja des Nutzers: Standard auf `gen=three`, danach `blender/robot/` und die Körper-GLBs ins Archiv; die
+   GLB-Atlanten (`assets/skins/waechter|paladin|mechanik/`) werden dann durch die `-three`-Atlanten ersetzt (Ordner umbenennen,
+   `atlasName` vereinfachen, Tests `skins.test.mjs` zusammenführen). Die Messungen gegen die GLBs (`robotgen.test.mjs`,
+   `robotgen_compare.mjs`) brauchen die GLBs – vorher entscheiden, ob sie als Archiv-Referenz bleiben.
 
 ## Grenzen
 
-- 0.13 „Skins“ ist auf `main`: Skins binden Meshes über den Atlas (`web/src/skinAtlas.js`, Signatur aus Eckenzahl und Box); jede Änderung an
-  Körpern braucht einen neuen Bake (`node web/tools/skin_bake.mjs --model <name>`).
-- Node auf dem Mac: `~/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin`; Python mit NumPy/Pillow für `verify` und
-  `robotgen_compare`: `uv venv runs/venv && uv pip install --python runs/venv/bin/python -r web/requirements.txt`, dann `runs/venv/bin` vorn in `PATH`.
+- Skins binden Meshes über den Atlas (`web/src/skinAtlas.js`, Signatur aus Eckenzahl und Box); jede Änderung an Körpern braucht einen
+  neuen Bake (`node web/tools/skin_bake.mjs --model <name>` für den GLB, zusätzlich `--gen three` für den Generator).
+- Auf Linux (CI) kann three-bvh-csg anders triangulieren: Tests dürfen nicht verlangen, dass ein bestimmter Schnitt offen oder
+  geschlossen herauskommt; Atlas-Einträge der CSG-Teile tragen deshalb gebackene Positionen.
+- Node auf dem Mac: `~/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin` (kein `npm`: Skripte aus `web/package.json`
+  direkt aufrufen); Python mit NumPy/Pillow für `verify` und `robotgen_compare`: `uv venv runs/venv && uv pip install --python
+  runs/venv/bin/python -r web/requirements.txt`, dann `runs/venv/bin` vorn in `PATH`.
+- Ballon-Quelle für Referenzen: `mkdir -p runs/robot/src && git -C ~/Claude/cubeescape-ballon archive <commit aus blender/robot/SOURCE.json>
+  basic tools data | tar -x -C runs/robot/src`.
 - Opus `high` (Kernsystem, Formvergleich).

@@ -1,12 +1,13 @@
 // Skin bake (0.13 "Skins"): UV atlas and geometry maps of a model for the skin mixer (src/skinShader.js), in Node, no Blender.
-//   node tools/skin_bake.mjs [--model waechter|paladin|mechanik|critic|scout|all] [--size 2048] [--ao-samples 32] [--workers 8]
-//     [--debug <dir>] (default ../runs/skins)
-// Steps: mesh sources (body GLB, Helm H built by its generator for every stored variant, Scout GLB) → model metres → one UV atlas
+//   node tools/skin_bake.mjs [--model waechter|paladin|mechanik|critic|scout|all] [--gen glb|three] [--size 2048] [--ao-samples 32]
+//     [--workers 8] [--debug <dir>] (default ../runs/skins)
+// Steps: mesh sources (body GLB, or with --gen three the body built by the three.js generator robotgen; Helm H built by its
+// generator for every stored variant, Scout GLB) → model metres → one UV atlas
 // with xatlas (tools/skinXatlas.mjs) → texel maps by rasterising every triangle in UV space (position, shading normal, mesh;
 // written as images to the debug folder together with part and role ids) → per texel the distance to the nearest plate edge of its
 // mesh in 3D (three-mesh-bvh closest point on the mesh's feature edges and rounded strips) and ambient occlusion from rays
 // (three-mesh-bvh, the whole model) → gutters filled with the nearest texel.
-// Output assets/skins/<model>/: atlas.json + atlas.bin (skinAtlas.js › readAtlas) and maps.png (R ambient occlusion, G edge
+// Output assets/skins/<model>/ (generated bodies: assets/skins/<body>-three/, skinAtlas.js › atlasName): atlas.json + atlas.bin (skinAtlas.js › readAtlas) and maps.png (R ambient occlusion, G edge
 // distance in the sqrt code of skinAtlas.js, B coverage). Deterministic: same sources, same bytes.
 import { isMainThread, Worker, workerData, parentPort } from 'node:worker_threads';
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
@@ -92,7 +93,7 @@ const here = path.dirname(fileURLToPath(import.meta.url)), webRoot = path.dirnam
 const log = (msg, t0 = log.t0 ??= performance.now()) => console.log(`[skin_bake ${((performance.now() - t0) / 1000).toFixed(1).padStart(6)}s] ${msg}`);
 
 function args() {
-  const o = { model: 'all', size: '2048', 'ao-samples': null, workers: String(Math.max(1, Math.min(availableParallelism() - 1, 10))), debug: path.join(repo, 'runs', 'skins'), out: path.join(repo, 'assets', 'skins') };
+  const o = { model: 'all', gen: 'glb', size: '2048', 'ao-samples': null, workers: String(Math.max(1, Math.min(availableParallelism() - 1, 10))), debug: path.join(repo, 'runs', 'skins'), out: path.join(repo, 'assets', 'skins') };
   const a = process.argv.slice(2);
   for (let i = 0; i < a.length; i++) {
     const k = a[i].replace(/^--/, '');
@@ -100,6 +101,7 @@ function args() {
     o[k] = a[++i];
   }
   if (o.model !== 'all' && !MODELS.includes(o.model)) throw new Error(`skin_bake: unknown model ${o.model} (${MODELS.join(', ')}, all)`);
+  if (!['glb', 'three'].includes(o.gen)) throw new Error(`skin_bake: unknown gen ${o.gen} (glb, three)`);
   return o;
 }
 
@@ -111,7 +113,13 @@ async function parseGLB(file) {
 
 // Sources of a model: one or more variants (root, metres per root unit, kind for roles/parts). A body or Scout has one; Helm H one
 // per stored variant (criticHelmetVariants.json) – variants share every mesh whose geometry is equal.
-async function loadSources(name, vite) {
+async function loadSources(name, vite, gen) {
+  if (BODIES.includes(name) && gen === 'three') {   // built at runtime: parts with CSG grooves keep their baked positions (see bake)
+    const { buildRobotBody } = await import('../src/robotgen/index.js');
+    const { scene, spec } = buildRobotBody(name), cut = new Set(spec.parts.filter(([, p]) => p[5].cuts?.length).map(([a, p]) => `${a}:${p[0]}`));
+    return { kind: 'body', metresPerUnit: 1, variants: [{ label: 'assembled', root: scene }], keepPositions: m => cut.has(`${m.userData.asm}:${m.userData.part}`),
+      source: `web/src/robotgen (buildRobotBody("${name}"))` };
+  }
   if (BODIES.includes(name)) {
     const root = await parseGLB(path.join(repo, 'assets', 'robot-bodies', name, 'assembled', `${name}.glb`));
     return { kind: 'body', metresPerUnit: 1, variants: [{ label: 'assembled', root }], source: `assets/robot-bodies/${name}/assembled/${name}.glb` };
@@ -142,7 +150,7 @@ async function loadSources(name, vite) {
     configureHelmetAssembly(root, { headset: 'on' }); // presentation neck stays: the helmet alone shows it, the robot removes it
     variants.push({ label: `strips ${strips}`, root });
   }
-  return { kind: 'critic', metresPerUnit: HELMET_FRAME_METERS, variants, source: 'web/src/helmet.js (forehead strips on and off)' };
+  return { kind: 'critic', metresPerUnit: HELMET_FRAME_METERS, variants, keepPositions: true, source: 'web/src/helmet.js (forehead strips on and off)' };
 }
 
 // Feature primitives of one mesh in model metres (as triangles; an edge becomes a sliver): open borders, edges where the shading
@@ -191,11 +199,11 @@ function features(position, normal, corner, { jumpDeg, roundDegPerMm, minTurnDeg
 
 async function bake(name, o, vite) {
   const recipes = JSON.parse(readFileSync(path.join(webRoot, 'src', 'skins.json'), 'utf8'));
-  const { skinMeshes, geometrySignature, sameSignature, cornerIndex, writeAtlas, encodeEdge } = await import('../src/skinAtlas.js');
+  const { skinMeshes, geometrySignature, sameSignature, cornerIndex, writeAtlas, encodeEdge, atlasName } = await import('../src/skinAtlas.js');
   const { describeSkinMeshes } = await vite.ssrLoadModule('/src/skinParts.js');
   const { buildAtlas } = await import('./skinXatlas.mjs');
   const S = Number(o.size), aoSamples = Number(o['ao-samples'] ?? recipes.ao.samples);
-  const src = await loadSources(name, vite);
+  const src = await loadSources(name, vite, o.gen), model = atlasName(name, o.gen);
   // union of the variants' meshes: one entry per key and geometry signature
   const entries = [];
   for (const [vi, v] of src.variants.entries()) {
@@ -210,14 +218,16 @@ async function bake(name, o, vite) {
       const position = g.attributes.position.clone().applyMatrix4(matrix).array;
       if (!g.attributes.normal) g.computeVertexNormals();
       const normal = g.attributes.normal.clone().applyNormalMatrix(new THREE.Matrix3().getNormalMatrix(matrix)).array;
-      entries.push({ key, name: mesh.name, sig, matrix: matrix.toArray(), local: g.attributes.position.array, position, normal, corner, variant: vi, desc: desc[i] });
+      const keepPos = src.keepPositions === true || !!src.keepPositions?.(mesh);
+      entries.push({ key, name: mesh.name, sig, matrix: matrix.toArray(), local: g.attributes.position.array, position, normal, corner, variant: vi, desc: desc[i], keepPos });
     });
   }
   log(`${name}: ${entries.length} meshes from ${src.variants.length} variant(s), ${entries.reduce((s, e) => s + e.corner.length / 3, 0)} triangles`);
   const atlas = await buildAtlas(entries.map(e => ({ position: e.position, normal: e.normal, index: e.corner })), { resolution: S, padding: 2, log });
   atlas.meshes.forEach((m, i) => Object.assign(entries[i], { source: m.source, uv: m.uv, out: m.corner }));
-  // runtime-built meshes (Helm H) keep their baked positions for transferGeometry (another engine may triangulate a CSG cut differently)
-  if (src.kind === 'critic') for (const e of entries) {
+  // runtime-built meshes (Helm H; of a generated body the parts with CSG grooves) keep their baked positions for transferGeometry:
+  // another engine or platform may triangulate a CSG cut differently (Linux CI), the rest of the generator is plain arithmetic
+  for (const e of entries.filter(x => x.keepPos)) {
     e.pos = new Float32Array(3 * e.source.length);
     e.source.forEach((v, i) => e.pos.set(e.local.subarray(3 * v, 3 * v + 3), 3 * i));
   }
@@ -305,10 +315,10 @@ async function bake(name, o, vite) {
     maps[3 * k + 1] = encodeEdge(edge[i]);
     maps[3 * k + 2] = index[k] >= 0 ? 255 : 0;
   }
-  const outDir = path.join(o.out, name);
+  const outDir = path.join(o.out, model);
   mkdirSync(outDir, { recursive: true });
   writeFileSync(path.join(outDir, 'maps.png'), encodePNG(S, S, 3, maps));
-  const { json, buffer } = writeAtlas({ model: name, kind: src.kind, source: src.source, variants: src.variants.map(v => v.label),
+  const { json, buffer } = writeAtlas({ model, kind: src.kind, source: src.source, variants: src.variants.map(v => v.label),
     size: S, padding: 2, metresPerUnit: +src.metresPerUnit.toPrecision(9), mmPerPx: +mmPerPx.toFixed(3), coverage: +coverage.toFixed(4),
     surfaceM2: +area3d.toFixed(4), edges: recipes.edges, ao: { ...recipes.ao, samples: aoSamples }, maps: 'maps.png', bin: 'atlas.bin' }, entries.map(e => ({ ...e, corner: e.out })));
   writeFileSync(path.join(outDir, 'atlas.bin'), Buffer.from(buffer));
@@ -316,7 +326,7 @@ async function bake(name, o, vite) {
   log(`${name}: wrote ${path.relative(repo, outDir)} (atlas.bin ${(buffer.byteLength / 1e6).toFixed(1)} MB)`);
 
   // ---- debug maps: position, normal, part, role, edge, AO
-  const dbg = path.join(o.debug, name);
+  const dbg = path.join(o.debug, model);
   mkdirSync(dbg, { recursive: true });
   const box = new THREE.Box3(); for (let i = 0; i < C; i++) box.expandByPoint(new THREE.Vector3().fromArray(cPos, 3 * i));
   const size = box.getSize(new THREE.Vector3());
@@ -364,7 +374,10 @@ if (isMainThread) {
   const warn = console.warn;
   console.warn = (...a) => { if (!String(a[0]).includes('"maxLeafSize" option has been deprecated')) warn(...a); };
   try {
-    for (const name of o.model === 'all' ? MODELS : [o.model]) await bake(name, o, vite);
+    for (const name of o.model === 'all' ? (o.gen === 'three' ? BODIES : MODELS) : [o.model]) {
+      if (o.gen === 'three' && !BODIES.includes(name)) throw new Error(`skin_bake: --gen three only for the bodies (${BODIES.join(', ')})`);
+      await bake(name, o, vite);
+    }
   } finally {
     await vite.close();
   }
