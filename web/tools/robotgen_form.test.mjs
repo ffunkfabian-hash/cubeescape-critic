@@ -49,7 +49,7 @@ function topology(geo, weld) {
     for (let j = 0; j < 3; j++) { const d = `${k[j]}>${k[(j + 1) % 3]}`; E.set(d, (E.get(d) ?? 0) + 1); }
     a.fromArray(p, i); b.fromArray(p, i + 3).sub(a); c.fromArray(p, i + 6).sub(a);
     s.fromArray(n, i).add(a.fromArray(n, i + 3)).add(a.fromArray(n, i + 6));
-    if (b.cross(c).dot(s) <= 0) back++;
+    if (!(b.cross(c).dot(s) > 0)) back++;                 // NaN normals count as facing back
   }
   const open = [];
   for (const [d, cnt] of E) { const [u, v] = d.split('>'); if ((E.get(`${v}>${u}`) ?? 0) !== cnt) open.push([u, v]); }
@@ -58,7 +58,7 @@ function topology(geo, weld) {
   return { open: open.length, loops: new Set([...parent.keys()].map(find)).size, back, volume: volume / 6 };
 }
 
-// Largest deviation of a normal's length from 1, over all meshes; the meshes with any beyond tol.
+// Largest deviation of a normal's length from 1, over all meshes; the meshes with any beyond tol (NaN counts as beyond).
 function normalLengths(scene, tol = 1e-5) {
   let worst = 0;
   const bad = [];
@@ -68,8 +68,8 @@ function normalLengths(scene, tol = 1e-5) {
     let off = 0;
     for (let i = 0; i < n.length; i += 3) {
       const d = Math.abs(Math.hypot(n[i], n[i + 1], n[i + 2]) - 1);
-      if (d > tol) off++;
-      worst = Math.max(worst, d);
+      if (!(d <= tol)) off++;
+      worst = Number.isNaN(d) ? NaN : Math.max(worst, d);
     }
     if (off) bad.push(`${o.name} (${off})`);
   });
@@ -211,6 +211,19 @@ for (const name of BODIES) {
     for (const o of ex.children) assert.deepEqual(o.position.toArray(), [off[o.name][0], off[o.name][2], -off[o.name][1]], o.name);
   });
 }
+
+test('normal lengths: zero and NaN normals are reported, unit ones not', () => {
+  const scene = new THREE.Group();
+  for (const [name, n] of [['unit', [0, 0, 1]], ['zero', [0, 0, 0]], ['nan', [NaN, 0, 1]]]) {
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('normal', new THREE.Float32BufferAttribute([...n, 0, 1, 0], 3));
+    scene.add(Object.assign(new THREE.Mesh(g), { name }));
+  }
+  assert.deepEqual(normalLengths(scene).bad, ['zero (1)', 'nan (1)']);
+  const box = new THREE.BoxGeometry(1, 1, 1).toNonIndexed();
+  box.attributes.normal.array[0] = NaN;
+  assert.equal(topology(box, 1e5).back, 1);
+});
 
 test('topology: a closed box has no loop, a box without one face has one, a flipped normal faces back', () => {
   const box = () => new THREE.BoxGeometry(1, 2, 3).toNonIndexed();
