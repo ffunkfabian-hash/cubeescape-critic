@@ -1,0 +1,3513 @@
+{
+ "study": "b_paladin",
+ "name": "paladin",
+ "assemblies": [
+  {
+   "id": "head",
+   "de": "Kopf",
+   "en": "Head",
+   "explode_mm": [
+    0,
+    0,
+    260
+   ],
+   "parts": [
+    {
+     "asm": "head",
+     "part": "antenna",
+     "part_de": "Stabantenne",
+     "side": "C",
+     "objects": [
+      "antenna"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "antenna_clip",
+     "part_de": "Antennenhalter",
+     "side": "C",
+     "objects": [
+      "antenna_clip"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "antenna_tip",
+     "part_de": "Antennenspitze",
+     "side": "C",
+     "objects": [
+      "antenna_tip"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "cable",
+     "part_de": "Kabelseele",
+     "side": "C",
+     "objects": [
+      "cable"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "cable_plug_l",
+     "part_de": "Kabelanschluss",
+     "side": "C",
+     "objects": [
+      "cable_plug_l"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "cable_plug_r",
+     "part_de": "Kabelanschluss",
+     "side": "C",
+     "objects": [
+      "cable_plug_r"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "cable_wrap",
+     "part_de": "Kabelwendel",
+     "side": "C",
+     "objects": [
+      "cable_wrap"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "cap",
+     "part_de": "Schädelhaube",
+     "side": "C",
+     "objects": [
+      "cap"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "cheek_l",
+     "part_de": "Wangenplatte",
+     "side": "C",
+     "objects": [
+      "cheek_l"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "cheek_r",
+     "part_de": "Wangenplatte",
+     "side": "C",
+     "objects": [
+      "cheek_r"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "chin_bar",
+     "part_de": "Kinnbügel",
+     "side": "C",
+     "objects": [
+      "chin_bar"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "comm_l",
+     "part_de": "Seitenmodul",
+     "side": "C",
+     "objects": [
+      "comm_l"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "comm_l_face",
+     "part_de": "Modulfläche",
+     "side": "C",
+     "objects": [
+      "comm_l_face"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "comm_l_holder",
+     "part_de": "Modulhalterung",
+     "side": "C",
+     "objects": [
+      "comm_l_holder"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "comm_l_holder_top",
+     "part_de": "Halterungsfuß",
+     "side": "C",
+     "objects": [
+      "comm_l_holder_top"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "comm_l_pin",
+     "part_de": "Halterungsschraube",
+     "side": "C",
+     "objects": [
+      "comm_l_pin"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "comm_l_rim",
+     "part_de": "Modulrand",
+     "side": "C",
+     "objects": [
+      "comm_l_rim"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "comm_r",
+     "part_de": "Seitenmodul",
+     "side": "C",
+     "objects": [
+      "comm_r"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "comm_r_face",
+     "part_de": "Modulfläche",
+     "side": "C",
+     "objects": [
+      "comm_r_face"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "comm_r_holder",
+     "part_de": "Modulhalterung",
+     "side": "C",
+     "objects": [
+      "comm_r_holder"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "comm_r_holder_top",
+     "part_de": "Halterungsfuß",
+     "side": "C",
+     "objects": [
+      "comm_r_holder_top"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "comm_r_pin",
+     "part_de": "Halterungsschraube",
+     "side": "C",
+     "objects": [
+      "comm_r_pin"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "comm_r_rim",
+     "part_de": "Modulrand",
+     "side": "C",
+     "objects": [
+      "comm_r_rim"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "eye_glass_l",
+     "part_de": "Sichtscheibe",
+     "side": "C",
+     "objects": [
+      "eye_glass_l"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "eye_glass_r",
+     "part_de": "Sichtscheibe",
+     "side": "C",
+     "objects": [
+      "eye_glass_r"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "face_center",
+     "part_de": "Gesichtsmitte",
+     "side": "C",
+     "objects": [
+      "face_center"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "face_ridge_l",
+     "part_de": "Seitenleiste",
+     "side": "C",
+     "objects": [
+      "face_ridge_l"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "face_ridge_r",
+     "part_de": "Seitenleiste",
+     "side": "C",
+     "objects": [
+      "face_ridge_r"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "helmet_core",
+     "part_de": "Helmkern",
+     "side": "C",
+     "objects": [
+      "helmet_core"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "jaw_band",
+     "part_de": "Kieferband",
+     "side": "C",
+     "objects": [
+      "jaw_band"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "jaw_leg_l",
+     "part_de": "Kieferschenkel",
+     "side": "C",
+     "objects": [
+      "jaw_leg_l"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "jaw_leg_r",
+     "part_de": "Kieferschenkel",
+     "side": "C",
+     "objects": [
+      "jaw_leg_r"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "mask",
+     "part_de": "Gesichtsmaske",
+     "side": "C",
+     "objects": [
+      "mask"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "neck",
+     "part_de": "Hals",
+     "side": "C",
+     "objects": [
+      "neck"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "neck_ring",
+     "part_de": "Wirbelring",
+     "side": "C",
+     "objects": [
+      "neck_ring"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "neck_trim",
+     "part_de": "Halskante",
+     "side": "C",
+     "objects": [
+      "neck_trim"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "rear_field_l",
+     "part_de": "Modulfeld",
+     "side": "C",
+     "objects": [
+      "rear_field_l"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "rear_field_r",
+     "part_de": "Modulfeld",
+     "side": "C",
+     "objects": [
+      "rear_field_r"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "rear_module",
+     "part_de": "Hinterkopfmodul",
+     "side": "C",
+     "objects": [
+      "rear_module"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "rear_slot",
+     "part_de": "Modulvertiefung",
+     "side": "C",
+     "objects": [
+      "rear_slot"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "rear_strip",
+     "part_de": "Modulleiste",
+     "side": "C",
+     "objects": [
+      "rear_strip"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "shell",
+     "part_de": "Seiten- und Hinterkopfgehäuse",
+     "side": "C",
+     "objects": [
+      "shell"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "stub",
+     "part_de": "Antennenstab",
+     "side": "C",
+     "objects": [
+      "stub"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "stub_cap",
+     "part_de": "Endkappe",
+     "side": "C",
+     "objects": [
+      "stub_cap"
+     ]
+    },
+    {
+     "asm": "head",
+     "part": "stub_clip",
+     "part_de": "Stabhalter",
+     "side": "C",
+     "objects": [
+      "stub_clip"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "arms",
+   "de": "Arme",
+   "en": "Arms",
+   "explode_mm": [
+    300,
+    0,
+    40
+   ],
+   "parts": [
+    {
+     "asm": "arms",
+     "part": "back_inset",
+     "part_de": "Handrücken-Akzentlinie",
+     "side": "L",
+     "objects": [
+      "arm_L_back_inset"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "back_plate",
+     "part_de": "Handrückenschale",
+     "side": "L",
+     "objects": [
+      "arm_L_back_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "elbow",
+     "part_de": "Ellbogengelenk",
+     "side": "L",
+     "objects": [
+      "arm_L_elbow"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "elbow_disc",
+     "part_de": "Ellbogenscheibe",
+     "side": "L",
+     "objects": [
+      "arm_L_elbow_disc"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "elbow_hub",
+     "part_de": "Ellbogennabe",
+     "side": "L",
+     "objects": [
+      "arm_L_elbow_hub"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "elbow_ring",
+     "part_de": "Ellbogenring",
+     "side": "L",
+     "objects": [
+      "arm_L_elbow_ring"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f0_0_core",
+     "part_de": "Finger 1 Glied 1",
+     "side": "L",
+     "objects": [
+      "arm_L_f0_0_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f0_0_joint",
+     "part_de": "Finger 1 Gelenk 1",
+     "side": "L",
+     "objects": [
+      "arm_L_f0_0_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f0_0_plate",
+     "part_de": "Finger 1 Glied 1 Platte",
+     "side": "L",
+     "objects": [
+      "arm_L_f0_0_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f0_1_core",
+     "part_de": "Finger 1 Glied 2",
+     "side": "L",
+     "objects": [
+      "arm_L_f0_1_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f0_1_joint",
+     "part_de": "Finger 1 Gelenk 2",
+     "side": "L",
+     "objects": [
+      "arm_L_f0_1_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f0_1_plate",
+     "part_de": "Finger 1 Glied 2 Platte",
+     "side": "L",
+     "objects": [
+      "arm_L_f0_1_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f0_2_core",
+     "part_de": "Finger 1 Glied 3",
+     "side": "L",
+     "objects": [
+      "arm_L_f0_2_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f0_2_joint",
+     "part_de": "Finger 1 Gelenk 3",
+     "side": "L",
+     "objects": [
+      "arm_L_f0_2_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f0_2_plate",
+     "part_de": "Finger 1 Glied 3 Platte",
+     "side": "L",
+     "objects": [
+      "arm_L_f0_2_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f1_0_core",
+     "part_de": "Finger 2 Glied 1",
+     "side": "L",
+     "objects": [
+      "arm_L_f1_0_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f1_0_joint",
+     "part_de": "Finger 2 Gelenk 1",
+     "side": "L",
+     "objects": [
+      "arm_L_f1_0_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f1_0_plate",
+     "part_de": "Finger 2 Glied 1 Platte",
+     "side": "L",
+     "objects": [
+      "arm_L_f1_0_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f1_1_core",
+     "part_de": "Finger 2 Glied 2",
+     "side": "L",
+     "objects": [
+      "arm_L_f1_1_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f1_1_joint",
+     "part_de": "Finger 2 Gelenk 2",
+     "side": "L",
+     "objects": [
+      "arm_L_f1_1_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f1_1_plate",
+     "part_de": "Finger 2 Glied 2 Platte",
+     "side": "L",
+     "objects": [
+      "arm_L_f1_1_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f1_2_core",
+     "part_de": "Finger 2 Glied 3",
+     "side": "L",
+     "objects": [
+      "arm_L_f1_2_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f1_2_joint",
+     "part_de": "Finger 2 Gelenk 3",
+     "side": "L",
+     "objects": [
+      "arm_L_f1_2_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f1_2_plate",
+     "part_de": "Finger 2 Glied 3 Platte",
+     "side": "L",
+     "objects": [
+      "arm_L_f1_2_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f2_0_core",
+     "part_de": "Finger 3 Glied 1",
+     "side": "L",
+     "objects": [
+      "arm_L_f2_0_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f2_0_joint",
+     "part_de": "Finger 3 Gelenk 1",
+     "side": "L",
+     "objects": [
+      "arm_L_f2_0_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f2_0_plate",
+     "part_de": "Finger 3 Glied 1 Platte",
+     "side": "L",
+     "objects": [
+      "arm_L_f2_0_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f2_1_core",
+     "part_de": "Finger 3 Glied 2",
+     "side": "L",
+     "objects": [
+      "arm_L_f2_1_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f2_1_joint",
+     "part_de": "Finger 3 Gelenk 2",
+     "side": "L",
+     "objects": [
+      "arm_L_f2_1_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f2_1_plate",
+     "part_de": "Finger 3 Glied 2 Platte",
+     "side": "L",
+     "objects": [
+      "arm_L_f2_1_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f2_2_core",
+     "part_de": "Finger 3 Glied 3",
+     "side": "L",
+     "objects": [
+      "arm_L_f2_2_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f2_2_joint",
+     "part_de": "Finger 3 Gelenk 3",
+     "side": "L",
+     "objects": [
+      "arm_L_f2_2_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f2_2_plate",
+     "part_de": "Finger 3 Glied 3 Platte",
+     "side": "L",
+     "objects": [
+      "arm_L_f2_2_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f3_0_core",
+     "part_de": "Finger 4 Glied 1",
+     "side": "L",
+     "objects": [
+      "arm_L_f3_0_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f3_0_joint",
+     "part_de": "Finger 4 Gelenk 1",
+     "side": "L",
+     "objects": [
+      "arm_L_f3_0_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f3_0_plate",
+     "part_de": "Finger 4 Glied 1 Platte",
+     "side": "L",
+     "objects": [
+      "arm_L_f3_0_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f3_1_core",
+     "part_de": "Finger 4 Glied 2",
+     "side": "L",
+     "objects": [
+      "arm_L_f3_1_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f3_1_joint",
+     "part_de": "Finger 4 Gelenk 2",
+     "side": "L",
+     "objects": [
+      "arm_L_f3_1_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f3_1_plate",
+     "part_de": "Finger 4 Glied 2 Platte",
+     "side": "L",
+     "objects": [
+      "arm_L_f3_1_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f3_2_core",
+     "part_de": "Finger 4 Glied 3",
+     "side": "L",
+     "objects": [
+      "arm_L_f3_2_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f3_2_joint",
+     "part_de": "Finger 4 Gelenk 3",
+     "side": "L",
+     "objects": [
+      "arm_L_f3_2_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f3_2_plate",
+     "part_de": "Finger 4 Glied 3 Platte",
+     "side": "L",
+     "objects": [
+      "arm_L_f3_2_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "fore_body",
+     "part_de": "Unterarmkörper",
+     "side": "L",
+     "objects": [
+      "arm_L_fore_body"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "fore_bolt_a",
+     "part_de": "Bolzen",
+     "side": "L",
+     "objects": [
+      "arm_L_fore_bolt_a"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "fore_bolt_b",
+     "part_de": "Bolzen",
+     "side": "L",
+     "objects": [
+      "arm_L_fore_bolt_b"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "fore_cuff",
+     "part_de": "Stulpe",
+     "side": "L",
+     "objects": [
+      "arm_L_fore_cuff"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "fore_cuff_trim",
+     "part_de": "Stulpenkante",
+     "side": "L",
+     "objects": [
+      "arm_L_fore_cuff_trim"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "fore_inset",
+     "part_de": "Akzentlinie",
+     "side": "L",
+     "objects": [
+      "arm_L_fore_inset"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "fore_shell",
+     "part_de": "Unterarmschale",
+     "side": "L",
+     "objects": [
+      "arm_L_fore_shell"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "fore_top",
+     "part_de": "Handgelenkplatte",
+     "side": "L",
+     "objects": [
+      "arm_L_fore_top"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "knuckle_guard",
+     "part_de": "Knöchelschutz",
+     "side": "L",
+     "objects": [
+      "arm_L_knuckle_guard"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "knuckles",
+     "part_de": "Knöchelwelle",
+     "side": "L",
+     "objects": [
+      "arm_L_knuckles"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "palm",
+     "part_de": "Handfläche",
+     "side": "L",
+     "objects": [
+      "arm_L_palm"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "shoulder_ball",
+     "part_de": "Schulterkugel",
+     "side": "L",
+     "objects": [
+      "arm_L_shoulder_ball"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "t_0_core",
+     "part_de": "Daumen Glied 1",
+     "side": "L",
+     "objects": [
+      "arm_L_t_0_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "t_0_joint",
+     "part_de": "Daumengelenk 1",
+     "side": "L",
+     "objects": [
+      "arm_L_t_0_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "t_0_plate",
+     "part_de": "Daumen Glied 1 Platte",
+     "side": "L",
+     "objects": [
+      "arm_L_t_0_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "t_1_core",
+     "part_de": "Daumen Glied 2",
+     "side": "L",
+     "objects": [
+      "arm_L_t_1_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "t_1_joint",
+     "part_de": "Daumengelenk 2",
+     "side": "L",
+     "objects": [
+      "arm_L_t_1_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "t_1_plate",
+     "part_de": "Daumen Glied 2 Platte",
+     "side": "L",
+     "objects": [
+      "arm_L_t_1_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "t_2_core",
+     "part_de": "Daumen Glied 3",
+     "side": "L",
+     "objects": [
+      "arm_L_t_2_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "t_2_joint",
+     "part_de": "Daumengelenk 3",
+     "side": "L",
+     "objects": [
+      "arm_L_t_2_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "t_2_plate",
+     "part_de": "Daumen Glied 3 Platte",
+     "side": "L",
+     "objects": [
+      "arm_L_t_2_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "thumb_mount",
+     "part_de": "Daumensockel",
+     "side": "L",
+     "objects": [
+      "arm_L_thumb_mount"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "upper_body",
+     "part_de": "Oberarmkörper",
+     "side": "L",
+     "objects": [
+      "arm_L_upper_body"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "wrist_block",
+     "part_de": "Kardanblock",
+     "side": "L",
+     "objects": [
+      "arm_L_wrist_block"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "wrist_pin",
+     "part_de": "Kardanbolzen",
+     "side": "L",
+     "objects": [
+      "arm_L_wrist_pin"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "back_inset",
+     "part_de": "Handrücken-Akzentlinie",
+     "side": "R",
+     "objects": [
+      "arm_R_back_inset"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "back_plate",
+     "part_de": "Handrückenschale",
+     "side": "R",
+     "objects": [
+      "arm_R_back_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "elbow",
+     "part_de": "Ellbogengelenk",
+     "side": "R",
+     "objects": [
+      "arm_R_elbow"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "elbow_disc",
+     "part_de": "Ellbogenscheibe",
+     "side": "R",
+     "objects": [
+      "arm_R_elbow_disc"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "elbow_hub",
+     "part_de": "Ellbogennabe",
+     "side": "R",
+     "objects": [
+      "arm_R_elbow_hub"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "elbow_ring",
+     "part_de": "Ellbogenring",
+     "side": "R",
+     "objects": [
+      "arm_R_elbow_ring"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f0_0_core",
+     "part_de": "Finger 1 Glied 1",
+     "side": "R",
+     "objects": [
+      "arm_R_f0_0_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f0_0_joint",
+     "part_de": "Finger 1 Gelenk 1",
+     "side": "R",
+     "objects": [
+      "arm_R_f0_0_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f0_0_plate",
+     "part_de": "Finger 1 Glied 1 Platte",
+     "side": "R",
+     "objects": [
+      "arm_R_f0_0_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f0_1_core",
+     "part_de": "Finger 1 Glied 2",
+     "side": "R",
+     "objects": [
+      "arm_R_f0_1_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f0_1_joint",
+     "part_de": "Finger 1 Gelenk 2",
+     "side": "R",
+     "objects": [
+      "arm_R_f0_1_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f0_1_plate",
+     "part_de": "Finger 1 Glied 2 Platte",
+     "side": "R",
+     "objects": [
+      "arm_R_f0_1_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f0_2_core",
+     "part_de": "Finger 1 Glied 3",
+     "side": "R",
+     "objects": [
+      "arm_R_f0_2_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f0_2_joint",
+     "part_de": "Finger 1 Gelenk 3",
+     "side": "R",
+     "objects": [
+      "arm_R_f0_2_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f0_2_plate",
+     "part_de": "Finger 1 Glied 3 Platte",
+     "side": "R",
+     "objects": [
+      "arm_R_f0_2_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f1_0_core",
+     "part_de": "Finger 2 Glied 1",
+     "side": "R",
+     "objects": [
+      "arm_R_f1_0_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f1_0_joint",
+     "part_de": "Finger 2 Gelenk 1",
+     "side": "R",
+     "objects": [
+      "arm_R_f1_0_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f1_0_plate",
+     "part_de": "Finger 2 Glied 1 Platte",
+     "side": "R",
+     "objects": [
+      "arm_R_f1_0_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f1_1_core",
+     "part_de": "Finger 2 Glied 2",
+     "side": "R",
+     "objects": [
+      "arm_R_f1_1_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f1_1_joint",
+     "part_de": "Finger 2 Gelenk 2",
+     "side": "R",
+     "objects": [
+      "arm_R_f1_1_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f1_1_plate",
+     "part_de": "Finger 2 Glied 2 Platte",
+     "side": "R",
+     "objects": [
+      "arm_R_f1_1_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f1_2_core",
+     "part_de": "Finger 2 Glied 3",
+     "side": "R",
+     "objects": [
+      "arm_R_f1_2_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f1_2_joint",
+     "part_de": "Finger 2 Gelenk 3",
+     "side": "R",
+     "objects": [
+      "arm_R_f1_2_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f1_2_plate",
+     "part_de": "Finger 2 Glied 3 Platte",
+     "side": "R",
+     "objects": [
+      "arm_R_f1_2_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f2_0_core",
+     "part_de": "Finger 3 Glied 1",
+     "side": "R",
+     "objects": [
+      "arm_R_f2_0_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f2_0_joint",
+     "part_de": "Finger 3 Gelenk 1",
+     "side": "R",
+     "objects": [
+      "arm_R_f2_0_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f2_0_plate",
+     "part_de": "Finger 3 Glied 1 Platte",
+     "side": "R",
+     "objects": [
+      "arm_R_f2_0_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f2_1_core",
+     "part_de": "Finger 3 Glied 2",
+     "side": "R",
+     "objects": [
+      "arm_R_f2_1_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f2_1_joint",
+     "part_de": "Finger 3 Gelenk 2",
+     "side": "R",
+     "objects": [
+      "arm_R_f2_1_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f2_1_plate",
+     "part_de": "Finger 3 Glied 2 Platte",
+     "side": "R",
+     "objects": [
+      "arm_R_f2_1_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f2_2_core",
+     "part_de": "Finger 3 Glied 3",
+     "side": "R",
+     "objects": [
+      "arm_R_f2_2_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f2_2_joint",
+     "part_de": "Finger 3 Gelenk 3",
+     "side": "R",
+     "objects": [
+      "arm_R_f2_2_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f2_2_plate",
+     "part_de": "Finger 3 Glied 3 Platte",
+     "side": "R",
+     "objects": [
+      "arm_R_f2_2_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f3_0_core",
+     "part_de": "Finger 4 Glied 1",
+     "side": "R",
+     "objects": [
+      "arm_R_f3_0_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f3_0_joint",
+     "part_de": "Finger 4 Gelenk 1",
+     "side": "R",
+     "objects": [
+      "arm_R_f3_0_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f3_0_plate",
+     "part_de": "Finger 4 Glied 1 Platte",
+     "side": "R",
+     "objects": [
+      "arm_R_f3_0_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f3_1_core",
+     "part_de": "Finger 4 Glied 2",
+     "side": "R",
+     "objects": [
+      "arm_R_f3_1_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f3_1_joint",
+     "part_de": "Finger 4 Gelenk 2",
+     "side": "R",
+     "objects": [
+      "arm_R_f3_1_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f3_1_plate",
+     "part_de": "Finger 4 Glied 2 Platte",
+     "side": "R",
+     "objects": [
+      "arm_R_f3_1_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f3_2_core",
+     "part_de": "Finger 4 Glied 3",
+     "side": "R",
+     "objects": [
+      "arm_R_f3_2_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f3_2_joint",
+     "part_de": "Finger 4 Gelenk 3",
+     "side": "R",
+     "objects": [
+      "arm_R_f3_2_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "f3_2_plate",
+     "part_de": "Finger 4 Glied 3 Platte",
+     "side": "R",
+     "objects": [
+      "arm_R_f3_2_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "fore_body",
+     "part_de": "Unterarmkörper",
+     "side": "R",
+     "objects": [
+      "arm_R_fore_body"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "fore_bolt_a",
+     "part_de": "Bolzen",
+     "side": "R",
+     "objects": [
+      "arm_R_fore_bolt_a"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "fore_bolt_b",
+     "part_de": "Bolzen",
+     "side": "R",
+     "objects": [
+      "arm_R_fore_bolt_b"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "fore_cuff",
+     "part_de": "Stulpe",
+     "side": "R",
+     "objects": [
+      "arm_R_fore_cuff"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "fore_cuff_trim",
+     "part_de": "Stulpenkante",
+     "side": "R",
+     "objects": [
+      "arm_R_fore_cuff_trim"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "fore_inset",
+     "part_de": "Akzentlinie",
+     "side": "R",
+     "objects": [
+      "arm_R_fore_inset"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "fore_shell",
+     "part_de": "Unterarmschale",
+     "side": "R",
+     "objects": [
+      "arm_R_fore_shell"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "fore_top",
+     "part_de": "Handgelenkplatte",
+     "side": "R",
+     "objects": [
+      "arm_R_fore_top"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "knuckle_guard",
+     "part_de": "Knöchelschutz",
+     "side": "R",
+     "objects": [
+      "arm_R_knuckle_guard"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "knuckles",
+     "part_de": "Knöchelwelle",
+     "side": "R",
+     "objects": [
+      "arm_R_knuckles"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "palm",
+     "part_de": "Handfläche",
+     "side": "R",
+     "objects": [
+      "arm_R_palm"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "shoulder_ball",
+     "part_de": "Schulterkugel",
+     "side": "R",
+     "objects": [
+      "arm_R_shoulder_ball"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "t_0_core",
+     "part_de": "Daumen Glied 1",
+     "side": "R",
+     "objects": [
+      "arm_R_t_0_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "t_0_joint",
+     "part_de": "Daumengelenk 1",
+     "side": "R",
+     "objects": [
+      "arm_R_t_0_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "t_0_plate",
+     "part_de": "Daumen Glied 1 Platte",
+     "side": "R",
+     "objects": [
+      "arm_R_t_0_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "t_1_core",
+     "part_de": "Daumen Glied 2",
+     "side": "R",
+     "objects": [
+      "arm_R_t_1_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "t_1_joint",
+     "part_de": "Daumengelenk 2",
+     "side": "R",
+     "objects": [
+      "arm_R_t_1_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "t_1_plate",
+     "part_de": "Daumen Glied 2 Platte",
+     "side": "R",
+     "objects": [
+      "arm_R_t_1_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "t_2_core",
+     "part_de": "Daumen Glied 3",
+     "side": "R",
+     "objects": [
+      "arm_R_t_2_core"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "t_2_joint",
+     "part_de": "Daumengelenk 3",
+     "side": "R",
+     "objects": [
+      "arm_R_t_2_joint"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "t_2_plate",
+     "part_de": "Daumen Glied 3 Platte",
+     "side": "R",
+     "objects": [
+      "arm_R_t_2_plate"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "thumb_mount",
+     "part_de": "Daumensockel",
+     "side": "R",
+     "objects": [
+      "arm_R_thumb_mount"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "upper_body",
+     "part_de": "Oberarmkörper",
+     "side": "R",
+     "objects": [
+      "arm_R_upper_body"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "wrist_block",
+     "part_de": "Kardanblock",
+     "side": "R",
+     "objects": [
+      "arm_R_wrist_block"
+     ]
+    },
+    {
+     "asm": "arms",
+     "part": "wrist_pin",
+     "part_de": "Kardanbolzen",
+     "side": "R",
+     "objects": [
+      "arm_R_wrist_pin"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "upper_body",
+   "de": "Oberkörper",
+   "en": "Upper body",
+   "explode_mm": [
+    0,
+    0,
+    0
+   ],
+   "parts": [
+    {
+     "asm": "upper_body",
+     "part": "abs_rib_0",
+     "part_de": "Bauchrippe",
+     "side": "C",
+     "objects": [
+      "abs_rib_0"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "abs_rib_1",
+     "part_de": "Bauchrippe",
+     "side": "C",
+     "objects": [
+      "abs_rib_1"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "abs_rib_2",
+     "part_de": "Bauchrippe",
+     "side": "C",
+     "objects": [
+      "abs_rib_2"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "abs_rib_3",
+     "part_de": "Bauchrippe",
+     "side": "C",
+     "objects": [
+      "abs_rib_3"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "abs_rib_4",
+     "part_de": "Bauchrippe",
+     "side": "C",
+     "objects": [
+      "abs_rib_4"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "abs_rib_5",
+     "part_de": "Bauchrippe",
+     "side": "C",
+     "objects": [
+      "abs_rib_5"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "abs_rib_6",
+     "part_de": "Bauchrippe",
+     "side": "C",
+     "objects": [
+      "abs_rib_6"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "back",
+     "part_de": "Rückenplatte",
+     "side": "C",
+     "objects": [
+      "back"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "back_rim_a",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "back_rim_a"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "back_rim_b",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "back_rim_b"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "bridge_l",
+     "part_de": "Schultersteg",
+     "side": "C",
+     "objects": [
+      "bridge_l"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "bridge_l_groove",
+     "part_de": "Stegvertiefung",
+     "side": "C",
+     "objects": [
+      "bridge_l_groove"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "bridge_r",
+     "part_de": "Schultersteg",
+     "side": "C",
+     "objects": [
+      "bridge_r"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "bridge_r_groove",
+     "part_de": "Stegvertiefung",
+     "side": "C",
+     "objects": [
+      "bridge_r_groove"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "chest",
+     "part_de": "Brustplatte",
+     "side": "C",
+     "objects": [
+      "chest"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "chest_light_l_bezel",
+     "part_de": "Lichtfassung",
+     "side": "C",
+     "objects": [
+      "chest_light_l_bezel"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "chest_light_l_lamp",
+     "part_de": "Statuslicht",
+     "side": "C",
+     "objects": [
+      "chest_light_l_lamp"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "chest_light_r_bezel",
+     "part_de": "Lichtfassung",
+     "side": "C",
+     "objects": [
+      "chest_light_r_bezel"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "chest_light_r_lamp",
+     "part_de": "Statuslicht",
+     "side": "C",
+     "objects": [
+      "chest_light_r_lamp"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "chest_rim_a",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "chest_rim_a"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "chest_rim_b",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "chest_rim_b"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "collar",
+     "part_de": "Kragen",
+     "side": "C",
+     "objects": [
+      "collar"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "collar_trim",
+     "part_de": "Kragenkante",
+     "side": "C",
+     "objects": [
+      "collar_trim"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "emblem_bezel",
+     "part_de": "Lichtfassung",
+     "side": "C",
+     "objects": [
+      "emblem_bezel"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "emblem_disc",
+     "part_de": "Medaillon",
+     "side": "C",
+     "objects": [
+      "emblem_disc"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "emblem_hub",
+     "part_de": "Medaillonnabe",
+     "side": "C",
+     "objects": [
+      "emblem_hub"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "emblem_lamp",
+     "part_de": "Statuslicht",
+     "side": "C",
+     "objects": [
+      "emblem_lamp"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "emblem_ring",
+     "part_de": "Medaillonring",
+     "side": "C",
+     "objects": [
+      "emblem_ring"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "gorget",
+     "part_de": "Halsring",
+     "side": "C",
+     "objects": [
+      "gorget"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "gorget_edge",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "gorget_edge"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_l",
+     "part_de": "Schulterpanzer",
+     "side": "C",
+     "objects": [
+      "pauldron_l"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_l_band",
+     "part_de": "Panzerfuge",
+     "side": "C",
+     "objects": [
+      "pauldron_l_band"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_l_edge",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "pauldron_l_edge"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_l_flare",
+     "part_de": "Schulterlage",
+     "side": "C",
+     "objects": [
+      "pauldron_l_flare"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_l_flare2",
+     "part_de": "Schulterlage",
+     "side": "C",
+     "objects": [
+      "pauldron_l_flare2"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_l_flare2_edge",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "pauldron_l_flare2_edge"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_l_flare2_rim_a",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "pauldron_l_flare2_rim_a"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_l_flare2_rim_b",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "pauldron_l_flare2_rim_b"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_l_flare_edge",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "pauldron_l_flare_edge"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_l_flare_rim_a",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "pauldron_l_flare_rim_a"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_l_flare_rim_b",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "pauldron_l_flare_rim_b"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_l_stripe_a",
+     "part_de": "Akzentstreifen",
+     "side": "C",
+     "objects": [
+      "pauldron_l_stripe_a"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_l_stripe_b",
+     "part_de": "Akzentstreifen",
+     "side": "C",
+     "objects": [
+      "pauldron_l_stripe_b"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_r",
+     "part_de": "Schulterpanzer",
+     "side": "C",
+     "objects": [
+      "pauldron_r"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_r_band",
+     "part_de": "Panzerfuge",
+     "side": "C",
+     "objects": [
+      "pauldron_r_band"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_r_edge",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "pauldron_r_edge"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_r_flare",
+     "part_de": "Schulterlage",
+     "side": "C",
+     "objects": [
+      "pauldron_r_flare"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_r_flare2",
+     "part_de": "Schulterlage",
+     "side": "C",
+     "objects": [
+      "pauldron_r_flare2"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_r_flare2_edge",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "pauldron_r_flare2_edge"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_r_flare2_rim_a",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "pauldron_r_flare2_rim_a"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_r_flare2_rim_b",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "pauldron_r_flare2_rim_b"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_r_flare_edge",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "pauldron_r_flare_edge"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_r_flare_rim_a",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "pauldron_r_flare_rim_a"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_r_flare_rim_b",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "pauldron_r_flare_rim_b"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_r_stripe_a",
+     "part_de": "Akzentstreifen",
+     "side": "C",
+     "objects": [
+      "pauldron_r_stripe_a"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "pauldron_r_stripe_b",
+     "part_de": "Akzentstreifen",
+     "side": "C",
+     "objects": [
+      "pauldron_r_stripe_b"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "rib_l",
+     "part_de": "Rippenplatte",
+     "side": "C",
+     "objects": [
+      "rib_l"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "rib_l_rim_a",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "rib_l_rim_a"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "rib_l_rim_b",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "rib_l_rim_b"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "rib_r",
+     "part_de": "Rippenplatte",
+     "side": "C",
+     "objects": [
+      "rib_r"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "rib_r_rim_a",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "rib_r_rim_a"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "rib_r_rim_b",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "rib_r_rim_b"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "shoulder_l_axle",
+     "part_de": "Schultergelenk",
+     "side": "C",
+     "objects": [
+      "shoulder_l_axle"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "shoulder_l_disc",
+     "part_de": "Medaillon",
+     "side": "C",
+     "objects": [
+      "shoulder_l_disc"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "shoulder_l_hub",
+     "part_de": "Medaillonnabe",
+     "side": "C",
+     "objects": [
+      "shoulder_l_hub"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "shoulder_l_med_disc",
+     "part_de": "Medaillon",
+     "side": "C",
+     "objects": [
+      "shoulder_l_med_disc"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "shoulder_l_med_hub",
+     "part_de": "Medaillonnabe",
+     "side": "C",
+     "objects": [
+      "shoulder_l_med_hub"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "shoulder_l_med_ring",
+     "part_de": "Medaillonring",
+     "side": "C",
+     "objects": [
+      "shoulder_l_med_ring"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "shoulder_l_ring",
+     "part_de": "Medaillonring",
+     "side": "C",
+     "objects": [
+      "shoulder_l_ring"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "shoulder_r_axle",
+     "part_de": "Schultergelenk",
+     "side": "C",
+     "objects": [
+      "shoulder_r_axle"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "shoulder_r_disc",
+     "part_de": "Medaillon",
+     "side": "C",
+     "objects": [
+      "shoulder_r_disc"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "shoulder_r_hub",
+     "part_de": "Medaillonnabe",
+     "side": "C",
+     "objects": [
+      "shoulder_r_hub"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "shoulder_r_med_disc",
+     "part_de": "Medaillon",
+     "side": "C",
+     "objects": [
+      "shoulder_r_med_disc"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "shoulder_r_med_hub",
+     "part_de": "Medaillonnabe",
+     "side": "C",
+     "objects": [
+      "shoulder_r_med_hub"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "shoulder_r_med_ring",
+     "part_de": "Medaillonring",
+     "side": "C",
+     "objects": [
+      "shoulder_r_med_ring"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "shoulder_r_ring",
+     "part_de": "Medaillonring",
+     "side": "C",
+     "objects": [
+      "shoulder_r_ring"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "solar",
+     "part_de": "Sonnenplatte",
+     "side": "C",
+     "objects": [
+      "solar"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "solar_bolt_a",
+     "part_de": "Bolzen",
+     "side": "C",
+     "objects": [
+      "solar_bolt_a"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "solar_bolt_b",
+     "part_de": "Bolzen",
+     "side": "C",
+     "objects": [
+      "solar_bolt_b"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "solar_rim_a",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "solar_rim_a"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "solar_rim_b",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "solar_rim_b"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "torso_core",
+     "part_de": "Rumpf",
+     "side": "C",
+     "objects": [
+      "torso_core"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "waist_core",
+     "part_de": "Taillenkern",
+     "side": "C",
+     "objects": [
+      "waist_core"
+     ]
+    },
+    {
+     "asm": "upper_body",
+     "part": "waist_trim",
+     "part_de": "Taillenkante",
+     "side": "C",
+     "objects": [
+      "waist_trim"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "lower_body",
+   "de": "Unterkörper",
+   "en": "Lower body",
+   "explode_mm": [
+    0,
+    0,
+    -170
+   ],
+   "parts": [
+    {
+     "asm": "lower_body",
+     "part": "belt",
+     "part_de": "Gürtelring",
+     "side": "C",
+     "objects": [
+      "belt"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "belt_box_l",
+     "part_de": "Gürtelmodul",
+     "side": "C",
+     "objects": [
+      "belt_box_l"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "belt_box_l_trim",
+     "part_de": "Modulkante",
+     "side": "C",
+     "objects": [
+      "belt_box_l_trim"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "belt_box_r",
+     "part_de": "Gürtelmodul",
+     "side": "C",
+     "objects": [
+      "belt_box_r"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "belt_box_r_trim",
+     "part_de": "Modulkante",
+     "side": "C",
+     "objects": [
+      "belt_box_r_trim"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "belt_trim",
+     "part_de": "Gürtelkante",
+     "side": "C",
+     "objects": [
+      "belt_trim"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "brief",
+     "part_de": "Schrittstück",
+     "side": "C",
+     "objects": [
+      "brief"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "buckle",
+     "part_de": "Schließe",
+     "side": "C",
+     "objects": [
+      "buckle"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "buckle_inset",
+     "part_de": "Schließenfeld",
+     "side": "C",
+     "objects": [
+      "buckle_inset"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "butt",
+     "part_de": "Gesäßplatte",
+     "side": "C",
+     "objects": [
+      "butt"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "hip_l_axle",
+     "part_de": "Hüftgelenk",
+     "side": "C",
+     "objects": [
+      "hip_l_axle"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "hip_l_disc",
+     "part_de": "Medaillon",
+     "side": "C",
+     "objects": [
+      "hip_l_disc"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "hip_l_hub",
+     "part_de": "Medaillonnabe",
+     "side": "C",
+     "objects": [
+      "hip_l_hub"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "hip_l_ring",
+     "part_de": "Medaillonring",
+     "side": "C",
+     "objects": [
+      "hip_l_ring"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "hip_r_axle",
+     "part_de": "Hüftgelenk",
+     "side": "C",
+     "objects": [
+      "hip_r_axle"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "hip_r_disc",
+     "part_de": "Medaillon",
+     "side": "C",
+     "objects": [
+      "hip_r_disc"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "hip_r_hub",
+     "part_de": "Medaillonnabe",
+     "side": "C",
+     "objects": [
+      "hip_r_hub"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "hip_r_ring",
+     "part_de": "Medaillonring",
+     "side": "C",
+     "objects": [
+      "hip_r_ring"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "pelvis_core",
+     "part_de": "Becken",
+     "side": "C",
+     "objects": [
+      "pelvis_core"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "tasset",
+     "part_de": "Lendenplatte",
+     "side": "C",
+     "objects": [
+      "tasset"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "tasset_rim_a",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "tasset_rim_a"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "tasset_rim_b",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "tasset_rim_b"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "tasset_side_l",
+     "part_de": "Beintasche",
+     "side": "C",
+     "objects": [
+      "tasset_side_l"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "tasset_side_l_edge",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "tasset_side_l_edge"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "tasset_side_l_rim_a",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "tasset_side_l_rim_a"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "tasset_side_l_rim_b",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "tasset_side_l_rim_b"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "tasset_side_r",
+     "part_de": "Beintasche",
+     "side": "C",
+     "objects": [
+      "tasset_side_r"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "tasset_side_r_edge",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "tasset_side_r_edge"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "tasset_side_r_rim_a",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "tasset_side_r_rim_a"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "tasset_side_r_rim_b",
+     "part_de": "Zierkante",
+     "side": "C",
+     "objects": [
+      "tasset_side_r_rim_b"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "tasset_stripe_a",
+     "part_de": "Akzentstreifen",
+     "side": "C",
+     "objects": [
+      "tasset_stripe_a"
+     ]
+    },
+    {
+     "asm": "lower_body",
+     "part": "tasset_stripe_b",
+     "part_de": "Akzentstreifen",
+     "side": "C",
+     "objects": [
+      "tasset_stripe_b"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "legs",
+   "de": "Beine",
+   "en": "Legs",
+   "explode_mm": [
+    90,
+    0,
+    -360
+   ],
+   "parts": [
+    {
+     "asm": "legs",
+     "part": "ankle_axle",
+     "part_de": "Knöchel",
+     "side": "L",
+     "objects": [
+      "foot_L_ankle_axle"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "ankle_disc",
+     "part_de": "Medaillon",
+     "side": "L",
+     "objects": [
+      "foot_L_ankle_disc"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "ankle_hub",
+     "part_de": "Medaillonnabe",
+     "side": "L",
+     "objects": [
+      "foot_L_ankle_hub"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "ankle_ring",
+     "part_de": "Medaillonring",
+     "side": "L",
+     "objects": [
+      "foot_L_ankle_ring"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "foot_core",
+     "part_de": "Fuß",
+     "side": "L",
+     "objects": [
+      "foot_L_foot_core"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "heel_cap",
+     "part_de": "Fersenkappe",
+     "side": "L",
+     "objects": [
+      "foot_L_heel_cap"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "sole",
+     "part_de": "Sohle",
+     "side": "L",
+     "objects": [
+      "foot_L_sole"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "toe_cap",
+     "part_de": "Zehenkappe",
+     "side": "L",
+     "objects": [
+      "foot_L_toe_cap"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "toe_cap_edge",
+     "part_de": "Zierkante",
+     "side": "L",
+     "objects": [
+      "foot_L_toe_cap_edge"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "ankle_axle",
+     "part_de": "Knöchel",
+     "side": "R",
+     "objects": [
+      "foot_R_ankle_axle"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "ankle_disc",
+     "part_de": "Medaillon",
+     "side": "R",
+     "objects": [
+      "foot_R_ankle_disc"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "ankle_hub",
+     "part_de": "Medaillonnabe",
+     "side": "R",
+     "objects": [
+      "foot_R_ankle_hub"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "ankle_ring",
+     "part_de": "Medaillonring",
+     "side": "R",
+     "objects": [
+      "foot_R_ankle_ring"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "foot_core",
+     "part_de": "Fuß",
+     "side": "R",
+     "objects": [
+      "foot_R_foot_core"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "heel_cap",
+     "part_de": "Fersenkappe",
+     "side": "R",
+     "objects": [
+      "foot_R_heel_cap"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "sole",
+     "part_de": "Sohle",
+     "side": "R",
+     "objects": [
+      "foot_R_sole"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "toe_cap",
+     "part_de": "Zehenkappe",
+     "side": "R",
+     "objects": [
+      "foot_R_toe_cap"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "toe_cap_edge",
+     "part_de": "Zierkante",
+     "side": "R",
+     "objects": [
+      "foot_R_toe_cap_edge"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "boot_cuff",
+     "part_de": "Stiefelschaft",
+     "side": "L",
+     "objects": [
+      "shin_L_boot_cuff"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "boot_cuff_edge",
+     "part_de": "Zierkante",
+     "side": "L",
+     "objects": [
+      "shin_L_boot_cuff_edge"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "calf",
+     "part_de": "Wadenplatte",
+     "side": "L",
+     "objects": [
+      "shin_L_calf"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_axle",
+     "part_de": "Kniegelenk",
+     "side": "L",
+     "objects": [
+      "shin_L_knee_axle"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_cap",
+     "part_de": "Kniekappe",
+     "side": "L",
+     "objects": [
+      "shin_L_knee_cap"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_cap_edge",
+     "part_de": "Zierkante",
+     "side": "L",
+     "objects": [
+      "shin_L_knee_cap_edge"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_disc",
+     "part_de": "Medaillon",
+     "side": "L",
+     "objects": [
+      "shin_L_knee_disc"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_hub",
+     "part_de": "Medaillonnabe",
+     "side": "L",
+     "objects": [
+      "shin_L_knee_hub"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_piston_a_collar",
+     "part_de": "Kniekolben (Manschette)",
+     "side": "L",
+     "objects": [
+      "shin_L_knee_piston_a_collar"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_piston_a_cyl",
+     "part_de": "Kniekolben",
+     "side": "L",
+     "objects": [
+      "shin_L_knee_piston_a_cyl"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_piston_a_rod",
+     "part_de": "Kniekolben (Stange)",
+     "side": "L",
+     "objects": [
+      "shin_L_knee_piston_a_rod"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_piston_b_collar",
+     "part_de": "Kniekolben (Manschette)",
+     "side": "L",
+     "objects": [
+      "shin_L_knee_piston_b_collar"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_piston_b_cyl",
+     "part_de": "Kniekolben",
+     "side": "L",
+     "objects": [
+      "shin_L_knee_piston_b_cyl"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_piston_b_rod",
+     "part_de": "Kniekolben (Stange)",
+     "side": "L",
+     "objects": [
+      "shin_L_knee_piston_b_rod"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_ring",
+     "part_de": "Medaillonring",
+     "side": "L",
+     "objects": [
+      "shin_L_knee_ring"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "shin_bolt_a",
+     "part_de": "Bolzen",
+     "side": "L",
+     "objects": [
+      "shin_L_shin_bolt_a"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "shin_bolt_b",
+     "part_de": "Bolzen",
+     "side": "L",
+     "objects": [
+      "shin_L_shin_bolt_b"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "shin_core",
+     "part_de": "Schienbein",
+     "side": "L",
+     "objects": [
+      "shin_L_shin_core"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "shin_light_bezel",
+     "part_de": "Lichtfassung",
+     "side": "L",
+     "objects": [
+      "shin_L_shin_light_bezel"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "shin_light_lamp",
+     "part_de": "Statuslicht",
+     "side": "L",
+     "objects": [
+      "shin_L_shin_light_lamp"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "shin_plate",
+     "part_de": "Schienbeinlage",
+     "side": "L",
+     "objects": [
+      "shin_L_shin_plate"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "shin_shell",
+     "part_de": "Schienbeinschale",
+     "side": "L",
+     "objects": [
+      "shin_L_shin_shell"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "shin_shell_rim_a",
+     "part_de": "Zierkante",
+     "side": "L",
+     "objects": [
+      "shin_L_shin_shell_rim_a"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "shin_shell_rim_b",
+     "part_de": "Zierkante",
+     "side": "L",
+     "objects": [
+      "shin_L_shin_shell_rim_b"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "boot_cuff",
+     "part_de": "Stiefelschaft",
+     "side": "R",
+     "objects": [
+      "shin_R_boot_cuff"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "boot_cuff_edge",
+     "part_de": "Zierkante",
+     "side": "R",
+     "objects": [
+      "shin_R_boot_cuff_edge"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "calf",
+     "part_de": "Wadenplatte",
+     "side": "R",
+     "objects": [
+      "shin_R_calf"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_axle",
+     "part_de": "Kniegelenk",
+     "side": "R",
+     "objects": [
+      "shin_R_knee_axle"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_cap",
+     "part_de": "Kniekappe",
+     "side": "R",
+     "objects": [
+      "shin_R_knee_cap"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_cap_edge",
+     "part_de": "Zierkante",
+     "side": "R",
+     "objects": [
+      "shin_R_knee_cap_edge"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_disc",
+     "part_de": "Medaillon",
+     "side": "R",
+     "objects": [
+      "shin_R_knee_disc"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_hub",
+     "part_de": "Medaillonnabe",
+     "side": "R",
+     "objects": [
+      "shin_R_knee_hub"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_piston_a_collar",
+     "part_de": "Kniekolben (Manschette)",
+     "side": "R",
+     "objects": [
+      "shin_R_knee_piston_a_collar"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_piston_a_cyl",
+     "part_de": "Kniekolben",
+     "side": "R",
+     "objects": [
+      "shin_R_knee_piston_a_cyl"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_piston_a_rod",
+     "part_de": "Kniekolben (Stange)",
+     "side": "R",
+     "objects": [
+      "shin_R_knee_piston_a_rod"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_piston_b_collar",
+     "part_de": "Kniekolben (Manschette)",
+     "side": "R",
+     "objects": [
+      "shin_R_knee_piston_b_collar"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_piston_b_cyl",
+     "part_de": "Kniekolben",
+     "side": "R",
+     "objects": [
+      "shin_R_knee_piston_b_cyl"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_piston_b_rod",
+     "part_de": "Kniekolben (Stange)",
+     "side": "R",
+     "objects": [
+      "shin_R_knee_piston_b_rod"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "knee_ring",
+     "part_de": "Medaillonring",
+     "side": "R",
+     "objects": [
+      "shin_R_knee_ring"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "shin_bolt_a",
+     "part_de": "Bolzen",
+     "side": "R",
+     "objects": [
+      "shin_R_shin_bolt_a"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "shin_bolt_b",
+     "part_de": "Bolzen",
+     "side": "R",
+     "objects": [
+      "shin_R_shin_bolt_b"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "shin_core",
+     "part_de": "Schienbein",
+     "side": "R",
+     "objects": [
+      "shin_R_shin_core"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "shin_light_bezel",
+     "part_de": "Lichtfassung",
+     "side": "R",
+     "objects": [
+      "shin_R_shin_light_bezel"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "shin_light_lamp",
+     "part_de": "Statuslicht",
+     "side": "R",
+     "objects": [
+      "shin_R_shin_light_lamp"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "shin_plate",
+     "part_de": "Schienbeinlage",
+     "side": "R",
+     "objects": [
+      "shin_R_shin_plate"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "shin_shell",
+     "part_de": "Schienbeinschale",
+     "side": "R",
+     "objects": [
+      "shin_R_shin_shell"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "shin_shell_rim_a",
+     "part_de": "Zierkante",
+     "side": "R",
+     "objects": [
+      "shin_R_shin_shell_rim_a"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "shin_shell_rim_b",
+     "part_de": "Zierkante",
+     "side": "R",
+     "objects": [
+      "shin_R_shin_shell_rim_b"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "hip_ball",
+     "part_de": "Hüftkugel",
+     "side": "L",
+     "objects": [
+      "thigh_L_hip_ball"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "thigh_cable",
+     "part_de": "Leitung",
+     "side": "L",
+     "objects": [
+      "thigh_L_thigh_cable"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "thigh_core",
+     "part_de": "Oberschenkel",
+     "side": "L",
+     "objects": [
+      "thigh_L_thigh_core"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "thigh_cuff",
+     "part_de": "Hüftmanschette",
+     "side": "L",
+     "objects": [
+      "thigh_L_thigh_cuff"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "thigh_cuff_trim",
+     "part_de": "Manschettenkante",
+     "side": "L",
+     "objects": [
+      "thigh_L_thigh_cuff_trim"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "thigh_seam_0",
+     "part_de": "Fuge",
+     "side": "L",
+     "objects": [
+      "thigh_L_thigh_seam_0"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "thigh_shell",
+     "part_de": "Oberschenkelschale",
+     "side": "L",
+     "objects": [
+      "thigh_L_thigh_shell"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "thigh_shell_rim_a",
+     "part_de": "Zierkante",
+     "side": "L",
+     "objects": [
+      "thigh_L_thigh_shell_rim_a"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "thigh_shell_rim_b",
+     "part_de": "Zierkante",
+     "side": "L",
+     "objects": [
+      "thigh_L_thigh_shell_rim_b"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "thigh_stripe_a",
+     "part_de": "Akzentstreifen",
+     "side": "L",
+     "objects": [
+      "thigh_L_thigh_stripe_a"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "thigh_stripe_b",
+     "part_de": "Akzentstreifen",
+     "side": "L",
+     "objects": [
+      "thigh_L_thigh_stripe_b"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "hip_ball",
+     "part_de": "Hüftkugel",
+     "side": "R",
+     "objects": [
+      "thigh_R_hip_ball"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "thigh_cable",
+     "part_de": "Leitung",
+     "side": "R",
+     "objects": [
+      "thigh_R_thigh_cable"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "thigh_core",
+     "part_de": "Oberschenkel",
+     "side": "R",
+     "objects": [
+      "thigh_R_thigh_core"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "thigh_cuff",
+     "part_de": "Hüftmanschette",
+     "side": "R",
+     "objects": [
+      "thigh_R_thigh_cuff"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "thigh_cuff_trim",
+     "part_de": "Manschettenkante",
+     "side": "R",
+     "objects": [
+      "thigh_R_thigh_cuff_trim"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "thigh_seam_0",
+     "part_de": "Fuge",
+     "side": "R",
+     "objects": [
+      "thigh_R_thigh_seam_0"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "thigh_shell",
+     "part_de": "Oberschenkelschale",
+     "side": "R",
+     "objects": [
+      "thigh_R_thigh_shell"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "thigh_shell_rim_a",
+     "part_de": "Zierkante",
+     "side": "R",
+     "objects": [
+      "thigh_R_thigh_shell_rim_a"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "thigh_shell_rim_b",
+     "part_de": "Zierkante",
+     "side": "R",
+     "objects": [
+      "thigh_R_thigh_shell_rim_b"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "thigh_stripe_a",
+     "part_de": "Akzentstreifen",
+     "side": "R",
+     "objects": [
+      "thigh_R_thigh_stripe_a"
+     ]
+    },
+    {
+     "asm": "legs",
+     "part": "thigh_stripe_b",
+     "part_de": "Akzentstreifen",
+     "side": "R",
+     "objects": [
+      "thigh_R_thigh_stripe_b"
+     ]
+    }
+   ]
+  }
+ ]
+}

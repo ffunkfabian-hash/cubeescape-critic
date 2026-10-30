@@ -1,5 +1,5 @@
 // Reader for NumPy .npz archives (np.savez_compressed: a zip of .npy files, deflated, zip64 local headers) as used by the Scout
-// generator for its baked cast (blender/scout/guss_2h.npz). inflateRaw(bytes) → bytes (or a promise of them) is supplied by the
+// generator for its baked cast (robotgen/data/guss_2h.npz). inflateRaw(bytes) → bytes (or a promise of them) is supplied by the
 // caller: zlib.inflateRawSync in Node, DecompressionStream('deflate-raw') in the browser.
 const DTYPES = { '<f4': Float32Array, '<f8': Float64Array, '<i4': Int32Array, '<i8': BigInt64Array, '|b1': Uint8Array, '|u1': Uint8Array };
 

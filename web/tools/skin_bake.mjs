@@ -1,13 +1,13 @@
 // Skin bake (0.13 "Skins"): UV atlas and geometry maps of a model for the skin mixer (src/skinShader.js), in Node, no Blender.
-//   node tools/skin_bake.mjs [--model waechter|paladin|mechanik|critic|scout|all] [--gen glb|three] [--size 2048] [--ao-samples 32]
+//   node tools/skin_bake.mjs [--model waechter|paladin|mechanik|critic|scout|all] [--size 2048] [--ao-samples 32]
 //     [--workers 8] [--debug <dir>] (default ../runs/skins)
-// Steps: mesh sources (body GLB, or with --gen three the body or Scout built by the three.js generator robotgen; Helm H built by its
-// generator for every stored variant, Scout GLB) → model metres → one UV atlas
+// Steps: mesh sources (bodies and Scout: the GLBs exported from the three.js generator, tools/robotgen_export.mjs, 0.18; Helm H built
+// by its generator for every stored variant) → model metres → one UV atlas
 // with xatlas (tools/skinXatlas.mjs) → texel maps by rasterising every triangle in UV space (position, shading normal, mesh;
 // written as images to the debug folder together with part and role ids) → per texel the distance to the nearest plate edge of its
 // mesh in 3D (three-mesh-bvh closest point on the mesh's feature edges and rounded strips) and ambient occlusion from rays
 // (three-mesh-bvh, the whole model) → gutters filled with the nearest texel.
-// Output assets/skins/<model>/ (generated bodies: assets/skins/<body>-three/, skinAtlas.js › atlasName): atlas.json + atlas.bin (skinAtlas.js › readAtlas) and maps.png (R ambient occlusion, G edge
+// Output assets/skins/<model>/: atlas.json + atlas.bin (skinAtlas.js › readAtlas) and maps.png (R ambient occlusion, G edge
 // distance in the sqrt code of skinAtlas.js, B coverage). Deterministic: same sources, same bytes.
 import { isMainThread, Worker, workerData, parentPort } from 'node:worker_threads';
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
@@ -93,7 +93,7 @@ const here = path.dirname(fileURLToPath(import.meta.url)), webRoot = path.dirnam
 const log = (msg, t0 = log.t0 ??= performance.now()) => console.log(`[skin_bake ${((performance.now() - t0) / 1000).toFixed(1).padStart(6)}s] ${msg}`);
 
 function args() {
-  const o = { model: 'all', gen: 'glb', size: '2048', 'ao-samples': null, workers: String(Math.max(1, Math.min(availableParallelism() - 1, 10))), debug: path.join(repo, 'runs', 'skins'), out: path.join(repo, 'assets', 'skins') };
+  const o = { model: 'all', size: '2048', 'ao-samples': null, workers: String(Math.max(1, Math.min(availableParallelism() - 1, 10))), debug: path.join(repo, 'runs', 'skins'), out: path.join(repo, 'assets', 'skins') };
   const a = process.argv.slice(2);
   for (let i = 0; i < a.length; i++) {
     const k = a[i].replace(/^--/, '');
@@ -101,7 +101,6 @@ function args() {
     o[k] = a[++i];
   }
   if (o.model !== 'all' && !MODELS.includes(o.model)) throw new Error(`skin_bake: unknown model ${o.model} (${MODELS.join(', ')}, all)`);
-  if (!['glb', 'three'].includes(o.gen)) throw new Error(`skin_bake: unknown gen ${o.gen} (glb, three)`);
   return o;
 }
 
@@ -113,31 +112,25 @@ async function parseGLB(file) {
 
 // Sources of a model: one or more variants (root, metres per root unit, kind for roles/parts). A body or Scout has one; Helm H one
 // per stored variant (criticHelmetVariants.json) – variants share every mesh whose geometry is equal.
-async function loadSources(name, vite, gen) {
-  if (BODIES.includes(name) && gen === 'three') {   // built at runtime: parts with CSG grooves keep their baked positions (see bake)
-    const { buildRobotBody } = await import('../src/robotgen/index.js');
-    const { scene, spec } = buildRobotBody(name), cut = new Set(spec.parts.filter(([, p]) => p[5].cuts?.length).map(([a, p]) => `${a}:${p[0]}`));
-    return { kind: 'body', metresPerUnit: 1, variants: [{ label: 'assembled', root: scene }], keepPositions: m => cut.has(`${m.userData.asm}:${m.userData.part}`),
-      source: `web/src/robotgen (buildRobotBody("${name}"))` };
-  }
+// Bodies and Scout are read from their exported GLBs (the files the viewer loads; robotgen_export.mjs writes them from the generator).
+// Parts made by CSG keep their baked positions: built live (&gen=three) in another JavaScript engine or on another platform (Linux CI)
+// a cut may come out a few triangles different; the rest of the generator is plain arithmetic and rebuilds the same vertices.
+async function loadSources(name, vite) {
+  const { packageFiles } = await import('./robotgen_export.mjs');
+  const glb = name === 'critic' ? null : packageFiles(name).glbs.assembled;
   if (BODIES.includes(name)) {
-    const root = await parseGLB(path.join(repo, 'assets', 'robot-bodies', name, 'assembled', `${name}.glb`));
-    return { kind: 'body', metresPerUnit: 1, variants: [{ label: 'assembled', root }], source: `assets/robot-bodies/${name}/assembled/${name}.glb` };
+    const { robotSpec } = await import('../src/robotgen/robot.js');
+    const cut = new Set(robotSpec(name).parts.filter(([, p]) => p[5].cuts?.length).map(([a, p]) => `${a}:${p[0]}`));
+    const root = await parseGLB(path.join(repo, glb));
+    return { kind: 'body', metresPerUnit: 1, variants: [{ label: 'assembled', root }], keepPositions: m => cut.has(`${m.userData.asm}:${m.userData.part}`), source: glb };
   }
-  if (name === 'scout' && gen === 'three') {   // Scout from the three.js generator (0.17); BSP parts keep their baked positions
-    const { buildScout, BSP_PARTS } = await import('../src/robotgen/scout.js');
-    const { readGussFile } = await import('./scoutGussNode.mjs');
-    const { scene: root } = buildScout(await readGussFile());
+  if (name === 'scout') {
+    const { BSP_PARTS } = await import('../src/robotgen/scout.js');
+    const root = await parseGLB(path.join(repo, glb));
     const { scoutFit } = await vite.ssrLoadModule('/src/scout.js');
     const { HELMET_FRAME_METERS } = await vite.ssrLoadModule('/src/robotHelmet.js');
     return { kind: 'scout', metresPerUnit: scoutFit(root).scale * HELMET_FRAME_METERS, variants: [{ label: 'assembled', root }],
-      keepPositions: m => BSP_PARTS.includes(m.userData.source_object), source: 'web/src/robotgen/scout.js (buildScout)' };
-  }
-  if (name === 'scout') {
-    const root = await parseGLB(path.join(repo, 'assets', 'helmet-scout', 'assembled', 'scout.glb'));
-    const { scoutFit } = await vite.ssrLoadModule('/src/scout.js');
-    const { HELMET_FRAME_METERS } = await vite.ssrLoadModule('/src/robotHelmet.js');
-    return { kind: 'scout', metresPerUnit: scoutFit(root).scale * HELMET_FRAME_METERS, variants: [{ label: 'assembled', root }], source: 'assets/helmet-scout/assembled/scout.glb' };
+      keepPositions: m => BSP_PARTS.includes(m.userData.source_object), source: glb };
   }
   const { buildHelmet } = await vite.ssrLoadModule('/src/helmet.js');
   const { configureHelmetAssembly } = await vite.ssrLoadModule('/src/assembly.js');
@@ -208,11 +201,11 @@ function features(position, normal, corner, { jumpDeg, roundDegPerMm, minTurnDeg
 
 async function bake(name, o, vite) {
   const recipes = JSON.parse(readFileSync(path.join(webRoot, 'src', 'skins.json'), 'utf8'));
-  const { skinMeshes, geometrySignature, sameSignature, cornerIndex, writeAtlas, encodeEdge, atlasName } = await import('../src/skinAtlas.js');
+  const { skinMeshes, geometrySignature, sameSignature, cornerIndex, writeAtlas, encodeEdge } = await import('../src/skinAtlas.js');
   const { describeSkinMeshes } = await vite.ssrLoadModule('/src/skinParts.js');
   const { buildAtlas } = await import('./skinXatlas.mjs');
   const S = Number(o.size), aoSamples = Number(o['ao-samples'] ?? recipes.ao.samples);
-  const src = await loadSources(name, vite, o.gen), model = atlasName(name, o.gen);
+  const src = await loadSources(name, vite), model = name;
   // union of the variants' meshes: one entry per key and geometry signature
   const entries = [];
   for (const [vi, v] of src.variants.entries()) {
@@ -383,8 +376,7 @@ if (isMainThread) {
   const warn = console.warn;
   console.warn = (...a) => { if (!String(a[0]).includes('"maxLeafSize" option has been deprecated')) warn(...a); };
   try {
-    for (const name of o.model === 'all' ? (o.gen === 'three' ? [...BODIES, 'scout'] : MODELS) : [o.model]) {
-      if (o.gen === 'three' && name === 'critic') throw new Error('skin_bake: --gen three only for the bodies and Scout (Helm H is built by three.js anyway)');
+    for (const name of o.model === 'all' ? MODELS : [o.model]) {
       await bake(name, o, vite);
     }
   } finally {

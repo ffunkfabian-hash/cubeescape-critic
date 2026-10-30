@@ -19,7 +19,11 @@ fünf Baugruppen aus Ballon: Kopf, Arme, Oberkörper, Unterkörper und Beine. Di
 
 ## Quelle und Export
 
-Der Generator bleibt in Ballon. Critic übernimmt ihn nicht als Kopie, sondern pinnt den Stand in `blender/robot/SOURCE.json`:
+> **Seit 0.18 „Prefab“** entstehen die Körper im three.js-Generator und werden mit `web/tools/robotgen_export.mjs` exportiert
+> ([unten](#export-018-prefab)). Der Blender-Export dieses Abschnitts ist archiviert (`archive/blender/robot/`); seine GLBs in
+> `assets/robot-bodies/` bleiben als eingefrorene Referenz der Messtests.
+
+Der Generator bleibt in Ballon. Critic übernimmt ihn nicht als Kopie, sondern pinnt den Stand in `blender/robot/SOURCE.json` (seit 0.18 `web/src/robotgen/data/SOURCE.json`):
 Repo, Branch und vollen Commit. Kopiert würde sonst ein großer Baum mit Waffenbaukasten, Ego-Armen und Formen. Gebaut und exportiert
 wird nur der Körper, mit `blender/robot/export_robot.py`:
 
@@ -30,7 +34,7 @@ git -C ~/Claude/cubeescape-ballon archive 14bd78d84c3b8d497482ad458981e6e9732477
 # je Studie ein Blender-Lauf (je ≈ 1 min), schreibt assets/robot-bodies/<name>/
 for s in a_waechter b_paladin c_mechanik; do
   ./ce lock blender -- /Applications/Blender.app/Contents/MacOS/Blender -b --factory-startup \
-    -P "$PWD/blender/robot/export_robot.py" -- --src runs/robot/src --study $s --out assets/robot-bodies
+    -P "$PWD/archive/blender/robot/export_robot.py" -- --src runs/robot/src --study $s --out assets/robot-bodies
 done
 ```
 
@@ -118,7 +122,8 @@ Der **Studienhelm** aus dem GLB ist ins Archiv gewandert: nicht mehr in der Ausw
 
 ## Viewer
 
-`?model=waechter`, `?model=paladin` oder `?model=mechanik` lädt den GLB. Der Viewer skaliert den Körper auf den Rahmen des
+`?model=waechter`, `?model=paladin` oder `?model=mechanik` lädt den GLB (seit 0.18 den Export des three.js-Generators aus
+`assets/robot-bodies-three/`; `&gen=three` baut live, `&gen=blender` zeigt die Blender-Referenz). Der Viewer skaliert den Körper auf den Rahmen des
 früheren three.js-Gesamtkörpers 0.9 (`ROBOT_FRAME`, Höhe 5,44, Füße bei y = −4,85), damit dessen Kameras (`front`, `left`, `back`, `right`)
 ohne Anpassung passen. Mit `&exploded=0..1` oder dem Regler „Explosionsabstand“ öffnet sich die Explosionsansicht. Dafür verschiebt der Viewer die Segmentknoten
 (GLB-Wurzeln mit Extras `asm`/`side`) um `explode_mm` aus `parts.json`, genau wie `robot_build.explode()` in Ballon; der Oberkörper
@@ -131,7 +136,7 @@ Arm mit 300 mm), eigene Etiketten, Zweig „Schultern“ im Bauteilbaum, Nahansi
 (Test `robotShoulders.test.mjs`); GLB, `parts.json` und Generator behalten Ballons Gruppierung. Wächter und Paladin 21, Mechanik 16 Teile.
 
 ![Explosion mit Schultern: Paladin vorn (GLB), Mechanik links (three.js)](bilder/outrider_schultern.jpg)
-In der GUI wechselt „Körperstudie“ zwischen den drei Modellen. Die Geometrie-Regler sind aus, weil Ballon die Quelle bleibt.
+In der GUI wechselt „Körperstudie“ zwischen den drei Modellen. Die Geometrie-Regler sind aus: Quelle ist der Generator, der Viewer lädt Dateien.
 
 **Seiten:** R/L ist die Körperseite des Roboters. Die rechte Seite liegt bei −X und erscheint in der Frontansicht links im Bild.
 Die three.js-Teile A/B und Scout R/L zählen anders.
@@ -143,9 +148,9 @@ Die three.js-Teile A/B und Scout R/L zählen anders.
 ## three.js-Generator (0.14 „Foundry“, 0.15 „Anvil“)
 
 Nutzerentscheid vom 29.10.2026: three.js ist der Standard, Blender soll ganz raus, auch für die Geometrie. Seit 0.14 baut
-`web/src/robotgen/` den **Wächter**, seit 0.15 auch **Paladin** und **Mechanik** ohne Blender im Browser. Die GLB-Fassung bleibt
-Standard und Vergleich: `?model=<körper>&gen=three` lädt den Generator, `&gen=glb` (Standard) den Export. Offen sind Scout und die
-Umstellung des Standards ([Übergabe](uebergabe-0.14-etappe2.md)).
+`web/src/robotgen/` den **Wächter**, seit 0.15 auch **Paladin** und **Mechanik** ohne Blender. Seit 0.18 ist der Generator die Quelle der
+Lieferpakete ([Export](#export-018-prefab)); `?model=<körper>&gen=three` baut ihn live im Browser, `&gen=blender` lädt die eingefrorene
+Blender-Fassung, gegen die die folgenden Messungen laufen.
 
 ![Wächter: Blender-GLB · three.js · Umrissdifferenz in vier Ansichten](bilder/foundry_vergleich.jpg)
 
@@ -214,10 +219,41 @@ Teile mit CSG-Fugen behalten ihre gebackenen Positionen für den Übertrag auf a
 
 ![Skin Rost: oben Blender-GLB, unten three.js – Wächter, Paladin, Mechanik](bilder/anvil_skins.jpg)
 
+## Export (0.18 „Prefab“)
+
+Nutzerentscheid vom 30.10.2026 (Weg 1): Der three.js-Generator wird zum Export-Programm, der Viewer lädt nur Dateien; Blender baut keine
+Geometrie mehr. `web/tools/robotgen_export.mjs` baut die drei Körper und Scout in Node und schreibt Lieferpakete im Format der
+Blender-Pakete:
+
+```bash
+node web/tools/robotgen_export.mjs                    # alle; --model waechter|paladin|mechanik|scout; --check schreibt nichts
+node web/tools/skin_bake.mjs --model <name>           # nur wenn sich Meshes geändert haben (Atlas aus dem exportierten GLB)
+```
+
+| Paket | Inhalt |
+|---|---|
+| `assets/robot-bodies-three/<körper>/` | `assembled/<körper>.glb`, `parts.json`, `manifest.json` ([Lieferindex](../assets/robot-bodies-three/README.md)) |
+| `assets/helmet-scout-three/` | `assembled/scout.glb`, `exploded/scout_exploded.glb`, `parts.json`, `manifest.json` ([Lieferindex](../assets/helmet-scout-three/README.md)) |
+
+- **GLB:** `GLTFExporter` in Node (Ersatz für das fehlende `FileReader`); die Wurzeln des Generators kommen in eine `THREE.Scene`, damit
+  die GLB-Wurzeln wieder die Segmentknoten sind und die Atlas-Schlüssel gleich bleiben. Extras aus `userData`, Rollenmaterialien, flache
+  Farben wie der Blender-Export; einzelne Meshes haben Schattierungsnormalen knapp neben Länge 1, der Exporter normiert sie.
+- **Manifest:** wie bisher je Objekt Baugruppe, Teil, Seite, Punkte, Dreiecke, Bounding-Box in Blender-Koordinaten; neu `digest` (sha256
+  über Index, Positionen, Normalen des gelieferten GLB) und `generator` (sha256 über alle Dateien in `web/src/robotgen/` und das
+  Export-Programm, Versionen von three, three-bvh-csg, three-mesh-bvh, Plattform). `parts.json` ist inhaltlich gleich der Blender-Fassung.
+- **Konsistenz** (`web/tools/robotgen_export.test.mjs`): Eingaben-Hash = aktueller Generator, Manifest = gelieferter GLB Mesh für Mesh,
+  frischer Export = gelieferte Dateien Byte für Byte auf der Plattform des Pakets (darwin-arm64); anderswo (Linux-CI, andere
+  Triangulierung einzelner Fugen) gleiche Meshes, Extras, Materialien und Boxen auf 0,1 mm.
+- **Skins:** Die Atlanten `assets/skins/<körper>/` und `scout/` sind aus den exportierten GLBs gebacken; die Meshes sind dieselben wie
+  im Live-Aufbau (gleiche Punkte, Indizes, float32-Positionen), deshalb passt derselbe Atlas auch zu `&gen=three`. Die alten Atlanten der
+  Blender-GLBs sind entfernt; `&gen=blender` zeigt Skins ohne Kantenabrieb und Schmutz.
+- **Ladezeit** (headless, Median): siehe [Bericht 0.18](versions/0.18.md#ladezeit).
+
 ## Grenzen und nächste Schritte
 
-- Die Studien bleiben Entwürfe aus Ballon. Bis Scout ebenfalls in three.js steht und der Nutzer dem Entfernen von Blender zustimmt,
-  kommen Formänderungen weiter per neuem Export und neuem Pin hierher; danach ist `web/src/robotgen/` die Quelle.
+- Die Studien bleiben Entwürfe aus Ballon; seit 0.18 ist `web/src/robotgen/` die Quelle. Formänderungen: Generator ändern,
+  `robotgen_export.mjs` und, bei geänderten Meshes, `skin_bake.mjs` laufen lassen. Die Messungen gegen Ballon/Blender
+  (`robotgen.test.mjs`) zeigen dann bewusst die Abweichung von der Referenz.
 - Ohne Waffe und ohne Haltung `ready`: Die Pilotwaffe gehört zu Ballon und ist nicht exportiert.
 - Die GLBs selbst bleiben flach; gealtert wird erst im Viewer (siehe oben). Andere Programme sehen nur die Gestaltungsfarben.
 - Für die Körper gibt es keine Vorlagenbilder und keine IoU-Messung; der Vergleich mit den Ballon-Cycles-Bildern (`~/Library/Caches/CubeEscapeBallon/out/robot/studies/`) ist eine Sichtprüfung.

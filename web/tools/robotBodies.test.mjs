@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 const ASSEMBLIES = ['head', 'arms', 'upper_body', 'lower_body', 'legs'];
-const source = JSON.parse(readFileSync(new URL('../../blender/robot/SOURCE.json', import.meta.url)));
+const source = JSON.parse(readFileSync(new URL('../src/robotgen/data/SOURCE.json', import.meta.url)));
 
 function glb(url) {
   const buf = readFileSync(url);
@@ -64,3 +64,11 @@ for (const [name, study] of [['waechter', 'a_waechter'], ['paladin', 'b_paladin'
     }
   });
 }
+
+test('model source (?gen=): export by default list, live, Blender; glb stays the alias of blender, unknown values fail', async () => {
+  const { SOURCES, modelSource } = await import('../src/modelSource.js');
+  assert.deepEqual(SOURCES, ['export', 'three', 'blender']);
+  for (const g of SOURCES) assert.equal(modelSource(g), g);
+  assert.equal(modelSource('glb'), 'blender');
+  assert.throws(() => modelSource('gltf'), /Unknown gen "gltf"/);
+});

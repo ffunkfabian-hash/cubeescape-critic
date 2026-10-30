@@ -1,4 +1,4 @@
-> Übernommen aus dem Arbeitsordner `trialanderror` (Stand D29, 29.10.2026). Dateinamen ohne Pfad beziehen sich jetzt auf `blender/scout/`; Bilder auf `assets/helmet-scout/`; `durchlaeufe/` und Marker-Exporte blieben im Arbeitsordner.
+> Übernommen aus dem Arbeitsordner `trialanderror` (Stand D29, 29.10.2026). Dateinamen ohne Pfad beziehen sich jetzt auf `archive/blender/scout/` (seit 0.18 archiviert; `guss_2h.npz` und `helm_params.json` in `web/src/robotgen/data/`); Bilder auf `assets/helmet-scout/`; `durchlaeufe/` und Marker-Exporte blieben im Arbeitsordner.
 
 # Marker-System „Scout Markierbogen“ – Kurzanleitung für andere Werkzeuge
 

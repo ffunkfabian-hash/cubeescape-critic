@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.18.0 „Prefab“ – 2026-10-30 (Generator als Export-Programm, Blender nur noch Cycles-Render)
+
+- `web/tools/robotgen_export.mjs` baut Wächter, Paladin, Mechanik und Scout mit dem three.js-Generator vorab und schreibt Lieferpakete
+  im bisherigen Format (`assets/robot-bodies-three/`, `assets/helmet-scout-three/`: GLB, `parts.json`, `manifest.json` mit Eingaben-Hash
+  und Digest je Mesh); der Viewer lädt sie standardmäßig (`&gen=three` live, `&gen=blender` eingefrorene Referenz). Test
+  `robotgen_export.test.mjs`: Eingaben, Manifest und frischer Export bytegleich (auf anderer Plattform Meshes und Boxen).
+- Ein Skin-Atlas je Modell, gebacken aus den exportierten GLBs (passt auch zum Live-Aufbau); `atlasName` und `--gen` entfallen.
+- Blender-Generatoren nach `archive/blender/`; Generator-Eingaben (`guss_2h.npz`, `helm_params.json`, `SOURCE.json`) in
+  `web/src/robotgen/data/`; optionaler Cycles-Render aus exportierten GLBs `blender/cycles_render.py`.
+
 ## 0.17.0 „Outrider“ – 2026-10-30 (Scout im three.js-Generator, Ladezeit der Masken-Schnitte, Schultern als Baugruppe)
 
 - Scout entsteht ohne Blender in `web/src/robotgen/scout.js` (`?model=scout&gen=three`, auch als Helm; Navigation „Quelle“): Guss aus

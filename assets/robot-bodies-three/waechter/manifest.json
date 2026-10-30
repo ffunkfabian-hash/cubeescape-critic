@@ -1,0 +1,9060 @@
+{
+ "study": "a_waechter",
+ "name": "waechter",
+ "generator": {
+  "tool": "web/tools/robotgen_export.mjs",
+  "source": "web/src/robotgen",
+  "inputs": {
+   "files": 22,
+   "sha256": "dceb4acd050a27cf4cf459b336ccb7fb5773513d78112f18a2f010478fa27448",
+   "libraries": {
+    "three": "0.186.1",
+    "three-bvh-csg": "0.0.18",
+    "three-mesh-bvh": "0.9.16"
+   }
+  },
+  "platform": "darwin-arm64 node 24"
+ },
+ "pose": "idle",
+ "materials": "color",
+ "measured": {
+  "height_mm": 1668,
+  "width_mm": 866,
+  "depth_mm": 525,
+  "assemblies": {
+   "head": {
+    "objects": 45,
+    "parts": 45,
+    "triangles": 146639,
+    "size_mm": [
+     249,
+     249,
+     295
+    ]
+   },
+   "arms": {
+    "objects": 142,
+    "parts": 71,
+    "triangles": 44572,
+    "size_mm": [
+     863,
+     402,
+     818
+    ]
+   },
+   "upper_body": {
+    "objects": 99,
+    "parts": 99,
+    "triangles": 68344,
+    "size_mm": [
+     858,
+     436,
+     489
+    ]
+   },
+   "lower_body": {
+    "objects": 36,
+    "parts": 36,
+    "triangles": 24920,
+    "size_mm": [
+     489,
+     227,
+     340
+    ]
+   },
+   "legs": {
+    "objects": 86,
+    "parts": 43,
+    "triangles": 93260,
+    "size_mm": [
+     583,
+     433,
+     965
+    ]
+   }
+  }
+ },
+ "totals": {
+  "objects": 408,
+  "verts": 271833,
+  "tris": 377735
+ },
+ "objects": [
+  {
+   "name": "abs_a",
+   "asm": "upper_body",
+   "part": "abs_a",
+   "part_de": "Bauchplatte",
+   "side": "C",
+   "verts": 713,
+   "tris": 1020,
+   "bbox": [
+    [
+     -0.1036,
+     -0.1285,
+     1.0352
+    ],
+    [
+     0.1433,
+     -0.042,
+     1.0971
+    ]
+   ],
+   "digest": "e34605c7b56071e6"
+  },
+  {
+   "name": "abs_a_edge",
+   "asm": "upper_body",
+   "part": "abs_a_edge",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 400,
+   "tris": 540,
+   "bbox": [
+    [
+     -0.0914,
+     -0.1124,
+     1.0351
+    ],
+    [
+     0.1209,
+     -0.0446,
+     1.0492
+    ]
+   ],
+   "digest": "f98a6bafeb44723b"
+  },
+  {
+   "name": "abs_b",
+   "asm": "upper_body",
+   "part": "abs_b",
+   "part_de": "Bauchplatte",
+   "side": "C",
+   "verts": 743,
+   "tris": 1108,
+   "bbox": [
+    [
+     -0.1398,
+     -0.1512,
+     1.0771
+    ],
+    [
+     0.1866,
+     -0.041,
+     1.1527
+    ]
+   ],
+   "digest": "6a1847cde07a8f2f"
+  },
+  {
+   "name": "antenna",
+   "asm": "head",
+   "part": "antenna",
+   "part_de": "Stabantenne",
+   "side": "C",
+   "verts": 50,
+   "tris": 32,
+   "bbox": [
+    [
+     -0.0945,
+     -0.0791,
+     1.5261
+    ],
+    [
+     -0.0817,
+     -0.072,
+     1.655
+    ]
+   ],
+   "digest": "68034edfaea8480f"
+  },
+  {
+   "name": "antenna_clip",
+   "asm": "head",
+   "part": "antenna_clip",
+   "part_de": "Antennenhalter",
+   "side": "C",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.0884,
+     -0.0821,
+     1.5247
+    ],
+    [
+     -0.0791,
+     -0.0724,
+     1.5357
+    ]
+   ],
+   "digest": "38d1c26ca8f30629"
+  },
+  {
+   "name": "antenna_tip",
+   "asm": "head",
+   "part": "antenna_tip",
+   "part_de": "Antennenspitze",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.0955,
+     -0.0765,
+     1.6537
+    ],
+    [
+     -0.0901,
+     -0.0711,
+     1.6579
+    ]
+   ],
+   "digest": "e43783bb7074fcd8"
+  },
+  {
+   "name": "arm_L_back_inset",
+   "asm": "arms",
+   "part": "back_inset",
+   "part_de": "Handrücken-Akzentlinie",
+   "side": "L",
+   "verts": 144,
+   "tris": 92,
+   "bbox": [
+    [
+     0.4118,
+     -0.0572,
+     0.6451
+    ],
+    [
+     0.4152,
+     -0.0422,
+     0.6851
+    ]
+   ],
+   "digest": "ebeedad2c379bb0f"
+  },
+  {
+   "name": "arm_L_back_plate",
+   "asm": "arms",
+   "part": "back_plate",
+   "part_de": "Handrückenschale",
+   "side": "L",
+   "verts": 164,
+   "tris": 156,
+   "bbox": [
+    [
+     0.3977,
+     -0.1018,
+     0.6185
+    ],
+    [
+     0.4146,
+     -0.0056,
+     0.7151
+    ]
+   ],
+   "digest": "6c88d2ed378212ee"
+  },
+  {
+   "name": "arm_L_elbow",
+   "asm": "arms",
+   "part": "elbow",
+   "part_de": "Ellbogengelenk",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.3019,
+     -0.0306,
+     0.9081
+    ],
+    [
+     0.4214,
+     0.1363,
+     1.0633
+    ]
+   ],
+   "digest": "b7861f558c0398e2"
+  },
+  {
+   "name": "arm_L_elbow_disc",
+   "asm": "arms",
+   "part": "elbow_disc",
+   "part_de": "Ellbogenscheibe",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.3079,
+     -0.033,
+     0.9124
+    ],
+    [
+     0.4154,
+     0.1388,
+     1.059
+    ]
+   ],
+   "digest": "42706831f944fdf8"
+  },
+  {
+   "name": "arm_L_elbow_hub",
+   "asm": "arms",
+   "part": "elbow_hub",
+   "part_de": "Ellbogennabe",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.3333,
+     -0.0296,
+     0.9352
+    ],
+    [
+     0.39,
+     0.1353,
+     1.0362
+    ]
+   ],
+   "digest": "6e3de8c252cc2f4b"
+  },
+  {
+   "name": "arm_L_elbow_ring",
+   "asm": "arms",
+   "part": "elbow_ring",
+   "part_de": "Ellbogenring",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.3213,
+     -0.0318,
+     0.9243
+    ],
+    [
+     0.402,
+     0.1375,
+     1.0471
+    ]
+   ],
+   "digest": "c55db595ee31e961"
+  },
+  {
+   "name": "arm_L_f0_0_core",
+   "asm": "arms",
+   "part": "f0_0_core",
+   "part_de": "Finger 1 Glied 1",
+   "side": "L",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.3652,
+     -0.1102,
+     0.5964
+    ],
+    [
+     0.3889,
+     -0.0873,
+     0.6277
+    ]
+   ],
+   "digest": "def8f6f9f76dbd83"
+  },
+  {
+   "name": "arm_L_f0_0_joint",
+   "asm": "arms",
+   "part": "f0_0_joint",
+   "part_de": "Finger 1 Gelenk 1",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.3731,
+     -0.1046,
+     0.6173
+    ],
+    [
+     0.387,
+     -0.0836,
+     0.6356
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_L_f0_0_plate",
+   "asm": "arms",
+   "part": "f0_0_plate",
+   "part_de": "Finger 1 Glied 1 Platte",
+   "side": "L",
+   "verts": 183,
+   "tris": 162,
+   "bbox": [
+    [
+     0.3834,
+     -0.1099,
+     0.5955
+    ],
+    [
+     0.3925,
+     -0.0884,
+     0.6248
+    ]
+   ],
+   "digest": "f4030613e21e042c"
+  },
+  {
+   "name": "arm_L_f0_1_core",
+   "asm": "arms",
+   "part": "f0_1_core",
+   "part_de": "Finger 1 Glied 2",
+   "side": "L",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.3553,
+     -0.1175,
+     0.5734
+    ],
+    [
+     0.3807,
+     -0.0957,
+     0.6013
+    ]
+   ],
+   "digest": "7c5bb69808f61c5a"
+  },
+  {
+   "name": "arm_L_f0_1_joint",
+   "asm": "arms",
+   "part": "f0_1_joint",
+   "part_de": "Finger 1 Gelenk 2",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.3671,
+     -0.1139,
+     0.5884
+    ],
+    [
+     0.381,
+     -0.0928,
+     0.6067
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_L_f0_1_plate",
+   "asm": "arms",
+   "part": "f0_1_plate",
+   "part_de": "Finger 1 Glied 2 Platte",
+   "side": "L",
+   "verts": 187,
+   "tris": 178,
+   "bbox": [
+    [
+     0.3712,
+     -0.1175,
+     0.5716
+    ],
+    [
+     0.3834,
+     -0.0984,
+     0.5934
+    ]
+   ],
+   "digest": "9f05e7f00ef643b0"
+  },
+  {
+   "name": "arm_L_f0_2_core",
+   "asm": "arms",
+   "part": "f0_2_core",
+   "part_de": "Finger 1 Glied 3",
+   "side": "L",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.3437,
+     -0.1226,
+     0.5573
+    ],
+    [
+     0.3671,
+     -0.1017,
+     0.5827
+    ]
+   ],
+   "digest": "6ae8788210ead86a"
+  },
+  {
+   "name": "arm_L_f0_2_joint",
+   "asm": "arms",
+   "part": "f0_2_joint",
+   "part_de": "Finger 1 Gelenk 3",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.355,
+     -0.1204,
+     0.568
+    ],
+    [
+     0.369,
+     -0.0993,
+     0.5863
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_L_f0_2_plate",
+   "asm": "arms",
+   "part": "f0_2_plate",
+   "part_de": "Finger 1 Glied 3 Platte",
+   "side": "L",
+   "verts": 197,
+   "tris": 178,
+   "bbox": [
+    [
+     0.3572,
+     -0.1228,
+     0.555
+    ],
+    [
+     0.3695,
+     -0.1054,
+     0.5717
+    ]
+   ],
+   "digest": "9cc78eb59dcf269a"
+  },
+  {
+   "name": "arm_L_f1_0_core",
+   "asm": "arms",
+   "part": "f1_0_core",
+   "part_de": "Finger 2 Glied 1",
+   "side": "L",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.363,
+     -0.0914,
+     0.5884
+    ],
+    [
+     0.3885,
+     -0.0678,
+     0.622
+    ]
+   ],
+   "digest": "0e748777676dd907"
+  },
+  {
+   "name": "arm_L_f1_0_joint",
+   "asm": "arms",
+   "part": "f1_0_joint",
+   "part_de": "Finger 2 Gelenk 1",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.3731,
+     -0.0853,
+     0.6111
+    ],
+    [
+     0.3871,
+     -0.0642,
+     0.6295
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_L_f1_0_plate",
+   "asm": "arms",
+   "part": "f1_0_plate",
+   "part_de": "Finger 2 Glied 1 Platte",
+   "side": "L",
+   "verts": 175,
+   "tris": 154,
+   "bbox": [
+    [
+     0.3808,
+     -0.0912,
+     0.5873
+    ],
+    [
+     0.3913,
+     -0.0692,
+     0.618
+    ]
+   ],
+   "digest": "51432a821fe9455d"
+  },
+  {
+   "name": "arm_L_f1_1_core",
+   "asm": "arms",
+   "part": "f1_1_core",
+   "part_de": "Finger 2 Glied 2",
+   "side": "L",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.35,
+     -0.0987,
+     0.5655
+    ],
+    [
+     0.3771,
+     -0.0764,
+     0.5951
+    ]
+   ],
+   "digest": "f0870362209dff76"
+  },
+  {
+   "name": "arm_L_f1_1_joint",
+   "asm": "arms",
+   "part": "f1_1_joint",
+   "part_de": "Finger 2 Gelenk 2",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.3644,
+     -0.095,
+     0.581
+    ],
+    [
+     0.3784,
+     -0.0739,
+     0.5994
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_L_f1_1_plate",
+   "asm": "arms",
+   "part": "f1_1_plate",
+   "part_de": "Finger 2 Glied 2 Platte",
+   "side": "L",
+   "verts": 185,
+   "tris": 170,
+   "bbox": [
+    [
+     0.3644,
+     -0.0989,
+     0.5633
+    ],
+    [
+     0.3795,
+     -0.0798,
+     0.5851
+    ]
+   ],
+   "digest": "d5fa5fc586b6ff06"
+  },
+  {
+   "name": "arm_L_f1_2_core",
+   "asm": "arms",
+   "part": "f1_2_core",
+   "part_de": "Finger 2 Glied 3",
+   "side": "L",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.3355,
+     -0.1034,
+     0.5509
+    ],
+    [
+     0.3593,
+     -0.0821,
+     0.5773
+    ]
+   ],
+   "digest": "a8ad1888d705e289"
+  },
+  {
+   "name": "arm_L_f1_2_joint",
+   "asm": "arms",
+   "part": "f1_2_joint",
+   "part_de": "Finger 2 Gelenk 3",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.3487,
+     -0.1013,
+     0.5612
+    ],
+    [
+     0.3627,
+     -0.0802,
+     0.5796
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_L_f1_2_plate",
+   "asm": "arms",
+   "part": "f1_2_plate",
+   "part_de": "Finger 2 Glied 3 Platte",
+   "side": "L",
+   "verts": 191,
+   "tris": 178,
+   "bbox": [
+    [
+     0.3467,
+     -0.1037,
+     0.5483
+    ],
+    [
+     0.3614,
+     -0.0865,
+     0.5642
+    ]
+   ],
+   "digest": "68ba9d32736549b4"
+  },
+  {
+   "name": "arm_L_f2_0_core",
+   "asm": "arms",
+   "part": "f2_0_core",
+   "part_de": "Finger 3 Glied 1",
+   "side": "L",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.362,
+     -0.0714,
+     0.584
+    ],
+    [
+     0.388,
+     -0.0482,
+     0.6163
+    ]
+   ],
+   "digest": "def8f6f9f76dbd83"
+  },
+  {
+   "name": "arm_L_f2_0_joint",
+   "asm": "arms",
+   "part": "f2_0_joint",
+   "part_de": "Finger 3 Gelenk 1",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.3731,
+     -0.0659,
+     0.6049
+    ],
+    [
+     0.3871,
+     -0.0448,
+     0.6233
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_L_f2_0_plate",
+   "asm": "arms",
+   "part": "f2_0_plate",
+   "part_de": "Finger 3 Glied 1 Platte",
+   "side": "L",
+   "verts": 183,
+   "tris": 162,
+   "bbox": [
+    [
+     0.3793,
+     -0.0713,
+     0.5826
+    ],
+    [
+     0.3907,
+     -0.05,
+     0.6112
+    ]
+   ],
+   "digest": "f4030613e21e042c"
+  },
+  {
+   "name": "arm_L_f2_1_core",
+   "asm": "arms",
+   "part": "f2_1_core",
+   "part_de": "Finger 3 Glied 2",
+   "side": "L",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.3479,
+     -0.0779,
+     0.5637
+    ],
+    [
+     0.3744,
+     -0.0559,
+     0.5924
+    ]
+   ],
+   "digest": "7c5bb69808f61c5a"
+  },
+  {
+   "name": "arm_L_f2_1_joint",
+   "asm": "arms",
+   "part": "f2_1_joint",
+   "part_de": "Finger 3 Gelenk 2",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.3629,
+     -0.0748,
+     0.5771
+    ],
+    [
+     0.3768,
+     -0.0537,
+     0.5954
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_L_f2_1_plate",
+   "asm": "arms",
+   "part": "f2_1_plate",
+   "part_de": "Finger 3 Glied 2 Platte",
+   "side": "L",
+   "verts": 187,
+   "tris": 178,
+   "bbox": [
+    [
+     0.3605,
+     -0.0781,
+     0.5613
+    ],
+    [
+     0.3766,
+     -0.0598,
+     0.5805
+    ]
+   ],
+   "digest": "9f05e7f00ef643b0"
+  },
+  {
+   "name": "arm_L_f2_2_core",
+   "asm": "arms",
+   "part": "f2_2_core",
+   "part_de": "Finger 3 Glied 3",
+   "side": "L",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.3328,
+     -0.0815,
+     0.5525
+    ],
+    [
+     0.3544,
+     -0.0605,
+     0.5779
+    ]
+   ],
+   "digest": "6ae8788210ead86a"
+  },
+  {
+   "name": "arm_L_f2_2_joint",
+   "asm": "arms",
+   "part": "f2_2_joint",
+   "part_de": "Finger 3 Gelenk 3",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.3455,
+     -0.08,
+     0.5607
+    ],
+    [
+     0.3593,
+     -0.059,
+     0.5789
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_L_f2_2_plate",
+   "asm": "arms",
+   "part": "f2_2_plate",
+   "part_de": "Finger 3 Glied 3 Platte",
+   "side": "L",
+   "verts": 197,
+   "tris": 178,
+   "bbox": [
+    [
+     0.3413,
+     -0.0818,
+     0.5497
+    ],
+    [
+     0.3562,
+     -0.0654,
+     0.5631
+    ]
+   ],
+   "digest": "9cc78eb59dcf269a"
+  },
+  {
+   "name": "arm_L_f3_0_core",
+   "asm": "arms",
+   "part": "f3_0_core",
+   "part_de": "Finger 4 Glied 1",
+   "side": "L",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.3624,
+     -0.0506,
+     0.5823
+    ],
+    [
+     0.3874,
+     -0.0287,
+     0.6107
+    ]
+   ],
+   "digest": "49bd327b8b393658"
+  },
+  {
+   "name": "arm_L_f3_0_joint",
+   "asm": "arms",
+   "part": "f3_0_joint",
+   "part_de": "Finger 4 Gelenk 1",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.3731,
+     -0.0466,
+     0.5987
+    ],
+    [
+     0.387,
+     -0.0255,
+     0.6171
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_L_f3_0_plate",
+   "asm": "arms",
+   "part": "f3_0_plate",
+   "part_de": "Finger 4 Glied 1 Platte",
+   "side": "L",
+   "verts": 185,
+   "tris": 170,
+   "bbox": [
+    [
+     0.3792,
+     -0.0506,
+     0.5807
+    ],
+    [
+     0.3902,
+     -0.0308,
+     0.6044
+    ]
+   ],
+   "digest": "4e8da5aa0aa07941"
+  },
+  {
+   "name": "arm_L_f3_1_core",
+   "asm": "arms",
+   "part": "f3_1_core",
+   "part_de": "Finger 4 Glied 2",
+   "side": "L",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.35,
+     -0.0557,
+     0.5662
+    ],
+    [
+     0.3731,
+     -0.0346,
+     0.5923
+    ]
+   ],
+   "digest": "252a205dd9e989e6"
+  },
+  {
+   "name": "arm_L_f3_1_joint",
+   "asm": "arms",
+   "part": "f3_1_joint",
+   "part_de": "Finger 4 Gelenk 2",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.3628,
+     -0.0538,
+     0.576
+    ],
+    [
+     0.3768,
+     -0.0327,
+     0.5944
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_L_f3_1_plate",
+   "asm": "arms",
+   "part": "f3_1_plate",
+   "part_de": "Finger 4 Glied 2 Platte",
+   "side": "L",
+   "verts": 193,
+   "tris": 178,
+   "bbox": [
+    [
+     0.3606,
+     -0.056,
+     0.5636
+    ],
+    [
+     0.3751,
+     -0.039,
+     0.5788
+    ]
+   ],
+   "digest": "d22e4c708be6d648"
+  },
+  {
+   "name": "arm_L_f3_2_core",
+   "asm": "arms",
+   "part": "f3_2_core",
+   "part_de": "Finger 4 Glied 3",
+   "side": "L",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.3368,
+     -0.0581,
+     0.559
+    ],
+    [
+     0.3537,
+     -0.0376,
+     0.5827
+    ]
+   ],
+   "digest": "0a9dfc8dec00148b"
+  },
+  {
+   "name": "arm_L_f3_2_joint",
+   "asm": "arms",
+   "part": "f3_2_joint",
+   "part_de": "Finger 4 Gelenk 3",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.3463,
+     -0.0576,
+     0.5642
+    ],
+    [
+     0.3603,
+     -0.0365,
+     0.5826
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_L_f3_2_plate",
+   "asm": "arms",
+   "part": "f3_2_plate",
+   "part_de": "Finger 4 Glied 3 Platte",
+   "side": "L",
+   "verts": 195,
+   "tris": 178,
+   "bbox": [
+    [
+     0.3424,
+     -0.0584,
+     0.5561
+    ],
+    [
+     0.355,
+     -0.043,
+     0.5664
+    ]
+   ],
+   "digest": "1e461b7d1d520e3c"
+  },
+  {
+   "name": "arm_L_fore_body",
+   "asm": "arms",
+   "part": "fore_body",
+   "part_de": "Unterarmkörper",
+   "side": "L",
+   "verts": 212,
+   "tris": 316,
+   "bbox": [
+    [
+     0.2947,
+     -0.0698,
+     0.7222
+    ],
+    [
+     0.4291,
+     0.1111,
+     0.9846
+    ]
+   ],
+   "digest": "5f1c8a0126792d96"
+  },
+  {
+   "name": "arm_L_fore_bolt_a",
+   "asm": "arms",
+   "part": "fore_bolt_a",
+   "part_de": "Bolzen",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.4331,
+     -0.0026,
+     0.757
+    ],
+    [
+     0.4395,
+     0.01,
+     0.7698
+    ]
+   ],
+   "digest": "97e8ad009acc7e61"
+  },
+  {
+   "name": "arm_L_fore_bolt_b",
+   "asm": "arms",
+   "part": "fore_bolt_b",
+   "part_de": "Bolzen",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.4331,
+     -0.0425,
+     0.7698
+    ],
+    [
+     0.4395,
+     -0.0298,
+     0.7825
+    ]
+   ],
+   "digest": "1f85b61934a9410d"
+  },
+  {
+   "name": "arm_L_fore_cuff",
+   "asm": "arms",
+   "part": "fore_cuff",
+   "part_de": "Stulpe",
+   "side": "L",
+   "verts": 160,
+   "tris": 188,
+   "bbox": [
+    [
+     0.3251,
+     -0.0908,
+     0.6864
+    ],
+    [
+     0.4322,
+     0.0238,
+     0.7517
+    ]
+   ],
+   "digest": "7588fad63947eed5"
+  },
+  {
+   "name": "arm_L_fore_cuff_trim",
+   "asm": "arms",
+   "part": "fore_cuff_trim",
+   "part_de": "Stulpenkante",
+   "side": "L",
+   "verts": 192,
+   "tris": 188,
+   "bbox": [
+    [
+     0.3241,
+     -0.0815,
+     0.7148
+    ],
+    [
+     0.4302,
+     0.0266,
+     0.7546
+    ]
+   ],
+   "digest": "7e69ac90121d532f"
+  },
+  {
+   "name": "arm_L_fore_inset",
+   "asm": "arms",
+   "part": "fore_inset",
+   "part_de": "Akzentlinie",
+   "side": "L",
+   "verts": 144,
+   "tris": 92,
+   "bbox": [
+    [
+     0.4363,
+     0.0119,
+     0.863
+    ],
+    [
+     0.4405,
+     0.04,
+     0.9399
+    ]
+   ],
+   "digest": "0f9946612e7fe1a4"
+  },
+  {
+   "name": "arm_L_fore_shell",
+   "asm": "arms",
+   "part": "fore_shell",
+   "part_de": "Unterarmschale",
+   "side": "L",
+   "verts": 196,
+   "tris": 296,
+   "bbox": [
+    [
+     0.3365,
+     -0.0717,
+     0.7323
+    ],
+    [
+     0.444,
+     0.1097,
+     0.9707
+    ]
+   ],
+   "digest": "5860ead4f766e567"
+  },
+  {
+   "name": "arm_L_fore_top",
+   "asm": "arms",
+   "part": "fore_top",
+   "part_de": "Handgelenkplatte",
+   "side": "L",
+   "verts": 146,
+   "tris": 116,
+   "bbox": [
+    [
+     0.4157,
+     -0.0552,
+     0.7313
+    ],
+    [
+     0.448,
+     0.0399,
+     0.8554
+    ]
+   ],
+   "digest": "f96a40cddd7ca0fc"
+  },
+  {
+   "name": "arm_L_knuckle_guard",
+   "asm": "arms",
+   "part": "knuckle_guard",
+   "part_de": "Knöchelschutz",
+   "side": "L",
+   "verts": 142,
+   "tris": 144,
+   "bbox": [
+    [
+     0.4023,
+     -0.1107,
+     0.6021
+    ],
+    [
+     0.4118,
+     -0.0144,
+     0.6481
+    ]
+   ],
+   "digest": "a93034d541f747ca"
+  },
+  {
+   "name": "arm_L_knuckles",
+   "asm": "arms",
+   "part": "knuckles",
+   "part_de": "Knöchelwelle",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.3719,
+     -0.1094,
+     0.5981
+    ],
+    [
+     0.3919,
+     -0.0182,
+     0.6441
+    ]
+   ],
+   "digest": "fc9c818e4a798088"
+  },
+  {
+   "name": "arm_L_palm",
+   "asm": "arms",
+   "part": "palm",
+   "part_de": "Handfläche",
+   "side": "L",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.3536,
+     -0.1082,
+     0.6039
+    ],
+    [
+     0.4027,
+     0.0029,
+     0.7078
+    ]
+   ],
+   "digest": "79406122a2981cb0"
+  },
+  {
+   "name": "arm_L_shoulder_ball",
+   "asm": "arms",
+   "part": "shoulder_ball",
+   "part_de": "Schulterkugel",
+   "side": "L",
+   "verts": 1626,
+   "tris": 3248,
+   "bbox": [
+    [
+     0.2283,
+     -0.0195,
+     1.2522
+    ],
+    [
+     0.3457,
+     0.1004,
+     1.3411
+    ]
+   ],
+   "digest": "27af3e6684738ea2"
+  },
+  {
+   "name": "arm_L_t_0_core",
+   "asm": "arms",
+   "part": "t_0_core",
+   "part_de": "Daumen Glied 1",
+   "side": "L",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.3544,
+     -0.1248,
+     0.6641
+    ],
+    [
+     0.3871,
+     -0.087,
+     0.6984
+    ]
+   ],
+   "digest": "7dbe767c0a2c615f"
+  },
+  {
+   "name": "arm_L_t_0_joint",
+   "asm": "arms",
+   "part": "t_0_joint",
+   "part_de": "Daumengelenk 1",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.3712,
+     -0.1066,
+     0.677
+    ],
+    [
+     0.3869,
+     -0.0825,
+     0.7024
+    ]
+   ],
+   "digest": "a53c94d6f30c9ba6"
+  },
+  {
+   "name": "arm_L_t_0_plate",
+   "asm": "arms",
+   "part": "t_0_plate",
+   "part_de": "Daumen Glied 1 Platte",
+   "side": "L",
+   "verts": 181,
+   "tris": 154,
+   "bbox": [
+    [
+     0.3718,
+     -0.1249,
+     0.6647
+    ],
+    [
+     0.3888,
+     -0.096,
+     0.6919
+    ]
+   ],
+   "digest": "bb962ced43557bf4"
+  },
+  {
+   "name": "arm_L_t_1_core",
+   "asm": "arms",
+   "part": "t_1_core",
+   "part_de": "Daumen Glied 2",
+   "side": "L",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.3404,
+     -0.142,
+     0.651
+    ],
+    [
+     0.3698,
+     -0.1089,
+     0.6818
+    ]
+   ],
+   "digest": "41cd08fd5233c828"
+  },
+  {
+   "name": "arm_L_t_1_joint",
+   "asm": "arms",
+   "part": "t_1_joint",
+   "part_de": "Daumengelenk 2",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.3546,
+     -0.1292,
+     0.66
+    ],
+    [
+     0.3703,
+     -0.1051,
+     0.6854
+    ]
+   ],
+   "digest": "a53c94d6f30c9ba6"
+  },
+  {
+   "name": "arm_L_t_1_plate",
+   "asm": "arms",
+   "part": "t_1_plate",
+   "part_de": "Daumen Glied 2 Platte",
+   "side": "L",
+   "verts": 183,
+   "tris": 170,
+   "bbox": [
+    [
+     0.3568,
+     -0.1423,
+     0.6516
+    ],
+    [
+     0.3715,
+     -0.1191,
+     0.6745
+    ]
+   ],
+   "digest": "b32761d95898303c"
+  },
+  {
+   "name": "arm_L_t_2_core",
+   "asm": "arms",
+   "part": "t_2_core",
+   "part_de": "Daumen Glied 3",
+   "side": "L",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.3279,
+     -0.1547,
+     0.6413
+    ],
+    [
+     0.3539,
+     -0.1243,
+     0.6701
+    ]
+   ],
+   "digest": "790f272167eb8ac1"
+  },
+  {
+   "name": "arm_L_t_2_joint",
+   "asm": "arms",
+   "part": "t_2_joint",
+   "part_de": "Daumengelenk 3",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.3399,
+     -0.1457,
+     0.6474
+    ],
+    [
+     0.3556,
+     -0.1218,
+     0.6728
+    ]
+   ],
+   "digest": "a53c94d6f30c9ba6"
+  },
+  {
+   "name": "arm_L_t_2_plate",
+   "asm": "arms",
+   "part": "t_2_plate",
+   "part_de": "Daumen Glied 3 Platte",
+   "side": "L",
+   "verts": 201,
+   "tris": 178,
+   "bbox": [
+    [
+     0.3425,
+     -0.1551,
+     0.6417
+    ],
+    [
+     0.3555,
+     -0.1364,
+     0.6614
+    ]
+   ],
+   "digest": "2675b28e02c17ef1"
+  },
+  {
+   "name": "arm_L_thumb_mount",
+   "asm": "arms",
+   "part": "thumb_mount",
+   "part_de": "Daumensockel",
+   "side": "L",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.3635,
+     -0.1022,
+     0.6691
+    ],
+    [
+     0.3946,
+     -0.0736,
+     0.706
+    ]
+   ],
+   "digest": "69a996c1b0ae7979"
+  },
+  {
+   "name": "arm_L_upper_core",
+   "asm": "arms",
+   "part": "upper_core",
+   "part_de": "Oberarmkörper",
+   "side": "L",
+   "verts": 1027,
+   "tris": 1904,
+   "bbox": [
+    [
+     0.2313,
+     -0.0246,
+     1.0013
+    ],
+    [
+     0.407,
+     0.1168,
+     1.302
+    ]
+   ],
+   "digest": "a102eeca297fdffe"
+  },
+  {
+   "name": "arm_L_upper_seam",
+   "asm": "arms",
+   "part": "upper_seam",
+   "part_de": "Oberarmfuge",
+   "side": "L",
+   "verts": 1005,
+   "tris": 1440,
+   "bbox": [
+    [
+     0.235,
+     -0.024,
+     1.2376
+    ],
+    [
+     0.3596,
+     0.1082,
+     1.2741
+    ]
+   ],
+   "digest": "8247f87469b30ba4"
+  },
+  {
+   "name": "arm_L_upper_shell_r",
+   "asm": "arms",
+   "part": "upper_shell_r",
+   "part_de": "Oberarmschale",
+   "side": "L",
+   "verts": 2618,
+   "tris": 3736,
+   "bbox": [
+    [
+     0.2932,
+     -0.0344,
+     1.038
+    ],
+    [
+     0.4155,
+     0.1266,
+     1.257
+    ]
+   ],
+   "digest": "411040433059057b"
+  },
+  {
+   "name": "arm_L_upper_stripe_a",
+   "asm": "arms",
+   "part": "upper_stripe_a",
+   "part_de": "Akzentstreifen",
+   "side": "L",
+   "verts": 166,
+   "tris": 216,
+   "bbox": [
+    [
+     0.3818,
+     0.0452,
+     1.1198
+    ],
+    [
+     0.407,
+     0.0515,
+     1.2271
+    ]
+   ],
+   "digest": "0f821717f1dd5f36"
+  },
+  {
+   "name": "arm_L_upper_stripe_b",
+   "asm": "arms",
+   "part": "upper_stripe_b",
+   "part_de": "Akzentstreifen",
+   "side": "L",
+   "verts": 166,
+   "tris": 216,
+   "bbox": [
+    [
+     0.3818,
+     0.0392,
+     1.1196
+    ],
+    [
+     0.407,
+     0.0456,
+     1.2269
+    ]
+   ],
+   "digest": "d45042f685bdae16"
+  },
+  {
+   "name": "arm_L_wrist_block",
+   "asm": "arms",
+   "part": "wrist_block",
+   "part_de": "Kardanblock",
+   "side": "L",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.3596,
+     -0.0591,
+     0.6818
+    ],
+    [
+     0.3924,
+     -0.019,
+     0.715
+    ]
+   ],
+   "digest": "1f30a9a3f0f50047"
+  },
+  {
+   "name": "arm_L_wrist_pin",
+   "asm": "arms",
+   "part": "wrist_pin",
+   "part_de": "Kardanbolzen",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.368,
+     -0.0613,
+     0.6846
+    ],
+    [
+     0.384,
+     -0.0169,
+     0.7122
+    ]
+   ],
+   "digest": "db385e373485c07b"
+  },
+  {
+   "name": "arm_R_back_inset",
+   "asm": "arms",
+   "part": "back_inset",
+   "part_de": "Handrücken-Akzentlinie",
+   "side": "R",
+   "verts": 144,
+   "tris": 92,
+   "bbox": [
+    [
+     -0.3818,
+     -0.1654,
+     0.6703
+    ],
+    [
+     -0.3785,
+     -0.1504,
+     0.7103
+    ]
+   ],
+   "digest": "ebeedad2c379bb0f"
+  },
+  {
+   "name": "arm_R_back_plate",
+   "asm": "arms",
+   "part": "back_plate",
+   "part_de": "Handrückenschale",
+   "side": "R",
+   "verts": 164,
+   "tris": 156,
+   "bbox": [
+    [
+     -0.3812,
+     -0.21,
+     0.6437
+    ],
+    [
+     -0.3644,
+     -0.1137,
+     0.7403
+    ]
+   ],
+   "digest": "6c88d2ed378212ee"
+  },
+  {
+   "name": "arm_R_elbow",
+   "asm": "arms",
+   "part": "elbow",
+   "part_de": "Ellbogengelenk",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.388,
+     -0.1387,
+     0.9333
+    ],
+    [
+     -0.2686,
+     0.0282,
+     1.0885
+    ]
+   ],
+   "digest": "b7861f558c0398e2"
+  },
+  {
+   "name": "arm_R_elbow_disc",
+   "asm": "arms",
+   "part": "elbow_disc",
+   "part_de": "Ellbogenscheibe",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.3821,
+     -0.1412,
+     0.9376
+    ],
+    [
+     -0.2746,
+     0.0306,
+     1.0842
+    ]
+   ],
+   "digest": "42706831f944fdf8"
+  },
+  {
+   "name": "arm_R_elbow_hub",
+   "asm": "arms",
+   "part": "elbow_hub",
+   "part_de": "Ellbogennabe",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.3567,
+     -0.1377,
+     0.9604
+    ],
+    [
+     -0.2999,
+     0.0272,
+     1.0614
+    ]
+   ],
+   "digest": "6e3de8c252cc2f4b"
+  },
+  {
+   "name": "arm_R_elbow_ring",
+   "asm": "arms",
+   "part": "elbow_ring",
+   "part_de": "Ellbogenring",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.3686,
+     -0.1399,
+     0.9495
+    ],
+    [
+     -0.288,
+     0.0294,
+     1.0723
+    ]
+   ],
+   "digest": "c55db595ee31e961"
+  },
+  {
+   "name": "arm_R_f0_0_core",
+   "asm": "arms",
+   "part": "f0_0_core",
+   "part_de": "Finger 1 Glied 1",
+   "side": "R",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.3556,
+     -0.2183,
+     0.6216
+    ],
+    [
+     -0.3318,
+     -0.1954,
+     0.6529
+    ]
+   ],
+   "digest": "def8f6f9f76dbd83"
+  },
+  {
+   "name": "arm_R_f0_0_joint",
+   "asm": "arms",
+   "part": "f0_0_joint",
+   "part_de": "Finger 1 Gelenk 1",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.3537,
+     -0.2128,
+     0.6425
+    ],
+    [
+     -0.3398,
+     -0.1917,
+     0.6608
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_R_f0_0_plate",
+   "asm": "arms",
+   "part": "f0_0_plate",
+   "part_de": "Finger 1 Glied 1 Platte",
+   "side": "R",
+   "verts": 183,
+   "tris": 162,
+   "bbox": [
+    [
+     -0.3591,
+     -0.2181,
+     0.6207
+    ],
+    [
+     -0.35,
+     -0.1965,
+     0.65
+    ]
+   ],
+   "digest": "f4030613e21e042c"
+  },
+  {
+   "name": "arm_R_f0_1_core",
+   "asm": "arms",
+   "part": "f0_1_core",
+   "part_de": "Finger 1 Glied 2",
+   "side": "R",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.3474,
+     -0.2256,
+     0.5986
+    ],
+    [
+     -0.322,
+     -0.2039,
+     0.6265
+    ]
+   ],
+   "digest": "7c5bb69808f61c5a"
+  },
+  {
+   "name": "arm_R_f0_1_joint",
+   "asm": "arms",
+   "part": "f0_1_joint",
+   "part_de": "Finger 1 Gelenk 2",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.3476,
+     -0.222,
+     0.6136
+    ],
+    [
+     -0.3337,
+     -0.2009,
+     0.6319
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_R_f0_1_plate",
+   "asm": "arms",
+   "part": "f0_1_plate",
+   "part_de": "Finger 1 Glied 2 Platte",
+   "side": "R",
+   "verts": 187,
+   "tris": 178,
+   "bbox": [
+    [
+     -0.35,
+     -0.2257,
+     0.5968
+    ],
+    [
+     -0.3378,
+     -0.2066,
+     0.6186
+    ]
+   ],
+   "digest": "9f05e7f00ef643b0"
+  },
+  {
+   "name": "arm_R_f0_2_core",
+   "asm": "arms",
+   "part": "f0_2_core",
+   "part_de": "Finger 1 Glied 3",
+   "side": "R",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.3338,
+     -0.2308,
+     0.5825
+    ],
+    [
+     -0.3104,
+     -0.2098,
+     0.6079
+    ]
+   ],
+   "digest": "6ae8788210ead86a"
+  },
+  {
+   "name": "arm_R_f0_2_joint",
+   "asm": "arms",
+   "part": "f0_2_joint",
+   "part_de": "Finger 1 Gelenk 3",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.3356,
+     -0.2286,
+     0.5932
+    ],
+    [
+     -0.3217,
+     -0.2075,
+     0.6115
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_R_f0_2_plate",
+   "asm": "arms",
+   "part": "f0_2_plate",
+   "part_de": "Finger 1 Glied 3 Platte",
+   "side": "R",
+   "verts": 197,
+   "tris": 178,
+   "bbox": [
+    [
+     -0.3361,
+     -0.231,
+     0.5802
+    ],
+    [
+     -0.3239,
+     -0.2135,
+     0.5969
+    ]
+   ],
+   "digest": "9cc78eb59dcf269a"
+  },
+  {
+   "name": "arm_R_f1_0_core",
+   "asm": "arms",
+   "part": "f1_0_core",
+   "part_de": "Finger 2 Glied 1",
+   "side": "R",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.3551,
+     -0.1995,
+     0.6136
+    ],
+    [
+     -0.3297,
+     -0.1759,
+     0.6472
+    ]
+   ],
+   "digest": "0e748777676dd907"
+  },
+  {
+   "name": "arm_R_f1_0_joint",
+   "asm": "arms",
+   "part": "f1_0_joint",
+   "part_de": "Finger 2 Gelenk 1",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.3537,
+     -0.1935,
+     0.6363
+    ],
+    [
+     -0.3397,
+     -0.1724,
+     0.6547
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_R_f1_0_plate",
+   "asm": "arms",
+   "part": "f1_0_plate",
+   "part_de": "Finger 2 Glied 1 Platte",
+   "side": "R",
+   "verts": 175,
+   "tris": 154,
+   "bbox": [
+    [
+     -0.358,
+     -0.1994,
+     0.6125
+    ],
+    [
+     -0.3475,
+     -0.1774,
+     0.6432
+    ]
+   ],
+   "digest": "51432a821fe9455d"
+  },
+  {
+   "name": "arm_R_f1_1_core",
+   "asm": "arms",
+   "part": "f1_1_core",
+   "part_de": "Finger 2 Glied 2",
+   "side": "R",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.3438,
+     -0.2069,
+     0.5907
+    ],
+    [
+     -0.3167,
+     -0.1846,
+     0.6203
+    ]
+   ],
+   "digest": "f0870362209dff76"
+  },
+  {
+   "name": "arm_R_f1_1_joint",
+   "asm": "arms",
+   "part": "f1_1_joint",
+   "part_de": "Finger 2 Gelenk 2",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.3451,
+     -0.2031,
+     0.6062
+    ],
+    [
+     -0.3311,
+     -0.182,
+     0.6245
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_R_f1_1_plate",
+   "asm": "arms",
+   "part": "f1_1_plate",
+   "part_de": "Finger 2 Glied 2 Platte",
+   "side": "R",
+   "verts": 185,
+   "tris": 170,
+   "bbox": [
+    [
+     -0.3462,
+     -0.207,
+     0.5885
+    ],
+    [
+     -0.331,
+     -0.1879,
+     0.6103
+    ]
+   ],
+   "digest": "d5fa5fc586b6ff06"
+  },
+  {
+   "name": "arm_R_f1_2_core",
+   "asm": "arms",
+   "part": "f1_2_core",
+   "part_de": "Finger 2 Glied 3",
+   "side": "R",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.3259,
+     -0.2115,
+     0.5761
+    ],
+    [
+     -0.3022,
+     -0.1902,
+     0.6025
+    ]
+   ],
+   "digest": "a8ad1888d705e289"
+  },
+  {
+   "name": "arm_R_f1_2_joint",
+   "asm": "arms",
+   "part": "f1_2_joint",
+   "part_de": "Finger 2 Gelenk 3",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.3293,
+     -0.2094,
+     0.5864
+    ],
+    [
+     -0.3153,
+     -0.1883,
+     0.6048
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_R_f1_2_plate",
+   "asm": "arms",
+   "part": "f1_2_plate",
+   "part_de": "Finger 2 Glied 3 Platte",
+   "side": "R",
+   "verts": 191,
+   "tris": 178,
+   "bbox": [
+    [
+     -0.328,
+     -0.2118,
+     0.5735
+    ],
+    [
+     -0.3133,
+     -0.1946,
+     0.5894
+    ]
+   ],
+   "digest": "68ba9d32736549b4"
+  },
+  {
+   "name": "arm_R_f2_0_core",
+   "asm": "arms",
+   "part": "f2_0_core",
+   "part_de": "Finger 3 Glied 1",
+   "side": "R",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.3546,
+     -0.1795,
+     0.6092
+    ],
+    [
+     -0.3287,
+     -0.1563,
+     0.6415
+    ]
+   ],
+   "digest": "def8f6f9f76dbd83"
+  },
+  {
+   "name": "arm_R_f2_0_joint",
+   "asm": "arms",
+   "part": "f2_0_joint",
+   "part_de": "Finger 3 Gelenk 1",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.3537,
+     -0.174,
+     0.6301
+    ],
+    [
+     -0.3397,
+     -0.1529,
+     0.6485
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_R_f2_0_plate",
+   "asm": "arms",
+   "part": "f2_0_plate",
+   "part_de": "Finger 3 Glied 1 Platte",
+   "side": "R",
+   "verts": 183,
+   "tris": 162,
+   "bbox": [
+    [
+     -0.3573,
+     -0.1794,
+     0.6078
+    ],
+    [
+     -0.3459,
+     -0.1581,
+     0.6364
+    ]
+   ],
+   "digest": "f4030613e21e042c"
+  },
+  {
+   "name": "arm_R_f2_1_core",
+   "asm": "arms",
+   "part": "f2_1_core",
+   "part_de": "Finger 3 Glied 2",
+   "side": "R",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.3411,
+     -0.186,
+     0.5889
+    ],
+    [
+     -0.3145,
+     -0.164,
+     0.6175
+    ]
+   ],
+   "digest": "7c5bb69808f61c5a"
+  },
+  {
+   "name": "arm_R_f2_1_joint",
+   "asm": "arms",
+   "part": "f2_1_joint",
+   "part_de": "Finger 3 Gelenk 2",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.3434,
+     -0.1829,
+     0.6023
+    ],
+    [
+     -0.3296,
+     -0.1618,
+     0.6206
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_R_f2_1_plate",
+   "asm": "arms",
+   "part": "f2_1_plate",
+   "part_de": "Finger 3 Glied 2 Platte",
+   "side": "R",
+   "verts": 187,
+   "tris": 178,
+   "bbox": [
+    [
+     -0.3433,
+     -0.1862,
+     0.5865
+    ],
+    [
+     -0.3272,
+     -0.168,
+     0.6057
+    ]
+   ],
+   "digest": "9f05e7f00ef643b0"
+  },
+  {
+   "name": "arm_R_f2_2_core",
+   "asm": "arms",
+   "part": "f2_2_core",
+   "part_de": "Finger 3 Glied 3",
+   "side": "R",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.3211,
+     -0.1896,
+     0.5777
+    ],
+    [
+     -0.2995,
+     -0.1686,
+     0.6031
+    ]
+   ],
+   "digest": "6ae8788210ead86a"
+  },
+  {
+   "name": "arm_R_f2_2_joint",
+   "asm": "arms",
+   "part": "f2_2_joint",
+   "part_de": "Finger 3 Gelenk 3",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.326,
+     -0.1882,
+     0.5858
+    ],
+    [
+     -0.3121,
+     -0.1671,
+     0.6041
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_R_f2_2_plate",
+   "asm": "arms",
+   "part": "f2_2_plate",
+   "part_de": "Finger 3 Glied 3 Platte",
+   "side": "R",
+   "verts": 197,
+   "tris": 178,
+   "bbox": [
+    [
+     -0.3229,
+     -0.1899,
+     0.5749
+    ],
+    [
+     -0.308,
+     -0.1735,
+     0.5882
+    ]
+   ],
+   "digest": "9cc78eb59dcf269a"
+  },
+  {
+   "name": "arm_R_f3_0_core",
+   "asm": "arms",
+   "part": "f3_0_core",
+   "part_de": "Finger 4 Glied 1",
+   "side": "R",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.3541,
+     -0.1588,
+     0.6075
+    ],
+    [
+     -0.3291,
+     -0.1368,
+     0.6359
+    ]
+   ],
+   "digest": "49bd327b8b393658"
+  },
+  {
+   "name": "arm_R_f3_0_joint",
+   "asm": "arms",
+   "part": "f3_0_joint",
+   "part_de": "Finger 4 Gelenk 1",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.3537,
+     -0.1547,
+     0.6239
+    ],
+    [
+     -0.3398,
+     -0.1336,
+     0.6423
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_R_f3_0_plate",
+   "asm": "arms",
+   "part": "f3_0_plate",
+   "part_de": "Finger 4 Glied 1 Platte",
+   "side": "R",
+   "verts": 185,
+   "tris": 170,
+   "bbox": [
+    [
+     -0.3569,
+     -0.1587,
+     0.6059
+    ],
+    [
+     -0.3458,
+     -0.139,
+     0.6296
+    ]
+   ],
+   "digest": "4e8da5aa0aa07941"
+  },
+  {
+   "name": "arm_R_f3_1_core",
+   "asm": "arms",
+   "part": "f3_1_core",
+   "part_de": "Finger 4 Glied 2",
+   "side": "R",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.3398,
+     -0.1639,
+     0.5914
+    ],
+    [
+     -0.3166,
+     -0.1427,
+     0.6175
+    ]
+   ],
+   "digest": "252a205dd9e989e6"
+  },
+  {
+   "name": "arm_R_f3_1_joint",
+   "asm": "arms",
+   "part": "f3_1_joint",
+   "part_de": "Finger 4 Gelenk 2",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.3435,
+     -0.162,
+     0.6011
+    ],
+    [
+     -0.3295,
+     -0.1409,
+     0.6195
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_R_f3_1_plate",
+   "asm": "arms",
+   "part": "f3_1_plate",
+   "part_de": "Finger 4 Glied 2 Platte",
+   "side": "R",
+   "verts": 193,
+   "tris": 178,
+   "bbox": [
+    [
+     -0.3418,
+     -0.1642,
+     0.5888
+    ],
+    [
+     -0.3273,
+     -0.1472,
+     0.604
+    ]
+   ],
+   "digest": "d22e4c708be6d648"
+  },
+  {
+   "name": "arm_R_f3_2_core",
+   "asm": "arms",
+   "part": "f3_2_core",
+   "part_de": "Finger 4 Glied 3",
+   "side": "R",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.3204,
+     -0.1662,
+     0.5842
+    ],
+    [
+     -0.3035,
+     -0.1458,
+     0.6079
+    ]
+   ],
+   "digest": "0a9dfc8dec00148b"
+  },
+  {
+   "name": "arm_R_f3_2_joint",
+   "asm": "arms",
+   "part": "f3_2_joint",
+   "part_de": "Finger 4 Gelenk 3",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.3269,
+     -0.1657,
+     0.5894
+    ],
+    [
+     -0.3129,
+     -0.1446,
+     0.6078
+    ]
+   ],
+   "digest": "35550db23270aa8e"
+  },
+  {
+   "name": "arm_R_f3_2_plate",
+   "asm": "arms",
+   "part": "f3_2_plate",
+   "part_de": "Finger 4 Glied 3 Platte",
+   "side": "R",
+   "verts": 195,
+   "tris": 178,
+   "bbox": [
+    [
+     -0.3217,
+     -0.1666,
+     0.5813
+    ],
+    [
+     -0.3091,
+     -0.1511,
+     0.5916
+    ]
+   ],
+   "digest": "1e461b7d1d520e3c"
+  },
+  {
+   "name": "arm_R_fore_body",
+   "asm": "arms",
+   "part": "fore_body",
+   "part_de": "Unterarmkörper",
+   "side": "R",
+   "verts": 212,
+   "tris": 316,
+   "bbox": [
+    [
+     -0.3958,
+     -0.1779,
+     0.7473
+    ],
+    [
+     -0.2614,
+     0.003,
+     1.0098
+    ]
+   ],
+   "digest": "6edde17fa259e079"
+  },
+  {
+   "name": "arm_R_fore_bolt_a",
+   "asm": "arms",
+   "part": "fore_bolt_a",
+   "part_de": "Bolzen",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.4062,
+     -0.1107,
+     0.7822
+    ],
+    [
+     -0.3997,
+     -0.0981,
+     0.795
+    ]
+   ],
+   "digest": "1f85b61934a9410d"
+  },
+  {
+   "name": "arm_R_fore_bolt_b",
+   "asm": "arms",
+   "part": "fore_bolt_b",
+   "part_de": "Bolzen",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.4062,
+     -0.1506,
+     0.795
+    ],
+    [
+     -0.3997,
+     -0.138,
+     0.8077
+    ]
+   ],
+   "digest": "97e8ad009acc7e61"
+  },
+  {
+   "name": "arm_R_fore_cuff",
+   "asm": "arms",
+   "part": "fore_cuff",
+   "part_de": "Stulpe",
+   "side": "R",
+   "verts": 160,
+   "tris": 188,
+   "bbox": [
+    [
+     -0.3988,
+     -0.199,
+     0.7115
+    ],
+    [
+     -0.2917,
+     -0.0843,
+     0.7769
+    ]
+   ],
+   "digest": "907c4433eabeabcf"
+  },
+  {
+   "name": "arm_R_fore_cuff_trim",
+   "asm": "arms",
+   "part": "fore_cuff_trim",
+   "part_de": "Stulpenkante",
+   "side": "R",
+   "verts": 192,
+   "tris": 188,
+   "bbox": [
+    [
+     -0.3969,
+     -0.1896,
+     0.74
+    ],
+    [
+     -0.2908,
+     -0.0816,
+     0.7798
+    ]
+   ],
+   "digest": "bfec446875159e42"
+  },
+  {
+   "name": "arm_R_fore_inset",
+   "asm": "arms",
+   "part": "fore_inset",
+   "part_de": "Akzentlinie",
+   "side": "R",
+   "verts": 144,
+   "tris": 92,
+   "bbox": [
+    [
+     -0.4072,
+     -0.0963,
+     0.8882
+    ],
+    [
+     -0.4029,
+     -0.0682,
+     0.9651
+    ]
+   ],
+   "digest": "163113320879d08c"
+  },
+  {
+   "name": "arm_R_fore_shell",
+   "asm": "arms",
+   "part": "fore_shell",
+   "part_de": "Unterarmschale",
+   "side": "R",
+   "verts": 196,
+   "tris": 296,
+   "bbox": [
+    [
+     -0.4107,
+     -0.1798,
+     0.7575
+    ],
+    [
+     -0.3032,
+     0.0016,
+     0.9958
+    ]
+   ],
+   "digest": "f6db035517983375"
+  },
+  {
+   "name": "arm_R_fore_top",
+   "asm": "arms",
+   "part": "fore_top",
+   "part_de": "Handgelenkplatte",
+   "side": "R",
+   "verts": 146,
+   "tris": 116,
+   "bbox": [
+    [
+     -0.4147,
+     -0.1634,
+     0.7565
+    ],
+    [
+     -0.3824,
+     -0.0682,
+     0.8806
+    ]
+   ],
+   "digest": "1e06c32a99721a73"
+  },
+  {
+   "name": "arm_R_knuckle_guard",
+   "asm": "arms",
+   "part": "knuckle_guard",
+   "part_de": "Knöchelschutz",
+   "side": "R",
+   "verts": 142,
+   "tris": 144,
+   "bbox": [
+    [
+     -0.3785,
+     -0.2188,
+     0.6272
+    ],
+    [
+     -0.3689,
+     -0.1225,
+     0.6732
+    ]
+   ],
+   "digest": "a93034d541f747ca"
+  },
+  {
+   "name": "arm_R_knuckles",
+   "asm": "arms",
+   "part": "knuckles",
+   "part_de": "Knöchelwelle",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.3585,
+     -0.2176,
+     0.6233
+    ],
+    [
+     -0.3386,
+     -0.1263,
+     0.6692
+    ]
+   ],
+   "digest": "fc9c818e4a798088"
+  },
+  {
+   "name": "arm_R_palm",
+   "asm": "arms",
+   "part": "palm",
+   "part_de": "Handfläche",
+   "side": "R",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.3694,
+     -0.2163,
+     0.6291
+    ],
+    [
+     -0.3203,
+     -0.1053,
+     0.733
+    ]
+   ],
+   "digest": "79406122a2981cb0"
+  },
+  {
+   "name": "arm_R_shoulder_ball",
+   "asm": "arms",
+   "part": "shoulder_ball",
+   "part_de": "Schulterkugel",
+   "side": "R",
+   "verts": 1626,
+   "tris": 3248,
+   "bbox": [
+    [
+     -0.3124,
+     -0.1277,
+     1.2774
+    ],
+    [
+     -0.195,
+     -0.0078,
+     1.3663
+    ]
+   ],
+   "digest": "b682040ff3c5226b"
+  },
+  {
+   "name": "arm_R_t_0_core",
+   "asm": "arms",
+   "part": "t_0_core",
+   "part_de": "Daumen Glied 1",
+   "side": "R",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.3537,
+     -0.2329,
+     0.6893
+    ],
+    [
+     -0.3211,
+     -0.1951,
+     0.7235
+    ]
+   ],
+   "digest": "7dbe767c0a2c615f"
+  },
+  {
+   "name": "arm_R_t_0_joint",
+   "asm": "arms",
+   "part": "t_0_joint",
+   "part_de": "Daumengelenk 1",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.3535,
+     -0.2148,
+     0.7022
+    ],
+    [
+     -0.3379,
+     -0.1907,
+     0.7276
+    ]
+   ],
+   "digest": "a53c94d6f30c9ba6"
+  },
+  {
+   "name": "arm_R_t_0_plate",
+   "asm": "arms",
+   "part": "t_0_plate",
+   "part_de": "Daumen Glied 1 Platte",
+   "side": "R",
+   "verts": 181,
+   "tris": 154,
+   "bbox": [
+    [
+     -0.3554,
+     -0.233,
+     0.6899
+    ],
+    [
+     -0.3385,
+     -0.2041,
+     0.7171
+    ]
+   ],
+   "digest": "bb962ced43557bf4"
+  },
+  {
+   "name": "arm_R_t_1_core",
+   "asm": "arms",
+   "part": "t_1_core",
+   "part_de": "Daumen Glied 2",
+   "side": "R",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.3365,
+     -0.2502,
+     0.6762
+    ],
+    [
+     -0.3071,
+     -0.217,
+     0.707
+    ]
+   ],
+   "digest": "41cd08fd5233c828"
+  },
+  {
+   "name": "arm_R_t_1_joint",
+   "asm": "arms",
+   "part": "t_1_joint",
+   "part_de": "Daumengelenk 2",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.337,
+     -0.2373,
+     0.6852
+    ],
+    [
+     -0.3212,
+     -0.2132,
+     0.7106
+    ]
+   ],
+   "digest": "a53c94d6f30c9ba6"
+  },
+  {
+   "name": "arm_R_t_1_plate",
+   "asm": "arms",
+   "part": "t_1_plate",
+   "part_de": "Daumen Glied 2 Platte",
+   "side": "R",
+   "verts": 183,
+   "tris": 170,
+   "bbox": [
+    [
+     -0.3381,
+     -0.2504,
+     0.6768
+    ],
+    [
+     -0.3235,
+     -0.2272,
+     0.6997
+    ]
+   ],
+   "digest": "b32761d95898303c"
+  },
+  {
+   "name": "arm_R_t_2_core",
+   "asm": "arms",
+   "part": "t_2_core",
+   "part_de": "Daumen Glied 3",
+   "side": "R",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.3206,
+     -0.2629,
+     0.6665
+    ],
+    [
+     -0.2946,
+     -0.2325,
+     0.6953
+    ]
+   ],
+   "digest": "790f272167eb8ac1"
+  },
+  {
+   "name": "arm_R_t_2_joint",
+   "asm": "arms",
+   "part": "t_2_joint",
+   "part_de": "Daumengelenk 3",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.3222,
+     -0.2539,
+     0.6726
+    ],
+    [
+     -0.3066,
+     -0.2299,
+     0.698
+    ]
+   ],
+   "digest": "a53c94d6f30c9ba6"
+  },
+  {
+   "name": "arm_R_t_2_plate",
+   "asm": "arms",
+   "part": "t_2_plate",
+   "part_de": "Daumen Glied 3 Platte",
+   "side": "R",
+   "verts": 201,
+   "tris": 178,
+   "bbox": [
+    [
+     -0.3221,
+     -0.2633,
+     0.6669
+    ],
+    [
+     -0.3092,
+     -0.2445,
+     0.6866
+    ]
+   ],
+   "digest": "2675b28e02c17ef1"
+  },
+  {
+   "name": "arm_R_thumb_mount",
+   "asm": "arms",
+   "part": "thumb_mount",
+   "part_de": "Daumensockel",
+   "side": "R",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.3613,
+     -0.2103,
+     0.6943
+    ],
+    [
+     -0.3301,
+     -0.1818,
+     0.7312
+    ]
+   ],
+   "digest": "d481512721ab9418"
+  },
+  {
+   "name": "arm_R_upper_core",
+   "asm": "arms",
+   "part": "upper_core",
+   "part_de": "Oberarmkörper",
+   "side": "R",
+   "verts": 1027,
+   "tris": 1904,
+   "bbox": [
+    [
+     -0.3737,
+     -0.1327,
+     1.0265
+    ],
+    [
+     -0.198,
+     0.0086,
+     1.3272
+    ]
+   ],
+   "digest": "dfd6bd593c7147e4"
+  },
+  {
+   "name": "arm_R_upper_seam",
+   "asm": "arms",
+   "part": "upper_seam",
+   "part_de": "Oberarmfuge",
+   "side": "R",
+   "verts": 1005,
+   "tris": 1440,
+   "bbox": [
+    [
+     -0.3263,
+     -0.1321,
+     1.2628
+    ],
+    [
+     -0.2017,
+     0.0001,
+     1.2993
+    ]
+   ],
+   "digest": "615facefdd9ec7f9"
+  },
+  {
+   "name": "arm_R_upper_shell_r",
+   "asm": "arms",
+   "part": "upper_shell_r",
+   "part_de": "Oberarmschale",
+   "side": "R",
+   "verts": 2618,
+   "tris": 3736,
+   "bbox": [
+    [
+     -0.3822,
+     -0.1426,
+     1.0632
+    ],
+    [
+     -0.2598,
+     0.0184,
+     1.2822
+    ]
+   ],
+   "digest": "e4b126677e981435"
+  },
+  {
+   "name": "arm_R_upper_stripe_a",
+   "asm": "arms",
+   "part": "upper_stripe_a",
+   "part_de": "Akzentstreifen",
+   "side": "R",
+   "verts": 166,
+   "tris": 216,
+   "bbox": [
+    [
+     -0.3737,
+     -0.0629,
+     1.145
+    ],
+    [
+     -0.3485,
+     -0.0567,
+     1.2523
+    ]
+   ],
+   "digest": "a5dd1e12dcd15214"
+  },
+  {
+   "name": "arm_R_upper_stripe_b",
+   "asm": "arms",
+   "part": "upper_stripe_b",
+   "part_de": "Akzentstreifen",
+   "side": "R",
+   "verts": 166,
+   "tris": 216,
+   "bbox": [
+    [
+     -0.3737,
+     -0.069,
+     1.1448
+    ],
+    [
+     -0.3485,
+     -0.0626,
+     1.2521
+    ]
+   ],
+   "digest": "c42525c697595535"
+  },
+  {
+   "name": "arm_R_wrist_block",
+   "asm": "arms",
+   "part": "wrist_block",
+   "part_de": "Kardanblock",
+   "side": "R",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.3591,
+     -0.1673,
+     0.707
+    ],
+    [
+     -0.3263,
+     -0.1271,
+     0.7402
+    ]
+   ],
+   "digest": "1f30a9a3f0f50047"
+  },
+  {
+   "name": "arm_R_wrist_pin",
+   "asm": "arms",
+   "part": "wrist_pin",
+   "part_de": "Kardanbolzen",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.3507,
+     -0.1694,
+     0.7098
+    ],
+    [
+     -0.3347,
+     -0.125,
+     0.7374
+    ]
+   ],
+   "digest": "db385e373485c07b"
+  },
+  {
+   "name": "back",
+   "asm": "upper_body",
+   "part": "back",
+   "part_de": "Rückenplatte",
+   "side": "C",
+   "verts": 1065,
+   "tris": 1528,
+   "bbox": [
+    [
+     -0.1698,
+     0.0564,
+     1.1649
+    ],
+    [
+     0.1472,
+     0.1507,
+     1.3708
+    ]
+   ],
+   "digest": "82c19cd2f9eaebfb"
+  },
+  {
+   "name": "back_rim_a",
+   "asm": "upper_body",
+   "part": "back_rim_a",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 435,
+   "tris": 440,
+   "bbox": [
+    [
+     -0.1713,
+     0.0599,
+     1.1674
+    ],
+    [
+     -0.0366,
+     0.1101,
+     1.3708
+    ]
+   ],
+   "digest": "533da443a86c562b"
+  },
+  {
+   "name": "back_rim_b",
+   "asm": "upper_body",
+   "part": "back_rim_b",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 406,
+   "tris": 440,
+   "bbox": [
+    [
+     0.0056,
+     0.1108,
+     1.1653
+    ],
+    [
+     0.1484,
+     0.1493,
+     1.3593
+    ]
+   ],
+   "digest": "185454738e04cc7d"
+  },
+  {
+   "name": "backpack",
+   "asm": "upper_body",
+   "part": "backpack",
+   "part_de": "Rückenmodul",
+   "side": "C",
+   "verts": 1290,
+   "tris": 2576,
+   "bbox": [
+    [
+     -0.1516,
+     0.0683,
+     1.1617
+    ],
+    [
+     0.1213,
+     0.2156,
+     1.3837
+    ]
+   ],
+   "digest": "e5457201083433be"
+  },
+  {
+   "name": "backpack_bezel",
+   "asm": "upper_body",
+   "part": "backpack_bezel",
+   "part_de": "Lichtfassung",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.0331,
+     0.2022,
+     1.3149
+    ],
+    [
+     -0.0197,
+     0.2075,
+     1.3283
+    ]
+   ],
+   "digest": "831c519d9e6a79a4"
+  },
+  {
+   "name": "backpack_lamp",
+   "asm": "upper_body",
+   "part": "backpack_lamp",
+   "part_de": "Statuslicht",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.0311,
+     0.2019,
+     1.317
+    ],
+    [
+     -0.0218,
+     0.2077,
+     1.3261
+    ]
+   ],
+   "digest": "8e7a145b1b55176b"
+  },
+  {
+   "name": "backpack_shell",
+   "asm": "upper_body",
+   "part": "backpack_shell",
+   "part_de": "Rückenmodulschale",
+   "side": "C",
+   "verts": 502,
+   "tris": 756,
+   "bbox": [
+    [
+     -0.1301,
+     0.175,
+     1.2167
+    ],
+    [
+     0.0771,
+     0.223,
+     1.326
+    ]
+   ],
+   "digest": "ef24db321ed21699"
+  },
+  {
+   "name": "belt",
+   "asm": "lower_body",
+   "part": "belt",
+   "part_de": "Gürtelring",
+   "side": "C",
+   "verts": 960,
+   "tris": 1440,
+   "bbox": [
+    [
+     -0.1309,
+     -0.098,
+     0.9344
+    ],
+    [
+     0.1422,
+     0.098,
+     0.9956
+    ]
+   ],
+   "digest": "d2e23e10208ab560"
+  },
+  {
+   "name": "belt_box_l",
+   "asm": "lower_body",
+   "part": "belt_box_l",
+   "part_de": "Gürtelmodul",
+   "side": "C",
+   "verts": 730,
+   "tris": 1232,
+   "bbox": [
+    [
+     0.0807,
+     0.076,
+     0.9352
+    ],
+    [
+     0.1473,
+     0.116,
+     1.0017
+    ]
+   ],
+   "digest": "fe6304bd15fb3420"
+  },
+  {
+   "name": "belt_box_l_trim",
+   "asm": "lower_body",
+   "part": "belt_box_l_trim",
+   "part_de": "Modulkante",
+   "side": "C",
+   "verts": 960,
+   "tris": 1440,
+   "bbox": [
+    [
+     0.0799,
+     0.0748,
+     0.9865
+    ],
+    [
+     0.1422,
+     0.1172,
+     0.9981
+    ]
+   ],
+   "digest": "f7c9920bbaa93b49"
+  },
+  {
+   "name": "belt_box_r",
+   "asm": "lower_body",
+   "part": "belt_box_r",
+   "part_de": "Gürtelmodul",
+   "side": "C",
+   "verts": 730,
+   "tris": 1232,
+   "bbox": [
+    [
+     -0.1336,
+     0.076,
+     0.9084
+    ],
+    [
+     -0.067,
+     0.116,
+     0.975
+    ]
+   ],
+   "digest": "a019666d51b868d5"
+  },
+  {
+   "name": "belt_box_r_trim",
+   "asm": "lower_body",
+   "part": "belt_box_r_trim",
+   "part_de": "Modulkante",
+   "side": "C",
+   "verts": 960,
+   "tris": 1440,
+   "bbox": [
+    [
+     -0.1344,
+     0.0748,
+     0.9597
+    ],
+    [
+     -0.0721,
+     0.1172,
+     0.9713
+    ]
+   ],
+   "digest": "6ca5ff80bc5ac5df"
+  },
+  {
+   "name": "belt_trim",
+   "asm": "lower_body",
+   "part": "belt_trim",
+   "part_de": "Gürtelkante",
+   "side": "C",
+   "verts": 960,
+   "tris": 1440,
+   "bbox": [
+    [
+     -0.1331,
+     -0.1001,
+     0.9589
+    ],
+    [
+     0.1412,
+     0.1001,
+     0.9959
+    ]
+   ],
+   "digest": "8a65ea011f965eeb"
+  },
+  {
+   "name": "bridge_l",
+   "asm": "upper_body",
+   "part": "bridge_l",
+   "part_de": "Schultersteg",
+   "side": "C",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.1494,
+     -0.0722,
+     1.3097
+    ],
+    [
+     0.2322,
+     0.1209,
+     1.3971
+    ]
+   ],
+   "digest": "f9ec4f8b32814016"
+  },
+  {
+   "name": "bridge_l_groove",
+   "asm": "upper_body",
+   "part": "bridge_l_groove",
+   "part_de": "Stegvertiefung",
+   "side": "C",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.172,
+     -0.0448,
+     1.3457
+    ],
+    [
+     0.2127,
+     0.0848,
+     1.3907
+    ]
+   ],
+   "digest": "60bd51e0642a3209"
+  },
+  {
+   "name": "bridge_r",
+   "asm": "upper_body",
+   "part": "bridge_r",
+   "part_de": "Schultersteg",
+   "side": "C",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.1954,
+     -0.1411,
+     1.3258
+    ],
+    [
+     -0.1126,
+     0.0519,
+     1.4131
+    ]
+   ],
+   "digest": "2d24a4c7ee1e7470"
+  },
+  {
+   "name": "bridge_r_groove",
+   "asm": "upper_body",
+   "part": "bridge_r_groove",
+   "part_de": "Stegvertiefung",
+   "side": "C",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.1728,
+     -0.1138,
+     1.3617
+    ],
+    [
+     -0.1321,
+     0.0159,
+     1.4068
+    ]
+   ],
+   "digest": "c675f0eb3eb2f797"
+  },
+  {
+   "name": "brief",
+   "asm": "lower_body",
+   "part": "brief",
+   "part_de": "Schrittstück",
+   "side": "C",
+   "verts": 1010,
+   "tris": 1904,
+   "bbox": [
+    [
+     -0.0809,
+     -0.086,
+     0.7347
+    ],
+    [
+     0.125,
+     0.0898,
+     0.8468
+    ]
+   ],
+   "digest": "225e735973c985da"
+  },
+  {
+   "name": "buckle",
+   "asm": "lower_body",
+   "part": "buckle",
+   "part_de": "Schließe",
+   "side": "C",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.0328,
+     -0.108,
+     0.9448
+    ],
+    [
+     0.0441,
+     -0.096,
+     0.9852
+    ]
+   ],
+   "digest": "3185d99ec19b7a64"
+  },
+  {
+   "name": "buckle_inset",
+   "asm": "lower_body",
+   "part": "buckle_inset",
+   "part_de": "Schließenfeld",
+   "side": "C",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.0231,
+     -0.11,
+     0.9527
+    ],
+    [
+     0.0344,
+     -0.096,
+     0.9773
+    ]
+   ],
+   "digest": "3726d46b4d04faee"
+  },
+  {
+   "name": "butt",
+   "asm": "lower_body",
+   "part": "butt",
+   "part_de": "Gesäßplatte",
+   "side": "C",
+   "verts": 678,
+   "tris": 1120,
+   "bbox": [
+    [
+     -0.0628,
+     0.0937,
+     0.7951
+    ],
+    [
+     0.1,
+     0.1112,
+     0.9519
+    ]
+   ],
+   "digest": "dfdd3e7bcfa924fd"
+  },
+  {
+   "name": "cable",
+   "asm": "head",
+   "part": "cable",
+   "part_de": "Kabelseele",
+   "side": "C",
+   "verts": 1908,
+   "tris": 1700,
+   "bbox": [
+    [
+     -0.0891,
+     -0.0803,
+     1.4397
+    ],
+    [
+     0.129,
+     0.0978,
+     1.4794
+    ]
+   ],
+   "digest": "aa17d0089c330f8b"
+  },
+  {
+   "name": "cable_plug_l",
+   "asm": "head",
+   "part": "cable_plug_l",
+   "part_de": "Kabelanschluss",
+   "side": "C",
+   "verts": 50,
+   "tris": 48,
+   "bbox": [
+    [
+     0.1201,
+     0.0175,
+     1.4752
+    ],
+    [
+     0.1312,
+     0.0284,
+     1.4821
+    ]
+   ],
+   "digest": "5c89a360439265a7"
+  },
+  {
+   "name": "cable_plug_r",
+   "asm": "head",
+   "part": "cable_plug_r",
+   "part_de": "Kabelanschluss",
+   "side": "C",
+   "verts": 50,
+   "tris": 48,
+   "bbox": [
+    [
+     -0.0903,
+     -0.0709,
+     1.4663
+    ],
+    [
+     -0.0793,
+     -0.06,
+     1.4731
+    ]
+   ],
+   "digest": "9417e1881bbc5a63"
+  },
+  {
+   "name": "cable_wrap",
+   "asm": "head",
+   "part": "cable_wrap",
+   "part_de": "Kabelwendel",
+   "side": "C",
+   "verts": 61233,
+   "tris": 61068,
+   "bbox": [
+    [
+     -0.0904,
+     -0.0803,
+     1.4383
+    ],
+    [
+     0.13,
+     0.0992,
+     1.4795
+    ]
+   ],
+   "digest": "9bcb92af8920e04e"
+  },
+  {
+   "name": "cap",
+   "asm": "head",
+   "part": "cap",
+   "part_de": "Schädelhaube",
+   "side": "C",
+   "verts": 3698,
+   "tris": 7280,
+   "bbox": [
+    [
+     -0.0989,
+     -0.1063,
+     1.5528
+    ],
+    [
+     0.1171,
+     0.1003,
+     1.6461
+    ]
+   ],
+   "digest": "b73c2791b1c7b6a3"
+  },
+  {
+   "name": "cheek_l",
+   "asm": "head",
+   "part": "cheek_l",
+   "part_de": "Wangenplatte",
+   "side": "C",
+   "verts": 1405,
+   "tris": 1865,
+   "bbox": [
+    [
+     0.0723,
+     -0.1122,
+     1.4461
+    ],
+    [
+     0.1342,
+     -0.0589,
+     1.5366
+    ]
+   ],
+   "digest": "102309fdb9e46341"
+  },
+  {
+   "name": "cheek_r",
+   "asm": "head",
+   "part": "cheek_r",
+   "part_de": "Wangenplatte",
+   "side": "C",
+   "verts": 1525,
+   "tris": 1971,
+   "bbox": [
+    [
+     -0.0302,
+     -0.1415,
+     1.4426
+    ],
+    [
+     0.0436,
+     -0.1032,
+     1.5331
+    ]
+   ],
+   "digest": "9d50a2d1de73dab2"
+  },
+  {
+   "name": "chest",
+   "asm": "upper_body",
+   "part": "chest",
+   "part_de": "Brustplatte",
+   "side": "C",
+   "verts": 3805,
+   "tris": 4999,
+   "bbox": [
+    [
+     -0.1799,
+     -0.1696,
+     1.1668
+    ],
+    [
+     0.2311,
+     -0.0234,
+     1.3657
+    ]
+   ],
+   "digest": "3da55bad325a2877"
+  },
+  {
+   "name": "chest_light_l_bezel",
+   "asm": "upper_body",
+   "part": "chest_light_l_bezel",
+   "part_de": "Lichtfassung",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.0919,
+     -0.128,
+     1.2036
+    ],
+    [
+     0.1035,
+     -0.1231,
+     1.2152
+    ]
+   ],
+   "digest": "03ec63d6e5735131"
+  },
+  {
+   "name": "chest_light_l_lamp",
+   "asm": "upper_body",
+   "part": "chest_light_l_lamp",
+   "part_de": "Statuslicht",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.0939,
+     -0.1283,
+     1.2057
+    ],
+    [
+     0.1015,
+     -0.1228,
+     1.213
+    ]
+   ],
+   "digest": "f13caa702a1c733a"
+  },
+  {
+   "name": "chest_light_r_bezel",
+   "asm": "upper_body",
+   "part": "chest_light_r_bezel",
+   "part_de": "Lichtfassung",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.0296,
+     -0.1523,
+     1.2092
+    ],
+    [
+     -0.018,
+     -0.1474,
+     1.2209
+    ]
+   ],
+   "digest": "c8b2df769959a432"
+  },
+  {
+   "name": "chest_light_r_lamp",
+   "asm": "upper_body",
+   "part": "chest_light_r_lamp",
+   "part_de": "Statuslicht",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.0276,
+     -0.1526,
+     1.2114
+    ],
+    [
+     -0.02,
+     -0.1471,
+     1.2187
+    ]
+   ],
+   "digest": "bd4b2286f6440cc1"
+  },
+  {
+   "name": "chest_rim_a",
+   "asm": "upper_body",
+   "part": "chest_rim_a",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 667,
+   "tris": 776,
+   "bbox": [
+    [
+     0.1542,
+     -0.1076,
+     1.1666
+    ],
+    [
+     0.2326,
+     -0.0244,
+     1.3507
+    ]
+   ],
+   "digest": "f96c5973aa5b012b"
+  },
+  {
+   "name": "chest_rim_b",
+   "asm": "upper_body",
+   "part": "chest_rim_b",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 686,
+   "tris": 776,
+   "bbox": [
+    [
+     -0.1813,
+     -0.1587,
+     1.1782
+    ],
+    [
+     -0.0867,
+     -0.0989,
+     1.3658
+    ]
+   ],
+   "digest": "62b1e4b335fd0580"
+  },
+  {
+   "name": "chest_stripe_a",
+   "asm": "upper_body",
+   "part": "chest_stripe_a",
+   "part_de": "Akzentstreifen",
+   "side": "C",
+   "verts": 238,
+   "tris": 276,
+   "bbox": [
+    [
+     0.1141,
+     -0.1221,
+     1.2747
+    ],
+    [
+     0.204,
+     -0.1009,
+     1.2849
+    ]
+   ],
+   "digest": "52208733a1f7973e"
+  },
+  {
+   "name": "chest_stripe_b",
+   "asm": "upper_body",
+   "part": "chest_stripe_b",
+   "part_de": "Akzentstreifen",
+   "side": "C",
+   "verts": 234,
+   "tris": 276,
+   "bbox": [
+    [
+     0.1126,
+     -0.1198,
+     1.2861
+    ],
+    [
+     0.199,
+     -0.0981,
+     1.2961
+    ]
+   ],
+   "digest": "cda5d852794fc9aa"
+  },
+  {
+   "name": "chin_bar",
+   "asm": "head",
+   "part": "chin_bar",
+   "part_de": "Kinnbügel",
+   "side": "C",
+   "verts": 866,
+   "tris": 1108,
+   "bbox": [
+    [
+     -0.0196,
+     -0.1112,
+     1.4084
+    ],
+    [
+     0.1063,
+     -0.0426,
+     1.44
+    ]
+   ],
+   "digest": "130992a32b2d5604"
+  },
+  {
+   "name": "collar",
+   "asm": "upper_body",
+   "part": "collar",
+   "part_de": "Kragen",
+   "side": "C",
+   "verts": 1010,
+   "tris": 1904,
+   "bbox": [
+    [
+     -0.1137,
+     -0.1087,
+     1.361
+    ],
+    [
+     0.1499,
+     0.0953,
+     1.4438
+    ]
+   ],
+   "digest": "f0fbb6431b12bc91"
+  },
+  {
+   "name": "collar_trim",
+   "asm": "upper_body",
+   "part": "collar_trim",
+   "part_de": "Kragenkante",
+   "side": "C",
+   "verts": 960,
+   "tris": 1440,
+   "bbox": [
+    [
+     -0.0724,
+     -0.1047,
+     1.4262
+    ],
+    [
+     0.1197,
+     0.0661,
+     1.4426
+    ]
+   ],
+   "digest": "e3c12fb4bd14547b"
+  },
+  {
+   "name": "comm_l",
+   "asm": "head",
+   "part": "comm_l",
+   "part_de": "Seitenmodul",
+   "side": "C",
+   "verts": 3026,
+   "tris": 5936,
+   "bbox": [
+    [
+     0.1076,
+     -0.0007,
+     1.472
+    ],
+    [
+     0.1406,
+     0.0479,
+     1.5462
+    ]
+   ],
+   "digest": "90d705e48ebe5383"
+  },
+  {
+   "name": "comm_l_face",
+   "asm": "head",
+   "part": "comm_l_face",
+   "part_de": "Modulfläche",
+   "side": "C",
+   "verts": 2994,
+   "tris": 5936,
+   "bbox": [
+    [
+     0.1258,
+     0.009,
+     1.4787
+    ],
+    [
+     0.1432,
+     0.0469,
+     1.5404
+    ]
+   ],
+   "digest": "80fe21a7380a72aa"
+  },
+  {
+   "name": "comm_l_holder",
+   "asm": "head",
+   "part": "comm_l_holder",
+   "part_de": "Modulhalterung",
+   "side": "C",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.1306,
+     0.0234,
+     1.4966
+    ],
+    [
+     0.1401,
+     0.035,
+     1.5647
+    ]
+   ],
+   "digest": "62c1dd893d3d851d"
+  },
+  {
+   "name": "comm_l_holder_top",
+   "asm": "head",
+   "part": "comm_l_holder_top",
+   "part_de": "Halterungsfuß",
+   "side": "C",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.1062,
+     0.0146,
+     1.5609
+    ],
+    [
+     0.1379,
+     0.0356,
+     1.5661
+    ]
+   ],
+   "digest": "ae208dbf5e76ed80"
+  },
+  {
+   "name": "comm_l_pin",
+   "asm": "head",
+   "part": "comm_l_pin",
+   "part_de": "Halterungsschraube",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.1349,
+     0.0261,
+     1.5067
+    ],
+    [
+     0.1399,
+     0.0322,
+     1.5126
+    ]
+   ],
+   "digest": "a9606da2b947e887"
+  },
+  {
+   "name": "comm_l_rim",
+   "asm": "head",
+   "part": "comm_l_rim",
+   "part_de": "Modulrand",
+   "side": "C",
+   "verts": 2970,
+   "tris": 5936,
+   "bbox": [
+    [
+     0.1206,
+     0.0024,
+     1.4705
+    ],
+    [
+     0.143,
+     0.0512,
+     1.5484
+    ]
+   ],
+   "digest": "17328fbd3cef1645"
+  },
+  {
+   "name": "comm_r",
+   "asm": "head",
+   "part": "comm_r",
+   "part_de": "Seitenmodul",
+   "side": "C",
+   "verts": 3026,
+   "tris": 5936,
+   "bbox": [
+    [
+     -0.1029,
+     -0.0891,
+     1.4631
+    ],
+    [
+     -0.0699,
+     -0.0405,
+     1.5372
+    ]
+   ],
+   "digest": "07d60e74155ba82a"
+  },
+  {
+   "name": "comm_r_face",
+   "asm": "head",
+   "part": "comm_r_face",
+   "part_de": "Modulfläche",
+   "side": "C",
+   "verts": 2994,
+   "tris": 5936,
+   "bbox": [
+    [
+     -0.1054,
+     -0.0881,
+     1.4689
+    ],
+    [
+     -0.0881,
+     -0.0502,
+     1.5305
+    ]
+   ],
+   "digest": "f491da1c6b550b51"
+  },
+  {
+   "name": "comm_r_holder",
+   "asm": "head",
+   "part": "comm_r_holder",
+   "part_de": "Modulhalterung",
+   "side": "C",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.1045,
+     -0.0753,
+     1.4866
+    ],
+    [
+     -0.095,
+     -0.0637,
+     1.5548
+    ]
+   ],
+   "digest": "88ddd4b4463beedf"
+  },
+  {
+   "name": "comm_r_holder_top",
+   "asm": "head",
+   "part": "comm_r_holder_top",
+   "part_de": "Halterungsfuß",
+   "side": "C",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.1058,
+     -0.0744,
+     1.5519
+    ],
+    [
+     -0.0741,
+     -0.0534,
+     1.5571
+    ]
+   ],
+   "digest": "8e814b0146bc4349"
+  },
+  {
+   "name": "comm_r_pin",
+   "asm": "head",
+   "part": "comm_r_pin",
+   "part_de": "Halterungsschraube",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.1021,
+     -0.0735,
+     1.4967
+    ],
+    [
+     -0.0972,
+     -0.0673,
+     1.5025
+    ]
+   ],
+   "digest": "a302c3cd215f755d"
+  },
+  {
+   "name": "comm_r_rim",
+   "asm": "head",
+   "part": "comm_r_rim",
+   "part_de": "Modulrand",
+   "side": "C",
+   "verts": 2970,
+   "tris": 5936,
+   "bbox": [
+    [
+     -0.1053,
+     -0.0925,
+     1.4609
+    ],
+    [
+     -0.0829,
+     -0.0436,
+     1.5387
+    ]
+   ],
+   "digest": "9e44cd7fbf991987"
+  },
+  {
+   "name": "emblem_bezel",
+   "asm": "upper_body",
+   "part": "emblem_bezel",
+   "part_de": "Lichtfassung",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.0304,
+     -0.1507,
+     1.2379
+    ],
+    [
+     0.0507,
+     -0.144,
+     1.2583
+    ]
+   ],
+   "digest": "0b3d5496bbb02f70"
+  },
+  {
+   "name": "emblem_disc",
+   "asm": "upper_body",
+   "part": "emblem_disc",
+   "part_de": "Medaillon",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.0147,
+     -0.1511,
+     1.2243
+    ],
+    [
+     0.0637,
+     -0.13,
+     1.2727
+    ]
+   ],
+   "digest": "cfdabc5864eaace0"
+  },
+  {
+   "name": "emblem_hub",
+   "asm": "upper_body",
+   "part": "emblem_hub",
+   "part_de": "Medaillonnabe",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.0252,
+     -0.1527,
+     1.2355
+    ],
+    [
+     0.0532,
+     -0.1284,
+     1.2614
+    ]
+   ],
+   "digest": "faedf2d356b9ea9c"
+  },
+  {
+   "name": "emblem_lamp",
+   "asm": "upper_body",
+   "part": "emblem_lamp",
+   "part_de": "Statuslicht",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.0325,
+     -0.151,
+     1.24
+    ],
+    [
+     0.0487,
+     -0.1438,
+     1.2562
+    ]
+   ],
+   "digest": "c23dc91e607291f3"
+  },
+  {
+   "name": "emblem_ring",
+   "asm": "upper_body",
+   "part": "emblem_ring",
+   "part_de": "Medaillonring",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.02,
+     -0.1519,
+     1.2299
+    ],
+    [
+     0.0585,
+     -0.1292,
+     1.2671
+    ]
+   ],
+   "digest": "63b47157f2cd39e2"
+  },
+  {
+   "name": "eye_glass_l",
+   "asm": "head",
+   "part": "eye_glass_l",
+   "part_de": "Sichtscheibe",
+   "side": "C",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.0762,
+     -0.1,
+     1.531
+    ],
+    [
+     0.1193,
+     -0.081,
+     1.5577
+    ]
+   ],
+   "digest": "86828522b40449cd"
+  },
+  {
+   "name": "eye_glass_r",
+   "asm": "head",
+   "part": "eye_glass_r",
+   "part_de": "Sichtscheibe",
+   "side": "C",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.0105,
+     -0.1366,
+     1.5288
+    ],
+    [
+     0.0322,
+     -0.1174,
+     1.5525
+    ]
+   ],
+   "digest": "864db07bf19fad63"
+  },
+  {
+   "name": "face_center",
+   "asm": "head",
+   "part": "face_center",
+   "part_de": "Gesichtsmitte",
+   "side": "C",
+   "verts": 898,
+   "tris": 1114,
+   "bbox": [
+    [
+     0.0267,
+     -0.1186,
+     1.4386
+    ],
+    [
+     0.0763,
+     -0.0801,
+     1.517
+    ]
+   ],
+   "digest": "740e8cf083167554"
+  },
+  {
+   "name": "face_ridge_l",
+   "asm": "head",
+   "part": "face_ridge_l",
+   "part_de": "Seitenleiste",
+   "side": "C",
+   "verts": 281,
+   "tris": 272,
+   "bbox": [
+    [
+     0.0643,
+     -0.1131,
+     1.4405
+    ],
+    [
+     0.0789,
+     -0.0802,
+     1.5172
+    ]
+   ],
+   "digest": "5ca5901b4e98ecb1"
+  },
+  {
+   "name": "face_ridge_r",
+   "asm": "head",
+   "part": "face_ridge_r",
+   "part_de": "Seitenleiste",
+   "side": "C",
+   "verts": 339,
+   "tris": 272,
+   "bbox": [
+    [
+     0.0267,
+     -0.1219,
+     1.4386
+    ],
+    [
+     0.0506,
+     -0.0986,
+     1.5163
+    ]
+   ],
+   "digest": "fdf741954418554e"
+  },
+  {
+   "name": "foot_L_ankle_axle",
+   "asm": "legs",
+   "part": "ankle_axle",
+   "part_de": "Knöchel",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.0814,
+     -0.0413,
+     0.072
+    ],
+    [
+     0.2186,
+     0.0653,
+     0.152
+    ]
+   ],
+   "digest": "5df3daa9f7acf05b"
+  },
+  {
+   "name": "foot_L_ankle_disc",
+   "asm": "legs",
+   "part": "ankle_disc",
+   "part_de": "Medaillon",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.0794,
+     -0.0345,
+     0.08
+    ],
+    [
+     0.2206,
+     0.0585,
+     0.144
+    ]
+   ],
+   "digest": "c063a69f6c068a84"
+  },
+  {
+   "name": "foot_L_ankle_hub",
+   "asm": "legs",
+   "part": "ankle_hub",
+   "part_de": "Medaillonnabe",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.0792,
+     -0.0205,
+     0.0954
+    ],
+    [
+     0.2208,
+     0.0445,
+     0.1286
+    ]
+   ],
+   "digest": "847a099c6be474af"
+  },
+  {
+   "name": "foot_L_ankle_ring",
+   "asm": "legs",
+   "part": "ankle_ring",
+   "part_de": "Medaillonring",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.0793,
+     -0.0275,
+     0.0877
+    ],
+    [
+     0.2207,
+     0.0515,
+     0.1363
+    ]
+   ],
+   "digest": "1dc9f4f6154cceb2"
+  },
+  {
+   "name": "foot_L_foot_core",
+   "asm": "legs",
+   "part": "foot_core",
+   "part_de": "Fuß",
+   "side": "L",
+   "verts": 1747,
+   "tris": 3248,
+   "bbox": [
+    [
+     0.0641,
+     -0.2161,
+     -0.0001
+    ],
+    [
+     0.2556,
+     0.124,
+     0.112
+    ]
+   ],
+   "digest": "0241c544a21fa173"
+  },
+  {
+   "name": "foot_L_heel_cap",
+   "asm": "legs",
+   "part": "heel_cap",
+   "part_de": "Fersenkappe",
+   "side": "L",
+   "verts": 1690,
+   "tris": 2752,
+   "bbox": [
+    [
+     0.0534,
+     0.0321,
+     -0.0097
+    ],
+    [
+     0.2169,
+     0.1304,
+     0.0827
+    ]
+   ],
+   "digest": "509a6b2f52c2eac3"
+  },
+  {
+   "name": "foot_L_sole",
+   "asm": "legs",
+   "part": "sole",
+   "part_de": "Sohle",
+   "side": "L",
+   "verts": 590,
+   "tris": 672,
+   "bbox": [
+    [
+     0.061,
+     -0.2239,
+     0
+    ],
+    [
+     0.2572,
+     0.1303,
+     0.012
+    ]
+   ],
+   "digest": "9f10ec20b285feb2"
+  },
+  {
+   "name": "foot_L_toe_cap",
+   "asm": "legs",
+   "part": "toe_cap",
+   "part_de": "Zehenkappe",
+   "side": "L",
+   "verts": 1968,
+   "tris": 2908,
+   "bbox": [
+    [
+     0.0851,
+     -0.2205,
+     0.0322
+    ],
+    [
+     0.2658,
+     -0.0219,
+     0.1112
+    ]
+   ],
+   "digest": "be4663b00f4d66cf"
+  },
+  {
+   "name": "foot_L_toe_cap_edge",
+   "asm": "legs",
+   "part": "toe_cap_edge",
+   "part_de": "Zierkante",
+   "side": "L",
+   "verts": 568,
+   "tris": 732,
+   "bbox": [
+    [
+     0.1269,
+     -0.1953,
+     0.0388
+    ],
+    [
+     0.2662,
+     -0.1574,
+     0.0682
+    ]
+   ],
+   "digest": "be9e8c2ac07750a9"
+  },
+  {
+   "name": "foot_R_ankle_axle",
+   "asm": "legs",
+   "part": "ankle_axle",
+   "part_de": "Knöchel",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.2415,
+     -0.1305,
+     0.072
+    ],
+    [
+     -0.0985,
+     -0.0095,
+     0.152
+    ]
+   ],
+   "digest": "5df3daa9f7acf05b"
+  },
+  {
+   "name": "foot_R_ankle_disc",
+   "asm": "legs",
+   "part": "ankle_disc",
+   "part_de": "Medaillon",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.242,
+     -0.1247,
+     0.08
+    ],
+    [
+     -0.098,
+     -0.0153,
+     0.144
+    ]
+   ],
+   "digest": "c063a69f6c068a84"
+  },
+  {
+   "name": "foot_R_ankle_hub",
+   "asm": "legs",
+   "part": "ankle_hub",
+   "part_de": "Medaillonnabe",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.2397,
+     -0.1122,
+     0.0954
+    ],
+    [
+     -0.1003,
+     -0.0278,
+     0.1286
+    ]
+   ],
+   "digest": "847a099c6be474af"
+  },
+  {
+   "name": "foot_R_ankle_ring",
+   "asm": "legs",
+   "part": "ankle_ring",
+   "part_de": "Medaillonring",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.2409,
+     -0.1184,
+     0.0877
+    ],
+    [
+     -0.0991,
+     -0.0216,
+     0.1363
+    ]
+   ],
+   "digest": "1dc9f4f6154cceb2"
+  },
+  {
+   "name": "foot_R_foot_core",
+   "asm": "legs",
+   "part": "foot_core",
+   "part_de": "Fuß",
+   "side": "R",
+   "verts": 1747,
+   "tris": 3248,
+   "bbox": [
+    [
+     -0.3068,
+     -0.2948,
+     -0.0001
+    ],
+    [
+     -0.0723,
+     0.0465,
+     0.112
+    ]
+   ],
+   "digest": "370d0547972e4cf8"
+  },
+  {
+   "name": "foot_R_heel_cap",
+   "asm": "legs",
+   "part": "heel_cap",
+   "part_de": "Fersenkappe",
+   "side": "R",
+   "verts": 1690,
+   "tris": 2752,
+   "bbox": [
+    [
+     -0.2265,
+     -0.0639,
+     -0.0097
+    ],
+    [
+     -0.0614,
+     0.0543,
+     0.0827
+    ]
+   ],
+   "digest": "9d336441db7cfdc6"
+  },
+  {
+   "name": "foot_R_sole",
+   "asm": "legs",
+   "part": "sole",
+   "part_de": "Sohle",
+   "side": "R",
+   "verts": 590,
+   "tris": 672,
+   "bbox": [
+    [
+     -0.3097,
+     -0.3021,
+     0
+    ],
+    [
+     -0.0682,
+     0.0528,
+     0.012
+    ]
+   ],
+   "digest": "c384714ba41d8512"
+  },
+  {
+   "name": "foot_R_toe_cap",
+   "asm": "legs",
+   "part": "toe_cap",
+   "part_de": "Zehenkappe",
+   "side": "R",
+   "verts": 1968,
+   "tris": 2908,
+   "bbox": [
+    [
+     -0.3168,
+     -0.3007,
+     0.0322
+    ],
+    [
+     -0.1184,
+     -0.0919,
+     0.1112
+    ]
+   ],
+   "digest": "9d05737ffbf4a67d"
+  },
+  {
+   "name": "foot_R_toe_cap_edge",
+   "asm": "legs",
+   "part": "toe_cap_edge",
+   "part_de": "Zierkante",
+   "side": "R",
+   "verts": 568,
+   "tris": 732,
+   "bbox": [
+    [
+     -0.3126,
+     -0.278,
+     0.0388
+    ],
+    [
+     -0.1802,
+     -0.2186,
+     0.0682
+    ]
+   ],
+   "digest": "c9fd650da1ef532f"
+  },
+  {
+   "name": "gorget",
+   "asm": "upper_body",
+   "part": "gorget",
+   "part_de": "Halsring",
+   "side": "C",
+   "verts": 960,
+   "tris": 1680,
+   "bbox": [
+    [
+     -0.1309,
+     -0.1288,
+     1.351
+    ],
+    [
+     0.1696,
+     0.1098,
+     1.4343
+    ]
+   ],
+   "digest": "09186fb6a7b6e4ca"
+  },
+  {
+   "name": "gorget_edge",
+   "asm": "upper_body",
+   "part": "gorget_edge",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 960,
+   "tris": 1440,
+   "bbox": [
+    [
+     -0.1243,
+     -0.1304,
+     1.3694
+    ],
+    [
+     0.1666,
+     0.1016,
+     1.4364
+    ]
+   ],
+   "digest": "a5bf234c862d5304"
+  },
+  {
+   "name": "helmet_core",
+   "asm": "head",
+   "part": "helmet_core",
+   "part_de": "Helmkern",
+   "side": "C",
+   "verts": 1290,
+   "tris": 2576,
+   "bbox": [
+    [
+     -0.0798,
+     -0.1059,
+     1.411
+    ],
+    [
+     0.106,
+     0.0815,
+     1.598
+    ]
+   ],
+   "digest": "5bd834c150142b08"
+  },
+  {
+   "name": "hip_l_axle",
+   "asm": "lower_body",
+   "part": "hip_l_axle",
+   "part_de": "Hüftgelenk",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.0844,
+     -0.05,
+     0.8334
+    ],
+    [
+     0.1879,
+     0.05,
+     0.9438
+    ]
+   ],
+   "digest": "d8cd749eaeb1ebd8"
+  },
+  {
+   "name": "hip_l_disc",
+   "asm": "lower_body",
+   "part": "hip_l_disc",
+   "part_de": "Medaillon",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.0816,
+     -0.04,
+     0.8428
+    ],
+    [
+     0.1906,
+     0.04,
+     0.9344
+    ]
+   ],
+   "digest": "7a49d5967f657f13"
+  },
+  {
+   "name": "hip_l_hub",
+   "asm": "lower_body",
+   "part": "hip_l_hub",
+   "part_de": "Medaillonnabe",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.08,
+     -0.0208,
+     0.8613
+    ],
+    [
+     0.1922,
+     0.0208,
+     0.9158
+    ]
+   ],
+   "digest": "ac4a6e01bf3c82b5"
+  },
+  {
+   "name": "hip_l_ring",
+   "asm": "lower_body",
+   "part": "hip_l_ring",
+   "part_de": "Medaillonring",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.0808,
+     -0.0304,
+     0.8521
+    ],
+    [
+     0.1914,
+     0.0304,
+     0.9251
+    ]
+   ],
+   "digest": "6f2c0f267930dba4"
+  },
+  {
+   "name": "hip_r_axle",
+   "asm": "lower_body",
+   "part": "hip_r_axle",
+   "part_de": "Hüftgelenk",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.1538,
+     -0.05,
+     0.8036
+    ],
+    [
+     -0.0503,
+     0.05,
+     0.914
+    ]
+   ],
+   "digest": "f4b6926400ecc04b"
+  },
+  {
+   "name": "hip_r_disc",
+   "asm": "lower_body",
+   "part": "hip_r_disc",
+   "part_de": "Medaillon",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.1565,
+     -0.04,
+     0.813
+    ],
+    [
+     -0.0476,
+     0.04,
+     0.9046
+    ]
+   ],
+   "digest": "af53d211cf2d7ee0"
+  },
+  {
+   "name": "hip_r_hub",
+   "asm": "lower_body",
+   "part": "hip_r_hub",
+   "part_de": "Medaillonnabe",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.1581,
+     -0.0208,
+     0.8316
+    ],
+    [
+     -0.046,
+     0.0208,
+     0.886
+    ]
+   ],
+   "digest": "adafa57d433ae483"
+  },
+  {
+   "name": "hip_r_ring",
+   "asm": "lower_body",
+   "part": "hip_r_ring",
+   "part_de": "Medaillonring",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.1573,
+     -0.0304,
+     0.8223
+    ],
+    [
+     -0.0468,
+     0.0304,
+     0.8953
+    ]
+   ],
+   "digest": "710ba705ec38436a"
+  },
+  {
+   "name": "jaw_band",
+   "asm": "head",
+   "part": "jaw_band",
+   "part_de": "Kieferband",
+   "side": "C",
+   "verts": 1080,
+   "tris": 1680,
+   "bbox": [
+    [
+     -0.0822,
+     -0.1084,
+     1.404
+    ],
+    [
+     0.1146,
+     0.0941,
+     1.4391
+    ]
+   ],
+   "digest": "ec661c746c580fe3"
+  },
+  {
+   "name": "jaw_leg_l",
+   "asm": "head",
+   "part": "jaw_leg_l",
+   "part_de": "Kieferschenkel",
+   "side": "C",
+   "verts": 711,
+   "tris": 984,
+   "bbox": [
+    [
+     0.0847,
+     -0.0806,
+     1.4269
+    ],
+    [
+     0.1279,
+     -0.0201,
+     1.5296
+    ]
+   ],
+   "digest": "26f1beee3480d507"
+  },
+  {
+   "name": "jaw_leg_r",
+   "asm": "head",
+   "part": "jaw_leg_r",
+   "part_de": "Kieferschenkel",
+   "side": "C",
+   "verts": 729,
+   "tris": 984,
+   "bbox": [
+    [
+     -0.0439,
+     -0.1341,
+     1.422
+    ],
+    [
+     0.0104,
+     -0.068,
+     1.524
+    ]
+   ],
+   "digest": "0f87136178e64343"
+  },
+  {
+   "name": "mask",
+   "asm": "head",
+   "part": "mask",
+   "part_de": "Gesichtsmaske",
+   "side": "C",
+   "verts": 9602,
+   "tris": 16037,
+   "bbox": [
+    [
+     -0.0609,
+     -0.1383,
+     1.422
+    ],
+    [
+     0.1313,
+     -0.0138,
+     1.6048
+    ]
+   ],
+   "digest": "42f5b7c12ce35056"
+  },
+  {
+   "name": "neck",
+   "asm": "head",
+   "part": "neck",
+   "part_de": "Hals",
+   "side": "C",
+   "verts": 674,
+   "tris": 1232,
+   "bbox": [
+    [
+     -0.0259,
+     -0.0677,
+     1.3624
+    ],
+    [
+     0.0728,
+     0.03,
+     1.4674
+    ]
+   ],
+   "digest": "43596fab17784eef"
+  },
+  {
+   "name": "neck_ring",
+   "asm": "head",
+   "part": "neck_ring",
+   "part_de": "Wirbelring",
+   "side": "C",
+   "verts": 960,
+   "tris": 1440,
+   "bbox": [
+    [
+     -0.0367,
+     -0.076,
+     1.4037
+    ],
+    [
+     0.0799,
+     0.0404,
+     1.4222
+    ]
+   ],
+   "digest": "b5866ea2e6ebc0a5"
+  },
+  {
+   "name": "neck_trim",
+   "asm": "head",
+   "part": "neck_trim",
+   "part_de": "Halskante",
+   "side": "C",
+   "verts": 960,
+   "tris": 1440,
+   "bbox": [
+    [
+     -0.0344,
+     -0.0731,
+     1.4179
+    ],
+    [
+     0.0766,
+     0.0379,
+     1.4271
+    ]
+   ],
+   "digest": "313413c9024cd5ad"
+  },
+  {
+   "name": "nozzle_l",
+   "asm": "upper_body",
+   "part": "nozzle_l",
+   "part_de": "Düse",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.0127,
+     0.1388,
+     1.1059
+    ],
+    [
+     0.0677,
+     0.1932,
+     1.1734
+    ]
+   ],
+   "digest": "5a78d77650d76322"
+  },
+  {
+   "name": "nozzle_l_core",
+   "asm": "upper_body",
+   "part": "nozzle_l_core",
+   "part_de": "Düsenkern",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.0215,
+     0.1476,
+     1.1036
+    ],
+    [
+     0.059,
+     0.1844,
+     1.1757
+    ]
+   ],
+   "digest": "4201dae1b4e9bca6"
+  },
+  {
+   "name": "nozzle_l_trim",
+   "asm": "upper_body",
+   "part": "nozzle_l_trim",
+   "part_de": "Düsenkante",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.0107,
+     0.1395,
+     1.1048
+    ],
+    [
+     0.0664,
+     0.1952,
+     1.1147
+    ]
+   ],
+   "digest": "80edf2be0479b293"
+  },
+  {
+   "name": "nozzle_r",
+   "asm": "upper_body",
+   "part": "nozzle_r",
+   "part_de": "Düse",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.1166,
+     0.1129,
+     1.1119
+    ],
+    [
+     -0.0616,
+     0.1673,
+     1.1794
+    ]
+   ],
+   "digest": "dc26df8a6c173098"
+  },
+  {
+   "name": "nozzle_r_core",
+   "asm": "upper_body",
+   "part": "nozzle_r_core",
+   "part_de": "Düsenkern",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.1078,
+     0.1217,
+     1.1096
+    ],
+    [
+     -0.0703,
+     0.1585,
+     1.1817
+    ]
+   ],
+   "digest": "140490d6875abca1"
+  },
+  {
+   "name": "nozzle_r_trim",
+   "asm": "upper_body",
+   "part": "nozzle_r_trim",
+   "part_de": "Düsenkante",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.1186,
+     0.1136,
+     1.1108
+    ],
+    [
+     -0.0629,
+     0.1694,
+     1.1207
+    ]
+   ],
+   "digest": "11cc22bea40aa5f7"
+  },
+  {
+   "name": "pack_cable_l",
+   "asm": "upper_body",
+   "part": "pack_cable_l",
+   "part_de": "Leitung",
+   "side": "C",
+   "verts": 225,
+   "tris": 252,
+   "bbox": [
+    [
+     0.097,
+     0.0353,
+     1.3399
+    ],
+    [
+     0.2056,
+     0.1461,
+     1.3779
+    ]
+   ],
+   "digest": "fda5336922f39bf6"
+  },
+  {
+   "name": "pack_cable_r",
+   "asm": "upper_body",
+   "part": "pack_cable_r",
+   "part_de": "Leitung",
+   "side": "C",
+   "verts": 193,
+   "tris": 252,
+   "bbox": [
+    [
+     -0.21,
+     -0.0351,
+     1.3552
+    ],
+    [
+     -0.1083,
+     0.0968,
+     1.3939
+    ]
+   ],
+   "digest": "512723d574a9eee2"
+  },
+  {
+   "name": "pauldron_l",
+   "asm": "upper_body",
+   "part": "pauldron_l",
+   "part_de": "Schulterpanzer",
+   "side": "C",
+   "verts": 2280,
+   "tris": 3932,
+   "bbox": [
+    [
+     0.1808,
+     -0.0967,
+     1.1997
+    ],
+    [
+     0.4403,
+     0.2004,
+     1.4101
+    ]
+   ],
+   "digest": "c0626dfff0aa50af"
+  },
+  {
+   "name": "pauldron_l_band",
+   "asm": "upper_body",
+   "part": "pauldron_l_band",
+   "part_de": "Panzerfuge",
+   "side": "C",
+   "verts": 1032,
+   "tris": 1440,
+   "bbox": [
+    [
+     0.1967,
+     -0.0823,
+     1.2086
+    ],
+    [
+     0.4252,
+     0.1902,
+     1.2898
+    ]
+   ],
+   "digest": "a69c9b0ba7d5e677"
+  },
+  {
+   "name": "pauldron_l_edge",
+   "asm": "upper_body",
+   "part": "pauldron_l_edge",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 1044,
+   "tris": 1440,
+   "bbox": [
+    [
+     0.193,
+     -0.0829,
+     1.1989
+    ],
+    [
+     0.4221,
+     0.1906,
+     1.2796
+    ]
+   ],
+   "digest": "ce692cb6c2f29b0a"
+  },
+  {
+   "name": "pauldron_l_flare",
+   "asm": "upper_body",
+   "part": "pauldron_l_flare",
+   "part_de": "Schulterlage",
+   "side": "C",
+   "verts": 1179,
+   "tris": 1812,
+   "bbox": [
+    [
+     0.2142,
+     -0.094,
+     1.1224
+    ],
+    [
+     0.4287,
+     0.2078,
+     1.265
+    ]
+   ],
+   "digest": "06b02bd2ebbbf883"
+  },
+  {
+   "name": "pauldron_l_flare2",
+   "asm": "upper_body",
+   "part": "pauldron_l_flare2",
+   "part_de": "Schulterlage",
+   "side": "C",
+   "verts": 959,
+   "tris": 1416,
+   "bbox": [
+    [
+     0.2634,
+     -0.0684,
+     1.0686
+    ],
+    [
+     0.4047,
+     0.1962,
+     1.1867
+    ]
+   ],
+   "digest": "cc9a2cd5fbb80659"
+  },
+  {
+   "name": "pauldron_l_flare2_edge",
+   "asm": "upper_body",
+   "part": "pauldron_l_flare2_edge",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 580,
+   "tris": 756,
+   "bbox": [
+    [
+     0.263,
+     -0.0703,
+     1.0677
+    ],
+    [
+     0.4033,
+     0.1981,
+     1.1167
+    ]
+   ],
+   "digest": "2a0fd3c62fc265ae"
+  },
+  {
+   "name": "pauldron_l_flare2_rim_a",
+   "asm": "upper_body",
+   "part": "pauldron_l_flare2_rim_a",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 208,
+   "tris": 272,
+   "bbox": [
+    [
+     0.263,
+     0.1714,
+     1.1117
+    ],
+    [
+     0.2856,
+     0.1861,
+     1.187
+    ]
+   ],
+   "digest": "ec537a5eaf9ed9d1"
+  },
+  {
+   "name": "pauldron_l_flare2_rim_b",
+   "asm": "upper_body",
+   "part": "pauldron_l_flare2_rim_b",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 208,
+   "tris": 272,
+   "bbox": [
+    [
+     0.3131,
+     -0.07,
+     1.0973
+    ],
+    [
+     0.3312,
+     -0.0574,
+     1.1739
+    ]
+   ],
+   "digest": "8b04924db4cffb25"
+  },
+  {
+   "name": "pauldron_l_flare_edge",
+   "asm": "upper_body",
+   "part": "pauldron_l_flare_edge",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 732,
+   "tris": 972,
+   "bbox": [
+    [
+     0.2129,
+     -0.096,
+     1.1218
+    ],
+    [
+     0.4311,
+     0.2099,
+     1.1972
+    ]
+   ],
+   "digest": "859ee1ea6c4eba44"
+  },
+  {
+   "name": "pauldron_l_flare_rim_a",
+   "asm": "upper_body",
+   "part": "pauldron_l_flare_rim_a",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 210,
+   "tris": 272,
+   "bbox": [
+    [
+     0.213,
+     0.1664,
+     1.1918
+    ],
+    [
+     0.2424,
+     0.1841,
+     1.2655
+    ]
+   ],
+   "digest": "d742254c788b4b9c"
+  },
+  {
+   "name": "pauldron_l_flare_rim_b",
+   "asm": "upper_body",
+   "part": "pauldron_l_flare_rim_b",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 210,
+   "tris": 272,
+   "bbox": [
+    [
+     0.2679,
+     -0.0957,
+     1.1761
+    ],
+    [
+     0.2909,
+     -0.0778,
+     1.2516
+    ]
+   ],
+   "digest": "5e440b35e032c2b4"
+  },
+  {
+   "name": "pauldron_l_stripe_a",
+   "asm": "upper_body",
+   "part": "pauldron_l_stripe_a",
+   "part_de": "Akzentstreifen",
+   "side": "C",
+   "verts": 150,
+   "tris": 160,
+   "bbox": [
+    [
+     0.4322,
+     -0.0055,
+     1.2349
+    ],
+    [
+     0.4386,
+     0.0109,
+     1.2895
+    ]
+   ],
+   "digest": "1ea8607d8b91c2c9"
+  },
+  {
+   "name": "pauldron_l_stripe_b",
+   "asm": "upper_body",
+   "part": "pauldron_l_stripe_b",
+   "part_de": "Akzentstreifen",
+   "side": "C",
+   "verts": 150,
+   "tris": 160,
+   "bbox": [
+    [
+     0.4279,
+     0.0187,
+     1.2363
+    ],
+    [
+     0.4337,
+     0.0334,
+     1.2907
+    ]
+   ],
+   "digest": "8a2046c515bc12d6"
+  },
+  {
+   "name": "pauldron_r",
+   "asm": "upper_body",
+   "part": "pauldron_r",
+   "part_de": "Schulterpanzer",
+   "side": "C",
+   "verts": 2240,
+   "tris": 3873,
+   "bbox": [
+    [
+     -0.4147,
+     -0.2126,
+     1.2362
+    ],
+    [
+     -0.1439,
+     0.0799,
+     1.4311
+    ]
+   ],
+   "digest": "125afc651df4287f"
+  },
+  {
+   "name": "pauldron_r_band",
+   "asm": "upper_body",
+   "part": "pauldron_r_band",
+   "part_de": "Panzerfuge",
+   "side": "C",
+   "verts": 1032,
+   "tris": 1440,
+   "bbox": [
+    [
+     -0.4023,
+     -0.1999,
+     1.2452
+    ],
+    [
+     -0.1679,
+     0.0694,
+     1.3087
+    ]
+   ],
+   "digest": "9d922cde90a155ed"
+  },
+  {
+   "name": "pauldron_r_edge",
+   "asm": "upper_body",
+   "part": "pauldron_r_edge",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 1044,
+   "tris": 1440,
+   "bbox": [
+    [
+     -0.4004,
+     -0.1993,
+     1.2354
+    ],
+    [
+     -0.1653,
+     0.0709,
+     1.2981
+    ]
+   ],
+   "digest": "d02fdc197415dc5c"
+  },
+  {
+   "name": "pauldron_r_flare",
+   "asm": "upper_body",
+   "part": "pauldron_r_flare",
+   "part_de": "Schulterlage",
+   "side": "C",
+   "verts": 1179,
+   "tris": 1812,
+   "bbox": [
+    [
+     -0.4157,
+     -0.2095,
+     1.1598
+    ],
+    [
+     -0.1957,
+     0.0887,
+     1.2883
+    ]
+   ],
+   "digest": "64a2d5dc48d660c2"
+  },
+  {
+   "name": "pauldron_r_flare2",
+   "asm": "upper_body",
+   "part": "pauldron_r_flare2",
+   "part_de": "Schulterlage",
+   "side": "C",
+   "verts": 959,
+   "tris": 1416,
+   "bbox": [
+    [
+     -0.3938,
+     -0.1929,
+     1.1039
+    ],
+    [
+     -0.2535,
+     0.0702,
+     1.2143
+    ]
+   ],
+   "digest": "8e5b39ef68905a85"
+  },
+  {
+   "name": "pauldron_r_flare2_edge",
+   "asm": "upper_body",
+   "part": "pauldron_r_flare2_edge",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 580,
+   "tris": 756,
+   "bbox": [
+    [
+     -0.3964,
+     -0.195,
+     1.1033
+    ],
+    [
+     -0.2532,
+     0.0721,
+     1.1432
+    ]
+   ],
+   "digest": "b33a22c2aedfbfe5"
+  },
+  {
+   "name": "pauldron_r_flare2_rim_a",
+   "asm": "upper_body",
+   "part": "pauldron_r_flare2_rim_a",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 208,
+   "tris": 272,
+   "bbox": [
+    [
+     -0.2677,
+     -0.1842,
+     1.1241
+    ],
+    [
+     -0.2531,
+     -0.1763,
+     1.2015
+    ]
+   ],
+   "digest": "2b22fef94f58e3cd"
+  },
+  {
+   "name": "pauldron_r_flare2_rim_b",
+   "asm": "upper_body",
+   "part": "pauldron_r_flare2_rim_b",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 208,
+   "tris": 272,
+   "bbox": [
+    [
+     -0.3132,
+     0.0525,
+     1.1384
+    ],
+    [
+     -0.3032,
+     0.0718,
+     1.2145
+    ]
+   ],
+   "digest": "f9ded0f9b1697183"
+  },
+  {
+   "name": "pauldron_r_flare_edge",
+   "asm": "upper_body",
+   "part": "pauldron_r_flare_edge",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 732,
+   "tris": 972,
+   "bbox": [
+    [
+     -0.4179,
+     -0.2117,
+     1.1594
+    ],
+    [
+     -0.1944,
+     0.0907,
+     1.2189
+    ]
+   ],
+   "digest": "ddeaaaaca8240ad6"
+  },
+  {
+   "name": "pauldron_r_flare_rim_a",
+   "asm": "upper_body",
+   "part": "pauldron_r_flare_rim_a",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 210,
+   "tris": 272,
+   "bbox": [
+    [
+     -0.216,
+     -0.1892,
+     1.1981
+    ],
+    [
+     -0.1945,
+     -0.1783,
+     1.2748
+    ]
+   ],
+   "digest": "e64c90e205b79e48"
+  },
+  {
+   "name": "pauldron_r_flare_rim_b",
+   "asm": "upper_body",
+   "part": "pauldron_r_flare_rim_b",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 210,
+   "tris": 272,
+   "bbox": [
+    [
+     -0.2645,
+     0.0661,
+     1.2138
+    ],
+    [
+     -0.2494,
+     0.0904,
+     1.2887
+    ]
+   ],
+   "digest": "5b1864f7465d0c56"
+  },
+  {
+   "name": "pauldron_r_stripe_a",
+   "asm": "upper_body",
+   "part": "pauldron_r_stripe_a",
+   "part_de": "Akzentstreifen",
+   "side": "C",
+   "verts": 150,
+   "tris": 160,
+   "bbox": [
+    [
+     -0.3844,
+     -0.1674,
+     1.2731
+    ],
+    [
+     -0.3729,
+     -0.1528,
+     1.3271
+    ]
+   ],
+   "digest": "dd7f870530d5d3e8"
+  },
+  {
+   "name": "pauldron_r_stripe_b",
+   "asm": "upper_body",
+   "part": "pauldron_r_stripe_b",
+   "part_de": "Akzentstreifen",
+   "side": "C",
+   "verts": 150,
+   "tris": 160,
+   "bbox": [
+    [
+     -0.3888,
+     -0.1431,
+     1.2745
+    ],
+    [
+     -0.3776,
+     -0.1304,
+     1.3284
+    ]
+   ],
+   "digest": "da636780bc985312"
+  },
+  {
+   "name": "pelvis_core",
+   "asm": "lower_body",
+   "part": "pelvis_core",
+   "part_de": "Becken",
+   "side": "C",
+   "verts": 1318,
+   "tris": 2576,
+   "bbox": [
+    [
+     -0.1371,
+     -0.098,
+     0.7871
+    ],
+    [
+     0.1696,
+     0.102,
+     1.0347
+    ]
+   ],
+   "digest": "7e99acc27b0e0523"
+  },
+  {
+   "name": "rear_field_l",
+   "asm": "head",
+   "part": "rear_field_l",
+   "part_de": "Modulfeld",
+   "side": "C",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.0266,
+     0.0942,
+     1.5276
+    ],
+    [
+     0.0003,
+     0.1075,
+     1.5522
+    ]
+   ],
+   "digest": "a1e26ec73400d2a7"
+  },
+  {
+   "name": "rear_field_r",
+   "asm": "head",
+   "part": "rear_field_r",
+   "part_de": "Modulfeld",
+   "side": "C",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.0614,
+     0.0796,
+     1.5261
+    ],
+    [
+     -0.0345,
+     0.0929,
+     1.5507
+    ]
+   ],
+   "digest": "9c3c15b529d4ecf7"
+  },
+  {
+   "name": "rear_module",
+   "asm": "head",
+   "part": "rear_module",
+   "part_de": "Hinterkopfmodul",
+   "side": "C",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.0663,
+     0.066,
+     1.5166
+    ],
+    [
+     0.0111,
+     0.1074,
+     1.5591
+    ]
+   ],
+   "digest": "d40a9ffeb90a14d9"
+  },
+  {
+   "name": "rear_slot",
+   "asm": "head",
+   "part": "rear_slot",
+   "part_de": "Modulvertiefung",
+   "side": "C",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.035,
+     0.0899,
+     1.5272
+    ],
+    [
+     -0.0253,
+     0.0953,
+     1.5511
+    ]
+   ],
+   "digest": "bfa6f99ce5bbd55a"
+  },
+  {
+   "name": "rear_strip",
+   "asm": "head",
+   "part": "rear_strip",
+   "part_de": "Modulleiste",
+   "side": "C",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     -0.0587,
+     0.0799,
+     1.5205
+    ],
+    [
+     -0.0003,
+     0.1055,
+     1.5254
+    ]
+   ],
+   "digest": "7365f359b98a2bc9"
+  },
+  {
+   "name": "rib_l",
+   "asm": "upper_body",
+   "part": "rib_l",
+   "part_de": "Rippenplatte",
+   "side": "C",
+   "verts": 616,
+   "tris": 848,
+   "bbox": [
+    [
+     0.1214,
+     -0.0813,
+     1.0835
+    ],
+    [
+     0.2081,
+     0.0107,
+     1.1883
+    ]
+   ],
+   "digest": "3c968d8baf2e603a"
+  },
+  {
+   "name": "rib_l_rim_a",
+   "asm": "upper_body",
+   "part": "rib_l_rim_a",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 341,
+   "tris": 440,
+   "bbox": [
+    [
+     0.1447,
+     -0.0565,
+     1.0836
+    ],
+    [
+     0.2004,
+     0.0111,
+     1.1879
+    ]
+   ],
+   "digest": "445e16fac8dd1bb4"
+  },
+  {
+   "name": "rib_l_rim_b",
+   "asm": "upper_body",
+   "part": "rib_l_rim_b",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 338,
+   "tris": 440,
+   "bbox": [
+    [
+     0.1276,
+     -0.0823,
+     1.0834
+    ],
+    [
+     0.2023,
+     -0.0561,
+     1.1847
+    ]
+   ],
+   "digest": "2435ea37d23f9370"
+  },
+  {
+   "name": "rib_r",
+   "asm": "upper_body",
+   "part": "rib_r",
+   "part_de": "Rippenplatte",
+   "side": "C",
+   "verts": 608,
+   "tris": 848,
+   "bbox": [
+    [
+     -0.1696,
+     -0.1316,
+     1.0931
+    ],
+    [
+     -0.0752,
+     -0.0608,
+     1.205
+    ]
+   ],
+   "digest": "9830e94eecdf7f45"
+  },
+  {
+   "name": "rib_r_rim_a",
+   "asm": "upper_body",
+   "part": "rib_r_rim_a",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 336,
+   "tris": 440,
+   "bbox": [
+    [
+     -0.1487,
+     -0.1328,
+     1.093
+    ],
+    [
+     -0.0793,
+     -0.1203,
+     1.201
+    ]
+   ],
+   "digest": "d566685272240aab"
+  },
+  {
+   "name": "rib_r_rim_b",
+   "asm": "upper_body",
+   "part": "rib_r_rim_b",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 351,
+   "tris": 440,
+   "bbox": [
+    [
+     -0.1713,
+     -0.1068,
+     1.0952
+    ],
+    [
+     -0.1049,
+     -0.0628,
+     1.2051
+    ]
+   ],
+   "digest": "35b4f078ff3ac718"
+  },
+  {
+   "name": "shell",
+   "asm": "head",
+   "part": "shell",
+   "part_de": "Seiten- und Hinterkopfgehäuse",
+   "side": "C",
+   "verts": 3178,
+   "tris": 5648,
+   "bbox": [
+    [
+     -0.1008,
+     -0.1144,
+     1.4253
+    ],
+    [
+     0.1255,
+     0.1007,
+     1.5708
+    ]
+   ],
+   "digest": "12a73ccc854d4e15"
+  },
+  {
+   "name": "shin_L_ankle_piston_a_collar",
+   "asm": "legs",
+   "part": "ankle_piston_a_collar",
+   "part_de": "Knöchelkolben (Manschette)",
+   "side": "L",
+   "verts": 58,
+   "tris": 56,
+   "bbox": [
+    [
+     0.0688,
+     -0.0089,
+     0.1959
+    ],
+    [
+     0.0863,
+     0.0088,
+     0.209
+    ]
+   ],
+   "digest": "af41c377979577ac"
+  },
+  {
+   "name": "shin_L_ankle_piston_a_cyl",
+   "asm": "legs",
+   "part": "ankle_piston_a_cyl",
+   "part_de": "Knöchelkolben",
+   "side": "L",
+   "verts": 58,
+   "tris": 56,
+   "bbox": [
+    [
+     0.0612,
+     -0.0142,
+     0.1992
+    ],
+    [
+     0.0846,
+     0.0071,
+     0.2912
+    ]
+   ],
+   "digest": "2d3810a0c482b0b2"
+  },
+  {
+   "name": "shin_L_ankle_piston_a_rod",
+   "asm": "legs",
+   "part": "ankle_piston_a_rod",
+   "part_de": "Knöchelkolben (Stange)",
+   "side": "L",
+   "verts": 58,
+   "tris": 56,
+   "bbox": [
+    [
+     0.0731,
+     -0.0044,
+     0.1344
+    ],
+    [
+     0.0883,
+     0.009,
+     0.213
+    ]
+   ],
+   "digest": "c15ab46236b5859b"
+  },
+  {
+   "name": "shin_L_ankle_piston_b_collar",
+   "asm": "legs",
+   "part": "ankle_piston_b_collar",
+   "part_de": "Knöchelkolben (Manschette)",
+   "side": "L",
+   "verts": 58,
+   "tris": 56,
+   "bbox": [
+    [
+     0.2122,
+     -0.0089,
+     0.1972
+    ],
+    [
+     0.2295,
+     0.0088,
+     0.2102
+    ]
+   ],
+   "digest": "d5517de8744d774a"
+  },
+  {
+   "name": "shin_L_ankle_piston_b_cyl",
+   "asm": "legs",
+   "part": "ankle_piston_b_cyl",
+   "part_de": "Knöchelkolben",
+   "side": "L",
+   "verts": 58,
+   "tris": 56,
+   "bbox": [
+    [
+     0.2139,
+     -0.0142,
+     0.2005
+    ],
+    [
+     0.2357,
+     0.0071,
+     0.2925
+    ]
+   ],
+   "digest": "7b6a8f476b2e46a0"
+  },
+  {
+   "name": "shin_L_ankle_piston_b_rod",
+   "asm": "legs",
+   "part": "ankle_piston_b_rod",
+   "part_de": "Knöchelkolben (Stange)",
+   "side": "L",
+   "verts": 58,
+   "tris": 56,
+   "bbox": [
+    [
+     0.2113,
+     -0.0044,
+     0.1356
+    ],
+    [
+     0.2252,
+     0.009,
+     0.2143
+    ]
+   ],
+   "digest": "b03399ca6d96ca9c"
+  },
+  {
+   "name": "shin_L_boot_cuff",
+   "asm": "legs",
+   "part": "boot_cuff",
+   "part_de": "Stiefelschaft",
+   "side": "L",
+   "verts": 2111,
+   "tris": 3432,
+   "bbox": [
+    [
+     0.0726,
+     -0.0617,
+     0.1112
+    ],
+    [
+     0.2262,
+     0.0854,
+     0.1925
+    ]
+   ],
+   "digest": "aaf4761bf5af46c0"
+  },
+  {
+   "name": "shin_L_boot_cuff_edge",
+   "asm": "legs",
+   "part": "boot_cuff_edge",
+   "part_de": "Zierkante",
+   "side": "L",
+   "verts": 860,
+   "tris": 1188,
+   "bbox": [
+    [
+     0.0707,
+     -0.0638,
+     0.1739
+    ],
+    [
+     0.2281,
+     0.0875,
+     0.1947
+    ]
+   ],
+   "digest": "710196def6d62e5e"
+  },
+  {
+   "name": "shin_L_calf",
+   "asm": "legs",
+   "part": "calf",
+   "part_de": "Wadenplatte",
+   "side": "L",
+   "verts": 792,
+   "tris": 1188,
+   "bbox": [
+    [
+     0.0784,
+     0.0585,
+     0.2534
+    ],
+    [
+     0.2177,
+     0.0876,
+     0.4157
+    ]
+   ],
+   "digest": "d30ef20bc3485637"
+  },
+  {
+   "name": "shin_L_knee_axle",
+   "asm": "legs",
+   "part": "knee_axle",
+   "part_de": "Kniegelenk",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.0782,
+     -0.0848,
+     0.4385
+    ],
+    [
+     0.2151,
+     0.0266,
+     0.5511
+    ]
+   ],
+   "digest": "8230c5e12f9d6666"
+  },
+  {
+   "name": "shin_L_knee_cap",
+   "asm": "legs",
+   "part": "knee_cap",
+   "part_de": "Kniekappe",
+   "side": "L",
+   "verts": 1826,
+   "tris": 2576,
+   "bbox": [
+    [
+     0.0699,
+     -0.1117,
+     0.4068
+    ],
+    [
+     0.224,
+     -0.053,
+     0.552
+    ]
+   ],
+   "digest": "88d9617bab95425f"
+  },
+  {
+   "name": "shin_L_knee_cap_edge",
+   "asm": "legs",
+   "part": "knee_cap_edge",
+   "part_de": "Zierkante",
+   "side": "L",
+   "verts": 452,
+   "tris": 564,
+   "bbox": [
+    [
+     0.0748,
+     -0.0992,
+     0.4076
+    ],
+    [
+     0.22,
+     -0.0586,
+     0.4167
+    ]
+   ],
+   "digest": "420862be40574193"
+  },
+  {
+   "name": "shin_L_knee_disc",
+   "asm": "legs",
+   "part": "knee_disc",
+   "part_de": "Medaillon",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.0743,
+     -0.0736,
+     0.4496
+    ],
+    [
+     0.219,
+     0.0155,
+     0.5399
+    ]
+   ],
+   "digest": "41210c93b8dfaff5"
+  },
+  {
+   "name": "shin_L_knee_hub",
+   "asm": "legs",
+   "part": "knee_hub",
+   "part_de": "Medaillonnabe",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.0705,
+     -0.0522,
+     0.471
+    ],
+    [
+     0.2229,
+     -0.0059,
+     0.5186
+    ]
+   ],
+   "digest": "d0bb7cabec6240ce"
+  },
+  {
+   "name": "shin_L_knee_ring",
+   "asm": "legs",
+   "part": "knee_ring",
+   "part_de": "Medaillonring",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.0724,
+     -0.0629,
+     0.4603
+    ],
+    [
+     0.221,
+     0.0048,
+     0.5293
+    ]
+   ],
+   "digest": "98a70d9aee844d01"
+  },
+  {
+   "name": "shin_L_shin_bolt_a",
+   "asm": "legs",
+   "part": "shin_bolt_a",
+   "part_de": "Bolzen",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.1562,
+     -0.0947,
+     0.243
+    ],
+    [
+     0.1634,
+     -0.0902,
+     0.2504
+    ]
+   ],
+   "digest": "0a6cfadb1d51a336"
+  },
+  {
+   "name": "shin_L_shin_bolt_b",
+   "asm": "legs",
+   "part": "shin_bolt_b",
+   "part_de": "Bolzen",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.1342,
+     -0.0947,
+     0.2428
+    ],
+    [
+     0.1414,
+     -0.0902,
+     0.2502
+    ]
+   ],
+   "digest": "87f83b4501ab3b72"
+  },
+  {
+   "name": "shin_L_shin_core",
+   "asm": "legs",
+   "part": "shin_core",
+   "part_de": "Schienbein",
+   "side": "L",
+   "verts": 1374,
+   "tris": 2576,
+   "bbox": [
+    [
+     0.0658,
+     -0.1014,
+     0.1055
+    ],
+    [
+     0.2299,
+     0.0788,
+     0.4733
+    ]
+   ],
+   "digest": "05efe165a7c30862"
+  },
+  {
+   "name": "shin_L_shin_light_bezel",
+   "asm": "legs",
+   "part": "shin_light_bezel",
+   "part_de": "Lichtfassung",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.1427,
+     -0.11,
+     0.33
+    ],
+    [
+     0.1535,
+     -0.106,
+     0.3409
+    ]
+   ],
+   "digest": "8b6b0134c7535aed"
+  },
+  {
+   "name": "shin_L_shin_light_lamp",
+   "asm": "legs",
+   "part": "shin_light_lamp",
+   "part_de": "Statuslicht",
+   "side": "L",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.1449,
+     -0.1105,
+     0.3321
+    ],
+    [
+     0.1513,
+     -0.1056,
+     0.3388
+    ]
+   ],
+   "digest": "7359bb5fd4db68b6"
+  },
+  {
+   "name": "shin_L_shin_plate",
+   "asm": "legs",
+   "part": "shin_plate",
+   "part_de": "Schienbeinlage",
+   "side": "L",
+   "verts": 735,
+   "tris": 1160,
+   "bbox": [
+    [
+     0.1179,
+     -0.1055,
+     0.231
+    ],
+    [
+     0.179,
+     -0.0849,
+     0.3198
+    ]
+   ],
+   "digest": "2e007583e8749a97"
+  },
+  {
+   "name": "shin_L_shin_shell",
+   "asm": "legs",
+   "part": "shin_shell",
+   "part_de": "Schienbeinschale",
+   "side": "L",
+   "verts": 2326,
+   "tris": 3566,
+   "bbox": [
+    [
+     0.0573,
+     -0.1113,
+     0.1446
+    ],
+    [
+     0.2379,
+     -0.0029,
+     0.4319
+    ]
+   ],
+   "digest": "fd50eacd1d959d1e"
+  },
+  {
+   "name": "shin_L_shin_shell_rim_a",
+   "asm": "legs",
+   "part": "shin_shell_rim_a",
+   "part_de": "Zierkante",
+   "side": "L",
+   "verts": 429,
+   "tris": 608,
+   "bbox": [
+    [
+     0.2226,
+     -0.0239,
+     0.1509
+    ],
+    [
+     0.2411,
+     -0.0036,
+     0.4319
+    ]
+   ],
+   "digest": "27f291016196a16a"
+  },
+  {
+   "name": "shin_L_shin_shell_rim_b",
+   "asm": "legs",
+   "part": "shin_shell_rim_b",
+   "part_de": "Zierkante",
+   "side": "L",
+   "verts": 429,
+   "tris": 608,
+   "bbox": [
+    [
+     0.0541,
+     -0.0239,
+     0.1496
+    ],
+    [
+     0.0767,
+     -0.0036,
+     0.4304
+    ]
+   ],
+   "digest": "63703008122d39cb"
+  },
+  {
+   "name": "shin_R_ankle_piston_a_collar",
+   "asm": "legs",
+   "part": "ankle_piston_a_collar",
+   "part_de": "Knöchelkolben (Manschette)",
+   "side": "R",
+   "verts": 58,
+   "tris": 56,
+   "bbox": [
+    [
+     -0.1059,
+     -0.0961,
+     0.1944
+    ],
+    [
+     -0.0883,
+     -0.078,
+     0.2081
+    ]
+   ],
+   "digest": "3b06a5af3ff4041d"
+  },
+  {
+   "name": "shin_R_ankle_piston_a_cyl",
+   "asm": "legs",
+   "part": "ankle_piston_a_cyl",
+   "part_de": "Knöchelkolben",
+   "side": "R",
+   "verts": 58,
+   "tris": 56,
+   "bbox": [
+    [
+     -0.1041,
+     -0.106,
+     0.1978
+    ],
+    [
+     -0.0803,
+     -0.0798,
+     0.2897
+    ]
+   ],
+   "digest": "da22991bcbdc1a3d"
+  },
+  {
+   "name": "shin_R_ankle_piston_a_rod",
+   "asm": "legs",
+   "part": "ankle_piston_a_rod",
+   "part_de": "Knöchelkolben (Stange)",
+   "side": "R",
+   "verts": 58,
+   "tris": 56,
+   "bbox": [
+    [
+     -0.1082,
+     -0.0919,
+     0.1335
+    ],
+    [
+     -0.0926,
+     -0.0744,
+     0.2119
+    ]
+   ],
+   "digest": "f7a404219015f97d"
+  },
+  {
+   "name": "shin_R_ankle_piston_b_collar",
+   "asm": "legs",
+   "part": "ankle_piston_b_collar",
+   "part_de": "Knöchelkolben (Manschette)",
+   "side": "R",
+   "verts": 58,
+   "tris": 56,
+   "bbox": [
+    [
+     -0.2491,
+     -0.0961,
+     0.1965
+    ],
+    [
+     -0.2318,
+     -0.078,
+     0.21
+    ]
+   ],
+   "digest": "d0c7d0badf1755e0"
+  },
+  {
+   "name": "shin_R_ankle_piston_b_cyl",
+   "asm": "legs",
+   "part": "ankle_piston_b_cyl",
+   "part_de": "Knöchelkolben",
+   "side": "R",
+   "verts": 58,
+   "tris": 56,
+   "bbox": [
+    [
+     -0.2549,
+     -0.106,
+     0.1998
+    ],
+    [
+     -0.2334,
+     -0.0798,
+     0.2918
+    ]
+   ],
+   "digest": "1bd9561ab1b6c83f"
+  },
+  {
+   "name": "shin_R_ankle_piston_b_rod",
+   "asm": "legs",
+   "part": "ankle_piston_b_rod",
+   "part_de": "Knöchelkolben (Stange)",
+   "side": "R",
+   "verts": 58,
+   "tris": 56,
+   "bbox": [
+    [
+     -0.2447,
+     -0.0919,
+     0.1354
+    ],
+    [
+     -0.2311,
+     -0.0744,
+     0.2139
+    ]
+   ],
+   "digest": "cd32249d2bb778d1"
+  },
+  {
+   "name": "shin_R_boot_cuff",
+   "asm": "legs",
+   "part": "boot_cuff",
+   "part_de": "Stiefelschaft",
+   "side": "R",
+   "verts": 2111,
+   "tris": 3432,
+   "bbox": [
+    [
+     -0.2459,
+     -0.1471,
+     0.1077
+    ],
+    [
+     -0.0922,
+     0.0008,
+     0.1966
+    ]
+   ],
+   "digest": "53317f8f95e57c11"
+  },
+  {
+   "name": "shin_R_boot_cuff_edge",
+   "asm": "legs",
+   "part": "boot_cuff_edge",
+   "part_de": "Zierkante",
+   "side": "R",
+   "verts": 860,
+   "tris": 1188,
+   "bbox": [
+    [
+     -0.2478,
+     -0.1493,
+     0.1693
+    ],
+    [
+     -0.0903,
+     0.001,
+     0.1989
+    ]
+   ],
+   "digest": "dd963dda79ec2090"
+  },
+  {
+   "name": "shin_R_calf",
+   "asm": "legs",
+   "part": "calf",
+   "part_de": "Wadenplatte",
+   "side": "R",
+   "verts": 792,
+   "tris": 1188,
+   "bbox": [
+    [
+     -0.2365,
+     -0.0402,
+     0.2561
+    ],
+    [
+     -0.0971,
+     -0.0051,
+     0.4189
+    ]
+   ],
+   "digest": "16f6c3d7486129f2"
+  },
+  {
+   "name": "shin_R_knee_axle",
+   "asm": "legs",
+   "part": "knee_axle",
+   "part_de": "Kniegelenk",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.2335,
+     -0.1875,
+     0.4356
+    ],
+    [
+     -0.096,
+     -0.0768,
+     0.5482
+    ]
+   ],
+   "digest": "8230c5e12f9d6666"
+  },
+  {
+   "name": "shin_R_knee_cap",
+   "asm": "legs",
+   "part": "knee_cap",
+   "part_de": "Kniekappe",
+   "side": "R",
+   "verts": 1826,
+   "tris": 2576,
+   "bbox": [
+    [
+     -0.2424,
+     -0.2155,
+     0.4002
+    ],
+    [
+     -0.0882,
+     -0.1516,
+     0.5453
+    ]
+   ],
+   "digest": "726ce556ed9542c6"
+  },
+  {
+   "name": "shin_R_knee_cap_edge",
+   "asm": "legs",
+   "part": "knee_cap_edge",
+   "part_de": "Zierkante",
+   "side": "R",
+   "verts": 452,
+   "tris": 564,
+   "bbox": [
+    [
+     -0.2385,
+     -0.1975,
+     0.4009
+    ],
+    [
+     -0.0933,
+     -0.1572,
+     0.4126
+    ]
+   ],
+   "digest": "2f4ba9bc301a293a"
+  },
+  {
+   "name": "shin_R_knee_disc",
+   "asm": "legs",
+   "part": "knee_disc",
+   "part_de": "Medaillon",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.2374,
+     -0.1765,
+     0.4466
+    ],
+    [
+     -0.0922,
+     -0.0879,
+     0.5372
+    ]
+   ],
+   "digest": "41210c93b8dfaff5"
+  },
+  {
+   "name": "shin_R_knee_hub",
+   "asm": "legs",
+   "part": "knee_hub",
+   "part_de": "Medaillonnabe",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.2411,
+     -0.1552,
+     0.4678
+    ],
+    [
+     -0.0885,
+     -0.1092,
+     0.516
+    ]
+   ],
+   "digest": "d0bb7cabec6240ce"
+  },
+  {
+   "name": "shin_R_knee_ring",
+   "asm": "legs",
+   "part": "knee_ring",
+   "part_de": "Medaillonring",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.2392,
+     -0.1658,
+     0.4572
+    ],
+    [
+     -0.0903,
+     -0.0985,
+     0.5266
+    ]
+   ],
+   "digest": "98a70d9aee844d01"
+  },
+  {
+   "name": "shin_R_shin_bolt_a",
+   "asm": "legs",
+   "part": "shin_bolt_a",
+   "part_de": "Bolzen",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.1828,
+     -0.1842,
+     0.237
+    ],
+    [
+     -0.1756,
+     -0.1793,
+     0.2445
+    ]
+   ],
+   "digest": "87f83b4501ab3b72"
+  },
+  {
+   "name": "shin_R_shin_bolt_b",
+   "asm": "legs",
+   "part": "shin_bolt_b",
+   "part_de": "Bolzen",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.1608,
+     -0.1842,
+     0.2367
+    ],
+    [
+     -0.1536,
+     -0.1793,
+     0.2442
+    ]
+   ],
+   "digest": "0a6cfadb1d51a336"
+  },
+  {
+   "name": "shin_R_shin_core",
+   "asm": "legs",
+   "part": "shin_core",
+   "part_de": "Schienbein",
+   "side": "R",
+   "verts": 1374,
+   "tris": 2576,
+   "bbox": [
+    [
+     -0.2488,
+     -0.2022,
+     0.1022
+    ],
+    [
+     -0.0846,
+     -0.0108,
+     0.475
+    ]
+   ],
+   "digest": "eda5ea44ceab5ac5"
+  },
+  {
+   "name": "shin_R_shin_light_bezel",
+   "asm": "legs",
+   "part": "shin_light_bezel",
+   "part_de": "Lichtfassung",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.1724,
+     -0.2044,
+     0.323
+    ],
+    [
+     -0.1616,
+     -0.2,
+     0.3339
+    ]
+   ],
+   "digest": "8b6b0134c7535aed"
+  },
+  {
+   "name": "shin_R_shin_light_lamp",
+   "asm": "legs",
+   "part": "shin_light_lamp",
+   "part_de": "Statuslicht",
+   "side": "R",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.1702,
+     -0.2048,
+     0.3251
+    ],
+    [
+     -0.1638,
+     -0.1996,
+     0.3319
+    ]
+   ],
+   "digest": "7359bb5fd4db68b6"
+  },
+  {
+   "name": "shin_R_shin_plate",
+   "asm": "legs",
+   "part": "shin_plate",
+   "part_de": "Schienbeinlage",
+   "side": "R",
+   "verts": 735,
+   "tris": 1160,
+   "bbox": [
+    [
+     -0.1982,
+     -0.1987,
+     0.2252
+    ],
+    [
+     -0.1371,
+     -0.1734,
+     0.313
+    ]
+   ],
+   "digest": "3b50ed27eed98e80"
+  },
+  {
+   "name": "shin_R_shin_shell",
+   "asm": "legs",
+   "part": "shin_shell",
+   "part_de": "Schienbeinschale",
+   "side": "R",
+   "verts": 2326,
+   "tris": 3566,
+   "bbox": [
+    [
+     -0.2566,
+     -0.2101,
+     0.1405
+    ],
+    [
+     -0.076,
+     -0.0871,
+     0.4299
+    ]
+   ],
+   "digest": "5d164edbf8f1ed8f"
+  },
+  {
+   "name": "shin_R_shin_shell_rim_a",
+   "asm": "legs",
+   "part": "shin_shell_rim_a",
+   "part_de": "Zierkante",
+   "side": "R",
+   "verts": 429,
+   "tris": 608,
+   "bbox": [
+    [
+     -0.2597,
+     -0.1235,
+     0.1502
+    ],
+    [
+     -0.2424,
+     -0.0887,
+     0.43
+    ]
+   ],
+   "digest": "a1e93354b0d7c553"
+  },
+  {
+   "name": "shin_R_shin_shell_rim_b",
+   "asm": "legs",
+   "part": "shin_shell_rim_b",
+   "part_de": "Zierkante",
+   "side": "R",
+   "verts": 429,
+   "tris": 608,
+   "bbox": [
+    [
+     -0.0965,
+     -0.1235,
+     0.1481
+    ],
+    [
+     -0.0728,
+     -0.0887,
+     0.4276
+    ]
+   ],
+   "digest": "15f2b3d195135609"
+  },
+  {
+   "name": "shoulder_l_axle",
+   "asm": "upper_body",
+   "part": "shoulder_l_axle",
+   "part_de": "Schultergelenk",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.169,
+     -0.0335,
+     1.2387
+    ],
+    [
+     0.3056,
+     0.1026,
+     1.3596
+    ]
+   ],
+   "digest": "9f5d0fb1c74b5e32"
+  },
+  {
+   "name": "shoulder_l_disc",
+   "asm": "upper_body",
+   "part": "shoulder_l_disc",
+   "part_de": "Medaillon",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.1674,
+     -0.0229,
+     1.2501
+    ],
+    [
+     0.3072,
+     0.092,
+     1.3482
+    ]
+   ],
+   "digest": "e94be71219407622"
+  },
+  {
+   "name": "shoulder_l_hub",
+   "asm": "upper_body",
+   "part": "shoulder_l_hub",
+   "part_de": "Medaillonnabe",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.1679,
+     -0.0018,
+     1.2721
+    ],
+    [
+     0.3066,
+     0.071,
+     1.3262
+    ]
+   ],
+   "digest": "b45d96e13dcbc12d"
+  },
+  {
+   "name": "shoulder_l_med_disc",
+   "asm": "upper_body",
+   "part": "shoulder_l_med_disc",
+   "part_de": "Medaillon",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.3868,
+     0.0466,
+     1.198
+    ],
+    [
+     0.4261,
+     0.1017,
+     1.2537
+    ]
+   ],
+   "digest": "eef97c6fc7ad8c44"
+  },
+  {
+   "name": "shoulder_l_med_hub",
+   "asm": "upper_body",
+   "part": "shoulder_l_med_hub",
+   "part_de": "Medaillonnabe",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.3878,
+     0.058,
+     1.2085
+    ],
+    [
+     0.4252,
+     0.0902,
+     1.2432
+    ]
+   ],
+   "digest": "04be9532b3d20665"
+  },
+  {
+   "name": "shoulder_l_med_ring",
+   "asm": "upper_body",
+   "part": "shoulder_l_med_ring",
+   "part_de": "Medaillonring",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.3873,
+     0.0523,
+     1.2033
+    ],
+    [
+     0.4256,
+     0.096,
+     1.2484
+    ]
+   ],
+   "digest": "b54c43962543a2a0"
+  },
+  {
+   "name": "shoulder_l_ring",
+   "asm": "upper_body",
+   "part": "shoulder_l_ring",
+   "part_de": "Medaillonring",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.1677,
+     -0.0124,
+     1.2611
+    ],
+    [
+     0.3069,
+     0.0815,
+     1.3372
+    ]
+   ],
+   "digest": "c29ba3f92a871ae3"
+  },
+  {
+   "name": "shoulder_r_axle",
+   "asm": "upper_body",
+   "part": "shoulder_r_axle",
+   "part_de": "Schultergelenk",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.2738,
+     -0.122,
+     1.2593
+    ],
+    [
+     -0.1372,
+     0.014,
+     1.3802
+    ]
+   ],
+   "digest": "8d215916a56a6296"
+  },
+  {
+   "name": "shoulder_r_disc",
+   "asm": "upper_body",
+   "part": "shoulder_r_disc",
+   "part_de": "Medaillon",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.2754,
+     -0.1114,
+     1.2707
+    ],
+    [
+     -0.1356,
+     0.0034,
+     1.3688
+    ]
+   ],
+   "digest": "94ecbaa11407f454"
+  },
+  {
+   "name": "shoulder_r_hub",
+   "asm": "upper_body",
+   "part": "shoulder_r_hub",
+   "part_de": "Medaillonnabe",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.2748,
+     -0.0904,
+     1.2927
+    ],
+    [
+     -0.1361,
+     -0.0176,
+     1.3468
+    ]
+   ],
+   "digest": "41418d1f6abe3c2f"
+  },
+  {
+   "name": "shoulder_r_med_disc",
+   "asm": "upper_body",
+   "part": "shoulder_r_med_disc",
+   "part_de": "Medaillon",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.4006,
+     -0.111,
+     1.235
+    ],
+    [
+     -0.365,
+     -0.0564,
+     1.2902
+    ]
+   ],
+   "digest": "2ab72931904b9286"
+  },
+  {
+   "name": "shoulder_r_med_hub",
+   "asm": "upper_body",
+   "part": "shoulder_r_med_hub",
+   "part_de": "Medaillonnabe",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.4008,
+     -0.0994,
+     1.2462
+    ],
+    [
+     -0.3647,
+     -0.068,
+     1.279
+    ]
+   ],
+   "digest": "f796e1d31bccbbdb"
+  },
+  {
+   "name": "shoulder_r_med_ring",
+   "asm": "upper_body",
+   "part": "shoulder_r_med_ring",
+   "part_de": "Medaillonring",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.4007,
+     -0.1052,
+     1.2406
+    ],
+    [
+     -0.3648,
+     -0.0622,
+     1.2846
+    ]
+   ],
+   "digest": "17ad93d9e636d110"
+  },
+  {
+   "name": "shoulder_r_ring",
+   "asm": "upper_body",
+   "part": "shoulder_r_ring",
+   "part_de": "Medaillonring",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     -0.2751,
+     -0.1009,
+     1.2817
+    ],
+    [
+     -0.1359,
+     -0.0071,
+     1.3578
+    ]
+   ],
+   "digest": "afb4664ed326c8cc"
+  },
+  {
+   "name": "solar",
+   "asm": "upper_body",
+   "part": "solar",
+   "part_de": "Sonnenplatte",
+   "side": "C",
+   "verts": 1101,
+   "tris": 1528,
+   "bbox": [
+    [
+     -0.1188,
+     -0.158,
+     1.0971
+    ],
+    [
+     0.1818,
+     -0.0828,
+     1.1944
+    ]
+   ],
+   "digest": "0692faf60c2acdf4"
+  },
+  {
+   "name": "solar_bolt_a",
+   "asm": "upper_body",
+   "part": "solar_bolt_a",
+   "part_de": "Bolzen",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.0494,
+     -0.1283,
+     1.1374
+    ],
+    [
+     0.0581,
+     -0.123,
+     1.1459
+    ]
+   ],
+   "digest": "eea3c906ba500402"
+  },
+  {
+   "name": "solar_bolt_b",
+   "asm": "upper_body",
+   "part": "solar_bolt_b",
+   "part_de": "Bolzen",
+   "side": "C",
+   "verts": 200,
+   "tris": 236,
+   "bbox": [
+    [
+     0.0063,
+     -0.1369,
+     1.1394
+    ],
+    [
+     0.015,
+     -0.1316,
+     1.1479
+    ]
+   ],
+   "digest": "04cc7c381f741995"
+  },
+  {
+   "name": "solar_rim_a",
+   "asm": "upper_body",
+   "part": "solar_rim_a",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 408,
+   "tris": 440,
+   "bbox": [
+    [
+     0.074,
+     -0.1097,
+     1.097
+    ],
+    [
+     0.1836,
+     -0.0863,
+     1.1803
+    ]
+   ],
+   "digest": "077d478f0f8409e6"
+  },
+  {
+   "name": "solar_rim_b",
+   "asm": "upper_body",
+   "part": "solar_rim_b",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 397,
+   "tris": 440,
+   "bbox": [
+    [
+     -0.1203,
+     -0.1515,
+     1.1015
+    ],
+    [
+     -0.0184,
+     -0.1272,
+     1.1944
+    ]
+   ],
+   "digest": "5ec0e1920f746144"
+  },
+  {
+   "name": "stub",
+   "asm": "head",
+   "part": "stub",
+   "part_de": "Antennenstab",
+   "side": "C",
+   "verts": 50,
+   "tris": 48,
+   "bbox": [
+    [
+     0.1253,
+     0.0081,
+     1.5347
+    ],
+    [
+     0.14,
+     0.0209,
+     1.585
+    ]
+   ],
+   "digest": "ea814e973251c410"
+  },
+  {
+   "name": "stub_cap",
+   "asm": "head",
+   "part": "stub_cap",
+   "part_de": "Endkappe",
+   "side": "C",
+   "verts": 66,
+   "tris": 64,
+   "bbox": [
+    [
+     0.1289,
+     0.0101,
+     1.5764
+    ],
+    [
+     0.1427,
+     0.0236,
+     1.5879
+    ]
+   ],
+   "digest": "f797cd5fb4a92f4a"
+  },
+  {
+   "name": "stub_clip",
+   "asm": "head",
+   "part": "stub_clip",
+   "part_de": "Stabhalter",
+   "side": "C",
+   "verts": 96,
+   "tris": 108,
+   "bbox": [
+    [
+     0.1231,
+     0.0064,
+     1.5329
+    ],
+    [
+     0.1348,
+     0.0178,
+     1.544
+    ]
+   ],
+   "digest": "a2e09495a358cc32"
+  },
+  {
+   "name": "tasset",
+   "asm": "lower_body",
+   "part": "tasset",
+   "part_de": "Lendenplatte",
+   "side": "C",
+   "verts": 836,
+   "tris": 1344,
+   "bbox": [
+    [
+     -0.0581,
+     -0.1067,
+     0.7428
+    ],
+    [
+     0.0818,
+     -0.09,
+     0.9494
+    ]
+   ],
+   "digest": "bdb0b8930b4edd93"
+  },
+  {
+   "name": "tasset_rim_a",
+   "asm": "lower_body",
+   "part": "tasset_rim_a",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 444,
+   "tris": 608,
+   "bbox": [
+    [
+     0.046,
+     -0.1081,
+     0.7463
+    ],
+    [
+     0.0829,
+     -0.0989,
+     0.9496
+    ]
+   ],
+   "digest": "3ddac00053d33b1e"
+  },
+  {
+   "name": "tasset_rim_b",
+   "asm": "lower_body",
+   "part": "tasset_rim_b",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 440,
+   "tris": 608,
+   "bbox": [
+    [
+     -0.0594,
+     -0.1081,
+     0.7427
+    ],
+    [
+     0.0203,
+     -0.0989,
+     0.9333
+    ]
+   ],
+   "digest": "7c6973733099dfed"
+  },
+  {
+   "name": "tasset_side_l",
+   "asm": "lower_body",
+   "part": "tasset_side_l",
+   "part_de": "Beintasche",
+   "side": "C",
+   "verts": 624,
+   "tris": 984,
+   "bbox": [
+    [
+     0.142,
+     -0.0887,
+     0.7484
+    ],
+    [
+     0.278,
+     0.0632,
+     0.9649
+    ]
+   ],
+   "digest": "a41f8e4c397f143a"
+  },
+  {
+   "name": "tasset_side_l_edge",
+   "asm": "lower_body",
+   "part": "tasset_side_l_edge",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 248,
+   "tris": 324,
+   "bbox": [
+    [
+     0.2292,
+     -0.0902,
+     0.7492
+    ],
+    [
+     0.2801,
+     0.0642,
+     0.7593
+    ]
+   ],
+   "digest": "8f4b857f2430cdcd"
+  },
+  {
+   "name": "tasset_side_l_rim_a",
+   "asm": "lower_body",
+   "part": "tasset_side_l_rim_a",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 323,
+   "tris": 440,
+   "bbox": [
+    [
+     0.1745,
+     0.0517,
+     0.7536
+    ],
+    [
+     0.2684,
+     0.0641,
+     0.9642
+    ]
+   ],
+   "digest": "fae3f587b0215dd0"
+  },
+  {
+   "name": "tasset_side_l_rim_b",
+   "asm": "lower_body",
+   "part": "tasset_side_l_rim_b",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 324,
+   "tris": 440,
+   "bbox": [
+    [
+     0.1486,
+     -0.09,
+     0.7492
+    ],
+    [
+     0.2347,
+     -0.0736,
+     0.9611
+    ]
+   ],
+   "digest": "c7237fd7c91e59e6"
+  },
+  {
+   "name": "tasset_side_l_top",
+   "asm": "lower_body",
+   "part": "tasset_side_l_top",
+   "part_de": "Beintasche oben",
+   "side": "C",
+   "verts": 367,
+   "tris": 536,
+   "bbox": [
+    [
+     0.1602,
+     -0.0799,
+     0.8366
+    ],
+    [
+     0.2412,
+     0.0507,
+     0.9662
+    ]
+   ],
+   "digest": "30c44f705d3c32b0"
+  },
+  {
+   "name": "tasset_side_l_top_edge",
+   "asm": "lower_body",
+   "part": "tasset_side_l_top_edge",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 218,
+   "tris": 276,
+   "bbox": [
+    [
+     0.2091,
+     -0.0812,
+     0.8374
+    ],
+    [
+     0.2431,
+     0.0515,
+     0.8454
+    ]
+   ],
+   "digest": "a7b13e77e7a03a61"
+  },
+  {
+   "name": "tasset_side_r",
+   "asm": "lower_body",
+   "part": "tasset_side_r",
+   "part_de": "Beintasche",
+   "side": "C",
+   "verts": 624,
+   "tris": 984,
+   "bbox": [
+    [
+     -0.207,
+     -0.0887,
+     0.6946
+    ],
+    [
+     -0.125,
+     0.0632,
+     0.9263
+    ]
+   ],
+   "digest": "f4e6a30cb6e8f75a"
+  },
+  {
+   "name": "tasset_side_r_edge",
+   "asm": "lower_body",
+   "part": "tasset_side_r_edge",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 248,
+   "tris": 324,
+   "bbox": [
+    [
+     -0.2093,
+     -0.0902,
+     0.6944
+    ],
+    [
+     -0.1584,
+     0.0642,
+     0.7045
+    ]
+   ],
+   "digest": "f05ae3f71d89cfd9"
+  },
+  {
+   "name": "tasset_side_r_rim_a",
+   "asm": "lower_body",
+   "part": "tasset_side_r_rim_a",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 324,
+   "tris": 440,
+   "bbox": [
+    [
+     -0.1636,
+     -0.09,
+     0.7
+    ],
+    [
+     -0.1318,
+     -0.0736,
+     0.9256
+    ]
+   ],
+   "digest": "cb363747e2a5667c"
+  },
+  {
+   "name": "tasset_side_r_rim_b",
+   "asm": "lower_body",
+   "part": "tasset_side_r_rim_b",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 323,
+   "tris": 440,
+   "bbox": [
+    [
+     -0.1972,
+     0.0517,
+     0.6958
+    ],
+    [
+     -0.1577,
+     0.0641,
+     0.9223
+    ]
+   ],
+   "digest": "9413d16ade99257e"
+  },
+  {
+   "name": "tasset_side_r_top",
+   "asm": "lower_body",
+   "part": "tasset_side_r_top",
+   "part_de": "Beintasche oben",
+   "side": "C",
+   "verts": 367,
+   "tris": 536,
+   "bbox": [
+    [
+     -0.1925,
+     -0.0799,
+     0.7872
+    ],
+    [
+     -0.1432,
+     0.0507,
+     0.9241
+    ]
+   ],
+   "digest": "8bc777ab67b66a71"
+  },
+  {
+   "name": "tasset_side_r_top_edge",
+   "asm": "lower_body",
+   "part": "tasset_side_r_top_edge",
+   "part_de": "Zierkante",
+   "side": "C",
+   "verts": 218,
+   "tris": 276,
+   "bbox": [
+    [
+     -0.1946,
+     -0.0812,
+     0.7869
+    ],
+    [
+     -0.1607,
+     0.0515,
+     0.7949
+    ]
+   ],
+   "digest": "127699e719cb9e53"
+  },
+  {
+   "name": "tasset_stripe_a",
+   "asm": "lower_body",
+   "part": "tasset_stripe_a",
+   "part_de": "Akzentstreifen",
+   "side": "C",
+   "verts": 170,
+   "tris": 216,
+   "bbox": [
+    [
+     0.0118,
+     -0.1084,
+     0.8443
+    ],
+    [
+     0.0265,
+     -0.0997,
+     0.9378
+    ]
+   ],
+   "digest": "99e31b4428481c68"
+  },
+  {
+   "name": "tasset_stripe_b",
+   "asm": "lower_body",
+   "part": "tasset_stripe_b",
+   "part_de": "Akzentstreifen",
+   "side": "C",
+   "verts": 170,
+   "tris": 216,
+   "bbox": [
+    [
+     0.0037,
+     -0.1084,
+     0.8433
+    ],
+    [
+     0.0179,
+     -0.0997,
+     0.9368
+    ]
+   ],
+   "digest": "ca2f1ddf7fe34da8"
+  },
+  {
+   "name": "thigh_L_hip_ball",
+   "asm": "legs",
+   "part": "hip_ball",
+   "part_de": "Hüftkugel",
+   "side": "L",
+   "verts": 1626,
+   "tris": 3248,
+   "bbox": [
+    [
+     0.0661,
+     -0.0698,
+     0.8224
+    ],
+    [
+     0.2061,
+     0.0698,
+     0.9548
+    ]
+   ],
+   "digest": "d98f8026c7bc5035"
+  },
+  {
+   "name": "thigh_L_thigh_core",
+   "asm": "legs",
+   "part": "thigh_core",
+   "part_de": "Oberschenkel",
+   "side": "L",
+   "verts": 1336,
+   "tris": 2576,
+   "bbox": [
+    [
+     0.0462,
+     -0.1096,
+     0.4888
+    ],
+    [
+     0.2319,
+     0.0898,
+     0.8764
+    ]
+   ],
+   "digest": "f63dda8ba06d8c5c"
+  },
+  {
+   "name": "thigh_L_thigh_cuff",
+   "asm": "legs",
+   "part": "thigh_cuff",
+   "part_de": "Hüftmanschette",
+   "side": "L",
+   "verts": 1061,
+   "tris": 1440,
+   "bbox": [
+    [
+     0.0441,
+     -0.1047,
+     0.8201
+    ],
+    [
+     0.2312,
+     0.0937,
+     0.8612
+    ]
+   ],
+   "digest": "25672b80a4356de2"
+  },
+  {
+   "name": "thigh_L_thigh_cuff_trim",
+   "asm": "legs",
+   "part": "thigh_cuff_trim",
+   "part_de": "Manschettenkante",
+   "side": "L",
+   "verts": 1029,
+   "tris": 1440,
+   "bbox": [
+    [
+     0.0472,
+     -0.102,
+     0.8173
+    ],
+    [
+     0.2283,
+     0.0904,
+     0.8373
+    ]
+   ],
+   "digest": "8413e5dbbfb55b1b"
+  },
+  {
+   "name": "thigh_L_thigh_seam_0",
+   "asm": "legs",
+   "part": "thigh_seam_0",
+   "part_de": "Fuge",
+   "side": "L",
+   "verts": 472,
+   "tris": 636,
+   "bbox": [
+    [
+     0.0756,
+     -0.121,
+     0.6853
+    ],
+    [
+     0.2422,
+     0.0206,
+     0.6986
+    ]
+   ],
+   "digest": "efa409a18b52a98e"
+  },
+  {
+   "name": "thigh_L_thigh_shell",
+   "asm": "legs",
+   "part": "thigh_shell",
+   "part_de": "Oberschenkelschale",
+   "side": "L",
+   "verts": 2661,
+   "tris": 4024,
+   "bbox": [
+    [
+     0.0733,
+     -0.1206,
+     0.543
+    ],
+    [
+     0.2431,
+     0.0232,
+     0.7649
+    ]
+   ],
+   "digest": "b2d7223316ab5204"
+  },
+  {
+   "name": "thigh_L_thigh_shell_rim_a",
+   "asm": "legs",
+   "part": "thigh_shell_rim_a",
+   "part_de": "Zierkante",
+   "side": "L",
+   "verts": 818,
+   "tris": 944,
+   "bbox": [
+    [
+     0.2297,
+     -0.0925,
+     0.5432
+    ],
+    [
+     0.2445,
+     0.024,
+     0.7638
+    ]
+   ],
+   "digest": "e8f40643bcefbd0f"
+  },
+  {
+   "name": "thigh_L_thigh_shell_rim_b",
+   "asm": "legs",
+   "part": "thigh_shell_rim_b",
+   "part_de": "Zierkante",
+   "side": "L",
+   "verts": 855,
+   "tris": 944,
+   "bbox": [
+    [
+     0.0723,
+     -0.122,
+     0.5468
+    ],
+    [
+     0.1954,
+     -0.1136,
+     0.7647
+    ]
+   ],
+   "digest": "62200121e066f81d"
+  },
+  {
+   "name": "thigh_L_thigh_stripe_a",
+   "asm": "legs",
+   "part": "thigh_stripe_a",
+   "part_de": "Akzentstreifen",
+   "side": "L",
+   "verts": 166,
+   "tris": 216,
+   "bbox": [
+    [
+     0.2396,
+     -0.0059,
+     0.6408
+    ],
+    [
+     0.243,
+     0.0021,
+     0.7109
+    ]
+   ],
+   "digest": "205c5c096f38902f"
+  },
+  {
+   "name": "thigh_L_thigh_stripe_b",
+   "asm": "legs",
+   "part": "thigh_stripe_b",
+   "part_de": "Akzentstreifen",
+   "side": "L",
+   "verts": 166,
+   "tris": 216,
+   "bbox": [
+    [
+     0.2396,
+     -0.0141,
+     0.6415
+    ],
+    [
+     0.243,
+     -0.0065,
+     0.7115
+    ]
+   ],
+   "digest": "05dc7cb9646317f3"
+  },
+  {
+   "name": "thigh_R_hip_ball",
+   "asm": "legs",
+   "part": "hip_ball",
+   "part_de": "Hüftkugel",
+   "side": "R",
+   "verts": 1626,
+   "tris": 3248,
+   "bbox": [
+    [
+     -0.1716,
+     -0.0693,
+     0.7892
+    ],
+    [
+     -0.0324,
+     0.0693,
+     0.9284
+    ]
+   ],
+   "digest": "8120906d260cdb4b"
+  },
+  {
+   "name": "thigh_R_thigh_core",
+   "asm": "legs",
+   "part": "thigh_core",
+   "part_de": "Oberschenkel",
+   "side": "R",
+   "verts": 1336,
+   "tris": 2576,
+   "bbox": [
+    [
+     -0.2321,
+     -0.1978,
+     0.463
+    ],
+    [
+     -0.0206,
+     0.0742,
+     0.8776
+    ]
+   ],
+   "digest": "e47690f4de6bcdf9"
+  },
+  {
+   "name": "thigh_R_thigh_cuff",
+   "asm": "legs",
+   "part": "thigh_cuff",
+   "part_de": "Hüftmanschette",
+   "side": "R",
+   "verts": 1061,
+   "tris": 1440,
+   "bbox": [
+    [
+     -0.2073,
+     -0.1146,
+     0.7612
+    ],
+    [
+     -0.0152,
+     0.0775,
+     0.8662
+    ]
+   ],
+   "digest": "6b3e5af0cd530efa"
+  },
+  {
+   "name": "thigh_R_thigh_cuff_trim",
+   "asm": "legs",
+   "part": "thigh_cuff_trim",
+   "part_de": "Manschettenkante",
+   "side": "R",
+   "verts": 1029,
+   "tris": 1440,
+   "bbox": [
+    [
+     -0.2047,
+     -0.1129,
+     0.7594
+    ],
+    [
+     -0.019,
+     0.0692,
+     0.8446
+    ]
+   ],
+   "digest": "c84a198201c48a51"
+  },
+  {
+   "name": "thigh_R_thigh_seam_0",
+   "asm": "legs",
+   "part": "thigh_seam_0",
+   "part_de": "Fuge",
+   "side": "R",
+   "verts": 472,
+   "tris": 636,
+   "bbox": [
+    [
+     -0.2354,
+     -0.1682,
+     0.6747
+    ],
+    [
+     -0.0632,
+     -0.0337,
+     0.7185
+    ]
+   ],
+   "digest": "25be821467f211eb"
+  },
+  {
+   "name": "thigh_R_thigh_shell",
+   "asm": "legs",
+   "part": "thigh_shell",
+   "part_de": "Oberschenkelschale",
+   "side": "R",
+   "verts": 2661,
+   "tris": 4024,
+   "bbox": [
+    [
+     -0.2425,
+     -0.1997,
+     0.5487
+    ],
+    [
+     -0.0618,
+     -0.0319,
+     0.7825
+    ]
+   ],
+   "digest": "191eee63ce6291b8"
+  },
+  {
+   "name": "thigh_R_thigh_shell_rim_a",
+   "asm": "legs",
+   "part": "thigh_shell_rim_a",
+   "part_de": "Zierkante",
+   "side": "R",
+   "verts": 818,
+   "tris": 944,
+   "bbox": [
+    [
+     -0.2439,
+     -0.1229,
+     0.5501
+    ],
+    [
+     -0.2175,
+     -0.0313,
+     0.7786
+    ]
+   ],
+   "digest": "fbfa5f00c1c12752"
+  },
+  {
+   "name": "thigh_R_thigh_shell_rim_b",
+   "asm": "legs",
+   "part": "thigh_shell_rim_b",
+   "part_de": "Zierkante",
+   "side": "R",
+   "verts": 855,
+   "tris": 944,
+   "bbox": [
+    [
+     -0.1722,
+     -0.2011,
+     0.5614
+    ],
+    [
+     -0.0607,
+     -0.1496,
+     0.7806
+    ]
+   ],
+   "digest": "fe17544e7793cbe4"
+  },
+  {
+   "name": "thigh_R_thigh_stripe_a",
+   "asm": "legs",
+   "part": "thigh_stripe_a",
+   "part_de": "Akzentstreifen",
+   "side": "R",
+   "verts": 166,
+   "tris": 216,
+   "bbox": [
+    [
+     -0.2391,
+     -0.0717,
+     0.638
+    ],
+    [
+     -0.2308,
+     -0.0459,
+     0.7045
+    ]
+   ],
+   "digest": "51959f9b4a73131a"
+  },
+  {
+   "name": "thigh_R_thigh_stripe_b",
+   "asm": "legs",
+   "part": "thigh_stripe_b",
+   "part_de": "Akzentstreifen",
+   "side": "R",
+   "verts": 166,
+   "tris": 216,
+   "bbox": [
+    [
+     -0.2386,
+     -0.0795,
+     0.6408
+    ],
+    [
+     -0.2303,
+     -0.054,
+     0.7074
+    ]
+   ],
+   "digest": "705709fbdef9fbcd"
+  },
+  {
+   "name": "torso_core",
+   "asm": "upper_body",
+   "part": "torso_core",
+   "part_de": "Rumpf",
+   "side": "C",
+   "verts": 2010,
+   "tris": 3920,
+   "bbox": [
+    [
+     -0.1993,
+     -0.1556,
+     1.0322
+    ],
+    [
+     0.228,
+     0.1423,
+     1.3977
+    ]
+   ],
+   "digest": "0f69674bc47c02b5"
+  },
+  {
+   "name": "waist_core",
+   "asm": "upper_body",
+   "part": "waist_core",
+   "part_de": "Taillenkern",
+   "side": "C",
+   "verts": 674,
+   "tris": 1232,
+   "bbox": [
+    [
+     -0.0903,
+     -0.0794,
+     0.9545
+    ],
+    [
+     0.0979,
+     0.0732,
+     1.086
+    ]
+   ],
+   "digest": "3eb0533ffd2c42a3"
+  },
+  {
+   "name": "waist_piston_l_collar",
+   "asm": "upper_body",
+   "part": "waist_piston_l_collar",
+   "part_de": "Taillenkolben (Manschette)",
+   "side": "C",
+   "verts": 58,
+   "tris": 56,
+   "bbox": [
+    [
+     0.103,
+     -0.014,
+     1.0408
+    ],
+    [
+     0.1286,
+     0.0099,
+     1.0558
+    ]
+   ],
+   "digest": "dca7a39df9023ed5"
+  },
+  {
+   "name": "waist_piston_l_cyl",
+   "asm": "upper_body",
+   "part": "waist_piston_l_cyl",
+   "part_de": "Taillenkolben",
+   "side": "C",
+   "verts": 58,
+   "tris": 56,
+   "bbox": [
+    [
+     0.0898,
+     -0.0119,
+     0.9625
+    ],
+    [
+     0.1261,
+     0.0116,
+     1.0525
+    ]
+   ],
+   "digest": "6a199d8684d8e577"
+  },
+  {
+   "name": "waist_piston_l_rod",
+   "asm": "upper_body",
+   "part": "waist_piston_l_rod",
+   "part_de": "Taillenkolben (Stange)",
+   "side": "C",
+   "verts": 58,
+   "tris": 56,
+   "bbox": [
+    [
+     0.109,
+     -0.0099,
+     1.0377
+    ],
+    [
+     0.1332,
+     0.0033,
+     1.1139
+    ]
+   ],
+   "digest": "9bffa031d2d2c2b8"
+  },
+  {
+   "name": "waist_piston_r_collar",
+   "asm": "upper_body",
+   "part": "waist_piston_r_collar",
+   "part_de": "Taillenkolben (Manschette)",
+   "side": "C",
+   "verts": 58,
+   "tris": 56,
+   "bbox": [
+    [
+     -0.1146,
+     -0.0579,
+     1.0518
+    ],
+    [
+     -0.0899,
+     -0.0334,
+     1.0652
+    ]
+   ],
+   "digest": "969afaf3605acc62"
+  },
+  {
+   "name": "waist_piston_r_cyl",
+   "asm": "upper_body",
+   "part": "waist_piston_r_cyl",
+   "part_de": "Taillenkolben",
+   "side": "C",
+   "verts": 58,
+   "tris": 56,
+   "bbox": [
+    [
+     -0.1124,
+     -0.0556,
+     0.9724
+    ],
+    [
+     -0.0863,
+     -0.0276,
+     1.0619
+    ]
+   ],
+   "digest": "13cb6f6b91b57116"
+  },
+  {
+   "name": "waist_piston_r_rod",
+   "asm": "upper_body",
+   "part": "waist_piston_r_rod",
+   "part_de": "Taillenkolben (Stange)",
+   "side": "C",
+   "verts": 58,
+   "tris": 56,
+   "bbox": [
+    [
+     -0.1118,
+     -0.0569,
+     1.0481
+    ],
+    [
+     -0.0966,
+     -0.0398,
+     1.1245
+    ]
+   ],
+   "digest": "bf979a15512ab640"
+  }
+ ]
+}

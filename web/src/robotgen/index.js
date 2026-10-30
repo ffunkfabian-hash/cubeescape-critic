@@ -1,5 +1,5 @@
 // three.js generator of the robot bodies (0.14 "Foundry" Wächter, 0.15 "Anvil" Paladin and Mechanik): replaces the Blender
-// export of cubeescape-ballon round 5 (blender/robot/export_robot.py) and builds the same scene as the GLB in
+// export of cubeescape-ballon round 5 (archive/blender/robot/export_robot.py) and builds the same scene as the GLB in
 // assets/robot-bodies/<name>/: one root node per segment (SEG_<segment>, ARM_<side>_<segment>, extras asm and side), the meshes
 // below it (indexed like the GLB) with extras asm, part, part_de, side and study, flat role materials MT_<role>_color. glTF axes
 // (metres, Y up, front +Z); the parts are built in the Ballon world (mm, Z up, front −Y) and converted like the glTF exporter.

@@ -6,7 +6,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { buildRobotBody } from '../src/robotgen/index.js';
-const GENERATED = ['waechter', 'paladin', 'mechanik'];   // robotBodies.js › GENERATED (that module imports GLB urls, Vite only)
+const GENERATED = ['waechter', 'paladin', 'mechanik'];   // the bodies of robotBodies.js › ROBOT_MODELS (that module imports GLB urls, Vite only)
 
 const file = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../src/robotgen/cutStages.json');
 const warn = console.warn;

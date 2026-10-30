@@ -15,9 +15,9 @@ Mesh-Quelle ──► Atlas (xatlas) ──► Karten im UV-Raum ──► Kante
                           Viewer: Rezept aus skins.json ──► Shader je Fragment ──► live, Texturexport, GLB
 ```
 
-1. **Quelle** (`web/tools/skin_bake.mjs`): Körper- und Scout-GLB, Helm H direkt aus dem Generator (`buildHelmet`, Stirnblenden an
-   und aus; Ausführung und Akzente tauschen nur Materialien). Seit 0.15 mit `--gen three` auch die Körper aus dem three.js-Generator
-   (`buildRobotBody`, Ablage `assets/skins/<körper>-three/`, siehe unten). Alles in Modellmetern: Körper 1, Helm H 0,25 m je Einheit
+1. **Quelle** (`web/tools/skin_bake.mjs`): Körper- und Scout-GLB – seit 0.18 die Exporte des three.js-Generators
+   (`assets/robot-bodies-three/`, `assets/helmet-scout-three/`, siehe unten) –, Helm H direkt aus dem Generator (`buildHelmet`, Stirnblenden an
+   und aus; Ausführung und Akzente tauschen nur Materialien). Alles in Modellmetern: Körper 1, Helm H 0,25 m je Einheit
    (`helmetFrameMeters`), Scout über seine Einpassung (`scoutFit`) ebenso.
 2. **Atlas** (`web/tools/skinXatlas.mjs`, xatlasjs 0.2.0, WASM): Punkte werden nur verschweißt, wenn auch die Schattierungsnormalen
    übereinstimmen (≤ 20°) – CSG-Dreiecke wachsen zu Flächen zusammen, harte Kanten bleiben Kartengrenzen. Diagramme einmal
@@ -35,20 +35,27 @@ Mesh-Quelle ──► Atlas (xatlas) ──► Karten im UV-Raum ──► Kante
    die Punkte jedes Meshes neu ab – darum funktioniert er auch für Meshes, die erst zur Laufzeit entstehen.
 
 ```bash
-node tools/skin_bake.mjs --model all        # aus web/; je Modell 1–2 min, Karten zur Kontrolle in ../runs/skins/
-node tools/skin_bake.mjs --model all --gen three   # die drei generierten Körper (0.15) und Scout (0.17), je ≈ 1–5 min
+node tools/skin_bake.mjs --model all        # aus web/; je Modell 1–5 min, Karten zur Kontrolle in ../runs/skins/
 ```
 
-**Generierte Körper (0.15 „Anvil“):** `?model=<körper>&gen=three` lädt den Atlas `assets/skins/<körper>-three/`
-(`skinAtlas.js › atlasName`), gebacken aus `buildRobotBody(name)`. Die GLB-Atlanten passen nicht: nur einfache Teile (Zylinder)
-haben dieselbe Signatur, 128–144 von 380–408 Meshes. Teile mit CSG-Fugen (Maske, Wangen, Brust, Schulterpanzer, Kniekappen,
+**Ein Atlas je Modell (0.18 „Prefab“):** Körper und Scout werden aus ihren exportierten GLBs gebacken (`robotgen_export.mjs`). Deren Meshes
+sind dieselben wie beim Bau im Browser (`&gen=three`): gleiche Punkte, Indizes und float32-Positionen, nach dem GLTFLoader-Rückimport
+geprüft (408/383/380/44 Signaturen gleich). Die bisherigen `-three`-Atlanten sind deshalb die Atlanten der Modelle geworden
+(`assets/skins/<körper>/`, `scout/`, neu gebacken aus den GLBs). Körper: `maps.png` bytegleich, nur 3–5 CSG-Einträge (Maske,
+Schienbein, Schulterpanzer) neu, weil der GLTFExporter deren Normalen normiert; Scout: Haube besser verschweißt, Atlas neu gepackt
+(Deckung 57,4 → 58,5 %, [Bericht 0.18](versions/0.18.md#skin-atlanten)). Die Atlanten der
+Blender-GLBs sind entfernt – `&gen=blender` zeigt Skins ohne Karten. `skins.test.mjs` prüft je Modell den GLB und den Live-Aufbau.
+
+**Generierte Körper (0.15 „Anvil“):** Bis 0.17 lud `?model=<körper>&gen=three` einen eigenen Atlas `assets/skins/<körper>-three/`,
+gebacken aus `buildRobotBody(name)`. Die Atlanten der Blender-GLBs passten nicht: nur einfache Teile (Zylinder)
+hatten dieselbe Signatur, 128–144 von 380–408 Meshes. Teile mit CSG-Fugen (Maske, Wangen, Brust, Schulterpanzer, Kniekappen,
 Schienbeinschalen) behalten ihre gebackenen Positionen wie Helm H: Rechnet eine andere Plattform den Schnitt anders, übernimmt das
 Dreieck die UVs des nächsten gebackenen Dreiecks (`transferGeometry`); der Rest des Generators ist reine Arithmetik und wird
 exakt nachgebaut. Größe je Körper ≈ 5 MB `atlas.bin` + 3,4 MB `maps.png` wie bei den GLB-Atlanten, Deckung ≈ 50 %
 (GLB 46 %). `verify` meldet für alle drei Körper mit `&gen=three` jedes Mesh im Atlas.
 
-**Scout aus dem Generator (0.17 „Outrider“):** eigener Atlas `assets/skins/scout-three/` aus `buildScout`
-([Scout](HELM_SCOUT.md#threejs-generator-017-outrider)); geladen, sobald Scout mit `&gen=three` erscheint, allein oder auf einem Körper.
+**Scout aus dem Generator (0.17 „Outrider“):** Atlas aus `buildScout` (bis 0.17 `scout-three`, seit 0.18 `scout`)
+([Scout](HELM_SCOUT.md#threejs-generator-017-outrider)).
 Gebackene Positionen tragen nur die BSP-Teile (Kern, Kragen, Kinnblock, Kieferstücke, Rückmodul) und die Mundwanne (Raycasts); Deckung
 57 %, 3,7 MB `atlas.bin`. `verify` prüft Scout aus dem Generator allein und auf Paladin (44/44).
 
