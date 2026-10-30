@@ -14,13 +14,16 @@ Antworten, Doku und Commit-Messages auf Deutsch; Code, Bezeichner und Kommentare
 - `assets/robot-bodies-three/` – die Körper (Herkunft Ballon Runde 5, 0.10; Pin `web/src/robotgen/data/SOURCE.json`): Lieferpakete aus
   `web/tools/robotgen_export.mjs`, GLB je Körper; Viewer `?model=waechter|paladin|mechanik`, gealtert (`web/src/robotWear.js`), mit Helm H oder Scout
   (`web/src/robotHelmet.js`, Varianten `criticHelmetVariants.json`) im einheitlichen Farbschema (`ballonRoles.json`,
-  `robotHelmetColors.json`); Navigation links in `web/src/navigation.js`
+  `robotHelmetColors.json`); Navigation in `web/src/navigation.js` – seit 0.20 Leiste oben (Ansichten) und zwei Seitenleisten mit Bildkacheln (links Körper/Kopf/Teile, rechts Look)
+  (Vorschaubilder `web/src/navThumbs/` aus `web/tools/nav_thumbs.mjs`, nach Form-/Skinänderungen neu rendern), Seitenwechsel ohne Neuladen
+  (`main.js › go`) und Ladebalken `web/src/loadingBar.js`
   ([docs/ROBOTER_BALLON.md](docs/ROBOTER_BALLON.md)).
 - `docs/SKINS.md`, `assets/skins/<modell>/` – Skins Rost, Glut, Ornat (0.13) für Körper und Helme, ohne Blender: UV-Atlas (xatlas)
   und Karten (Kantenabstand, AO) aus `web/tools/skin_bake.mjs`, Rezepte `web/src/skins.json`, Mischer als Shader
   (`web/src/skinShader.js`, Viewer `web/src/robotSkins.js`, Navigation „Lackierung“); Kontrollkarten in `runs/skins/`. Seit 0.16 auch
-  Bronze und Schrott aus Nutzerbildern: Kacheln und Motive in `assets/skins/textures/` (`web/tools/skin_swatches.py`), Vorlagenkarten für
-  Bildgeneratoren per `web/tools/skin_guide.py`, Prompts in `docs/SKINS.md`.
+  Bronze und Schrott aus Nutzerbildern (seit 0.20 prozedural neu, die Kacheln bleiben als Material): Kacheln und Motive in `assets/skins/textures/` (`web/tools/skin_swatches.py`), Vorlagenkarten für
+  Bildgeneratoren per `web/tools/skin_guide.py`, Prompts in `docs/SKINS.md`. Seit 0.20 zehn weitere rein prozedural nach Nutzerbildern
+  (Vorhut, Azur, Neon, Orbit, Moos, Frost, Galaxie, Signal, Chrom, Sand) mit den Schichten `carbon`, `circuit`, `sparkle`.
 - `web/src/robotgen/` – three.js-Generator der Körper und von Scout, **die Quelle der Geometrie** (0.14 Wächter, 0.15 Paladin und
   Mechanik, 0.17 Scout: `scout.js`, `scoutGuss.js`, `scoutMesh.js`, `bsp.js`; Eingaben in `data/`: Ballon-Pin `SOURCE.json`, Guss
   `guss_2h.npz`, `helm_params.json`). Seit 0.18 schreibt `web/tools/robotgen_export.mjs` daraus die Lieferpakete, der Viewer lädt sie;

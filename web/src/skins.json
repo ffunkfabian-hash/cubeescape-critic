@@ -1,5 +1,5 @@
 {
- "note": "Skin recipes (0.13 Skins), taken over from the Blender interim version (blender/robot/skins.json, f8d1c5b) and mixed live by web/src/skinShader.js. Colours sRGB hex; layers apply in order. Reference: user picture of 29.10.2026 (three robots: rusty orange/navy, black with red glow lines, white/purple/gold). Roles: shell, accent, trim, graphite, dark_metal, anodized, rubber, energy, reticle_cyan. Layer selectors: roles, not_roles, parts, not_parts (glob on the part id; helmets through aliases), asm, side, facing [x, y, z, min cosine] (model axes, front +Z).",
+ "note": "Skin recipes (0.13 Skins), taken over from the Blender interim version (blender/robot/skins.json, f8d1c5b) and mixed live by web/src/skinShader.js. Colours sRGB hex; layers apply in order. Reference: user picture of 29.10.2026 (three robots: rusty orange/navy, black with red glow lines, white/purple/gold). Roles: shell, accent, trim, graphite, dark_metal, anodized, rubber, energy, reticle_cyan. Since 0.20 Livery also carbon, circuit, sparkle layers and a swatch per skin (two colours of the navigation button). Since 0.20 Livery also carbon, circuit, sparkle layers and a swatch per skin (two colours of the navigation button). Since 0.20 Livery also carbon, circuit, sparkle layers and a swatch per skin (two colours of the navigation button). Since 0.20 Livery also carbon, circuit, sparkle layers and a swatch per skin (two colours of the navigation button). Since 0.20 Livery also carbon, circuit, sparkle layers and a swatch per skin (two colours of the navigation button). Since 0.20 Livery also carbon, circuit, sparkle layers and a swatch per skin (two colours of the navigation button). Since 0.20 Livery also carbon, circuit, sparkle layers and a swatch per skin (two colours of the navigation button). Since 0.20 Livery also carbon, circuit, sparkle layers and a swatch per skin (two colours of the navigation button). Since 0.20 Livery also carbon, circuit, sparkle layers and a swatch per skin (two colours of the navigation button). Since 0.20 Livery also carbon, circuit, sparkle layers and a swatch per skin (two colours of the navigation button). Since 0.20 Livery also carbon, circuit, sparkle layers and a swatch per skin (two colours of the navigation button). Since 0.20 Livery also carbon, circuit, sparkle layers and a swatch per skin (two colours of the navigation button). Since 0.20 Livery also carbon, circuit, sparkle layers and a swatch per skin (two colours of the navigation button). Since 0.20 Livery also carbon, circuit, sparkle layers and a swatch per skin (two colours of the navigation button). Since 0.20 Livery also carbon, circuit, sparkle layers and a swatch per skin (two colours of the navigation button). Since 0.20 Livery also carbon, circuit, sparkle layers and a swatch per skin (two colours of the navigation button). Since 0.20 Livery also carbon, circuit, sparkle layers and a swatch per skin (two colours of the navigation button). Since 0.20 Livery also carbon, circuit, sparkle layers and a swatch per skin (two colours of the navigation button). Since 0.20 Livery also carbon, circuit, sparkle layers and a swatch per skin (two colours of the navigation button). Layer selectors: roles, not_roles, parts, not_parts (glob on the part id; helmets through aliases), asm, side, facing [x, y, z, min cosine] (model axes, front +Z).",
  "edges": {
   "jumpDeg": 20,
   "roundDegPerMm": 18,
@@ -69,6 +69,10 @@
    "de": "Rost",
    "energy": "#4FD8FF",
    "emissive_intensity": 1.0,
+   "swatch": [
+    "#C25A28",
+    "#1C2533"
+   ],
    "layers": [
     {
      "type": "fill",
@@ -237,6 +241,10 @@
    "de": "Glut",
    "energy": "#FF3A1E",
    "emissive_intensity": 2.0,
+   "swatch": [
+    "#18191C",
+    "#FF3318"
+   ],
    "layers": [
     {
      "type": "fill",
@@ -431,6 +439,10 @@
    "de": "Ornat",
    "energy": "#A35CFF",
    "emissive_intensity": 1.5,
+   "swatch": [
+    "#ECE7DC",
+    "#4C2A82"
+   ],
    "layers": [
     {
      "type": "fill",
@@ -630,117 +642,133 @@
   "schrott": {
    "de": "Schrott",
    "energy": "#3FE0E8",
-   "emissive_intensity": 1.6,
-   "note": "aus dem Nutzerbild vom 30.10.2026 (rostiger Schrott mit Leiterbahnen): Farben je Rolle als Median der Inseln, Stahlkachel und Leiterbahn-Motive per tools/skin_swatches.py",
+   "emissive_intensity": 1.4,
+   "swatch": [
+    "#6A6C70",
+    "#9A5530"
+   ],
+   "note": "0.20 neu: zusammengeflickter Schrott – blanker Stahl, einzelne verblichen lackierte Platten (Orange, Petrol), Warnstreifen-Rest, viel Rost, schwarze ölige Mechanik",
    "layers": [
     {
      "type": "fill",
-     "color": "#8A8584",
-     "rough": 0.5,
-     "metal": 0.55
-    },
-    {
-     "type": "tex",
-     "roles": [
-      "shell"
-     ],
-     "texture": "schrott_shell",
-     "tile_mm": 140,
-     "mode": "overlay",
-     "opacity": 0.85
+     "color": "#6A6C70",
+     "rough": 0.6,
+     "metal": 0.65
     },
     {
      "type": "fill",
+     "color": "#111114",
      "roles": [
       "graphite",
       "dark_metal",
       "anodized"
      ],
-     "color": "#26252C",
      "rough": 0.5,
      "metal": 0.6
     },
     {
      "type": "fill",
-     "not_roles": [
-      "energy",
-      "reticle_cyan",
-      "rubber",
-      "dark_metal",
-      "trim"
-     ],
-     "color": "#8A8584",
-     "rough": 0.5,
-     "metal": 0.55,
-     "kinds": [
-      "critic",
-      "scout"
-     ],
-     "not_parts": [
-      "mask",
-      "face_center",
-      "eye_*",
-      "chin_bar",
-      "neck",
-      "neck_ring",
-      "visor*",
-      "lens*"
-     ]
-    },
-    {
-     "type": "tex",
-     "not_roles": [
-      "energy",
-      "reticle_cyan",
-      "rubber",
-      "dark_metal",
-      "trim"
-     ],
-     "texture": "schrott_helm_shell",
-     "tile_mm": 140,
-     "mode": "overlay",
-     "opacity": 0.85,
-     "kinds": [
-      "critic",
-      "scout"
-     ],
-     "not_parts": [
-      "mask",
-      "face_center",
-      "eye_*",
-      "chin_bar",
-      "neck",
-      "neck_ring",
-      "visor*",
-      "lens*"
-     ]
-    },
-    {
-     "type": "fill",
-     "roles": [
-      "trim"
-     ],
-     "color": "#8A4A2A",
-     "rough": 0.75,
-     "metal": 0.2
-    },
-    {
-     "type": "fill",
+     "color": "#141212",
      "roles": [
       "rubber"
      ],
-     "color": "#161313",
      "rough": 0.9,
      "metal": 0.0
     },
     {
      "type": "fill",
+     "color": "#5A3A26",
+     "roles": [
+      "trim"
+     ],
+     "rough": 0.7,
+     "metal": 0.3
+    },
+    {
+     "type": "fill",
+     "color": "#9A5530",
      "roles": [
       "accent"
      ],
-     "color": "#C2581E",
+     "rough": 0.65,
+     "metal": 0.05
+    },
+    {
+     "type": "fill",
+     "color": "#9A5530",
+     "roles": [
+      "shell"
+     ],
+     "parts": [
+      "pauldron_l",
+      "pauldron_l_flare*",
+      "fore_shell",
+      "thigh_shell",
+      "cap"
+     ],
+     "side": [
+      "L",
+      "C"
+     ],
+     "rough": 0.7,
+     "metal": 0.05
+    },
+    {
+     "type": "fill",
+     "color": "#4A6662",
+     "roles": [
+      "shell"
+     ],
+     "parts": [
+      "pauldron_r",
+      "pauldron_r_flare*",
+      "shin_shell",
+      "chest",
+      "chest_*",
+      "tasset_side_*",
+      "cheek_*"
+     ],
+     "side": [
+      "R",
+      "C"
+     ],
+     "rough": 0.7,
+     "metal": 0.05
+    },
+    {
+     "type": "fill",
+     "color": "#B88C2A",
+     "roles": [
+      "shell"
+     ],
+     "parts": [
+      "knee_cap"
+     ],
+     "side": [
+      "R"
+     ],
      "rough": 0.6,
-     "metal": 0.1
+     "metal": 0.05
+    },
+    {
+     "type": "stripes",
+     "roles": [
+      "shell"
+     ],
+     "parts": [
+      "knee_cap"
+     ],
+     "side": [
+      "R"
+     ],
+     "color": "#1A1A1A",
+     "rough": 0.6,
+     "angle": 45,
+     "freq": 3.0,
+     "width": 0.5,
+     "warp": 0,
+     "jitter": 0,
+     "seed": 21
     },
     {
      "type": "wear",
@@ -748,229 +776,124 @@
       "shell",
       "accent"
      ],
-     "radius_mm": 24,
+     "radius_mm": 22,
      "noise": 16,
      "threshold": [
-      0.58,
-      0.63
+      0.56,
+      0.61
      ],
-     "color": "#9C4A1C",
-     "rough": 0.88,
-     "metal": 0.0,
-     "seed": 21,
-     "edge_weight": 0.35,
-     "contrast": 2.2
-    },
-    {
-     "type": "wear",
-     "radius_mm": 24,
-     "noise": 16,
-     "threshold": [
-      0.58,
-      0.63
-     ],
-     "color": "#9C4A1C",
-     "rough": 0.88,
-     "metal": 0.0,
-     "seed": 71,
      "edge_weight": 0.35,
      "contrast": 2.2,
-     "not_roles": [
-      "energy",
-      "reticle_cyan",
-      "rubber",
-      "dark_metal",
-      "trim"
-     ],
-     "kinds": [
-      "critic",
-      "scout"
-     ],
-     "not_parts": [
-      "mask",
-      "face_center",
-      "eye_*",
-      "chin_bar",
-      "neck",
-      "neck_ring",
-      "visor*",
-      "lens*"
-     ]
-    },
-    {
-     "type": "wear",
-     "not_roles": [
-      "rubber",
-      "energy",
-      "reticle_cyan"
-     ],
-     "radius_mm": 4,
-     "noise": 130,
-     "threshold": [
-      0.52,
-      0.56
-     ],
-     "color": "#A4A7AC",
-     "rough": 0.3,
-     "metal": 0.9,
+     "color": "#8A8C90",
+     "rough": 0.5,
+     "metal": 0.75,
      "seed": 22
     },
     {
-     "type": "dirt",
-     "not_roles": [
-      "energy",
-      "reticle_cyan"
+     "type": "wear",
+     "roles": [
+      "shell",
+      "accent"
      ],
-     "color": "#2E241C",
-     "rough": 0.9,
-     "amount": 0.75,
-     "ao": [
-      0.3,
-      0.95
+     "radius_mm": 30,
+     "noise": 12,
+     "threshold": [
+      0.5,
+      0.55
      ],
-     "noise": 18,
+     "edge_weight": 0.35,
+     "contrast": 2.6,
+     "color": "#7E3814",
+     "rough": 0.92,
+     "metal": 0.0,
      "seed": 23
     },
     {
      "type": "dirt",
      "roles": [
       "shell",
-      "graphite",
-      "trim"
+      "accent"
      ],
-     "color": "#7A3B17",
+     "color": "#5E2A10",
      "rough": 0.95,
-     "amount": 0.6,
+     "amount": 0.5,
      "ao": [
-      0.55,
-      0.92
+      0.7,
+      1.0
      ],
-     "noise": 40,
-     "base": 0.1,
+     "noise": 9,
+     "base": 0.25,
+     "seed": 28
+    },
+    {
+     "type": "wear",
+     "not_roles": [
+      "rubber",
+      "energy",
+      "reticle_cyan"
+     ],
+     "radius_mm": 3.5,
+     "noise": 130,
+     "threshold": [
+      0.52,
+      0.56
+     ],
+     "color": "#B4B8BE",
+     "rough": 0.3,
+     "metal": 0.9,
      "seed": 24
     },
     {
-     "type": "scratches",
-     "color": "#C9CCD0",
-     "amount": 0.4,
-     "seed": 25,
+     "type": "dirt",
      "roles": [
       "shell",
       "accent",
       "trim"
-     ]
+     ],
+     "color": "#7A3B17",
+     "rough": 0.95,
+     "amount": 0.7,
+     "ao": [
+      0.5,
+      0.92
+     ],
+     "noise": 40,
+     "base": 0.1,
+     "seed": 25
+    },
+    {
+     "type": "dirt",
+     "not_roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "color": "#1C1610",
+     "rough": 0.7,
+     "amount": 0.85,
+     "ao": [
+      0.3,
+      0.95
+     ],
+     "noise": 18,
+     "seed": 26
     },
     {
      "type": "scratches",
-     "color": "#6A6A70",
-     "amount": 0.25,
-     "seed": 75,
-     "roles": [
-      "graphite",
-      "dark_metal",
-      "anodized"
-     ]
-    },
-    {
-     "type": "decal",
      "roles": [
       "shell",
-      "graphite",
-      "anodized"
+      "accent"
      ],
-     "parts": [
-      "chest",
-      "chest_*",
-      "abs_*",
-      "solar",
-      "tasset",
-      "thigh_shell",
-      "shin_shell",
-      "boot_cuff",
-      "back",
-      "blade_*",
-      "backpack_shell",
-      "butt",
-      "calf"
-     ],
-     "not_parts": [
-      "*_edge",
-      "*_rim_*",
-      "*_stripe_*"
-     ],
-     "texture": "schrott_decals",
-     "axis": "z",
-     "size": 0.75,
-     "count": 16,
-     "glow": 2.2,
-     "rough": 0.3,
-     "seed": 26,
-     "not_kinds": [
-      "critic",
-      "scout"
-     ]
+     "color": "#C9CCD0",
+     "amount": 0.45,
+     "seed": 27
     },
     {
-     "type": "decal",
-     "roles": [
-      "shell",
-      "graphite",
-      "anodized"
-     ],
+     "type": "fill",
      "parts": [
-      "pauldron_l",
-      "pauldron_r",
-      "pauldron_*_flare*",
-      "fore_shell",
-      "upper_shell_r",
-      "tasset_side_*"
+      "*_lamp"
      ],
-     "not_parts": [
-      "*_edge",
-      "*_rim_*",
-      "*_stripe_*"
-     ],
-     "texture": "schrott_decals",
-     "axis": "x",
-     "size": 0.7,
-     "count": 16,
-     "glow": 2.2,
-     "rough": 0.3,
-     "seed": 27,
-     "not_kinds": [
-      "critic",
-      "scout"
-     ]
-    },
-    {
-     "type": "decal",
-     "kinds": [
-      "critic",
-      "scout"
-     ],
-     "roles": [
-      "shell",
-      "graphite",
-      "anodized"
-     ],
-     "parts": [
-      "cap",
-      "forehead_plate_*",
-      "cheek_*",
-      "rear_field_*",
-      "shell"
-     ],
-     "not_parts": [
-      "*_edge",
-      "*_rim_*"
-     ],
-     "texture": "schrott_helm_decals",
-     "axis": "x",
-     "size": 0.6,
-     "count": 16,
-     "glow": 2.2,
-     "rough": 0.3,
-     "seed": 40
+     "color": "#3FE0E8",
+     "emit": "#3FE0E8"
     },
     {
      "type": "fill",
@@ -987,128 +910,320 @@
   },
   "bronze": {
    "de": "Bronze",
-   "energy": "#B070FF",
-   "emissive_intensity": 1.6,
-   "note": "aus dem Nutzerbild vom 30.10.2026 (Bronze mit Grünspan und Runen): Farben je Rolle als Median der Inseln, Bronze- und Eisenkachel und Runen-Motive per tools/skin_swatches.py",
+   "energy": "#3FE0E8",
+   "emissive_intensity": 1.4,
+   "swatch": [
+    "#B08A3E",
+    "#4A1A1E"
+   ],
+   "note": "0.20 nach dem goldenen Roboter aus Nutzerbild 5 (vierter): Gold-Bronze mit eingravierten Ornamenten, hellere Kanten, weinroter Unterbau und weinrote Seitenteile, türkise Augen",
    "layers": [
     {
      "type": "fill",
-     "color": "#93654A",
-     "rough": 0.42,
-     "metal": 0.85
-    },
-    {
-     "type": "tex",
-     "roles": [
-      "shell"
-     ],
-     "texture": "bronze_shell",
-     "tile_mm": 120,
-     "mode": "overlay",
-     "opacity": 0.9
+     "color": "#B08A3E",
+     "rough": 0.32,
+     "metal": 0.9
     },
     {
      "type": "fill",
+     "color": "#4A1A1E",
      "roles": [
       "graphite",
+      "rubber"
+     ],
+     "rough": 0.6,
+     "metal": 0.15
+    },
+    {
+     "type": "fill",
+     "color": "#2A1012",
+     "roles": [
       "dark_metal",
       "anodized"
      ],
-     "color": "#3D302B",
-     "rough": 0.55,
-     "metal": 0.7
+     "rough": 0.45,
+     "metal": 0.6
     },
     {
      "type": "fill",
-     "not_roles": [
-      "energy",
-      "reticle_cyan",
-      "rubber",
-      "dark_metal",
-      "trim"
-     ],
-     "color": "#93654A",
-     "rough": 0.42,
-     "metal": 0.85,
-     "kinds": [
-      "critic",
-      "scout"
-     ],
-     "not_parts": [
-      "mask",
-      "face_center",
-      "eye_*",
-      "chin_bar",
-      "neck",
-      "neck_ring",
-      "visor*",
-      "lens*"
-     ]
-    },
-    {
-     "type": "tex",
-     "not_roles": [
-      "energy",
-      "reticle_cyan",
-      "rubber",
-      "dark_metal",
-      "trim"
-     ],
-     "texture": "bronze_helm_shell",
-     "tile_mm": 120,
-     "mode": "overlay",
-     "opacity": 0.85,
-     "kinds": [
-      "critic",
-      "scout"
-     ],
-     "not_parts": [
-      "mask",
-      "face_center",
-      "eye_*",
-      "chin_bar",
-      "neck",
-      "neck_ring",
-      "visor*",
-      "lens*"
-     ]
-    },
-    {
-     "type": "tex",
-     "roles": [
-      "graphite"
-     ],
-     "texture": "bronze_graphite",
-     "tile_mm": 180,
-     "mode": "overlay",
-     "opacity": 0.8
-    },
-    {
-     "type": "fill",
+     "color": "#D8B460",
      "roles": [
       "trim"
      ],
-     "color": "#B08A4A",
-     "rough": 0.3,
-     "metal": 0.95
+     "rough": 0.25,
+     "metal": 1.0
     },
     {
      "type": "fill",
-     "roles": [
-      "rubber"
-     ],
-     "color": "#1C141B",
-     "rough": 0.9,
-     "metal": 0.0
-    },
-    {
-     "type": "fill",
+     "color": "#5E2226",
      "roles": [
       "accent"
      ],
-     "color": "#B87333",
-     "rough": 0.35,
-     "metal": 0.9
+     "rough": 0.55,
+     "metal": 0.1
+    },
+    {
+     "type": "fill",
+     "color": "#5E2226",
+     "roles": [
+      "shell"
+     ],
+     "parts": [
+      "tasset_side_*",
+      "rib_*",
+      "fore_top",
+      "heel_cap"
+     ],
+     "rough": 0.55,
+     "metal": 0.1
+    },
+    {
+     "type": "band",
+     "roles": [
+      "shell"
+     ],
+     "from_mm": 0.0,
+     "to_mm": 1.8,
+     "color": "#D8B460",
+     "rough": 0.25,
+     "metal": 1.0
+    },
+    {
+     "type": "filigree",
+     "roles": [
+      "shell"
+     ],
+     "from_mm": 4.0,
+     "to_mm": 30.0,
+     "scale": 24,
+     "rings": 6,
+     "width_mm": 0.9,
+     "color": "#6A4A1E",
+     "rough": 0.5,
+     "metal": 0.85,
+     "seed": 31
+    },
+    {
+     "type": "diamond",
+     "roles": [
+      "shell"
+     ],
+     "parts": [
+      "thigh_shell",
+      "shin_shell",
+      "calf",
+      "chest"
+     ],
+     "facing": [
+      0,
+      0,
+      1,
+      0.25
+     ],
+     "radii": [
+      0.45,
+      0.6
+     ],
+     "aspect": 1.3,
+     "width_mm": 2.2,
+     "color": "#6A4A1E",
+     "rough": 0.5,
+     "metal": 0.85
+    },
+    {
+     "type": "wear",
+     "roles": [
+      "shell",
+      "trim"
+     ],
+     "radius_mm": 3,
+     "noise": 140,
+     "threshold": [
+      0.52,
+      0.57
+     ],
+     "color": "#EAD08A",
+     "rough": 0.2,
+     "metal": 1.0,
+     "seed": 32
+    },
+    {
+     "type": "dirt",
+     "not_roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "color": "#2A1A10",
+     "rough": 0.8,
+     "amount": 0.6,
+     "ao": [
+      0.3,
+      0.95
+     ],
+     "noise": 18,
+     "seed": 34
+    },
+    {
+     "type": "scratches",
+     "roles": [
+      "shell"
+     ],
+     "color": "#EAD08A",
+     "amount": 0.25,
+     "seed": 35
+    },
+    {
+     "type": "fill",
+     "parts": [
+      "*_lamp"
+     ],
+     "color": "#3FE0E8",
+     "emit": "#3FE0E8"
+    },
+    {
+     "type": "fill",
+     "roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "color": "#3FE0E8",
+     "emit": "#3FE0E8",
+     "rough": 0.2,
+     "metal": 0.0
+    }
+   ]
+  },
+  "vorhut": {
+   "de": "Vorhut",
+   "energy": "#3FF2E0",
+   "emissive_intensity": 1.6,
+   "swatch": [
+    "#D9D3C4",
+    "#1E2A4F"
+   ],
+   "note": "Nutzerbild 1 vom 30.10.2026: Elfenbein-Lack mit Navy-Feldern, Goldkanten, Carbon-Unterbau, cyanfarbenes Brustmedaillon, abgeplatzte und rostige Kanten",
+   "layers": [
+    {
+     "type": "fill",
+     "color": "#D9D3C4",
+     "rough": 0.55,
+     "metal": 0.05
+    },
+    {
+     "type": "carbon",
+     "roles": [
+      "graphite",
+      "rubber"
+     ],
+     "color": "#111215",
+     "color2": "#30333A",
+     "cell_mm": 3.2,
+     "rough": 0.32,
+     "metal": 0.2
+    },
+    {
+     "type": "fill",
+     "color": "#2A2D33",
+     "roles": [
+      "dark_metal",
+      "anodized"
+     ],
+     "rough": 0.4,
+     "metal": 0.8
+    },
+    {
+     "type": "fill",
+     "color": "#1E2A4F",
+     "roles": [
+      "shell",
+      "accent"
+     ],
+     "parts": [
+      "pauldron_*_flare*",
+      "pauldron_*_band",
+      "rib_*",
+      "abs_*",
+      "tasset_side_*",
+      "knee_cap",
+      "heel_cap",
+      "toe_cap",
+      "boot_cuff",
+      "thigh_cuff",
+      "fore_top",
+      "gorget",
+      "upper_shell_r",
+      "*_stripe_*",
+      "cap",
+      "shell",
+      "helmet_core",
+      "rear_*"
+     ],
+     "rough": 0.45,
+     "metal": 0.1
+    },
+    {
+     "type": "fill",
+     "color": "#C9A14A",
+     "roles": [
+      "trim"
+     ],
+     "rough": 0.3,
+     "metal": 1.0
+    },
+    {
+     "type": "fill",
+     "color": "#C9A14A",
+     "parts": [
+      "*_rim_*",
+      "*_edge",
+      "*_trim",
+      "*_band",
+      "*_bezel"
+     ],
+     "not_roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "rough": 0.3,
+     "metal": 1.0
+    },
+    {
+     "type": "band",
+     "roles": [
+      "shell"
+     ],
+     "from_mm": 0.0,
+     "to_mm": 2.2,
+     "color": "#C9A14A",
+     "rough": 0.3,
+     "metal": 1.0
+    },
+    {
+     "type": "emblem",
+     "roles": [
+      "shell"
+     ],
+     "parts": [
+      "chest"
+     ],
+     "anchor": "emblem_disc",
+     "facing": [
+      0,
+      0,
+      1,
+      0.3
+     ],
+     "center": [
+      0,
+      0
+     ],
+     "radius": 0.3,
+     "rays": 4,
+     "ray_length": 1.0,
+     "core": 0.0,
+     "width_mm": 3.0,
+     "color": "#3FF2E0",
+     "emit": "#3FF2E0"
     },
     {
      "type": "wear",
@@ -1117,16 +1232,34 @@
       "energy",
       "reticle_cyan"
      ],
-     "radius_mm": 5,
-     "noise": 110,
+     "radius_mm": 3,
+     "noise": 140,
      "threshold": [
-      0.5,
-      0.55
+      0.52,
+      0.57
      ],
-     "color": "#E2BC72",
-     "rough": 0.22,
-     "metal": 1.0,
-     "seed": 31
+     "color": "#7A7C80",
+     "rough": 0.35,
+     "metal": 0.85,
+     "seed": 41
+    },
+    {
+     "type": "wear",
+     "roles": [
+      "shell"
+     ],
+     "radius_mm": 10,
+     "noise": 40,
+     "threshold": [
+      0.6,
+      0.64
+     ],
+     "edge_weight": 0.4,
+     "contrast": 1.6,
+     "color": "#6B4528",
+     "rough": 0.85,
+     "metal": 0.0,
+     "seed": 42
     },
     {
      "type": "dirt",
@@ -1134,158 +1267,31 @@
       "energy",
       "reticle_cyan"
      ],
-     "color": "#2A211C",
-     "rough": 0.85,
-     "amount": 0.7,
+     "color": "#3A2E22",
+     "amount": 0.5,
      "ao": [
       0.3,
       0.95
      ],
-     "noise": 18,
-     "seed": 32
-    },
-    {
-     "type": "dirt",
-     "roles": [
-      "shell",
-      "graphite",
-      "trim",
-      "accent"
-     ],
-     "color": "#3E8C78",
-     "rough": 0.9,
-     "metal": 0.0,
-     "amount": 0.8,
-     "ao": [
-      0.5,
-      0.93
-     ],
-     "noise": 30,
-     "base": 0.12,
-     "seed": 33
+     "noise": 20,
+     "seed": 43
     },
     {
      "type": "scratches",
-     "color": "#E8C88A",
-     "amount": 0.3,
-     "seed": 34,
      "roles": [
-      "shell",
-      "accent",
-      "trim"
-     ]
-    },
-    {
-     "type": "scratches",
-     "color": "#7A6450",
-     "amount": 0.25,
-     "seed": 84,
-     "roles": [
-      "graphite",
-      "dark_metal",
-      "anodized"
-     ]
-    },
-    {
-     "type": "decal",
-     "roles": [
-      "shell",
-      "graphite",
-      "anodized"
-     ],
-     "parts": [
-      "chest",
-      "chest_*",
-      "abs_*",
-      "solar",
-      "tasset",
-      "thigh_shell",
-      "shin_shell",
-      "boot_cuff",
-      "back",
-      "blade_*",
-      "backpack_shell",
-      "butt",
-      "calf"
-     ],
-     "not_parts": [
-      "*_edge",
-      "*_rim_*",
-      "*_stripe_*"
-     ],
-     "texture": "bronze_decals",
-     "axis": "z",
-     "size": 0.7,
-     "count": 16,
-     "glow": 1.2,
-     "rough": 0.3,
-     "seed": 35,
-     "not_kinds": [
-      "critic",
-      "scout"
-     ]
-    },
-    {
-     "type": "decal",
-     "roles": [
-      "shell",
-      "graphite",
-      "anodized"
-     ],
-     "parts": [
-      "pauldron_l",
-      "pauldron_r",
-      "pauldron_*_flare*",
-      "fore_shell",
-      "upper_shell_r",
-      "tasset_side_*"
-     ],
-     "not_parts": [
-      "*_edge",
-      "*_rim_*",
-      "*_stripe_*"
-     ],
-     "texture": "bronze_decals",
-     "axis": "x",
-     "size": 0.65,
-     "count": 16,
-     "glow": 1.2,
-     "rough": 0.3,
-     "seed": 36,
-     "not_kinds": [
-      "critic",
-      "scout"
-     ]
-    },
-    {
-     "type": "decal",
-     "kinds": [
-      "critic",
-      "scout"
-     ],
-     "roles": [
-      "shell",
-      "graphite",
-      "anodized"
-     ],
-     "parts": [
-      "cap",
-      "forehead_plate_*",
-      "cheek_*",
-      "rear_field_*",
       "shell"
      ],
-     "not_parts": [
-      "*_edge",
-      "*_rim_*"
+     "color": "#9A968C",
+     "amount": 0.35,
+     "seed": 44
+    },
+    {
+     "type": "fill",
+     "parts": [
+      "*_lamp"
      ],
-     "texture": "bronze_helm_decals",
-     "axis": "x",
-     "size": 0.6,
-     "count": 16,
-     "glow": 1.2,
-     "rough": 0.3,
-     "seed": 40
+     "color": "#3FF2E0",
+     "emit": "#3FF2E0"
     },
     {
      "type": "fill",
@@ -1293,8 +1299,1710 @@
       "energy",
       "reticle_cyan"
      ],
-     "color": "#B070FF",
-     "emit": "#B070FF",
+     "color": "#3FF2E0",
+     "emit": "#3FF2E0",
+     "rough": 0.2,
+     "metal": 0.0
+    }
+   ]
+  },
+  "azur": {
+   "de": "Azur",
+   "energy": "#FF8A1E",
+   "emissive_intensity": 1.8,
+   "swatch": [
+    "#1E3497",
+    "#FF8A1E"
+   ],
+   "note": "Nutzerbild 2 vom 30.10.2026, 0.20 näher am Render: Platten aus blauem Carbon mit Metallglanz, kräftige orange Leuchtlinien an jeder Plattenkante, Goldkanten, Goldornament an Schultern und Brust, Sonnenemblem mit glühendem Kern, orange Ringe an den Gelenken, helle Kreidekratzer, Oberschenkel und Unterbau schwarzes Carbon",
+   "layers": [
+    {
+     "type": "fill",
+     "color": "#1E3497",
+     "rough": 0.32,
+     "metal": 0.45
+    },
+    {
+     "type": "carbon",
+     "roles": [
+      "shell"
+     ],
+     "color": "#142670",
+     "color2": "#3552C8",
+     "cell_mm": 3.4,
+     "rough": 0.28,
+     "metal": 0.5
+    },
+    {
+     "type": "carbon",
+     "roles": [
+      "graphite",
+      "rubber"
+     ],
+     "color": "#0D0E12",
+     "color2": "#2A2D36",
+     "cell_mm": 3.0,
+     "rough": 0.3,
+     "metal": 0.3
+    },
+    {
+     "type": "carbon",
+     "roles": [
+      "shell"
+     ],
+     "parts": [
+      "thigh_shell",
+      "abs_*",
+      "tasset"
+     ],
+     "color": "#0D0E12",
+     "color2": "#2E3139",
+     "cell_mm": 3.0,
+     "rough": 0.3,
+     "metal": 0.3
+    },
+    {
+     "type": "fill",
+     "color": "#1B1D24",
+     "roles": [
+      "dark_metal",
+      "anodized"
+     ],
+     "rough": 0.4,
+     "metal": 0.8
+    },
+    {
+     "type": "fill",
+     "color": "#D4A84A",
+     "roles": [
+      "trim",
+      "accent"
+     ],
+     "rough": 0.28,
+     "metal": 1.0
+    },
+    {
+     "type": "fill",
+     "color": "#D4A84A",
+     "parts": [
+      "*_rim_*",
+      "*_edge",
+      "*_trim",
+      "*_band",
+      "*_bezel"
+     ],
+     "not_roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "rough": 0.28,
+     "metal": 1.0
+    },
+    {
+     "type": "fill",
+     "color": "#FF8A1E",
+     "parts": [
+      "*_ring"
+     ],
+     "not_roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "emit": "#FF8A1E",
+     "rough": 0.3
+    },
+    {
+     "type": "band",
+     "roles": [
+      "shell"
+     ],
+     "from_mm": 0.0,
+     "to_mm": 1.8,
+     "color": "#D4A84A",
+     "rough": 0.28,
+     "metal": 1.0
+    },
+    {
+     "type": "band",
+     "roles": [
+      "shell"
+     ],
+     "from_mm": 2.6,
+     "to_mm": 4.4,
+     "color": "#FF8A1E",
+     "emit": "#FF8A1E",
+     "emit_strength": 1.4,
+     "rough": 0.3
+    },
+    {
+     "type": "filigree",
+     "roles": [
+      "shell"
+     ],
+     "parts": [
+      "pauldron_*",
+      "chest",
+      "chest_*",
+      "upper_shell_r",
+      "fore_shell",
+      "cap",
+      "shell"
+     ],
+     "not_parts": [
+      "*_edge",
+      "*_rim_*"
+     ],
+     "from_mm": 5.0,
+     "to_mm": 18.0,
+     "scale": 20,
+     "rings": 5,
+     "width_mm": 1.1,
+     "color": "#D4A84A",
+     "rough": 0.3,
+     "metal": 1.0,
+     "seed": 51
+    },
+    {
+     "type": "emblem",
+     "roles": [
+      "shell"
+     ],
+     "parts": [
+      "chest"
+     ],
+     "anchor": "emblem_disc",
+     "facing": [
+      0,
+      0,
+      1,
+      0.3
+     ],
+     "center": [
+      0,
+      0
+     ],
+     "radius": 0.3,
+     "rays": 12,
+     "ray_length": 1.5,
+     "core": 0.45,
+     "width_mm": 3.5,
+     "color": "#D4A84A",
+     "rough": 0.28,
+     "metal": 1.0
+    },
+    {
+     "type": "emblem",
+     "roles": [
+      "shell"
+     ],
+     "parts": [
+      "chest"
+     ],
+     "anchor": "emblem_disc",
+     "facing": [
+      0,
+      0,
+      1,
+      0.3
+     ],
+     "center": [
+      0,
+      0
+     ],
+     "radius": 0.12,
+     "rays": 4,
+     "ray_length": 1.0,
+     "core": 0.0,
+     "width_mm": 2.5,
+     "color": "#FF8A1E",
+     "emit": "#FF8A1E",
+     "emit_strength": 1.5
+    },
+    {
+     "type": "wear",
+     "roles": [
+      "shell"
+     ],
+     "radius_mm": 1,
+     "edge_weight": 0,
+     "noise": 45,
+     "contrast": 3.0,
+     "threshold": [
+      0.6,
+      0.63
+     ],
+     "color": "#D6DAE4",
+     "rough": 0.8,
+     "metal": 0.0,
+     "amount": 0.75,
+     "seed": 55
+    },
+    {
+     "type": "wear",
+     "not_roles": [
+      "rubber",
+      "energy",
+      "reticle_cyan"
+     ],
+     "radius_mm": 2.5,
+     "noise": 150,
+     "threshold": [
+      0.55,
+      0.6
+     ],
+     "color": "#AEB8D8",
+     "amount": 0.3,
+     "seed": 52
+    },
+    {
+     "type": "dirt",
+     "not_roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "color": "#1A1408",
+     "amount": 0.35,
+     "ao": [
+      0.3,
+      0.9
+     ],
+     "noise": 20,
+     "seed": 53
+    },
+    {
+     "type": "scratches",
+     "roles": [
+      "shell"
+     ],
+     "color": "#C8D0E8",
+     "amount": 0.4,
+     "seed": 54
+    },
+    {
+     "type": "fill",
+     "parts": [
+      "*_lamp"
+     ],
+     "color": "#FF8A1E",
+     "emit": "#FF8A1E"
+    },
+    {
+     "type": "fill",
+     "roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "color": "#FF8A1E",
+     "emit": "#FF8A1E",
+     "rough": 0.2,
+     "metal": 0.0
+    }
+   ]
+  },
+  "neon": {
+   "de": "Neon",
+   "energy": "#2BE8FF",
+   "emissive_intensity": 1.5,
+   "swatch": [
+    "#1A1D22",
+    "#2BE8FF"
+   ],
+   "note": "Nutzerbild 3 vom 30.10.2026, 0.20 nach dem Render: Carbon-Platten mit bunten Leuchtbahnen, Mechanik mattschwarz (Cyan, Grün, Magenta, Orange) und leuchtenden Plattenrändern, weiße Sticker-Platten auf linker Schulter und Oberschenkel, orange Leuchtlinie an Bauch und Gürtel",
+   "layers": [
+    {
+     "type": "fill",
+     "color": "#0A0B0D",
+     "rough": 0.7,
+     "metal": 0.1
+    },
+    {
+     "type": "carbon",
+     "roles": [
+      "shell",
+      "accent"
+     ],
+     "color": "#14171C",
+     "color2": "#3A4048",
+     "cell_mm": 3.0,
+     "rough": 0.3,
+     "metal": 0.3
+    },
+    {
+     "type": "fill",
+     "color": "#8A9099",
+     "roles": [
+      "dark_metal",
+      "trim"
+     ],
+     "rough": 0.25,
+     "metal": 1.0
+    },
+    {
+     "type": "fill",
+     "color": "#E8E4DA",
+     "roles": [
+      "shell"
+     ],
+     "parts": [
+      "pauldron_l",
+      "thigh_shell"
+     ],
+     "side": [
+      "L"
+     ],
+     "rough": 0.55,
+     "metal": 0.0
+    },
+    {
+     "type": "stripes",
+     "roles": [
+      "shell"
+     ],
+     "parts": [
+      "pauldron_l",
+      "thigh_shell"
+     ],
+     "side": [
+      "L"
+     ],
+     "not_parts": [
+      "*_edge",
+      "*_rim_*"
+     ],
+     "color": "#D8336E",
+     "rough": 0.5,
+     "angle": 25,
+     "freq": 1.1,
+     "width": 0.22,
+     "warp": 2.8,
+     "seed": 61
+    },
+    {
+     "type": "band",
+     "roles": [
+      "shell",
+      "accent"
+     ],
+     "from_mm": 0.6,
+     "to_mm": 1.8,
+     "color": "#2BE8FF",
+     "emit": "#2BE8FF",
+     "rough": 0.3
+    },
+    {
+     "type": "fill",
+     "color": "#FF7A1E",
+     "roles": [
+      "accent"
+     ],
+     "parts": [
+      "*_stripe_*",
+      "belt_trim",
+      "waist_trim"
+     ],
+     "emit": "#FF7A1E",
+     "rough": 0.3
+    },
+    {
+     "type": "circuit",
+     "roles": [
+      "shell"
+     ],
+     "not_parts": [
+      "*_edge",
+      "*_rim_*"
+     ],
+     "cell_mm": 22,
+     "density": 0.3,
+     "width_mm": 1.8,
+     "pad_mm": 2.4,
+     "hue_per_m": 1.2,
+     "hue": 0.3,
+     "emit": true,
+     "emit_strength": 1.1,
+     "rough": 0.3,
+     "seed": 62
+    },
+    {
+     "type": "wear",
+     "roles": [
+      "shell",
+      "accent"
+     ],
+     "radius_mm": 2,
+     "noise": 160,
+     "threshold": [
+      0.57,
+      0.61
+     ],
+     "color": "#5A5F68",
+     "rough": 0.3,
+     "metal": 0.8,
+     "amount": 0.5,
+     "seed": 64
+    },
+    {
+     "type": "dirt",
+     "not_roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "color": "#050506",
+     "amount": 0.3,
+     "ao": [
+      0.35,
+      0.95
+     ],
+     "noise": 22,
+     "seed": 65
+    },
+    {
+     "type": "fill",
+     "parts": [
+      "*_lamp"
+     ],
+     "color": "#2BE8FF",
+     "emit": "#2BE8FF"
+    },
+    {
+     "type": "fill",
+     "roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "color": "#2BE8FF",
+     "emit": "#2BE8FF",
+     "rough": 0.2,
+     "metal": 0.0
+    }
+   ]
+  },
+  "moos": {
+   "de": "Moos",
+   "energy": "#B8E070",
+   "emissive_intensity": 0.8,
+   "swatch": [
+    "#55683A",
+    "#101309"
+   ],
+   "note": "Nutzerbild 4 (fünfter Roboter), 0.20 nach dem Render: Tarnmuster in Grüntönen, Platten von Moos bewachsen, Mechanik schwarz-oliv, kaum Leuchten",
+   "layers": [
+    {
+     "type": "fill",
+     "color": "#55683A",
+     "rough": 0.8,
+     "metal": 0.0
+    },
+    {
+     "type": "fill",
+     "color": "#101309",
+     "roles": [
+      "graphite",
+      "rubber"
+     ],
+     "rough": 0.85,
+     "metal": 0.05
+    },
+    {
+     "type": "fill",
+     "color": "#1A1D16",
+     "roles": [
+      "dark_metal",
+      "anodized"
+     ],
+     "rough": 0.55,
+     "metal": 0.6
+    },
+    {
+     "type": "fill",
+     "color": "#3A4430",
+     "roles": [
+      "trim"
+     ],
+     "rough": 0.6,
+     "metal": 0.3
+    },
+    {
+     "type": "wear",
+     "roles": [
+      "shell",
+      "accent"
+     ],
+     "radius_mm": 1,
+     "edge_weight": 0,
+     "noise": 8,
+     "contrast": 3.0,
+     "threshold": [
+      0.1,
+      0.14
+     ],
+     "color": "#33452A",
+     "seed": 51
+    },
+    {
+     "type": "wear",
+     "roles": [
+      "shell",
+      "accent"
+     ],
+     "radius_mm": 1,
+     "edge_weight": 0,
+     "noise": 12,
+     "contrast": 3.0,
+     "threshold": [
+      0.22,
+      0.26
+     ],
+     "color": "#7C8C55",
+     "seed": 52
+    },
+    {
+     "type": "wear",
+     "roles": [
+      "shell",
+      "accent"
+     ],
+     "radius_mm": 1,
+     "edge_weight": 0,
+     "noise": 10,
+     "contrast": 3.0,
+     "threshold": [
+      0.3,
+      0.33999999999999997
+     ],
+     "color": "#4E4632",
+     "seed": 53
+    },
+    {
+     "type": "dirt",
+     "roles": [
+      "shell",
+      "accent",
+      "trim"
+     ],
+     "color": "#6E8F2E",
+     "rough": 0.95,
+     "metal": 0.0,
+     "amount": 0.95,
+     "ao": [
+      0.5,
+      0.98
+     ],
+     "noise": 40,
+     "base": 0.22,
+     "seed": 55
+    },
+    {
+     "type": "dirt",
+     "roles": [
+      "shell",
+      "accent",
+      "trim"
+     ],
+     "color": "#4F6B22",
+     "rough": 0.95,
+     "metal": 0.0,
+     "amount": 0.6,
+     "ao": [
+      0.6,
+      1.0
+     ],
+     "noise": 90,
+     "base": 0.15,
+     "seed": 58
+    },
+    {
+     "type": "dirt",
+     "not_roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "color": "#2E2416",
+     "rough": 0.9,
+     "amount": 0.5,
+     "ao": [
+      0.3,
+      0.9
+     ],
+     "noise": 18,
+     "seed": 56
+    },
+    {
+     "type": "wear",
+     "not_roles": [
+      "rubber",
+      "energy",
+      "reticle_cyan"
+     ],
+     "radius_mm": 2.5,
+     "noise": 140,
+     "threshold": [
+      0.55,
+      0.6
+     ],
+     "color": "#6E6F68",
+     "rough": 0.45,
+     "metal": 0.6,
+     "amount": 0.4,
+     "seed": 54
+    },
+    {
+     "type": "fill",
+     "parts": [
+      "*_lamp"
+     ],
+     "color": "#B8E070",
+     "emit": "#B8E070"
+    },
+    {
+     "type": "fill",
+     "roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "color": "#B8E070",
+     "emit": "#B8E070",
+     "rough": 0.2,
+     "metal": 0.0
+    }
+   ]
+  },
+  "frost": {
+   "de": "Frost",
+   "energy": "#5CE1FF",
+   "emissive_intensity": 1.4,
+   "swatch": [
+    "#E4E8EC",
+    "#1E2328"
+   ],
+   "note": "Nutzerbild 4 (achter Roboter), 0.20 nach dem Render: Schneetarnung Weiß und Grau auf allen Platten, Mechanik anthrazit, Schnee in den Fugen, cyanfarbene Augen",
+   "layers": [
+    {
+     "type": "fill",
+     "color": "#E6EAEE",
+     "rough": 0.62,
+     "metal": 0.02
+    },
+    {
+     "type": "fill",
+     "color": "#1E2328",
+     "roles": [
+      "graphite",
+      "rubber"
+     ],
+     "rough": 0.65,
+     "metal": 0.15
+    },
+    {
+     "type": "fill",
+     "color": "#2E343B",
+     "roles": [
+      "dark_metal",
+      "anodized"
+     ],
+     "rough": 0.45,
+     "metal": 0.7
+    },
+    {
+     "type": "fill",
+     "color": "#9AA3AD",
+     "roles": [
+      "trim"
+     ],
+     "rough": 0.4,
+     "metal": 0.5
+    },
+    {
+     "type": "wear",
+     "roles": [
+      "shell",
+      "accent"
+     ],
+     "radius_mm": 1,
+     "edge_weight": 0,
+     "noise": 9,
+     "contrast": 3.0,
+     "threshold": [
+      0.12,
+      0.16
+     ],
+     "color": "#B8C0C8",
+     "seed": 61
+    },
+    {
+     "type": "wear",
+     "roles": [
+      "shell",
+      "accent"
+     ],
+     "radius_mm": 1,
+     "edge_weight": 0,
+     "noise": 13,
+     "contrast": 3.0,
+     "threshold": [
+      0.22,
+      0.26
+     ],
+     "color": "#8C96A0",
+     "seed": 62
+    },
+    {
+     "type": "wear",
+     "roles": [
+      "shell",
+      "accent"
+     ],
+     "radius_mm": 1,
+     "edge_weight": 0,
+     "noise": 17,
+     "contrast": 3.0,
+     "threshold": [
+      0.36,
+      0.39999999999999997
+     ],
+     "color": "#5E6873",
+     "seed": 63
+    },
+    {
+     "type": "wear",
+     "not_roles": [
+      "rubber",
+      "energy",
+      "reticle_cyan"
+     ],
+     "radius_mm": 2.5,
+     "noise": 150,
+     "threshold": [
+      0.55,
+      0.6
+     ],
+     "color": "#7E8790",
+     "rough": 0.35,
+     "metal": 0.8,
+     "amount": 0.5,
+     "seed": 64
+    },
+    {
+     "type": "dirt",
+     "roles": [
+      "shell",
+      "accent",
+      "trim"
+     ],
+     "color": "#F6F9FB",
+     "rough": 0.85,
+     "metal": 0.0,
+     "amount": 0.75,
+     "ao": [
+      0.5,
+      0.95
+     ],
+     "noise": 35,
+     "base": 0.06,
+     "seed": 65
+    },
+    {
+     "type": "fill",
+     "parts": [
+      "*_lamp"
+     ],
+     "color": "#5CE1FF",
+     "emit": "#5CE1FF"
+    },
+    {
+     "type": "fill",
+     "roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "color": "#5CE1FF",
+     "emit": "#5CE1FF",
+     "rough": 0.2,
+     "metal": 0.0
+    }
+   ]
+  },
+  "galaxie": {
+   "de": "Galaxie",
+   "energy": "#A070FF",
+   "emissive_intensity": 1.6,
+   "swatch": [
+    "#2A1068",
+    "#07050C"
+   ],
+   "note": "Nutzerbild 4 (zehnter Roboter), 0.20 nach dem Render: Platten glänzend violett mit Nebeln in Magenta und Blau und funkelnden Sternen, Mechanik glänzend schwarz",
+   "layers": [
+    {
+     "type": "fill",
+     "color": "#2A1068",
+     "rough": 0.2,
+     "metal": 0.55
+    },
+    {
+     "type": "fill",
+     "color": "#07050C",
+     "roles": [
+      "graphite",
+      "rubber"
+     ],
+     "rough": 0.25,
+     "metal": 0.45
+    },
+    {
+     "type": "fill",
+     "color": "#0C0718",
+     "roles": [
+      "dark_metal"
+     ],
+     "rough": 0.3,
+     "metal": 0.8
+    },
+    {
+     "type": "fill",
+     "color": "#6A3BD6",
+     "roles": [
+      "trim",
+      "anodized"
+     ],
+     "rough": 0.22,
+     "metal": 0.9
+    },
+    {
+     "type": "wear",
+     "roles": [
+      "shell",
+      "accent"
+     ],
+     "radius_mm": 1,
+     "edge_weight": 0,
+     "noise": 5,
+     "contrast": 2.0,
+     "threshold": [
+      0.05,
+      0.35
+     ],
+     "color": "#9B2FC9",
+     "seed": 71,
+     "amount": 0.7
+    },
+    {
+     "type": "wear",
+     "roles": [
+      "shell",
+      "accent"
+     ],
+     "radius_mm": 1,
+     "edge_weight": 0,
+     "noise": 7,
+     "contrast": 2.0,
+     "threshold": [
+      0.1,
+      0.4
+     ],
+     "color": "#2D4BD8",
+     "seed": 72,
+     "amount": 0.6
+    },
+    {
+     "type": "wear",
+     "roles": [
+      "shell",
+      "accent"
+     ],
+     "radius_mm": 1,
+     "edge_weight": 0,
+     "noise": 4,
+     "contrast": 2.0,
+     "threshold": [
+      0.15,
+      0.45
+     ],
+     "color": "#0B0620",
+     "seed": 73,
+     "amount": 0.7
+    },
+    {
+     "type": "sparkle",
+     "roles": [
+      "shell",
+      "accent"
+     ],
+     "cell_mm": 9,
+     "density": 0.3,
+     "size_mm": 0.8,
+     "color": "#FFFFFF",
+     "emit": "#DCCBFF",
+     "emit_strength": 1.5,
+     "seed": 74
+    },
+    {
+     "type": "sparkle",
+     "roles": [
+      "shell",
+      "accent"
+     ],
+     "cell_mm": 30,
+     "density": 0.25,
+     "size_mm": 1.8,
+     "color": "#FFFFFF",
+     "emit": "#FFFFFF",
+     "emit_strength": 2.5,
+     "seed": 75
+    },
+    {
+     "type": "wear",
+     "not_roles": [
+      "rubber",
+      "energy",
+      "reticle_cyan"
+     ],
+     "radius_mm": 2,
+     "noise": 150,
+     "threshold": [
+      0.56,
+      0.6
+     ],
+     "color": "#8C7BC8",
+     "rough": 0.2,
+     "metal": 1.0,
+     "amount": 0.4,
+     "seed": 76
+    },
+    {
+     "type": "dirt",
+     "not_roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "color": "#05030A",
+     "amount": 0.25,
+     "ao": [
+      0.35,
+      0.95
+     ],
+     "noise": 22,
+     "seed": 77
+    },
+    {
+     "type": "fill",
+     "parts": [
+      "*_lamp"
+     ],
+     "color": "#A070FF",
+     "emit": "#A070FF"
+    },
+    {
+     "type": "fill",
+     "roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "color": "#A070FF",
+     "emit": "#A070FF",
+     "rough": 0.2,
+     "metal": 0.0
+    }
+   ]
+  },
+  "signal": {
+   "de": "Signal",
+   "energy": "#FFB21E",
+   "emissive_intensity": 1.3,
+   "swatch": [
+    "#6A6E73",
+    "#E07A14"
+   ],
+   "note": "Nutzerbild 4 (neunter Roboter), 0.20 nach dem Render: Gunmetal mit orange-schwarzen Warnstreifen auf den Schulterpanzern und Knien, dunkler Unterbau, bernsteinfarbene Augen",
+   "layers": [
+    {
+     "type": "fill",
+     "color": "#6A6E73",
+     "rough": 0.5,
+     "metal": 0.55
+    },
+    {
+     "type": "fill",
+     "color": "#17140F",
+     "roles": [
+      "graphite",
+      "rubber"
+     ],
+     "rough": 0.8,
+     "metal": 0.1
+    },
+    {
+     "type": "fill",
+     "color": "#2A2B2C",
+     "roles": [
+      "dark_metal",
+      "anodized"
+     ],
+     "rough": 0.5,
+     "metal": 0.7
+    },
+    {
+     "type": "fill",
+     "color": "#3A3C3F",
+     "roles": [
+      "trim"
+     ],
+     "rough": 0.45,
+     "metal": 0.6
+    },
+    {
+     "type": "fill",
+     "color": "#E07A14",
+     "roles": [
+      "accent"
+     ],
+     "rough": 0.55
+    },
+    {
+     "type": "fill",
+     "color": "#35373A",
+     "roles": [
+      "shell"
+     ],
+     "parts": [
+      "cap",
+      "shell",
+      "helmet_core",
+      "rear_*"
+     ],
+     "rough": 0.5,
+     "metal": 0.5
+    },
+    {
+     "type": "fill",
+     "color": "#E07A14",
+     "roles": [
+      "shell"
+     ],
+     "parts": [
+      "pauldron_l",
+      "pauldron_r",
+      "pauldron_*_flare*",
+      "pauldron_*_band",
+      "knee_cap"
+     ],
+     "rough": 0.55
+    },
+    {
+     "type": "stripes",
+     "roles": [
+      "shell"
+     ],
+     "parts": [
+      "pauldron_l",
+      "pauldron_r",
+      "pauldron_*_flare*",
+      "pauldron_*_band",
+      "knee_cap"
+     ],
+     "not_parts": [
+      "*_edge",
+      "*_rim_*"
+     ],
+     "color": "#141414",
+     "rough": 0.6,
+     "angle": 45,
+     "freq": 3.0,
+     "width": 0.5,
+     "warp": 0,
+     "jitter": 0,
+     "seed": 81
+    },
+    {
+     "type": "wear",
+     "not_roles": [
+      "rubber",
+      "energy",
+      "reticle_cyan"
+     ],
+     "radius_mm": 3,
+     "noise": 130,
+     "threshold": [
+      0.52,
+      0.57
+     ],
+     "color": "#9A9C98",
+     "rough": 0.35,
+     "metal": 0.85,
+     "seed": 82
+    },
+    {
+     "type": "dirt",
+     "not_roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "color": "#2E261C",
+     "rough": 0.9,
+     "amount": 0.7,
+     "ao": [
+      0.3,
+      0.95
+     ],
+     "noise": 18,
+     "seed": 84
+    },
+    {
+     "type": "scratches",
+     "roles": [
+      "shell",
+      "accent"
+     ],
+     "color": "#B4B6B0",
+     "amount": 0.4,
+     "seed": 85
+    },
+    {
+     "type": "fill",
+     "parts": [
+      "*_lamp"
+     ],
+     "color": "#FFB21E",
+     "emit": "#FFB21E"
+    },
+    {
+     "type": "fill",
+     "roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "color": "#FFB21E",
+     "emit": "#FFB21E",
+     "rough": 0.2,
+     "metal": 0.0
+    }
+   ]
+  },
+  "chrom": {
+   "de": "Chrom",
+   "energy": "#3CF0D2",
+   "emissive_intensity": 1.4,
+   "swatch": [
+    "#8C929C",
+    "#4A1A8A"
+   ],
+   "note": "Nutzerbild 4 (sechster Roboter), 0.20 nach dem Render: polierter Chrom auf allen Platten, glänzend violetter Unterbau, türkise Augen",
+   "layers": [
+    {
+     "type": "fill",
+     "color": "#8C929C",
+     "rough": 0.42,
+     "metal": 1.0
+    },
+    {
+     "type": "fill",
+     "color": "#4A1A8A",
+     "roles": [
+      "graphite",
+      "rubber"
+     ],
+     "rough": 0.3,
+     "metal": 0.35
+    },
+    {
+     "type": "fill",
+     "color": "#2A1748",
+     "roles": [
+      "dark_metal",
+      "anodized"
+     ],
+     "rough": 0.3,
+     "metal": 0.9
+    },
+    {
+     "type": "fill",
+     "color": "#6A2FC0",
+     "roles": [
+      "trim",
+      "accent"
+     ],
+     "rough": 0.25,
+     "metal": 0.6
+    },
+    {
+     "type": "wear",
+     "not_roles": [
+      "rubber",
+      "energy",
+      "reticle_cyan"
+     ],
+     "radius_mm": 2,
+     "noise": 160,
+     "threshold": [
+      0.58,
+      0.62
+     ],
+     "color": "#B4BAC2",
+     "rough": 0.3,
+     "metal": 1.0,
+     "amount": 0.4,
+     "seed": 91
+    },
+    {
+     "type": "scratches",
+     "roles": [
+      "shell"
+     ],
+     "color": "#B9BEC6",
+     "rough": 0.4,
+     "amount": 0.3,
+     "seed": 92
+    },
+    {
+     "type": "dirt",
+     "not_roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "color": "#2A2630",
+     "amount": 0.2,
+     "ao": [
+      0.35,
+      0.95
+     ],
+     "noise": 22,
+     "seed": 93
+    },
+    {
+     "type": "fill",
+     "parts": [
+      "*_lamp"
+     ],
+     "color": "#3CF0D2",
+     "emit": "#3CF0D2"
+    },
+    {
+     "type": "fill",
+     "roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "color": "#3CF0D2",
+     "emit": "#3CF0D2",
+     "rough": 0.2,
+     "metal": 0.0
+    }
+   ]
+  },
+  "sand": {
+   "de": "Sand",
+   "energy": "#FFC46B",
+   "emissive_intensity": 0.9,
+   "swatch": [
+    "#B49A72",
+    "#3A3128"
+   ],
+   "note": "Nutzerbild 4 (dritter Roboter), 0.20 nach dem Render: Wüstenbeige, stark abgenutzt mit großen Abplatzern, dunkelbrauner Unterbau, Staub in den Fugen",
+   "layers": [
+    {
+     "type": "fill",
+     "color": "#B49A72",
+     "rough": 0.8,
+     "metal": 0.0
+    },
+    {
+     "type": "fill",
+     "color": "#3A3128",
+     "roles": [
+      "graphite",
+      "rubber"
+     ],
+     "rough": 0.85,
+     "metal": 0.05
+    },
+    {
+     "type": "fill",
+     "color": "#2E2822",
+     "roles": [
+      "dark_metal",
+      "anodized"
+     ],
+     "rough": 0.5,
+     "metal": 0.6
+    },
+    {
+     "type": "fill",
+     "color": "#6E5C44",
+     "roles": [
+      "trim"
+     ],
+     "rough": 0.6,
+     "metal": 0.3
+    },
+    {
+     "type": "wear",
+     "roles": [
+      "shell",
+      "accent"
+     ],
+     "radius_mm": 25,
+     "noise": 14,
+     "threshold": [
+      0.55,
+      0.6
+     ],
+     "edge_weight": 0.35,
+     "contrast": 2.4,
+     "color": "#7E6A4E",
+     "rough": 0.85,
+     "metal": 0.0,
+     "seed": 101
+    },
+    {
+     "type": "wear",
+     "roles": [
+      "shell",
+      "accent"
+     ],
+     "radius_mm": 8,
+     "noise": 60,
+     "threshold": [
+      0.56,
+      0.6
+     ],
+     "edge_weight": 0.5,
+     "contrast": 1.4,
+     "color": "#4A4038",
+     "rough": 0.55,
+     "metal": 0.5,
+     "seed": 106
+    },
+    {
+     "type": "wear",
+     "not_roles": [
+      "rubber",
+      "energy",
+      "reticle_cyan"
+     ],
+     "radius_mm": 3.5,
+     "noise": 130,
+     "threshold": [
+      0.52,
+      0.57
+     ],
+     "color": "#7E7A70",
+     "rough": 0.45,
+     "metal": 0.75,
+     "seed": 102
+    },
+    {
+     "type": "dirt",
+     "not_roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "color": "#D2BE96",
+     "rough": 1.0,
+     "amount": 0.5,
+     "ao": [
+      0.3,
+      0.95
+     ],
+     "noise": 20,
+     "base": 0.1,
+     "seed": 103
+    },
+    {
+     "type": "dirt",
+     "not_roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "color": "#3A2E20",
+     "amount": 0.35,
+     "ao": [
+      0.3,
+      0.9
+     ],
+     "noise": 18,
+     "seed": 104
+    },
+    {
+     "type": "scratches",
+     "roles": [
+      "shell",
+      "accent"
+     ],
+     "color": "#D4C6A6",
+     "amount": 0.45,
+     "seed": 105
+    },
+    {
+     "type": "fill",
+     "parts": [
+      "*_lamp"
+     ],
+     "color": "#FFC46B",
+     "emit": "#FFC46B"
+    },
+    {
+     "type": "fill",
+     "roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "color": "#FFC46B",
+     "emit": "#FFC46B",
+     "rough": 0.2,
+     "metal": 0.0
+    }
+   ]
+  },
+  "orbit": {
+   "de": "Orbit",
+   "energy": "#3FF2C8",
+   "emissive_intensity": 1.6,
+   "swatch": [
+    "#1E2747",
+    "#E07A22"
+   ],
+   "note": "Nutzerbild 6 vom 30.10.2026: verkratztes Navy mit Goldkanten, weiße Panzerteile an Schultern, Unterarmen und Oberschenkeln mit orangen Kappen und Streifen, orange leuchtende Leiterbahnen an Brustring und Schienbeinen, Carbon-Unterbau, türkise Augen",
+   "layers": [
+    {
+     "type": "fill",
+     "color": "#1E2747",
+     "rough": 0.45,
+     "metal": 0.25
+    },
+    {
+     "type": "carbon",
+     "roles": [
+      "graphite",
+      "rubber"
+     ],
+     "color": "#0D0E12",
+     "color2": "#2A2D36",
+     "cell_mm": 3.0,
+     "rough": 0.38,
+     "metal": 0.25
+    },
+    {
+     "type": "fill",
+     "color": "#1C1F26",
+     "roles": [
+      "dark_metal",
+      "anodized"
+     ],
+     "rough": 0.4,
+     "metal": 0.8
+    },
+    {
+     "type": "fill",
+     "color": "#C99A3A",
+     "roles": [
+      "trim",
+      "accent"
+     ],
+     "rough": 0.3,
+     "metal": 1.0
+    },
+    {
+     "type": "fill",
+     "color": "#C99A3A",
+     "parts": [
+      "*_rim_*",
+      "*_edge",
+      "*_trim",
+      "*_band",
+      "*_bezel"
+     ],
+     "not_roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "rough": 0.3,
+     "metal": 1.0
+    },
+    {
+     "type": "fill",
+     "color": "#DCD8CC",
+     "roles": [
+      "shell"
+     ],
+     "parts": [
+      "pauldron_*_band",
+      "pauldron_*_flare2*",
+      "fore_shell",
+      "thigh_shell"
+     ],
+     "rough": 0.6,
+     "metal": 0.02
+    },
+    {
+     "type": "fill",
+     "color": "#E07A22",
+     "roles": [
+      "shell"
+     ],
+     "parts": [
+      "knee_cap",
+      "toe_cap",
+      "fore_top",
+      "thigh_cuff",
+      "heel_cap"
+     ],
+     "rough": 0.55,
+     "metal": 0.05
+    },
+    {
+     "type": "stripes",
+     "roles": [
+      "shell"
+     ],
+     "parts": [
+      "fore_shell",
+      "thigh_shell"
+     ],
+     "not_parts": [
+      "*_edge",
+      "*_rim_*"
+     ],
+     "color": "#E07A22",
+     "rough": 0.55,
+     "angle": 35,
+     "freq": 0.8,
+     "width": 0.2,
+     "warp": 0,
+     "jitter": 0,
+     "seed": 111
+    },
+    {
+     "type": "band",
+     "roles": [
+      "shell"
+     ],
+     "from_mm": 0.0,
+     "to_mm": 1.6,
+     "color": "#C99A3A",
+     "rough": 0.3,
+     "metal": 1.0
+    },
+    {
+     "type": "emblem",
+     "roles": [
+      "shell"
+     ],
+     "parts": [
+      "chest"
+     ],
+     "anchor": "emblem_disc",
+     "facing": [
+      0,
+      0,
+      1,
+      0.3
+     ],
+     "center": [
+      0,
+      0
+     ],
+     "radius": 0.14,
+     "rays": 6,
+     "ray_length": 2.6,
+     "core": 0.0,
+     "width_mm": 2.4,
+     "color": "#FF8A2A",
+     "emit": "#FF8A2A",
+     "emit_strength": 1.3
+    },
+    {
+     "type": "stripes",
+     "roles": [
+      "shell"
+     ],
+     "parts": [
+      "shin_shell"
+     ],
+     "facing": [
+      0,
+      0,
+      1,
+      0.4
+     ],
+     "not_parts": [
+      "*_edge",
+      "*_rim_*"
+     ],
+     "color": "#FF8A2A",
+     "emit": "#FF8A2A",
+     "emit_strength": 1.3,
+     "rough": 0.3,
+     "angle": 90,
+     "freq": 3.0,
+     "width": 0.07,
+     "warp": 0,
+     "jitter": 0,
+     "region": [
+      -0.4,
+      0.4,
+      0.0,
+      0.85
+     ],
+     "seed": 112
+    },
+    {
+     "type": "wear",
+     "not_roles": [
+      "rubber",
+      "energy",
+      "reticle_cyan"
+     ],
+     "radius_mm": 3,
+     "noise": 140,
+     "threshold": [
+      0.52,
+      0.57
+     ],
+     "color": "#B08A3A",
+     "rough": 0.3,
+     "metal": 0.95,
+     "seed": 113
+    },
+    {
+     "type": "scratches",
+     "roles": [
+      "shell"
+     ],
+     "color": "#B8BCC4",
+     "amount": 0.55,
+     "seed": 114
+    },
+    {
+     "type": "dirt",
+     "not_roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "color": "#1E1810",
+     "rough": 0.85,
+     "amount": 0.55,
+     "ao": [
+      0.3,
+      0.95
+     ],
+     "noise": 18,
+     "seed": 115
+    },
+    {
+     "type": "fill",
+     "parts": [
+      "*_lamp"
+     ],
+     "color": "#3FF2C8",
+     "emit": "#3FF2C8"
+    },
+    {
+     "type": "fill",
+     "roles": [
+      "energy",
+      "reticle_cyan"
+     ],
+     "color": "#3FF2C8",
+     "emit": "#3FF2C8",
      "rough": 0.2,
      "metal": 0.0
     }

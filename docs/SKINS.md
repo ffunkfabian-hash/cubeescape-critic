@@ -62,7 +62,7 @@ Gebackene Positionen tragen nur die BSP-Teile (Kern, Kragen, Kinnblock, Kieferst
 ## Mischer (`web/src/skinShader.js`)
 
 Ein Rezept (`web/src/skins.json`, aus der Blender-Fassung übernommen) ist eine Folge von Schichten: fill, band, wear, dirt, scratches,
-stripes, diamond, chevron, emblem, filigree. Es wird zu GLSL übersetzt und je Fragment in Modellmetern ausgewertet; nur AO und
+stripes, diamond, chevron, emblem, filigree, tex, decal (0.16) und seit 0.20 carbon, circuit, sparkle (siehe unten). Es wird zu GLSL übersetzt und je Fragment in Modellmetern ausgewertet; nur AO und
 Kantenabstand kommen aus `maps.png`. Muster bleiben dadurch auch ganz nah scharf. Rauschen ist nach der Pixelgröße bandbegrenzt
 (Oktaven feiner als etwa ein Pixel blenden zum Mittelwert), Schwellen werden um ihre Bildschirmableitung geweitet.
 
@@ -73,6 +73,13 @@ Kantenabstand kommen aus `maps.png`. Muster bleiben dadurch auch ganz nah scharf
 - Meshes ohne passenden Atlas-Eintrag (anderer Parameterstand) werden ohne Karten gemalt, mit Warnung in der Konsole.
 
 ## Skins aus generierten Bildern: Bronze und Schrott (30.10.2026)
+
+> **Seit 0.20 „Livery“ sind Bronze und Schrott prozedural** (Nutzer: „Überarbeite die Skins Schrott und Bronze generell“): Bronze =
+> polierte Bronzeplatten, gravierte Ornamente (`filigree` dunkel), violette Leuchtlinie, Messingkanten, Grünspan nur in den Fugen der
+> Platten, Mechanik geschwärztes Eisen; Schrott = blanker Stahl mit einzelnen verblichen lackierten Platten (Orange links, Petrol
+> rechts), Warnstreifen-Rest am rechten Knie, großflächiger Rost, schwarze ölige Mechanik. Die Kacheln und Motivbögen unten bleiben in
+> `assets/skins/textures/` als Material für künftige Skins aus Nutzerbildern; die Schichten `tex`, `decal` und `kinds` prüft
+> `skins.test.mjs` mit einem eigenen Testrezept. Der folgende Abschnitt beschreibt den Weg aus 0.16.
 
 Ein Bildgenerator, der ein ganzes Atlasbild bemalt (Vorlage: exportierte Basisfarbe), malt jede Insel für sich: Er weiß nicht,
 welche Inseln im 3D nebeneinanderliegen. Auf dem Modell wechselt das Material dann fleckig, Muster brechen an Nähten ab, Motive
@@ -136,10 +143,57 @@ bleiben; `skin_swatches.py` bricht sonst ab (eine mitgelieferte Legende unter de
 > islands with a magenta outline, nowhere else. Details smaller than an island, no pattern running across an island border. Do
 > not draw the white or magenta outlines, and do not add the legend to the result.
 
+## Skins nach Nutzerbildern (0.20 „Livery“, 30.10.2026)
+
+Sechs Bilder des Nutzers (Roboter in Hangar und Ruinen, eine Reihe von zehn Lackierungen) wurden in Rezepte übersetzt – ohne neue
+Bilddateien, nur aus prozeduralen Schichten, damit sie auf allen drei Körpern und beiden Helmen gleich sitzen und ganz nah scharf
+bleiben. Jeder Skin folgt dem Roboter seines Bildes (Nutzer: „die sollen nicht alle gleich ausschauen, ich habe mich auf die Render
+bezogen“); Figuren- und Szenendetails (Umhang, Waffen, Aufkleber mit Motiven) bleiben weg.
+
+| Skin | Vorlage | Look | Besondere Schichten |
+|---|---|---|---|
+| **Vorhut** | Bild 1 (Hangar, Weiß-Navy) | Elfenbein-Lack, Navy-Felder auf Schulterflügeln, Rippen, Bauch, Knie, Haube; Goldkanten; cyanfarbenes Brustmedaillon | carbon (Unterbau), Rost an Kanten |
+| **Azur** | Bild 2 (Ruinen, Blau-Gold) | Platten aus blauem Carbon mit Metallglanz, kräftige orange Leuchtlinie an jeder Plattenkante, Goldkanten, Goldornament an Schultern und Brust, Sonnenemblem mit glühendem Kern, orange Gelenkringe, Kreidekratzer, schwarze Carbon-Oberschenkel | carbon (blau und schwarz), band, filigree, emblem ×2 |
+| **Neon** | Bild 3 (Ruinen, Neon) | Carbon-Platten mit bunten Leuchtbahnen und cyanfarbenen Rändern, weiße Sticker-Platten links, orange Bauchlinie; Mechanik mattschwarz | carbon, circuit (Farbverlauf) |
+| **Orbit** | Bild 6 (Hangar, Navy-Orange) | verkratztes Navy mit Goldkanten, weiße Unterarme, Oberschenkel und Schulterbänder mit orangen Streifen, orange Knie und Stiefel, orange Leiterbahnen am Brustring und Leuchtlinien an den Schienbeinen, türkise Augen | emblem als Leiterbahnen, stripes mit `region` |
+| **Sand** | Bild 4, dritter | Wüstenbeige mit großen Abplatzern, dunkelbrauner Unterbau, Staub in den Fugen | wear (Abplatzer) |
+| **Moos** | Bild 4, fünfter | Grüntarnung, Platten von Moos bewachsen, Mechanik schwarz-oliv | wear ohne Kante als Tarnflecken |
+| **Chrom** | Bild 4, sechster | polierter Chrom, glänzend violetter Unterbau | – |
+| **Frost** | Bild 4, achter | Schneetarnung Weiß/Grau, Schnee in den Fugen, Mechanik anthrazit, cyanfarbene Augen | dto. |
+| **Signal** | Bild 4, neunter | Gunmetal, orange-schwarze Warnstreifen auf Schulterpanzern und Knien, dunkler Unterbau, bernsteinfarbene Augen | stripes mit `jitter: 0` |
+| **Galaxie** | Bild 4, zehnter | Platten tiefes Violett mit Nebeln in Magenta und Blau und Sternen, Mechanik glänzend schwarz | sparkle (zwei Größen) |
+| **Bronze** | Bild 5, vierter (gold) | graviertes Gold-Bronze, weinroter Unterbau und Seitenteile, türkise Augen | filigree, diamond |
+| **Schrott** | – (0.16, neu 0.20) | zusammengeflickt: blanker Stahl, verblichen Orange und Petrol, Warnstreifen-Rest, viel Rost | wear, dirt |
+
+Schwarz-Rot (Bild 4, zweiter) ist Glut, Weiß-Schwarz (erster) das Farbschema Weiß-Graphit, Rost-Orange (siebter) Rost.
+
+**Kontrast (Nutzerwunsch, gilt für jeden Skin):** Muster und Farbe tragen die Panzerplatten (Rollen `shell`, `accent`), die Mechanik
+(`graphite`, `dark_metal`, `rubber`, `anodized`) bleibt dunkel und ruhig – „weiße Panzerplatten, schwarze Mechanik zum Beispiel“.
+Verworfen auf dem Weg: Neon mit weißen Platten (aus der Ferne pastell) und eine für alle gleiche Formel (abgesetzte Felder, Metallkante,
+Leuchtlinie, Emblem) – die Skins sahen sich zu ähnlich.
+
+![Skins (Spalten: Vorhut, Azur, Neon, Orbit, Moos, Frost, Galaxie, Signal, Chrom, Sand, Bronze, Schrott) auf Wächter, Paladin, Mechanik, Helm H und Scout](bilder/livery_skins.jpg)
+
+**Neue Schichten im Mischer** (`skinShader.js`):
+
+- `carbon`: Köperbindung 2/2 aus Faserbündeln (`cell_mm` je Bündel, Farben `color`/`color2`), auf der Achsenebene, die die Normale am
+  stärksten zeigt (`skinPlane`); feiner als ein Pixel blendet sie zum Mittelwert, die Rauheit steigt in den Rillen leicht.
+- `circuit`: Leiterbahnen auf einem Raster von `cell_mm`. Jede Kante zwischen zwei Zellen ist mit Wahrscheinlichkeit `density` eine Bahn –
+  beide Zellen sehen denselben Zufallswert, deshalb laufen Bahnen durch; Sackgassen bekommen ein Lötauge (`pad_mm`). Farbe fest oder
+  als Regenbogen über das Modell (`hue_per_m`, Versatz `hue`), mit `emit` leuchtend. Ab ≈ 1/5 Zelle je Pixel blendet sie aus.
+- `sparkle`: je Zelle von `cell_mm` (3D) ein versetzter Punkt, ein Anteil `density` leuchtet, Größe bis `size_mm`.
+- `stripes` bekommt `jitter` (0 = gleich breite Streifen, z. B. Warnstreifen); ohne die Angabe bleibt der Code wie bisher.
+- Tarnflecken und Nebel brauchen keine neue Schicht: `wear` mit `edge_weight: 0` ist reines, geschwelltes Rauschen.
+- Jedes Rezept trägt `swatch` (zwei Farben); die Skin-Knöpfe der Navigation zeigen sie als Punkt.
+
+Prüfung: `skins.test.mjs` (neue Schichttypen im GLSL, Streifen ohne `jitter` unverändert, jeder Skin mit Farbpunkt, jede `wear`-Schicht
+mit Radius); `verify` setzt jeden Skin auf Wächter mit Helm H und rendert ihn (ein Shader-Fehler ist ein Konsolenfehler).
+
 ## Viewer
 
-- Navigation **„Lackierung“**: Farbschema (Creme, Weiß-Graphit, Original) *oder* Skin (Rost, Glut, Ornat), für Körper und Helm
-  zusammen; „Material gealtert/flach“ wirkt nur beim Farbschema. URL `&skin=rost|glut|ornat` (Farbschema bleibt darunter `&colors=`).
+- Navigation **„Lackierung“**: Farbschema (Creme, Weiß-Graphit, Original) *oder* Skin (14 Rezepte als Bildkacheln in der rechten Leiste „Look“, Vorschaubilder aus `tools/nav_thumbs.mjs`), für Körper und
+  Helm zusammen; „Material gealtert/flach“ wirkt nur beim Farbschema. URL `&skin=<Schlüssel in skins.json>` (Farbschema bleibt darunter
+  `&colors=`).
 - **Texturen exportieren**: rendert den Mischer im UV-Raum (2048²) und lädt je Atlas Basisfarbe, ORM (glTF-Reihenfolge) und Emission
   als PNG herunter; Lücken zwischen den Inseln mit der nächsten Inselfarbe gefüllt. Der GLB-Export trägt dieselben Texturen.
 

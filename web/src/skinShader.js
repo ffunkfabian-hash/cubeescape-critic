@@ -1,5 +1,5 @@
 // Skin mixer as a shader (0.13 "Skins"): a recipe of skins.json (layers fill, band, wear, dirt, scratches, stripes, diamond,
-// chevron, emblem, filigree) is compiled to GLSL and evaluated per fragment in model metres – live on the model (skinMaterial,
+// chevron, emblem, filigree; since 0.20 "Livery" carbon, circuit, sparkle) is compiled to GLSL and evaluated per fragment in model metres – live on the model (skinMaterial,
 // a MeshStandardMaterial) and in UV space for the texture export (skinBakeMaterial). Only ambient occlusion and the distance to
 // the nearest plate edge come from the baked maps (skinAtlas.js); patterns and noise are procedural, so they stay sharp up close.
 // Noise is band-limited by the fragment's footprint (octaves finer than a pixel fade to their mean) and thresholds widen by
@@ -77,6 +77,14 @@ float skinFbm(vec3 p, float scale, int octaves, float seed, float fw) {
   return total / norm;
 }
 float skinStep(float lo, float hi, float v) { float a = fwidth(v) * 0.75; return smoothstep(lo - a, hi + a, v); }
+// planar coordinates on the model axis plane the normal faces most (triplanar without blending, for fine line patterns); id 0/1/2
+vec2 skinPlane(vec3 p, vec3 n, out float id) {
+  vec3 a = abs(n);
+  if (a.x > a.y && a.x > a.z) { id = 0.0; return p.yz; }
+  if (a.y > a.z) { id = 1.0; return p.xz; }
+  id = 2.0; return p.xy;
+}
+vec3 skinHue(float h) { return clamp(abs(mod(h * 6.0 + vec3(0.0, 4.0, 2.0), 6.0) - 3.0) - 1.0, 0.0, 1.0); }
 // anti-aliased line of width w (mm) at distance d (mm)
 float skinLine(float d, float w, float aa) { return 1.0 - smoothstep(w * 0.5 - aa, w * 0.5 + aa, abs(d)); }
 bool skinOn(float mask, int i) { return ((int(mask + 0.5) >> i) & 1) == 1; }
@@ -124,7 +132,7 @@ function layerCode(L, i) {
       return `if (skinOn(mask, ${i})) {
     float axis = v * ${f(Math.cos(a))} + u * ${f(Math.sin(a))};
     float fr = fract(axis * ${f(L.freq ?? 1.6)} + (skinFbm(pos, ${f(ws)}, 3, ${seed}, fw) - 0.5) * ${f(L.warp ?? 1.2)});
-    float wd = ${f(width)} * (0.4 + skinFbm(pos, ${f(ws * 2.3)}, 2, ${f((L.seed ?? 0) + 7)}, fw));
+    float wd = ${f(width)} * ${L.jitter === undefined ? '' : `mix(1.0, `}(0.4 + skinFbm(pos, ${f(ws * 2.3)}, 2, ${f((L.seed ?? 0) + 7)}, fw))${L.jitter === undefined ? '' : `, ${f(L.jitter)})`};
     float e = abs(fr - 0.5) * 2.0, ea = max(fwidth(e), 0.001);
     float w = (1.0 - smoothstep(wd - 0.03 - ea, wd + 0.03 + ea, e))${region(L)}${sel.map(x => ' * ' + x).join('')};
     ${apply(L)} }`;
@@ -176,6 +184,49 @@ function layerCode(L, i) {
     s.base = mix(s.base, d.rgb, w);
     s.emit = mix(s.emit, d.rgb * ${f(L.glow ?? 0)}, w);
     s.rough = mix(s.rough, ${f(L.rough ?? 0.35)}, w); }`;
+    }
+    case 'carbon': {  // twill weave (2/2) of fibre tows, cell_mm per tow, on the facing axis plane; fades to its mean below a pixel
+      const cell = L.cell_mm ?? 3, [ca, cb] = [L.color ?? '#121316', L.color2 ?? '#34373D'];
+      return `if (skinOn(mask, ${i})) {
+    float id; vec2 q = skinPlane(pos, nor, id) * ${f(1000 / cell)};
+    vec2 c = floor(q), t = fract(q);
+    float over = step(mod(c.x + c.y, 4.0), 1.5);
+    float tow = sin(mix(t.x, t.y, over) * 3.14159265);
+    float shade = mix(mix(0.45, 1.0, over) * (0.3 + 0.7 * tow), 0.55, smoothstep(0.3, 0.8, pxmm / ${f(cell)}));
+    float w = ${f(L.opacity ?? 1)}${region(L)}${sel.map(x => ' * ' + x).join('')};
+    skinApply(s, w, true, mix(${lin(ca)}, ${lin(cb)}, shade), ${'rough' in L}, ${f(L.rough ?? 0)} + 0.12 * (1.0 - shade), ${'metal' in L}, ${f(L.metal ?? 0)}, false, vec3(0)); }`;
+    }
+    case 'circuit': { // circuit traces on a grid of cell_mm: an edge between two cells is a trace with probability density (shared by
+      // both cells, so traces connect), dead ends get a pad; colour fixed or a rainbow over the model (hue_per_m), glowing with emit
+      const cell = L.cell_mm ?? 10, p = L.density ?? 0.45, pad = L.pad_mm ?? 1.5;
+      const rainbow = L.hue_per_m != null;
+      const col = rainbow ? `pow(skinHue(dot(pos, vec3(0.35, 1.0, 0.2)) * ${f(L.hue_per_m)} + ${f(L.hue ?? 0)}), vec3(2.2))` : lin(L.color ?? '#FFFFFF');
+      return `if (skinOn(mask, ${i})) {
+    float id; vec2 q = skinPlane(pos, nor, id) * ${f(1000 / cell)};
+    vec2 c = floor(q), t = fract(q) - 0.5;
+    float r = step(skinHash(vec3(c, id * 2.0), ${seed}), ${f(p)}), l = step(skinHash(vec3(c - vec2(1, 0), id * 2.0), ${seed}), ${f(p)});
+    float up = step(skinHash(vec3(c, id * 2.0 + 1.0), ${seed}), ${f(p)}), dn = step(skinHash(vec3(c - vec2(0, 1), id * 2.0 + 1.0), ${seed}), ${f(p)});
+    float big = 1e3, d = big;
+    d = min(d, mix(big, t.x >= 0.0 ? abs(t.y) : length(t), r));
+    d = min(d, mix(big, t.x <= 0.0 ? abs(t.y) : length(t), l));
+    d = min(d, mix(big, t.y >= 0.0 ? abs(t.x) : length(t), up));
+    d = min(d, mix(big, t.y <= 0.0 ? abs(t.x) : length(t), dn));
+    float ends = r + l + up + dn;
+    float w = skinLine(d * ${f(cell)}, ${f(L.width_mm ?? 0.8)}, aa) * step(0.5, ends);
+    w = max(w, step(0.5, ends) * step(ends, 1.5) * (1.0 - smoothstep(${f(pad)} - aa, ${f(pad)} + aa, length(t) * ${f(cell)})));
+    w *= (1.0 - smoothstep(0.2, 0.45, pxmm / ${f(cell)}))${region(L)}${sel.map(x => ' * ' + x).join('')} * ${f(L.opacity ?? 1)};
+    vec3 col = ${col};
+    skinApply(s, w, true, col, ${'rough' in L}, ${f(L.rough ?? 0)}, ${'metal' in L}, ${f(L.metal ?? 0)}, ${!!L.emit}, col * ${f(L.emit_strength ?? 1)}); }`;
+    }
+    case 'sparkle': { // stars: one jittered point per cell of cell_mm in 3D, a share `density` of them shines, size up to size_mm
+      const cell = L.cell_mm ?? 12;
+      return `if (skinOn(mask, ${i})) {
+    vec3 q = pos * ${f(1000 / cell)}, c = floor(q), t = fract(q) - 0.5;
+    vec3 o = vec3(skinHash(c, ${f((L.seed ?? 0) + 1)}), skinHash(c, ${f((L.seed ?? 0) + 2)}), skinHash(c, ${f((L.seed ?? 0) + 3)})) - 0.5;
+    float h = skinHash(c, ${seed}), size = ${f(L.size_mm ?? 1.2)} * (0.35 + 0.65 * fract(h * 7.31));
+    float w = step(${f(1 - (L.density ?? 0.25))}, h) * (1.0 - smoothstep(size * 0.25, size + aa, length(t - o * 0.6) * ${f(cell)}));
+    w *= (1.0 - smoothstep(0.25, 0.6, pxmm / ${f(cell)}))${region(L)}${sel.map(x => ' * ' + x).join('')};
+    ${apply(L)} }`;
     }
     case 'filigree': {
       const rings = L.rings ?? 9, scale = L.scale ?? 40, wmm = L.width_mm ?? 1.2;

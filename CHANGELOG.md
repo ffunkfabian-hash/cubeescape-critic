@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.20.0 „Livery“ – 2026-10-30 (zehn Skins nach Nutzerbildern, Seitenwechsel ohne Neuladen, Ladebalken)
+
+- Skins Vorhut, Azur, Neon, Orbit, Moos, Frost, Galaxie, Signal, Chrom, Sand nach sechs Nutzerbildern, rein prozedural für alle Körper und
+  beide Helme; neue Mischer-Schichten `carbon` (Köperbindung), `circuit` (zusammenhängende Leiterbahnen, Regenbogen), `sparkle`
+  (Sterne), `stripes.jitter`; Farbpunkt je Skin-Knopf. `verify` rendert jeden Skin.
+- Navigation lädt die Seite nicht mehr neu: Modell-Links und Einstellungen tauschen das Modell im laufenden Viewer (`main.js › go`,
+  `history.pushState`, Zurück/Vor), Navigation, offene Abschnitte und Kamera (zwischen Körpern) bleiben.
+- Ladebalken oben über dem Bild (`loadingBar.js`) beim ersten Laden, Seiten-, Helm- und Skinwechsel; Shader per `compileAsync`.
+- Kontrast Platten/Mechanik bei Neon, Moos, Frost, Galaxie; Bronze und Schrott prozedural neu (statt Bildkacheln), Neon überarbeitet; jeder Skin nach seinem Roboter im Render, mit Kontrast
+  Platten/Mechanik (Bronze nach dem goldenen Roboter, Signal Gunmetal).
+- Navigation neu: Leiste oben (gezeigtes Modell, Ansichten als SVG-Icons), links „Modell“ (Körper und Kopf als Bildkacheln, Varianten
+  nur bei Helm H, Nahansicht, Bauteile), rechts „Look“ (Lackierung als Bildkacheln, Darstellung, Helm-Geometrie, Referenz & Export); beide Leisten
+  einzeln ausblendbar (`[` `]`). Vorschaubilder aus `tools/nav_thumbs.mjs`. „Original“ ist ein Referenzschalter statt eines Farbschemas.
+
 ## 0.19.0 „Whetstone“ – 2026-10-30 (Generator: Normalen Länge 1, Aufbau schneller, Formtests statt Blender-Gleichheit)
 
 - Normalen: Nullnormalen an entarteten Dreiecken (Körper: Maske, Schienbeinschalen, Schulterpanzer; Scout: 12 022 flächenlose

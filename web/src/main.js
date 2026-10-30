@@ -23,63 +23,77 @@ import { modelSource } from './modelSource.js';
 import { setRobotWear, releaseRobotWear } from './robotWear.js';
 import { SKINS, loadSkinAtlas, loadSkinTextures, prepareSkin, applySkin, releaseSkin, skinState, bakeSkinTextures, useBakedMaterial } from './robotSkins.js';
 import { HELMETS, CRITIC_VARIANTS, COLOR_SCHEMES, HELMET_FRAME_METERS, dressBody, isStudyHelmetPart, matchRobotColors, paletteMaterials, schemePalette, setRobotHelmet } from './robotHelmet.js';
-import { createNavigation } from './navigation.js';
+import { createNavigation, thumb } from './navigation.js';
+import { createLoadingBar } from './loadingBar.js';
 import { FINISH_PRESETS, ACCENT_PRESETS } from './finishPresets.js';
 
-const query = new URLSearchParams(location.search);
-const materialFinish = resolveFinish(query.get('finish') ?? 'original');
-const materialAccents = resolveAccents(query.get('accents') ?? 'original');
-const strips = query.get('strips') ?? 'on';
-if (!['on', 'off'].includes(strips)) throw new Error(`Unknown strips ${JSON.stringify(strips)}; expected on or off`);
-D.foreheadPlates.enabled = strips === 'on';
+let query = new URLSearchParams(location.search);
 if (query.get('ui') === '0') document.body.classList.add('noui');
+const loading = createLoadingBar();
+// Page state from the URL. Since 0.20 "Livery" a model link or a setting that used to reload the page loads the next page in place
+// (go, readPage, enterPage): renderer, lights and navigation stay. robotLook, robotHelmet and presentationOptions are the same objects
+// for the whole session (window.* refers to them), the other values are replaced per page.
 // ?model=scout: Scout v3 instead of the three.js helmet H; geometry GUI is off.
 // ?model=waechter|paladin|mechanik: one of the three robot bodies in its own frame (ROBOT_FRAME).
 // Bodies and Scout come from the three.js generator (web/src/robotgen) as exported GLBs (tools/robotgen_export.mjs, 0.18);
 // &gen=three builds them live in the browser, &gen=blender (alias glb) loads the frozen Blender export (modelSource.js).
 // The skin atlases (assets/skins/<model>) are baked from the exported GLBs and fit the live build as well.
-const modelName = query.get('model') ?? 'critic';
 const MODEL_NAMES = ['critic', 'scout', ...Object.keys(ROBOT_MODELS)];
-if (!MODEL_NAMES.includes(modelName)) throw new Error(`Unknown model ${JSON.stringify(modelName)}; expected ${MODEL_NAMES.join(', ')}`);
-const robotGen = modelSource(query.get('gen') ?? 'export');
-const scoutModels = modelName === 'scout' ? { assembled: await loadScout(false, robotGen), exploded: await loadScout(true, robotGen) } : null;
-const robotModel = ROBOT_MODELS[modelName] ? await loadRobot(modelName, { gen: robotGen }) : null;
+let materialFinish, materialAccents, strips, modelName, robotGen, scoutModels = null, robotModel = null;
 // &wear=on|off: aged material of the colour scheme (robotWear.js) or its flat colours.
-const robotLook = { wear: query.get('wear') ?? 'on' };
-if (!['on', 'off'].includes(robotLook.wear)) throw new Error(`Unknown wear ${JSON.stringify(robotLook.wear)}; expected on or off`);
-// &skin=none|rost|glut|ornat: skin of body and helmet (robotSkins.js, recipes skins.json, atlases assets/skins/<model>). Wear and
-// dirt are part of the recipe, so the aged shader is off while a skin is shown; the colour scheme stays underneath.
-robotLook.skin = query.get('skin') ?? 'none';
-if (robotLook.skin !== 'none' && !SKINS[robotLook.skin]) throw new Error(`Unknown skin ${JSON.stringify(robotLook.skin)}; expected none${Object.keys(SKINS).map(k => ', ' + k).join('')}`);
+// &skin=none|<key of skins.json>: skin of body and helmet (robotSkins.js, atlases assets/skins/<model>). Wear and dirt are part of
+// the recipe, so the aged shader is off while a skin is shown; the colour scheme stays underneath.
+const robotLook = {};
 const skinOn = () => robotLook.skin !== 'none';
-// atlases of the shown models (body and both helmets on a robot), loaded when a skin is first shown; skinAtlases is keyed by kind
-// ('body', 'critic', 'scout'). The Blender reference (&gen=blender) has other meshes: a skin paints it without maps.
-const skinAtlases = {}, atlasOf = { body: modelName, critic: 'critic', scout: 'scout' };
-async function ensureSkinAtlases() {
-  const kinds = robotModel ? ['body', 'critic', 'scout'] : [modelName];
-  await Promise.all([loadSkinTextures(), ...kinds.map(async k => { skinAtlases[k] ??= await loadSkinAtlas(atlasOf[k]); })]);
-}
-if (skinOn()) await ensureSkinAtlases();
-// &helmet=study|critic|scout (robots only): helmet on the robot's head segment (robotHelmet.js).
-const robotHelmet = { kind: query.get('helmet') ?? 'critic' }; // 'study' (helmet of the body GLB) stays reachable by URL as archive
-if (!HELMETS[robotHelmet.kind]) throw new Error(`Unknown helmet ${JSON.stringify(robotHelmet.kind)}; expected ${Object.keys(HELMETS).join(', ')}`);
-// &helmetVariant=80…88 (Critic helmet on a robot): finish, accents and forehead strips of the stored variants
-// (criticHelmetVariants.json); &headset=on|off as on the helmet alone.
-robotHelmet.variant = query.get('helmetVariant') ?? CRITIC_VARIANTS.default;
-if (!CRITIC_VARIANTS.variants[robotHelmet.variant]) throw new Error(`Unknown helmetVariant ${JSON.stringify(robotHelmet.variant)}; expected ${Object.keys(CRITIC_VARIANTS.variants).join(', ')}`);
+// &helmet=study|critic|scout (robots only): helmet on the robot's head segment (robotHelmet.js); 'study' (helmet of the body GLB)
+// stays reachable by URL as archive. &helmetVariant=80…88 (Critic helmet on a robot): finish, accents and forehead strips of the
+// stored variants (criticHelmetVariants.json); &headset=on|off as on the helmet alone.
 // &colors=body|helmet|original: Farbschema 1 (body palette, ballonRoles.json), Farbschema 2 (helmet H's own colours on every role,
 // robotHelmetColors.json › scheme2) for bodies and helmets alike, aged; or each model in its own materials. Helmet materials map to
 // the roles via robotHelmetColors.json. Headless reference checks pass colors=original (verify_renders.mjs).
-robotHelmet.colors = query.get('colors') ?? 'body';
-if (!COLOR_SCHEMES[robotHelmet.colors]) throw new Error(`Unknown colors ${JSON.stringify(robotHelmet.colors)}; expected ${Object.keys(COLOR_SCHEMES).join(', ')}`);
+const robotHelmet = {};
+const presentationOptions = {};
+// atlases of the shown models (body and both helmets on a robot), loaded when a skin is first shown, keyed by atlas model
+// (waechter, paladin, mechanik, critic, scout). The Blender reference (&gen=blender) has other meshes: a skin paints it without maps.
+const skinAtlases = {};
+const atlasOf = kind => (kind === 'body' ? modelName : kind);
+async function ensureSkinAtlases(name = modelName, robot = !!robotModel) {
+  const models = robot ? [name, 'critic', 'scout'] : [name];
+  await Promise.all([loadSkinTextures(), ...models.map(async m => { skinAtlases[m] ??= await loadSkinAtlas(m); })]);
+}
+const pageTitle = name => (ROBOT_MODELS[name] ? ROBOT_MODELS[name].de.replace(/ \(.*/, '') : name === 'scout' ? 'Scout' : 'Helm H');
+
+// Everything a URL asks for, validated and loaded, without touching the shown page: a failed or overtaken load leaves it as it was.
+async function readPage(q) {
+  const finish = resolveFinish(q.get('finish') ?? 'original'), accents = resolveAccents(q.get('accents') ?? 'original');
+  const stripsOn = q.get('strips') ?? 'on';
+  if (!['on', 'off'].includes(stripsOn)) throw new Error(`Unknown strips ${JSON.stringify(stripsOn)}; expected on or off`);
+  const name = q.get('model') ?? 'critic';
+  if (!MODEL_NAMES.includes(name)) throw new Error(`Unknown model ${JSON.stringify(name)}; expected ${MODEL_NAMES.join(', ')}`);
+  const gen = modelSource(q.get('gen') ?? 'export');
+  const look = { wear: q.get('wear') ?? 'on', skin: q.get('skin') ?? 'none' };
+  if (!['on', 'off'].includes(look.wear)) throw new Error(`Unknown wear ${JSON.stringify(look.wear)}; expected on or off`);
+  if (look.skin !== 'none' && !SKINS[look.skin]) throw new Error(`Unknown skin ${JSON.stringify(look.skin)}; expected none${Object.keys(SKINS).map(k => ', ' + k).join('')}`);
+  const helmet = { kind: q.get('helmet') ?? 'critic', variant: q.get('helmetVariant') ?? CRITIC_VARIANTS.default, colors: q.get('colors') ?? 'body' };
+  if (!HELMETS[helmet.kind]) throw new Error(`Unknown helmet ${JSON.stringify(helmet.kind)}; expected ${Object.keys(HELMETS).join(', ')}`);
+  if (!CRITIC_VARIANTS.variants[helmet.variant]) throw new Error(`Unknown helmetVariant ${JSON.stringify(helmet.variant)}; expected ${Object.keys(CRITIC_VARIANTS.variants).join(', ')}`);
+  if (!COLOR_SCHEMES[helmet.colors]) throw new Error(`Unknown colors ${JSON.stringify(helmet.colors)}; expected ${Object.keys(COLOR_SCHEMES).join(', ')}`);
+  const presentation = resolveAssemblyOptions({ headset: q.get('headset') ?? 'on', exploded: q.get('exploded') ?? '0' });
+  const [scout, robot] = await Promise.all([
+    name === 'scout' ? Promise.all([loadScout(false, gen), loadScout(true, gen)]).then(([assembled, exploded]) => ({ assembled, exploded })) : null,
+    ROBOT_MODELS[name] ? loadRobot(name, { gen }) : null]);
+  const [helmetModel] = await Promise.all([robot ? makeRobotHelmet(helmet.kind, helmet.variant, presentation.headset, gen) : null,
+    look.skin !== 'none' ? ensureSkinAtlases(name, !!robot) : null]);
+  return { query: q, finish, accents, strips: stripsOn, name, gen, look, helmet, presentation, scout, robot, helmetModel };
+}
 
 const BG = 0x8c8c8c;
 // ?static=1: no animation loop, frames only via window.renderFrame() (headless checks with software GL).
 const STATIC = query.get('static') === '1';
-const presentationOptions = resolveAssemblyOptions({ headset: query.get('headset') ?? 'on', exploded: query.get('exploded') ?? '0' });
 const annotation = createAssemblyLabels();
-if (scoutModels) document.querySelector('#assembly-labels .assembly-footnote').textContent = 'S01–S13 = Scout-Teile · R/L = Seite (R = rechts in der Frontansicht) · Abstände nur zur Darstellung';
-if (robotModel) document.querySelector('#assembly-labels .assembly-footnote').textContent = 'Baugruppen des Körpers · R/L = Körperseite · Socket_* = Anker zur Elternbaugruppe · Abstände nur zur Darstellung';
+const footnote = document.querySelector('#assembly-labels .assembly-footnote');
+const FOOTNOTES = { critic: footnote.textContent, scout: 'S01–S13 = Scout-Teile · R/L = Seite (R = rechts in der Frontansicht) · Abstände nur zur Darstellung',
+  robot: 'Baugruppen des Körpers · R/L = Körperseite · Socket_* = Anker zur Elternbaugruppe · Abstände nur zur Darstellung' };
 let assemblyParts = [];
 let showLabels = query.get('labels') !== '0';
 const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: STATIC });
@@ -156,12 +170,13 @@ controls.target.copy(target);
 let model;
 let current = 'front';
 let turntable = false;
-const M = createMaterials(materialFinish.name, materialAccents.name);
+let M = null; // materials of helmet H alone (finish and accents of the page), built once per pair
+const criticMaterials = new Map();
 
 // Helmet for a robot body: helmet H in the chosen variant 80–88 (without its presentation neck) or Scout.
 const variantMaterials = new Map();
-async function makeRobotHelmet(kind, variant = robotHelmet.variant, headset = presentationOptions.headset) {
-  if (kind === 'scout') return loadScout(false, robotGen);
+async function makeRobotHelmet(kind, variant = robotHelmet.variant, headset = presentationOptions.headset, gen = robotGen) {
+  if (kind === 'scout') return loadScout(false, gen);
   if (kind !== 'critic') return null;
   const v = CRITIC_VARIANTS.variants[variant], key = `${v.finish}|${v.accents}`;
   if (!variantMaterials.has(key)) variantMaterials.set(key, createMaterials(v.finish, v.accents));
@@ -181,10 +196,6 @@ let scheme2 = null;
 function schemeMaterials(colors) {
   if (colors === 'helmet') return scheme2 ??= schemePalette(createMaterials('original', 'original'));
   return robotModel?.userData.roleMaterials ?? paletteMaterials();
-}
-if (robotModel) {
-  if (robotHelmet.colors === 'helmet') dressBody(robotModel, schemeMaterials('helmet'));
-  setRobotHelmet(robotModel, robotHelmet.kind, await makeRobotHelmet(robotHelmet.kind), robotHelmet.colors, schemeMaterials(robotHelmet.colors));
 }
 
 function setCameraView(name) {
@@ -244,7 +255,6 @@ function updateOverlay() {
   overlay.style.display = show ? 'block' : 'none';
   if (show) overlay.src = `/refs/ref_${current}.png`;
   overlay.classList.toggle('diff', overlayMode === 'difference');
-  document.getElementById('btn-overlay').classList.toggle('on', overlayOn);
 }
 function toggleOverlay(on = !overlayOn, mode = overlayMode) {
   overlayOn = on;
@@ -260,8 +270,6 @@ function markButtons() {
     b.classList.toggle('on', b.dataset.view === 'turntable' ? turntable : !turntable && b.dataset.view === current);
   }
 }
-for (const b of document.querySelectorAll('#bar [data-view]')) b.addEventListener('click', () => setCameraView(b.dataset.view));
-document.getElementById('btn-overlay').addEventListener('click', () => toggleOverlay());
 
 // Post-processing: ambient occlusion, bloom only above the emissive threshold (visor), ACES in the output pass.
 const composer = new EffectComposer(renderer, new THREE.WebGLRenderTarget(1, 1, { type: THREE.HalfFloatType, samples: 4 }));
@@ -320,7 +328,7 @@ function robotSkinRoots() {
 const applySkinIfPrepared = (root, key) => { const st = skinState(root); if (st) applySkin(st, key); };
 function skinStandalone(root, kind) {
   setRobotWear(root, false, { metersPerWorld: HELMET_FRAME_METERS });
-  applySkin(prepareSkin(root, kind, skinAtlases[kind]), robotLook.skin);
+  applySkin(prepareSkin(root, kind, skinAtlases[atlasOf(kind)]), robotLook.skin);
 }
 // prepared skin states with a skin shown (texture and GLB export)
 function activeSkinStates() {
@@ -361,7 +369,7 @@ function rebuildModel() {
     // order matters: a skin restores the flat state it found, the aged shader records its own flat state
     if (!skinOn()) for (const root of robotSkinRoots()) applySkinIfPrepared(root.root, null);
     setRobotWear(model, robotLook.wear === 'on' && !skinOn());
-    if (skinOn()) for (const { root, kind, skip } of robotSkinRoots()) applySkin(prepareSkin(root, kind, skinAtlases[kind], { skip }), robotLook.skin);
+    if (skinOn()) for (const { root, kind, skip } of robotSkinRoots()) applySkin(prepareSkin(root, kind, skinAtlases[atlasOf(kind)], { skip }), robotLook.skin);
     setRobotExplosion(model, presentationOptions.exploded);
     assemblyParts = presentationOptions.exploded > 0 ? robotParts(model) : [];
     annotation.setGroups(assemblyParts);
@@ -412,14 +420,17 @@ async function exportGLBNow() {
   a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }
-document.getElementById('btn-export').addEventListener('click', exportGLB);
 
-// lil-gui (top right, Critic helmet only): live geometry parameters; geometry rebuilds after a change is finished. Models,
-// variants, views, parts and look live in the navigation on the left (buildNavigation).
+// lil-gui (Critic helmet only): live geometry parameters; geometry rebuilds after a change is finished. Since 0.20 it sits in the
+// right panel (section Helm-Geometrie); models, variants, views, parts and look are the navigation (buildNavigation).
+let gui = null;
 function buildGui() {
+  gui?.destroy();
+  gui = null;
   if (scoutModels || robotModel) return;
-  const gui = new GUI({ title: 'Helm-Parameter' });
-  gui.close();
+  // in the right panel (section Helm-Geometrie) when the navigation is shown, else floating and closed
+  gui = new GUI({ title: 'Helm-Parameter', container: guiHost ?? undefined });
+  if (!guiHost) gui.close();
   const re = () => rebuild();
   const f1 = gui.addFolder('Proportionen');
   f1.add(D.head, 'tilt', -0.3, 0.3, 0.01).name('Kuppel Neigung').onFinishChange(re);
@@ -447,7 +458,7 @@ function buildGui() {
     ['x', 'y', 'z'].forEach((axis, k) => f.add(p, String(k), -0.7, 0.7, 0.005).name(axis).onFinishChange(re));
   });
   gui.add({ json: () => console.log(JSON.stringify(D, null, 2)) }, 'json').name('Parameter → Konsole');
-  gui.add({ reset: () => { resetParams(); D.foreheadPlates.enabled = strips === 'on'; gui.destroy(); buildGui(); rebuild(); } }, 'reset').name('Zurücksetzen');
+  gui.add({ reset: () => { resetParams(); D.foreheadPlates.enabled = strips === 'on'; buildGui(); rebuild(); } }, 'reset').name('Zurücksetzen');
 }
 
 // Highlight of the selected part in the navigation: emissive tint on per-material clones, originals restored on clear.
@@ -578,35 +589,60 @@ async function exportSkinTextures() {
   }
   return files.map(f => f.name);
 }
+// The frame (bar and panels) is built once; its content per page (buildNavigation after every page change). Bar: models and camera
+// views; left panel "Modell": helmet and variants, close-ups, parts; right panel "Look": paint, display, helmet geometry, export.
+let nav = null;
+const navPerf = document.createElement('span');
+let guiHost = null; // section of the right panel that holds lil-gui (Helm H)
 function buildNavigation() {
-  const nav = createNavigation({ onToggle: () => { resize(); if (current && !turntable) setCameraView(current); } });
+  if (!nav) {
+    nav = createNavigation({ onToggle: () => { resize(); if (current && !turntable) setCameraView(current); }, onLink: search => go(search) });
+    setInterval(() => {
+      if (frameTimes.length < 10) { navPerf.textContent = 'ruht'; return; }
+      const t = [...frameTimes].sort((a, b) => a - b), avg = t.reduce((x, y) => x + y, 0) / t.length;
+      navPerf.textContent = `ø ${avg.toFixed(1)} ms · p95 ${t[Math.floor(t.length * 0.95)].toFixed(0)} ms`;
+      frameTimes.length = 0;
+    }, 1000);
+  }
+  nav.clear();
   const isCritic = !scoutModels && !robotModel;
   const href = params => '?' + new URLSearchParams(Object.entries(params).filter(([, v]) => v != null && v !== '')).toString();
-  // Modelle
-  const sModels = nav.section('Modelle');
+  // Bar: shown model and camera views
+  const headKind = robotModel ? robotHelmet.kind : scoutModels ? 'scout' : 'critic';
+  const headLabel = { study: 'Studie', critic: 'Helm H', scout: 'Scout' };
+  nav.title(robotModel ? `${pageTitle(modelName)} · ${headLabel[headKind]}` : `${headLabel[headKind]} ohne Körper`);
+  nav.views([['front', 'Front'], ['left', 'Links'], ['back', 'Hinten'], ['right', 'Rechts'], ['assembly', 'Übersicht'], ['turntable', 'Drehteller']]
+    .map(([v, label]) => ({ view: v, label: `${label} – Maus: links drehen, rechts verschieben, Rad zoomen`, onClick: () => setCameraView(v) })));
+  const reload = (key, value) => { const q = new URLSearchParams(query); q.set(key, value); go(q); };
+  const variantTiles = Object.entries(CRITIC_VARIANTS.variants).map(([value, v]) => ({ value, label: v.label.replace(', weiße Streifen', ' · Weiß').replace(', Kontraststreifen', ' · Kontrast').replace(' ohne Blenden', ' · ohne'), badge: value,
+    title: `${value} ${v.label}`, img: thumb(`variant_${value}`) }));
+
+  // Left panel: body and head (links to other pages keep paint and source), Helm H's variants only while Helm H is the head
   const keep = { colors: robotHelmet.colors === 'body' ? null : robotHelmet.colors, wear: robotLook.wear === 'on' ? null : robotLook.wear, skin: skinOn() ? robotLook.skin : null };
   const keepGen = { gen: robotGen !== 'export' && !isCritic ? robotGen : null };
-  nav.links(sModels, [
-    { group: 'Körper', items: Object.entries(ROBOT_MODELS).map(([key, r]) => ({ label: r.de.replace(/ \(.*/, ''), hint: r.de.match(/\((.*)\)/)?.[1],
-      href: href({ model: key, helmet: robotModel ? robotHelmet.kind : null, ...keepGen, ...keep }), active: modelName === key })) },
-    { group: 'Helme', items: [
-      { label: 'Helm H', hint: 'H01–H21 · Varianten 80–88', href: href({ ...keep }), active: isCritic },
-      { label: 'Scout', hint: 'S01–S13', href: href({ model: 'scout', ...keepGen, ...keep }), active: !!scoutModels }] },
-  ]);
-  const reload = (key, value) => { query.set(key, value); location.search = query.toString(); };
-  // Source of bodies and Scout (robotBodies.js › SOURCES), page reload
-  if (!isCritic) nav.choice(sModels, 'Quelle', [{ value: 'export', label: 'Export', title: 'GLB aus dem three.js-Generator (Lieferpaket, Standard)' },
-    { value: 'three', label: 'Live', title: 'three.js-Generator im Browser (web/src/robotgen; dauert)' }, { value: 'blender', label: 'Blender', title: 'eingefrorener Blender-Export (Referenz der Messungen)' }],
-    robotGen, v => reload('gen', v));
+  const alone = kind => (kind === 'scout' ? href({ model: 'scout', ...keepGen, ...keep }) : href({ ...keep })); // a head without body
+  const sModel = nav.section('left', 'Roboter');
+  nav.heading(sModel, 'Körper');
+  const bodyTiles = nav.tiles(sModel, [
+    ...Object.entries(ROBOT_MODELS).map(([key, r]) => ({ value: key, label: pageTitle(key), title: `Körper ${r.de}`, img: thumb(`model_${key}`),
+      href: href({ model: key, helmet: headKind, ...keepGen, ...keep }) })),
+    { value: 'none', label: 'ohne', title: 'Kopf ohne Körper', icon: 'noBody', href: alone(headKind) }], robotModel ? modelName : 'none', null, { columns: 4 });
+  nav.heading(sModel, 'Kopf');
+  const headKinds = Object.keys(HELMETS).filter(k => k !== 'study' || headKind === 'study');
+  const helmetChoice = nav.tiles(sModel, headKinds.map(k => ({ value: k, label: headLabel[k], title: robotModel ? `${HELMETS[k]} auf dem Körper` : `${HELMETS[k]} ohne Körper`,
+    img: thumb(`model_${k}`), href: robotModel ? undefined : alone(k) })), headKind, kind => { helmetOptions.hidden = kind !== 'critic'; switchHelmet({ kind }); });
+  // variants and headset belong to Helm H (Scout has none)
+  const helmetOptions = document.createElement('div');
+  helmetOptions.hidden = headKind !== 'critic';
+  sModel.append(helmetOptions);
+  nav.heading(helmetOptions, 'Variante Helm H');
   let switchHelmet = null;
   if (robotModel) {
-    const helmetChoice = nav.choice(sModels, 'Helm', Object.entries(HELMETS).filter(([value]) => value !== 'study' || robotHelmet.kind === 'study').map(([value, title]) => ({ value, title, label: { study: 'Studie', critic: 'Helm H', scout: 'Scout' }[value] })),
-      robotHelmet.kind, kind => switchHelmet({ kind }));
-    // Re-dress the robot after a helmet setting changed; the URL and the links to the other robots keep the settings.
+    // Re-dress the robot after a helmet setting changed; the URL and the links to the other bodies and to the head alone keep the settings.
     const urlKeys = { kind: 'helmet', variant: 'helmetVariant', headset: 'headset', colors: 'colors' };
     switchHelmet = async change => {
       const run = ++helmetRun, next = { ...robotHelmet, ...change }, headset = change.headset ?? presentationOptions.headset;
-      const [helmet] = await Promise.all([makeRobotHelmet(next.kind, next.variant, headset), skinOn() ? ensureSkinAtlases() : null]);
+      const [helmet] = await loading.track(Promise.all([makeRobotHelmet(next.kind, next.variant, headset), skinOn() ? ensureSkinAtlases() : null]), 'Lade Helm …');
       if (run !== helmetRun) return; // a later click won; state is only written by the winner
       Object.assign(robotHelmet, next);
       presentationOptions.headset = headset;
@@ -618,87 +654,38 @@ function buildNavigation() {
       }
       for (const [k, q] of Object.entries(urlKeys)) query.set(q, k === 'headset' ? presentationOptions.headset : robotHelmet[k]);
       history.replaceState(null, '', '?' + query);
-      for (const a of sModels.querySelectorAll('a.nav-link')) {
+      for (const a of document.querySelectorAll('a.nav-link')) {
         const q = new URLSearchParams(a.search);
         if (!ROBOT_MODELS[q.get('model')]) continue;
         for (const [k, name] of Object.entries(urlKeys)) q.set(name, k === 'headset' ? presentationOptions.headset : robotHelmet[k]);
         a.search = '?' + q;
       }
+      bodyTiles.elements.at(-1).search = new URL(alone(robotHelmet.kind), location.href).search;
       helmetChoice.set(robotHelmet.kind);
+      helmetOptions.hidden = robotHelmet.kind !== 'critic';
+      nav.title(`${pageTitle(modelName)} · ${headLabel[robotHelmet.kind]}`);
       rebuild();
+      await loading.track(compileShown(), 'Helm wird aufgebaut …');
     };
-    const variants = CRITIC_VARIANTS.variants;
-    nav.choice(sModels, 'Variante Helm H', Object.entries(variants).map(([value, v]) => ({ value, label: value, title: `${value} ${v.label}: ${v.finish}, ${v.accents}, Blenden ${v.strips}` })),
-      robotHelmet.variant, variant => switchHelmet({ variant, kind: 'critic' }));
-    nav.choice(sModels, 'Kopfhörer', [{ value: 'on', label: 'an' }, { value: 'off', label: 'aus' }], presentationOptions.headset, headset => switchHelmet({ headset, kind: 'critic' }));
-    nav.note(sModels, 'Der Helm sitzt im Kopfsegment am Halsanker und ist auf die Box des Studienhelms eingepasst; der Roboterhals bleibt.');
+    nav.tiles(helmetOptions, variantTiles, robotHelmet.variant, variant => switchHelmet({ variant, kind: 'critic' }), { prefix: 'Helm H: ' });
+    nav.toggle(helmetOptions, 'Kopfhörer', presentationOptions.headset === 'on', on => switchHelmet({ headset: on ? 'on' : 'off', kind: 'critic' }));
   }
   if (isCritic) {
     const variantNow = Object.entries(CRITIC_VARIANTS.variants).find(([, v]) => v.finish === materialFinish.name && v.accents === materialAccents.name && v.strips === strips)?.[0];
-    nav.choice(sModels, 'Variante', Object.entries(CRITIC_VARIANTS.variants).map(([value, v]) => ({ value, label: value, title: `${value} ${v.label}` })), variantNow, value => {
+    nav.tiles(helmetOptions, variantTiles, variantNow, value => {
       const v = CRITIC_VARIANTS.variants[value];
-      query.set('finish', v.finish); query.set('accents', v.accents); query.set('strips', v.strips); location.search = query.toString();
+      const q = new URLSearchParams(query);
+      q.set('finish', v.finish); q.set('accents', v.accents); q.set('strips', v.strips);
+      go(q);
     });
-    nav.choice(sModels, 'Kopfhörer', [{ value: 'on', label: 'an' }, { value: 'off', label: 'aus' }], presentationOptions.headset, v => reload('headset', v));
+    nav.toggle(helmetOptions, 'Kopfhörer', presentationOptions.headset === 'on', on => reload('headset', on ? 'on' : 'off'));
   }
-  // Lackierung (0.13): colour scheme or skin, for body and helmet together
-  const sPaint = nav.section('Lackierung');
-  const setLinks = () => { for (const a of sModels.querySelectorAll('a.nav-link')) { const q = new URLSearchParams(a.search); if (skinOn()) q.set('skin', robotLook.skin); else q.delete('skin'); a.search = '?' + q; } };
-  let paintRun = 0;
-  const schemeChoice = nav.choice(sPaint, 'Farbschema', Object.entries(COLOR_SCHEMES).map(([value, s]) => ({ value, label: s.label, title: s.title })),
-    skinOn() ? null : robotHelmet.colors, async colors => {
-      ++paintRun;
-      skinChoice.set(null);
-      clearHighlight();
-      const wasSkin = skinOn();
-      robotLook.skin = 'none';
-      query.delete('skin');
-      if (!robotModel) { reload('colors', colors); return; } // a helmet alone is re-dressed from its source
-      for (const { root } of robotSkinRoots()) applySkinIfPrepared(root, null); // before re-dressing: the skin hides the role materials
-      history.replaceState(null, '', '?' + query);
-      setLinks();
-      if (colors !== robotHelmet.colors) await switchHelmet({ colors });
-      else if (wasSkin) rebuild();
-      wearChoice?.set(robotLook.wear);
-    });
-  const skinChoice = nav.choice(sPaint, 'Skin', Object.entries(SKINS).map(([value, s]) => ({ value, label: s.de, title: `Skin ${s.de} (skins.json): Muster, Abrieb und Schmutz im Shader, Karten aus dem UV-Atlas` })),
-    skinOn() ? robotLook.skin : null, async v => {
-      const run = ++paintRun;
-      schemeChoice.set(null);
-      try {
-        await ensureSkinAtlases(); // all atlases of the model first (on a robot: body, Helm H and Scout), so a rebuild meanwhile keeps the old paint
-      } catch (e) {
-        if (run === paintRun) { skinChoice.set(skinOn() ? robotLook.skin : null); schemeChoice.set(skinOn() ? null : robotHelmet.colors); }
-        throw e;
-      }
-      if (run !== paintRun) return; // a later click won
-      robotLook.skin = v;
-      clearHighlight();
-      query.set('skin', v);
-      history.replaceState(null, '', '?' + query);
-      setLinks();
-      rebuild();
-    });
-  const wearChoice = (robotModel || robotHelmet.colors !== 'original') ? nav.choice(sPaint, 'Material', [{ value: 'on', label: 'gealtert' }, { value: 'off', label: 'flach' }], robotLook.wear, v => {
-    clearHighlight();
-    robotLook.wear = v;
-    query.set('wear', v);
-    history.replaceState(null, '', '?' + query);
-    if (robotModel) { if (!skinOn()) setRobotWear(robotModel, v === 'on'); requestRender(true); } else rebuild();
-  }) : null;
-  nav.buttons(sPaint, [{ label: 'Texturen exportieren', title: 'Skin als Basisfarbe, ORM und Emission im UV-Atlas (PNG, 2048²) je Modell', onClick: exportSkinTextures }]);
-  nav.note(sPaint, 'Farbschema (gealtert oder flach) oder Skin (Rost, Glut, Ornat) – gilt für Körper und Helm zusammen. Skins bringen Abrieb und Schmutz selbst mit; der Schalter „Material“ wirkt nur beim Farbschema.');
-  // Ansichten
-  const sViews = nav.section('Ansichten');
-  const views = [['front', 'Front'], ['left', 'Links'], ['back', 'Hinten'], ['right', 'Rechts'], ['assembly', 'Übersicht'], ['turntable', 'Drehteller']];
-  nav.buttons(sViews, views.map(([v, label]) => ({ label, onClick: () => setCameraView(v) }))).forEach((b, i) => { b.dataset.view = views[i][0]; });
+  const sClose = nav.section('left', 'Nahansicht');
   const asmBox = (...ids) => { const ms = []; robotModel.traverse(o => { if (o.isMesh && ids.includes(assemblyOf(o))) ms.push(o); }); return visibleBox(ms); };
-  if (robotModel) nav.buttons(sViews, [['Kopf', ['head'], 1.15], ['Oberkörper', ['upper_body'], 1.05], ['Schultern', ['shoulders'], 1.1], ['Becken', ['lower_body'], 1.1], ['Beine', ['legs'], 1.0], ['Arme', ['arms'], 1.0]]
+  if (robotModel) nav.buttons(sClose, [['Kopf', ['head'], 1.15], ['Oberkörper', ['upper_body'], 1.05], ['Schultern', ['shoulders'], 1.1], ['Becken', ['lower_body'], 1.1], ['Beine', ['legs'], 1.0], ['Arme', ['arms'], 1.0]]
     .map(([label, ids, margin]) => ({ label, title: 'Nahansicht der Baugruppe', onClick: () => frameBox(asmBox(...ids), margin) })));
-  if (!robotModel) nav.buttons(sViews, [['Gesicht', 0.15, 0.85], ['Krone', 0.6, 1.0], ['Kinn + Hals', 0, 0.45]].map(([label, lo, hi]) => ({ label, title: 'Nahansicht', onClick: () => frameRegion(lo, hi) })));
-  nav.note(sViews, 'Maus: links drehen · rechts verschieben · Rad zoomen. Taste O: Referenz-Overlay (Helm H).');
-  // Bauteile
-  const sParts = nav.section('Bauteile', false);
+  else nav.buttons(sClose, [['Gesicht', 0.15, 0.85], ['Krone', 0.6, 1.0], ['Kinn + Hals', 0, 0.45]].map(([label, lo, hi]) => ({ label, title: 'Nahansicht', onClick: () => frameRegion(lo, hi) })));
+  const sParts = nav.section('left', 'Bauteile', false);
   const meshesOfTree = () => partTree().flatMap(g => g.meshes);
   const treeActions = {
     select: node => (node ? setHighlight(node.meshes) : clearHighlight()),
@@ -710,8 +697,64 @@ function buildNavigation() {
   const refreshTree = () => nav.tree(sParts, partTree(), treeActions);
   refreshTree();
   onRebuilt = refreshTree;
-  // Look & Material
-  const sLook = nav.section('Look & Material');
+  nav.left.append(Object.assign(document.createElement('span'), { textContent: 'Bildzeit' }), navPerf);
+
+  // Right panel: Look. Colour scheme or skin, for body and helmet together.
+  const sPaint = nav.section('right', 'Lackierung');
+  const setLinks = () => { for (const a of document.querySelectorAll('a.nav-link')) { const q = new URLSearchParams(a.search); if (skinOn()) q.set('skin', robotLook.skin); else q.delete('skin'); a.search = '?' + q; } };
+  let paintRun = 0;
+  // Colour schemes 1 and 2 (one scheme for every model, 0.12); 'original' (each model in its own materials) is the reference of the
+  // checks (verify, colors=original) and sits under "Referenz & Export".
+  nav.heading(sPaint, 'Farbschema');
+  const setScheme = async colors => {
+    ++paintRun;
+    skinChoice.set(null);
+    schemeChoice.set(colors);
+    originalSwitch.set(colors === 'original');
+    if (!robotModel) { const q = new URLSearchParams(query); q.delete('skin'); q.set('colors', colors); go(q); return; } // a helmet alone is re-dressed from its source
+    clearHighlight();
+    const wasSkin = skinOn();
+    robotLook.skin = 'none';
+    query.delete('skin');
+    for (const { root } of robotSkinRoots()) applySkinIfPrepared(root, null); // before re-dressing: the skin hides the role materials
+    history.replaceState(null, '', '?' + query);
+    setLinks();
+    if (colors !== robotHelmet.colors) await switchHelmet({ colors });
+    else if (wasSkin) rebuild();
+  };
+  const schemeChoice = nav.tiles(sPaint, Object.entries(COLOR_SCHEMES).filter(([value]) => value !== 'original').map(([value, s]) => ({ value, label: s.label, title: s.title, img: thumb(`scheme_${value}`) })),
+    skinOn() ? null : robotHelmet.colors, setScheme);
+  if (robotModel || robotHelmet.colors !== 'original') nav.toggle(sPaint, 'gealtert (nur Farbschema)', robotLook.wear === 'on', on => {
+    const v = on ? 'on' : 'off';
+    clearHighlight();
+    robotLook.wear = v;
+    query.set('wear', v);
+    history.replaceState(null, '', '?' + query);
+    if (robotModel) { if (!skinOn()) setRobotWear(robotModel, v === 'on'); requestRender(true); } else rebuild();
+  }, 'Farbschema mit Abrieb und Schmutz oder flach; Skins bringen ihre Alterung selbst mit');
+  nav.heading(sPaint, 'Skins');
+  const skinChoice = nav.tiles(sPaint, Object.entries(SKINS).map(([value, s]) => ({ value, label: s.de, swatch: s.swatch, img: thumb(`skin_${value}`),
+    title: `${s.de} (skins.json): Muster, Abrieb und Schmutz im Shader, Karten aus dem UV-Atlas` })),
+    skinOn() ? robotLook.skin : null, async v => {
+      const run = ++paintRun;
+      schemeChoice.set(null);
+      originalSwitch.set(false);
+      try {
+        await loading.track(ensureSkinAtlases(), 'Lade Skin …'); // all atlases of the model first (on a robot: body, Helm H and Scout), so a rebuild meanwhile keeps the old paint
+      } catch (e) {
+        if (run === paintRun) { skinChoice.set(skinOn() ? robotLook.skin : null); schemeChoice.set(skinOn() ? null : robotHelmet.colors); }
+        throw e;
+      }
+      if (run !== paintRun) return; // a later click won
+      robotLook.skin = v;
+      clearHighlight();
+      query.set('skin', v);
+      history.replaceState(null, '', '?' + query);
+      setLinks();
+      rebuild();
+      await loading.track(compileShown(), 'Skin wird aufgebaut …');
+    }, { prefix: 'Skin ' });
+  const sLook = nav.section('right', 'Darstellung', false);
   const explode = v => { presentationOptions.exploded = v; rebuild(); setCameraView(v > 0 ? 'assembly' : 'front'); };
   if (scoutModels) nav.choice(sLook, 'Explosion', [{ value: 0, label: 'montiert' }, { value: 1, label: 'explodiert' }], presentationOptions.exploded > 0 ? 1 : 0, explode);
   else nav.slider(sLook, 'Explosion', { min: 0, max: 1, step: 0.05, value: presentationOptions.exploded, format: v => v.toFixed(2), live: !!robotModel }, explode);
@@ -720,29 +763,116 @@ function buildNavigation() {
   nav.slider(sLook, 'Bloom', { min: 0, max: 2, step: 0.01, value: bloom.strength, format: v => v.toFixed(2), live: true }, v => { bloom.strength = v; requestRender(); });
   nav.slider(sLook, 'AO', { min: 0, max: 1, step: 0.01, value: gtao.blendIntensity, format: v => v.toFixed(2), live: true }, v => { gtao.blendIntensity = v; requestRender(); });
   nav.choice(sLook, 'Beim Drehen', [{ value: true, label: 'flüssig', title: 'ohne AO während der Bewegung' }, { value: false, label: 'volle Qualität' }], quality.light, v => { quality.light = v; });
-  if (isCritic) {
-    nav.buttons(sLook, [{ label: 'Overlay', title: 'Referenzbild der Ansicht (Taste O)', onClick: () => toggleOverlay() },
-      { label: 'Overlay Differenz', onClick: () => toggleOverlay(true, overlayMode === 'difference' ? 'normal' : 'difference') }]);
-  }
-  nav.buttons(sLook, [{ label: 'GLB exportieren', title: 'aktuelles Modell als GLB (Roboter: flache Lieferfassung)', onClick: exportGLB }]);
-  // Footer: model and frame time while rendering
-  const name = document.createElement('span'), perf = document.createElement('span');
-  name.textContent = robotModel ? `${ROBOT_MODELS[modelName].de.replace(/ \(.*/, '')} · ${HELMETS[robotHelmet.kind].replace(/ \(.*/, '')}` : scoutModels ? 'Scout' : 'Helm H';
-  nav.footer.append(name, perf);
-  setInterval(() => {
-    if (frameTimes.length < 10) { perf.textContent = 'ruht'; return; }
-    const t = [...frameTimes].sort((a, b) => a - b), avg = t.reduce((x, y) => x + y, 0) / t.length;
-    perf.textContent = `ø ${avg.toFixed(1)} ms · p95 ${t[Math.floor(t.length * 0.95)].toFixed(0)} ms`;
-    frameTimes.length = 0;
-  }, 1000);
+  if (isCritic) nav.buttons(sLook, [{ label: 'Overlay', title: 'Referenzbild der Ansicht (Taste O)', onClick: () => toggleOverlay() },
+    { label: 'Overlay Differenz', onClick: () => toggleOverlay(true, overlayMode === 'difference' ? 'normal' : 'difference') }]);
+  guiHost = isCritic ? nav.section('right', 'Helm-Geometrie', false) : null;
+  guiHost?.classList.add('nav-gui');
+  const sExport = nav.section('right', 'Referenz & Export', false);
+  const originalSwitch = nav.toggle(sExport, 'Originalmaterialien (Referenz)', !skinOn() && robotHelmet.colors === 'original', on => setScheme(on ? 'original' : 'body'),
+    COLOR_SCHEMES.original.title + ' – Referenz der Prüfungen (verify), kein Farbschema');
+  nav.buttons(sExport, [{ label: 'GLB exportieren', title: 'aktuelles Modell als GLB (Roboter: flache Lieferfassung; mit Skin: gebackene Texturen)', onClick: exportGLB },
+    { label: 'Skin-Texturen', title: 'Skin als Basisfarbe, ORM und Emission im UV-Atlas (PNG, 2048²) je Modell', onClick: exportSkinTextures }]);
+  // Source of bodies and Scout (robotBodies.js › SOURCES), next page
+  if (!isCritic) nav.choice(sExport, 'Quelle', [{ value: 'export', label: 'Export', title: 'GLB aus dem three.js-Generator (Lieferpaket, Standard)' },
+    { value: 'three', label: 'Live', title: 'three.js-Generator im Browser (web/src/robotgen; dauert)' }, { value: 'blender', label: 'Blender', title: 'eingefrorener Blender-Export (Referenz der Messungen)' }],
+    robotGen, v => reload('gen', v));
+  nav.note(sExport, 'Tasten: [ und ] blenden die Leisten aus, O zeigt das Referenz-Overlay (Helm H).');
+  markButtons();
 }
 
-rebuild();
-buildGui();
-if (query.get('ui') !== '0') buildNavigation();
-setCameraView(VIEWS[query.get('view')] ? query.get('view') : presentationOptions.exploded > 0 ? 'assembly' : 'front');
-if (query.get('turntable') === '1') setTurntable(true);
-if (query.get('overlay')) toggleOverlay(true, query.get('overlay') === 'diff' ? 'difference' : 'normal');
+// Page change in place (0.20): the shown model is freed (prepared skins, aged copies, Helm H geometry; GLB geometry stays in the
+// loader cache), the next one is dressed and built, then GUI, navigation content and camera follow. The camera stays where it is
+// between models of the same kind (robot to robot), so bodies and skins can be compared from the same view.
+const pageKind = () => (robotModel ? 'robot' : scoutModels ? 'scout' : 'critic');
+let shownKind = null;
+function leavePage() {
+  if (!model) return;
+  clearHighlight();
+  onRebuilt = () => {};
+  scene.remove(model);
+  if (robotModel) {
+    let helmet = null;
+    robotModel.traverse(o => { if (o.userData.robotHelmet) helmet = o; });
+    for (const { root } of robotSkinRoots()) releaseSkin(root);
+    releaseRobotWear(robotModel);
+    if (helmet?.userData.robotHelmet === 'critic') helmet.traverse(o => o.geometry?.dispose());
+  } else if (scoutModels) for (const m of [scoutModels.assembled, scoutModels.exploded]) { releaseSkin(m.children[0]); releaseRobotWear(m); }
+  else { releaseSkin(model); releaseRobotWear(model); disposeModel(model); }
+  model = null;
+}
+function enterPage(page) {
+  leavePage();
+  query = page.query;
+  ({ finish: materialFinish, accents: materialAccents, strips, name: modelName, gen: robotGen, scout: scoutModels, robot: robotModel } = page);
+  Object.assign(robotLook, page.look);
+  Object.assign(robotHelmet, page.helmet);
+  Object.assign(presentationOptions, page.presentation);
+  D.foreheadPlates.enabled = strips === 'on';
+  const kind = pageKind();
+  if (kind === 'critic') {
+    const key = `${materialFinish.name}|${materialAccents.name}`;
+    if (!criticMaterials.has(key)) criticMaterials.set(key, createMaterials(materialFinish.name, materialAccents.name));
+    M = criticMaterials.get(key);
+  }
+  footnote.textContent = FOOTNOTES[kind];
+  if (robotModel) {
+    if (robotHelmet.colors === 'helmet') dressBody(robotModel, schemeMaterials('helmet'));
+    setRobotHelmet(robotModel, robotHelmet.kind, page.helmetModel, robotHelmet.colors, schemeMaterials(robotHelmet.colors));
+  }
+  rebuild();
+  if (query.get('ui') !== '0') buildNavigation();
+  buildGui();
+  if (kind !== shownKind) {
+    setCameraView(VIEWS[query.get('view')] ? query.get('view') : presentationOptions.exploded > 0 ? 'assembly' : 'front');
+    if (query.get('turntable') === '1') setTurntable(true);
+    if (query.get('overlay')) toggleOverlay(true, query.get('overlay') === 'diff' ? 'difference' : 'normal');
+  } else {
+    updateOverlay();
+    markButtons();
+  }
+  shownKind = kind;
+  document.title = `${pageTitle(modelName)} – Roboter-Viewer`;
+  Object.assign(window, { materialFinish, materialAccents });
+}
+// Shaders of new materials (a skin, a helmet) compile in parallel before the next frame; meanwhile the last frame stays on screen.
+let compiling = 0;
+async function compileShown() {
+  if (STATIC) return;
+  compiling++;
+  try { await renderer.compileAsync(scene, camera); } catch (e) { console.warn('compileAsync', e); } finally { compiling--; requestRender(true); }
+}
+// Next page from a link or setting (search: string or URLSearchParams); history 'push' (default), 'replace' or 'none' (back/forward).
+let pageRun = 0;
+async function go(search, history_ = 'push') {
+  const run = ++pageRun, q = new URLSearchParams(search);
+  loading.start(`Lade ${pageTitle(q.get('model') ?? 'critic')} …`);
+  try {
+    const page = await readPage(q);
+    if (run === pageRun) {
+      enterPage(page);
+      if (history_ === 'push') history.pushState(null, '', '?' + q);
+      else if (history_ === 'replace') history.replaceState(null, '', '?' + q);
+      await compileShown();
+    }
+  } catch (e) {
+    console.error(e);
+    if (run === pageRun) {
+      loading.fail(`Fehler: ${e.message ?? e}`);
+      if (history_ === 'none') history.replaceState(null, '', '?' + query); // back/forward to a page that failed: show what is shown
+      if (query.get('ui') !== '0') buildNavigation(); // undo the link marked on click
+      return;
+    }
+  }
+  loading.end();
+}
+addEventListener('popstate', () => { if (location.search.slice(1) !== query.toString()) go(location.search, 'none'); });
+
+try {
+  enterPage(await readPage(query));
+} catch (e) {
+  loading.fail(`Fehler: ${e.message ?? e}`);
+  throw e;
+}
 
 function renderFrame() {
   annotation.update(camera, model, showLabels && presentationOptions.exploded > 0 && !maskMode);
@@ -764,6 +894,7 @@ let frames = 0;
 if (STATIC) {
   renderFrame();
   window.__ready = true;
+  loading.end();
 } else {
   let endPending = false, lastFrame = 0;
   const setInteractive = on => { gtao.enabled = !(on && quality.light); requestRender(); };
@@ -779,14 +910,14 @@ if (STATIC) {
     if (controls.update()) needsRender = true;
     else if (endPending) { endPending = false; setInteractive(false); }
     if (frames < 3) needsRender = true;
-    if (!needsRender) { lastFrame = 0; return; }
+    if (!needsRender || compiling) { lastFrame = 0; return; }
     needsRender = false;
     const now = performance.now();
     if (lastFrame) { frameTimes.push(now - lastFrame); if (frameTimes.length > 90) frameTimes.shift(); }
     lastFrame = now;
     renderFrame();
-    if (++frames === 3) window.__ready = true;
+    if (++frames === 3) { window.__ready = true; loading.end(); }
   });
 }
 
-Object.assign(window, { GLTFExporter, exportSkinTextures, activeSkinStates, bakeSkinTextures, robotLook, robotHelmet, partTree, requestRender, renderer, THREE, scene, camera, controls, renderFrame, setCameraView, toggleOverlay, setMaskMode, exportGLB, rebuild, helmetParams: D, materialFinish, materialAccents, presentationOptions, assemblyParts });
+Object.assign(window, { GLTFExporter, SKINS, go, exportSkinTextures, activeSkinStates, bakeSkinTextures, robotLook, robotHelmet, partTree, requestRender, renderer, THREE, scene, camera, controls, renderFrame, setCameraView, toggleOverlay, setMaskMode, exportGLB, rebuild, helmetParams: D, materialFinish, materialAccents, presentationOptions, assemblyParts });

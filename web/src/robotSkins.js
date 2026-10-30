@@ -7,7 +7,7 @@ import { readAtlas, skinMeshes, geometrySignature, sameSignature, closeSignature
 import { describeSkinMeshes, SKIN_RECIPES } from './skinParts.js';
 import { skinLayerMask, skinMaterial, skinBakeMaterial, skinTextureNames } from './skinShader.js';
 
-export const SKINS = Object.fromEntries(Object.entries(SKIN_RECIPES.skins).map(([key, r]) => [key, { de: r.de, energy: r.energy }]));
+export const SKINS = Object.fromEntries(Object.entries(SKIN_RECIPES.skins).map(([key, r]) => [key, { de: r.de, energy: r.energy, swatch: r.swatch }]));
 const ATLAS_JSON = import.meta.glob('../../assets/skins/*/atlas.json', { import: 'default' });
 const ATLAS_FILES = import.meta.glob('../../assets/skins/*/*.{bin,png}', { eager: true, query: '?url', import: 'default' });
 
