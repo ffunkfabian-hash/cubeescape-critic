@@ -7,6 +7,15 @@
 - Viewer: `?model=waechter&gen=three` (GLB-Fassung bleibt Standard); Helm H/Scout, Farbschemata, Altern und Explosion laufen unverändert.
 - Gemessen gegen den Blender-GLB: Teileliste identisch, Boxen je Objekt ≤ 0,65 mm, Umriss-IoU 0,9988–0,9995 in vier Ansichten; neues
   Vergleichswerkzeug `web/tools/robotgen_compare.mjs`, 7 neue Tests (74 Node-Tests).
+
+## 0.13.0 „Skins“ – 2026-10-29 (Lackierungen Rost, Glut, Ornat für Körper und Helme, ohne Blender)
+
+- Skins nach dem Referenzbild des Nutzers für Wächter, Paladin, Mechanik, Helm H und Scout, auf dem Roboter und beim Helm allein (`&skin=`).
+- Werkzeugkette in three.js/Node statt Blender: UV-Atlas mit xatlas (WASM, deterministisch), Karten im UV-Raum, Kantenabstand und AO mit
+  three-mesh-bvh (`web/tools/skin_bake.mjs`, Ablage `assets/skins/`); Mischer als Shader nach `web/src/skins.json`, Texturexport per Knopf.
+- Navigation „Lackierung“: Farbschema oder Skin für Körper und Helm zusammen. Blender-Fassung der Skins (UV-Vorlage, Bake, Python-Mischer)
+  entfernt; Körper-GLBs wieder ohne Blender-UVs wie in 0.12.
+
 ## 0.12.0 „Fusion“ – 2026-10-29 (Helme auf den Robotern, Navigation links)
 
 - Ein Werkzeug: Körper Wächter, Paladin, Mechanik tragen Helm H (Standard, Varianten 80–88, Kopfhörer an/aus) oder Scout, eingepasst im Kopfsegment am Halsanker (`robotHelmet.js`).

@@ -44,11 +44,12 @@ sind die Cycles-Ansichten. [Aufbau, Nachbau und Grenzen](../docs/HELM_SCOUT.md).
 
 Links sitzt eine einklappbare Navigation (`web/src/navigation.js`; mit `?ui=0` ausgeblendet, der Zustand „eingeklappt“ wird im Browser
 gemerkt):
-- **Modelle:** Körper und Helme als Links; beim Körper Helm, Farbschema, Variante 80–88 und Kopfhörer, beim Helm allein Variante,
-  Kopfhörer und Farbschema (Creme, Weiß-Graphit, Original).
+- **Modelle:** Körper und Helme als Links; beim Körper Helm, Variante 80–88 und Kopfhörer, beim Helm allein Variante und Kopfhörer.
+- **Lackierung (0.13):** Farbschema (Creme, Weiß-Graphit, Original) oder Skin (Rost, Glut, Ornat) für Körper und Helm zusammen,
+  Material gealtert/flach (nur Farbschema), Texturexport des Skins.
 - **Ansichten:** Front, Links, Hinten, Rechts, Übersicht, Drehteller und Nahansichten (Roboter je Baugruppe, sonst nach Höhe).
 - **Bauteile:** Baum nach Baugruppe und Teil mit Suche; Klick hebt hervor, Haken blendet aus, ◎ isoliert, ⌖ zoomt heran.
-- **Look & Material:** gealtert/flach, Explosion, Beschriftungen, Belichtung, Bloom, AO, Qualität beim Drehen, Overlay, GLB-Export.
+- **Look & Material:** Explosion, Beschriftungen, Belichtung, Bloom, AO, Qualität beim Drehen, Overlay, GLB-Export.
 Oben rechts bleiben nur die Geometrieregler von Helm H (lil-gui). Die Fußzeile zeigt die Bildzeit, solange gerendert wird.
 
 **Rendern bei Bedarf:** Der Viewer zeichnet nur nach einer Änderung, die Schattenkarte nur bei Modell-, Licht- oder Sichtbarkeitswechsel.
@@ -67,6 +68,10 @@ oder Scout: `&helmet=critic|scout`, `&helmetVariant=80…88`, `&headset=on|off`.
 von Helm H auf allen Rollen) kleiden Körper und Helme einheitlich, gealtert wie die Körper (`src/ballonRoles.json`,
 `src/robotHelmetColors.json`); `&colors=original` zeigt jedes Modell in seinen eigenen Materialien. `verify` prüft Helm H standardmäßig
 in Originalfarben; `--colors=body|helmet --no-iou` prüft den Export im Schema.
+
+**Skins (0.13):** `&skin=rost|glut|ornat` malt Körper und Helm (auch Helm H oder Scout allein) mit dem Skin-Mischer nach
+`src/skins.json`; Atlas und Karten je Modell in `assets/skins/` aus `node tools/skin_bake.mjs --model all`, ohne Blender.
+`verify` prüft Wächter mit Helm H in Rost (alle Meshes im Atlas, Texturexport). [Ablauf, Mischer, Vergleich](../docs/SKINS.md).
 
 **three.js-Generator (0.14):** `&gen=three` baut den Wächter mit `src/robotgen/` statt ihn aus dem GLB zu laden (gleiche Szene, Extras
 und Materialien; Paladin, Mechanik und Scout folgen). `node tools/robotgen_compare.mjs [--model=waechter]` rendert beide Fassungen mit

@@ -21,13 +21,13 @@ raus, auch für die Geometrie. Blender-Dateien erst entfernen, wenn der Ersatz g
    Teile S01–S13. Gleiches Vorgehen: Geometrie-Bausteine übertragen, gegen den GLB des Lieferpakets messen (Box je Teil, IoU,
    Nahvergleich), im Viewer zuschaltbar ohne die GLB-Fassung zu entfernen. Prozedurale Materialien gibt es im GLB nur flach
    (docs/LESSONS.md); die Texturen des Lieferpakets weiter verwenden. Eher eigene Version (zwei Hauptziele je Auftrag).
-3. Danach mit Ja des Nutzers: Standard auf `gen=three` umstellen, `blender/robot/` und die Körper-GLBs ins Archiv.
+3. **Skin-Atlas aus dem Generator:** `web/tools/skin_bake.mjs` liest heute die Körper-GLBs; für `gen=three` dieselbe Bake-Kette mit `buildRobotBody(name)` als Quelle (eigener Atlas oder Variante im bestehenden), sonst fehlen bei Skins Kantenabrieb und Schmutz (heute 0/408 Meshes des generierten Wächters im Atlas). Prüfung: `verify` meldet „408/408 meshes mapped“ auch mit `&gen=three`.
+4. Danach mit Ja des Nutzers: Standard auf `gen=three` umstellen, `blender/robot/` und die Körper-GLBs ins Archiv.
 
 ## Grenzen
 
-- Parallele Sitzung 0.13 „Skins“ (Branch `claude/critic-0.13-skins`): nicht anfassen `web/src/robotSkins.js`, Skin- und Navigationsteile
-  von `web/src/main.js`, `blender/robot/skins*`, `uv_template.py`, `bake_maps.py`. Der Generator liefert dafür Meshes mit `asm`, `part`,
-  `side` und Rollenmaterialien `MT_<rolle>_color` wie der GLB; UV-Koordinaten erzeugt er noch nicht (Skins brauchen ggf. einen Atlas).
+- 0.13 „Skins“ ist auf `main`: Skins binden Meshes über den Atlas (`web/src/skinAtlas.js`, Signatur aus Eckenzahl und Box); jede Änderung an
+  Körpern braucht einen neuen Bake (`node web/tools/skin_bake.mjs --model <name>`).
 - Node auf dem Mac: `~/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin`; Python mit NumPy/Pillow für `verify` und
   `robotgen_compare`: `uv venv runs/venv && uv pip install --python runs/venv/bin/python -r web/requirements.txt`, dann `runs/venv/bin` vorn in `PATH`.
 - Opus `high` (Kernsystem, Formvergleich).

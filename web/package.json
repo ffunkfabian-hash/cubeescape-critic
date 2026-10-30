@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "playwright": "1.62.1",
-    "vite": "8.3.5"
+    "vite": "8.3.5",
+    "xatlasjs": "0.2.0"
   }
 }

@@ -17,6 +17,15 @@ const load = url => {
   return cache.get(url);
 };
 
+// Scale and centre of the assembled Scout GLB scene in the helmet frame (shell box without antennas); also used by the skin bake.
+export function scoutFit(ref) {
+  const box = new THREE.Box3();
+  ref.updateMatrixWorld(true);
+  ref.traverse(o => { if (o.isMesh && !(o.userData.source_object ?? o.name).startsWith('Antenne')) box.expandByObject(o); });
+  const size = box.getSize(new THREE.Vector3());
+  return { scale: SCOUT_FRAME.height / size.y, mid: box.getCenter(new THREE.Vector3()) };
+}
+
 export async function loadScout(exploded) {
   // Fit by the assembled helmet's box so the exploded parts keep the same scale and origin.
   const ref = await load(assembledUrl);
@@ -24,11 +33,7 @@ export async function loadScout(exploded) {
   const model = new THREE.Group();
   model.name = exploded ? 'scout_exploded' : 'scout';
   const inner = source.clone(true);
-  const box = new THREE.Box3();
-  ref.updateMatrixWorld(true);
-  ref.traverse(o => { if (o.isMesh && !(o.userData.source_object ?? o.name).startsWith('Antenne')) box.expandByObject(o); });
-  const size = box.getSize(new THREE.Vector3()), mid = box.getCenter(new THREE.Vector3());
-  const s = SCOUT_FRAME.height / size.y;
+  const { scale: s, mid } = scoutFit(ref);
   inner.scale.setScalar(s);
   inner.position.set(-mid.x * s, -mid.y * s, -mid.z * s).add(new THREE.Vector3(...SCOUT_FRAME.center));
   inner.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
