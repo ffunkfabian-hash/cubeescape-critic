@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Silhouette IoU of a robot body, Blender GLB against the three.js generator, and comparison sheets.
+"""Silhouette IoU of a robot body or Scout, Blender GLB against the three.js generator, and comparison sheets.
 
 Input: <dir>/glb/ and <dir>/three/ from robotgen_compare.mjs (mask_<view>.png white on black, render_<view>.png, close_*.png).
 Writes <dir>/silhouette_<view>.png (grey = both, amber = only GLB, blue = only three.js), <dir>/views.jpg (per view GLB render,
@@ -14,7 +14,6 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 VIEWS = ['front', 'left', 'back', 'right']
-CLOSE = ['chest', 'head', 'hip_leg', 'back', 'hand']
 
 
 def mask(path):
@@ -66,7 +65,8 @@ def main(d):
             sheet.paste(t.resize((w, h)), (c * w, r * h))
     sheet.save(os.path.join(d, 'views.jpg'), quality=88)
     pairs = []
-    for k in CLOSE:
+    close = sorted({f[6:-4] for f in os.listdir(os.path.join(d, 'glb')) if f.startswith('close_') and f.endswith('.png') and not f.endswith('_wear.png')})
+    for k in close:
         for suffix, name in (('', 'flach'), ('_wear', 'gealtert')):
             ga, th = (os.path.join(d, g, f'close_{k}{suffix}.png') for g in ('glb', 'three'))
             if os.path.exists(ga) and os.path.exists(th):

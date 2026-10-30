@@ -47,11 +47,56 @@ wenn sie fehlt. Die Geometrie von `bauen_lauf6b()` hängt nicht von ihr ab; nur 
 `web/` zeigt Scout mit `?model=scout`, zum Beispiel `http://127.0.0.1:5173/?model=scout&view=left`. Mit `&exploded=1` (Scout kennt nur 0 oder 1; jeder Wert über 0 zeigt die volle Explosion) erscheint
 die Explosionsansicht mit Etiketten S01–S13. Der Viewer lädt `assets/helmet-scout/assembled/scout.glb` und
 `exploded/scout_exploded.glb` und skaliert Scout auf den Rahmen des three.js-Helms, damit die Kameraansichten passen.
-Die Geometrie lässt sich im Viewer nicht ändern, denn Quelle bleibt der Blender-Generator.
+Die Geometrie lässt sich im Viewer nicht ändern, denn Quelle bleibt der Blender-Generator; mit `&gen=three` baut der three.js-Generator
+dieselbe Szene ([unten](#threejs-generator-017-outrider)).
 
 **Grenze:** Die Blender-Materialien sind prozedural (Rauschen, Schmutz, Abrieb). glTF übernimmt davon nur flache Ersatzmaterialien
 mit der mittleren Farbe des Materials, dazu Rauheit, Metall und Leuchten. Der GLB ist deshalb glatter als die Cycles-Bilder.
 Maßgeblich für das Aussehen sind die Cycles-Ansichten.
+
+## three.js-Generator (0.17 „Outrider“)
+
+Seit 0.17 entsteht Scout auch ohne Blender: `web/src/robotgen/scout.js` baut dieselben 44 Meshes S01–S13 wie `run.py › bauen_lauf6b`
+und `export_scout.py`, mit Namen, Extras (`part_id`, `part_label`, `side`, `source_object`), Gruppen und Explosionsversätzen wie
+`parts.json`. Der Viewer zeigt ihn mit `?model=scout&gen=three` und als Helm auf jedem Körper (`&helmet=scout&gen=three`); Navigation
+„Modelle › Quelle: GLB / three.js“. Die GLB-Fassung bleibt Standard.
+
+![Scout: Blender-GLB · three.js · Umrissdifferenz in vier Ansichten](bilder/outrider_vergleich.jpg)
+
+| Datei | Blender-Vorbild | Inhalt |
+|---|---|---|
+| `npz.js`, `scoutGuss.js` | `helm_bauen.guss_2h_einsetzen` (Modus `voll`), `innen_weg`, `mund_vertiefung` | Guss aus `blender/scout/guss_2h.npz` (Haube, Augen, Gelenkscheiben, Krempe) gelesen wie gespeichert; Innenschicht weg, Krempe an der Seitenplatte gekappt, Mundwanne (Umriss per `bisect`, Rand am unversehrten Guss gemessen) |
+| `scout.js › unterhelm` | `helm_csg.unterhelm`, `volumen` (`helm_volumen.py`) | Kern, Kragen, Kinnblock, Kieferstücke aus Kopfvolumen, Prismen, Halbräumen, elliptischen Zylindern |
+| `scout.js › ohrmodule`, `rueckmodul`, `schlauch` | `helm_csg.ohrmodule_neu`, `rueckmodul_neu`, `helm_build8.ohrmodule`/`schlauch`, `helm_build3.catmull`/`kabel_spirale` | Funkmuscheln mit Bügel, Antennen, Rückmodul mit Feld und Hebel, Spiralkabel (Kurve mit rundem Profil) |
+| `scoutMesh.js`, `bsp.js` | `bmesh`, Boolean `EXACT`, `shade_smooth_by_angle` | n-Gon-Meshes, `bisect_plane`, `recalc_face_normals`, BSP-Booleans in doppelter Genauigkeit, Raycasts, Schattierung (Kanten nach Winkel, Eckwinkel-Gewichtung) |
+
+- **Materialien:** die flachen glTF-Ersatzmaterialien des Lieferpakets (`scoutMaterials.json`, Test gegen den GLB). Die prozeduralen
+  Cycles-Materialien gibt es weiterhin nur in Blender; Skins und Farbschemata greifen wie beim GLB.
+- **Booleans:** Der Unterhelm besteht aus ebenen Flächen. three-bvh-csg (float32) ließ in den verketteten Kieferschnitten Splitter, die
+  das Mesh öffneten (Kinnblock 4 mm zu breit) oder bei Reparatur nach jedem Schritt 90 s brauchten. `bsp.js` schneidet exakt an Ebenen
+  in doppelter Genauigkeit (nach csg.js), `finish` schließt die T-Kreuzungen einmal am Ende: alle CSG-Teile geschlossen, außen orientiert.
+- **Teile, die `bauen_lauf6b` baut und wieder entfernt** (Maske, Wangenplatten, Leuchtkörper, Lauf-3-Module), sind nicht übertragen;
+  `helm_params.json` bleibt die gemeinsame Quelle, Zweige, die D29 nicht nutzt (Kronenkuppel, Seitennuten, Halsring), brechen mit Meldung ab.
+- **Skin-Atlas** `assets/skins/scout-three/` (`skin_bake.mjs --model scout --gen three`); die BSP-Teile und die Mundwanne tragen gebackene
+  Positionen für den Übertrag in anderen JavaScript-Engines.
+
+**Messung gegen den Blender-GLB** (`web/tools/scoutgen.test.mjs`, `node web/tools/robotgen_compare.mjs --model=scout`):
+
+| Prüfung | Ergebnis |
+|---|---|
+| Objekte, Extras, Gruppen, Explosionsversätze gegen `manifest.json`/`parts.json` | 44/44 identisch |
+| Box je Objekt (H = 1,0 ≈ 300 mm) | max. 0,09 mm (Spiralkabel), Guss, Anbauten und CSG-Teile ≤ 0,03 mm |
+| Topologie: Punkte/Flächen je Objekt gegen das Manifest | Guss-Teile, Mundwanne, Anbauten identisch; Haube 72 470/69 649 statt 72 475/69 653; Kabel 6 530 statt 6 550 Punkte |
+| Umriss-IoU vorn / links / hinten / rechts (gleicher Viewer, gleiche Kamera) | 0,9993 / 0,9997 / 0,9990 / 0,9994 |
+| Dreiecke (GLB) | 182 438 (180 248) |
+
+![Nahvergleich mit gleicher Kamera, flach und gealtert: Rückseite, Funkmuschel, Gesicht, Auge, Kinn](bilder/outrider_nah.jpg)
+
+![Explosion: Blender-GLB · three.js](bilder/outrider_explosion.jpg)
+
+**Bekannte Abweichungen:** Die Fase des Rückmoduls (Blender-Bevel 0,005, zwei Segmente) ist als gerundeter Kasten nachgebaut, das
+eingelassene Feld bleibt scharfkantig – gealtert zeigen seine Kanten mehr Abrieb. CSG-Teile sind trianguliert statt n-Gone (Schattierung
+gleich). Das Kabelprofil hat 10 Punkte wie Blenders `bevel_resolution 3`, die Windungszahl weicht um zwei Profilringe ab.
 
 ## Stände und Marker
 

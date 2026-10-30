@@ -1,10 +1,12 @@
-// Scout v3 (?model=scout): the Blender-built helmet from blender/scout, loaded as GLB from assets/helmet-scout.
-// The GLB is the generator's export (Y up, front +Z, height 1.0); it is scaled and centred to the frame of the
-// three.js helmet so the same camera views apply. Exported meshes carry extras part_id/part_label/side (parts.json).
+// Scout v3 (?model=scout): the Blender-built helmet from blender/scout, loaded as GLB from assets/helmet-scout, or with
+// gen 'three' (&gen=three, 0.17) built by the three.js generator robotgen/scout.js into the same scene (cast read from
+// blender/scout/guss_2h.npz). The GLB is the Blender generator's export (Y up, front +Z, height 1.0); it is scaled and centred to
+// the frame of the three.js helmet so the same camera views apply. Exported meshes carry extras part_id/part_label/side (parts.json).
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import assembledUrl from '../../assets/helmet-scout/assembled/scout.glb?url';
 import explodedUrl from '../../assets/helmet-scout/exploded/scout_exploded.glb?url';
+import gussUrl from '../../blender/scout/guss_2h.npz?url';
 
 // Shell of the three.js helmet without neck and antennas (measured: dome top ≈ 0.40, collar bottom −0.41), so both
 // helmets fill the camera views alike. Scout is fitted by its own box without antennas (Antenne_*).
@@ -17,6 +19,19 @@ const load = url => {
   return cache.get(url);
 };
 
+// Scout from the three.js generator (assembled and exploded share the meshes' geometry), built once per page.
+let generated = null;
+const inflateRaw = async bytes => new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer());
+function generate() {
+  generated ??= (async () => {
+    const [{ readNpz }, { buildScout, explodedScout }] = await Promise.all([import('./robotgen/npz.js'), import('./robotgen/scout.js')]);
+    const guss = await readNpz(new Uint8Array(await (await fetch(gussUrl)).arrayBuffer()), inflateRaw);
+    const { scene, groups } = buildScout(guss);
+    return { assembled: scene, exploded: explodedScout(scene, groups) };
+  })();
+  return generated;
+}
+
 // Scale and centre of the assembled Scout GLB scene in the helmet frame (shell box without antennas); also used by the skin bake.
 export function scoutFit(ref) {
   const box = new THREE.Box3();
@@ -26,12 +41,15 @@ export function scoutFit(ref) {
   return { scale: SCOUT_FRAME.height / size.y, mid: box.getCenter(new THREE.Vector3()) };
 }
 
-export async function loadScout(exploded) {
+export async function loadScout(exploded, gen = 'glb') {
+  if (!['glb', 'three'].includes(gen)) throw new Error(`Unknown gen ${JSON.stringify(gen)}; expected glb or three`);
   // Fit by the assembled helmet's box so the exploded parts keep the same scale and origin.
-  const ref = await load(assembledUrl);
-  const source = exploded ? await load(explodedUrl) : ref;
+  const g = gen === 'three' ? await generate() : null;
+  const ref = g ? g.assembled : await load(assembledUrl);
+  const source = exploded ? (g ? g.exploded : await load(explodedUrl)) : ref;
   const model = new THREE.Group();
   model.name = exploded ? 'scout_exploded' : 'scout';
+  model.userData.gen = gen;
   const inner = source.clone(true);
   const { scale: s, mid } = scoutFit(ref);
   inner.scale.setScalar(s);

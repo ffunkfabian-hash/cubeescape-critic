@@ -24,6 +24,9 @@ Antworten, Doku und Commit-Messages auf Deutsch; Code, Bezeichner und Kommentare
 - `web/src/robotgen/` – three.js-Generator der Körper ohne Blender (0.14 Wächter, 0.15 Paladin und Mechanik; `?model=<körper>&gen=three`):
   Übertragung der gepinnten Ballon-Quelle, Prüfung gegen den Python-Abzug (`web/tools/robotgen_dump_spec.py`) und den GLB
   (`robotgen.test.mjs`, `robotgen_compare.mjs`); eigene Skin-Atlanten `assets/skins/<körper>-three/` (`skin_bake.mjs --gen three`).
+  Seit 0.17 auch Scout (`scout.js`, `scoutGuss.js`, `scoutMesh.js`, `bsp.js`; Guss aus `blender/scout/guss_2h.npz`, `&gen=three`,
+  Atlas `scout-three`, Test `scoutgen.test.mjs`) und die geprüfte Schneider-Stufentabelle `cutStages.json`
+  (`robotgen_cut_stages.mjs`, Ladezeit `robotgen_bench.mjs`). Schultern sind im Viewer eine eigene Baugruppe (`web/src/robotShoulders.js`).
 - `docs/HELM_STIL.md` – bestätigte Form-/Materialvorgaben; runde Haube, Augen erhalten, maßgeblich ist das Video.
 - `docs/HELM_AGENTEN.md` – technischer Aufbau, Material-/Akzentvarianten, Prüfumfang, visueller Eindruck und offene Nutzerwahl; vor Helm-Fortsetzungen gezielt lesen.
 - Archiv (in 0.12 aus dem Viewer entfernt, Code in Git): Körperstudien `docs/HELM_AUFBAU.md` (0.5), `HELM_CUIRASS.md` (0.6),

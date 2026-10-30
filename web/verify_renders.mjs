@@ -272,14 +272,15 @@ try {
   result.skinNavigation = await navPage.evaluate(() => window.activeSkinStates().map(st => `${st.atlas.model}:${st.active}:${st.mapped}/${st.meshes.length}`));
   if (result.skinNavigation.length !== 2) throw new Error(`skin nav: ${result.skinNavigation}`);
   await navPage.close();
-  // Generated bodies (&gen=three, 0.15): every mesh of each body finds an entry in its own atlas (<body>-three).
+  // Generated bodies (&gen=three, 0.15) and Scout from the generator (0.17, on Paladin and alone): every mesh finds an entry in
+  // its own atlas (<body>-three, scout-three).
   result.skinsGenerated = [];
-  for (const body of ['waechter', 'paladin', 'mechanik']) {
+  for (const [body, helmet] of [['waechter', 'critic'], ['paladin', 'scout'], ['mechanik', 'critic'], ['scout', null]]) {
     const page = await browser.newPage({ viewport: { width: 480, height: 480 } });
     page.setDefaultTimeout(180000);
     page.on('pageerror', e => errors.push(`skin gen=three ${body}: ${e.message}`));
     page.on('console', m => { if (m.type() === 'error' || /without atlas entry/.test(m.text())) errors.push(`skin gen=three ${body}: ${m.text()}`); });
-    await page.goto(`${url}?ui=0&static=1&model=${body}&gen=three&helmet=critic&skin=rost`);
+    await page.goto(`${url}?ui=0&static=1&model=${body}&gen=three${helmet ? `&helmet=${helmet}` : ''}&skin=rost`);
     await page.waitForFunction(() => window.__ready === true, null, { timeout: 180000 });
     result.skinsGenerated.push(...await page.evaluate(() => window.activeSkinStates().map(st => ({ model: st.atlas.model, meshes: st.meshes.length, mapped: st.mapped, transferred: st.transferred }))));
     await page.close();
@@ -288,7 +289,7 @@ try {
     console.log(`skin rost on ${s.model} (gen=three): ${s.mapped}/${s.meshes} meshes mapped${s.transferred ? `, ${s.transferred} transferred` : ''}`);
     if (s.mapped !== s.meshes) throw new Error(`skin on ${s.model} (gen=three): ${s.mapped}/${s.meshes} mapped`);
   }
-  if (result.skinsGenerated.filter(s => s.model.endsWith('-three')).length !== 3) throw new Error(`skin gen=three: ${JSON.stringify(result.skinsGenerated)}`);
+  if (result.skinsGenerated.filter(s => s.model.endsWith('-three')).length !== 5) throw new Error(`skin gen=three: ${JSON.stringify(result.skinsGenerated)}`);
   console.log(`skin GLB: ${result.skinGlb.materials.join(', ')}; navigation: ${result.skinNavigation.join(', ')}`);
   for (const s of result.skins) {
     console.log(`skin ${s.skin} on ${s.model}: ${s.mapped}/${s.meshes} meshes mapped, bake fills ${(s.filled * 100).toFixed(1)} %`);

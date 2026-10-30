@@ -7,9 +7,13 @@ largest calm square inside that role's islands whose colour is typical for the r
 the glowing motifs (runes, circuit traces) as a decal sheet with alpha. The skin recipe then puts them on the model by role and part.
 
   python3 tools/skin_swatches.py <texture> <debug dir of skin_bake (role.png, edge.png, legend.json)> <out dir> <prefix>
+  python3 tools/skin_swatches.py --decals <motif sheet> <out dir> <prefix>
 
 Writes <prefix>_<role>.jpg (seamless, native resolution of the crop) for every role with enough area, <prefix>_decals.png (4×4 cells of 256², RGBA) and
 <prefix>_swatches.json (source crops, mean colours, decal count).
+With --decals (0.17) the input is a motif sheet from an image generator (docs/SKINS.md › Prompts): a square 4 × 4 grid of glowing
+motifs on pure black. Each cell becomes a 256² cell of <prefix>_decals.png with alpha from the brightness (black = transparent)
+and the colour divided by it (the motif's own colour where it is faint).
 """
 import colorsys
 import json
@@ -123,5 +127,31 @@ def main(texture, debug, out, prefix):
     print(json.dumps(report))
 
 
+def decal_sheet(sheet, out, prefix, floor=0.06, full=0.55):
+    """Motif sheet on black (4 × 4) → <prefix>_decals.png: alpha = brightness (max channel) ramped from `floor` to `full`,
+    colour un-premultiplied (rgb / alpha), each cell resized to CELL²."""
+    src = Image.open(sheet).convert('RGB')
+    w, h = src.size
+    if w != h:
+        raise SystemExit(f'{sheet}: {w}×{h} is not square – a motif sheet is a square 4 × 4 grid')
+    img = np.asarray(src.resize((GRID * CELL, GRID * CELL), Image.LANCZOS)).astype(np.float32) / 255
+    border = np.concatenate([img[:4].reshape(-1, 3), img[-4:].reshape(-1, 3), img[:, :4].reshape(-1, 3), img[:, -4:].reshape(-1, 3)])
+    if border.max(-1).mean() > floor:
+        print(f'{sheet}: border not black (mean {border.max(-1).mean():.3f}) – alpha keeps that haze', file=sys.stderr)
+    a = np.clip((img.max(-1) - floor) / (full - floor), 0, 1)
+    rgb = np.clip(img / np.maximum(a, 1e-3)[..., None], 0, 1)
+    rgb[a == 0] = 0
+    sheet_rgba = np.dstack([(rgb * 255).round(), (a * 255).round()]).astype(np.uint8)
+    os.makedirs(out, exist_ok=True)
+    Image.fromarray(sheet_rgba, 'RGBA').save(os.path.join(out, f'{prefix}_decals.png'), optimize=True)
+    cells = [int((a[r * CELL:(r + 1) * CELL, c * CELL:(c + 1) * CELL] > 0.5).any()) for r in range(GRID) for c in range(GRID)]
+    report = {'sheet': os.path.basename(sheet), 'decals': sum(cells), 'empty_cells': [i for i, k in enumerate(cells) if not k]}
+    print(json.dumps(report))
+    return report
+
+
 if __name__ == '__main__':
-    main(*sys.argv[1:5])
+    if sys.argv[1:2] == ['--decals']:
+        decal_sheet(*sys.argv[2:5])
+    else:
+        main(*sys.argv[1:5])

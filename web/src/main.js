@@ -18,7 +18,7 @@ import { resolveAssemblyOptions } from './assemblyOptions.js';
 import { createAssemblyLabels } from './assemblyLabels.js';
 import { D, resetParams } from './params.js';
 import { loadScout, scoutParts, SCOUT_FRAME } from './scout.js';
-import { ROBOT_MODELS, ROBOT_FRAME, loadRobot, setRobotExplosion, robotParts } from './robotBodies.js';
+import { ROBOT_MODELS, ROBOT_FRAME, loadRobot, setRobotExplosion, robotParts, assemblyOf, shoulderSide } from './robotBodies.js';
 import { setRobotWear, releaseRobotWear } from './robotWear.js';
 import { SKINS, loadSkinAtlas, loadSkinTextures, prepareSkin, applySkin, releaseSkin, skinState, bakeSkinTextures, useBakedMaterial } from './robotSkins.js';
 import { atlasName } from './skinAtlas.js';
@@ -35,12 +35,13 @@ D.foreheadPlates.enabled = strips === 'on';
 if (query.get('ui') === '0') document.body.classList.add('noui');
 // ?model=scout: the Blender-built Scout v3 (blender/scout) as GLB instead of the three.js helmet; geometry GUI is off.
 // ?model=waechter|paladin|mechanik: one of the three robot bodies (blender/robot) as GLB in its own frame (ROBOT_FRAME);
-// &gen=three builds the body with the three.js generator instead (web/src/robotgen, bodies in GENERATED).
+// &gen=three builds the body with the three.js generator instead (web/src/robotgen, bodies in GENERATED), and Scout as well
+// (robotgen/scout.js, 0.17) – alone and as helmet on a robot.
 const modelName = query.get('model') ?? 'critic';
 const MODEL_NAMES = ['critic', 'scout', ...Object.keys(ROBOT_MODELS)];
 if (!MODEL_NAMES.includes(modelName)) throw new Error(`Unknown model ${JSON.stringify(modelName)}; expected ${MODEL_NAMES.join(', ')}`);
-const scoutModels = modelName === 'scout' ? { assembled: await loadScout(false), exploded: await loadScout(true) } : null;
 const robotGen = query.get('gen') ?? 'glb';
+const scoutModels = modelName === 'scout' ? { assembled: await loadScout(false, robotGen), exploded: await loadScout(true, robotGen) } : null;
 const robotModel = ROBOT_MODELS[modelName] ? await loadRobot(modelName, { gen: robotGen }) : null;
 // &wear=on|off: aged material of the colour scheme (robotWear.js) or its flat colours.
 const robotLook = { wear: query.get('wear') ?? 'on' };
@@ -51,11 +52,11 @@ robotLook.skin = query.get('skin') ?? 'none';
 if (robotLook.skin !== 'none' && !SKINS[robotLook.skin]) throw new Error(`Unknown skin ${JSON.stringify(robotLook.skin)}; expected none${Object.keys(SKINS).map(k => ', ' + k).join('')}`);
 const skinOn = () => robotLook.skin !== 'none';
 // atlases of the shown models (body and both helmets on a robot), loaded when a skin is first shown; a generated body
-// (&gen=three) has its own atlas
-const skinAtlases = {}, bodyAtlas = atlasName(modelName, robotGen);
+// (&gen=three) has its own atlas, so has Scout from the generator; skinAtlases is keyed by kind ('body', 'critic', 'scout')
+const skinAtlases = {}, atlasOf = { body: atlasName(modelName, robotGen), critic: 'critic', scout: atlasName('scout', robotGen) };
 async function ensureSkinAtlases() {
-  const names = robotModel ? [bodyAtlas, 'critic', 'scout'] : [modelName];
-  await Promise.all([loadSkinTextures(), ...names.map(async n => { skinAtlases[n] ??= await loadSkinAtlas(n); })]);
+  const kinds = robotModel ? ['body', 'critic', 'scout'] : [modelName];
+  await Promise.all([loadSkinTextures(), ...kinds.map(async k => { skinAtlases[k] ??= await loadSkinAtlas(atlasOf[k]); })]);
 }
 if (skinOn()) await ensureSkinAtlases();
 // &helmet=study|critic|scout (robots only): helmet on the robot's head segment (robotHelmet.js).
@@ -159,7 +160,7 @@ const M = createMaterials(materialFinish.name, materialAccents.name);
 // Helmet for a robot body: helmet H in the chosen variant 80–88 (without its presentation neck) or Scout.
 const variantMaterials = new Map();
 async function makeRobotHelmet(kind, variant = robotHelmet.variant, headset = presentationOptions.headset) {
-  if (kind === 'scout') return loadScout(false);
+  if (kind === 'scout') return loadScout(false, robotGen);
   if (kind !== 'critic') return null;
   const v = CRITIC_VARIANTS.variants[variant], key = `${v.finish}|${v.accents}`;
   if (!variantMaterials.has(key)) variantMaterials.set(key, createMaterials(v.finish, v.accents));
@@ -359,7 +360,7 @@ function rebuildModel() {
     // order matters: a skin restores the flat state it found, the aged shader records its own flat state
     if (!skinOn()) for (const root of robotSkinRoots()) applySkinIfPrepared(root.root, null);
     setRobotWear(model, robotLook.wear === 'on' && !skinOn());
-    if (skinOn()) for (const { root, kind, skip } of robotSkinRoots()) applySkin(prepareSkin(root, kind, skinAtlases[kind === 'body' ? bodyAtlas : kind], { skip }), robotLook.skin);
+    if (skinOn()) for (const { root, kind, skip } of robotSkinRoots()) applySkin(prepareSkin(root, kind, skinAtlases[kind], { skip }), robotLook.skin);
     setRobotExplosion(model, presentationOptions.exploded);
     assemblyParts = presentationOptions.exploded > 0 ? robotParts(model) : [];
     annotation.setGroups(assemblyParts);
@@ -533,7 +534,7 @@ function partTree() {
     robotModel.traverse(o => { if (o.isMesh && o.userData.part) byName.set(o.name, o); });
     const side = { R: ' rechts', L: ' links', C: '' };
     const groups = robotModel.userData.parts.assemblies.map(a => parent(a.de, a.parts
-      .map(p => ({ label: p.part_de + side[p.side], meshes: p.objects.map(n => byName.get(n)).filter(m => m && !replacedByHelmet(m)) }))
+      .map(p => ({ label: p.part_de + side[a.id === 'shoulders' ? shoulderSide(p.objects[0]) : p.side], meshes: p.objects.map(n => byName.get(n)).filter(m => m && !replacedByHelmet(m)) }))
       .filter(c => c.meshes.length)));
     const holder = robotModel.getObjectByName(`helmet_${robotHelmet.kind}`);
     const head = groups[robotModel.userData.parts.assemblies.findIndex(a => a.id === 'head')];
@@ -583,14 +584,18 @@ function buildNavigation() {
   // Modelle
   const sModels = nav.section('Modelle');
   const keep = { colors: robotHelmet.colors === 'body' ? null : robotHelmet.colors, wear: robotLook.wear === 'on' ? null : robotLook.wear, skin: skinOn() ? robotLook.skin : null };
+  const keepGen = { gen: robotGen !== 'glb' && !isCritic ? robotGen : null };
   nav.links(sModels, [
     { group: 'Körper', items: Object.entries(ROBOT_MODELS).map(([key, r]) => ({ label: r.de.replace(/ \(.*/, ''), hint: r.de.match(/\((.*)\)/)?.[1],
-      href: href({ model: key, helmet: robotModel ? robotHelmet.kind : null, gen: robotModel && robotGen !== 'glb' ? robotGen : null, ...keep }), active: modelName === key })) },
+      href: href({ model: key, helmet: robotModel ? robotHelmet.kind : null, ...keepGen, ...keep }), active: modelName === key })) },
     { group: 'Helme', items: [
       { label: 'Helm H', hint: 'H01–H21 · Varianten 80–88', href: href({ ...keep }), active: isCritic },
-      { label: 'Scout', hint: 'S01–S13', href: href({ model: 'scout', ...keep }), active: !!scoutModels }] },
+      { label: 'Scout', hint: 'S01–S13', href: href({ model: 'scout', ...keepGen, ...keep }), active: !!scoutModels }] },
   ]);
   const reload = (key, value) => { query.set(key, value); location.search = query.toString(); };
+  // Source of bodies and Scout: Blender export (GLB) or the three.js generator (robotgen), page reload
+  if (!isCritic) nav.choice(sModels, 'Quelle', [{ value: 'glb', label: 'GLB', title: 'Blender-Export (Lieferpaket)' }, { value: 'three', label: 'three.js', title: 'three.js-Generator (web/src/robotgen)' }],
+    robotGen, v => reload('gen', v));
   let switchHelmet = null;
   if (robotModel) {
     const helmetChoice = nav.choice(sModels, 'Helm', Object.entries(HELMETS).filter(([value]) => value !== 'study' || robotHelmet.kind === 'study').map(([value, title]) => ({ value, title, label: { study: 'Studie', critic: 'Helm H', scout: 'Scout' }[value] })),
@@ -685,8 +690,8 @@ function buildNavigation() {
   const sViews = nav.section('Ansichten');
   const views = [['front', 'Front'], ['left', 'Links'], ['back', 'Hinten'], ['right', 'Rechts'], ['assembly', 'Übersicht'], ['turntable', 'Drehteller']];
   nav.buttons(sViews, views.map(([v, label]) => ({ label, onClick: () => setCameraView(v) }))).forEach((b, i) => { b.dataset.view = views[i][0]; });
-  const asmBox = (...ids) => { const ms = []; robotModel.traverse(o => { if (o.isMesh && ids.includes(o.userData.asm)) ms.push(o); }); return visibleBox(ms); };
-  if (robotModel) nav.buttons(sViews, [['Kopf', ['head'], 1.15], ['Oberkörper', ['upper_body'], 1.05], ['Becken', ['lower_body'], 1.1], ['Beine', ['legs'], 1.0], ['Arme', ['arms'], 1.0]]
+  const asmBox = (...ids) => { const ms = []; robotModel.traverse(o => { if (o.isMesh && ids.includes(assemblyOf(o))) ms.push(o); }); return visibleBox(ms); };
+  if (robotModel) nav.buttons(sViews, [['Kopf', ['head'], 1.15], ['Oberkörper', ['upper_body'], 1.05], ['Schultern', ['shoulders'], 1.1], ['Becken', ['lower_body'], 1.1], ['Beine', ['legs'], 1.0], ['Arme', ['arms'], 1.0]]
     .map(([label, ids, margin]) => ({ label, title: 'Nahansicht der Baugruppe', onClick: () => frameBox(asmBox(...ids), margin) })));
   if (!robotModel) nav.buttons(sViews, [['Gesicht', 0.15, 0.85], ['Krone', 0.6, 1.0], ['Kinn + Hals', 0, 0.45]].map(([label, lo, hi]) => ({ label, title: 'Nahansicht', onClick: () => frameRegion(lo, hi) })));
   nav.note(sViews, 'Maus: links drehen · rechts verschieben · Rad zoomen. Taste O: Referenz-Overlay (Helm H).');

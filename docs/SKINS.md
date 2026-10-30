@@ -36,7 +36,7 @@ Mesh-Quelle ──► Atlas (xatlas) ──► Karten im UV-Raum ──► Kante
 
 ```bash
 node tools/skin_bake.mjs --model all        # aus web/; je Modell 1–2 min, Karten zur Kontrolle in ../runs/skins/
-node tools/skin_bake.mjs --model all --gen three   # die drei generierten Körper (0.15), je ≈ 1 min
+node tools/skin_bake.mjs --model all --gen three   # die drei generierten Körper (0.15) und Scout (0.17), je ≈ 1–5 min
 ```
 
 **Generierte Körper (0.15 „Anvil“):** `?model=<körper>&gen=three` lädt den Atlas `assets/skins/<körper>-three/`
@@ -46,6 +46,11 @@ Schienbeinschalen) behalten ihre gebackenen Positionen wie Helm H: Rechnet eine 
 Dreieck die UVs des nächsten gebackenen Dreiecks (`transferGeometry`); der Rest des Generators ist reine Arithmetik und wird
 exakt nachgebaut. Größe je Körper ≈ 5 MB `atlas.bin` + 3,4 MB `maps.png` wie bei den GLB-Atlanten, Deckung ≈ 50 %
 (GLB 46 %). `verify` meldet für alle drei Körper mit `&gen=three` jedes Mesh im Atlas.
+
+**Scout aus dem Generator (0.17 „Outrider“):** eigener Atlas `assets/skins/scout-three/` aus `buildScout`
+([Scout](HELM_SCOUT.md#threejs-generator-017-outrider)); geladen, sobald Scout mit `&gen=three` erscheint, allein oder auf einem Körper.
+Gebackene Positionen tragen nur die BSP-Teile (Kern, Kragen, Kinnblock, Kieferstücke, Rückmodul) und die Mundwanne (Raycasts); Deckung
+57 %, 3,7 MB `atlas.bin`. `verify` prüft Scout aus dem Generator allein und auf Paladin (44/44).
 
 ## Mischer (`web/src/skinShader.js`)
 
@@ -78,8 +83,8 @@ Fläche mit typischer Farbe als nahtlose Kachel und die leuchtenden Linienmotive
   (Plattenmaterial außer Maske, Gesicht, Augen, Kinn) und `<skin>_helm_decals`; bis eigene Helmbilder da sind, sind es Kopien des
   Körpermaterials. Eine neue Helmkachel ersetzt einfach die Datei.
 
-Beide Werkzeuge brauchen zusätzlich SciPy (`uv pip install --python runs/venv/bin/python scipy`; nicht in `web/requirements.txt`,
-ihr Test `tools/test_skin_tools.py` überspringt sich ohne SciPy).
+Beide Werkzeuge brauchen zusätzlich SciPy; seit 0.17 steht es in `web/requirements.txt` (`scipy==1.18.1`, Python ≥ 3.12), damit
+`tools/test_skin_tools.py` auch in CI läuft (ohne SciPy überspringt er sich weiterhin).
 
 ```bash
 python3 tools/skin_swatches.py <bild> <debug-ordner von skin_bake, z. B. ../runs/skins/waechter> ../assets/skins/textures <name>
@@ -102,7 +107,10 @@ Ablage als `assets/skins/textures/<skin>_<rolle>.jpg`.
 > emissive lines only – no filled glowing areas, no haze wider than a few pixels. Flat front view, no perspective, no text, no grid
 > lines or frames.
 
-Ablage als `<skin>_decals.*`; Alpha aus der Helligkeit auf Schwarz.
+Umwandeln mit `python3 tools/skin_swatches.py --decals <bogen> ../assets/skins/textures <skin>` (0.17): jede der 4 × 4 Zellen wird
+eine 256²-Zelle von `<skin>_decals.png`, Alpha aus der Helligkeit (Schwarz durchsichtig, ab ≈ 55 % voll), die Farbe durch Alpha
+geteilt, damit schwache Linien ihre Farbe behalten; leere Zellen und ein nicht schwarzer Rand werden gemeldet, nicht quadratische Bögen
+abgelehnt.
 
 Für die Helme dieselben Prompts mit eigenen Materialien (z. B. „polished gunmetal helmet shell with fine engraving“); Ablage als
 `<skin>_helm_shell.jpg` und `<skin>_helm_decals.*`.

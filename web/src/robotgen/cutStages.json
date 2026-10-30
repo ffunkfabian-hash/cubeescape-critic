@@ -1,0 +1,14 @@
+{
+ "note": "First closed cut stage (cutters grown by stage × mesh.js › CUT_JITTER) of every body part that three-bvh-csg leaves open at stage 0; written by web/tools/robotgen_cut_stages.mjs, keys: segment node/mesh name.",
+ "platform": "darwin-arm64 node 24.19.0",
+ "stages": {
+  "waechter": {},
+  "paladin": {
+   "SEG_head/mask": 8
+  },
+  "mechanik": {
+   "SEG_head/cheek_l": 1,
+   "SEG_head/mask": 14
+  }
+ }
+}
