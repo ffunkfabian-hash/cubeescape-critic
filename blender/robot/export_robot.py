@@ -15,14 +15,10 @@ x mirrored for side R), so no second GLB is needed. Run once per study, headless
   blender -b --factory-startup -P blender/robot/export_robot.py -- --src <ballon checkout> --study a_waechter --out assets/robot-bodies
 """
 import json
-import math
 import os
 import sys
 
 import bpy
-
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from uv_template import UV_MARGIN, uv_template  # noqa: E402
 
 STUDIES = {'a_waechter': 'waechter', 'b_paladin': 'paladin', 'c_mechanik': 'mechanik'}
 
@@ -89,9 +85,6 @@ def main():
     rows = describe(F, names, o['study'])
     gaps = R.anchor_gaps(F['obs'])
     measured = R.measure(F['obs'])
-    area3d, coverage = uv_template(sorted(F['obs'].values(), key=lambda ob: ob.name))
-    uv = dict(surface_m2=round(area3d, 4), coverage=round(coverage, 4), margin=UV_MARGIN,
-              mm_per_px={str(s): round(math.sqrt(area3d / (coverage * s * s)) * 1000, 3) for s in (2048, 4096)})
     export(os.path.join(out, 'assembled', f'{name}.glb'))
 
     groups = {}
@@ -106,7 +99,7 @@ def main():
 
     src = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'SOURCE.json'), encoding='utf-8'))
     manifest = dict(study=o['study'], name=name, source=src, blender=bpy.app.version_string, pose='idle', materials='color',
-                    measured=measured, uv=uv, anchor_gap_mm={k: round(v, 2) for k, v in gaps.items()},
+                    measured=measured, anchor_gap_mm={k: round(v, 2) for k, v in gaps.items()},
                     totals=dict(objects=len(rows), verts=sum(r['verts'] for r in rows), tris=sum(r['tris'] for r in rows)),
                     objects=rows)
     json.dump(manifest, open(os.path.join(out, 'manifest.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)

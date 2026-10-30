@@ -1,5 +1,69 @@
 {
- "note": "Skin recipes for blender/robot/skins.py (0.13 Skins). Colours sRGB hex; layers apply in order. Reference: user picture of 29.10.2026 (three robots: rusty orange/navy, black with red glow lines, white/purple/gold). Roles: shell, accent, trim, graphite, dark_metal, anodized, rubber, energy, reticle_cyan.",
+ "note": "Skin recipes (0.13 Skins), taken over from the Blender interim version (blender/robot/skins.json, f8d1c5b) and mixed live by web/src/skinShader.js. Colours sRGB hex; layers apply in order. Reference: user picture of 29.10.2026 (three robots: rusty orange/navy, black with red glow lines, white/purple/gold). Roles: shell, accent, trim, graphite, dark_metal, anodized, rubber, energy, reticle_cyan. Layer selectors: roles, not_roles, parts, not_parts (glob on the part id; helmets through aliases), asm, side, facing [x, y, z, min cosine] (model axes, front +Z).",
+ "edges": {
+  "jumpDeg": 20,
+  "roundDegPerMm": 18,
+  "minTurnDeg": 8,
+  "note": "plate edges for wear, bands and filigree (tools/skin_bake.mjs): open borders, shading-normal jumps > jumpDeg across an edge, and rounded strips where the normals turn faster than roundDegPerMm between two corners (≥ minTurnDeg, so tiny noise does not count; bevels of several segments turn little per segment). Blender version: 20° between texels of 1.1 mm."
+ },
+ "ao": {
+  "distanceMm": 15,
+  "samples": 32
+ },
+ "aliases": {
+  "note": "helmet part ids → part names of the recipes (Ballon study helmet: cap, shell, helmet_core, mask, face_*, cheek_*, rear_*, …), so a recipe selects the same kind of part on every helmet",
+  "critic": {
+   "H01": "cap",
+   "H02": "brow_trim",
+   "H03": "mask",
+   "H04A": "eye_r",
+   "H04B": "eye_l",
+   "H05A": "cheek_r",
+   "H05B": "cheek_l",
+   "H06": "face_center",
+   "H07": "chin_bar",
+   "H08A": "jaw_leg_r",
+   "H08B": "jaw_leg_l",
+   "H09": "shell",
+   "H10": "helmet_core",
+   "H11A": "rear_field_r",
+   "H11B": "rear_field_l",
+   "H12": "comm_r",
+   "H13": "comm_l",
+   "H14A": "hinge_r",
+   "H14B": "hinge_l",
+   "H15": "head_band",
+   "H15A": "comm_r_holder",
+   "H15B": "comm_l_holder",
+   "H16": "rear_module",
+   "H17A": "antenna",
+   "H17B": "antenna",
+   "H18A": "cable",
+   "H18B": "cable",
+   "H19": "neck_ring",
+   "H20": "forehead_plate_r",
+   "H21": "forehead_plate_l",
+   "F01": "fastener",
+   "F02": "fastener",
+   "F03": "fastener",
+   "P01": "neck"
+  },
+  "scout": {
+   "S01": "cap",
+   "S02": "eye",
+   "S03": "hinge_disc",
+   "S04": "brim_trim",
+   "S05": "face_center",
+   "S06": "chin_bar",
+   "S07": "jaw_leg",
+   "S08": "shell",
+   "S09": "helmet_core",
+   "S10": "comm",
+   "S11": "antenna",
+   "S12": "rear_module",
+   "S13": "cable"
+  }
+ },
  "skins": {
   "rost": {
    "de": "Rost",

@@ -44,7 +44,7 @@ mit angewandten Fasen-Modifikatoren und schreibt je Studie `assembled/<name>.glb
 
 ![Ballon-Cycles · Viewer flach · Viewer gealtert · Nahaufnahme flach · gealtert](bilder/patina_vergleich.jpg)
 
-Seit 0.11 zeigt der Viewer die Körper standardmäßig gealtert (`&wear=on`; `&wear=off` oder GUI „Look › Material“ = flach).
+Seit 0.11 zeigt der Viewer die Körper standardmäßig gealtert (`&wear=on`; `&wear=off` oder Navigation „Lackierung › Material“ = flach).
 `web/src/robotWear.js` bildet das Cycles-Material `aaa_nodes()` aus Ballon (`basic/kit.py`, Skin `standard`) im Shader nach.
 Alle Zahlen stehen in `web/src/robotWearParams.json`:
 
@@ -127,6 +127,10 @@ In der GUI wechselt „Körperstudie“ zwischen den drei Modellen. Die Geometri
 
 **Seiten:** R/L ist die Körperseite des Roboters. Die rechte Seite liegt bei −X und erscheint in der Frontansicht links im Bild.
 Die three.js-Teile A/B und Scout R/L zählen anders.
+
+**Skins (0.13):** Neben den Farbschemata gibt es die Skins Rost, Glut und Ornat für Körper und Helme (Navigation „Lackierung“,
+`&skin=`); sie brauchen nur die Extras `asm`/`part`/`side` und die Rollenmaterialien `MT_<role>_color` der GLBs.
+[Werkzeugkette und Mischer](SKINS.md).
 
 ## Grenzen und nächste Schritte
 
