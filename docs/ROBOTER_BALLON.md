@@ -122,7 +122,15 @@ Der **Studienhelm** aus dem GLB ist ins Archiv gewandert: nicht mehr in der Ausw
 früheren three.js-Gesamtkörpers 0.9 (`ROBOT_FRAME`, Höhe 5,44, Füße bei y = −4,85), damit dessen Kameras (`front`, `left`, `back`, `right`)
 ohne Anpassung passen. Mit `&exploded=0..1` oder dem Regler „Explosionsabstand“ öffnet sich die Explosionsansicht. Dafür verschiebt der Viewer die Segmentknoten
 (GLB-Wurzeln mit Extras `asm`/`side`) um `explode_mm` aus `parts.json`, genau wie `robot_build.explode()` in Ballon; der Oberkörper
-bleibt stehen. Die Etiketten zeigen sieben Gruppen (Kopf, Arm R/L, Oberkörper, Unterkörper, Bein R/L) mit Anker und Teilezahl.
+bleibt stehen. Die Etiketten zeigen neun Gruppen (Kopf, Schulter R/L, Arm R/L, Oberkörper, Unterkörper, Bein R/L) mit Anker und Teilezahl.
+
+**Schultern als eigene Baugruppe (0.17, Nutzerwunsch):** In Ballon gehören Schulterpanzer samt Zierkanten und Streifen,
+Schulterscheiben, -achsen und (Mechanik) -kolben zum Oberkörper, die Schulterkugel zum Arm. Der Viewer hängt sie beim Laden in eigene
+Knoten `SHOULDER_R/L` (`web/src/robotShoulders.js`): Explosion mit eigenem Versatz (150 mm seitlich, 20 mm hoch – zwischen Rumpf und
+Arm mit 300 mm), eigene Etiketten, Zweig „Schultern“ im Bauteilbaum, Nahansicht „Schultern“. Weltlage und Skin-Atlas-Schlüssel bleiben
+(Test `robotShoulders.test.mjs`); GLB, `parts.json` und Generator behalten Ballons Gruppierung. Wächter und Paladin 21, Mechanik 16 Teile.
+
+![Explosion mit Schultern: Paladin vorn (GLB), Mechanik links (three.js)](bilder/outrider_schultern.jpg)
 In der GUI wechselt „Körperstudie“ zwischen den drei Modellen. Die Geometrie-Regler sind aus, weil Ballon die Quelle bleibt.
 
 **Seiten:** R/L ist die Körperseite des Roboters. Die rechte Seite liegt bei −X und erscheint in der Frontansicht links im Bild.
@@ -167,11 +175,15 @@ Umstellung des Standards ([Übergabe](uebergabe-0.14-etappe2.md)).
   three-bvh-csg Splitter unter 0,01 mm (kollineare Nulldreiecke, Punktpaare im µm-Abstand), die das Mesh öffnen – bei etwa zwei Dritteln
   aller Schneidergrößen, je nach Größe zufällig, beim Wächter zufällig nicht. Der Generator prüft jedes geschnittene Teil mit demselben
   Schlüssel wie der Test (`meshDefects`) und wiederholt den Schnitt sonst mit um je 0,002 mm größeren Schneidern (`CUT_JITTER`, höchstens
-  32 Versuche = 0,064 mm). Paladin braucht 8, Mechanik 15 Versuche an der Maske.
+  32 Versuche = 0,064 mm). Paladin braucht 8, Mechanik 15 Versuche an der Maske. Seit 0.17 steht die gefundene Stufe je Teil in
+  `cutStages.json` (Paladin Maske 8, Mechanik Maske 14 und Wange links 1; `web/tools/robotgen_cut_stages.mjs`): Der erste Schnitt
+  nutzt sie, gesucht wird nur, wenn sie nicht schließt (andere Plattform, geänderter Teil).
 - **Indiziert wie der GLB (0.15):** Ecken mit gleicher Position und gleicher Schattierungsnormale teilen sich einen Punkt (`indexGeometry`,
   Hashtabelle) – Schattierung unverändert, ein Viertel der Punkte (Wächter 271 833 statt 1,13 Mio.).
 - Aufbau (Node, warm): Wächter ≈ 1,2 s, Paladin ≈ 3,0 s, Mechanik ≈ 4,6 s – der Unterschied sind die Masken-Wiederholungen
   (je ≈ 0,3 s); Headless-Browser 2,6 / 4,2 / 7,3 s (GLB ≈ 1,3–1,4 s).
+  0.17 (Mac unter Last, `robotgen_bench.mjs`): mit Tabelle Paladin 9,6 → 4,5 s, Mechanik 12,0 → 4,0 s (Node, abwechselnd gemessen);
+  im Headless-Browser kein sauber messbarer Gewinn, der Rest überwiegt. Nächster Schritt: Generator als Export-Programm (Weg 1, 0.18).
 
 **Messung gegen den Blender-GLB** (`npm --prefix web test` › `robotgen.test.mjs`, `node web/tools/robotgen_compare.mjs`):
 

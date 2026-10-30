@@ -183,7 +183,7 @@ test('cut retry: the stage from the table first, then the search without it', ()
   assert.equal(firstClosed(build, k => (k === 5 ? 0 : 1), CUT_RETRIES, 5), 5);
   assert.deepEqual(calls, [5]);                                 // table stage closes: cut once
   calls.length = 0;
-  assert.equal(firstClosed(build, k => (k < 3 ? 1 : 0), CUT_RETRIES, 5), 3);
+  assert.equal(firstClosed(build, k => (k < 3 || k === 5 ? 1 : 0), CUT_RETRIES, 5), 3);
   assert.deepEqual(calls, [5, 0, 1, 2, 3]);                     // table stage open (other platform): search from 0, skipping it
   calls.length = 0;
   assert.equal(firstClosed(build, () => 1, 4, 2), 4);

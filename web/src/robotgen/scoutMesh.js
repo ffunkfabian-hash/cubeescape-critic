@@ -1,6 +1,6 @@
 // Polygon meshes for the Scout generator (0.17): the small part of Blender's mesh tools that blender/scout uses on its final
 // parts – n-gon meshes { V: [[x, y, z]], F: [[i, …]], S: [smooth per face] }, bmesh.ops.bisect_plane, face deletion,
-// recalc_face_normals, exact booleans (three-bvh-csg), BVH ray casts and Blender's shading (smooth, sharp edges by angle,
+// recalc_face_normals, exact booleans (BSP, bsp.js), BVH ray casts and Blender's shading (smooth, sharp edges by angle,
 // corner normals weighted by the corner angle). Units are those of the Scout generator (H = helmet height = 1.0).
 import * as THREE from 'three';
 import { MeshBVH } from 'three-mesh-bvh';
@@ -183,21 +183,6 @@ export function soup(m, scale = 1) {
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
   return g;
-}
-
-// Triangle soup → mesh with shared corners (positions equal to 1e-7 of the unit).
-export function welded(geo, scale = 1) {
-  const p = geo.attributes.position.array, idx = new Map(), V = [], F = [];
-  for (let i = 0; i < p.length; i += 9) {
-    const f = [];
-    for (let k = 0; k < 9; k += 3) {
-      const v = [p[i + k] * scale, p[i + k + 1] * scale, p[i + k + 2] * scale], key = v.map(c => Math.round(c * 1e7)).join(',');
-      if (!idx.has(key)) { idx.set(key, V.length); V.push(v); }
-      f.push(idx.get(key));
-    }
-    if (new Set(f).size === 3) F.push(f);
-  }
-  return mesh(V, F, F.map(() => true));
 }
 
 // Exact booleans in Blender (helm_csg.csg) as BSP polygon booleans (bsp.js, double precision): ops [['I'|'U'|'D', mesh or

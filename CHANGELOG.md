@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.17.0 „Outrider“ – 2026-10-30 (Scout im three.js-Generator, Ladezeit der Masken-Schnitte, Schultern als Baugruppe)
+
+- Scout entsteht ohne Blender in `web/src/robotgen/scout.js` (`?model=scout&gen=three`, auch als Helm; Navigation „Quelle“): Guss aus
+  `guss_2h.npz`, Unterhelm per BSP-Booleans (`bsp.js`), Anbauten; 44/44 Meshes, Box je Objekt ≤ 0,09 mm, IoU 0,9990–0,9997;
+  eigener Skin-Atlas `scout-three`.
+- Masken-Schnitte: geprüfte Schneider-Stufentabelle `cutStages.json` statt Suche bei jedem Laden (Node: Paladin 9,6 → 4,5 s, Mechanik 12,0 → 4,0 s); Mess-Werkzeug
+  `robotgen_bench.mjs`.
+- Schultern sind im Viewer eine eigene Baugruppe (Explosion, Etiketten, Bauteilbaum); `skin_swatches.py --decals` für Motivbögen auf
+  Schwarz, SciPy in `web/requirements.txt`. 124 Node-Tests.
+
 ## 0.16.0 „Swatch“ – 2026-10-30 (Skins Bronze und Schrott aus Nutzerbildern, Prompts für Nano Banana Pro)
 
 - Neue Skins Bronze und Schrott: Material je Rolle und leuchtende Linienmotive aus den generierten Bildern des Nutzers
