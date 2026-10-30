@@ -12,6 +12,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { robotSpec } from '../src/robotgen/robot.js';
 import { buildRobotBody } from '../src/robotgen/index.js';
 import { partGeometry, meshDefects, firstClosed, CUT_RETRIES } from '../src/robotgen/mesh.js';
+import CUT_STAGES from '../src/robotgen/cutStages.json' with { type: 'json' };
 
 const NAMES = ['waechter', 'paladin', 'mechanik'];
 
@@ -128,6 +129,13 @@ for (const name of NAMES) {
     assert.deepEqual(dirs(built.scene.getObjectByName('arm_R_elbow_ring')), dirs(glb.getObjectByName('arm_R_elbow_ring')));
   });
 
+  test(`${name}: cut stage table – listed parts close at their stage at once, all others at stage 0 (on the table's platform)`, t => {
+    const table = CUT_STAGES.stages[name] ?? {}, used = Object.fromEntries(Object.entries(built.stages).filter(([, k]) => k > 0));
+    for (const key of Object.keys(table)) assert.ok(key in built.stages, `${key}: listed in cutStages.json but not a part with cuts`);
+    if (CUT_STAGES.platform.startsWith(`${process.platform}-${process.arch} `)) assert.deepEqual(used, table, 'cut stages differ: node tools/robotgen_cut_stages.mjs');
+    else t.diagnostic(`table written on ${CUT_STAGES.platform}; here ${JSON.stringify(used)}, table ${JSON.stringify(table)}`);
+  });
+
   test(`${name}: parts index equals parts.json of the GLB export`, () => {
     assert.deepEqual(built.parts, partsJson);
   });
@@ -168,6 +176,18 @@ test('mesh defects: a closed box has none, a missing triangle opens it, a flippe
   const flipped = box();
   for (let i = 0; i < 9; i++) flipped.attributes.normal.array[i] *= -1;
   assert.equal(meshDefects(flipped), 1);
+});
+
+test('cut retry: the stage from the table first, then the search without it', () => {
+  const calls = [], build = k => (calls.push(k), k);
+  assert.equal(firstClosed(build, k => (k === 5 ? 0 : 1), CUT_RETRIES, 5), 5);
+  assert.deepEqual(calls, [5]);                                 // table stage closes: cut once
+  calls.length = 0;
+  assert.equal(firstClosed(build, k => (k < 3 ? 1 : 0), CUT_RETRIES, 5), 3);
+  assert.deepEqual(calls, [5, 0, 1, 2, 3]);                     // table stage open (other platform): search from 0, skipping it
+  calls.length = 0;
+  assert.equal(firstClosed(build, () => 1, 4, 2), 4);
+  assert.deepEqual(calls, [2, 0, 1, 3, 4]);                     // never closed: each stage once, up to the limit
 });
 
 test('cut retry: builds with growing cutters until one is closed, at most CUT_RETRIES repeats', () => {

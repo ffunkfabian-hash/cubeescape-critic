@@ -118,6 +118,24 @@ for (const name of ['waechter', 'paladin', 'mechanik']) {
   });
 }
 
+test('scout (gen three): own atlas covers every mesh of Scout from the generator; only BSP parts keep baked positions', async () => {
+  const dir = atlasName('scout', 'three');
+  assert.ok(existsSync(path.join(repo, 'assets', 'skins', dir, 'atlas.json')), `no atlas for ${dir}: node tools/skin_bake.mjs --model scout --gen three`);
+  const a = atlas(dir);
+  assert.equal(a.source, 'web/src/robotgen/scout.js (buildScout)');
+  const { buildScout, BSP_PARTS } = await import('../src/robotgen/scout.js');
+  const { readGussFile } = await import('./scoutGussNode.mjs');
+  const root = buildScout(await readGussFile()).scene, stats = { transferred: [] };
+  assert.ok(checkRemap(root, a, stats) > 1e5);
+  const withPos = [...a.entries.values()].flat().filter(e => e.pos);
+  assert.deepEqual(withPos.map(e => e.name).sort(), [...BSP_PARTS].sort(), 'baked positions');
+  assert.ok(stats.transferred.every(k => withPos.some(e => e.key === k)), `transferred: ${stats.transferred.join(', ')}`);
+  assert.equal(skinMeshes(root).length, a.entries.size);
+  assert.ok(a.coverage > 0.4, `coverage ${a.coverage}`);
+  assert.deepEqual(a.edges, RECIPES.edges, 'edge parameters changed in skins.json: bake again');
+  assert.ok(overlap(a) < 0.01, 'charts overlap');
+});
+
 let vite;
 before(async () => {
   const { createServer } = await import('vite');

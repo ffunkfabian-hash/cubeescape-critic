@@ -1,8 +1,9 @@
-// Comparison of a robot body: Blender GLB (gen=glb) against the three.js generator (gen=three), same viewer, same cameras.
+// Comparison of a robot body or Scout (0.17): Blender GLB (gen=glb) against the three.js generator (gen=three), same viewer,
+// same cameras.
 // Writes to <out>/<gen>/: render_<view>.png and mask_<view>.png for front, left, back, right (assembled, flat colours, study
 // helmet), close_<shot>.png (close-ups with fixed cameras, flat and aged) and exploded.png; then runs robotgen_iou.py
 // (silhouette IoU per view and comparison sheets) if Python with Pillow and NumPy is available.
-// Usage: node tools/robotgen_compare.mjs [--model=waechter] [--out=renders/robotgen] [--no-iou]
+// Usage: node tools/robotgen_compare.mjs [--model=waechter|paladin|mechanik|scout] [--out=renders/robotgen] [--no-iou]
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -19,13 +20,23 @@ for (const a of process.argv.slice(2)) {
 const out = path.resolve(root, opt.out);
 const VIEWS = ['front', 'left', 'back', 'right'];
 // Close-ups (viewer world: robot frame of ROBOT_FRAME, front +Z): camera position and target.
-const CLOSE = {
+const CLOSE_BODY = {
   chest: { pos: [2.2, -0.2, 4.6], target: [0, -0.9, 0] },
   head: { pos: [-1.3, 0.4, 2.6], target: [0, 0.05, 0] },
   hip_leg: { pos: [2.6, -3.0, 4.2], target: [0, -3.0, 0] },
   back: { pos: [-2.4, -0.6, -4.2], target: [0, -1.0, 0] },
   hand: { pos: [-3.4, -2.2, 2.6], target: [-1.3, -2.6, 0.2] },
 };
+// Scout alone in the helmet frame (SCOUT_FRAME, height 0.81, front +Z)
+const CLOSE_SCOUT = {
+  face: { pos: [0.45, 0.1, 1.15], target: [0, 0.02, 0] },
+  eyes: { pos: [0.2, 0.2, 0.75], target: [0, 0.1, 0.2] },
+  ear: { pos: [1.15, 0.05, 0.25], target: [0.25, -0.05, 0] },
+  jaw: { pos: [0.7, -0.45, 0.85], target: [0, -0.25, 0.1] },
+  back: { pos: [-0.5, 0.15, -1.15], target: [0, 0, 0] },
+};
+const scout = opt.model === 'scout';
+const CLOSE = scout ? CLOSE_SCOUT : CLOSE_BODY;
 
 const { createServer } = await import('vite');
 const playwright = await import('playwright');
@@ -49,15 +60,20 @@ try {
       await page.goto(`${url}?model=${opt.model}&gen=${gen}&ui=0&static=1&helmet=study&${extra}`);
       await page.waitForFunction(() => window.__ready === true, null, { timeout: 240000 });
     };
-    await open('wear=off');
+    await open(scout ? 'wear=off&colors=original' : 'wear=off');
     const loadMs = performance.now() - t0;
-    const info = await page.evaluate(() => {
+    const info = await page.evaluate(scout => {
+      if (scout) {
+        let meshes = 0, tris = 0;
+        window.scene.traverse(o => { if (o.isMesh && o.userData.part_id) { meshes++; tris += (o.geometry.index ? o.geometry.index.count : o.geometry.attributes.position.count) / 3; } });
+        return { meshes, tris };
+      }
       let r = null;
       window.scene.traverse(o => { if (!r && o.userData.robot) r = o; });
       let meshes = 0, tris = 0;
       r?.traverse(o => { if (o.isMesh && o.userData.asm) { meshes++; tris += (o.geometry.index ? o.geometry.index.count : o.geometry.attributes.position.count) / 3; } });
       return { meshes, tris, gen: r?.userData.gen };
-    });
+    }, scout);
     for (const v of VIEWS) {
       await page.evaluate(v => window.setCameraView(v), v);
       await shot(`render_${v}.png`);

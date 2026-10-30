@@ -1,7 +1,7 @@
 // Skin bake (0.13 "Skins"): UV atlas and geometry maps of a model for the skin mixer (src/skinShader.js), in Node, no Blender.
 //   node tools/skin_bake.mjs [--model waechter|paladin|mechanik|critic|scout|all] [--gen glb|three] [--size 2048] [--ao-samples 32]
 //     [--workers 8] [--debug <dir>] (default ../runs/skins)
-// Steps: mesh sources (body GLB, or with --gen three the body built by the three.js generator robotgen; Helm H built by its
+// Steps: mesh sources (body GLB, or with --gen three the body or Scout built by the three.js generator robotgen; Helm H built by its
 // generator for every stored variant, Scout GLB) → model metres → one UV atlas
 // with xatlas (tools/skinXatlas.mjs) → texel maps by rasterising every triangle in UV space (position, shading normal, mesh;
 // written as images to the debug folder together with part and role ids) → per texel the distance to the nearest plate edge of its
@@ -123,6 +123,15 @@ async function loadSources(name, vite, gen) {
   if (BODIES.includes(name)) {
     const root = await parseGLB(path.join(repo, 'assets', 'robot-bodies', name, 'assembled', `${name}.glb`));
     return { kind: 'body', metresPerUnit: 1, variants: [{ label: 'assembled', root }], source: `assets/robot-bodies/${name}/assembled/${name}.glb` };
+  }
+  if (name === 'scout' && gen === 'three') {   // Scout from the three.js generator (0.17); BSP parts keep their baked positions
+    const { buildScout, BSP_PARTS } = await import('../src/robotgen/scout.js');
+    const { readGussFile } = await import('./scoutGussNode.mjs');
+    const { scene: root } = buildScout(await readGussFile());
+    const { scoutFit } = await vite.ssrLoadModule('/src/scout.js');
+    const { HELMET_FRAME_METERS } = await vite.ssrLoadModule('/src/robotHelmet.js');
+    return { kind: 'scout', metresPerUnit: scoutFit(root).scale * HELMET_FRAME_METERS, variants: [{ label: 'assembled', root }],
+      keepPositions: m => BSP_PARTS.includes(m.userData.source_object), source: 'web/src/robotgen/scout.js (buildScout)' };
   }
   if (name === 'scout') {
     const root = await parseGLB(path.join(repo, 'assets', 'helmet-scout', 'assembled', 'scout.glb'));
@@ -374,8 +383,8 @@ if (isMainThread) {
   const warn = console.warn;
   console.warn = (...a) => { if (!String(a[0]).includes('"maxLeafSize" option has been deprecated')) warn(...a); };
   try {
-    for (const name of o.model === 'all' ? (o.gen === 'three' ? BODIES : MODELS) : [o.model]) {
-      if (o.gen === 'three' && !BODIES.includes(name)) throw new Error(`skin_bake: --gen three only for the bodies (${BODIES.join(', ')})`);
+    for (const name of o.model === 'all' ? (o.gen === 'three' ? [...BODIES, 'scout'] : MODELS) : [o.model]) {
+      if (o.gen === 'three' && name === 'critic') throw new Error('skin_bake: --gen three only for the bodies and Scout (Helm H is built by three.js anyway)');
       await bake(name, o, vite);
     }
   } finally {

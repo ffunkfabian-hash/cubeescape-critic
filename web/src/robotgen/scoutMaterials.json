@@ -1,0 +1,10 @@
+{
+ "note": "Flat glTF stand-ins of the procedural Blender materials, copied from assets/helmet-scout/assembled/scout.glb (export_scout._glb_material); robotgen/scout.js builds the same MeshStandardMaterial as GLTFLoader (scout.test.mjs compares them).",
+ "MAT_Dunkel_glb": {"color": [0.024158, 0.026241, 0.029557], "metalness": 0.05, "roughness": 0.6},
+ "MAT_Leucht_glb": {"color": [0.01033, 0.027321, 0.026241], "metalness": 0, "roughness": 0.3, "emissive": [0.268206, 1, 0.942002], "emissiveIntensity": 1.740855},
+ "MAT_Kabel_Huelse_glb": {"color": [0.62396, 0.597202, 0.539479], "metalness": 0, "roughness": 0.38},
+ "MAT_Kabel_glb": {"color": [0.006995, 0.006995, 0.006995], "metalness": 0, "roughness": 0.5},
+ "MAT_Weiss_glb": {"color": [0.651406, 0.637597, 0.597202], "metalness": 0, "roughness": 0.45},
+ "MAT_Modul_glb": {"color": [0.111932, 0.107023, 0.08022], "metalness": 0.15, "roughness": 0.45},
+ "MAT_Metall_glb": {"color": [0.155926, 0.155926, 0.155926], "metalness": 1.0, "roughness": 0.3}
+}

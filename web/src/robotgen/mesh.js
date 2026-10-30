@@ -280,17 +280,21 @@ export function indexGeometry(geo) {
   return g;
 }
 
-// First of build(0), build(1), … (at most `retries` repeats) without defects; the last one when none is closed.
-export function firstClosed(build, defects, retries) {
-  let geo = build(0);
-  for (let k = 1; k <= retries && defects(geo); k++) geo = build(k);
+// First closed of build(start), then build(0), build(1), … (at most `retries` repeats, start skipped) without defects; the last one
+// when none is closed. start: the stage found when the cut stage table (cutStages.json) was written, so a part that needs grown
+// cutters is cut once instead of `start + 1` times; the search only runs where that stage does not close (other platform, changed
+// part). The stage used is stored in geo.userData.cutStage.
+export function firstClosed(build, defects, retries, start = 0) {
+  let k = start, geo = build(k);
+  for (let j = 0; j <= retries && defects(geo); j++) if (j !== start) geo = build(k = j);
+  if (geo?.userData) geo.userData.cutStage = k;
   return geo;
 }
 
-// Geometry of one part for side sx (+1 right/centre, −1 left), metres, segment frame.
-export function partGeometry(kind, params, sx = 1, retries = CUT_RETRIES) {
+// Geometry of one part for side sx (+1 right/centre, −1 left), metres, segment frame; start: cut stage to try first.
+export function partGeometry(kind, params, sx = 1, retries = CUT_RETRIES, start = 0) {
   const p = FORMS.has(kind) ? params : mirrorParams(kind, params, sx);
   const retry = FORMS.has(kind) && p.cuts?.length ? retries : 0;
   const build = k => shapeGeometry(kind, p, sx, k * CUT_JITTER).scale(0.001, 0.001, 0.001);
-  return firstClosed(build, meshDefects, retry);
+  return firstClosed(build, meshDefects, retry, retry ? Math.min(start, retry) : 0);
 }

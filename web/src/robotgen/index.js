@@ -7,7 +7,8 @@ import * as THREE from 'three';
 import roles from '../ballonRoles.json' with { type: 'json' };
 import { frameFrom } from './frame.js';
 import { robotSpec, ASSEMBLIES, asmOfSegment } from './robot.js';
-import { partGeometry, indexGeometry } from './mesh.js';
+import { partGeometry, indexGeometry, CUT_RETRIES } from './mesh.js';
+import CUT_STAGES from './cutStages.json' with { type: 'json' };
 import { UPPER_MM, FORE_MM, FINGER_X, FINGER_SCALE, FINGER_LINKS, KNUCKLE_Z, THUMB_BASE, THUMB_DIR, THUMB_LINKS, FINGER_POSES, SEGMENTS as ARM_SEGMENTS } from './arm.js';
 
 const MM = 0.001;
@@ -81,8 +82,11 @@ function segmentNode(name, M, asm, side) {
   return node;
 }
 
-// Body study as a scene like the GLB: { scene, spec }. name: waechter, paladin or mechanik (robotgen/studies.js).
-export function buildRobotBody(name) {
+// Body study as a scene like the GLB: { scene, spec, parts, stages }. name: waechter, paladin or mechanik (robotgen/studies.js).
+// stages: cut stage to try first per part (key `${segment node}/${mesh name}`), default the checked table cutStages.json; the
+// returned stages list the stage each cut part needed (robotgen_cut_stages.mjs writes the table from it).
+export function buildRobotBody(name, { stages = CUT_STAGES.stages[name] ?? {} } = {}) {
+  const used = {};
   const spec = robotSpec(name);
   const de = new Map(spec.parts.map(([asm, p]) => [`${asm}:${p[0]}`, p[1]]));
   const materials = new Map();
@@ -91,7 +95,9 @@ export function buildRobotBody(name) {
   const addParts = (node, list, side, naming) => {
     const sx = side === 'L' ? -1 : 1;
     for (const [asm, [pid, , , kind, role, p]] of list) {
-      const geo = indexGeometry(partGeometry(kind, p, sx));
+      const key = `${node.name}/${naming(pid)}`, raw = partGeometry(kind, p, sx, CUT_RETRIES, stages[key] ?? 0);
+      if (p.cuts?.length) used[key] = raw.userData.cutStage;
+      const geo = indexGeometry(raw);
       geo.applyMatrix4(TO_GLTF);
       const mesh = new THREE.Mesh(geo, material(role));
       mesh.name = naming(pid);
@@ -118,7 +124,7 @@ export function buildRobotBody(name) {
   scene.name = `robotgen_${name}`;
   for (const r of roots.sort((a, b) => (a.name < b.name ? -1 : 1))) scene.add(r);
   scene.userData = { generator: 'robotgen', study: spec.study };
-  return { scene, spec, parts: partsIndex(scene, spec) };
+  return { scene, spec, parts: partsIndex(scene, spec), stages: used };
 }
 
 // Assemblies → parts → objects as parts.json of the GLB export (export_robot.py): objects sorted by name, grouped by
