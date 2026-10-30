@@ -27,6 +27,9 @@ const quiet = fn => { console.warn = () => {}; try { return fn(); } finally { co
 
 // Open spots of the Scout cast (S01–S05 as baked in run 2h): boundary loops per mesh after welding. Every other mesh is closed.
 const KNOWN_OPENINGS = { Kappe: 82, Auge_L: 1, Auge_R: 1, Krempe: 6, Mund_Vertiefung: 1 };
+// Triangles whose smooth shading normals face their back (curled cast surfaces, the cable coils, the mouth tub shaded at 180°), as
+// in the Blender export; every other Scout mesh has none.
+const KNOWN_BACK_FACING = { Kappe: 58, Krempe: 74, Mund_Vertiefung: 21, Kabel_R: 11, Kabel_L: 8 };
 // Rounding of the manifest boxes (robotgen_export.mjs › blenderBox: 1e-4 in metres, Scout in helmet heights) plus float noise on the
 // package's platform; elsewhere (Linux CI: three-bvh-csg may triangulate a seam differently) 1e-4 as in robotgen_export.test.mjs.
 const boxTol = manifest => (manifest.generator.platform.startsWith(`${process.platform}-${process.arch} `) ? 0.5e-4 + 1e-7 : 1e-4);
@@ -188,17 +191,19 @@ for (const name of BODIES) {
     }
   });
 
-  test('scout: closed except the known openings of the cast, BSP parts outward, normals of unit length', () => {
-    const loops = {};
+  test('scout: closed except the known openings of the cast, BSP parts outward, normals of unit length on the front (known exceptions)', () => {
+    const loops = {}, back = {};
     for (const m of meshes.values()) {
       const t = topology(m.geometry, 1e6);
       if (t.loops) loops[m.name] = t.loops;
+      if (t.back) back[m.name] = t.back;
       if (BSP_PARTS.includes(m.name) && m.name !== 'Mund_Vertiefung') {
         assert.equal(t.open, 0, `${m.name}: open edges`);
         assert.ok(t.volume > 0, `${m.name}: volume ${t.volume}`);
       }
     }
     assert.deepEqual(loops, KNOWN_OPENINGS, 'boundary loops per mesh');
+    assert.deepEqual(back, KNOWN_BACK_FACING, 'triangles with shading normals facing back, per mesh');
     const n = normalLengths(built.scene);
     assert.deepEqual(n.bad, [], `normals not of unit length (largest deviation ${n.worst})`);
   });
