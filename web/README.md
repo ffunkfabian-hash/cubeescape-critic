@@ -35,10 +35,10 @@ vorhandene Bilder allein können noch aus einem früheren Lauf stammen. `--no-io
 
 ## Scout v3 (0.8)
 
-`?model=scout` zeigt den zweiten Helm **Scout v3**, Stand D29. Er wird in Blender aus `blender/scout/` gebaut und hier als GLB aus
-`assets/helmet-scout/` geladen. Kameras, Turntable und Look bleiben gleich, die Geometrie-Regler sind ausgeblendet, weil die Quelle der Blender-Generator bleibt.
-`&exploded=1` zeigt die Explosionsansicht mit den Teil-IDs S01–S13. Die Materialien im GLB sind flache Ersatzmaterialien; maßgeblich
-sind die Cycles-Ansichten. [Aufbau, Nachbau und Grenzen](../docs/HELM_SCOUT.md).
+`?model=scout` zeigt den zweiten Helm **Scout v3**, Stand D29. Er entsteht seit 0.17 im three.js-Generator (`src/robotgen/scout.js`)
+und wird seit 0.18 als exportierter GLB aus `assets/helmet-scout-three/` geladen (`&gen=three` live, `&gen=blender` die eingefrorene
+Blender-Fassung). Kameras, Turntable und Look bleiben gleich, die Geometrie-Regler sind ausgeblendet. `&exploded=1` zeigt die
+Explosionsansicht mit den Teil-IDs S01–S13. Die Materialien im GLB sind flache Ersatzmaterialien. [Aufbau und Grenzen](../docs/HELM_SCOUT.md).
 
 ## Navigation links (0.12)
 
@@ -59,8 +59,8 @@ neu gezeichnet. Headless (`?static=1`) aktualisiert die Schatten wie bisher in j
 
 ## Körper (0.10–0.12)
 
-`?model=waechter`, `?model=paladin` und `?model=mechanik` zeigen die drei Körper als GLB aus `assets/robot-bodies/` (Herkunft:
-`cubeescape-ballon`, Roboter Runde 5). Sie stehen im Rahmen `ROBOT_FRAME` (`src/robotBodies.js`). `&exploded=0..1` verschiebt die
+`?model=waechter`, `?model=paladin` und `?model=mechanik` zeigen die drei Körper als GLB aus `assets/robot-bodies-three/` (seit 0.18
+der Export des three.js-Generators; Herkunft: `cubeescape-ballon`, Roboter Runde 5). Sie stehen im Rahmen `ROBOT_FRAME` (`src/robotBodies.js`). `&exploded=0..1` verschiebt die
 Baugruppen entlang der Anker. Seit 0.11 sind die Materialien gealtert (`&wear=off` flach), seit 0.12 trägt jeder Körper Helm H (Standard)
 oder Scout: `&helmet=critic|scout`, `&helmetVariant=80…88`, `&headset=on|off`. [Quelle, Export und Grenzen](../docs/ROBOTER_BALLON.md).
 
@@ -71,13 +71,15 @@ in Originalfarben; `--colors=body|helmet --no-iou` prüft den Export im Schema.
 
 **Skins (0.13):** `&skin=rost|glut|ornat` malt Körper und Helm (auch Helm H oder Scout allein) mit dem Skin-Mischer nach
 `src/skins.json`; Atlas und Karten je Modell in `assets/skins/` aus `node tools/skin_bake.mjs --model all`, ohne Blender.
-`verify` prüft Wächter mit Helm H in Rost (alle Meshes im Atlas, Texturexport) und alle drei Körper sowie Scout (allein und auf
-Paladin) mit `&gen=three` in ihren eigenen Atlanten (`node tools/skin_bake.mjs --model all --gen three`). [Ablauf, Mischer, Vergleich](../docs/SKINS.md).
+`verify` prüft Wächter mit Helm H in Rost (alle Meshes im Atlas, Texturexport), alle drei Körper sowie Scout (allein und auf
+Paladin) aus den exportierten GLBs und Paladin mit Scout live (`&gen=three`) – alle Meshes im Atlas ihres Modells. [Ablauf, Mischer, Vergleich](../docs/SKINS.md).
 
-**three.js-Generator (0.14, 0.15, 0.17):** `&gen=three` (Navigation „Quelle“) baut Wächter, Paladin, Mechanik und Scout mit
-`src/robotgen/` statt sie aus dem GLB zu laden (gleiche Szene, Extras und Materialien). `node tools/robotgen_compare.mjs
-[--model=waechter|paladin|mechanik|scout]` rendert beide Fassungen mit gleicher Kamera und misst die Umriss-IoU (`renders/robotgen/`,
-Vergleichsbögen `views.jpg`, `close.jpg`); `node tools/robotgen_bench.mjs [--browser]` misst Aufbau- und Ladezeiten,
+**three.js-Generator (0.14, 0.15, 0.17) und Export (0.18):** Wächter, Paladin, Mechanik und Scout entstehen in `src/robotgen/`.
+`node tools/robotgen_export.mjs` schreibt daraus die Lieferpakete (`assets/robot-bodies-three/`, `assets/helmet-scout-three/`; `--check`
+prüft ohne zu schreiben, Test `tools/robotgen_export.test.mjs`), die der Viewer lädt. Navigation „Quelle“ bzw. `&gen=`: `export`
+(Standard), `three` (Generator live im Browser, dauert), `blender` (eingefrorene Blender-GLBs). `node tools/robotgen_compare.mjs
+[--model=waechter|paladin|mechanik|scout]` rendert Blender-Referenz und Export mit gleicher Kamera und misst die Umriss-IoU (`renders/robotgen/`,
+Vergleichsbögen `views.jpg`, `close.jpg`); `node tools/robotgen_bench.mjs [--browser]` misst Aufbau- und Ladezeiten (alle drei Quellen),
 `node tools/robotgen_cut_stages.mjs` schreibt die Schneider-Stufentabelle neu. [Körper](../docs/ROBOTER_BALLON.md#threejs-generator-014-foundry-015-anvil),
 [Scout](../docs/HELM_SCOUT.md#threejs-generator-017-outrider).
 

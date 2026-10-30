@@ -1,4 +1,4 @@
-// Polygon meshes for the Scout generator (0.17): the small part of Blender's mesh tools that blender/scout uses on its final
+// Polygon meshes for the Scout generator (0.17): the small part of Blender's mesh tools that archive/blender/scout uses on its final
 // parts – n-gon meshes { V: [[x, y, z]], F: [[i, …]], S: [smooth per face] }, bmesh.ops.bisect_plane, face deletion,
 // recalc_face_normals, exact booleans (BSP, bsp.js), BVH ray casts and Blender's shading (smooth, sharp edges by angle,
 // corner normals weighted by the corner angle). Units are those of the Scout generator (H = helmet height = 1.0).

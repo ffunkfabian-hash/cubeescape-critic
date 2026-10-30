@@ -1,8 +1,8 @@
-// Scout S01–S05 from the baked cast of run 2h (blender/scout/guss_2h.npz, read with npz.js) as blender/scout/helm_bauen.py ›
+// Scout S01–S05 from the baked cast of run 2h (data/guss_2h.npz, read with npz.js) as archive/blender/scout/helm_bauen.py ›
 // guss_2h_einsetzen (mode 'voll') builds them: inner layer of the cap removed above innenAbZ, brim cut where the side plate starts,
 // the mouth recess cut into the face plate (bisected along its outline) with a tub measured on the intact surface, shading by
 // angle with hard eye rims. Blender axes (Z up, front −Y), H = 1.0.
-import params from '../../../blender/scout/helm_params.json' with { type: 'json' };
+import params from './data/helm_params.json' with { type: 'json' };
 import { mesh, faceNormal, faceCenter, keepFaces, bisect, raycaster, recalcNormals } from './scoutMesh.js';
 
 export const GUSS_PARTS = ['Kappe', 'Auge_L', 'Auge_R', 'Augenhoehle_L', 'Augenhoehle_R', 'Maske_Gelenk_L', 'Maske_Gelenk_R', 'Krempe'];

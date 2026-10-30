@@ -18,10 +18,9 @@ import { resolveAssemblyOptions } from './assemblyOptions.js';
 import { createAssemblyLabels } from './assemblyLabels.js';
 import { D, resetParams } from './params.js';
 import { loadScout, scoutParts, SCOUT_FRAME } from './scout.js';
-import { ROBOT_MODELS, ROBOT_FRAME, loadRobot, setRobotExplosion, robotParts, assemblyOf, shoulderSide } from './robotBodies.js';
+import { ROBOT_MODELS, ROBOT_FRAME, loadRobot, setRobotExplosion, robotParts, assemblyOf, shoulderSide, checkSource } from './robotBodies.js';
 import { setRobotWear, releaseRobotWear } from './robotWear.js';
 import { SKINS, loadSkinAtlas, loadSkinTextures, prepareSkin, applySkin, releaseSkin, skinState, bakeSkinTextures, useBakedMaterial } from './robotSkins.js';
-import { atlasName } from './skinAtlas.js';
 import { HELMETS, CRITIC_VARIANTS, COLOR_SCHEMES, HELMET_FRAME_METERS, dressBody, isStudyHelmetPart, matchRobotColors, paletteMaterials, schemePalette, setRobotHelmet } from './robotHelmet.js';
 import { createNavigation } from './navigation.js';
 import { FINISH_PRESETS, ACCENT_PRESETS } from './finishPresets.js';
@@ -33,14 +32,15 @@ const strips = query.get('strips') ?? 'on';
 if (!['on', 'off'].includes(strips)) throw new Error(`Unknown strips ${JSON.stringify(strips)}; expected on or off`);
 D.foreheadPlates.enabled = strips === 'on';
 if (query.get('ui') === '0') document.body.classList.add('noui');
-// ?model=scout: the Blender-built Scout v3 (blender/scout) as GLB instead of the three.js helmet; geometry GUI is off.
-// ?model=waechter|paladin|mechanik: one of the three robot bodies (blender/robot) as GLB in its own frame (ROBOT_FRAME);
-// &gen=three builds the body with the three.js generator instead (web/src/robotgen, bodies in GENERATED), and Scout as well
-// (robotgen/scout.js, 0.17) – alone and as helmet on a robot.
+// ?model=scout: Scout v3 instead of the three.js helmet H; geometry GUI is off.
+// ?model=waechter|paladin|mechanik: one of the three robot bodies in its own frame (ROBOT_FRAME).
+// Bodies and Scout come from the three.js generator (web/src/robotgen) as exported GLBs (tools/robotgen_export.mjs, 0.18);
+// &gen=three builds them live in the browser, &gen=blender loads the frozen Blender export (robotBodies.js › SOURCES).
+// The skin atlases (assets/skins/<model>) are baked from the exported GLBs and fit the live build as well.
 const modelName = query.get('model') ?? 'critic';
 const MODEL_NAMES = ['critic', 'scout', ...Object.keys(ROBOT_MODELS)];
 if (!MODEL_NAMES.includes(modelName)) throw new Error(`Unknown model ${JSON.stringify(modelName)}; expected ${MODEL_NAMES.join(', ')}`);
-const robotGen = query.get('gen') ?? 'glb';
+const robotGen = checkSource(query.get('gen') ?? 'export');
 const scoutModels = modelName === 'scout' ? { assembled: await loadScout(false, robotGen), exploded: await loadScout(true, robotGen) } : null;
 const robotModel = ROBOT_MODELS[modelName] ? await loadRobot(modelName, { gen: robotGen }) : null;
 // &wear=on|off: aged material of the colour scheme (robotWear.js) or its flat colours.
@@ -51,9 +51,9 @@ if (!['on', 'off'].includes(robotLook.wear)) throw new Error(`Unknown wear ${JSO
 robotLook.skin = query.get('skin') ?? 'none';
 if (robotLook.skin !== 'none' && !SKINS[robotLook.skin]) throw new Error(`Unknown skin ${JSON.stringify(robotLook.skin)}; expected none${Object.keys(SKINS).map(k => ', ' + k).join('')}`);
 const skinOn = () => robotLook.skin !== 'none';
-// atlases of the shown models (body and both helmets on a robot), loaded when a skin is first shown; a generated body
-// (&gen=three) has its own atlas, so has Scout from the generator; skinAtlases is keyed by kind ('body', 'critic', 'scout')
-const skinAtlases = {}, atlasOf = { body: atlasName(modelName, robotGen), critic: 'critic', scout: atlasName('scout', robotGen) };
+// atlases of the shown models (body and both helmets on a robot), loaded when a skin is first shown; skinAtlases is keyed by kind
+// ('body', 'critic', 'scout'). The Blender reference (&gen=blender) has other meshes: a skin paints it without maps.
+const skinAtlases = {}, atlasOf = { body: modelName, critic: 'critic', scout: 'scout' };
 async function ensureSkinAtlases() {
   const kinds = robotModel ? ['body', 'critic', 'scout'] : [modelName];
   await Promise.all([loadSkinTextures(), ...kinds.map(async k => { skinAtlases[k] ??= await loadSkinAtlas(atlasOf[k]); })]);
@@ -584,7 +584,7 @@ function buildNavigation() {
   // Modelle
   const sModels = nav.section('Modelle');
   const keep = { colors: robotHelmet.colors === 'body' ? null : robotHelmet.colors, wear: robotLook.wear === 'on' ? null : robotLook.wear, skin: skinOn() ? robotLook.skin : null };
-  const keepGen = { gen: robotGen !== 'glb' && !isCritic ? robotGen : null };
+  const keepGen = { gen: robotGen !== 'export' && !isCritic ? robotGen : null };
   nav.links(sModels, [
     { group: 'Körper', items: Object.entries(ROBOT_MODELS).map(([key, r]) => ({ label: r.de.replace(/ \(.*/, ''), hint: r.de.match(/\((.*)\)/)?.[1],
       href: href({ model: key, helmet: robotModel ? robotHelmet.kind : null, ...keepGen, ...keep }), active: modelName === key })) },
@@ -593,8 +593,9 @@ function buildNavigation() {
       { label: 'Scout', hint: 'S01–S13', href: href({ model: 'scout', ...keepGen, ...keep }), active: !!scoutModels }] },
   ]);
   const reload = (key, value) => { query.set(key, value); location.search = query.toString(); };
-  // Source of bodies and Scout: Blender export (GLB) or the three.js generator (robotgen), page reload
-  if (!isCritic) nav.choice(sModels, 'Quelle', [{ value: 'glb', label: 'GLB', title: 'Blender-Export (Lieferpaket)' }, { value: 'three', label: 'three.js', title: 'three.js-Generator (web/src/robotgen)' }],
+  // Source of bodies and Scout (robotBodies.js › SOURCES), page reload
+  if (!isCritic) nav.choice(sModels, 'Quelle', [{ value: 'export', label: 'Export', title: 'GLB aus dem three.js-Generator (Lieferpaket, Standard)' },
+    { value: 'three', label: 'Live', title: 'three.js-Generator im Browser (web/src/robotgen; dauert)' }, { value: 'blender', label: 'Blender', title: 'eingefrorener Blender-Export (Referenz der Messungen)' }],
     robotGen, v => reload('gen', v));
   let switchHelmet = null;
   if (robotModel) {

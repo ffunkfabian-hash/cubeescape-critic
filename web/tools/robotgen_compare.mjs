@@ -1,5 +1,5 @@
-// Comparison of a robot body or Scout (0.17): Blender GLB (gen=glb) against the three.js generator (gen=three), same viewer,
-// same cameras.
+// Comparison of a robot body or Scout (0.17): frozen Blender GLB (gen=blender) against the three.js generator as exported
+// (gen=export, 0.18; the same bytes as the live build, robotgen_export.test.mjs), same viewer, same cameras.
 // Writes to <out>/<gen>/: render_<view>.png and mask_<view>.png for front, left, back, right (assembled, flat colours, study
 // helmet), close_<shot>.png (close-ups with fixed cameras, flat and aged) and exploded.png; then runs robotgen_iou.py
 // (silhouette IoU per view and comparison sheets) if Python with Pillow and NumPy is available.
@@ -47,7 +47,7 @@ const browser = await playwright.chromium.launch({ args: ['--use-angle=swiftshad
 const result = { model: opt.model, startedAt: new Date().toISOString(), gens: {} };
 const errors = [];
 try {
-  for (const gen of ['glb', 'three']) {
+  for (const gen of ['blender', 'export']) {
     const dir = path.join(out, gen);
     mkdirSync(dir, { recursive: true });
     const page = await browser.newPage({ viewport: { width: 1280, height: 720 } });

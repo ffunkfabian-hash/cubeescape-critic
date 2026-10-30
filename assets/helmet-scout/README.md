@@ -1,7 +1,11 @@
-# Scout 0.8 – Lieferstand D29
+# Scout 0.8 – Blender-Fassung D29 (eingefrorene Referenz)
 
-Scout v3 aus dem Blender-Generator `blender/scout/`, Stand D29 (29.10.2026). Exportiert mit
-`blender/scout/run.py -- --build --export assets/helmet-scout` aus leerer Szene.
+> Seit 0.18 lädt der Viewer Scout aus dem three.js-Generator ([`assets/helmet-scout-three/`](../helmet-scout-three/README.md)).
+> Diese Dateien bleiben unverändert als Referenz der Messtests (`web/tools/scoutgen.test.mjs`) und im Viewer unter `&gen=blender`;
+> der Blender-Generator liegt im Archiv (`archive/blender/scout/`).
+
+Scout v3 aus dem Blender-Generator `archive/blender/scout/`, Stand D29 (29.10.2026). Exportiert mit
+`archive/blender/scout/run.py -- --build --export assets/helmet-scout` aus leerer Szene.
 
 | Datei | Inhalt |
 | --- | --- |

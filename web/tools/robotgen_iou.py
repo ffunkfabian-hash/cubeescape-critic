@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Silhouette IoU of a robot body or Scout, Blender GLB against the three.js generator, and comparison sheets.
 
-Input: <dir>/glb/ and <dir>/three/ from robotgen_compare.mjs (mask_<view>.png white on black, render_<view>.png, close_*.png).
+Input: <dir>/blender/ and <dir>/export/ from robotgen_compare.mjs (mask_<view>.png white on black, render_<view>.png, close_*.png).
 Writes <dir>/silhouette_<view>.png (grey = both, amber = only GLB, blue = only three.js), <dir>/views.jpg (per view GLB render,
 three.js render, silhouette difference) and <dir>/close.jpg (close-ups with the same camera, GLB left, three.js right);
 prints {"views": {view: IoU}, "mean": …} as JSON. Usage: python3 robotgen_iou.py <dir>
@@ -49,13 +49,13 @@ def main(d):
     res = {}
     rows = []
     for v in VIEWS:
-        a, b = mask(os.path.join(d, 'glb', f'mask_{v}.png')), mask(os.path.join(d, 'three', f'mask_{v}.png'))
+        a, b = mask(os.path.join(d, 'blender', f'mask_{v}.png')), mask(os.path.join(d, 'export', f'mask_{v}.png'))
         res[v] = round(float((a & b).sum() / max(1, (a | b).sum())), 4)
         sil = silhouette(a, b)
         sil.save(os.path.join(d, f'silhouette_{v}.png'))
-        box = crop_box([os.path.join(d, g, f'mask_{v}.png') for g in ('glb', 'three')])
-        tiles = [label(Image.open(os.path.join(d, 'glb', f'render_{v}.png')).convert('RGB').crop(box), f'{v} · Blender-GLB'),
-                 label(Image.open(os.path.join(d, 'three', f'render_{v}.png')).convert('RGB').crop(box), f'{v} · three.js'),
+        box = crop_box([os.path.join(d, g, f'mask_{v}.png') for g in ('blender', 'export')])
+        tiles = [label(Image.open(os.path.join(d, 'blender', f'render_{v}.png')).convert('RGB').crop(box), f'{v} · Blender-GLB'),
+                 label(Image.open(os.path.join(d, 'export', f'render_{v}.png')).convert('RGB').crop(box), f'{v} · three.js'),
                  label(sil.crop(box), f'{v} · IoU {res[v]:.4f}')]
         rows.append(tiles)
     w, h = rows[0][0].size
@@ -65,10 +65,10 @@ def main(d):
             sheet.paste(t.resize((w, h)), (c * w, r * h))
     sheet.save(os.path.join(d, 'views.jpg'), quality=88)
     pairs = []
-    close = sorted({f[6:-4] for f in os.listdir(os.path.join(d, 'glb')) if f.startswith('close_') and f.endswith('.png') and not f.endswith('_wear.png')})
+    close = sorted({f[6:-4] for f in os.listdir(os.path.join(d, 'blender')) if f.startswith('close_') and f.endswith('.png') and not f.endswith('_wear.png')})
     for k in close:
         for suffix, name in (('', 'flach'), ('_wear', 'gealtert')):
-            ga, th = (os.path.join(d, g, f'close_{k}{suffix}.png') for g in ('glb', 'three'))
+            ga, th = (os.path.join(d, g, f'close_{k}{suffix}.png') for g in ('blender', 'export'))
             if os.path.exists(ga) and os.path.exists(th):
                 pairs.append((label(Image.open(ga).convert('RGB'), f'{k} {name} · Blender-GLB'), label(Image.open(th).convert('RGB'), f'{k} {name} · three.js')))
     if pairs:

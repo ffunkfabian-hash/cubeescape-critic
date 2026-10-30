@@ -1,5 +1,5 @@
 // Curved forms of the robot bodies (port of cubeescape-ballon basic/arms/forms.py at the commit pinned in
-// blender/robot/SOURCE.json): superellipse cross-sections, loft, wrap (armour plate) and tube. Pure geometry in mm in the
+// robotgen/data/SOURCE.json): superellipse cross-sections, loft, wrap (armour plate) and tube. Pure geometry in mm in the
 // segment frame (+Z along the segment, +Y front/armour side); every builder returns { V: [[x, y, z]…], F: [[i, j, k(, l)]…] }
 // with faces oriented outwards. The bevelled variants used for the meshes live in bevel.js.
 

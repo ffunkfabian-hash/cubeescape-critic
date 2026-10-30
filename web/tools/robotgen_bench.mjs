@@ -1,5 +1,7 @@
 // Build and load times of the three.js generator (0.17): Node (warm, first build discarded, median of --runs builds) and, with
-// --browser, the headless viewer (time until window.__ready, median of --runs page loads, gen=three against gen=glb).
+// --browser, the headless viewer (time until window.__ready, median of --runs page loads): the exported GLB (gen=export, default
+// since 0.18), the generator live (gen=three) and the frozen Blender GLB (gen=blender), taken in turn per load so a changing load on
+// the machine hits all three alike.
 // --no-table: bodies built without the cut stage table (search from stage 0 as before 0.17; Node only – for the browser, empty
 // src/robotgen/cutStages.json › stages instead).
 // Usage: node tools/robotgen_bench.mjs [--runs=3] [--browser] [--no-table] [waechter paladin mechanik scout]
@@ -26,7 +28,7 @@ async function nodeBuild(name) {
 }
 
 const out = { node: {}, browser: {} };
-const list = models.length ? models : ['waechter', 'paladin', 'mechanik'];
+const list = models.length ? models : ['waechter', 'paladin', 'mechanik', 'scout'];
 for (const name of list) {
   const build = await nodeBuild(name);
   build();
@@ -45,19 +47,20 @@ if (browserToo) {
   const url = server.resolvedUrls.local[0];
   const browser = await playwright.chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
   try {
+    const GENS = ['export', 'three', 'blender'];
     for (const name of list) {
-      for (const gen of ['glb', 'three']) {
-        const ms = [];
-        for (let k = 0; k <= runs; k++) {     // first load warms the dev server's module cache and is discarded
+      const ms = Object.fromEntries(GENS.map(g => [g, []]));
+      for (let k = 0; k <= runs; k++) {       // first round warms the dev server's module cache and is discarded
+        for (const gen of GENS) {
           const page = await browser.newPage({ viewport: { width: 1280, height: 720 } });
           const t = performance.now();
           await page.goto(`${url}?model=${name}&gen=${gen}&ui=0&static=1&helmet=study&wear=off`);
           await page.waitForFunction(() => window.__ready === true, null, { timeout: 240000 });
-          if (k) ms.push(performance.now() - t);
+          if (k) ms[gen].push(performance.now() - t);
           await page.close();
         }
-        out.browser[`${name}:${gen}`] = Math.round(median(ms));
       }
+      for (const gen of GENS) out.browser[`${name}:${gen}`] = Math.round(median(ms[gen]));
     }
   } finally {
     await browser.close();

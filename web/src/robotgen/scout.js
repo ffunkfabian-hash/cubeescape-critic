@@ -1,4 +1,4 @@
-// three.js generator of Scout v3 (0.17 "Outrider"): replaces blender/scout (run.py › bauen_lauf6b, export_scout.py) for the 44
+// three.js generator of Scout v3 (0.17 "Outrider"): replaces archive/blender/scout (run.py › bauen_lauf6b, export_scout.py) for the 44
 // exported meshes S01–S13 and builds the same scene as assets/helmet-scout/assembled/scout.glb – meshes named by their Blender
 // object with extras part_id, part_label, side, source_object, the flat glTF materials of the delivery package
 // (scoutMaterials.json), glTF axes (Y up, front +Z, H = 1.0). Ported step by step:
@@ -8,7 +8,7 @@
 //   S12      back module – helm_csg.rueckmodul_neu;  S13 coiled cables – helm_build8.schlauch, helm_build3.catmull/kabel_spirale
 // Parts that bauen_lauf6b builds and removes again (mask, cheek plates, visor glow, run-3 modules) are not ported.
 import * as THREE from 'three';
-import P from '../../../blender/scout/helm_params.json' with { type: 'json' };
+import P from './data/helm_params.json' with { type: 'json' };
 import MATS from './scoutMaterials.json' with { type: 'json' };
 import { mesh, join, transformed, recalcNormals, csg, moveSolid, finish, raycaster, shaded } from './scoutMesh.js';
 import { gussParts } from './scoutGuss.js';

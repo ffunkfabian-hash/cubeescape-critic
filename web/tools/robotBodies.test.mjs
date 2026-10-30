@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 const ASSEMBLIES = ['head', 'arms', 'upper_body', 'lower_body', 'legs'];
-const source = JSON.parse(readFileSync(new URL('../../blender/robot/SOURCE.json', import.meta.url)));
+const source = JSON.parse(readFileSync(new URL('../src/robotgen/data/SOURCE.json', import.meta.url)));
 
 function glb(url) {
   const buf = readFileSync(url);

@@ -272,24 +272,24 @@ try {
   result.skinNavigation = await navPage.evaluate(() => window.activeSkinStates().map(st => `${st.atlas.model}:${st.active}:${st.mapped}/${st.meshes.length}`));
   if (result.skinNavigation.length !== 2) throw new Error(`skin nav: ${result.skinNavigation}`);
   await navPage.close();
-  // Generated bodies (&gen=three, 0.15) and Scout from the generator (0.17, on Paladin and alone): every mesh finds an entry in
-  // its own atlas (<body>-three, scout-three).
+  // Bodies and Scout as exported GLBs (default, 0.18) and built live (&gen=three): every mesh finds an entry in its model's atlas.
   result.skinsGenerated = [];
-  for (const [body, helmet] of [['waechter', 'critic'], ['paladin', 'scout'], ['mechanik', 'critic'], ['scout', null]]) {
+  for (const [body, helmet, gen] of [['waechter', 'critic', 'export'], ['paladin', 'scout', 'export'], ['mechanik', 'critic', 'export'], ['scout', null, 'export'], ['paladin', 'scout', 'three']]) {
     const page = await browser.newPage({ viewport: { width: 480, height: 480 } });
     page.setDefaultTimeout(180000);
-    page.on('pageerror', e => errors.push(`skin gen=three ${body}: ${e.message}`));
-    page.on('console', m => { if (m.type() === 'error' || /without atlas entry/.test(m.text())) errors.push(`skin gen=three ${body}: ${m.text()}`); });
-    await page.goto(`${url}?ui=0&static=1&model=${body}&gen=three${helmet ? `&helmet=${helmet}` : ''}&skin=rost`);
+    page.on('pageerror', e => errors.push(`skin gen=${gen} ${body}: ${e.message}`));
+    page.on('console', m => { if (m.type() === 'error' || /without atlas entry/.test(m.text())) errors.push(`skin gen=${gen} ${body}: ${m.text()}`); });
+    await page.goto(`${url}?ui=0&static=1&model=${body}&gen=${gen}${helmet ? `&helmet=${helmet}` : ''}&skin=rost`);
     await page.waitForFunction(() => window.__ready === true, null, { timeout: 180000 });
-    result.skinsGenerated.push(...await page.evaluate(() => window.activeSkinStates().map(st => ({ model: st.atlas.model, meshes: st.meshes.length, mapped: st.mapped, transferred: st.transferred }))));
+    result.skinsGenerated.push(...await page.evaluate(gen => window.activeSkinStates().map(st => ({ model: st.atlas.model, gen, meshes: st.meshes.length, mapped: st.mapped, transferred: st.transferred })), gen));
     await page.close();
   }
   for (const s of result.skinsGenerated) {
-    console.log(`skin rost on ${s.model} (gen=three): ${s.mapped}/${s.meshes} meshes mapped${s.transferred ? `, ${s.transferred} transferred` : ''}`);
-    if (s.mapped !== s.meshes) throw new Error(`skin on ${s.model} (gen=three): ${s.mapped}/${s.meshes} mapped`);
+    console.log(`skin rost on ${s.model} (gen=${s.gen}): ${s.mapped}/${s.meshes} meshes mapped${s.transferred ? `, ${s.transferred} transferred` : ''}`);
+    if (s.mapped !== s.meshes) throw new Error(`skin on ${s.model} (gen=${s.gen}): ${s.mapped}/${s.meshes} mapped`);
   }
-  if (result.skinsGenerated.filter(s => s.model.endsWith('-three')).length !== 5) throw new Error(`skin gen=three: ${JSON.stringify(result.skinsGenerated)}`);
+  const seen = result.skinsGenerated.map(s => `${s.model}:${s.gen}`).sort().join(' ');
+  if (seen !== 'critic:export critic:export mechanik:export paladin:export paladin:three scout:export scout:export scout:three waechter:export') throw new Error(`skin sources: ${seen}`);
   console.log(`skin GLB: ${result.skinGlb.materials.join(', ')}; navigation: ${result.skinNavigation.join(', ')}`);
   for (const s of result.skins) {
     console.log(`skin ${s.skin} on ${s.model}: ${s.mapped}/${s.meshes} meshes mapped, bake fills ${(s.filled * 100).toFixed(1)} %`);

@@ -1,12 +1,16 @@
-// Scout v3 (?model=scout): the Blender-built helmet from blender/scout, loaded as GLB from assets/helmet-scout, or with
-// gen 'three' (&gen=three, 0.17) built by the three.js generator robotgen/scout.js into the same scene (cast read from
-// blender/scout/guss_2h.npz). The GLB is the Blender generator's export (Y up, front +Z, height 1.0); it is scaled and centred to
-// the frame of the three.js helmet so the same camera views apply. Exported meshes carry extras part_id/part_label/side (parts.json).
+// Scout v3 (?model=scout): built by the three.js generator robotgen/scout.js (0.17, cast read from robotgen/data/guss_2h.npz) and
+// exported by tools/robotgen_export.mjs into assets/helmet-scout-three (0.18); the viewer loads these GLBs. &gen=three builds it live
+// in the browser, &gen=blender loads the frozen export of the archived Blender generator (assets/helmet-scout, archive/blender/scout).
+// All are the same scene (Y up, front +Z, height 1.0); it is scaled and centred to the frame of the three.js helmet so the same camera
+// views apply. Meshes carry extras part_id/part_label/side (parts.json).
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import assembledUrl from '../../assets/helmet-scout/assembled/scout.glb?url';
-import explodedUrl from '../../assets/helmet-scout/exploded/scout_exploded.glb?url';
-import gussUrl from '../../blender/scout/guss_2h.npz?url';
+import { checkSource } from './robotBodies.js';
+import assembledUrl from '../../assets/helmet-scout-three/assembled/scout.glb?url';
+import explodedUrl from '../../assets/helmet-scout-three/exploded/scout_exploded.glb?url';
+import blenderAssembledUrl from '../../assets/helmet-scout/assembled/scout.glb?url';
+import blenderExplodedUrl from '../../assets/helmet-scout/exploded/scout_exploded.glb?url';
+import gussUrl from './robotgen/data/guss_2h.npz?url';
 
 // Shell of the three.js helmet without neck and antennas (measured: dome top ≈ 0.40, collar bottom −0.41), so both
 // helmets fill the camera views alike. Scout is fitted by its own box without antennas (Antenne_*).
@@ -41,12 +45,12 @@ export function scoutFit(ref) {
   return { scale: SCOUT_FRAME.height / size.y, mid: box.getCenter(new THREE.Vector3()) };
 }
 
-export async function loadScout(exploded, gen = 'glb') {
-  if (!['glb', 'three'].includes(gen)) throw new Error(`Unknown gen ${JSON.stringify(gen)}; expected glb or three`);
+export async function loadScout(exploded, gen = 'export') {
+  checkSource(gen);
   // Fit by the assembled helmet's box so the exploded parts keep the same scale and origin.
-  const g = gen === 'three' ? await generate() : null;
-  const ref = g ? g.assembled : await load(assembledUrl);
-  const source = exploded ? (g ? g.exploded : await load(explodedUrl)) : ref;
+  const g = gen === 'three' ? await generate() : null, blender = gen === 'blender';
+  const ref = g ? g.assembled : await load(blender ? blenderAssembledUrl : assembledUrl);
+  const source = exploded ? (g ? g.exploded : await load(blender ? blenderExplodedUrl : explodedUrl)) : ref;
   const model = new THREE.Group();
   model.name = exploded ? 'scout_exploded' : 'scout';
   model.userData.gen = gen;

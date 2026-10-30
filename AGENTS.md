@@ -9,10 +9,10 @@ Antworten, Doku und Commit-Messages auf Deutsch; Code, Bezeichner und Kommentare
 - `critic/` – Kritiker-Prompt und JSON-Schema der Antwort (Vertrag zwischen Kritiker und Arbeiter).
 - `generator/`, `tools/` – entstehen mit Version 0.1 (Blender-Generator, Ansichten, Kritiker-Aufruf, Messung).
 - `web/` – Three.js-Nachbau im Browser mit Playwright-Prüfung und Umriss-IoU (`web/README.md`); `web/renders/` nicht im Repo.
-- `blender/scout/`, `assets/helmet-scout/`, `reference/scout/` – zweiter Helm **Scout v3** (0.8): Blender-Generator mit Einstieg `run.py`,
-  GLB-Lieferpaket, Vorlagen; Viewer `?model=scout` ([docs/HELM_SCOUT.md](docs/HELM_SCOUT.md)).
-- `blender/robot/`, `assets/robot-bodies/` – die Körper (Herkunft Ballon Runde 5, 0.10): Export mit gepinnter Quelle
-  (`SOURCE.json`), GLB je Körper; Viewer `?model=waechter|paladin|mechanik`, gealtert (`web/src/robotWear.js`), mit Helm H oder Scout
+- `assets/helmet-scout-three/`, `reference/scout/` – zweiter Helm **Scout v3** (0.8, seit 0.17 im three.js-Generator): Lieferpaket aus
+  `web/tools/robotgen_export.mjs`, Vorlagen; Viewer `?model=scout` ([docs/HELM_SCOUT.md](docs/HELM_SCOUT.md)).
+- `assets/robot-bodies-three/` – die Körper (Herkunft Ballon Runde 5, 0.10; Pin `web/src/robotgen/data/SOURCE.json`): Lieferpakete aus
+  `web/tools/robotgen_export.mjs`, GLB je Körper; Viewer `?model=waechter|paladin|mechanik`, gealtert (`web/src/robotWear.js`), mit Helm H oder Scout
   (`web/src/robotHelmet.js`, Varianten `criticHelmetVariants.json`) im einheitlichen Farbschema (`ballonRoles.json`,
   `robotHelmetColors.json`); Navigation links in `web/src/navigation.js`
   ([docs/ROBOTER_BALLON.md](docs/ROBOTER_BALLON.md)).
@@ -21,12 +21,16 @@ Antworten, Doku und Commit-Messages auf Deutsch; Code, Bezeichner und Kommentare
   (`web/src/skinShader.js`, Viewer `web/src/robotSkins.js`, Navigation „Lackierung“); Kontrollkarten in `runs/skins/`. Seit 0.16 auch
   Bronze und Schrott aus Nutzerbildern: Kacheln und Motive in `assets/skins/textures/` (`web/tools/skin_swatches.py`), Vorlagenkarten für
   Bildgeneratoren per `web/tools/skin_guide.py`, Prompts in `docs/SKINS.md`.
-- `web/src/robotgen/` – three.js-Generator der Körper ohne Blender (0.14 Wächter, 0.15 Paladin und Mechanik; `?model=<körper>&gen=three`):
-  Übertragung der gepinnten Ballon-Quelle, Prüfung gegen den Python-Abzug (`web/tools/robotgen_dump_spec.py`) und den GLB
-  (`robotgen.test.mjs`, `robotgen_compare.mjs`); eigene Skin-Atlanten `assets/skins/<körper>-three/` (`skin_bake.mjs --gen three`).
-  Seit 0.17 auch Scout (`scout.js`, `scoutGuss.js`, `scoutMesh.js`, `bsp.js`; Guss aus `blender/scout/guss_2h.npz`, `&gen=three`,
-  Atlas `scout-three`, Test `scoutgen.test.mjs`) und die geprüfte Schneider-Stufentabelle `cutStages.json`
-  (`robotgen_cut_stages.mjs`, Ladezeit `robotgen_bench.mjs`). Schultern sind im Viewer eine eigene Baugruppe (`web/src/robotShoulders.js`).
+- `web/src/robotgen/` – three.js-Generator der Körper und von Scout, **die Quelle der Geometrie** (0.14 Wächter, 0.15 Paladin und
+  Mechanik, 0.17 Scout: `scout.js`, `scoutGuss.js`, `scoutMesh.js`, `bsp.js`; Eingaben in `data/`: Ballon-Pin `SOURCE.json`, Guss
+  `guss_2h.npz`, `helm_params.json`). Seit 0.18 schreibt `web/tools/robotgen_export.mjs` daraus die Lieferpakete, der Viewer lädt sie;
+  `&gen=three` baut live im Browser, `&gen=blender` zeigt die eingefrorenen Blender-GLBs. Nach jeder Änderung neu exportieren
+  (`robotgen_export.test.mjs` prüft Eingaben-Hash und Bytes) und bei geänderten Meshes den Skin-Atlas neu backen. Messung gegen
+  Ballon/Blender (`robotgen_dump_spec.py`, `robotgen.test.mjs`, `scoutgen.test.mjs`, `robotgen_compare.mjs`), Schneider-Stufentabelle
+  `cutStages.json` (`robotgen_cut_stages.mjs`, Ladezeit `robotgen_bench.mjs`). Schultern sind im Viewer eine eigene Baugruppe (`web/src/robotShoulders.js`).
+- `assets/robot-bodies/`, `assets/helmet-scout/` – eingefrorene Blender-GLBs (bis 0.17), nur noch Referenz der Messtests;
+  `archive/blender/` – die archivierten Blender-Generatoren. `blender/cycles_render.py` – optionaler Cycles-Render aus einem
+  exportierten GLB (Präsentation, Drehteller, Vorlagen), unter `./ce lock gpu`, kein Pflichtschritt.
 - `docs/HELM_STIL.md` – bestätigte Form-/Materialvorgaben; runde Haube, Augen erhalten, maßgeblich ist das Video.
 - `docs/HELM_AGENTEN.md` – technischer Aufbau, Material-/Akzentvarianten, Prüfumfang, visueller Eindruck und offene Nutzerwahl; vor Helm-Fortsetzungen gezielt lesen.
 - Archiv (in 0.12 aus dem Viewer entfernt, Code in Git): Körperstudien `docs/HELM_AUFBAU.md` (0.5), `HELM_CUIRASS.md` (0.6),
@@ -51,8 +55,8 @@ Antworten, Doku und Commit-Messages auf Deutsch; Code, Bezeichner und Kommentare
   Schätzungen des Modells, der Arbeiter prüft sie am Bild und an der Messung. Ungültige Antwort → Runde zählt, keine Wiederholung.
 - **Ein Abbruchkriterium, das gemessen wird:** IoU der Umrisse je Ansicht und Rundenlimit; die Selbstbewertung des Kritikers
   (`confidence`) wird berichtet, entscheidet aber nicht allein.
-- Blender nur headless unter `./ce lock gpu -- …` (Renders) bzw. `blender` (Modell); Generator ist die Quelle, nie von Hand
-  modellierte `.blend` committen.
+- Blender baut seit 0.18 keine Geometrie mehr; nur `blender/cycles_render.py` headless unter `./ce lock gpu -- …` aus exportierten GLBs.
+  Der three.js-Generator ist die Quelle, nie von Hand modellierte `.blend` oder GLBs committen.
 - Der bestätigte Auftrag vom 28.10.2026 verwendet den bestehenden Three.js-Generator ohne Blender in dieser Umgebung.
   Vorhandene Materialien erhalten (seit 0.12 unter `colors=original`, geprüft mit `verify`; Standard ist das einheitliche Farbschema), Geometrie verbessern; Prüfungen: `npm --prefix web test`, `npm --prefix web run build`,
   `npm --prefix web run verify`. Die ältere Mac-Vorgabe blockiert diesen ausdrücklich beauftragten Ablauf nicht.

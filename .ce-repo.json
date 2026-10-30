@@ -1,7 +1,7 @@
 {
   "name": "cubeescape-critic",
-  "version": "0.17.0",
-  "version_name": "Outrider",
+  "version": "0.18.0",
+  "version_name": "Prefab",
   "check": {
     "quick": [
       [

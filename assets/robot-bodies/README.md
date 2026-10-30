@@ -1,7 +1,11 @@
-# Roboterkörper 0.10 – Lieferstand
+# Roboterkörper 0.10 – Blender-Fassung (eingefrorene Referenz)
 
-Drei Körperstudien aus `cubeescape-ballon` (Roboter Runde 5, Commit `14bd78d`, siehe `blender/robot/SOURCE.json`), exportiert mit
-`blender/robot/export_robot.py`. Je Ordner `waechter/`, `paladin/`, `mechanik/`:
+> Seit 0.18 lädt der Viewer die Körper aus dem three.js-Generator ([`assets/robot-bodies-three/`](../robot-bodies-three/README.md)).
+> Diese Dateien bleiben unverändert als Referenz der Messtests (`web/tools/robotgen.test.mjs`, `robotgen_compare.mjs`) und im Viewer
+> unter `&gen=blender`; das Exportskript liegt im Archiv (`archive/blender/robot/`).
+
+Drei Körperstudien aus `cubeescape-ballon` (Roboter Runde 5, Commit `14bd78d`, siehe `web/src/robotgen/data/SOURCE.json`), exportiert mit
+`archive/blender/robot/export_robot.py`. Je Ordner `waechter/`, `paladin/`, `mechanik/`:
 
 | Datei | Inhalt |
 | --- | --- |

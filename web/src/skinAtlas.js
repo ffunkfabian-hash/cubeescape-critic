@@ -12,8 +12,6 @@ import * as THREE from 'three';
 import { MeshBVH } from 'three-mesh-bvh';
 
 export const ATLAS_FORMAT = 'critic-skin-atlas/1';
-// Atlas of a model: the body from the three.js generator (gen three, robotgen) has its own atlas next to the GLB's.
-export const atlasName = (model, gen = 'glb') => (gen === 'three' ? `${model}-three` : model);
 // Edge distances are stored in 8 bits as sqrt(d / EDGE_RANGE_MM): fine steps near the edge (0.14 mm at 5 mm), coarse far away.
 export const EDGE_RANGE_MM = 64;
 export const encodeEdge = mm => Math.round(Math.sqrt(Math.min(Math.max(mm, 0), EDGE_RANGE_MM) / EDGE_RANGE_MM) * 255);
