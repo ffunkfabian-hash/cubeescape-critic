@@ -1,7 +1,7 @@
 {
   "name": "cubeescape-critic",
-  "version": "0.18.0",
-  "version_name": "Prefab",
+  "version": "0.19.0",
+  "version_name": "Whetstone",
   "check": {
     "quick": [
       [

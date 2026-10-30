@@ -12,6 +12,47 @@ export const BEVEL = { cyl: 0.8, hull: 2.0, hulls: 1.0, prism: 1.6, plate: 1.0, 
 const FORMS = new Set(['loft', 'wrap', 'tube']);
 const LOFT_CREASE = 44;
 
+// Ids of equal integer triples q[3i..3i+2] (open-addressing hash table, ids in order of first appearance): the welding keys of
+// the helpers below as numbers instead of strings (0.19 "Whetstone": same keys, same order, several times faster).
+export function tripleIds(q) {
+  const n = q.length / 3;
+  let size = 1;
+  while (size < 2 * n) size *= 2;
+  const table = new Int32Array(size).fill(-1), first = new Int32Array(n), ids = new Int32Array(n);
+  let count = 0;
+  for (let i = 0; i < n; i++) {
+    const x = q[3 * i], y = q[3 * i + 1], z = q[3 * i + 2];
+    let h = Math.imul(x, 0x9e3779b1) ^ Math.imul(y, 0x85ebca77) ^ Math.imul(z, 0xc2b2ae3d);
+    h = Math.imul(h ^ (h >>> 15), 0x2c1b3c6d);
+    let slot = (h ^ (h >>> 13)) & (size - 1), v;
+    for (;; slot = (slot + 1) & (size - 1)) {
+      v = table[slot];
+      if (v < 0) { v = table[slot] = count; first[count++] = i; break; }
+      const j = first[v];
+      if (q[3 * j] === x && q[3 * j + 1] === y && q[3 * j + 2] === z) break;
+    }
+    ids[i] = v;
+  }
+  return { ids, count, first };
+}
+
+// Rounded position keys of all corners: Math.round(coordinate · scale) per axis.
+function roundedKeys(p, scale) {
+  const q = new Int32Array(p.length);
+  for (let i = 0; i < p.length; i++) q[i] = Math.round(p[i] * scale);
+  return tripleIds(q);
+}
+
+// Corners grouped by id (CSR: start[id] … start[id + 1] in `list`), in increasing corner order.
+function groups(ids, count) {
+  const start = new Int32Array(count + 1), list = new Int32Array(ids.length);
+  for (let i = 0; i < ids.length; i++) start[ids[i] + 1]++;
+  for (let k = 0; k < count; k++) start[k + 1] += start[k];
+  const fill = start.slice(0, count);
+  for (let i = 0; i < ids.length; i++) list[fill[ids[i]]++] = i;
+  return { start, list };
+}
+
 // Faceted plate (Arm v3 robot_arm.plate): tapered base at distance r(z) from the segment axis, thickness t, hip roof with ridge,
 // placed around the axis by phi (0 = +Y) and shifted sideways by u; convex hull of these points.
 export function platePoints(p) {
@@ -65,8 +106,8 @@ function toGeometry({ V, F, N }) {
   const a = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3();
   for (const f of F) {
     for (let j = 1; j < f.length - 1; j++) {
-      a.fromArray(V[f[0]]); b.fromArray(V[f[j]]); c.fromArray(V[f[j + 1]]);
-      if (b.clone().sub(a).cross(c.clone().sub(a)).lengthSq() < 1e-12) continue;
+      a.fromArray(V[f[0]]); b.fromArray(V[f[j]]).sub(a); c.fromArray(V[f[j + 1]]).sub(a);
+      if (b.cross(c).lengthSq() < 1e-12) continue;
       pos.push(...V[f[0]], ...V[f[j]], ...V[f[j + 1]]);
       if (N) nor.push(...N[f[0]], ...N[f[j]], ...N[f[j + 1]]);
     }
@@ -102,10 +143,11 @@ function cut(geo, cuts) {
 // opposite winding (and a few exact duplicates). Both triangles of a reversed pair and the second of a duplicate are dropped.
 export function dropSheets(geo) {
   const p = geo.attributes.position.array;
-  const key = i => `${Math.round(p[i * 3] * 100)},${Math.round(p[i * 3 + 1] * 100)},${Math.round(p[i * 3 + 2] * 100)}`;   // 0.01 mm
-  const seen = new Map(), drop = new Set();
+  const { ids, count } = roundedKeys(p, 100);                                // 0.01 mm
+  const seen = new Map(), drop = new Set(), big = count > 2e5;
   for (let t = 0; t < p.length / 9; t++) {
-    const k = [0, 1, 2].map(j => key(t * 3 + j)), s = [...k].sort().join('|');
+    const k = [ids[3 * t], ids[3 * t + 1], ids[3 * t + 2]], o = [...k].sort((u, v) => u - v);
+    const s = big ? o.join(',') : (o[0] * count + o[1]) * count + o[2];
     const prev = seen.get(s);
     if (prev === undefined || prev.t < 0) { seen.set(s, { t, k }); continue; }   // first, or first after a dropped pair
     const i = k.indexOf(prev.k[0]), same = k[(i + 1) % 3] === prev.k[1];
@@ -125,26 +167,44 @@ export function dropSheets(geo) {
 // into a fan around its centroid through those points, so all edges are shared again.
 export function closeTJunctions(geo) {
   const p = geo.attributes.position.array, cell = 2;      // mm
-  const verts = new Map(), grid = new Map();
-  for (let i = 0; i < p.length; i += 3) {
-    const k = `${Math.round(p[i] * 1e4)},${Math.round(p[i + 1] * 1e4)},${Math.round(p[i + 2] * 1e4)}`;
-    if (verts.has(k)) continue;
-    const v = [p[i], p[i + 1], p[i + 2]];
-    verts.set(k, v);
-    const g = v.map(c => Math.floor(c / cell)).join(',');
+  const grid = new Map(), { count, first } = roundedKeys(p, 1e4);
+  const G = 1 << 17, cellKey = (x, y, z) => ((x + G / 2) * G + (y + G / 2)) * G + (z + G / 2);   // cells within ±131 m
+  for (let k = 0; k < count; k++) {
+    const i = 3 * first[k], v = [p[i], p[i + 1], p[i + 2]];
+    const g = cellKey(Math.floor(v[0] / cell), Math.floor(v[1] / cell), Math.floor(v[2] / cell));
     if (!grid.has(g)) grid.set(g, []);
     grid.get(g).push(v);
   }
+  // Cells of the box around the edge are visited in x, y, z order as before, but only those the edge (grown by m) passes through
+  // (0.19: most of the box is empty, and a corner on the edge lies within 1e-4 mm of it, far inside m).
+  const m = 1e-3;
+  const slab = (i, a, d, c, t0, t1, out) => {   // parameter interval of a + t·d within cell slab c of axis i, clipped to [t0, t1]
+    const s0 = c * cell - m, s1 = (c + 1) * cell + m;
+    if (d[i] === 0) { out[0] = a[i] >= s0 && a[i] <= s1 ? t0 : 1; out[1] = a[i] >= s0 && a[i] <= s1 ? t1 : 0; return; }
+    const u = (s0 - a[i]) / d[i], v = (s1 - a[i]) / d[i];
+    out[0] = Math.max(t0, Math.min(u, v)); out[1] = Math.min(t1, Math.max(u, v));
+  };
+  const tx = [0, 0], ty = [0, 0];
   const onEdge = (a, b) => {                // corners strictly inside segment a–b, ordered from a
     const lo = [0, 1, 2].map(i => Math.floor((Math.min(a[i], b[i]) - 1e-3) / cell)), hi = [0, 1, 2].map(i => Math.floor((Math.max(a[i], b[i]) + 1e-3) / cell));
     const d = [b[0] - a[0], b[1] - a[1], b[2] - a[2]], L2 = d[0] * d[0] + d[1] * d[1] + d[2] * d[2], hits = [];
     if ((hi[0] - lo[0] + 1) * (hi[1] - lo[1] + 1) * (hi[2] - lo[2] + 1) > 4096) return hits;
-    for (let x = lo[0]; x <= hi[0]; x++) for (let y = lo[1]; y <= hi[1]; y++) for (let z = lo[2]; z <= hi[2]; z++) {
-      for (const v of grid.get(`${x},${y},${z}`) ?? []) {
-        const t = ((v[0] - a[0]) * d[0] + (v[1] - a[1]) * d[1] + (v[2] - a[2]) * d[2]) / L2;
-        if (t <= 1e-6 || t >= 1 - 1e-6) continue;
-        const q = [a[0] + t * d[0] - v[0], a[1] + t * d[1] - v[1], a[2] + t * d[2] - v[2]];
-        if (q[0] * q[0] + q[1] * q[1] + q[2] * q[2] < 1e-8) hits.push([t, v]);
+    for (let x = lo[0]; x <= hi[0]; x++) {
+      slab(0, a, d, x, 0, 1, tx);
+      if (tx[0] > tx[1]) continue;
+      for (let y = lo[1]; y <= hi[1]; y++) {
+        slab(1, a, d, y, tx[0], tx[1], ty);
+        if (ty[0] > ty[1]) continue;
+        const za = a[2] + ty[0] * d[2], zb = a[2] + ty[1] * d[2];
+        const z0 = Math.max(lo[2], Math.floor((Math.min(za, zb) - m) / cell)), z1 = Math.min(hi[2], Math.floor((Math.max(za, zb) + m) / cell));
+        for (let z = z0; z <= z1; z++) {
+          for (const v of grid.get(cellKey(x, y, z)) ?? []) {
+            const t = ((v[0] - a[0]) * d[0] + (v[1] - a[1]) * d[1] + (v[2] - a[2]) * d[2]) / L2;
+            if (t <= 1e-6 || t >= 1 - 1e-6) continue;
+            const q = [a[0] + t * d[0] - v[0], a[1] + t * d[1] - v[1], a[2] + t * d[2] - v[2]];
+            if (q[0] * q[0] + q[1] * q[1] + q[2] * q[2] < 1e-8) hits.push([t, v]);
+          }
+        }
       }
     }
     return hits.sort((u, w) => u[0] - w[0]).map(h => h[1]);
@@ -166,6 +226,8 @@ export function closeTJunctions(geo) {
 // Vertex normals per corner from all faces at the same position whose normal is within the crease angle, weighted uniformly
 // like Blender's weighted-normal modifier at weight 50 (area weighting turns the normals abruptly across narrow chamfer
 // facets, which the wear shader reads as bevel strips).
+// Every normal has unit length (0.19): a corner whose crease sum vanishes (degenerate triangle) takes the mean of all faces at its
+// position, so the live build equals the export (GLTFExporter would otherwise set it to (1, 0, 0) and renormalise the mesh).
 export function creaseNormals(geo, creaseDeg) {
   const p = geo.attributes.position, nTri = p.count / 3, cosC = Math.cos(creaseDeg * Math.PI / 180);
   const fn = new Float32Array(nTri * 3), fa = new Float32Array(nTri);
@@ -177,18 +239,24 @@ export function creaseNormals(geo, creaseDeg) {
     if (area > 0) n.divideScalar(area);
     fn.set([n.x, n.y, n.z], 3 * t);
   }
-  const key = i => `${Math.round(p.getX(i) * 1e4)},${Math.round(p.getY(i) * 1e4)},${Math.round(p.getZ(i) * 1e4)}`;
-  const at = new Map();
-  for (let i = 0; i < p.count; i++) { const k = key(i); if (!at.has(k)) at.set(k, []); at.get(k).push(Math.floor(i / 3)); }
+  const { ids, count } = roundedKeys(p.array, 1e4), { start, list } = groups(ids, count);
   const normals = new Float32Array(p.count * 3);
   for (let i = 0; i < p.count; i++) {
-    const t0 = Math.floor(i / 3);
+    const t0 = Math.floor(i / 3), s0 = start[ids[i]], s1 = start[ids[i] + 1];
     let x = 0, y = 0, z = 0;
-    for (const t of at.get(key(i))) {
+    for (let s = s0; s < s1; s++) {
+      const t = Math.floor(list[s] / 3);
       if (fn[3 * t] * fn[3 * t0] + fn[3 * t + 1] * fn[3 * t0 + 1] + fn[3 * t + 2] * fn[3 * t0 + 2] < cosC) continue;
       x += fn[3 * t] * fa[t]; y += fn[3 * t + 1] * fa[t]; z += fn[3 * t + 2] * fa[t];
     }
-    const L = Math.hypot(x, y, z) || 1;
+    let L = Math.hypot(x, y, z);
+    if (!(L > 1e-12)) {                // corner of a degenerate (CSG sliver) triangle: every face at the position, else its own
+      x = y = z = 0;
+      for (let s = s0; s < s1; s++) { const t = Math.floor(list[s] / 3); x += fn[3 * t] * fa[t]; y += fn[3 * t + 1] * fa[t]; z += fn[3 * t + 2] * fa[t]; }
+      L = Math.hypot(x, y, z);
+      if (!(L > 1e-12)) { [x, y, z] = [fn[3 * t0], fn[3 * t0 + 1], fn[3 * t0 + 2]]; L = Math.hypot(x, y, z); }
+      if (!(L > 1e-12)) { [x, y, z] = [0, 0, 1]; L = 1; }
+    }
     normals.set([x / L, y / L, z / L], 3 * i);
   }
   geo.setAttribute('normal', new THREE.BufferAttribute(normals, 3));
@@ -199,22 +267,22 @@ export function creaseNormals(geo, creaseDeg) {
 // glTF axes x, z, −y, where the part ends up), directed edges without a reverse partner, plus triangles whose shading normals
 // face the back or lie almost in the face (a margin, so float rounding of the later axis turn cannot flip them).
 export function meshDefects(geo) {
-  const p = geo.attributes.position.array, n = geo.attributes.normal.array;
-  const key = i => `${Math.round(p[i * 3] * 1e5)},${Math.round(p[i * 3 + 2] * 1e5)},${Math.round(-p[i * 3 + 1] * 1e5)}`;
-  const E = new Map();
+  const p = geo.attributes.position.array, n = geo.attributes.normal.array, q = new Int32Array(p.length);
+  for (let i = 0; i < p.length; i += 3) { q[i] = Math.round(p[i] * 1e5); q[i + 1] = Math.round(p[i + 2] * 1e5); q[i + 2] = Math.round(-p[i + 1] * 1e5); }
+  const { ids, count: N } = tripleIds(q), E = new Map();
   let back = 0;
   const a = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3(), s = new THREE.Vector3();
   for (let t = 0; t < p.length / 9; t++) {
-    const k = [0, 1, 2].map(j => key(t * 3 + j));
-    if (new Set(k).size < 3) continue;
-    for (let j = 0; j < 3; j++) { const d = `${k[j]}>${k[(j + 1) % 3]}`; E.set(d, (E.get(d) ?? 0) + 1); }
+    const k = [ids[3 * t], ids[3 * t + 1], ids[3 * t + 2]];
+    if (k[0] === k[1] || k[1] === k[2] || k[0] === k[2]) continue;
+    for (let j = 0; j < 3; j++) { const d = k[j] * N + k[(j + 1) % 3]; E.set(d, (E.get(d) ?? 0) + 1); }
     a.fromArray(p, t * 9); b.fromArray(p, t * 9 + 3).sub(a); c.fromArray(p, t * 9 + 6).sub(a);
     s.fromArray(n, t * 9).add(a.fromArray(n, t * 9 + 3)).add(a.fromArray(n, t * 9 + 6));
     b.cross(c);
     if (b.dot(s) <= 1e-3 * b.length() * s.length()) back++;
   }
   let open = 0;
-  for (const [d, cnt] of E) { const [u, v] = d.split('>'); if (E.get(`${v}>${u}`) !== cnt) open++; }
+  for (const [d, cnt] of E) { const u = Math.floor(d / N), v = d - u * N; if (E.get(v * N + u) !== cnt) open++; }
   return open + back;
 }
 
@@ -222,6 +290,9 @@ export function meshDefects(geo) {
 // 0.01 mm that open the mesh; Blender's exact boolean has none. The cut is then repeated with every cutter grown by
 // CUT_JITTER mm per attempt (deterministic, far below the 1 mm box tolerance) until the form is closed.
 export const CUT_JITTER = 0.002, CUT_RETRIES = 32;
+
+// CSG result of a form part with cuts before the cleanup (dropSheets, closeTJunctions), mm: input of robotgen_speed.test.mjs.
+export const rawCut = (kind, p) => cut(toGeometry(rawShape(kind, p, p.bevel ?? BEVEL[kind] ?? 1.0)), p.cuts);
 
 function shapeGeometry(kind, p, sx, grow) {
   const w = p.bevel ?? BEVEL[kind] ?? 1.0;
@@ -252,7 +323,11 @@ function shapeGeometry(kind, p, sx, grow) {
 // in order of first appearance; the triangles and their shading stay as they are (a third of the vertices of the triangle soup).
 export function indexGeometry(geo) {
   const p = geo.attributes.position.array, n = geo.attributes.normal.array, count = p.length / 3;
-  const bits = a => new Uint32Array(a.buffer, a.byteOffset, a.length).map(w => (w === 0x80000000 ? 0 : w));   // −0 = +0
+  const bits = a => {                                                         // −0 = +0
+    const w = new Uint32Array(a.buffer, a.byteOffset, a.length), out = new Uint32Array(a.length);
+    for (let i = 0; i < w.length; i++) out[i] = w[i] === 0x80000000 ? 0 : w[i];
+    return out;
+  };
   const P = bits(p), N = bits(n);
   let size = 1;
   while (size < 2 * count) size *= 2;
@@ -286,6 +361,10 @@ export function indexGeometry(geo) {
 // part). The stage used is stored in geo.userData.cutStage.
 export function firstClosed(build, defects, retries, start = 0) {
   let k = start, geo = build(k);
+  if (!retries && !start) {             // nothing to choose from (parts without cuts): the defect count would not be used
+    if (geo?.userData) geo.userData.cutStage = 0;
+    return geo;
+  }
   for (let j = 0; j <= retries && defects(geo); j++) if (j !== start) geo = build(k = j);
   if (geo?.userData) geo.userData.cutStage = k;
   return geo;

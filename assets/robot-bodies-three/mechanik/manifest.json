@@ -6,7 +6,7 @@
   "source": "web/src/robotgen",
   "inputs": {
    "files": 22,
-   "sha256": "dceb4acd050a27cf4cf459b336ccb7fb5773513d78112f18a2f010478fa27448",
+   "sha256": "94559673c9fe1c4b913f114d3c1ccec5973658af5b2ead0a0b66c497d1b4d931",
    "libraries": {
     "three": "0.186.1",
     "three-bvh-csg": "0.0.18",
@@ -4390,7 +4390,7 @@
      1.5765
     ]
    ],
-   "digest": "dae90a4f6a9f17b9"
+   "digest": "5d143c0589e68814"
   },
   {
    "name": "face_ridge_l",
@@ -5996,7 +5996,7 @@
      0.4564
     ]
    ],
-   "digest": "7e828e25cea3b3c7"
+   "digest": "9f8c668c09696768"
   },
   {
    "name": "shin_L_shin_shell_rim_a",
@@ -6436,7 +6436,7 @@
      0.4574
     ]
    ],
-   "digest": "caa05f815a0b7ca9"
+   "digest": "5c0a2e29d77c4046"
   },
   {
    "name": "shin_R_shin_shell_rim_a",

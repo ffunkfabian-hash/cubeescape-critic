@@ -1,11 +1,13 @@
-# Übergabe – Roboter und Scout in three.js, Stand nach 0.18 „Prefab“: Generator ist die Quelle
+# Übergabe – Roboter und Scout in three.js, Stand nach 0.19 „Whetstone“: Generator ist die Quelle, Formtests
 
-Stand 30.10.2026: **Wächter**, **Paladin**, **Mechanik** (0.14–0.15) und **Scout** (0.17) entstehen ohne Blender in `web/src/robotgen/`.
+Stand 30.10.2026 (nach 0.19): **Wächter**, **Paladin**, **Mechanik** (0.14–0.15) und **Scout** (0.17) entstehen ohne Blender in `web/src/robotgen/`.
 Seit 0.18 ist der Generator ein Export-Programm: `node web/tools/robotgen_export.mjs` schreibt die Lieferpakete
 `assets/robot-bodies-three/` und `assets/helmet-scout-three/`, der Viewer lädt sie (Ladezeit wie GLB statt 11–20 s headless,
 [Bericht 0.18](versions/0.18.md)). Blender baut keine Geometrie mehr: Die Blender-Generatoren liegen in `archive/blender/`, ihre GLBs
-(`assets/robot-bodies/`, `assets/helmet-scout/`) bleiben als eingefrorene Referenz der Messtests, `blender/cycles_render.py` rendert
+(`assets/robot-bodies/`, `assets/helmet-scout/`) bleiben als eingefrorene Referenz, `blender/cycles_render.py` rendert
 optional mit Cycles aus den exportierten GLBs. Ein Skin-Atlas je Modell (`assets/skins/<modell>/`), gebacken aus den exportierten GLBs.
+Seit 0.19 ([Bericht](versions/0.19.md)): alle Normalen Länge 1, Live-Aufbau = Export bis in die Normalen, Aufbau 2–3-mal schneller
+(bytegleich), Tests gegen das eigene Paket statt gegen Blender – der Generator darf jetzt weitergeformt werden.
 
 Aufteilung seit Nexogen 1.20.34 (Nutzerentscheid 30.10.2026): Critic macht die Roboter-Konzepte (Körper, Helme, Skins), BALLON nur
 Waffen samt Ego-Ansicht und Ego-Armen; Critic übernimmt die Ego-Arme aus BALLON unverändert und gibt dem Ganzkörper eine eigene neutrale
@@ -13,11 +15,15 @@ Pose mit Gelenkgrenzen. Formgen v2 entsteht danach auf Basis beider.
 
 ## Ablauf nach einer Formänderung
 
-1. Generator in `web/src/robotgen/` ändern (Eingaben in `data/`), Tests `robotgen.test.mjs`/`scoutgen.test.mjs` zeigen die Abweichung
-   von der Blender-Referenz.
-2. `node web/tools/robotgen_export.mjs` (alle oder `--model <name>`); `robotgen_export.test.mjs` ist rot, bis das geschehen ist.
+1. Generator in `web/src/robotgen/` ändern (Eingaben in `data/`). `robotgen_form.test.mjs` zeigt, was sich gegenüber dem eigenen Paket
+   geändert hat (Teileliste, Segmente, Boxen, Öffnungen, Normalen) – bei gewollter Formänderung ist das erwartet.
+2. `node web/tools/robotgen_export.mjs` (alle oder `--model <name>`); `robotgen_export.test.mjs` ist rot, bis das geschehen ist. Danach
+   prüfen die Formtests gegen das neue Paket; neue Öffnungen der Scout-Haube in `KNOWN_OPENINGS` bewusst eintragen.
 3. Haben sich Meshes geändert: `node web/tools/skin_bake.mjs --model <name>` (Atlas aus dem neuen GLB).
-4. `verify`, Sichtprüfung; optional Cycles-Bilder mit `blender/cycles_render.py`.
+4. `verify`, Sichtprüfung; Abstand zur Blender-Referenz bei Bedarf `node web/tools/robotgen_reference.mjs [--iou]` (Bericht, keine
+   Sperre); optional Cycles-Bilder mit `blender/cycles_render.py`.
+5. Nur Tempo geändert (gleiche Form)? Dann muss `robotgen_export.mjs` die GLBs als `unchanged` melden – nur der Eingaben-Hash im Manifest
+   ändert sich; `robotgen_speed.test.mjs` vergleicht die schnellen Wege mit den 0.18-Fassungen.
 
 ## Erledigt
 
@@ -25,17 +31,20 @@ Pose mit Gelenkgrenzen. Formgen v2 entsteht danach auf Basis beider.
    ~~Schultern als Baugruppe~~ (0.17) – Einzelheiten in den Berichten [0.15](versions/0.15.md), [0.17](versions/0.17.md).
 2. ~~Weg 1 – Generator als Export-Programm~~ (0.18): Lieferpakete, Konsistenztest Export ↔ Generator, Viewer lädt Dateien
    (`&gen=export|three|blender`), ein Atlas je Modell, Blender-Generatoren archiviert, Cycles-Renderskript.
+3. ~~Live-Aufbau schneller~~ (0.19): Node warm Wächter 1,5–1,8 → 0,6 s, Paladin 1,4–1,6 → 0,5 s, Mechanik 1,3–1,4 → 0,45 s, Scout
+   0,76–0,78 → 0,4 s, bytegleich (Zahlen-Hashes statt Text-Schlüssel, Blockboxen im BSP-Baum, Schattierung ohne Zwischenarrays). Die
+   Box-Beschneidung des Kopfvolumens hätte andere Polygonteile ergeben und den Export verändert – nicht umgesetzt.
+4. ~~Normalen der CSG-Teile~~ (0.19): Es waren Nullnormalen an entarteten Dreiecken (Körper: Maske, Schienbeinschalen, Schulterpanzer;
+   Scout: 12 022 flächenlose Guss-Flächen der Haube); jetzt Mittel der Nachbarflächen, alle |n| = 1 ± 5·10⁻⁸; Export und Atlanten neu.
+5. ~~Messtests auf Formtests~~ (0.19): `robotgen_form.test.mjs` gegen das eigene Paket; Blender/Ballon nur noch Bericht
+   `robotgen_reference.mjs`.
 
 ## Offen
 
 1. **Ego-Arme aus BALLON** übernehmen (neue Aufteilung, s. o.) – eigener Auftrag.
-2. **Live-Aufbau schneller** (nur noch für `&gen=three` und den Export wichtig): Scout ≈ 2,5 s (Node), davon ≈ 1,7 s der BSP-Schnitt
-   Kern ∩ Kopfvolumen (4 736 Flächen, Baum als Kette). Möglich: Volumen vorher auf die Box des Kerns beschneiden (nur gültig, solange
-   das Volumen dort konvex ist – Test gegen das volle Ergebnis). Bei den Körpern kosten die übrigen Fugen und Lofts den Großteil.
-3. **Normalen der CSG-Teile** sind nicht überall Länge 1 (Maske, Schienbein, Schulterpanzer); der GLTFExporter normiert sie. Wer
-   Export und Live-Aufbau bis in die Normalen gleich will, normiert im Generator (dann Export und Atlas neu).
-4. Blender-Referenz und alte Messtests: Sobald der Nutzer die Körper im Generator weiterformt, verlieren `robotgen.test.mjs`/`scoutgen.test.mjs`
-   ihren Sinn als Gleichheitsprüfung – dann auf Formtests (Geschlossenheit, Teileliste, Boxen gegen das eigene Manifest) umstellen.
+2. Tempo, falls nötig: Bei den Körpern liegt jetzt gut die Hälfte in three-bvh-csg selbst (Halbkanten-Tabelle mit Text-Schlüsseln
+   je Schnitt, `HalfEdgeMap.updateFrom`); schneller nur mit Änderung an der Bibliothek oder weniger Schnitten (dann neue Form).
+3. Wenn die Körper weitergeformt werden: Neuexport und Bake (Ablauf oben); der Referenzbericht zeigt den Abstand zur Blender-Fassung.
 
 ## Grenzen
 

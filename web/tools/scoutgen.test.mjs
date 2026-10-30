@@ -1,34 +1,17 @@
-// Scout from the three.js generator (0.17 "Outrider", web/src/robotgen/scout.js): the cast is read from guss_2h.npz, the scene
-// has every object of the Blender export with its extras, groups and explosion offsets of parts.json, the GLB's materials, and
-// every object's box within 1 mm of the manifest (H = 1.0 ≈ 300 mm); BSP parts are closed with outward normals; the build is
-// deterministic. Building blocks (npy reader, bisect, BSP booleans) are checked on small cases.
+// Building blocks of the Scout generator (0.17 "Outrider", web/src/robotgen/scout.js): npy reader of the cast guss_2h.npz, bisect,
+// BSP booleans. Since 0.19 the built Scout is checked against its own delivery package (robotgen_form.test.mjs: objects, groups,
+// boxes, known openings, normals, determinism, explosion); the frozen Blender export (assets/helmet-scout/) is an optional report
+// (node tools/robotgen_reference.mjs --model=scout).
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
-import { createHash } from 'node:crypto';
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { parseNpy } from '../src/robotgen/npz.js';
 import { mesh, bisect, keepFaces, csg, finish, recalcNormals } from '../src/robotgen/scoutMesh.js';
-import { buildScout, explodedScout, scoutParts, quader, BSP_PARTS } from '../src/robotgen/scout.js';
+import { quader } from '../src/robotgen/scout.js';
 import { readGussFile } from './scoutGussNode.mjs';
 
-const root = new URL('../../assets/helmet-scout/', import.meta.url);
-const manifest = JSON.parse(readFileSync(new URL('manifest.json', root)));
-const partsJson = JSON.parse(readFileSync(new URL('parts.json', root))).parts;
-const MM = 1 / 300;                       // 1 mm in H units (helmet height H = 1.0 ≈ 30 cm)
-const warn = console.warn;
-console.warn = () => {};
 const guss = await readGussFile();
-const parts = scoutParts(guss), built = buildScout(null, { parts });
-console.warn = warn;
-built.scene.updateMatrixWorld(true);
-const meshes = new Map(built.scene.children.map(o => [o.name, o]));
 
-const loadGLB = file => {
-  const buf = readFileSync(file);
-  return new Promise((res, rej) => new GLTFLoader().parse(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength), '', g => res(g.scene), rej));
-};
 // closed and consistently oriented after welding (directed edges with their reverse), and the signed volume
 function closure(geo) {
   const g = geo.index ? geo.toNonIndexed() : geo, p = g.attributes.position.array, E = new Map();
@@ -85,66 +68,4 @@ test('BSP booleans: box minus a box through it is closed, outward, volume 8 − 
   // recalcNormals turns an inside-out cube outwards
   const inv = recalcNormals({ ...quader([1, 1, 1]), F: quader([1, 1, 1]).F.map(f => f.slice().reverse()) });
   assert.deepEqual(inv.F, quader([1, 1, 1]).F);
-});
-
-test('scout: every object of the Blender export with its extras; groups and offsets equal parts.json', () => {
-  assert.deepEqual([...meshes.keys()].sort(), manifest.objects.map(o => o.name).sort());
-  assert.deepEqual(built.groups.map(g => ({ id: g.id, label: g.label, side: g.side, objects: g.objects, exploded_offset: g.offset })),
-    partsJson.map(p => ({ id: p.id, label: p.label, side: p.side, objects: p.objects, exploded_offset: p.exploded_offset })));
-  for (const p of partsJson) for (const n of p.objects) {
-    const u = meshes.get(n).userData;
-    assert.deepEqual([u.part_id, u.part_label, u.side, u.source_object], [p.id, p.label, p.side, n], n);
-  }
-});
-
-test('scout: every object\'s box within 1 mm of the Blender manifest', () => {
-  let worst = 0, name = '';
-  for (const o of manifest.objects) {
-    const b = new THREE.Box3().setFromObject(meshes.get(o.name), true);
-    const [[x0, y0, z0], [x1, y1, z1]] = o.bbox;              // Blender (Z up, front −Y) → glTF
-    const d = Math.max(...[x0, z0, -y1, x1, z1, -y0].map((v, i) => Math.abs(v - [b.min.x, b.min.y, b.min.z, b.max.x, b.max.y, b.max.z][i])));
-    if (d > worst) { worst = d; name = o.name; }
-    assert.ok(d < MM, `${o.name}: box differs by ${(d / MM).toFixed(2)} mm`);
-  }
-  console.log(`scout: largest box difference ${(worst / MM).toFixed(3)} mm (${name})`);
-});
-
-test('scout: materials as GLTFLoader reads them from the GLB', async () => {
-  const glb = await loadGLB(new URL('assembled/scout.glb', root));
-  const ref = new Map();
-  glb.traverse(o => { if (o.isMesh) ref.set(o.userData.source_object, o.material); });
-  for (const [n, m] of meshes) {
-    const a = ref.get(n), b = m.material;
-    assert.equal(b.name, a.name, n);
-    for (const k of ['roughness', 'metalness', 'side', 'emissiveIntensity']) assert.ok(Math.abs(a[k] - b[k]) < 1e-4, `${n}.${k}`);
-    for (const k of ['color', 'emissive']) assert.ok(a[k].toArray().every((v, i) => Math.abs(v - b[k].toArray()[i]) < 1e-4), `${n}.${k}`);
-  }
-});
-
-test('scout: Blender topology – vertex and face counts as in the manifest (cap and cable within 0.5 %, CSG parts aside)', () => {
-  for (const o of manifest.objects) {
-    if (BSP_PARTS.includes(o.name) && o.name !== 'Mund_Vertiefung') continue;   // triangles of the BSP result instead of n-gons
-    const m = parts[o.name], tol = o.name === 'Kappe' || o.name.startsWith('Kabel_') ? 0.005 * o.verts : 0;
-    assert.ok(Math.abs(m.V.length - o.verts) <= tol && Math.abs(m.F.length - o.faces) <= tol, `${o.name}: ${m.V.length}/${m.F.length} for ${o.verts}/${o.faces}`);
-  }
-});
-
-test('scout: BSP parts closed with outward volume, all meshes indexed, build deterministic, exploded copy offset', () => {
-  for (const n of BSP_PARTS.filter(x => x !== 'Mund_Vertiefung')) {
-    const c = closure(meshes.get(n).geometry);
-    assert.equal(c.open, 0, `${n}: open edges`);
-    assert.ok(c.volume > 0, `${n}: volume ${c.volume}`);
-  }
-  for (const m of meshes.values()) assert.ok(m.geometry.index, `${m.name}: not indexed`);
-  const hash = scene => {
-    const h = createHash('sha256');
-    for (const o of scene.children) h.update(o.name).update(Buffer.from(o.geometry.index.array.buffer)).update(Buffer.from(o.geometry.attributes.position.array.buffer)).update(Buffer.from(o.geometry.attributes.normal.array.buffer));
-    return h.digest('hex');
-  };
-  console.warn = () => {};
-  assert.equal(hash(buildScout(guss).scene), hash(built.scene));
-  console.warn = warn;
-  const ex = explodedScout(built.scene, built.groups);
-  const off = Object.fromEntries(partsJson.flatMap(p => p.objects.map(n => [n, p.exploded_offset])));
-  for (const o of ex.children) assert.deepEqual(o.position.toArray(), [off[o.name][0], off[o.name][2], -off[o.name][1]], o.name);
 });

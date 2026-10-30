@@ -4,9 +4,12 @@
 // the machine hits all three alike.
 // --no-table: bodies built without the cut stage table (search from stage 0 as before 0.17; Node only – for the browser, empty
 // src/robotgen/cutStages.json › stages instead).
+// Node output per model (0.19): median, min and max in ms over the runs, plus the machine's load average before and after, so a
+// measurement under foreign load can be told apart.
 // Usage: node tools/robotgen_bench.mjs [--runs=3] [--browser] [--no-table] [waechter paladin mechanik scout]
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import os from 'node:os';
 import { buildRobotBody } from '../src/robotgen/index.js';
 
 const args = process.argv.slice(2);
@@ -27,14 +30,14 @@ async function nodeBuild(name) {
   return () => buildRobotBody(name, noTable ? { stages: {} } : undefined);
 }
 
-const out = { node: {}, browser: {} };
+const out = { node: {}, browser: {}, load: { before: os.loadavg().map(x => Math.round(x * 10) / 10) } };
 const list = models.length ? models : ['waechter', 'paladin', 'mechanik', 'scout'];
 for (const name of list) {
   const build = await nodeBuild(name);
   build();
   const ms = [];
   for (let k = 0; k < runs; k++) { const t = performance.now(); build(); ms.push(performance.now() - t); }
-  out.node[name] = Math.round(median(ms));
+  out.node[name] = { median: Math.round(median(ms)), min: Math.round(Math.min(...ms)), max: Math.round(Math.max(...ms)), runs };
 }
 console.warn = quiet;
 
@@ -67,4 +70,5 @@ if (browserToo) {
     await server.close();
   }
 }
+out.load.after = os.loadavg().map(x => Math.round(x * 10) / 10);
 console.log(JSON.stringify(out));

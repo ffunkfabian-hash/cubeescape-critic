@@ -5,7 +5,7 @@
   "source": "web/src/robotgen",
   "inputs": {
    "files": 22,
-   "sha256": "dceb4acd050a27cf4cf459b336ccb7fb5773513d78112f18a2f010478fa27448",
+   "sha256": "94559673c9fe1c4b913f114d3c1ccec5973658af5b2ead0a0b66c497d1b4d931",
    "libraries": {
     "three": "0.186.1",
     "three-bvh-csg": "0.0.18",
@@ -246,7 +246,7 @@
   {
    "name": "Kappe",
    "part": "S01 Haube (Guss)",
-   "verts": 75191,
+   "verts": 75883,
    "tris": 141317,
    "bbox": [
     [
@@ -260,7 +260,7 @@
      1
     ]
    ],
-   "digest": "2153a9445fcc5604"
+   "digest": "d66526ce8e618d03"
   },
   {
    "name": "Kern",
@@ -853,6 +853,6 @@
   }
  ],
  "count": 44,
- "verts": 100543,
+ "verts": 101235,
  "tris": 182438
 }

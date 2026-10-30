@@ -6,7 +6,7 @@
   "source": "web/src/robotgen",
   "inputs": {
    "files": 22,
-   "sha256": "dceb4acd050a27cf4cf459b336ccb7fb5773513d78112f18a2f010478fa27448",
+   "sha256": "94559673c9fe1c4b913f114d3c1ccec5973658af5b2ead0a0b66c497d1b4d931",
    "libraries": {
     "three": "0.186.1",
     "three-bvh-csg": "0.0.18",
@@ -5424,7 +5424,7 @@
      1.6048
     ]
    ],
-   "digest": "42f5b7c12ce35056"
+   "digest": "020d8eab5a290623"
   },
   {
    "name": "neck",
@@ -5688,7 +5688,7 @@
      1.4101
     ]
    ],
-   "digest": "c0626dfff0aa50af"
+   "digest": "e8c982c77697c609"
   },
   {
    "name": "pauldron_l_band",
@@ -5974,7 +5974,7 @@
      1.4311
     ]
    ],
-   "digest": "125afc651df4287f"
+   "digest": "4d917f193cef1703"
   },
   {
    "name": "pauldron_r_band",
@@ -7008,7 +7008,7 @@
      0.4319
     ]
    ],
-   "digest": "fd50eacd1d959d1e"
+   "digest": "55b7fc570146a0af"
   },
   {
    "name": "shin_L_shin_shell_rim_a",
@@ -7536,7 +7536,7 @@
      0.4299
     ]
    ],
-   "digest": "5d164edbf8f1ed8f"
+   "digest": "03e65729df34f5dc"
   },
   {
    "name": "shin_R_shin_shell_rim_a",
