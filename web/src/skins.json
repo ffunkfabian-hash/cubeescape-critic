@@ -330,6 +330,7 @@
      "parts": [
       "chest"
      ],
+     "anchor": "emblem_disc",
      "facing": [
       0,
       0,
@@ -338,11 +339,11 @@
      ],
      "center": [
       0,
-      0.05
+      0
      ],
-     "radius": 0.24,
+     "radius": 0.32,
      "rays": 10,
-     "ray_length": 2.1,
+     "ray_length": 1.6,
      "core": 0.0,
      "width_mm": 4,
      "color": "#FF3318",
@@ -555,6 +556,7 @@
      "parts": [
       "chest"
      ],
+     "anchor": "emblem_disc",
      "facing": [
       0,
       0,
@@ -563,11 +565,11 @@
      ],
      "center": [
       0,
-      0.1
+      0
      ],
-     "radius": 0.2,
+     "radius": 0.32,
      "rays": 12,
-     "ray_length": 1.75,
+     "ray_length": 1.4,
      "core": 0.5,
      "width_mm": 3.5,
      "color": "#D9AE4C",

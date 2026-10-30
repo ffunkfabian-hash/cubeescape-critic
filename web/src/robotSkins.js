@@ -57,7 +57,8 @@ export function prepareSkin(root, kind, atlas, { skip = () => false, materials =
     const n = geometry.attributes.position.count;
     geometry.setAttribute('skinInfo', new THREE.BufferAttribute(new Float32Array(4 * n), 4));
     geometry.setAttribute('skinCentre', new THREE.BufferAttribute(new Float32Array(3 * n).map((_, j) => centre.getComponent(j % 3)), 3));
-    return { mesh, key, entry, geometry, desc: { ...desc[i], side: desc[i].side ?? side }, mirror: side === 'R' ? -1 : 1, half: Math.max(half.y, 1e-4) };
+    geometry.setAttribute('skinAnchor', geometry.attributes.skinCentre.clone());
+    return { mesh, key, entry, geometry, centre, desc: { ...desc[i], side: desc[i].side ?? side }, mirror: side === 'R' ? -1 : 1, half: Math.max(half.y, 1e-4) };
   });
   if (mapped < meshes.length) console.warn(`Skin ${atlas.model}: ${meshes.length - mapped} of ${meshes.length} meshes without atlas entry (painted without maps)`);
   if (transferred) console.info(`Skin ${atlas.model}: ${transferred} meshes differ slightly from the bake, UVs transferred`);
@@ -75,11 +76,16 @@ export function applySkin(state, key) {
   if (!recipe) throw new Error(`Unknown skin ${JSON.stringify(key)}; expected ${Object.keys(SKIN_RECIPES.skins).join(', ')}`);
   if (!state.materials.has(key)) state.materials.set(key, skinMaterial(key, recipe, state.atlas.texture));
   const material = state.materials.get(key);
+  // emblems with an anchor part are centred on that part of the same model (the chest sun on its medallion); else the own centre
+  const anchors = recipe.layers.map(L => (L.anchor ? state.meshes.find(m => m.desc.part === L.anchor)?.centre ?? null : null));
   for (const m of state.meshes) {
     m.flat = { geometry: m.mesh.geometry, material: m.mesh.material };
     const info = m.geometry.attributes.skinInfo, mask = skinLayerMask(recipe, m.desc);
     for (let i = 0; i < info.count; i++) info.setXYZW(i, mask, m.mirror, m.entry ? 1 : 0, m.half);
     info.needsUpdate = true;
+    const at = anchors.find((c, i) => c && Math.floor(mask / 2 ** i) % 2) ?? m.centre, anchor = m.geometry.attributes.skinAnchor;
+    for (let i = 0; i < anchor.count; i++) anchor.setXYZ(i, at.x, at.y, at.z);
+    anchor.needsUpdate = true;
     m.mesh.geometry = m.geometry;
     m.mesh.material = material;
   }
@@ -179,7 +185,7 @@ export function useBakedMaterial(state, textures) {
   const before = state.meshes.map(m => m.mesh.material), flats = [];
   for (const m of state.meshes) m.mesh.material = m.entry ? baked : flats[flats.push(flatSkinMaterial(state.active, m.desc)) - 1];
   const exported = state.meshes.map(m => m.mesh.material);
-  // the viewer's skin attributes stay out of the GLB: same attributes, without skinPos/skinNor/skinInfo/skinCentre
+  // the viewer's skin attributes stay out of the GLB: same attributes, without skinPos/skinNor/skinInfo/skinCentre/skinAnchor
   const geometryBefore = state.meshes.map(m => m.mesh.geometry), exportGeometry = state.meshes.map(m => {
     const g = new THREE.BufferGeometry();
     for (const [name, attr] of Object.entries(m.mesh.geometry.attributes)) if (!name.startsWith('skin')) g.setAttribute(name, attr);

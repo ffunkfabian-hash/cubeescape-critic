@@ -221,3 +221,13 @@ test('xatlas: welding keeps hard edges apart, atlas is deterministic and covers 
   assert.equal(x.meshes[0].corner.length, box.index.count);
   assert.ok(Math.max(x.width, x.height) <= 256);
 });
+
+test('emblem anchor: the chest suns of Glut and Ornat are centred on the medallion part, not on the plate box', () => {
+  for (const key of ['glut', 'ornat']) {
+    const L = RECIPES.skins[key].layers.find(l => l.type === 'emblem');
+    assert.equal(L.anchor, 'emblem_disc', key);
+    assert.deepEqual(L.center, [0, 0], key);
+    assert.match(skinGLSL(RECIPES.skins[key]), /pos\.x - vSkinAnchor\.x/, key);
+  }
+  assert.doesNotMatch(skinGLSL(RECIPES.skins.rost), /vSkinAnchor\.x/);
+});

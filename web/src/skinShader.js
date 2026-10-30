@@ -7,7 +7,8 @@
 //
 // Per mesh the geometry carries skinInfo (layer mask, mirror sign for side R, 1 if the mesh has maps, half height of the part
 // in metres) and skinCentre (part centre in model metres): roles, parts, assembly and side are judged once per mesh on the
-// CPU (skinLayerMask), the facing selector and everything else per fragment.
+// CPU (skinLayerMask), the facing selector and everything else per fragment. An emblem with `anchor` (a part name) is centred on
+// that part instead (skinAnchor, set per skin by robotSkins.js › applySkin): the sun on the chest plate around its medallion.
 import * as THREE from 'three';
 import { EDGE_RANGE_MM } from './skinAtlas.js';
 
@@ -39,6 +40,7 @@ varying vec3 vSkinPos;
 varying vec3 vSkinNor;
 varying vec4 vSkinInfo;
 varying vec3 vSkinCentre;
+varying vec3 vSkinAnchor;
 varying vec2 vSkinUv;
 struct SkinOut { vec3 base; float rough; float metal; vec3 emit; float ao; };
 
@@ -130,8 +132,9 @@ function layerCode(L, i) {
     }
     case 'emblem': {
       const [cu, cv] = L.center ?? [0, 0], R = L.radius ?? 0.35, rays = L.rays ?? 8, wmm = L.width_mm ?? 4;
+      const [ou, ov] = L.anchor ? ['(pos.x - vSkinAnchor.x) / hy * vSkinInfo.y', '(pos.y - vSkinAnchor.y) / hy'] : ['u', 'v'];
       return `if (skinOn(mask, ${i})) {
-    float ru = u - ${f(cu)}, rv = v - ${f(cv)}, r = length(vec2(ru, rv));
+    float ru = ${ou} - ${f(cu)}, rv = ${ov} - ${f(cv)}, r = length(vec2(ru, rv));
     float ang = atan(rv, ru) * ${f(rays / (2 * Math.PI))};
     float ring = ${line(`r - ${f(R)}`, wmm)};
     float ray = ${line(`(ang - floor(ang + 0.5)) * ${f(2 * Math.PI / rays)} * r`, wmm)} * step(${f(R * 1.15)}, r) * step(r, ${f(R * (L.ray_length ?? 1.7))});
@@ -194,13 +197,15 @@ attribute vec3 skinPos;
 attribute vec3 skinNor;
 attribute vec4 skinInfo;
 attribute vec3 skinCentre;
+attribute vec3 skinAnchor;
 varying vec3 vSkinPos;
 varying vec3 vSkinNor;
 varying vec4 vSkinInfo;
 varying vec3 vSkinCentre;
+varying vec3 vSkinAnchor;
 varying vec2 vSkinUv;
 `;
-const VERTEX_SET = 'vSkinPos = skinPos; vSkinNor = skinNor; vSkinInfo = skinInfo; vSkinCentre = skinCentre; vSkinUv = uv;';
+const VERTEX_SET = 'vSkinPos = skinPos; vSkinNor = skinNor; vSkinInfo = skinInfo; vSkinCentre = skinCentre; vSkinAnchor = skinAnchor; vSkinUv = uv;';
 
 // Live material of a recipe on the meshes of one atlas (maps: texture of maps.png, linear, no flip).
 export function skinMaterial(key, recipe, maps) {
