@@ -19,6 +19,9 @@ Antworten, Doku und Commit-Messages auf Deutsch; Code, Bezeichner und Kommentare
 - `docs/SKINS.md`, `assets/skins/<modell>/` – Skins Rost, Glut, Ornat (0.13) für Körper und Helme, ohne Blender: UV-Atlas (xatlas)
   und Karten (Kantenabstand, AO) aus `web/tools/skin_bake.mjs`, Rezepte `web/src/skins.json`, Mischer als Shader
   (`web/src/skinShader.js`, Viewer `web/src/robotSkins.js`, Navigation „Lackierung“); Kontrollkarten in `runs/skins/`.
+- `web/src/robotgen/` – three.js-Generator der Körper ohne Blender (0.14, bisher Wächter; `?model=waechter&gen=three`): Übertragung der
+  gepinnten Ballon-Quelle, Prüfung gegen den Python-Abzug (`web/tools/robotgen_dump_spec.py`) und den GLB (`robotgen.test.mjs`,
+  `robotgen_compare.mjs`).
 - `docs/HELM_STIL.md` – bestätigte Form-/Materialvorgaben; runde Haube, Augen erhalten, maßgeblich ist das Video.
 - `docs/HELM_AGENTEN.md` – technischer Aufbau, Material-/Akzentvarianten, Prüfumfang, visueller Eindruck und offene Nutzerwahl; vor Helm-Fortsetzungen gezielt lesen.
 - Archiv (in 0.12 aus dem Viewer entfernt, Code in Git): Körperstudien `docs/HELM_AUFBAU.md` (0.5), `HELM_CUIRASS.md` (0.6),

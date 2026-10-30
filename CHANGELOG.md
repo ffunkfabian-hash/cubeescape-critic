@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.14.0 „Foundry“ – 2026-10-29 (Roboterkörper als three.js-Generator, Etappe 1: Wächter)
+
+- Der Wächter entsteht ohne Blender in `web/src/robotgen/`: Übertragung von Ballons Formbaukasten (`forms.py`, `shapes.py`, `body.py`,
+  `helmet.py`, Arm v3) mit Fasen als Geometrie, Fugen per CSG, Teile-IDs, Extras, Segmentwurzeln und Rollenmaterialien wie im GLB.
+- Viewer: `?model=waechter&gen=three` (GLB-Fassung bleibt Standard); Helm H/Scout, Farbschemata, Altern und Explosion laufen unverändert.
+- Gemessen gegen den Blender-GLB: Teileliste identisch, Boxen je Objekt ≤ 0,65 mm, Umriss-IoU 0,9988–0,9995 in vier Ansichten; neues
+  Vergleichswerkzeug `web/tools/robotgen_compare.mjs`, 7 neue Tests (74 Node-Tests).
+
 ## 0.13.0 „Skins“ – 2026-10-29 (Lackierungen Rost, Glut, Ornat für Körper und Helme, ohne Blender)
 
 - Skins nach dem Referenzbild des Nutzers für Wächter, Paladin, Mechanik, Helm H und Scout, auf dem Roboter und beim Helm allein (`&skin=`).
