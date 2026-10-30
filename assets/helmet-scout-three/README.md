@@ -1,17 +1,21 @@
-# Scout aus dem three.js-Generator – Lieferstand 0.18
+# Scout aus dem three.js-Generator – Lieferstand 0.19
 
 Scout v3 (Stand D29), gebaut vom three.js-Generator `web/src/robotgen/scout.js` (Guss und Parameter in `web/src/robotgen/data/`) und
 geschrieben von `node web/tools/robotgen_export.mjs --model scout`. Der Viewer lädt diese Dateien (Standard). Die Blender-Fassung
-`assets/helmet-scout/` bleibt als eingefrorene Referenz der Messtests.
+`assets/helmet-scout/` bleibt als eingefrorene Referenz (seit 0.19 Bericht `web/tools/robotgen_reference.mjs`, kein Test).
 
 | Datei | Inhalt |
 | --- | --- |
-| `assembled/scout.glb` | montierter Helm, 44 Meshes, 182 438 Dreiecke; glTF Y oben, vorn +Z, Höhe ≈ 1,0 (4,2 MB) |
+| `assembled/scout.glb` | montierter Helm, 44 Meshes, 101 235 Punkte, 182 438 Dreiecke; glTF Y oben, vorn +Z, Höhe ≈ 1,0 (4,2 MB) |
 | `exploded/scout_exploded.glb` | dieselben Meshes, je Teil um den Explosionsversatz verschoben |
-| `parts.json` | 18 Gruppen S01–S13 (seitige Teile je R/L) mit Objekten und Versatz – gleich der Blender-Fassung (Test) |
+| `parts.json` | 18 Gruppen S01–S13 (seitige Teile je R/L) mit Objekten und Versatz – gleich der Blender-Fassung (Bericht `robotgen_reference.mjs`) |
 | `manifest.json` | Generator (Eingaben-Hash, Bibliotheken, Plattform), je Objekt Teil, Punkte, Dreiecke, Bounding-Box (Blender-Koordinaten), `digest` |
 
 Jedes Mesh trägt die `extras` `part_id`, `part_label`, `side`, `source_object`. Die Materialien sind die flachen Ersatzmaterialien des
 Blender-Pakets (`web/src/robotgen/scoutMaterials.json`). Cycles-Ansichten: `blender/cycles_render.py` liest diesen GLB.
 
-[Aufbau](../../docs/HELM_SCOUT.md#threejs-generator-017-outrider) · [Prüfbericht](../../docs/versions/0.18.md)
+Seit 0.19 haben alle Normalen Länge 1 (die 12 022 flächenlosen Guss-Flächen der Haube nehmen das Mittel ihrer Nachbarn), der
+Live-Aufbau gleicht dem GLB bis in die Normalen; bekannte Öffnungen des Gusses (Randschleifen: Kappe 82, Augen je 1, Krempe 6,
+Mundwanne 1) stehen in `web/tools/robotgen_form.test.mjs`.
+
+[Aufbau](../../docs/HELM_SCOUT.md#threejs-generator-017-outrider) · [Prüfbericht 0.18](../../docs/versions/0.18.md) · [0.19](../../docs/versions/0.19.md)

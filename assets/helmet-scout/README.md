@@ -1,7 +1,8 @@
 # Scout 0.8 – Blender-Fassung D29 (eingefrorene Referenz)
 
 > Seit 0.18 lädt der Viewer Scout aus dem three.js-Generator ([`assets/helmet-scout-three/`](../helmet-scout-three/README.md)).
-> Diese Dateien bleiben unverändert als Referenz der Messtests (`web/tools/scoutgen.test.mjs`) und im Viewer unter `&gen=blender`;
+> Diese Dateien bleiben unverändert als Referenz (seit 0.19 Bericht `web/tools/robotgen_reference.mjs --model=scout`, bis 0.18 Test
+> `scoutgen.test.mjs`) und im Viewer unter `&gen=blender`;
 > der Blender-Generator liegt im Archiv (`archive/blender/scout/`).
 
 Scout v3 aus dem Blender-Generator `archive/blender/scout/`, Stand D29 (29.10.2026). Exportiert mit

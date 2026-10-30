@@ -87,7 +87,7 @@ Körper; Navigation „Modelle › Quelle: Export / Live / Blender“.
 - **Skin-Atlas** `assets/skins/scout/` (seit 0.18 aus dem exportierten GLB: `skin_bake.mjs --model scout`); die BSP-Teile und die
   Mundwanne tragen gebackene Positionen für den Übertrag in anderen JavaScript-Engines.
 
-**Messung gegen den Blender-GLB** (`web/tools/scoutgen.test.mjs`, `node web/tools/robotgen_compare.mjs --model=scout`):
+**Messung gegen den Blender-GLB** (bis 0.18 `scoutgen.test.mjs`, seit 0.19 Bericht `node web/tools/robotgen_reference.mjs --model=scout [--iou]`):
 
 | Prüfung | Ergebnis |
 |---|---|
@@ -104,6 +104,11 @@ Körper; Navigation „Modelle › Quelle: Export / Live / Blender“.
 **Bekannte Abweichungen:** Die Fase des Rückmoduls (Blender-Bevel 0,005, zwei Segmente) ist als gerundeter Kasten nachgebaut, das
 eingelassene Feld bleibt scharfkantig – gealtert zeigen seine Kanten mehr Abrieb. CSG-Teile sind trianguliert statt n-Gone (Schattierung
 gleich). Das Kabelprofil hat 10 Punkte wie Blenders `bevel_resolution 3`, die Windungszahl weicht um zwei Profilringe ab.
+
+**Seit 0.19 „Whetstone“:** Die 12 022 flächenlosen Guss-Flächen der Haube bekommen statt der Nullnormale das Mittel ihrer
+Nachbarflächen (Live-Aufbau = Export bis in die Normalen); der BSP-Baum prüft ganze Polygonblöcke über ihre Hüllbox (Node warm
+0,76 → 0,4 s, bytegleich). Formtests gegen das eigene Paket mit den bekannten Öffnungen des Gusses (Kappe 82 Randschleifen, Augen je 1,
+Krempe 6, Mundwanne 1); der Blender-Vergleich ist ein Bericht ([ROBOTER_BALLON](ROBOTER_BALLON.md#normalen-tempo-und-formtests-019-whetstone)).
 
 ## Stände und Marker
 

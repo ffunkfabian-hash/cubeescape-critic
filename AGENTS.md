@@ -25,10 +25,13 @@ Antworten, Doku und Commit-Messages auf Deutsch; Code, Bezeichner und Kommentare
   Mechanik, 0.17 Scout: `scout.js`, `scoutGuss.js`, `scoutMesh.js`, `bsp.js`; Eingaben in `data/`: Ballon-Pin `SOURCE.json`, Guss
   `guss_2h.npz`, `helm_params.json`). Seit 0.18 schreibt `web/tools/robotgen_export.mjs` daraus die Lieferpakete, der Viewer lädt sie;
   `&gen=three` baut live im Browser, `&gen=blender` zeigt die eingefrorenen Blender-GLBs. Nach jeder Änderung neu exportieren
-  (`robotgen_export.test.mjs` prüft Eingaben-Hash und Bytes) und bei geänderten Meshes den Skin-Atlas neu backen. Messung gegen
-  Ballon/Blender (`robotgen_dump_spec.py`, `robotgen.test.mjs`, `scoutgen.test.mjs`, `robotgen_compare.mjs`), Schneider-Stufentabelle
-  `cutStages.json` (`robotgen_cut_stages.mjs`, Ladezeit `robotgen_bench.mjs`). Schultern sind im Viewer eine eigene Baugruppe (`web/src/robotShoulders.js`).
-- `assets/robot-bodies/`, `assets/helmet-scout/` – eingefrorene Blender-GLBs (bis 0.17), nur noch Referenz der Messtests;
+  (`robotgen_export.test.mjs` prüft Eingaben-Hash, Bytes und seit 0.19 Live-Aufbau = GLB bis in die Normalen) und bei geänderten Meshes
+  den Skin-Atlas neu backen. Seit 0.19 Formtests gegen das eigene Paket (`robotgen_form.test.mjs`: Teileliste, Segmente, Boxen,
+  Geschlossenheit, Normalen Länge 1), Tempo-Gleichheit gegen die 0.18-Fassungen (`robotgen_speed.test.mjs`); der Abstand zu
+  Ballon/Blender ist ein Bericht (`robotgen_reference.mjs`, IoU mit `--iou` über `robotgen_compare.mjs`). Schneider-Stufentabelle
+  `cutStages.json` (`robotgen_cut_stages.mjs`, Aufbauzeit `robotgen_bench.mjs`). Schultern sind im Viewer eine eigene Baugruppe (`web/src/robotShoulders.js`).
+- `assets/robot-bodies/`, `assets/helmet-scout/` – eingefrorene Blender-GLBs (bis 0.17), nur noch Referenz des Berichts
+  `robotgen_reference.mjs` (seit 0.19 keine Testsperre);
   `archive/blender/` – die archivierten Blender-Generatoren. `blender/cycles_render.py` – optionaler Cycles-Render aus einem
   exportierten GLB (Präsentation, Drehteller, Vorlagen), unter `./ce lock gpu`, kein Pflichtschritt.
 - `docs/HELM_STIL.md` – bestätigte Form-/Materialvorgaben; runde Haube, Augen erhalten, maßgeblich ist das Video.

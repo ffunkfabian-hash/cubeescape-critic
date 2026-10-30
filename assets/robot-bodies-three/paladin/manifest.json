@@ -6,7 +6,7 @@
   "source": "web/src/robotgen",
   "inputs": {
    "files": 22,
-   "sha256": "dceb4acd050a27cf4cf459b336ccb7fb5773513d78112f18a2f010478fa27448",
+   "sha256": "94559673c9fe1c4b913f114d3c1ccec5973658af5b2ead0a0b66c497d1b4d931",
    "libraries": {
     "three": "0.186.1",
     "three-bvh-csg": "0.0.18",
@@ -76,7 +76,7 @@
  },
  "totals": {
   "objects": 383,
-  "verts": 255790,
+  "verts": 255788,
   "tris": 353108
  },
  "objects": [
@@ -5204,7 +5204,7 @@
      1.646
     ]
    ],
-   "digest": "ca284172f3486724"
+   "digest": "6a9e240e2101c077"
   },
   {
    "name": "neck",
@@ -6598,7 +6598,7 @@
    "part": "shin_shell",
    "part_de": "Schienbeinschale",
    "side": "L",
-   "verts": 2185,
+   "verts": 2184,
    "tris": 3212,
    "bbox": [
     [
@@ -6612,7 +6612,7 @@
      0.4359
     ]
    ],
-   "digest": "40b6bd65e8cdbe51"
+   "digest": "aa817db6408767e9"
   },
   {
    "name": "shin_L_shin_shell_rim_a",
@@ -7126,7 +7126,7 @@
    "part": "shin_shell",
    "part_de": "Schienbeinschale",
    "side": "R",
-   "verts": 2185,
+   "verts": 2184,
    "tris": 3212,
    "bbox": [
     [
@@ -7140,7 +7140,7 @@
      0.4371
     ]
    ],
-   "digest": "395a14389d0fc05e"
+   "digest": "528c7e1c3e8a895d"
   },
   {
    "name": "shin_R_shin_shell_rim_a",

@@ -21,7 +21,7 @@ fünf Baugruppen aus Ballon: Kopf, Arme, Oberkörper, Unterkörper und Beine. Di
 
 > **Seit 0.18 „Prefab“** entstehen die Körper im three.js-Generator und werden mit `web/tools/robotgen_export.mjs` exportiert
 > ([unten](#export-018-prefab)). Der Blender-Export dieses Abschnitts ist archiviert (`archive/blender/robot/`); seine GLBs in
-> `assets/robot-bodies/` bleiben als eingefrorene Referenz der Messtests.
+> `assets/robot-bodies/` bleiben als eingefrorene Referenz (seit 0.19 Bericht `robotgen_reference.mjs`, kein Test mehr).
 
 Der Generator bleibt in Ballon. Critic übernimmt ihn nicht als Kopie, sondern pinnt den Stand in `blender/robot/SOURCE.json` (seit 0.18 `web/src/robotgen/data/SOURCE.json`):
 Repo, Branch und vollen Commit. Kopiert würde sonst ein großer Baum mit Waffenbaukasten, Ego-Armen und Formen. Gebaut und exportiert
@@ -190,7 +190,7 @@ Blender-Fassung, gegen die die folgenden Messungen laufen.
   0.17 (Mac unter Last, `robotgen_bench.mjs`): mit Tabelle Paladin 9,6 → 4,5 s, Mechanik 12,0 → 4,0 s (Node, abwechselnd gemessen);
   im Headless-Browser kein sauber messbarer Gewinn, der Rest überwiegt. Nächster Schritt: Generator als Export-Programm (Weg 1, 0.18).
 
-**Messung gegen den Blender-GLB** (`npm --prefix web test` › `robotgen.test.mjs`, `node web/tools/robotgen_compare.mjs`):
+**Messung gegen den Blender-GLB** (bis 0.18 `robotgen.test.mjs`, seit 0.19 Bericht `node web/tools/robotgen_reference.mjs [--iou]`):
 
 | Prüfung | Wächter (0.14) | Paladin (0.15) | Mechanik (0.15) |
 |---|---|---|---|
@@ -249,11 +249,27 @@ node web/tools/skin_bake.mjs --model <name>           # nur wenn sich Meshes ge�
   Blender-GLBs sind entfernt; `&gen=blender` zeigt Skins ohne Kantenabrieb und Schmutz.
 - **Ladezeit** (headless, Median): siehe [Bericht 0.18](versions/0.18.md#ladezeit).
 
+## Normalen, Tempo und Formtests (0.19 „Whetstone“)
+
+- **Normalen Länge 1:** `creaseNormals` (Körper) und `shaded` (Scout) fielen an entarteten Dreiecken auf den Nullvektor zurück (Splitter der
+  CSG-Schnitte an Maske, Schienbeinschalen, Schulterpanzer; 12 022 flächenlose Guss-Flächen der Scout-Haube). Der GLTFExporter machte
+  daraus (1, 0, 0) und normierte das ganze Attribut neu, deshalb wichen Live-Aufbau und Export ab. Jetzt nimmt eine solche Ecke das
+  Mittel aller Flächen an ihrer Position; alle Normalen |n| = 1 ± 5·10⁻⁸, `robotgen_export.test.mjs` vergleicht Live-Aufbau und GLB
+  Mesh für Mesh mit Normalen.
+- **Tempo, bytegleich:** Schweiß-Schlüssel als Zahlen-Hash (`tripleIds`) statt Zeichenketten, Defektzählung nur bei Teilen mit
+  Schnitten, T-Kreuzungen nur in Rasterzellen entlang der Kante (`mesh.js`); im BSP-Baum ganze Polygonblöcke mit Hüllbox statt eines
+  Tests je Polygon und Knoten (`bsp.js`, Scout-Kern: 20,7 → 2,9 Mio. Tests), Schattierung mit typisierten Feldern (`scoutMesh.js`).
+  Node warm bei Last ≈ 3: Wächter 1,5–1,8 → 0,6 s, Paladin 1,4–1,6 → 0,5 s, Mechanik 1,3–1,4 → 0,45 s, Scout 0,76–0,78 → 0,4 s
+  ([Bericht](versions/0.19.md#2--tempo)). `robotgen_speed.test.mjs` hält die schnellen Wege gegen die 0.18-Fassungen.
+- **Formtests** (`robotgen_form.test.mjs`) prüfen den Generator gegen das eigene Paket: Teileliste und IDs, Segmente und Baugruppen,
+  Box je Teil, Geschlossenheit (Scout: bekannte Öffnungen des Gusses als Randschleifen), Normalen, Determinismus. Der Abstand zur
+  Blender-Referenz und zur Ballon-Teileliste ist ein Bericht: `node web/tools/robotgen_reference.mjs [--model=…] [--iou]`.
+
 ## Grenzen und nächste Schritte
 
 - Die Studien bleiben Entwürfe aus Ballon; seit 0.18 ist `web/src/robotgen/` die Quelle. Formänderungen: Generator ändern,
-  `robotgen_export.mjs` und, bei geänderten Meshes, `skin_bake.mjs` laufen lassen. Die Messungen gegen Ballon/Blender
-  (`robotgen.test.mjs`) zeigen dann bewusst die Abweichung von der Referenz.
+  `robotgen_export.mjs` und, bei geänderten Meshes, `skin_bake.mjs` laufen lassen. Die Formtests prüfen dann gegen das neue Paket,
+  der Bericht `robotgen_reference.mjs` zeigt den Abstand zu Ballon/Blender ([0.19](#normalen-tempo-und-formtests-019-whetstone)).
 - Ohne Waffe und ohne Haltung `ready`: Die Pilotwaffe gehört zu Ballon und ist nicht exportiert.
 - Die GLBs selbst bleiben flach; gealtert wird erst im Viewer (siehe oben). Andere Programme sehen nur die Gestaltungsfarben.
 - Für die Körper gibt es keine Vorlagenbilder und keine IoU-Messung; der Vergleich mit den Ballon-Cycles-Bildern (`~/Library/Caches/CubeEscapeBallon/out/robot/studies/`) ist eine Sichtprüfung.

@@ -1,6 +1,8 @@
 // Delivered GLBs of the three.js generator (0.18 "Prefab", tools/robotgen_export.mjs) against the generator: the manifest names the
 // current generator inputs, describes the delivered GLB mesh by mesh, and a fresh export gives the same bytes on the platform that
 // wrote the package. Elsewhere (Linux CI: CSG may triangulate differently) the fresh build must have the same meshes, extras and boxes.
+// Since 0.19 the live build itself equals the delivered meshes to the bit, normals included (the GLTFExporter has nothing left to
+// normalise), on the package's platform.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -48,6 +50,10 @@ for (const name of MODELS) {
         const meshesDiffer = manifest.objects.filter(o => !now.has(o.name) || meshDigest(now.get(o.name).geometry) !== o.digest).map(o => o.name);
         assert.fail(`${differ.join(', ')} differ from the generator (meshes: ${meshesDiffer.slice(0, 8).join(', ') || 'none'}): node tools/robotgen_export.mjs --model ${name}`);
       }
+      // live build (before the exporter) = delivered mesh: index, positions and normals
+      const live = meshes(fresh.scene);
+      const liveDiffer = manifest.objects.filter(o => meshDigest(live.get(o.name).geometry) !== o.digest).map(o => o.name);
+      assert.deepEqual(liveDiffer, [], 'live build differs from the delivered GLB (normals the exporter changed?)');
       return;
     }
     t.diagnostic(`package written on ${manifest.generator.platform}: comparing meshes and boxes only`);

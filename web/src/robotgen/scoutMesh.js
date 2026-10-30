@@ -147,28 +147,58 @@ export function triangles(m) {
 
 // Shading like Blender: flat faces (S false) use their normal; smooth faces average the faces around each corner that are
 // smooth and within `angle` degrees of the corner's face (sharp edges by angle; 180 = all), weighted by the corner angle.
+// Faces without area (the cast of the cap has 12 022) take the mean of all faces around the corner, so every normal has unit
+// length (0.19; before, they were 0 and only the GLTFExporter set them to (1, 0, 0)).
 // Returns a non-indexed BufferGeometry with position and normal.
 export function shaded(m, angle = 180) {
-  const { T, owner } = triangles(m), fn = m.F.map(f => faceNormal(m.V, f)), cosA = Math.cos(Math.min(angle, 180) * Math.PI / 180) - 1e-6;
-  const around = m.V.map(() => []);
-  const cornerAngle = (t, k) => {
-    const p = m.V[t[k]], a = norm(sub(m.V[t[(k + 1) % 3]], p)), b = norm(sub(m.V[t[(k + 2) % 3]], p));
-    return Math.acos(Math.max(-1, Math.min(1, dot(a, b))));
-  };
-  T.forEach((t, ti) => { if (m.S[owner[ti]]) t.forEach((i, k) => around[i].push([owner[ti], cornerAngle(t, k)])); });
-  const pos = new Float32Array(T.length * 9), nor = new Float32Array(T.length * 9);
+  const { T, owner } = triangles(m), nF = m.F.length, nV = m.V.length, cosA = Math.cos(Math.min(angle, 180) * Math.PI / 180) - 1e-6;
+  const fn = new Float64Array(3 * nF);
+  m.F.forEach((f, i) => fn.set(faceNormal(m.V, f), 3 * i));
+  // faces around each vertex with their corner angle, in triangle order (CSR: entries start[i] … start[i + 1]); typed arrays and
+  // scalar arithmetic in the order of the former per-corner lists (0.19), so the sums are the same to the bit
+  const start = new Int32Array(nV + 1);
+  for (const t of T) { start[t[0] + 1]++; start[t[1] + 1]++; start[t[2] + 1]++; }
+  for (let i = 0; i < nV; i++) start[i + 1] += start[i];
+  const fill = start.slice(0, nV), face = new Int32Array(3 * T.length), weight = new Float64Array(3 * T.length);
   T.forEach((t, ti) => {
-    const fi = owner[ti], n0 = fn[fi];
-    t.forEach((i, k) => {
-      pos.set(m.V[i], ti * 9 + k * 3);
+    for (let k = 0; k < 3; k++) {
+      const p = m.V[t[k]], q = m.V[t[(k + 1) % 3]], r = m.V[t[(k + 2) % 3]];
+      let ax = q[0] - p[0], ay = q[1] - p[1], az = q[2] - p[2], bx = r[0] - p[0], by = r[1] - p[1], bz = r[2] - p[2];
+      const la = Math.hypot(ax, ay, az), lb = Math.hypot(bx, by, bz);
+      if (la > 0) { ax /= la; ay /= la; az /= la; } else ax = ay = az = 0;
+      if (lb > 0) { bx /= lb; by /= lb; bz /= lb; } else bx = by = bz = 0;
+      const e = fill[t[k]]++;
+      face[e] = owner[ti];
+      weight[e] = Math.acos(Math.max(-1, Math.min(1, ax * bx + ay * by + az * bz)));
+    }
+  });
+  const out = [0, 0, 0];
+  // mean normal at vertex i of the faces passing (all, or smooth within the crease of n0); false when it vanishes
+  const mean = (i, n0) => {
+    let x = 0, y = 0, z = 0;
+    for (let e = start[i]; e < start[i + 1]; e++) {
+      const g = face[e];
+      if (n0 && (!m.S[g] || fn[3 * g] * n0[0] + fn[3 * g + 1] * n0[1] + fn[3 * g + 2] * n0[2] < cosA)) continue;
+      const w = weight[e];
+      x += fn[3 * g] * w; y += fn[3 * g + 1] * w; z += fn[3 * g + 2] * w;
+    }
+    const l = Math.hypot(x, y, z);
+    if (!(l > 1e-12)) return false;
+    out[0] = x / l; out[1] = y / l; out[2] = z / l;
+    return true;
+  };
+  const pos = new Float32Array(T.length * 9), nor = new Float32Array(T.length * 9), n0 = [0, 0, 0];
+  T.forEach((t, ti) => {
+    const fi = owner[ti];
+    n0[0] = fn[3 * fi]; n0[1] = fn[3 * fi + 1]; n0[2] = fn[3 * fi + 2];
+    for (let k = 0; k < 3; k++) {
+      const i = t[k], o = ti * 9 + k * 3;
+      pos.set(m.V[i], o);
       let n = n0;
-      if (m.S[fi]) {
-        const s = [0, 0, 0];
-        for (const [g, w] of around[i]) if (dot(fn[g], n0) >= cosA) { s[0] += fn[g][0] * w; s[1] += fn[g][1] * w; s[2] += fn[g][2] * w; }
-        n = Math.hypot(...s) > 1e-12 ? norm(s) : n0;
-      }
-      nor.set(n, ti * 9 + k * 3);
-    });
+      if (m.S[fi] && mean(i, n0)) n = out;
+      if (!n[0] && !n[1] && !n[2]) n = mean(i, null) ? out : [0, 0, 1];
+      nor[o] = n[0]; nor[o + 1] = n[1]; nor[o + 2] = n[2];
+    }
   });
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.BufferAttribute(pos, 3));

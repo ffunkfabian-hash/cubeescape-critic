@@ -79,7 +79,10 @@ Paladin) aus den exportierten GLBs und Paladin mit Scout live (`&gen=three`) –
 prüft ohne zu schreiben, Test `tools/robotgen_export.test.mjs`), die der Viewer lädt. Navigation „Quelle“ bzw. `&gen=`: `export`
 (Standard), `three` (Generator live im Browser, dauert), `blender` (eingefrorene Blender-GLBs). `node tools/robotgen_compare.mjs
 [--model=waechter|paladin|mechanik|scout]` rendert Blender-Referenz und Export mit gleicher Kamera und misst die Umriss-IoU (`renders/robotgen/`,
-Vergleichsbögen `views.jpg`, `close.jpg`); `node tools/robotgen_bench.mjs [--browser]` misst Aufbau- und Ladezeiten (alle drei Quellen),
+Vergleichsbögen `views.jpg`, `close.jpg`); `node tools/robotgen_reference.mjs [--model=…] [--iou]` berichtet seit 0.19 den Abstand zu
+Blender-Referenz und Ballon-Teileliste je Teil (kein Test mehr; die Tests `tools/robotgen_form.test.mjs` prüfen gegen das eigene Paket,
+`tools/robotgen_speed.test.mjs` die schnellen Wege gegen die 0.18-Fassungen); `node tools/robotgen_bench.mjs [--browser]` misst Aufbau-
+(Median, Spanne, Last) und Ladezeiten (alle drei Quellen),
 `node tools/robotgen_cut_stages.mjs` schreibt die Schneider-Stufentabelle neu. [Körper](../docs/ROBOTER_BALLON.md#threejs-generator-014-foundry-015-anvil),
 [Scout](../docs/HELM_SCOUT.md#threejs-generator-017-outrider).
 

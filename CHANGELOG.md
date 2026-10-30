@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.19.0 „Whetstone“ – 2026-10-30 (Generator: Normalen Länge 1, Aufbau schneller, Formtests statt Blender-Gleichheit)
+
+- Normalen: Nullnormalen an entarteten Dreiecken (Körper: Maske, Schienbeinschalen, Schulterpanzer; Scout: 12 022 flächenlose
+  Guss-Flächen der Haube) nehmen das Mittel der Nachbarflächen; alle |n| = 1 ± 5·10⁻⁸, Live-Aufbau = Export bis in die Normalen
+  (Test). Alle vier Pakete neu exportiert, Atlanten neu gebacken.
+- Aufbau in Node 2–3-mal schneller, bytegleich: Zahlen-Hashes statt Text-Schlüssel (`mesh.js`), Blockboxen im BSP-Baum (`bsp.js`),
+  Schattierung ohne Zwischenarrays (`scoutMesh.js`); `robotgen_speed.test.mjs` vergleicht mit den 0.18-Fassungen,
+  `robotgen_bench.mjs` meldet Median, Spanne und Last.
+- Tests gegen das eigene Paket (`robotgen_form.test.mjs`: Teileliste, Segmente, Boxen, Öffnungen, Normalen, Determinismus) statt
+  gegen die Blender-Referenz; deren Abstand zeigt der Bericht `robotgen_reference.mjs` (`--iou` mit Umriss-IoU).
+
 ## 0.18.0 „Prefab“ – 2026-10-30 (Generator als Export-Programm, Blender nur noch Cycles-Render)
 
 - `web/tools/robotgen_export.mjs` baut Wächter, Paladin, Mechanik und Scout mit dem three.js-Generator vorab und schreibt Lieferpakete
