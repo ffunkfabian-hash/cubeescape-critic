@@ -62,6 +62,12 @@ def main(texture, debug, out, prefix):
     edge = np.asarray(Image.open(os.path.join(debug, 'edge.png')).convert('L')).astype(np.float32) / 255 * 32   # mm, clipped at 32
     S = rmap.shape[0]
     src = Image.open(texture).convert('RGB')
+    w, h = src.size
+    if h > w:                                                          # a legend left under the map (skin_guide.py): drop it
+        print(f'{texture}: {w}×{h}, keeping the top {w}×{w} (atlas square)', file=sys.stderr)
+        src = src.crop((0, 0, w, w))
+    elif w != h:
+        raise SystemExit(f'{texture}: {w}×{h} is not square – an atlas image must keep the square layout of the atlas')
     img = np.asarray(src.resize((S, S), Image.LANCZOS))
     big = np.asarray(src)
     k = big.shape[0] / S                                               # texture pixels per atlas pixel

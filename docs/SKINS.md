@@ -78,6 +78,9 @@ Fläche mit typischer Farbe als nahtlose Kachel und die leuchtenden Linienmotive
   (Plattenmaterial außer Maske, Gesicht, Augen, Kinn) und `<skin>_helm_decals`; bis eigene Helmbilder da sind, sind es Kopien des
   Körpermaterials. Eine neue Helmkachel ersetzt einfach die Datei.
 
+Beide Werkzeuge brauchen zusätzlich SciPy (`uv pip install --python runs/venv/bin/python scipy`; nicht in `web/requirements.txt`,
+ihr Test `tools/test_skin_tools.py` überspringt sich ohne SciPy).
+
 ```bash
 python3 tools/skin_swatches.py <bild> <debug-ordner von skin_bake, z. B. ../runs/skins/waechter> ../assets/skins/textures <name>
 ```
@@ -105,16 +108,18 @@ Für die Helme dieselben Prompts mit eigenen Materialien (z. B. „polished gunm
 `<skin>_helm_shell.jpg` und `<skin>_helm_decals.*`.
 
 **Nur wenn ein ganzes Atlasbild gewünscht ist** – je Modell die Vorlage mitgeben (Rollenfarben je Insel, weiße Inselränder,
-magentafarbene Ränder = Motivflächen, Legende unten): `runs/skins/guide/<modell>_guide.png` für Wächter, Helm H (`critic`) und Scout,
-erzeugt mit `python3 tools/skin_guide.py <debug-ordner von skin_bake> ../assets/skins/<modell>/maps.png <ziel.png>`:
+magentafarbene Ränder = Motivflächen): `runs/skins/guide/<modell>_guide.png` (quadratisch wie der Atlas) und die Legende
+`<modell>_guide_legende.png` als zweites Bild, für Wächter, Helm H (`critic`) und Scout, erzeugt mit
+`python3 tools/skin_guide.py <debug-ordner von skin_bake> ../assets/skins/<modell>/maps.png <ziel.png>`. Das Ergebnis muss quadratisch
+bleiben; `skin_swatches.py` bricht sonst ab (eine mitgelieferte Legende unter der Karte schneidet es ab):
 
-> Paint a texture for this UV atlas of a sci-fi robot, same resolution as the input. Keep every island exactly in place and shape
-> and paint only inside the islands; black areas stay pure black. The flat colour of an island is its material (legend at the
-> bottom): light grey = armour plates, blue = dark body frame, brown = joints and pistons, green = anodised inlays, yellow = trim
+> Paint a texture for this UV atlas of a sci-fi robot (first image), square, same resolution as the first image. Keep every
+> island exactly in place and shape and paint only inside the islands; black areas stay pure black. The flat colour of an island is its material (legend in the
+> second image): light grey = armour plates, blue = dark body frame, brown = joints and pistons, green = anodised inlays, yellow = trim
 > and bolts, orange = accent stripes, purple = rubber and cables, cyan = glowing lights. All islands of the same colour get the
 > same material with identical colour, scale and wear. Glowing motifs (one per island, centred, not touching the border) only in
 > islands with a magenta outline, nowhere else. Details smaller than an island, no pattern running across an island border. Do
-> not draw the white or magenta outlines, and do not add the legend.
+> not draw the white or magenta outlines, and do not add the legend to the result.
 
 ## Viewer
 

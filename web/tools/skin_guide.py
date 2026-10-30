@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Guide map of a skin atlas for an image generator (docs/SKINS.md › Prompts für Nano Banana Pro).
 
-Every UV island flat in the colour of its role (legend below the map), white island outlines, a magenta outline around the
-islands where glowing motifs may go, everything else black. Input: the debug maps of tools/skin_bake.mjs (role.png, part.png,
+Every UV island flat in the colour of its role, white island outlines, a magenta outline around the islands where glowing motifs
+may go, everything else black. The map keeps the atlas size (square), so a generated image in its layout lines up with the atlas
+(skin_swatches.py); the legend is a separate image <out>_legende.png. Input: the debug maps of tools/skin_bake.mjs (role.png, part.png,
 legend.json) and the atlas maps.png (coverage).
 
-  python3 tools/skin_guide.py <debug dir, e.g. ../runs/skins/critic> <maps.png> <out.png>
+  python3 tools/skin_guide.py <debug dir, e.g. ../runs/skins/critic> <maps.png> <out.png>   (+ <out>_legende.png)
 """
 import colorsys
 import fnmatch
@@ -70,8 +71,8 @@ def main(debug, maps, out):
         d.rectangle([x, y, x + 32, y + 32], fill=PALETTE[r][0]); d.text((x + 44, y + 9), PALETTE[r][1], fill=(230, 230, 230))
     d.rectangle([20, 150, 52, 170], outline=(255, 0, 255), width=3)
     d.text((64, 154), 'magenta Rand = hier duerfen Motive hin; weisse Linie = Inselrand; schwarz = leer lassen', fill=(230, 230, 230))
-    full = Image.new('RGB', (S, S + 180)); full.paste(Image.fromarray(img), (0, 0)); full.paste(legend_img, (0, S))
-    full.save(out)
+    Image.fromarray(img).save(out)
+    legend_img.save(os.path.splitext(out)[0] + '_legende.png')
     print(f'{out}: {len(shown)} roles, {int(zone.sum())} motif px')
 
 
