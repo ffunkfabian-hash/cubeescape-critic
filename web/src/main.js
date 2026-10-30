@@ -18,7 +18,7 @@ import { resolveAssemblyOptions } from './assemblyOptions.js';
 import { createAssemblyLabels } from './assemblyLabels.js';
 import { D, resetParams } from './params.js';
 import { loadScout, scoutParts, SCOUT_FRAME } from './scout.js';
-import { ROBOT_MODELS, ROBOT_FRAME, loadRobot, setRobotExplosion, robotParts } from './robotBodies.js';
+import { ROBOT_MODELS, ROBOT_FRAME, loadRobot, setRobotExplosion, robotParts, assemblyOf, shoulderSide } from './robotBodies.js';
 import { setRobotWear, releaseRobotWear } from './robotWear.js';
 import { SKINS, loadSkinAtlas, loadSkinTextures, prepareSkin, applySkin, releaseSkin, skinState, bakeSkinTextures, useBakedMaterial } from './robotSkins.js';
 import { atlasName } from './skinAtlas.js';
@@ -534,7 +534,7 @@ function partTree() {
     robotModel.traverse(o => { if (o.isMesh && o.userData.part) byName.set(o.name, o); });
     const side = { R: ' rechts', L: ' links', C: '' };
     const groups = robotModel.userData.parts.assemblies.map(a => parent(a.de, a.parts
-      .map(p => ({ label: p.part_de + side[p.side], meshes: p.objects.map(n => byName.get(n)).filter(m => m && !replacedByHelmet(m)) }))
+      .map(p => ({ label: p.part_de + side[a.id === 'shoulders' ? shoulderSide(p.objects[0]) : p.side], meshes: p.objects.map(n => byName.get(n)).filter(m => m && !replacedByHelmet(m)) }))
       .filter(c => c.meshes.length)));
     const holder = robotModel.getObjectByName(`helmet_${robotHelmet.kind}`);
     const head = groups[robotModel.userData.parts.assemblies.findIndex(a => a.id === 'head')];
@@ -690,8 +690,8 @@ function buildNavigation() {
   const sViews = nav.section('Ansichten');
   const views = [['front', 'Front'], ['left', 'Links'], ['back', 'Hinten'], ['right', 'Rechts'], ['assembly', 'Übersicht'], ['turntable', 'Drehteller']];
   nav.buttons(sViews, views.map(([v, label]) => ({ label, onClick: () => setCameraView(v) }))).forEach((b, i) => { b.dataset.view = views[i][0]; });
-  const asmBox = (...ids) => { const ms = []; robotModel.traverse(o => { if (o.isMesh && ids.includes(o.userData.asm)) ms.push(o); }); return visibleBox(ms); };
-  if (robotModel) nav.buttons(sViews, [['Kopf', ['head'], 1.15], ['Oberkörper', ['upper_body'], 1.05], ['Becken', ['lower_body'], 1.1], ['Beine', ['legs'], 1.0], ['Arme', ['arms'], 1.0]]
+  const asmBox = (...ids) => { const ms = []; robotModel.traverse(o => { if (o.isMesh && ids.includes(assemblyOf(o))) ms.push(o); }); return visibleBox(ms); };
+  if (robotModel) nav.buttons(sViews, [['Kopf', ['head'], 1.15], ['Oberkörper', ['upper_body'], 1.05], ['Schultern', ['shoulders'], 1.1], ['Becken', ['lower_body'], 1.1], ['Beine', ['legs'], 1.0], ['Arme', ['arms'], 1.0]]
     .map(([label, ids, margin]) => ({ label, title: 'Nahansicht der Baugruppe', onClick: () => frameBox(asmBox(...ids), margin) })));
   if (!robotModel) nav.buttons(sViews, [['Gesicht', 0.15, 0.85], ['Krone', 0.6, 1.0], ['Kinn + Hals', 0, 0.45]].map(([label, lo, hi]) => ({ label, title: 'Nahansicht', onClick: () => frameRegion(lo, hi) })));
   nav.note(sViews, 'Maus: links drehen · rechts verschieben · Rad zoomen. Taste O: Referenz-Overlay (Helm H).');

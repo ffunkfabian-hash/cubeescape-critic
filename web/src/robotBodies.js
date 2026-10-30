@@ -4,6 +4,9 @@
 // segment nodes (GLB roots with extras asm/side) by the assembly offsets from parts.json, as tools/robot_build.explode does.
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { SHOULDERS, shoulderSide, assemblyOf, separateShoulders } from './robotShoulders.js';
+
+export { assemblyOf, shoulderSide };
 import waechterUrl from '../../assets/robot-bodies/waechter/assembled/waechter.glb?url';
 import paladinUrl from '../../assets/robot-bodies/paladin/assembled/paladin.glb?url';
 import mechanikUrl from '../../assets/robot-bodies/mechanik/assembled/mechanik.glb?url';
@@ -18,7 +21,8 @@ export const ROBOT_MODELS = {
 // frame at the top; camera target and distance for assembled and exploded views.
 export const ROBOT_FRAME = { height: 5.44, floor: -4.85, camera: { target: -2.2, dist: 11.8, explodedTarget: -2.6, explodedDist: 17.5 } };
 // Anchor of each assembly towards its parent (basic/robot ANCHORS), shown as the label's connection.
-const SOCKETS = { head: 'Socket_Neck', arms: 'Socket_Shoulder', upper_body: 'Rumpf', lower_body: 'Socket_Waist', legs: 'Socket_Hip' };
+const SOCKETS = { head: 'Socket_Neck', shoulders: 'Socket_Shoulder', arms: 'Socket_Shoulder', upper_body: 'Rumpf', lower_body: 'Socket_Waist', legs: 'Socket_Hip' };
+
 
 const cache = new Map();
 const load = url => {
@@ -48,6 +52,7 @@ export async function loadRobot(name, { gen = 'glb' } = {}) {
   const s = ROBOT_FRAME.height / size.y;
   inner.scale.setScalar(s);
   inner.position.set(-mid.x * s, ROBOT_FRAME.floor - box.min.y * s, -mid.z * s);
+  const index = separateShoulders(inner, parts);
   for (const node of inner.children) node.userData.basePosition = node.position.clone();
   // flat GLB material per Ballon role (MT_<role>_color), e.g. to dress a helmet in the robot's colours (robotHelmet.js)
   const roleMaterials = new Map();
@@ -55,7 +60,7 @@ export async function loadRobot(name, { gen = 'glb' } = {}) {
   inner.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
   const model = new THREE.Group();
   model.name = `robot_${name}`;
-  model.userData = { robot: name, study: parts.study, parts, roleMaterials, gen };
+  model.userData = { robot: name, study: parts.study, parts: index, roleMaterials, gen };
   model.add(inner);
   return model;
 }
@@ -72,7 +77,7 @@ export function setRobotExplosion(model, amount) {
 }
 
 // Label groups (same shape as assembly.js › assemblyDescription): one per assembly, arms and legs per side.
-const SIDED = { arms: 'Arm', legs: 'Bein' };
+const SIDED = { shoulders: 'Schulter', arms: 'Arm', legs: 'Bein' };
 export function robotParts(model) {
   const de = Object.fromEntries(model.userData.parts.assemblies.map(a => [a.id, a.de]));
   model.updateMatrixWorld(true);
@@ -80,7 +85,7 @@ export function robotParts(model) {
   model.traverse(o => {
     if (!o.isMesh || !o.userData.asm) return;
     for (let p = o; p; p = p.parent) if (!p.visible) return; // hidden study helmet or parts hidden in the navigation
-    const { asm, side } = o.userData, sided = SIDED[asm] && (side === 'R' || side === 'L');
+    const asm = assemblyOf(o), side = asm === SHOULDERS.id ? shoulderSide(o.name) : o.userData.side, sided = SIDED[asm] && (side === 'R' || side === 'L');
     const key = sided ? `${asm} ${side}` : asm, socket = SOCKETS[asm] + (sided ? `_${side}` : '');
     if (!groups.has(key)) groups.set(key, { id: sided ? `${SIDED[asm]} ${side}` : de[asm], socket, meshes: [], box: new THREE.Box3() });
     const g = groups.get(key); g.meshes.push({ name: o.name, path: `${o.userData.part_de ?? o.userData.part_label ?? o.userData.partLabel ?? 'Helm'} (${o.name || o.parent?.name})` }); g.box.expandByObject(o);
