@@ -585,7 +585,7 @@ function buildNavigation() {
   const keep = { colors: robotHelmet.colors === 'body' ? null : robotHelmet.colors, wear: robotLook.wear === 'on' ? null : robotLook.wear, skin: skinOn() ? robotLook.skin : null };
   nav.links(sModels, [
     { group: 'Körper', items: Object.entries(ROBOT_MODELS).map(([key, r]) => ({ label: r.de.replace(/ \(.*/, ''), hint: r.de.match(/\((.*)\)/)?.[1],
-      href: href({ model: key, helmet: robotModel ? robotHelmet.kind : null, ...keep }), active: modelName === key })) },
+      href: href({ model: key, helmet: robotModel ? robotHelmet.kind : null, gen: robotModel && robotGen !== 'glb' ? robotGen : null, ...keep }), active: modelName === key })) },
     { group: 'Helme', items: [
       { label: 'Helm H', hint: 'H01–H21 · Varianten 80–88', href: href({ ...keep }), active: isCritic },
       { label: 'Scout', hint: 'S01–S13', href: href({ model: 'scout', ...keep }), active: !!scoutModels }] },
