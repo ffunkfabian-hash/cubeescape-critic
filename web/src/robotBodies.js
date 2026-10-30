@@ -1,12 +1,13 @@
 // Robot bodies (?model=waechter|paladin|mechanik): the three body studies of cubeescape-ballon round 5, built by the three.js
 // generator robotgen (0.14–0.15) and exported by tools/robotgen_export.mjs into assets/robot-bodies-three/<name>/ (0.18); the viewer
 // loads these files. &gen=three builds the body live in the browser (to check the generator), &gen=blender loads the frozen Blender
-// export of Ballon (assets/robot-bodies/<name>/, archive/blender/robot, reference of the generator's measurements). The viewer
+// export of Ballon (assets/robot-bodies/<name>/, archive/blender/robot, reference of the generator's measurements; alias &gen=glb). The viewer
 // fits each body to ROBOT_FRAME (taken over from the former three.js full body 0.9, so the helmet scale is unchanged) and explodes it by moving the
 // segment nodes (GLB roots with extras asm/side) by the assembly offsets from parts.json, as tools/robot_build.explode does.
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { SHOULDERS, shoulderSide, assemblyOf, separateShoulders } from './robotShoulders.js';
+import { modelSource } from './modelSource.js';
 
 export { assemblyOf, shoulderSide };
 import waechterUrl from '../../assets/robot-bodies-three/waechter/assembled/waechter.glb?url';
@@ -22,12 +23,7 @@ export const ROBOT_MODELS = {
   paladin: { url: paladinUrl, blender: paladinBlenderUrl, parts: () => import('../../assets/robot-bodies-three/paladin/parts.json'), de: 'Paladin (athletisch)' },
   mechanik: { url: mechanikUrl, blender: mechanikBlenderUrl, parts: () => import('../../assets/robot-bodies-three/mechanik/parts.json'), de: 'Mechanik (schlank-mechanisch)' },
 };
-// Sources of bodies and Scout (?gen=): the exported files (default), the generator live in the browser, the frozen Blender export.
-export const SOURCES = ['export', 'three', 'blender'];
-export function checkSource(gen) {
-  if (!SOURCES.includes(gen)) throw new Error(`Unknown gen ${JSON.stringify(gen)}; expected ${SOURCES.join(', ')}`);
-  return gen;
-}
+
 // Frame of the bodies in the viewer (measured on the former three.js full body 0.9): feet at y = −4.85, height 5.44, helmet
 // frame at the top; camera target and distance for assembled and exploded views.
 export const ROBOT_FRAME = { height: 5.44, floor: -4.85, camera: { target: -2.2, dist: 11.8, explodedTarget: -2.6, explodedDist: 17.5 } };
@@ -47,13 +43,13 @@ export function explodeOffset(mm, side, amount) {
   return new THREE.Vector3(x, mm[2] * 0.001 * amount, -mm[1] * 0.001 * amount);
 }
 
-// gen: see SOURCES; 'three' builds with robotgen/index.js › buildRobotBody, the same scene the export writes.
+// gen: see modelSource.js › SOURCES; 'three' builds with robotgen/index.js › buildRobotBody, the same scene the export writes.
 const generate = name => import('./robotgen/index.js').then(m => { const { scene, parts } = m.buildRobotBody(name); return [scene, parts]; });
 
 export async function loadRobot(name, { gen = 'export' } = {}) {
   const entry = ROBOT_MODELS[name];
   if (!entry) throw new Error(`Unknown robot ${JSON.stringify(name)}; expected ${Object.keys(ROBOT_MODELS).join(', ')}`);
-  checkSource(gen);
+  gen = modelSource(gen);
   const [source, parts] = gen === 'three' ? await generate(name)
     : await Promise.all([load(gen === 'blender' ? entry.blender : entry.url), entry.parts().then(m => m.default)]);
   const inner = source.clone(true);

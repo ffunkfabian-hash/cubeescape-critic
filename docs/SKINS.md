@@ -41,7 +41,9 @@ node tools/skin_bake.mjs --model all        # aus web/; je Modell 1–5 min, Kar
 **Ein Atlas je Modell (0.18 „Prefab“):** Körper und Scout werden aus ihren exportierten GLBs gebacken (`robotgen_export.mjs`). Deren Meshes
 sind dieselben wie beim Bau im Browser (`&gen=three`): gleiche Punkte, Indizes und float32-Positionen, nach dem GLTFLoader-Rückimport
 geprüft (408/383/380/44 Signaturen gleich). Die bisherigen `-three`-Atlanten sind deshalb die Atlanten der Modelle geworden
-(`assets/skins/<körper>/`, `scout/`, neu gebacken aus den GLBs: Karten bytegleich, nur `source` geändert); die Atlanten der
+(`assets/skins/<körper>/`, `scout/`, neu gebacken aus den GLBs). Körper: `maps.png` bytegleich, nur 3–5 CSG-Einträge (Maske,
+Schienbein, Schulterpanzer) neu, weil der GLTFExporter deren Normalen normiert; Scout: Haube besser verschweißt, Atlas neu gepackt
+(Deckung 57,4 → 58,5 %, [Bericht 0.18](versions/0.18.md#skin-atlanten)). Die Atlanten der
 Blender-GLBs sind entfernt – `&gen=blender` zeigt Skins ohne Karten. `skins.test.mjs` prüft je Modell den GLB und den Live-Aufbau.
 
 **Generierte Körper (0.15 „Anvil“):** Bis 0.17 lud `?model=<körper>&gen=three` einen eigenen Atlas `assets/skins/<körper>-three/`,

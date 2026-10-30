@@ -18,7 +18,8 @@ import { resolveAssemblyOptions } from './assemblyOptions.js';
 import { createAssemblyLabels } from './assemblyLabels.js';
 import { D, resetParams } from './params.js';
 import { loadScout, scoutParts, SCOUT_FRAME } from './scout.js';
-import { ROBOT_MODELS, ROBOT_FRAME, loadRobot, setRobotExplosion, robotParts, assemblyOf, shoulderSide, checkSource } from './robotBodies.js';
+import { ROBOT_MODELS, ROBOT_FRAME, loadRobot, setRobotExplosion, robotParts, assemblyOf, shoulderSide } from './robotBodies.js';
+import { modelSource } from './modelSource.js';
 import { setRobotWear, releaseRobotWear } from './robotWear.js';
 import { SKINS, loadSkinAtlas, loadSkinTextures, prepareSkin, applySkin, releaseSkin, skinState, bakeSkinTextures, useBakedMaterial } from './robotSkins.js';
 import { HELMETS, CRITIC_VARIANTS, COLOR_SCHEMES, HELMET_FRAME_METERS, dressBody, isStudyHelmetPart, matchRobotColors, paletteMaterials, schemePalette, setRobotHelmet } from './robotHelmet.js';
@@ -35,12 +36,12 @@ if (query.get('ui') === '0') document.body.classList.add('noui');
 // ?model=scout: Scout v3 instead of the three.js helmet H; geometry GUI is off.
 // ?model=waechter|paladin|mechanik: one of the three robot bodies in its own frame (ROBOT_FRAME).
 // Bodies and Scout come from the three.js generator (web/src/robotgen) as exported GLBs (tools/robotgen_export.mjs, 0.18);
-// &gen=three builds them live in the browser, &gen=blender loads the frozen Blender export (robotBodies.js › SOURCES).
+// &gen=three builds them live in the browser, &gen=blender (alias glb) loads the frozen Blender export (modelSource.js).
 // The skin atlases (assets/skins/<model>) are baked from the exported GLBs and fit the live build as well.
 const modelName = query.get('model') ?? 'critic';
 const MODEL_NAMES = ['critic', 'scout', ...Object.keys(ROBOT_MODELS)];
 if (!MODEL_NAMES.includes(modelName)) throw new Error(`Unknown model ${JSON.stringify(modelName)}; expected ${MODEL_NAMES.join(', ')}`);
-const robotGen = checkSource(query.get('gen') ?? 'export');
+const robotGen = modelSource(query.get('gen') ?? 'export');
 const scoutModels = modelName === 'scout' ? { assembled: await loadScout(false, robotGen), exploded: await loadScout(true, robotGen) } : null;
 const robotModel = ROBOT_MODELS[modelName] ? await loadRobot(modelName, { gen: robotGen }) : null;
 // &wear=on|off: aged material of the colour scheme (robotWear.js) or its flat colours.

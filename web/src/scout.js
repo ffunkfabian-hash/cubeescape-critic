@@ -5,7 +5,7 @@
 // views apply. Meshes carry extras part_id/part_label/side (parts.json).
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { checkSource } from './robotBodies.js';
+import { modelSource } from './modelSource.js';
 import assembledUrl from '../../assets/helmet-scout-three/assembled/scout.glb?url';
 import explodedUrl from '../../assets/helmet-scout-three/exploded/scout_exploded.glb?url';
 import blenderAssembledUrl from '../../assets/helmet-scout/assembled/scout.glb?url';
@@ -46,7 +46,7 @@ export function scoutFit(ref) {
 }
 
 export async function loadScout(exploded, gen = 'export') {
-  checkSource(gen);
+  gen = modelSource(gen);
   // Fit by the assembled helmet's box so the exploded parts keep the same scale and origin.
   const g = gen === 'three' ? await generate() : null, blender = gen === 'blender';
   const ref = g ? g.assembled : await load(blender ? blenderAssembledUrl : assembledUrl);
