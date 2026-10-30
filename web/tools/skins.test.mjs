@@ -231,3 +231,30 @@ test('emblem anchor: the chest suns of Glut and Ornat are centred on the medalli
   }
   assert.doesNotMatch(skinGLSL(RECIPES.skins.rost), /vSkinAnchor\.x/);
 });
+
+test('texture layers: every swatch and decal sheet of a recipe exists and has its sampler in the GLSL', () => {
+  const dir = path.join(repo, 'assets', 'skins', 'textures');
+  let used = 0;
+  for (const [key, recipe] of Object.entries(RECIPES.skins)) {
+    const glsl = skinGLSL(recipe);
+    for (const L of recipe.layers.filter(l => l.type === 'tex' || l.type === 'decal')) {
+      used++;
+      assert.ok(['jpg', 'png'].some(e => existsSync(path.join(dir, `${L.texture}.${e}`))), `${key}: no texture ${L.texture}`);
+      assert.match(glsl, new RegExp(`uniform sampler2D skinTex_${L.texture};`), key);
+      if (L.type === 'decal') assert.equal(decodePNG(readFileSync(path.join(dir, `${L.texture}.png`))).channels, 4, `${L.texture}: decal sheet without alpha`);
+    }
+  }
+  assert.ok(used >= 4, `${used} texture layers`);
+});
+
+test('kinds: helmet layers apply to Helm H and Scout only, body motifs not to helmets', () => {
+  const r = RECIPES.skins.schrott, bit = (d, i) => Math.floor(skinLayerMask(r, d) / 2 ** i) % 2;
+  const helm = r.layers.findIndex(l => l.type === 'tex' && l.kinds), body = r.layers.findIndex(l => l.type === 'decal' && l.not_kinds);
+  const cap = { role: 'anodized', part: 'cap', asm: 'head', side: null }, chest = { role: 'shell', part: 'chest', asm: 'upper_body', side: 'C', kind: 'body' };
+  assert.equal(bit({ ...cap, kind: 'critic' }, helm), 1);
+  assert.equal(bit({ ...cap, kind: 'scout' }, helm), 1);
+  assert.equal(bit({ ...cap, kind: 'body' }, helm), 0);
+  assert.equal(bit({ ...cap, part: 'mask', kind: 'critic' }, helm), 0);
+  assert.equal(bit(chest, body), 1);
+  assert.equal(bit({ ...chest, kind: 'critic' }, body), 0);
+});

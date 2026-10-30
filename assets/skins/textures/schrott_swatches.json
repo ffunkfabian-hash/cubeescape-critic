@@ -1,0 +1,76 @@
+{
+ "texture": "b.jpg",
+ "roles": {
+  "anodized": {
+   "crop_px": [
+    1620,
+    2260,
+    96
+   ],
+   "tile_px": 96,
+   "mean": [
+    20,
+    21,
+    30
+   ],
+   "area_px": 48316
+  },
+  "dark_metal": {
+   "crop_px": [
+    1708,
+    1696,
+    64
+   ],
+   "tile_px": 64,
+   "mean": [
+    20,
+    19,
+    29
+   ],
+   "area_px": 219249
+  },
+  "graphite": {
+   "crop_px": [
+    310,
+    338,
+    160
+   ],
+   "tile_px": 160,
+   "mean": [
+    48,
+    45,
+    51
+   ],
+   "area_px": 811672
+  },
+  "rubber": {
+   "crop_px": [
+    264,
+    1760,
+    64
+   ],
+   "tile_px": 64,
+   "mean": [
+    37,
+    25,
+    23
+   ],
+   "area_px": 47117
+  },
+  "shell": {
+   "crop_px": [
+    52,
+    1178,
+    96
+   ],
+   "tile_px": 96,
+   "mean": [
+    129,
+    125,
+    126
+   ],
+   "area_px": 672564
+  }
+ },
+ "decals": 16
+}

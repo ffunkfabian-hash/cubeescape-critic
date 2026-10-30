@@ -3,7 +3,9 @@
 // a MeshStandardMaterial) and in UV space for the texture export (skinBakeMaterial). Only ambient occlusion and the distance to
 // the nearest plate edge come from the baked maps (skinAtlas.js); patterns and noise are procedural, so they stay sharp up close.
 // Noise is band-limited by the fragment's footprint (octaves finer than a pixel fade to their mean) and thresholds widen by
-// their screen derivative, so patterns do not shimmer from afar.
+// their screen derivative, so patterns do not shimmer from afar. Layers `tex` and `decal` read images (recipe.textures, e.g.
+// material swatches and glowing motifs cut from a painted atlas by tools/skin_swatches.py): a swatch is laid triplanar in model
+// space with an offset per part, a decal is projected from the front (axis z) or the side (axis x) onto the centre of each part.
 //
 // Per mesh the geometry carries skinInfo (layer mask, mirror sign for side R, 1 if the mesh has maps, half height of the part
 // in metres) and skinCentre (part centre in model metres): roles, parts, assembly and side are judged once per mesh on the
@@ -17,13 +19,15 @@ export const MAX_LAYERS = 24; // layer mask in a float attribute: exact up to 2^
 const glob = pattern => new RegExp(`^${pattern.replace(/[.+^${}()|\\]/g, '\\$&').replace(/\*/g, '.*').replace(/\?/g, '.')}$`);
 const any = (patterns, name) => patterns.some(p => glob(p).test(name ?? ''));
 
-// Layers of the recipe that apply to a mesh described by { role, part, asm, side }, as a bit mask (bit i = layer i).
+// Layers of the recipe that apply to a mesh described by { role, part, asm, side, kind }, as a bit mask (bit i = layer i); kind is
+// the model of the mesh's atlas (body, critic, scout), so a helmet can have layers of its own (kinds / not_kinds).
 export function skinLayerMask(recipe, d) {
   if (recipe.layers.length > MAX_LAYERS) throw new Error(`skin: ${recipe.layers.length} layers, at most ${MAX_LAYERS}`);
   let mask = 0;
   recipe.layers.forEach((L, i) => {
     const ok = (!L.roles || L.roles.includes(d.role)) && (!L.not_roles || !L.not_roles.includes(d.role))
       && (!L.asm || L.asm.includes(d.asm)) && (!L.side || L.side.includes(d.side))
+      && (!L.kinds || L.kinds.includes(d.kind)) && (!L.not_kinds || !L.not_kinds.includes(d.kind))
       && (!L.parts || any(L.parts, d.part)) && (!L.not_parts || !any(L.not_parts, d.part));
     if (ok) mask += 2 ** i;
   });
@@ -85,6 +89,10 @@ void skinApply(inout SkinOut s, float w, bool hasColor, vec3 color, bool hasRoug
 }
 `;
 
+// Images a recipe reads (layer.texture → sampler skinTex_<name>).
+export const skinTextureNames = recipe => [...new Set(recipe.layers.filter(L => L.texture).map(L => L.texture))];
+const sampler = name => `skinTex_${name.replace(/[^A-Za-z0-9_]/g, '_')}`;
+
 // GLSL of one layer (inside skinEvaluate, variables: pos, nor, mask, u, v, hmm, edge, ao, fw, pxmm, s).
 function layerCode(L, i) {
   const seed = f(L.seed ?? 0), sel = [];
@@ -141,6 +149,34 @@ function layerCode(L, i) {
     float w = clamp(ring + ray + step(r, ${f(R * (L.core ?? 0.45))}), 0.0, 1.0)${region(L)}${sel.map(x => ' * ' + x).join('')};
     ${apply(L)} }`;
     }
+    case 'tex': {     // material swatch, triplanar in model space; offset per part so neighbouring parts do not repeat the same spot
+      const T = sampler(L.texture), k = f(1000 / (L.tile_mm ?? 150)), mode = L.mode ?? 'replace';
+      const col = mode === 'multiply' ? 's.base * c * 2.0' : mode === 'overlay' ? 'mix(s.base, s.base * c / max(vec3(0.05), avg), 1.0)' : 'c';
+      return `if (skinOn(mask, ${i})) {
+    vec3 off = vec3(skinHash(vSkinCentre * 997.0, ${seed}), skinHash(vSkinCentre * 991.0, ${f((L.seed ?? 0) + 1)}), skinHash(vSkinCentre * 983.0, ${f((L.seed ?? 0) + 2)})) * 7.0;
+    vec3 tp = pos * ${k} + off, bw = pow(abs(nor), vec3(4.0)); bw /= bw.x + bw.y + bw.z;
+    vec3 c = texture2D(${T}, tp.yz).rgb * bw.x + texture2D(${T}, tp.xz).rgb * bw.y + texture2D(${T}, tp.xy).rgb * bw.z;
+    vec3 avg = textureLod(${T}, vec2(0.5), 20.0).rgb;
+    float w = ${f(L.opacity ?? 1)}${region(L)}${sel.map(x => ' * ' + x).join('')};
+    s.base = mix(s.base, ${col}, w);
+    ${'rough' in L || 'metal' in L ? `skinApply(s, w, false, vec3(0), ${'rough' in L}, ${f(L.rough ?? 0)}, ${'metal' in L}, ${f(L.metal ?? 0)}, false, vec3(0));` : ''} }`;
+    }
+    case 'decal': {   // one motif of a sheet (grid × grid cells, count used) per part, chosen by the part centre (mirror-symmetric)
+      const T = sampler(L.texture), g = L.grid ?? 4, n = L.count ?? g * g, [cu, cv] = L.center ?? [0, 0], size = L.size ?? 0.8;
+      const side = (L.axis ?? 'z') === 'x';
+      return `if (skinOn(mask, ${i})) {
+    vec3 lc = (pos - vSkinCentre) / hy;
+    float face = ${side ? 'abs(nor.x)' : 'nor.z'};
+    vec2 q = vec2(${side ? 'lc.z * sign(nor.x)' : 'lc.x'} - ${f(cu)}, lc.y - ${f(cv)}) / ${f(size)} * 0.5 + 0.5;
+    float inside = step(0.0, q.x) * step(q.x, 1.0) * step(0.0, q.y) * step(q.y, 1.0);
+    float cell = floor(skinHash(vec3(abs(vSkinCentre.x), vSkinCentre.yz) * 1000.0, ${seed}) * ${f(n)});
+    vec2 cuv = vec2((mod(cell, ${f(g)}) + clamp(q.x, 0.0, 1.0)) / ${f(g)}, 1.0 - (floor(cell / ${f(g)}) + 1.0 - clamp(q.y, 0.0, 1.0)) / ${f(g)});
+    vec4 d = texture2D(${T}, cuv);
+    float w = d.a * inside * smoothstep(${f((L.min_facing ?? 0.45) - 0.05)}, ${f((L.min_facing ?? 0.45) + 0.05)}, face) * ${f(L.opacity ?? 1)}${sel.map(x => ' * ' + x).join('')};
+    s.base = mix(s.base, d.rgb, w);
+    s.emit = mix(s.emit, d.rgb * ${f(L.glow ?? 0)}, w);
+    s.rough = mix(s.rough, ${f(L.rough ?? 0.35)}, w); }`;
+    }
     case 'filigree': {
       const rings = L.rings ?? 9, scale = L.scale ?? 40, wmm = L.width_mm ?? 1.2;
       return `if (skinOn(mask, ${i})) {
@@ -170,6 +206,7 @@ function apply(L) {
 // GLSL function SkinOut skinEvaluate() for a recipe (reads the varyings and skinMaps).
 export function skinGLSL(recipe) {
   return `${COMMON}
+${skinTextureNames(recipe).map(n => `uniform sampler2D ${sampler(n)};`).join('\n')}
 SkinOut skinEvaluate() {
   SkinOut s = SkinOut(vec3(0.0), 0.6, 0.0, vec3(0.0), 1.0);
   vec3 pos = vSkinPos, nor = normalize(vSkinNor);
@@ -207,8 +244,9 @@ varying vec2 vSkinUv;
 `;
 const VERTEX_SET = 'vSkinPos = skinPos; vSkinNor = skinNor; vSkinInfo = skinInfo; vSkinCentre = skinCentre; vSkinAnchor = skinAnchor; vSkinUv = uv;';
 
-// Live material of a recipe on the meshes of one atlas (maps: texture of maps.png, linear, no flip).
-export function skinMaterial(key, recipe, maps) {
+// Live material of a recipe on the meshes of one atlas (maps: texture of maps.png, linear, no flip; textures: name → image
+// texture of the recipe's tex/decal layers, sRGB, repeating).
+export function skinMaterial(key, recipe, maps, textures = {}) {
   const m = new THREE.MeshStandardMaterial({ name: `skin_${key}`, roughness: 1, metalness: 1 });
   const glow = { value: recipe.emissive_intensity ?? 1 };
   m.userData.skin = { key, glow };
@@ -216,6 +254,7 @@ export function skinMaterial(key, recipe, maps) {
   m.onBeforeCompile = shader => {
     shader.uniforms.skinMaps = { value: maps };
     shader.uniforms.skinGlow = glow;
+    for (const n of skinTextureNames(recipe)) shader.uniforms[sampler(n)] = { value: textures[n] ?? null };
     shader.vertexShader = shader.vertexShader.replace('#include <common>', `#include <common>\n${VERTEX_DECL}`)
       .replace('#include <begin_vertex>', `#include <begin_vertex>\n${VERTEX_SET}`);
     shader.fragmentShader = shader.fragmentShader.replace('#include <common>', `#include <common>\n${fragment}\nuniform float skinGlow;`)
@@ -237,11 +276,12 @@ export function skinMaterial(key, recipe, maps) {
 
 // Texture bake of a recipe: the mesh rasterised in its atlas UVs; output 0 base colour (sRGB), 1 ORM (R ambient occlusion,
 // G roughness, B metalness; glTF order), 2 emission (sRGB, before the skin's emissive intensity). Alpha = coverage.
-export function skinBakeMaterial(recipe, maps) {
+export function skinBakeMaterial(recipe, maps, textures = {}) {
   const output = { value: 0 };
   const m = new THREE.ShaderMaterial({
     name: 'skin_bake', side: THREE.DoubleSide, depthTest: false, depthWrite: false,
-    uniforms: { skinMaps: { value: maps }, skinOutput: output },
+    uniforms: { skinMaps: { value: maps }, skinOutput: output,
+      ...Object.fromEntries(skinTextureNames(recipe).map(n => [sampler(n), { value: textures[n] ?? null }])) },
     vertexShader: `${VERTEX_DECL}\nvoid main() { ${VERTEX_SET} gl_Position = vec4(uv * 2.0 - 1.0, 0.0, 1.0); }`,
     fragmentShader: `${skinGLSL(recipe)}
 uniform int skinOutput;

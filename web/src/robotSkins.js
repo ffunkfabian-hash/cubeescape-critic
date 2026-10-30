@@ -5,11 +5,27 @@
 import * as THREE from 'three';
 import { readAtlas, skinMeshes, geometrySignature, sameSignature, closeSignature, skinGeometry, transferGeometry, unmappedGeometry } from './skinAtlas.js';
 import { describeSkinMeshes, SKIN_RECIPES } from './skinParts.js';
-import { skinLayerMask, skinMaterial, skinBakeMaterial } from './skinShader.js';
+import { skinLayerMask, skinMaterial, skinBakeMaterial, skinTextureNames } from './skinShader.js';
 
 export const SKINS = Object.fromEntries(Object.entries(SKIN_RECIPES.skins).map(([key, r]) => [key, { de: r.de, energy: r.energy }]));
 const ATLAS_JSON = import.meta.glob('../../assets/skins/*/atlas.json', { import: 'default' });
 const ATLAS_FILES = import.meta.glob('../../assets/skins/*/*.{bin,png}', { eager: true, query: '?url', import: 'default' });
+
+const TEXTURE_FILES = import.meta.glob('../../assets/skins/textures/*.{jpg,png}', { eager: true, query: '?url', import: 'default' });
+const textures = {};
+// Images of the recipes' tex/decal layers (assets/skins/textures/<name>.jpg|png), loaded once; call before a skin is applied.
+export async function loadSkinTextures() {
+  const names = [...new Set(Object.values(SKIN_RECIPES.skins).flatMap(skinTextureNames))].filter(n => !textures[n]);
+  await Promise.all(names.map(async n => {
+    const url = TEXTURE_FILES[`../../assets/skins/textures/${n}.jpg`] ?? TEXTURE_FILES[`../../assets/skins/textures/${n}.png`];
+    if (!url) throw new Error(`Skin: no texture ${n} in assets/skins/textures/`);
+    const t = await new THREE.TextureLoader().loadAsync(url);
+    t.colorSpace = THREE.SRGBColorSpace;
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    t.anisotropy = 8;
+    textures[n] = t;
+  }));
+}
 
 const atlases = new Map();
 // Atlas and maps texture of a model (waechter, paladin, mechanik, critic, scout; generated bodies <body>-three), loaded once.
@@ -74,7 +90,7 @@ export function applySkin(state, key) {
   if (!key) return 0;
   const recipe = SKIN_RECIPES.skins[key];
   if (!recipe) throw new Error(`Unknown skin ${JSON.stringify(key)}; expected ${Object.keys(SKIN_RECIPES.skins).join(', ')}`);
-  if (!state.materials.has(key)) state.materials.set(key, skinMaterial(key, recipe, state.atlas.texture));
+  if (!state.materials.has(key)) state.materials.set(key, skinMaterial(key, recipe, state.atlas.texture, textures));
   const material = state.materials.get(key);
   // emblems with an anchor part are centred on that part of the same model (the chest sun on its medallion); else the own centre
   const anchors = recipe.layers.map(L => (L.anchor ? state.meshes.find(m => m.desc.part === L.anchor)?.centre ?? null : null));
@@ -108,7 +124,7 @@ export const skinState = root => prepared.get(root) ?? null;
 export function bakeSkinTextures(renderer, state, size = 2048) {
   const recipe = SKIN_RECIPES.skins[state.active];
   if (!recipe) throw new Error('bakeSkinTextures: no skin shown');
-  const material = skinBakeMaterial(recipe, state.atlas.texture), scene = new THREE.Scene();
+  const material = skinBakeMaterial(recipe, state.atlas.texture, textures), scene = new THREE.Scene();
   for (const m of state.meshes) if (m.entry) scene.add(new THREE.Mesh(m.geometry, material));
   const target = new THREE.WebGLRenderTarget(size, size, { type: THREE.UnsignedByteType, colorSpace: THREE.NoColorSpace });
   const camera = new THREE.Camera(), out = {}, prev = { target: renderer.getRenderTarget(), tone: renderer.toneMapping, color: renderer.getClearColor(new THREE.Color()), alpha: renderer.getClearAlpha() };

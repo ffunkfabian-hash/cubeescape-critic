@@ -60,6 +60,62 @@ Kantenabstand kommen aus `maps.png`. Muster bleiben dadurch auch ganz nah scharf
 - **Auswahl je Fragment**: Blickrichtung (`facing`), Muster im Teilrahmen (Mitte und halbe Höhe des Meshes, Seite R gespiegelt).
 - Meshes ohne passenden Atlas-Eintrag (anderer Parameterstand) werden ohne Karten gemalt, mit Warnung in der Konsole.
 
+## Skins aus generierten Bildern: Bronze und Schrott (30.10.2026)
+
+Ein Bildgenerator, der ein ganzes Atlasbild bemalt (Vorlage: exportierte Basisfarbe), malt jede Insel für sich: Er weiß nicht,
+welche Inseln im 3D nebeneinanderliegen. Auf dem Modell wechselt das Material dann fleckig, Muster brechen an Nähten ab, Motive
+landen zufällig. Aus solchen Bildern nimmt `web/tools/skin_swatches.py` deshalb nur das **Material**: je Rolle die größte ruhige
+Fläche mit typischer Farbe als nahtlose Kachel und die leuchtenden Linienmotive (Runen, Leiterbahnen) als Bogen mit Alpha
+(`assets/skins/textures/`). Die Rezepte legen sie nach Rolle und Bauteil auf – im Modellraum, ohne Nähte, für alle Körper und Helme:
+
+- Schicht `tex`: Kachel triplanar im Modellraum (`tile_mm`, Modus `overlay`/`multiply`/`replace`), je Teil versetzt.
+- Schicht `decal`: ein Motiv des Bogens je Teil (Wahl über die Teilmitte, links und rechts gleich), Projektion von vorn (`axis: z`)
+  oder seitlich (`axis: x`), `glow` macht es leuchtend.
+- Grundfarben je Rolle sind die Mediane der jeweiligen Inseln im Nutzerbild; Kantenabrieb, Rost bzw. Grünspan in Vertiefungen und
+  Kratzer kommen aus Kantenabstand und AO des Atlas wie bei Rost, Glut, Ornat.
+- **Helme mit eigenem Material:** Schichten mit `kinds: ["critic", "scout"]` gelten nur für Helm H und Scout (jede Mesh-Beschreibung
+  trägt ihr Modell, `skinParts.js › describeSkinMeshes`). Die Helme haben in Bronze und Schrott eigene Plätze `<skin>_helm_shell`
+  (Plattenmaterial außer Maske, Gesicht, Augen, Kinn) und `<skin>_helm_decals`; bis eigene Helmbilder da sind, sind es Kopien des
+  Körpermaterials. Eine neue Helmkachel ersetzt einfach die Datei.
+
+```bash
+python3 tools/skin_swatches.py <bild> <debug-ordner von skin_bake, z. B. ../runs/skins/waechter> ../assets/skins/textures <name>
+```
+
+### Prompts für Nano Banana Pro
+
+**Empfohlen – Kacheln und Motivbögen** (direkt verwendbar, keine Atlas-Vorlage nötig). Je Material ein Bild:
+
+> Seamless tileable texture, 1024 × 1024, of **[Material, z. B. worn grey painted steel armour plate with rust bleeding from
+> scratches]** for a sci-fi robot. Flat, evenly lit, orthographic top-down view: no perspective, no shadows, no highlights, no
+> objects, no text, no border. The left/right and top/bottom edges must continue exactly, so the image repeats without visible
+> seams. Even detail density over the whole square; the square shows about 15 cm of surface.
+
+Materialien je Skin: Panzerplatten (`shell`), dunkler Grundkörper (`graphite`), Gelenke/Kolben (`dark_metal`), Zierkanten (`trim`).
+Ablage als `assets/skins/textures/<skin>_<rolle>.jpg`.
+
+> Sprite sheet, 2048 × 2048, a 4 × 4 grid of 16 separate glowing **[cyan circuit-board traces / violet and gold runic glyphs]** on
+> a pure black background (#000000). One motif centred in each cell with a wide black margin, nothing touches a cell border. Thin
+> emissive lines only – no filled glowing areas, no haze wider than a few pixels. Flat front view, no perspective, no text, no grid
+> lines or frames.
+
+Ablage als `<skin>_decals.*`; Alpha aus der Helligkeit auf Schwarz.
+
+Für die Helme dieselben Prompts mit eigenen Materialien (z. B. „polished gunmetal helmet shell with fine engraving“); Ablage als
+`<skin>_helm_shell.jpg` und `<skin>_helm_decals.*`.
+
+**Nur wenn ein ganzes Atlasbild gewünscht ist** – je Modell die Vorlage mitgeben (Rollenfarben je Insel, weiße Inselränder,
+magentafarbene Ränder = Motivflächen, Legende unten): `runs/skins/guide/<modell>_guide.png` für Wächter, Helm H (`critic`) und Scout,
+erzeugt mit `python3 tools/skin_guide.py <debug-ordner von skin_bake> ../assets/skins/<modell>/maps.png <ziel.png>`:
+
+> Paint a texture for this UV atlas of a sci-fi robot, same resolution as the input. Keep every island exactly in place and shape
+> and paint only inside the islands; black areas stay pure black. The flat colour of an island is its material (legend at the
+> bottom): light grey = armour plates, blue = dark body frame, brown = joints and pistons, green = anodised inlays, yellow = trim
+> and bolts, orange = accent stripes, purple = rubber and cables, cyan = glowing lights. All islands of the same colour get the
+> same material with identical colour, scale and wear. Glowing motifs (one per island, centred, not touching the border) only in
+> islands with a magenta outline, nowhere else. Details smaller than an island, no pattern running across an island border. Do
+> not draw the white or magenta outlines, and do not add the legend.
+
 ## Viewer
 
 - Navigation **„Lackierung“**: Farbschema (Creme, Weiß-Graphit, Original) *oder* Skin (Rost, Glut, Ornat), für Körper und Helm

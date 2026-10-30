@@ -18,7 +18,9 @@ Antworten, Doku und Commit-Messages auf Deutsch; Code, Bezeichner und Kommentare
   ([docs/ROBOTER_BALLON.md](docs/ROBOTER_BALLON.md)).
 - `docs/SKINS.md`, `assets/skins/<modell>/` – Skins Rost, Glut, Ornat (0.13) für Körper und Helme, ohne Blender: UV-Atlas (xatlas)
   und Karten (Kantenabstand, AO) aus `web/tools/skin_bake.mjs`, Rezepte `web/src/skins.json`, Mischer als Shader
-  (`web/src/skinShader.js`, Viewer `web/src/robotSkins.js`, Navigation „Lackierung“); Kontrollkarten in `runs/skins/`.
+  (`web/src/skinShader.js`, Viewer `web/src/robotSkins.js`, Navigation „Lackierung“); Kontrollkarten in `runs/skins/`. Seit 0.16 auch
+  Bronze und Schrott aus Nutzerbildern: Kacheln und Motive in `assets/skins/textures/` (`web/tools/skin_swatches.py`), Vorlagenkarten für
+  Bildgeneratoren per `web/tools/skin_guide.py`, Prompts in `docs/SKINS.md`.
 - `web/src/robotgen/` – three.js-Generator der Körper ohne Blender (0.14 Wächter, 0.15 Paladin und Mechanik; `?model=<körper>&gen=three`):
   Übertragung der gepinnten Ballon-Quelle, Prüfung gegen den Python-Abzug (`web/tools/robotgen_dump_spec.py`) und den GLB
   (`robotgen.test.mjs`, `robotgen_compare.mjs`); eigene Skin-Atlanten `assets/skins/<körper>-three/` (`skin_bake.mjs --gen three`).
