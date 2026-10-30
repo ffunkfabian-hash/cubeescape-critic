@@ -97,6 +97,7 @@ def rig(sc, centre, size):
     cam.location = (0, -dist, 0.08 * size.z)
     track = cam.constraints.new('TRACK_TO')
     track.target = pivot
+    track.track_axis, track.up_axis = 'TRACK_NEGATIVE_Z', 'UP_Y'      # camera and area lights look along −Z
     for name, loc, power, scale in (('key', (-0.8, -1.0, 0.7), 900, 1.0), ('fill', (1.0, -0.6, 0.2), 300, 1.4), ('rim', (0.3, 1.0, 0.9), 700, 0.8)):
         light = bpy.data.lights.new(name, 'AREA')
         light.energy = power * (dist / 4) ** 2
@@ -107,6 +108,7 @@ def rig(sc, centre, size):
         ob.location = Vector(loc) * dist
         c = ob.constraints.new('TRACK_TO')
         c.target = pivot
+        c.track_axis, c.up_axis = 'TRACK_NEGATIVE_Z', 'UP_Y'
     return pivot
 
 
