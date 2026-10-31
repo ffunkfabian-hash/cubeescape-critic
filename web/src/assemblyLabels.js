@@ -1,7 +1,7 @@
 // Screen-space labels stay outside the exported model. Every mesh is listed in its stable part family.
 import * as THREE from 'three';
 export function createAssemblyLabels() {
-  const layer = document.createElement('div'); layer.id = 'assembly-labels';
+  const layer = document.createElement('div'); layer.id = 'assembly-labels'; layer.hidden = true; // shown by update()
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); layer.appendChild(svg);
   const title = document.createElement('div'); title.className = 'assembly-heading';
   title.textContent = 'EXPLOSIONSANSICHT · BAUTEILE'; layer.appendChild(title);

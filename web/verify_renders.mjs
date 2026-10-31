@@ -258,6 +258,39 @@ try {
     return names;
   });
   if (result.skinTextureExport.length !== 6 || !result.skinTextureExport.every(n => n.includes('_rost_'))) throw new Error(`skin texture export: ${result.skinTextureExport}`);
+  // every recipe of skins.json compiles and renders on body and helmet (a shader error is a console error, collected above)
+  result.skinRecipes = await skinPage.evaluate(() => {
+    const out = [];
+    for (const key of Object.keys(window.SKINS)) {
+      window.robotLook.skin = key;
+      window.rebuild();
+      window.renderFrame();
+      out.push(`${key}:${window.activeSkinStates().length}`);
+    }
+    window.robotLook.skin = 'rost';
+    window.rebuild();
+    return out;
+  });
+  if (result.skinRecipes.some(r => !r.endsWith(':2'))) throw new Error(`skin recipes: ${result.skinRecipes}`);
+  // image layers (tex, decal, kinds): no shipped recipe uses them since 0.20, a test recipe of the kept swatches and sheets renders
+  result.skinImageLayers = await skinPage.evaluate(async () => {
+    window.SKIN_RECIPES.skins.__bilder = { de: 'Bildtest', energy: '#FFFFFF', layers: [
+      { type: 'fill', color: '#808080' },
+      { type: 'tex', roles: ['shell'], texture: 'schrott_shell', tile_mm: 140, mode: 'overlay' },
+      { type: 'tex', roles: ['shell', 'anodized', 'graphite'], texture: 'schrott_helm_shell', kinds: ['critic', 'scout'] },
+      { type: 'decal', roles: ['shell'], parts: ['chest', 'thigh_shell'], texture: 'bronze_decals', axis: 'z', glow: 1.2, not_kinds: ['critic', 'scout'] },
+      { type: 'decal', roles: ['shell', 'anodized'], parts: ['cap', 'shell'], texture: 'bronze_helm_decals', axis: 'x', kinds: ['critic', 'scout'] }] };
+    await window.loadSkinTextures();
+    window.robotLook.skin = '__bilder';
+    window.rebuild();
+    window.renderFrame();
+    const states = window.activeSkinStates().map(st => `${st.atlas.model}:${st.active}`);
+    window.robotLook.skin = 'rost';
+    window.rebuild();
+    delete window.SKIN_RECIPES.skins.__bilder;
+    return states;
+  });
+  if (result.skinImageLayers.length !== 2) throw new Error(`skin image layers: ${result.skinImageLayers}`);
   await skinPage.close();
   // A skin chosen in the navigation loads its atlases first; a rebuild while they load (e.g. the explosion slider) keeps the old paint.
   const navPage = await browser.newPage({ viewport: { width: 1100, height: 800 } });
@@ -271,6 +304,35 @@ try {
   await navPage.waitForFunction(() => location.search.includes('skin=glut'), null, { timeout: 60000 });
   result.skinNavigation = await navPage.evaluate(() => window.activeSkinStates().map(st => `${st.atlas.model}:${st.active}:${st.mapped}/${st.meshes.length}`));
   if (result.skinNavigation.length !== 2) throw new Error(`skin nav: ${result.skinNavigation}`);
+  // 0.20: a model link loads the next page in place (same document, navigation and skin stay), back returns to the robot
+  // shown models are the scene's top-level children (a robot carries its Scout helmet inside, also named 'scout')
+  await navPage.evaluate(() => { window.__samePage = true; window.__shown = () => window.scene.children.filter(o => /^(robot_|scout|SciFi)/.test(o.name)).map(o => o.name).join(); });
+  await navPage.click('a.nav-link[href*="model=mechanik"]');
+  await navPage.waitForFunction(() => window.__shown() === 'robot_mechanik' && !document.getElementById('loading').classList.contains('on'), null, { timeout: 120000 });
+  await navPage.click('a.nav-link[href*="model=scout"]');
+  await navPage.waitForFunction(() => window.__shown() === 'scout', null, { timeout: 120000 });
+  const scoutPage = await navPage.evaluate(() => ({ same: window.__samePage, search: location.search, skins: window.activeSkinStates().map(st => `${st.atlas.model}:${st.active}`),
+    links: document.querySelectorAll('a.nav-link').length, on: [...document.querySelectorAll('a.nav-link.on')].map(a => a.textContent.trim()) }));
+  await navPage.goBack();
+  await navPage.waitForFunction(() => window.__shown() === 'robot_mechanik', null, { timeout: 120000 });
+  result.pageNavigation = { scout: scoutPage, back: await navPage.evaluate(() => ({ same: window.__samePage, search: location.search, children: window.__shown().split(',') })) };
+  if (!scoutPage.same || scoutPage.skins.join() !== 'scout:glut' || !scoutPage.on.includes('Scout') || !result.pageNavigation.back.same
+    || result.pageNavigation.back.children.join() !== 'robot_mechanik') throw new Error(`page navigation: ${JSON.stringify(result.pageNavigation)}`);
+  // a skin click overtaken by a body link: scene, URL and navigation agree afterwards (a page change drops older paint requests).
+  // The skin must still be loading when the link is clicked: Wächter's atlas is not loaded yet (delayed 1.5 s by the route above).
+  await navPage.click('button.nav-tile[title^="Farbschema 1"]');
+  await navPage.click('a.nav-link[href*="model=waechter"]');
+  await navPage.waitForFunction(() => window.__shown() === 'robot_waechter' && !document.getElementById('loading').classList.contains('on'), null, { timeout: 120000 });
+  await navPage.evaluate(() => { document.querySelector('button[title^="Skin Neon"]').click(); document.querySelector('a.nav-link[href*="model=paladin"]').click(); });
+  await navPage.waitForFunction(() => window.__shown() === 'robot_paladin' && !document.getElementById('loading').classList.contains('on'), null, { timeout: 120000 });
+  await navPage.waitForTimeout(6000); // the overtaken skin request has finished meanwhile
+  result.pageRace = await navPage.evaluate(() => ({ url: new URLSearchParams(location.search).get('skin') ?? 'none', look: window.robotLook.skin,
+    active: [...new Set(window.activeSkinStates().map(st => st.active))].join(), models: window.activeSkinStates().map(st => st.atlas.model),
+    tile: document.querySelector('#nav-right .nav-tile.on')?.title ?? null, de: window.SKINS[window.robotLook.skin]?.de ?? null }));
+  const race = result.pageRace, painted = race.look !== 'none';
+  if (race.url !== race.look || race.active !== (painted ? race.look : '') || (painted && !race.models.includes('paladin'))
+    || (painted ? !race.tile?.startsWith(`Skin ${race.de}`) : !race.tile?.startsWith('Farbschema')))
+    throw new Error(`page race: ${JSON.stringify(race)}`);
   await navPage.close();
   // Bodies and Scout as exported GLBs (default, 0.18) and built live (&gen=three): every mesh finds an entry in its model's atlas.
   result.skinsGenerated = [];
@@ -290,7 +352,8 @@ try {
   }
   const seen = result.skinsGenerated.map(s => `${s.model}:${s.gen}`).sort().join(' ');
   if (seen !== 'critic:export critic:export mechanik:export paladin:export paladin:three scout:export scout:export scout:three waechter:export') throw new Error(`skin sources: ${seen}`);
-  console.log(`skin GLB: ${result.skinGlb.materials.join(', ')}; navigation: ${result.skinNavigation.join(', ')}`);
+  console.log(`skin GLB: ${result.skinGlb.materials.join(', ')}; navigation: ${result.skinNavigation.join(', ')}; recipes: ${result.skinRecipes.join(' ')}`);
+  console.log(`page navigation without reload: ${result.pageNavigation.scout.search} → back ${result.pageNavigation.back.search}; race: skin ${result.pageRace.look}, tile ${result.pageRace.tile?.split(':')[0]}; image layers: ${result.skinImageLayers.join(', ')}`);
   for (const s of result.skins) {
     console.log(`skin ${s.skin} on ${s.model}: ${s.mapped}/${s.meshes} meshes mapped, bake fills ${(s.filled * 100).toFixed(1)} %`);
     if (s.mapped !== s.meshes || s.filled < 0.9) throw new Error(`skin ${s.skin} on ${s.model}: ${s.mapped}/${s.meshes} mapped, ${s.filled} filled`);

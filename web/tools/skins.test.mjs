@@ -189,6 +189,28 @@ test('recipes: layer masks follow roles, parts (glob) and assembly; GLSL for eve
   }
 });
 
+test('0.20 layers: carbon, circuit and sparkle compile per recipe; stripes keep their old code without jitter; every skin has a swatch', () => {
+  const used = new Set(Object.values(RECIPES.skins).flatMap(r => r.layers.map(L => L.type)));
+  for (const type of ['carbon', 'circuit', 'sparkle']) assert.ok(used.has(type), `no recipe uses ${type}`);
+  const neon = skinGLSL(RECIPES.skins.neon);
+  assert.match(neon, /skinPlane\(pos, nor, id\)/);
+  assert.match(neon, /skinHue\(dot\(pos/, 'rainbow circuit');
+  assert.match(skinGLSL(RECIPES.skins.galaxie), /length\(t - o \* 0\.6\)/, 'sparkle');
+  assert.match(skinGLSL(RECIPES.skins.signal), /mix\(1\.0, \(0\.4 \+ skinFbm/, 'stripes with jitter');
+  assert.doesNotMatch(skinGLSL(RECIPES.skins.rost), /mix\(1\.0, \(0\.4/, 'stripes without jitter as before 0.20');
+  for (const [key, r] of Object.entries(RECIPES.skins)) {
+    assert.ok(r.swatch?.length === 2 && r.swatch.every(c => /^#[0-9A-F]{6}$/i.test(c)), `${key}: swatch`);
+    for (const L of r.layers) if (L.type === 'wear') assert.ok(Number.isFinite(L.radius_mm), `${key}: wear needs radius_mm`);
+  }
+});
+
+test('navigation tiles: every skin, Helm H variant, colour scheme and model has its preview image (tools/nav_thumbs.mjs)', () => {
+  const dir = path.join(web, 'src', 'navThumbs'), variants = JSON.parse(readFileSync(path.join(web, 'src', 'criticHelmetVariants.json'), 'utf8')).variants;
+  const names = [...Object.keys(RECIPES.skins).map(k => `skin_${k}`), ...Object.keys(variants).map(k => `variant_${k}`), 'scheme_body', 'scheme_helmet',
+    ...['waechter', 'paladin', 'mechanik', 'critic', 'scout'].map(m => `model_${m}`)];
+  for (const n of names) assert.ok(existsSync(path.join(dir, `${n}.jpg`)), `${n}.jpg missing: node tools/nav_thumbs.mjs --only ${n}`);
+});
+
 test('edge code: sqrt steps, fine near the edge', () => {
   for (const mm of [0, 0.5, 5, 16, 28, 63]) assert.ok(Math.abs(decodeEdge(encodeEdge(mm)) - mm) < Math.max(0.1, mm * 0.03), `${mm} mm`);
   assert.ok(decodeEdge(encodeEdge(5) + 1) - decodeEdge(encodeEdge(5)) < 0.2);
@@ -224,23 +246,28 @@ test('emblem anchor: the chest suns of Glut and Ornat are centred on the medalli
   assert.doesNotMatch(skinGLSL(RECIPES.skins.rost), /vSkinAnchor\.x/);
 });
 
-test('texture layers: every swatch and decal sheet of a recipe exists and has its sampler in the GLSL', () => {
-  const dir = path.join(repo, 'assets', 'skins', 'textures');
-  let used = 0;
-  for (const [key, recipe] of Object.entries(RECIPES.skins)) {
-    const glsl = skinGLSL(recipe);
-    for (const L of recipe.layers.filter(l => l.type === 'tex' || l.type === 'decal')) {
-      used++;
-      assert.ok(['jpg', 'png'].some(e => existsSync(path.join(dir, `${L.texture}.${e}`))), `${key}: no texture ${L.texture}`);
-      assert.match(glsl, new RegExp(`uniform sampler2D skinTex_${L.texture};`), key);
-      if (L.type === 'decal') assert.equal(decodePNG(readFileSync(path.join(dir, `${L.texture}.png`))).channels, 4, `${L.texture}: decal sheet without alpha`);
-    }
+// Image layers (tex, decal, kinds; 0.16): since 0.20 no shipped recipe uses them (Bronze and Schrott became procedural), the mixer
+// keeps them for skins from user pictures. A recipe of the kept swatches and sheets in assets/skins/textures stands in.
+const IMAGE_RECIPE = { layers: [
+  { type: 'fill', color: '#808080' },
+  { type: 'tex', roles: ['shell'], texture: 'schrott_shell', tile_mm: 140, mode: 'overlay' },
+  { type: 'tex', not_roles: ['energy', 'reticle_cyan', 'rubber', 'dark_metal', 'trim'], texture: 'schrott_helm_shell', kinds: ['critic', 'scout'],
+    not_parts: ['mask', 'face_center', 'eye_*', 'chin_bar', 'neck', 'neck_ring', 'visor*', 'lens*'] },
+  { type: 'decal', roles: ['shell'], parts: ['chest'], texture: 'bronze_decals', axis: 'z', not_kinds: ['critic', 'scout'] },
+  { type: 'decal', roles: ['shell'], parts: ['cap'], texture: 'bronze_helm_decals', axis: 'x', kinds: ['critic', 'scout'] }] };
+test('texture layers: swatches and decal sheets exist, decal sheets have alpha, every image has its sampler in the GLSL', () => {
+  const dir = path.join(repo, 'assets', 'skins', 'textures'), glsl = skinGLSL(IMAGE_RECIPE);
+  for (const L of IMAGE_RECIPE.layers.filter(l => l.texture)) {
+    assert.ok(['jpg', 'png'].some(e => existsSync(path.join(dir, `${L.texture}.${e}`))), `no texture ${L.texture}`);
+    assert.match(glsl, new RegExp(`uniform sampler2D skinTex_${L.texture};`));
+    if (L.type === 'decal') assert.equal(decodePNG(readFileSync(path.join(dir, `${L.texture}.png`))).channels, 4, `${L.texture}: decal sheet without alpha`);
   }
-  assert.ok(used >= 4, `${used} texture layers`);
+  for (const [key, recipe] of Object.entries(RECIPES.skins)) for (const L of recipe.layers.filter(l => l.texture))
+    assert.ok(['jpg', 'png'].some(e => existsSync(path.join(dir, `${L.texture}.${e}`))), `${key}: no texture ${L.texture}`);
 });
 
 test('kinds: helmet layers apply to Helm H and Scout only, body motifs not to helmets', () => {
-  const r = RECIPES.skins.schrott, bit = (d, i) => Math.floor(skinLayerMask(r, d) / 2 ** i) % 2;
+  const r = IMAGE_RECIPE, bit = (d, i) => Math.floor(skinLayerMask(r, d) / 2 ** i) % 2;
   const helm = r.layers.findIndex(l => l.type === 'tex' && l.kinds), body = r.layers.findIndex(l => l.type === 'decal' && l.not_kinds);
   const cap = { role: 'anodized', part: 'cap', asm: 'head', side: null }, chest = { role: 'shell', part: 'chest', asm: 'upper_body', side: 'C', kind: 'body' };
   assert.equal(bit({ ...cap, kind: 'critic' }, helm), 1);

@@ -40,17 +40,36 @@ und wird seit 0.18 als exportierter GLB aus `assets/helmet-scout-three/` geladen
 Blender-Fassung). Kameras, Turntable und Look bleiben gleich, die Geometrie-Regler sind ausgeblendet. `&exploded=1` zeigt die
 Explosionsansicht mit den Teil-IDs S01–S13. Die Materialien im GLB sind flache Ersatzmaterialien. [Aufbau und Grenzen](../docs/HELM_SCOUT.md).
 
-## Navigation links (0.12)
+## Navigation (0.12, neu aufgebaut in 0.20)
 
-Links sitzt eine einklappbare Navigation (`web/src/navigation.js`; mit `?ui=0` ausgeblendet, der Zustand „eingeklappt“ wird im Browser
-gemerkt):
-- **Modelle:** Körper und Helme als Links; beim Körper Helm, Variante 80–88 und Kopfhörer, beim Helm allein Variante und Kopfhörer.
-- **Lackierung (0.13):** Farbschema (Creme, Weiß-Graphit, Original) oder Skin (Rost, Glut, Ornat) für Körper und Helm zusammen,
-  Material gealtert/flach (nur Farbschema), Texturexport des Skins.
-- **Ansichten:** Front, Links, Hinten, Rechts, Übersicht, Drehteller und Nahansichten (Roboter je Baugruppe, sonst nach Höhe).
-- **Bauteile:** Baum nach Baugruppe und Teil mit Suche; Klick hebt hervor, Haken blendet aus, ◎ isoliert, ⌖ zoomt heran.
-- **Look & Material:** Explosion, Beschriftungen, Belichtung, Bloom, AO, Qualität beim Drehen, Overlay, GLB-Export.
-Oben rechts bleiben nur die Geometrieregler von Helm H (lil-gui). Die Fußzeile zeigt die Bildzeit, solange gerendert wird.
+Seit 0.20 „Livery“ (`web/src/navigation.js`; mit `?ui=0` ausgeblendet):
+- **Leiste oben:** gezeigtes Modell („Paladin · Helm H“), Kamera-Ansichten als Icons (Front, Links, Hinten, Rechts, Übersicht,
+  Drehteller) und die Schalter der beiden Seitenleisten.
+- **Leiste links „Modell“ › Roboter:** Körper als Bildkacheln (Wächter, Paladin, Mechanik, „ohne“ = Kopf allein) und Kopf (Helm H,
+  Scout; auf dem Körper wird getauscht, ohne Körper sind es Links); Varianten 80–88 und Kopfhörer nur, solange Helm H der Kopf ist.
+  Danach Nahansichten (Baugruppen bzw. Höhenbereiche); Bauteilbaum mit Suche (Klick hebt hervor, Haken blendet
+  aus, ◎ isoliert, ⌖ zoomt heran); unten Modell und Bildzeit.
+- **Leiste rechts „Look“:** Lackierung (Farbschema Creme oder Weiß-Graphit, Schalter „gealtert“, 15 Skins als Bildkacheln),
+  Darstellung (Explosion, Beschriftungen, Belichtung, Bloom, AO, Qualität beim Drehen, Overlay), Helm-Geometrie (lil-gui, nur Helm H),
+  Referenz & Export (Originalmaterialien als Prüfreferenz, GLB, Skin-Texturen, Quelle Export/Live/Blender).
+- Beide Seitenleisten einzeln ein- und ausblendbar (Knöpfe oben links und rechts, Tasten `[` und `]`, im Browser gemerkt); das Bild
+  nimmt den freien Platz. Unter 900 px entfällt der Schriftzug oben.
+- **Vorschaubilder** der Kacheln: `web/src/navThumbs/*.jpg` (≈ 210 KB), gerendert mit `node tools/nav_thumbs.mjs` (Metal auf dem Mac,
+  ≈ 3 min; `--only skin_neon,...` für einzelne). Nach einer Form-, Varianten-, Farbschema- oder Skinänderung neu rendern.
+- **„Original“** ist kein Farbschema: jedes Modell in seinen eigenen Materialien, die Referenz von `verify` (`colors=original`). Es steht
+  deshalb nicht in der Lackierung, sondern als Schalter unter „Referenz & Export“; die Regel bleibt ein Farbschema für alle Modelle
+  ([ROBOTER_BALLON.md](../docs/ROBOTER_BALLON.md)).
+
+![Navigation 0.20](../docs/bilder/livery_navigation.jpg)
+
+**Seitenwechsel ohne Neuladen (0.20 „Livery“):** Modell-Links und die Einstellungen, die früher die Seite neu luden (Quelle, Variante
+und Kopfhörer von Helm H, Farbschema eines Helms allein), laden die nächste Seite im laufenden Viewer (`main.js › go`: `readPage` lädt
+und prüft alles, erst dann tauscht `enterPage` das Modell; ein späterer Klick gewinnt). Renderer, Licht und Navigation bleiben, offene
+Abschnitte und Scrollstand auch; die URL folgt per `history.pushState`, Zurück/Vor im Browser funktioniert. Zwischen Körpern bleibt die
+Kamera stehen (Vergleich aus derselben Ansicht). Ein Klick mit Strg/⌘ oder Mitteltaste öffnet weiterhin einen neuen Tab.
+**Ladebalken** (`web/src/loadingBar.js`): schmaler Balken oben über dem Bild mit Text („Lade Paladin …“, „Lade Skin …“), schon beim
+ersten Laden aus `index.html`; bei einem Fehler rot mit Meldung, die bisherige Seite bleibt. Neue Shader (Skin, Helm) kompilieren per
+`renderer.compileAsync`, solange der Balken läuft – das letzte Bild bleibt stehen, statt dass der Viewer einfriert.
 
 **Rendern bei Bedarf:** Der Viewer zeichnet nur nach einer Änderung, die Schattenkarte nur bei Modell-, Licht- oder Sichtbarkeitswechsel.
 Beim Ziehen der Kamera entfällt auf Wunsch die AO. Ergebnis im App-Browser (Apple M5, Paladin gealtert, Kamera kreist automatisch):
