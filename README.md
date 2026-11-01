@@ -1,6 +1,6 @@
 # Critic – Roboter-Viewer im Browser
 
-**Stand 0.12 „Fusion“:** ein Werkzeug für Körper und Helme. Drei Körper (Wächter, Paladin, Mechanik) tragen wahlweise Helm H
+**Stand 0.20 „Livery“** (aktuelle Version: `.ce-repo.json`, Verlauf: [CHANGELOG.md](CHANGELOG.md)); seit 0.12 „Fusion“ ein Werkzeug für Körper und Helme. Drei Körper (Wächter, Paladin, Mechanik) tragen wahlweise Helm H
 (H01–H21, Varianten 80–88) oder Scout (S01–S13), alles in einem einheitlichen, gealterten Farbschema. Links eine Navigation mit
 Modellen, Ansichten, Bauteilbaum sowie Look und Material. [Körper, Helme, Farben](docs/ROBOTER_BALLON.md) · [Viewer](web/README.md) ·
 [Prüfbericht](docs/versions/0.12.md). Die früheren three.js-Körperstudien 0.5–0.9 sind in 0.12 entfernt; ihre Lieferpakete und Berichte
