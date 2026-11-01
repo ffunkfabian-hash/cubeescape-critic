@@ -1,5 +1,9 @@
 # Changelog
 
+## Patch doku-panorama (ohne Versionsänderung)
+
+- `README.md`: Stand 0.20 „Livery“ statt 0.12; `AGENTS.md`: nicht vorhandene Ordner `generator/`, `tools/` richtiggestellt. Ein toter Anker in `docs/versions/0.12.md` auf die umbenannte Navigation-Überschrift gesetzt. Nur Markdown. Geprüft und unverändert: Pin `web/src/robotgen/data/SOURCE.json` (Commit `14bd78d` liegt weiter nur auf dem Ballon-Branch `claude/ballon-0-23-gauntlet-runde5-b524af`, nicht auf `main`).
+
 ## 0.20.0 „Livery“ – 2026-10-30 (zehn Skins nach Nutzerbildern, Seitenwechsel ohne Neuladen, Ladebalken)
 
 - Skins Vorhut, Azur, Neon, Orbit, Moos, Frost, Galaxie, Signal, Chrom, Sand nach sechs Nutzerbildern, rein prozedural für alle Körper und

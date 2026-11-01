@@ -7,7 +7,7 @@ Antworten, Doku und Commit-Messages auf Deutsch; Code, Bezeichner und Kommentare
 
 - `reference/` – Vorlagen (nur lesen; neue Vorlagen als eigener Ordner).
 - `critic/` – Kritiker-Prompt und JSON-Schema der Antwort (Vertrag zwischen Kritiker und Arbeiter).
-- `generator/`, `tools/` – entstehen mit Version 0.1 (Blender-Generator, Ansichten, Kritiker-Aufruf, Messung).
+- Die ursprünglich geplanten Ordner `generator/` und `tools/` gibt es nicht: der Generator liegt in `web/src/robotgen/`, die Werkzeuge in `web/tools/`, der Blender-Rest in `blender/` und `archive/blender/`.
 - `web/` – Three.js-Nachbau im Browser mit Playwright-Prüfung und Umriss-IoU (`web/README.md`); `web/renders/` nicht im Repo.
 - `assets/helmet-scout-three/`, `reference/scout/` – zweiter Helm **Scout v3** (0.8, seit 0.17 im three.js-Generator): Lieferpaket aus
   `web/tools/robotgen_export.mjs`, Vorlagen; Viewer `?model=scout` ([docs/HELM_SCOUT.md](docs/HELM_SCOUT.md)).
