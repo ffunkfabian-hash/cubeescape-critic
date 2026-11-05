@@ -21,7 +21,12 @@
     "registry": "https://github.com/ffunkfabian-hash/cubeescape-nexogen/blob/main/repos.json"
   },
   "tools_version": {
-    "version": "0.24.0",
-    "commit": "f8a13fc9fb1c7d2b4038b7bf619d2fccd9f00d4a"
-  }
+    "version": "0.35.0",
+    "commit": "79250432f2d2cedeab642800c6a2ac667e6ec645"
+  },
+  "core_paths": [
+    "critic/schema.json",
+    "web/src/robotgen/data/SOURCE.json",
+    "assets/robot-bodies-three/*/manifest.json"
+  ]
 }
