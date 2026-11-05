@@ -1,5 +1,9 @@
 # Changelog
 
+## Patch kern-sweep (ohne Versionsänderung)
+
+- `AGENTS.md` auf Repo-Eigenes gekürzt und um den harten Kern (Regeln 1–8) ergänzt; `docs/LESSONS.md` auf Dauer-Fallen gekürzt, Rest unverändert in `docs/LESSONS-lang.md`; `.ce-repo.json`: Pin 0.35, `core_paths`. Nur Doku und Konfiguration.
+
 ## Patch doku-panorama (ohne Versionsänderung)
 
 - `README.md`: Stand 0.20 „Livery“ statt 0.12; `AGENTS.md`: nicht vorhandene Ordner `generator/`, `tools/` richtiggestellt. Ein toter Anker in `docs/versions/0.12.md` auf die umbenannte Navigation-Überschrift gesetzt. Nur Markdown. Geprüft und unverändert: Pin `web/src/robotgen/data/SOURCE.json` (Commit `14bd78d` liegt weiter nur auf dem Ballon-Branch `claude/ballon-0-23-gauntlet-runde5-b524af`, nicht auf `main`).
