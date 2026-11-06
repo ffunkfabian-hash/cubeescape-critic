@@ -4,16 +4,7 @@ Zentraler Repo-Einstieg: [Nexogen](https://github.com/ffunkfabian-hash/cubeescap
 
 ## Harter Kern
 
-Quelle: Nexogen `templates/kern.md`, nur dort ändern; gilt auch in Cloud-Sitzungen.
-
-1. Kein Commit direkt auf `main`.
-2. Kein Force-Push, keine überschriebenen Branches oder Tags.
-3. Nichts Fremdes anfassen oder löschen: andere Sitzungen, Worktrees, Stash, Haupt-Checkout.
-4. Merge nach `main` nur mit Ja des Nutzers, außer Patch bis 100 Zeilen ohne Format, Vertrag, Kernpfad bei grünem `merge-check`; Tag, Release, Repo öffentlich machen immer nur mit Ja.
-5. Tests nie löschen oder abschwächen, um grün zu werden.
-6. Keine Zugangsdaten, kein fremdes Material, keine großen Binärdaten nach außen (öffentliche Repos, fremde APIs).
-7. Formate, Verträge und IDs nur mit Migration; IDs sind ewig.
-8. Nichts als fertig melden, was nicht geprüft ist.
+Global: `~/.claude/CLAUDE.md` › Harter Kern (Quelle Nexogen `templates/kern.md`); gilt auch in Cloud-Sitzungen, hier nicht kopiert.
 
 ## Was hier liegt
 
