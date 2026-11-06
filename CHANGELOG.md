@@ -1,5 +1,9 @@
 # Changelog
 
+## Patch pin37 (ohne Versionsänderung)
+
+- `.ce-repo.json`: Pin auf Agent Tools 0.37.0 (`f222344`), `ce` als Lader dieses Stands neu geschrieben. Nur Konfiguration.
+
 ## Patch runde (ohne Versionsänderung)
 
 - `AGENTS.md`: Kopie des harten Kerns durch Verweis auf die globale Regel ersetzt; `.ce-repo.json`: Pin auf Agent Tools 0.36.2 (`e85688c`); `core_paths` geprüft, stimmen mit Agent Tools `docs/core-paths.md` überein. Nur Doku und Konfiguration.
