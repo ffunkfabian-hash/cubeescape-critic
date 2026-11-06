@@ -1,5 +1,9 @@
 # Changelog
 
+## Patch runde (ohne Versionsänderung)
+
+- `AGENTS.md`: Kopie des harten Kerns durch Verweis auf die globale Regel ersetzt; `.ce-repo.json`: Pin auf Agent Tools 0.36.2 (`e85688c`); `core_paths` geprüft, stimmen mit Agent Tools `docs/core-paths.md` überein. Nur Doku und Konfiguration.
+
 ## Patch kern-sweep (ohne Versionsänderung)
 
 - `AGENTS.md` auf Repo-Eigenes gekürzt und um den harten Kern (Regeln 1–8) ergänzt; `docs/LESSONS.md` auf Dauer-Fallen gekürzt, Rest unverändert in `docs/LESSONS-lang.md`; `.ce-repo.json`: Pin 0.35, `core_paths`. Nur Doku und Konfiguration.
