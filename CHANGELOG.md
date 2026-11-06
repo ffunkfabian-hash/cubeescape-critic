@@ -1,5 +1,9 @@
 # Changelog
 
+## Patch pin40 (ohne Versionsänderung)
+
+- `.ce-repo.json`: Pin auf Agent Tools 0.40.0 (`0b67cb3`), `ce` als Lader dieses Stands neu geschrieben. Nur Konfiguration.
+
 ## Patch pin37 (ohne Versionsänderung)
 
 - `.ce-repo.json`: Pin auf Agent Tools 0.37.0 (`f222344`), `ce` als Lader dieses Stands neu geschrieben. Nur Konfiguration.
