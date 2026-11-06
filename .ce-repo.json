@@ -1,6 +1,9 @@
 {
   "name": "cubeescape-critic",
-  "version": "0.20.0",
+  "version": {
+    "file": "CHANGELOG.md",
+    "pattern": "(?m)^## (\\d+\\.\\d+(?:\\.\\d+)?)"
+  },
   "version_name": "Livery",
   "check": {
     "quick": [
@@ -11,6 +14,7 @@
     ]
   },
   "docs": {
+    "changelog": "CHANGELOG.md",
     "agent_sections": [
       "Was hier liegt",
       "Regeln"

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.20.1 Patch merge-check-felder
+
+- `.ce-repo.json`: `version` als `{file, pattern}` aus dem Changelog statt Text, `docs.changelog` ergänzt. `./ce merge-check` prüft damit Version und CHANGELOG, Patches tragen ab jetzt eine Nummer.
+
 ## Patch pin40 (ohne Versionsänderung)
 
 - `.ce-repo.json`: Pin auf Agent Tools 0.40.0 (`0b67cb3`), `ce` als Lader dieses Stands neu geschrieben. Nur Konfiguration.
