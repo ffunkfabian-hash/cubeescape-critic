@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.20.3 Patch pin-0431
+
+- `.ce-repo.json`: Pin auf Agent Tools 0.43.1 (`8adca7d`), `ce` als Lader dieses Stands neu geschrieben; Postfach per Label `postfach`. Nur Konfiguration.
+
 ## 0.20.2 Patch pin42
 
 - `.ce-repo.json`: Pin auf Agent Tools 0.42.0 (`e1c2ddf`), `ce` als Lader dieses Stands neu geschrieben. Nur Konfiguration.
